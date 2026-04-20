@@ -1,41 +1,37 @@
 import type { ReactNode } from "react";
+import { MdKeyboardArrowDown, MdCheck } from "react-icons/md";
 
 export function Field({
   label,
   children,
-  labelWidth = 130,
-  align = "right",
+  className = "",
 }: {
   label: ReactNode;
   children: ReactNode;
-  labelWidth?: number;
-  align?: "right" | "left";
+  className?: string;
 }) {
   return (
-    <div className="flex items-center gap-2 mb-2">
-      <label
-        className="text-[12px] text-[color:var(--color-text-secondary)] shrink-0"
-        style={{ width: labelWidth, textAlign: align }}
-      >
-        {label}
-      </label>
-      <div className="flex-1 min-w-0">{children}</div>
+    <div className={`mb-4 ${className}`}>
+      <label className="lve-label">{label}</label>
+      {children}
     </div>
   );
 }
 
 export function TextInput({
   value = "",
-  readOnly = true,
-  className = "",
+  readOnly = false,
   type = "text",
   placeholder,
+  error = false,
+  className = "",
 }: {
   value?: string;
   readOnly?: boolean;
-  className?: string;
   type?: string;
   placeholder?: string;
+  error?: boolean;
+  className?: string;
 }) {
   return (
     <input
@@ -43,8 +39,8 @@ export function TextInput({
       defaultValue={value}
       readOnly={readOnly}
       placeholder={placeholder}
-      data-readonly={readOnly}
-      className={`field-input w-full ${className}`}
+      data-error={error || undefined}
+      className={`lve-input ${className}`}
     />
   );
 }
@@ -53,23 +49,34 @@ export function SelectInput({
   value = "",
   options = [],
   className = "",
+  error = false,
 }: {
   value?: string;
   options?: string[];
   className?: string;
+  error?: boolean;
 }) {
+  const all = value && !options.includes(value) ? [value, ...options] : options;
   return (
-    <select
-      defaultValue={value}
-      className={`field-input w-full ${className}`}
-    >
-      {value && !options.includes(value) && <option value={value}>{value}</option>}
-      {options.map((opt) => (
-        <option key={opt} value={opt}>
-          {opt}
-        </option>
-      ))}
-    </select>
+    <div className="relative">
+      <select
+        defaultValue={value}
+        data-error={error || undefined}
+        className={`lve-input pr-12 appearance-none ${className}`}
+      >
+        {all.map((opt) => (
+          <option key={opt} value={opt}>
+            {opt || "—"}
+          </option>
+        ))}
+      </select>
+      <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none">
+        <span className="h-6 w-px bg-[#BBBBBB]" />
+        <span className={`px-3 ${error ? "text-[#d72714]" : "text-[#006cf4]"}`}>
+          <MdKeyboardArrowDown size={22} />
+        </span>
+      </div>
+    </div>
   );
 }
 
@@ -81,12 +88,15 @@ export function Checkbox({
   checked?: boolean;
 }) {
   return (
-    <label className="inline-flex items-center gap-2 text-[12px] text-[color:var(--color-text-secondary)]">
-      <input
-        type="checkbox"
-        defaultChecked={checked}
-        className="w-4 h-4 rounded border-[color:var(--color-input-border)] accent-[color:var(--color-lv-green)]"
-      />
+    <label className="inline-flex items-center gap-2 cursor-pointer select-none font-['Mulish'] text-[15px] text-[#3d3d3d]">
+      <span className="relative inline-flex items-center justify-center w-5 h-5 rounded border border-[#979797] bg-white peer-checked:bg-[#178830]">
+        <input
+          type="checkbox"
+          defaultChecked={checked}
+          className="peer absolute inset-0 opacity-0 cursor-pointer"
+        />
+        <MdCheck className="hidden peer-checked:[display:block] text-white absolute" size={16} />
+      </span>
       {label && <span>{label}</span>}
     </label>
   );
@@ -102,9 +112,9 @@ export function Section({
   className?: string;
 }) {
   return (
-    <section className={`panel ${className}`}>
-      <header className="panel-header">{title}</header>
-      <div className="panel-body">{children}</div>
+    <section className={`lve-panel ${className}`}>
+      <header className="lve-panel-header">{title}</header>
+      <div className="lve-panel-body">{children}</div>
     </section>
   );
 }

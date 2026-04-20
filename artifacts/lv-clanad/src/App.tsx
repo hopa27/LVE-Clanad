@@ -1,5 +1,6 @@
 import { useState, type JSX } from "react";
-import { TopMenu } from "./components/TopMenu";
+import { Header } from "./components/Header";
+import { Footer } from "./components/Footer";
 import { Toolbar } from "./components/Toolbar";
 import { PolicyHeader } from "./components/PolicyHeader";
 import { TabBar, type TabKey, TABS } from "./components/TabBar";
@@ -37,25 +38,21 @@ const TAB_COMPONENTS: Record<TabKey, () => JSX.Element> = {
 export default function App() {
   const [activeTab, setActiveTab] = useState<TabKey>("application");
   const ActiveComponent = TAB_COMPONENTS[activeTab];
+  const activeLabel = TABS.find((t) => t.key === activeTab)?.label ?? "";
 
   return (
-    <div className="flex flex-col h-screen bg-[color:var(--color-page-bg)]">
-      <TopMenu />
-      <Toolbar />
-      <PolicyHeader />
-      <TabBar
-        activeTab={activeTab}
-        onChange={setActiveTab}
-      />
-      <main className="flex-1 overflow-auto">
-        <div className="p-4 max-w-[1400px] mx-auto">
-          <h2 className="text-[11px] font-semibold uppercase tracking-wider text-[color:var(--color-text-muted)] mb-3">
-            {TABS.find((t) => t.key === activeTab)?.label}
-          </h2>
+    <div className="min-h-screen flex flex-col bg-[#f0f0f0]">
+      <Header title={`Client Annuity Administration System — ${activeLabel}`} />
+      <main className="flex-1 px-[142px] py-8">
+        <Toolbar />
+        <PolicyHeader />
+        <TabBar activeTab={activeTab} onChange={setActiveTab} />
+        <div className="bg-white rounded-b-lg rounded-tr-lg shadow-sm p-6 -mt-px">
           <ActiveComponent />
         </div>
+        <StatusBar />
       </main>
-      <StatusBar />
+      <Footer />
     </div>
   );
 }

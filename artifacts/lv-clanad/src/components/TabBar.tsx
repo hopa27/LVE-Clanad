@@ -37,13 +37,13 @@ export function TabBar({
   onChange: (key: TabKey) => void;
 }) {
   return (
-    <div className="border-b border-[color:var(--color-panel-border)] bg-[#f9fafc] overflow-x-auto">
-      <div className="flex items-center min-w-max px-2">
+    <div className="overflow-x-auto">
+      <div className="flex flex-row gap-4 min-w-max">
         {TABS.map((tab) => (
           <button
             key={tab.key}
             type="button"
-            className={`tab-btn ${activeTab === tab.key ? "active" : ""}`}
+            className={`lve-tab ${activeTab === tab.key ? "active" : ""}`}
             onClick={() => onChange(tab.key)}
           >
             {tab.label}

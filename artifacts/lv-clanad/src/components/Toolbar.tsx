@@ -1,32 +1,32 @@
 import {
-  FilePlus2,
-  FilePlus,
-  Copy,
-  Pencil,
-  Ban,
-  Search,
-  Database,
-  BarChart3,
-  Building2,
-  LogOut,
-} from "lucide-react";
+  MdAdd,
+  MdNoteAdd,
+  MdContentCopy,
+  MdEdit,
+  MdBlock,
+  MdSearch,
+  MdStorage,
+  MdBarChart,
+  MdBusiness,
+  MdLogout,
+} from "react-icons/md";
 
 const TOOLS = [
-  { label: "New App", icon: FilePlus2, enabled: true },
-  { label: "New Quote", icon: FilePlus, enabled: false },
-  { label: "Sim App", icon: Copy, enabled: true },
-  { label: "Edit", icon: Pencil, enabled: true },
-  { label: "Cancel", icon: Ban, enabled: false },
-  { label: "Search", icon: Search, enabled: true },
-  { label: "CRS", icon: Database, enabled: true },
-  { label: "Reports", icon: BarChart3, enabled: true },
-  { label: "Company", icon: Building2, enabled: true },
-  { label: "Exit", icon: LogOut, enabled: true },
+  { label: "New App", icon: MdAdd, enabled: true },
+  { label: "New Quote", icon: MdNoteAdd, enabled: false },
+  { label: "Sim App", icon: MdContentCopy, enabled: true },
+  { label: "Edit", icon: MdEdit, enabled: true },
+  { label: "Cancel", icon: MdBlock, enabled: false },
+  { label: "Search", icon: MdSearch, enabled: true },
+  { label: "CRS", icon: MdStorage, enabled: true },
+  { label: "Reports", icon: MdBarChart, enabled: true },
+  { label: "Company", icon: MdBusiness, enabled: true },
+  { label: "Exit", icon: MdLogout, enabled: true },
 ];
 
 export function Toolbar() {
   return (
-    <div className="flex items-center gap-1 px-3 py-1.5 border-b border-[color:var(--color-panel-border)] bg-white">
+    <div className="flex flex-wrap items-center gap-2 mb-6">
       {TOOLS.map((tool) => {
         const Icon = tool.icon;
         return (
@@ -34,10 +34,10 @@ export function Toolbar() {
             key={tool.label}
             type="button"
             disabled={!tool.enabled}
-            className="btn-toolbar"
+            className="lve-btn lve-btn-secondary lve-btn-sm"
             title={tool.label}
           >
-            <Icon size={18} strokeWidth={1.75} />
+            <Icon size={18} />
             <span>{tool.label}</span>
           </button>
         );

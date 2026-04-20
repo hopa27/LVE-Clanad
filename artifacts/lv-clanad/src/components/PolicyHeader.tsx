@@ -1,57 +1,54 @@
-import { ChevronDown, ExternalLink, MoreHorizontal } from "lucide-react";
+import { MdKeyboardArrowDown, MdOpenInNew, MdMoreHoriz } from "react-icons/md";
 
 export function PolicyHeader() {
   return (
-    <div className="flex flex-wrap items-center gap-2 px-3 py-2 bg-[color:var(--color-lv-green-dark)] text-white">
-      <div className="flex items-center gap-1">
-        <button
-          type="button"
-          className="flex items-center gap-1 px-2 py-1 rounded-md bg-white/10 hover:bg-white/20 text-[12px] font-mono"
-          title="Select policy"
-        >
-          225810 <ChevronDown size={12} />
-        </button>
-        <button
-          type="button"
-          className="p-1 rounded-md bg-white/10 hover:bg-white/20"
-          title="Open policy"
-        >
-          <ExternalLink size={14} />
-        </button>
-      </div>
+    <div className="lve-panel mb-6 p-4 flex flex-wrap items-center gap-3">
+      <button
+        type="button"
+        className="inline-flex items-center gap-1 px-3 h-9 rounded-[8px] border border-[#BBBBBB] bg-white font-['Mulish'] text-[#3d3d3d] hover:border-[#178830]"
+      >
+        225810 <MdKeyboardArrowDown />
+      </button>
+      <button
+        type="button"
+        className="h-9 w-9 inline-flex items-center justify-center rounded-[8px] border border-[#BBBBBB] bg-white text-[#006cf4] hover:border-[#178830]"
+        title="Open"
+      >
+        <MdOpenInNew size={16} />
+      </button>
 
-      <div className="flex items-center px-3 py-1 rounded-md bg-white/15 font-semibold text-[13px]">
+      <div className="px-4 h-9 inline-flex items-center rounded-[30px] bg-[#00263e] text-white font-['Livvic'] font-semibold text-sm">
         Liverpool Victoria Friendly Society Limited
       </div>
 
-      <div className="flex items-center px-2 py-1 rounded-md bg-white/15 font-mono text-[12px]">
+      <div className="px-3 h-9 inline-flex items-center rounded-[8px] bg-[#eaf5f8] text-[#0d2c41] font-['Mulish'] text-sm">
         225810
       </div>
 
-      <div className="flex items-center px-2 py-1 rounded-md bg-[color:var(--color-lv-orange)] text-white font-semibold text-[12px]">
+      <div className="px-3 h-9 inline-flex items-center rounded-[8px] bg-[#006cf4] text-white font-['Livvic'] font-semibold text-sm">
         87
       </div>
 
-      <div className="flex items-center px-3 py-1 rounded-md bg-[color:var(--color-lv-orange)] font-semibold text-[12px]">
+      <div className="px-4 h-9 inline-flex items-center rounded-[30px] bg-[#178830] text-white font-['Livvic'] font-semibold text-sm">
         Turner
       </div>
 
-      <div className="flex items-center px-3 py-1 rounded-md bg-white/15 text-[12px]">
+      <div className="px-3 h-9 inline-flex items-center rounded-[8px] bg-[#eaf5f8] text-[#0d2c41] font-['Mulish'] text-sm">
         Simultaneous Policies
       </div>
 
       <button
         type="button"
-        className="p-1 rounded-md bg-white/10 hover:bg-white/20"
+        className="h-9 w-9 inline-flex items-center justify-center rounded-[8px] border border-[#BBBBBB] bg-white text-[#3d3d3d] hover:border-[#178830]"
         title="More"
       >
-        <MoreHorizontal size={14} />
+        <MdMoreHoriz size={18} />
       </button>
 
       <input
         type="text"
         placeholder="Quick find…"
-        className="ml-auto px-3 py-1 rounded-md bg-white/15 placeholder-white/60 text-[12px] outline-none focus:bg-white/25 w-56"
+        className="lve-input ml-auto max-w-xs"
       />
     </div>
   );

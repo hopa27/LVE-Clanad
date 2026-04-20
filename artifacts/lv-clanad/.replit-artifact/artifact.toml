@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "LV= CLANAD"
+version = "1.0.0"
+id = "artifacts/lv-clanad"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18373
+
+[services.development]
+run = "pnpm --filter @workspace/lv-clanad run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/lv-clanad", "run", "build" ]
+publicDir = "artifacts/lv-clanad/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18373"
+BASE_PATH = "/"

@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+@theme {
+  --color-lv-green: #00935f;
+  --color-lv-green-dark: #006e47;
+  --color-lv-orange: #f5a623;
+  --color-lv-orange-dark: #d98b10;
+  --color-section-header: #f5a623;
+  --color-page-bg: #f6f7f9;
+  --color-panel: #ffffff;
+  --color-panel-border: #e2e6ec;
+  --color-input-bg: #ffffff;
+  --color-input-border: #c9d0d8;
+  --color-toolbar-bg: #ffffff;
+  --color-status-bar: #1f2937;
+  --color-tab-active: #ffffff;
+  --color-tab-inactive: #eef1f5;
+  --color-text-primary: #1a2433;
+  --color-text-secondary: #5b6776;
+  --color-text-muted: #8590a0;
+  --color-row-alt: #f9fafb;
+  --color-row-hover: #eef5ff;
+  --color-link: #0f6fde;
+
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+@layer base {
+  html, body, #root {
+    height: 100%;
+  }
+  body {
+    @apply font-sans antialiased;
+    background: var(--color-page-bg);
+    color: var(--color-text-primary);
+    font-size: 13px;
+  }
+
+  input, select, textarea {
+    font-family: inherit;
+    font-size: 13px;
+  }
+
+  /* Make focus rings consistent */
+  :focus-visible {
+    outline: 2px solid var(--color-lv-green);
+    outline-offset: 1px;
+    border-radius: 4px;
+  }
+}
+
+@layer components {
+  .field {
+    @apply flex items-center gap-2;
+  }
+  .field-label {
+    @apply text-xs text-[color:var(--color-text-secondary)] whitespace-nowrap;
+  }
+  .field-input {
+    @apply px-2 py-1 rounded-md border bg-white text-[color:var(--color-text-primary)] outline-none transition-colors;
+    border-color: var(--color-input-border);
+    min-width: 0;
+  }
+  .field-input:hover { border-color: #95a3b3; }
+  .field-input:focus { border-color: var(--color-lv-green); box-shadow: 0 0 0 3px rgba(0,147,95,0.12); }
+  .field-input:read-only, .field-input[data-readonly="true"] {
+    background: #f3f5f9;
+    color: var(--color-text-secondary);
+  }
+
+  .panel {
+    @apply rounded-lg border bg-white shadow-sm;
+    border-color: var(--color-panel-border);
+  }
+  .panel-header {
+    @apply px-3 py-2 rounded-t-lg text-white font-semibold text-[12px] tracking-wide uppercase;
+    background: linear-gradient(180deg, #f6b34a, #e89518);
+  }
+  .panel-body { @apply p-4; }
+
+  .data-table { @apply w-full text-[12px] border-collapse; }
+  .data-table thead th {
+    @apply text-left font-semibold px-2 py-1.5 border-b sticky top-0 bg-[#eef2f7] text-[color:var(--color-text-secondary)] uppercase tracking-wide;
+    border-color: var(--color-panel-border);
+    font-size: 10.5px;
+  }
+  .data-table tbody td {
+    @apply px-2 py-1.5 border-b;
+    border-color: #eef0f4;
+  }
+  .data-table tbody tr:nth-child(even) { background: var(--color-row-alt); }
+  .data-table tbody tr:hover { background: var(--color-row-hover); }
+  .data-table tbody tr.selected { background: #dceeff; }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-md text-[12px] font-medium border transition-all select-none;
+    border-color: var(--color-input-border);
+    background: white;
+    color: var(--color-text-primary);
+  }
+  .btn:hover { background: #f1f4f8; border-color: #95a3b3; }
+  .btn:active { background: #e6ebf1; }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .btn-primary {
+    background: var(--color-lv-green);
+    color: white;
+    border-color: var(--color-lv-green-dark);
+  }
+  .btn-primary:hover { background: var(--color-lv-green-dark); }
+
+  .btn-toolbar {
+    @apply flex flex-col items-center justify-center gap-0.5 px-3 py-1.5 rounded-md text-[11px] text-[color:var(--color-text-secondary)] hover:bg-[#eef2f7] hover:text-[color:var(--color-text-primary)] transition-colors;
+    min-width: 56px;
+  }
+  .btn-toolbar:disabled { opacity: 0.4; pointer-events: none; }
+
+  .pill-tag {
+    @apply inline-flex items-center px-2 py-0.5 rounded-md font-semibold text-[11px];
+  }
+
+  .tab-btn {
+    @apply px-3 py-2 text-[12px] font-medium border-b-2 border-transparent text-[color:var(--color-text-secondary)] hover:text-[color:var(--color-text-primary)] hover:bg-[#f3f5f9] whitespace-nowrap transition-colors;
+  }
+  .tab-btn.active {
+    color: var(--color-lv-green-dark);
+    border-color: var(--color-lv-green);
+    background: white;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #c9d0d8; border-radius: 6px; }
+::-webkit-scrollbar-thumb:hover { background: #95a3b3; }

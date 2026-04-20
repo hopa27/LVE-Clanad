@@ -3,8 +3,8 @@ import { MdLogout } from "react-icons/md";
 
 export function Header({ title }: { title: string }) {
   return (
-    <header className="w-full bg-[#00263e] text-white pt-4 pb-6 px-[142px] shrink-0">
-      <div className="flex items-center justify-between gap-6">
+    <header className="w-full bg-[#00263e] text-white py-5 px-[142px] shrink-0 flex items-center">
+      <div className="flex items-center justify-between gap-6 w-full">
         <div className="flex items-center gap-6 min-w-0">
           <img src={lvLogo} alt="LV=" className="h-6 w-auto shrink-0" />
           <h1 className="font-['Livvic'] text-3xl font-normal tracking-tight text-white truncate">

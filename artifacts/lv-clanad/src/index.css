@@ -39,6 +39,7 @@
     background: var(--color-lve-page-bg);
     color: var(--color-lve-body);
     -webkit-font-smoothing: antialiased;
+    zoom: 0.8;
   }
 }
 

@@ -53,11 +53,11 @@ export function PaymentsTab() {
             <thead>
               <tr>
                 <th>Pay Date</th>
-                <th style={{ textAlign: "right" }}>Gross</th>
-                <th style={{ textAlign: "right" }}>Cap Element</th>
-                <th style={{ textAlign: "right" }}>Tax</th>
-                <th style={{ textAlign: "right" }}>Post Adj</th>
-                <th style={{ textAlign: "right" }}>Net</th>
+                <th>Gross</th>
+                <th>Cap Element</th>
+                <th>Tax</th>
+                <th>Post Adj</th>
+                <th>Net</th>
                 <th>Method</th>
                 <th>Reason</th>
                 <th>BACS Date</th>
@@ -68,11 +68,11 @@ export function PaymentsTab() {
               {PAYMENT_HISTORY.map((row, i) => (
                 <tr key={i}>
                   <td>{row.date}</td>
-                  <td style={{ textAlign: "right" }}>{row.gross}</td>
-                  <td style={{ textAlign: "right" }}>{row.cap}</td>
-                  <td style={{ textAlign: "right" }}>{row.tax}</td>
-                  <td style={{ textAlign: "right" }}>{row.postAdj}</td>
-                  <td style={{ textAlign: "right" }}>{row.net}</td>
+                  <td>{row.gross}</td>
+                  <td>{row.cap}</td>
+                  <td>{row.tax}</td>
+                  <td>{row.postAdj}</td>
+                  <td>{row.net}</td>
                   <td>{row.method}</td>
                   <td>{row.reason}</td>
                   <td>{row.bacs}</td>
@@ -92,12 +92,12 @@ export function PaymentsTab() {
                 <th>Pay Date</th>
                 <th>Tax Code</th>
                 <th>N</th>
-                <th style={{ textAlign: "right" }}>Gross</th>
-                <th style={{ textAlign: "right" }}>Cum Instal</th>
-                <th style={{ textAlign: "right" }}>Free Pay</th>
-                <th style={{ textAlign: "right" }}>Taxable Pay</th>
-                <th style={{ textAlign: "right" }}>Tax</th>
-                <th style={{ textAlign: "right" }}>Tax YTD</th>
+                <th>Gross</th>
+                <th>Cum Instal</th>
+                <th>Free Pay</th>
+                <th>Taxable Pay</th>
+                <th>Tax</th>
+                <th>Tax YTD</th>
               </tr>
             </thead>
             <tbody>
@@ -106,12 +106,12 @@ export function PaymentsTab() {
                   <td>{row.date}</td>
                   <td>{row.code}</td>
                   <td>{row.n}</td>
-                  <td style={{ textAlign: "right" }}>{row.gross}</td>
-                  <td style={{ textAlign: "right" }}>{row.cum}</td>
-                  <td style={{ textAlign: "right" }}>{row.free}</td>
-                  <td style={{ textAlign: "right" }}>{row.taxable}</td>
-                  <td style={{ textAlign: "right" }}>{row.tax}</td>
-                  <td style={{ textAlign: "right" }}>{row.ytd}</td>
+                  <td>{row.gross}</td>
+                  <td>{row.cum}</td>
+                  <td>{row.free}</td>
+                  <td>{row.taxable}</td>
+                  <td>{row.tax}</td>
+                  <td>{row.ytd}</td>
                 </tr>
               ))}
             </tbody>

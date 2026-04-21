@@ -28,7 +28,7 @@ function AnnuitantBlock({
       </div>
       <div>
         <Field label="DOB:"><TextInput value={dob as string} /></Field>
-        <Field label="DDD:"><TextInput value={ddd as string} /></Field>
+        <Field label="Date of Death (DOD):"><TextInput value={ddd as string} /></Field>
         <Field label="Death Cert Received?:"><Checkbox checked={deathCert as boolean} /></Field>
         <Field label="Nat ins no:"><TextInput value={natIns as string} /></Field>
         <Field label="Enhanced?:"><TextInput value={enhanced as string} /></Field>

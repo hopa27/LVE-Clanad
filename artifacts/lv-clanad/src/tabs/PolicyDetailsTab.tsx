@@ -1,4 +1,5 @@
 import { Field, TextInput, SelectInput, Checkbox, Section } from "../components/Field";
+import { DatePicker } from "../components/DatePicker";
 
 export function PolicyDetailsTab() {
   return (
@@ -60,10 +61,10 @@ export function PolicyDetailsTab() {
 
       <div className="space-y-4 lg:col-span-1">
         <Section title="Agency Deceased">
-          <Field label="Deceased Date:"><TextInput value="/  /" /></Field>
+          <Field label="Deceased Date:"><DatePicker placeholder="Deceased Date" /></Field>
           <Field label="Agency Ref:"><TextInput value="" /></Field>
           <Field label="Agency Unique Ref:"><TextInput value="" /></Field>
-          <Field label="Notification Date:"><TextInput value="/  /" /></Field>
+          <Field label="Notification Date:"><DatePicker placeholder="Notification Date" /></Field>
         </Section>
 
         <Section title="Statements & Letters">

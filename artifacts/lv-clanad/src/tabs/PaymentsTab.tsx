@@ -1,4 +1,5 @@
 import { Field, TextInput, Section } from "../components/Field";
+import { DatePicker } from "../components/DatePicker";
 import { MdFileUpload } from "react-icons/md";
 
 const PAYMENT_HISTORY = [
@@ -39,8 +40,8 @@ export function PaymentsTab() {
             <Field label="PAYE Tax Deduction:"><TextInput value="0" /></Field>
           </div>
           <div>
-            <Field label="Next Anniversary:"><TextInput value="25/04/2026" /></Field>
-            <Field label="Next Payment Due:"><TextInput value="25/04/2026" /></Field>
+            <Field label="Next Anniversary:"><DatePicker placeholder="Next Anniversary" /></Field>
+            <Field label="Next Payment Due:"><DatePicker placeholder="Next Payment Due" /></Field>
             <Field label="Inst Remaining:"><TextInput value="1" /></Field>
             <Field label="Nth Inst:"><TextInput value="6" /></Field>
           </div>

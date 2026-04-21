@@ -20,7 +20,7 @@ export function IncreaseHistoryTab() {
   return (
     <Section title="Increase History">
       <div className="overflow-auto">
-        <table className="data-table">
+        <table className="lve-grid">
           <thead>
             <tr>
               {COLUMNS.map((c) => (
@@ -29,9 +29,9 @@ export function IncreaseHistoryTab() {
             </tr>
           </thead>
           <tbody>
-            <tr className="selected">
+            <tr>
               {ROW.map((v, i) => (
-                <td key={i} className={i > 3 ? "font-mono text-right" : "font-mono"}>{v}</td>
+                <td key={i}>{v}</td>
               ))}
             </tr>
           </tbody>

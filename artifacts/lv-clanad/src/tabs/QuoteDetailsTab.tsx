@@ -31,15 +31,16 @@ export function QuoteDetailsTab() {
             </Field>
           </div>
           <div className="lg:col-span-1">
-            <h4 className="text-[12px] font-semibold text-[color:var(--color-lv-orange-dark)] mb-2">LTA Details</h4>
-            <Field label="LTA% Crystallised:"><TextInput value="0" /></Field>
-            <Field label="Pension Fund within LTA:"><TextInput value="15,000" /></Field>
-            <Field label="Net LTA Excess Pension Fund Retained:"><TextInput value="0" /></Field>
-            <Field label="Standard Lifetime Allowance:"><TextInput value="1,073,100" /></Field>
-            <Field label="First BCE:"><Checkbox checked={true} /></Field>
-            <Field label="LTA Protection type:"><TextInput value="N" /></Field>
-            <Field label="Enhancement:"><TextInput value="0" /></Field>
-            <Field label="HMRC Certificate Number:"><TextInput value="" /></Field>
+            <Section title="LTA Details">
+              <Field label="LTA% Crystallised:"><TextInput value="0" /></Field>
+              <Field label="Pension Fund within LTA:"><TextInput value="15,000" /></Field>
+              <Field label="Net LTA Excess Pension Fund Retained:"><TextInput value="0" /></Field>
+              <Field label="Standard Lifetime Allowance:"><TextInput value="1,073,100" /></Field>
+              <Field label="First BCE:"><Checkbox checked={true} /></Field>
+              <Field label="LTA Protection type:"><TextInput value="N" /></Field>
+              <Field label="Enhancement:"><TextInput value="0" /></Field>
+              <Field label="HMRC Certificate Number:"><TextInput value="" /></Field>
+            </Section>
           </div>
         </div>
 

@@ -59,6 +59,12 @@ export function PolicyDetailsTab() {
           <Field label="Post Code:"><TextInput value="LS15 8ZB" /></Field>
           <Field label="Email:"><TextInput value="WMCS@agepartnership.com" /></Field>
         </Section>
+
+        <Section title="P45 Details">
+          <Field label="P45 date rec'd:"><TextInput value="" /></Field>
+          <Field label="P45 Tax Paid:"><TextInput value="" /></Field>
+          <Field label="P45 Gross Pay:"><TextInput value="" /></Field>
+        </Section>
       </div>
 
       <div className="space-y-4 lg:col-span-1">
@@ -82,12 +88,6 @@ export function PolicyDetailsTab() {
           <Field label="Issue wake up letters/maturity chasers:">
             <SelectInput value="Yes" options={["Yes", "No"]} />
           </Field>
-        </Section>
-
-        <Section title="P45 Details">
-          <Field label="P45 date rec'd:"><TextInput value="" /></Field>
-          <Field label="P45 Tax Paid:"><TextInput value="" /></Field>
-          <Field label="P45 Gross Pay:"><TextInput value="" /></Field>
         </Section>
 
         <Section title="IFA Details">

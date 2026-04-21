@@ -21,6 +21,7 @@ export function Field({
 export function TextInput({
   value = "",
   readOnly = false,
+  disabled = false,
   type = "text",
   placeholder,
   error = false,
@@ -28,6 +29,7 @@ export function TextInput({
 }: {
   value?: string;
   readOnly?: boolean;
+  disabled?: boolean;
   type?: string;
   placeholder?: string;
   error?: boolean;
@@ -38,9 +40,10 @@ export function TextInput({
       type={type}
       defaultValue={value}
       readOnly={readOnly}
+      disabled={disabled}
       placeholder={placeholder}
       data-error={error || undefined}
-      className={`lve-input ${className}`}
+      className={`lve-input ${disabled ? "bg-[#f0f0f0] text-[#777] cursor-not-allowed" : ""} ${className}`}
     />
   );
 }

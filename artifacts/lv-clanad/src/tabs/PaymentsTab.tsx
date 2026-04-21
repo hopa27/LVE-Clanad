@@ -1,5 +1,5 @@
 import { Field, TextInput, Section } from "../components/Field";
-import { Upload } from "lucide-react";
+import { MdFileUpload } from "react-icons/md";
 
 const PAYMENT_HISTORY = [
   { date: "28/05/2025", gross: "9,570.32", cap: "0", tax: "-2,780.46", postAdj: "0", net: "6,789.86", method: "B", reason: "ONEOFF", bacs: "27/05/2025", hash: "/I ZU" },
@@ -14,14 +14,16 @@ const TAX_HISTORY = [
 export function PaymentsTab() {
   return (
     <div className="space-y-4">
-      <Section title="Payment Summary">
+      <Section
+        title="Payment Summary"
+        headerAction={
+          <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
+            <MdFileUpload size={16} /> Import
+          </button>
+        }
+      >
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-8">
           <div>
-            <Field label="">
-              <button type="button" className="btn">
-                <Upload size={14} /> Import
-              </button>
-            </Field>
             <Field label="Premium:"><TextInput value="15,000" /></Field>
             <Field label="Tax Free Cash:"><TextInput value="0" /></Field>
             <Field label="Total:"><TextInput value="15,000" /></Field>

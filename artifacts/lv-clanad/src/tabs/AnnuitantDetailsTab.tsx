@@ -18,6 +18,7 @@ function AnnuitantBlock({
   dateMarRec = "",
   uwRef = "",
   deathCert = false,
+  showShortName = true,
 }: Record<string, string | boolean | undefined>) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-6">
@@ -25,7 +26,9 @@ function AnnuitantBlock({
         <Field label="Surname:"><TextInput value={surname as string} /></Field>
         <Field label="Forename:"><TextInput value={forename as string} /></Field>
         <Field label="2nd Name:"><TextInput value={second as string} /></Field>
-        <Field label="Short Name:"><TextInput value={shortName as string} /></Field>
+        {showShortName && (
+          <Field label="Short Name:"><TextInput value={shortName as string} /></Field>
+        )}
       </div>
       <div>
         <Field label="DOB:"><DatePicker value={dob as string} placeholder="DOB" /></Field>
@@ -64,7 +67,7 @@ export function AnnuitantDetailsTab() {
       </Section>
 
       <Section title="Dependant / Second Annuitant / Beneficiary">
-        <AnnuitantBlock />
+        <AnnuitantBlock showShortName={false} />
       </Section>
     </div>
   );

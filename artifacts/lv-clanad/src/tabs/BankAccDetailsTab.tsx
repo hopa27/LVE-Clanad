@@ -21,16 +21,16 @@ export function BankAccDetailsTab() {
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
           <div>
-            <Field label="Bank sort code:"><TextInput value="30-15-52" /></Field>
-            <Field label="Bank account no:"><TextInput value="01841281" /></Field>
-            <Field label="Bank account name:"><TextInput value="Mrs Linda Turner" /></Field>
-            <Field label="Bank name:"><TextInput value="LLOYDS BANK PLC, WIRRAL" /></Field>
+            <Field inline label="Bank sort code:"><TextInput value="30-15-52" /></Field>
+            <Field inline label="Bank account no:"><TextInput value="01841281" /></Field>
+            <Field inline label="Bank account name:"><TextInput value="Mrs Linda Turner" /></Field>
+            <Field inline label="Bank name:"><TextInput value="LLOYDS BANK PLC, WIRRAL" /></Field>
           </div>
           <div>
-            <Field label="Payment Ref:"><TextInput value="225810" /></Field>
-            <Field label="Payment Method:"><TextInput value="B" /></Field>
-            <Field label="Change Effective Date:"><DatePicker placeholder="Change Effective Date" /></Field>
-            <Field label="TOTAL:"><TextInput value="£15,000.00" disabled /></Field>
+            <Field inline label="Payment Ref:"><TextInput value="225810" /></Field>
+            <Field inline label="Payment Method:"><TextInput value="B" /></Field>
+            <Field inline label="Change Effective Date:"><DatePicker placeholder="Change Effective Date" /></Field>
+            <Field inline label="TOTAL:"><TextInput value="£15,000.00" disabled /></Field>
           </div>
         </div>
       </Section>

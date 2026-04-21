@@ -5,15 +5,25 @@ export function Field({
   label,
   children,
   className = "",
+  inline = false,
 }: {
   label: ReactNode;
   children: ReactNode;
   className?: string;
+  inline?: boolean;
 }) {
+  if (inline) {
+    return (
+      <div className={`mb-4 flex items-center gap-3 ${className}`}>
+        <label className="lve-label !mb-0 text-right shrink-0 w-[170px]">{label}</label>
+        <div className="flex-1 min-w-0">{children}</div>
+      </div>
+    );
+  }
   return (
-    <div className={`mb-4 flex items-center gap-3 ${className}`}>
-      <label className="lve-label !mb-0 text-right shrink-0 w-[170px]">{label}</label>
-      <div className="flex-1 min-w-0">{children}</div>
+    <div className={`mb-4 ${className}`}>
+      <label className="lve-label">{label}</label>
+      {children}
     </div>
   );
 }

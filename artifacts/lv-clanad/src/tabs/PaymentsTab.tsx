@@ -49,15 +49,15 @@ export function PaymentsTab() {
 
       <Section title="Payment History">
         <div className="overflow-auto">
-          <table className="data-table">
+          <table className="lve-grid">
             <thead>
               <tr>
                 <th>Pay Date</th>
-                <th className="text-right">Gross</th>
-                <th className="text-right">Cap Element</th>
-                <th className="text-right">Tax</th>
-                <th className="text-right">Post Adj</th>
-                <th className="text-right">Net</th>
+                <th style={{ textAlign: "right" }}>Gross</th>
+                <th style={{ textAlign: "right" }}>Cap Element</th>
+                <th style={{ textAlign: "right" }}>Tax</th>
+                <th style={{ textAlign: "right" }}>Post Adj</th>
+                <th style={{ textAlign: "right" }}>Net</th>
                 <th>Method</th>
                 <th>Reason</th>
                 <th>BACS Date</th>
@@ -66,17 +66,17 @@ export function PaymentsTab() {
             </thead>
             <tbody>
               {PAYMENT_HISTORY.map((row, i) => (
-                <tr key={i} className={i === 0 ? "selected" : ""}>
-                  <td className="font-mono">{row.date}</td>
-                  <td className="text-right font-mono">{row.gross}</td>
-                  <td className="text-right font-mono">{row.cap}</td>
-                  <td className="text-right font-mono text-red-600">{row.tax}</td>
-                  <td className="text-right font-mono">{row.postAdj}</td>
-                  <td className="text-right font-mono">{row.net}</td>
+                <tr key={i}>
+                  <td>{row.date}</td>
+                  <td style={{ textAlign: "right" }}>{row.gross}</td>
+                  <td style={{ textAlign: "right" }}>{row.cap}</td>
+                  <td style={{ textAlign: "right" }}>{row.tax}</td>
+                  <td style={{ textAlign: "right" }}>{row.postAdj}</td>
+                  <td style={{ textAlign: "right" }}>{row.net}</td>
                   <td>{row.method}</td>
                   <td>{row.reason}</td>
-                  <td className="font-mono">{row.bacs}</td>
-                  <td className="font-mono text-[11px]">{row.hash}</td>
+                  <td>{row.bacs}</td>
+                  <td>{row.hash}</td>
                 </tr>
               ))}
             </tbody>
@@ -86,32 +86,32 @@ export function PaymentsTab() {
 
       <Section title="Tax History">
         <div className="overflow-auto">
-          <table className="data-table">
+          <table className="lve-grid">
             <thead>
               <tr>
                 <th>Pay Date</th>
                 <th>Tax Code</th>
                 <th>N</th>
-                <th className="text-right">Gross</th>
-                <th className="text-right">Cum Instal</th>
-                <th className="text-right">Free Pay</th>
-                <th className="text-right">Taxable Pay</th>
-                <th className="text-right">Tax</th>
-                <th className="text-right">Tax YTD</th>
+                <th style={{ textAlign: "right" }}>Gross</th>
+                <th style={{ textAlign: "right" }}>Cum Instal</th>
+                <th style={{ textAlign: "right" }}>Free Pay</th>
+                <th style={{ textAlign: "right" }}>Taxable Pay</th>
+                <th style={{ textAlign: "right" }}>Tax</th>
+                <th style={{ textAlign: "right" }}>Tax YTD</th>
               </tr>
             </thead>
             <tbody>
               {TAX_HISTORY.map((row, i) => (
                 <tr key={i}>
-                  <td className="font-mono">{row.date}</td>
-                  <td className="font-mono">{row.code}</td>
+                  <td>{row.date}</td>
+                  <td>{row.code}</td>
                   <td>{row.n}</td>
-                  <td className="text-right font-mono">{row.gross}</td>
-                  <td className="text-right font-mono">{row.cum}</td>
-                  <td className="text-right font-mono">{row.free}</td>
-                  <td className="text-right font-mono">{row.taxable}</td>
-                  <td className="text-right font-mono">{row.tax}</td>
-                  <td className="text-right font-mono">{row.ytd}</td>
+                  <td style={{ textAlign: "right" }}>{row.gross}</td>
+                  <td style={{ textAlign: "right" }}>{row.cum}</td>
+                  <td style={{ textAlign: "right" }}>{row.free}</td>
+                  <td style={{ textAlign: "right" }}>{row.taxable}</td>
+                  <td style={{ textAlign: "right" }}>{row.tax}</td>
+                  <td style={{ textAlign: "right" }}>{row.ytd}</td>
                 </tr>
               ))}
             </tbody>

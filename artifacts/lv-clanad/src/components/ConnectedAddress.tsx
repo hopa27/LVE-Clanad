@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
-type LineDef = { label: string; readOnly?: boolean };
+type LineDef = { placeholder?: string; readOnly?: boolean };
 
 let measureCanvas: HTMLCanvasElement | null = null;
 function measureText(text: string, font: string): number {
@@ -107,22 +107,21 @@ export function ConnectedAddress({
   };
 
   return (
-    <div>
+    <div className="space-y-2">
       {lines.map((line, i) => (
-        <div className="mb-4" key={line.label}>
-          <label className="lve-label">{line.label}</label>
-          <input
-            ref={(el) => {
-              inputRefs.current[i] = el;
-            }}
-            type="text"
-            value={values[i] ?? ""}
-            readOnly={line.readOnly}
-            onChange={(e) => handleChange(i, e.target.value)}
-            onKeyDown={(e) => handleKeyDown(i, e)}
-            className="lve-input"
-          />
-        </div>
+        <input
+          key={i}
+          ref={(el) => {
+            inputRefs.current[i] = el;
+          }}
+          type="text"
+          value={values[i] ?? ""}
+          placeholder={line.placeholder ?? `Line ${i + 1}`}
+          readOnly={line.readOnly}
+          onChange={(e) => handleChange(i, e.target.value)}
+          onKeyDown={(e) => handleKeyDown(i, e)}
+          className="lve-input"
+        />
       ))}
     </div>
   );

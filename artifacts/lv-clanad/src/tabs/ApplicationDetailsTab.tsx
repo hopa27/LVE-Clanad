@@ -58,16 +58,18 @@ export function ApplicationDetailsTab() {
         </Section>
 
         <Section title="Correspondence Address">
-          <ConnectedAddress
-            lines={[
-              { label: "Line 1:" },
-              { label: "Line 2:" },
-              { label: "Line 3:" },
-              { label: "Line 4:" },
-              { label: "Line 5 (County):" },
-            ]}
-            initial={["Little East Down Farm", "Ashwater", "", "", ""]}
-          />
+          <Field label="Address:">
+            <ConnectedAddress
+              lines={[
+                { placeholder: "Line 1" },
+                { placeholder: "Line 2" },
+                { placeholder: "Line 3" },
+                { placeholder: "Line 4" },
+                { placeholder: "Line 5 (County)" },
+              ]}
+              initial={["Little East Down Farm", "Ashwater", "", "", ""]}
+            />
+          </Field>
           <Field label="Postcode:"><TextInput value="EX21 5UP" /></Field>
           <Field label="Country:">
             <SelectInput value="United Kingdom" options={["United Kingdom", "Ireland", "Other"]} />

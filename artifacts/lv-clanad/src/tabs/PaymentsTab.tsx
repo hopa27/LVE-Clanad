@@ -37,13 +37,13 @@ export function PaymentsTab() {
             <Field label="Taxable pay:"><TextInput value="-5,590.06" /></Field>
             <Field label="Cumulative Free Pay:"><TextInput value="6,289.56" /></Field>
             <Field label="PAYE Tax Due To Date:"><TextInput value="-2,780.46" /></Field>
-            <Field label="PAYE Tax Deduction:"><TextInput value="0" /></Field>
           </div>
           <div>
             <Field label="Next Anniversary:"><DatePicker placeholder="Next Anniversary" /></Field>
             <Field label="Next Payment Due:"><DatePicker placeholder="Next Payment Due" /></Field>
             <Field label="Inst Remaining:"><TextInput value="1" /></Field>
             <Field label="Nth Inst:"><TextInput value="6" /></Field>
+            <Field label="PAYE Tax Deduction:"><TextInput value="0" /></Field>
           </div>
         </div>
       </Section>

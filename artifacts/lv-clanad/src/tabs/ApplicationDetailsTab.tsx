@@ -1,4 +1,5 @@
 import { Field, TextInput, SelectInput, Checkbox, Section } from "../components/Field";
+import { ConnectedAddress } from "../components/ConnectedAddress";
 
 export function ApplicationDetailsTab() {
   return (
@@ -57,11 +58,16 @@ export function ApplicationDetailsTab() {
         </Section>
 
         <Section title="Correspondence Address">
-          <Field label="Line 1:"><TextInput value="Little East Down Farm" /></Field>
-          <Field label="Line 2:"><TextInput value="Ashwater" /></Field>
-          <Field label="Line 3:"><TextInput value="" /></Field>
-          <Field label="Line 4:"><TextInput value="" /></Field>
-          <Field label="Line 5 (County):"><TextInput value="" /></Field>
+          <ConnectedAddress
+            lines={[
+              { label: "Line 1:" },
+              { label: "Line 2:" },
+              { label: "Line 3:" },
+              { label: "Line 4:" },
+              { label: "Line 5 (County):" },
+            ]}
+            initial={["Little East Down Farm", "Ashwater", "", "", ""]}
+          />
           <Field label="Postcode:"><TextInput value="EX21 5UP" /></Field>
           <Field label="Country:">
             <SelectInput value="United Kingdom" options={["United Kingdom", "Ireland", "Other"]} />

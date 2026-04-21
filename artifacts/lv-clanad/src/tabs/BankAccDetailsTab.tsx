@@ -37,24 +37,22 @@ export function BankAccDetailsTab() {
 
       <Section title="Transfers In">
         <div className="overflow-auto">
-          <table className="data-table">
+          <table className="lve-grid">
             <thead>
               <tr>
                 <th>Transfer Company</th>
                 <th>Ref</th>
                 <th>Date</th>
-                <th className="text-right">Amount (£)</th>
+                <th style={{ textAlign: "right" }}>Amount (£)</th>
               </tr>
             </thead>
             <tbody>
               {TRANSFERS.map((t, i) => (
-                <tr key={i} className={i === 0 ? "selected" : ""}>
-                  <td className="font-medium">{t.company}</td>
-                  <td className="font-mono text-[11px] text-[color:var(--color-text-secondary)]">{t.ref}</td>
-                  <td className="font-mono text-[11px]">{t.date}</td>
-                  <td className={`text-right font-mono ${t.amount.startsWith("-") ? "text-red-600" : "text-[color:var(--color-lv-green-dark)]"}`}>
-                    {t.amount}
-                  </td>
+                <tr key={i}>
+                  <td>{t.company}</td>
+                  <td>{t.ref}</td>
+                  <td>{t.date}</td>
+                  <td style={{ textAlign: "right" }}>{t.amount}</td>
                 </tr>
               ))}
             </tbody>

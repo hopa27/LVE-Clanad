@@ -10,7 +10,14 @@ const TRANSFERS = [
 export function BankAccDetailsTab() {
   return (
     <div className="space-y-4">
-      <Section title="Bank Details">
+      <Section
+        title="Bank Details"
+        headerAction={
+          <button type="button" className="lve-btn-secondary inline-flex items-center gap-1">
+            <Pencil size={14} /> Edit Bank Details
+          </button>
+        }
+      >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
           <div>
             <Field label="Bank sort code:"><TextInput value="30-15-52" /></Field>
@@ -25,16 +32,11 @@ export function BankAccDetailsTab() {
           </div>
         </div>
 
-        <div className="flex items-center justify-between mt-3">
-          <button type="button" className="btn">
-            <Pencil size={14} /> Edit Bank Details
-          </button>
-          <div className="flex items-center gap-2">
-            <span className="text-[12px] text-[color:var(--color-text-secondary)]">TOTAL:</span>
-            <span className="px-3 py-1 rounded-md bg-[#e8f5ee] text-[color:var(--color-lv-green-dark)] font-semibold text-[13px]">
-              £15,000.00
-            </span>
-          </div>
+        <div className="flex items-center justify-end mt-3 gap-2">
+          <span className="text-[12px] text-[color:var(--color-text-secondary)]">TOTAL:</span>
+          <span className="px-3 py-1 rounded-md bg-[#e8f5ee] text-[color:var(--color-lv-green-dark)] font-semibold text-[13px]">
+            £15,000.00
+          </span>
         </div>
       </Section>
 

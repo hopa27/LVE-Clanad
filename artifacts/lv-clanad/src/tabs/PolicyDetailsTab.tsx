@@ -64,6 +64,9 @@ export function PolicyDetailsTab() {
           <Field label="P45 date rec'd:"><TextInput value="" /></Field>
           <Field label="P45 Tax Paid:"><TextInput value="" /></Field>
           <Field label="P45 Gross Pay:"><TextInput value="" /></Field>
+          <div className="my-3 border-t border-[color:var(--color-panel-border)]" />
+          <Field label="Adviser Charge:"><Checkbox /></Field>
+          <Field label="Serious ill health:"><DatePicker placeholder="Serious ill health" /></Field>
         </Section>
       </div>
 
@@ -96,8 +99,6 @@ export function PolicyDetailsTab() {
           <Field label="Commission:"><TextInput value="270" /></Field>
           <Field label="Key Account:"><TextInput value="Z" /></Field>
           <Field label="Region:"><TextInput value="MAN" /></Field>
-          <Field label="Adviser Charge:"><Checkbox /></Field>
-          <Field label="Serious ill health:"><DatePicker placeholder="Serious ill health" /></Field>
         </Section>
       </div>
     </div>

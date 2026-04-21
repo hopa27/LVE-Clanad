@@ -121,17 +121,19 @@ export function Section({
   className = "",
   headerAction,
 }: {
-  title: string;
+  title?: string;
   children: ReactNode;
   className?: string;
   headerAction?: ReactNode;
 }) {
   return (
     <section className={`lve-panel ${className}`}>
-      <header className="lve-panel-header flex items-center justify-between">
-        <span>{title}</span>
-        {headerAction}
-      </header>
+      {(title || headerAction) && (
+        <header className="lve-panel-header flex items-center justify-between">
+          <span>{title}</span>
+          {headerAction}
+        </header>
+      )}
       <div className="lve-panel-body">{children}</div>
     </section>
   );

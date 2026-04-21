@@ -35,7 +35,7 @@ export function BankAccDetailsTab() {
         </div>
       </Section>
 
-      <Section title="Transfers In">
+      <Section>
         <div className="overflow-auto">
           <table className="lve-grid">
             <thead>

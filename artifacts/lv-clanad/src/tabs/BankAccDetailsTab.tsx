@@ -1,4 +1,5 @@
 import { Field, TextInput, Section } from "../components/Field";
+import { DatePicker } from "../components/DatePicker";
 import { Pencil } from "lucide-react";
 
 const TRANSFERS = [
@@ -28,7 +29,7 @@ export function BankAccDetailsTab() {
             <Field label="Bank name:"><TextInput value="LLOYDS BANK PLC, WIRRAL" /></Field>
             <Field label="Payment Ref:"><TextInput value="225810" /></Field>
             <Field label="Payment Method:"><TextInput value="B" /></Field>
-            <Field label="Change Effective Date:"><TextInput value="" /></Field>
+            <Field label="Change Effective Date:"><DatePicker placeholder="Change Effective Date" /></Field>
           </div>
         </div>
 

@@ -1,4 +1,5 @@
 import { Field, TextInput, SelectInput, Checkbox, Section } from "../components/Field";
+import { DatePicker } from "../components/DatePicker";
 
 function AnnuitantBlock({
   surname = "",
@@ -27,8 +28,8 @@ function AnnuitantBlock({
         <Field label="Short Name:"><TextInput value={shortName as string} /></Field>
       </div>
       <div>
-        <Field label="DOB:"><TextInput value={dob as string} /></Field>
-        <Field label="DOD:"><TextInput value={ddd as string} /></Field>
+        <Field label="DOB:"><DatePicker value={dob as string} placeholder="DOB" /></Field>
+        <Field label="DOD:"><DatePicker value={ddd as string} placeholder="DOD" /></Field>
         <Field label="Death Cert Received?:"><Checkbox checked={deathCert as boolean} /></Field>
         <Field label="Nat ins no:"><TextInput value={natIns as string} /></Field>
         <Field label="Enhanced?:"><TextInput value={enhanced as string} /></Field>

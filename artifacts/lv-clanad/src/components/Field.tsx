@@ -11,9 +11,9 @@ export function Field({
   className?: string;
 }) {
   return (
-    <div className={`mb-4 ${className}`}>
-      <label className="lve-label">{label}</label>
-      {children}
+    <div className={`mb-4 flex items-center gap-3 ${className}`}>
+      <label className="lve-label !mb-0 text-right shrink-0 w-[170px]">{label}</label>
+      <div className="flex-1 min-w-0">{children}</div>
     </div>
   );
 }

@@ -30,12 +30,6 @@ export function BankAccDetailsTab() {
             <Field label="Payment Ref:"><TextInput value="225810" /></Field>
             <Field label="Payment Method:"><TextInput value="B" /></Field>
             <Field label="Change Effective Date:"><DatePicker placeholder="Change Effective Date" /></Field>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
-          <div />
-          <div>
             <Field label="TOTAL:"><TextInput value="£15,000.00" disabled /></Field>
           </div>
         </div>

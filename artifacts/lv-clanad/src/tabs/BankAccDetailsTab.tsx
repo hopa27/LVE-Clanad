@@ -1,6 +1,6 @@
 import { Field, TextInput, Section } from "../components/Field";
 import { DatePicker } from "../components/DatePicker";
-import { Pencil } from "lucide-react";
+import { MdEdit } from "react-icons/md";
 
 const TRANSFERS = [
   { company: "PRUDENTIAL", ref: "225810", date: "25/04/2025", amount: "32,760.42" },
@@ -14,8 +14,8 @@ export function BankAccDetailsTab() {
       <Section
         title="Bank Details"
         headerAction={
-          <button type="button" className="lve-btn-secondary inline-flex items-center gap-1">
-            <Pencil size={14} /> Edit Bank Details
+          <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
+            <MdEdit size={16} /> Edit Bank Details
           </button>
         }
       >

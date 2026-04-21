@@ -24,7 +24,7 @@ export function IncreaseHistoryTab() {
           <thead>
             <tr>
               {COLUMNS.map((c) => (
-                <th key={c}>{c}</th>
+                <th key={c} className="whitespace-nowrap">{c}</th>
               ))}
             </tr>
           </thead>

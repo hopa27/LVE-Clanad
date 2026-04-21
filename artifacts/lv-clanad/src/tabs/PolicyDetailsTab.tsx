@@ -95,7 +95,7 @@ export function PolicyDetailsTab() {
           <Field label="Key Account:"><TextInput value="Z" /></Field>
           <Field label="Region:"><TextInput value="MAN" /></Field>
           <Field label="Adviser Charge:"><Checkbox /></Field>
-          <Field label="Serious ill health:"><TextInput value="/  /" /></Field>
+          <Field label="Serious ill health:"><DatePicker placeholder="Serious ill health" /></Field>
         </Section>
       </div>
     </div>

@@ -33,11 +33,10 @@ export function BankAccDetailsTab() {
           </div>
         </div>
 
-        <div className="flex items-center justify-end mt-3 gap-2">
-          <span className="text-[12px] text-[color:var(--color-text-secondary)]">TOTAL:</span>
-          <span className="px-3 py-1 rounded-md bg-[#e8f5ee] text-[color:var(--color-lv-green-dark)] font-semibold text-[13px]">
-            £15,000.00
-          </span>
+        <div className="mt-3 flex justify-end">
+          <div className="w-64">
+            <Field label="TOTAL:"><TextInput value="£15,000.00" readOnly /></Field>
+          </div>
         </div>
       </Section>
 

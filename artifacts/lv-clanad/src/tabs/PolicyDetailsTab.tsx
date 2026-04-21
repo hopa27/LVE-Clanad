@@ -4,7 +4,8 @@ import { DatePicker } from "../components/DatePicker";
 export function PolicyDetailsTab() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-      <Section title="Policy Details" className="lg:col-span-1">
+      <div className="space-y-4 lg:col-span-1">
+      <Section title="Policy Details">
         <Field label="Online Application:"><Checkbox /></Field>
         <Field label="Tax Code:">
           <div className="flex items-center gap-2">
@@ -37,6 +38,14 @@ export function PolicyDetailsTab() {
         <Field label="Policy Owner:"><TextInput value="Mrs L Turner" /></Field>
       </Section>
 
+      <Section title="Non Standard Policy">
+        <Field label="Non Std Flag:">
+          <SelectInput value="" options={["", "Y", "N"]} />
+        </Field>
+        <Field label="Non Standard Policy:"><TextInput value="" /></Field>
+      </Section>
+      </div>
+
       <div className="space-y-4 lg:col-span-1">
         <Section title="IFA Contact Details">
           <Field label="Name:"><TextInput value="Age Partnership Wealth Management Limited" /></Field>
@@ -49,13 +58,6 @@ export function PolicyDetailsTab() {
           <Field label="District:"><TextInput value="" /></Field>
           <Field label="Post Code:"><TextInput value="LS15 8ZB" /></Field>
           <Field label="Email:"><TextInput value="WMCS@agepartnership.com" /></Field>
-        </Section>
-
-        <Section title="Non Standard Policy">
-          <Field label="Non Std Flag:">
-            <SelectInput value="" options={["", "Y", "N"]} />
-          </Field>
-          <Field label="Non Standard Policy:"><TextInput value="" /></Field>
         </Section>
       </div>
 

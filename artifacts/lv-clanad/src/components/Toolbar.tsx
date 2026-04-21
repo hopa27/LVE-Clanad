@@ -8,7 +8,6 @@ import {
   MdStorage,
   MdBarChart,
   MdBusiness,
-  MdLogout,
 } from "react-icons/md";
 
 const TOOLS = [
@@ -21,7 +20,6 @@ const TOOLS = [
   { label: "CRS", icon: MdStorage, enabled: true },
   { label: "Reports", icon: MdBarChart, enabled: true },
   { label: "Company", icon: MdBusiness, enabled: true },
-  { label: "Exit", icon: MdLogout, enabled: true },
 ];
 
 export function Toolbar() {

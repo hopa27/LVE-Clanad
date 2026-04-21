@@ -107,7 +107,7 @@ export function ConnectedAddress({
   };
 
   return (
-    <div className="space-y-2">
+    <div className="rounded-[8px] border border-[#BBBBBB] bg-white overflow-hidden focus-within:border-[#178830] focus-within:border-[2px] hover:border-[#178830] transition-colors">
       {lines.map((line, i) => (
         <input
           key={i}
@@ -120,7 +120,9 @@ export function ConnectedAddress({
           readOnly={line.readOnly}
           onChange={(e) => handleChange(i, e.target.value)}
           onKeyDown={(e) => handleKeyDown(i, e)}
-          className="lve-input"
+          className={`block w-full h-[42px] px-3 bg-transparent outline-none font-['Mulish'] text-[16px] leading-[26px] text-[#3d3d3d] placeholder:text-[#BBBBBB] ${
+            i > 0 ? "border-t border-[#e3e6ea]" : ""
+          }`}
         />
       ))}
     </div>

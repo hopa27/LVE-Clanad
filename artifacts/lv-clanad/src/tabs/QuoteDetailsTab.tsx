@@ -68,35 +68,28 @@ export function QuoteDetailsTab() {
 
       <Section title="Quote Lines">
         <div className="overflow-auto">
-          <table className="data-table">
+          <table className="lve-grid">
             <thead>
               <tr>
-                <th>Type</th><th>Premium</th><th>Tax Free Cash Amount</th>
-                <th>Original Income</th><th>Esc Type</th><th>Esc Rate %</th>
-                <th>Current Income</th><th>Spouse %</th><th>Spouse Income</th>
-                <th>Guarantee</th><th>Last Pay Under Guarantee</th>
-                <th>Overlap</th><th>Value Protection %</th><th>Tax Free %</th>
-                <th>Max Tax Free</th>
+                {[
+                  "Type","Premium","Tax Free Cash Amount","Original Income","Esc Type","Esc Rate %",
+                  "Current Income","Spouse %","Spouse Income","Guarantee","Last Pay Under Guarantee",
+                  "Overlap","Value Protection %","Tax Free %","Max Tax Free",
+                ].map((c) => (
+                  <th key={c} className="whitespace-nowrap !px-4">{c}</th>
+                ))}
               </tr>
             </thead>
             <tbody>
               {QUOTE_ROWS.map((r, i) => (
-                <tr key={i} className="selected">
-                  <td>{r.type}</td>
-                  <td className="font-mono">{r.premium}</td>
-                  <td className="font-mono">{r.tfc}</td>
-                  <td className="font-mono">{r.original}</td>
-                  <td>{r.escType}</td>
-                  <td className="font-mono">{r.escRate}</td>
-                  <td className="font-mono">{r.currentInc}</td>
-                  <td className="font-mono">{r.spousePct}</td>
-                  <td className="font-mono">{r.spouseInc}</td>
-                  <td>{r.guarantee}</td>
-                  <td>{r.lastPay}</td>
-                  <td>{r.overlap}</td>
-                  <td className="font-mono">{r.valProt}</td>
-                  <td className="font-mono">{r.taxFree}</td>
-                  <td>{r.maxFree}</td>
+                <tr key={i}>
+                  {[
+                    r.type, r.premium, r.tfc, r.original, r.escType, r.escRate,
+                    r.currentInc, r.spousePct, r.spouseInc, r.guarantee, r.lastPay,
+                    r.overlap, r.valProt, r.taxFree, r.maxFree,
+                  ].map((v, j) => (
+                    <td key={j} className="!px-4 whitespace-nowrap">{v}</td>
+                  ))}
                 </tr>
               ))}
             </tbody>

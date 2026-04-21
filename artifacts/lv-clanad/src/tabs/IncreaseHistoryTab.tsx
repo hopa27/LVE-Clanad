@@ -24,14 +24,14 @@ export function IncreaseHistoryTab() {
           <thead>
             <tr>
               {COLUMNS.map((c) => (
-                <th key={c} className="whitespace-nowrap">{c}</th>
+                <th key={c} className="whitespace-nowrap !px-4">{c}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             <tr>
               {ROW.map((v, i) => (
-                <td key={i}>{v}</td>
+                <td key={i} className="!px-4">{v}</td>
               ))}
             </tr>
           </tbody>

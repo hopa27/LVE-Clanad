@@ -19,6 +19,7 @@ function AnnuitantBlock({
   uwRef = "",
   deathCert = false,
   showShortName = true,
+  showUwRef = true,
 }: Record<string, string | boolean | undefined>) {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-6">
@@ -46,7 +47,9 @@ function AnnuitantBlock({
         <Field label="MAR Copy to PH?:"><TextInput value={marCopyToPH as string} /></Field>
         <Field label="Date MAR Sent:"><TextInput value={dateMarSent as string} /></Field>
         <Field label="Date MAR Received:"><TextInput value={dateMarRec as string} /></Field>
-        <Field label="U/W Ref:"><TextInput value={uwRef as string} /></Field>
+        {showUwRef && (
+          <Field label="U/W Ref:"><TextInput value={uwRef as string} /></Field>
+        )}
       </div>
     </div>
   );
@@ -67,7 +70,7 @@ export function AnnuitantDetailsTab() {
       </Section>
 
       <Section title="Dependant / Second Annuitant / Beneficiary">
-        <AnnuitantBlock showShortName={false} />
+        <AnnuitantBlock showShortName={false} showUwRef={false} />
       </Section>
     </div>
   );

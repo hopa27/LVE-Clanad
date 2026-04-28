@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MdPrint, MdClose, MdHelpOutline } from "react-icons/md";
+import { MdPrint, MdClose, MdHelpOutline, MdInfoOutline } from "react-icons/md";
 import { DatePicker } from "./DatePicker";
 
 export function TaxCertificateModal({
@@ -12,11 +12,17 @@ export function TaxCertificateModal({
   const [startDate, setStartDate] = useState<string>("10, Oct, 2022");
   const [endDate, setEndDate] = useState<string>("");
   const [confirmOpen, setConfirmOpen] = useState(false);
+  const [infoOpen, setInfoOpen] = useState(false);
 
   if (!open) return null;
 
   const handleConfirmYes = () => {
     setConfirmOpen(false);
+    setInfoOpen(true);
+  };
+
+  const handleInfoOk = () => {
+    setInfoOpen(false);
     onClose();
   };
 
@@ -95,6 +101,30 @@ export function TaxCertificateModal({
           </div>
         </div>
       </div>
+
+      {infoOpen && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/30">
+          <div className="lve-panel w-[340px] bg-white">
+            <header className="lve-panel-header">Information</header>
+            <div className="lve-panel-body">
+              <div className="flex items-start gap-3">
+                <MdInfoOutline
+                  size={32}
+                  className="text-[#006cf4] shrink-0 mt-0.5"
+                />
+                <p className="font-['Mulish'] text-[13px] text-[#3d3d3d]">
+                  PDF file request sent!
+                </p>
+              </div>
+              <div className="mt-6 flex items-center justify-end">
+                <button type="button" className="lve-btn" onClick={handleInfoOk}>
+                  OK
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {confirmOpen && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/30">

@@ -165,7 +165,7 @@ export function DatePicker({
                 captionLayout="label"
                 showOutsideDays
                 components={{
-                  MonthCaption: () => null,
+                  MonthCaption: () => <></>,
                 }}
                 classNames={{
                   month_grid: "border-collapse",

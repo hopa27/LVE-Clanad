@@ -3,6 +3,7 @@ import { MdKeyboardArrowDown, MdOpenInNew, MdMoreHoriz } from "react-icons/md";
 export function PolicyHeader() {
   return (
     <div className="lve-panel mb-6 p-4 flex flex-wrap items-center gap-3">
+      <span className="font-['Mulish'] text-[12px] font-semibold text-[#3d3d3d]">Policy No:</span>
       <button
         type="button"
         className="inline-flex items-center gap-1 px-3 h-9 rounded-[8px] border border-[#BBBBBB] bg-white font-['Mulish'] text-[#3d3d3d] hover:border-[#178830]"

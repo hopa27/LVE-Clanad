@@ -1,15 +1,22 @@
 import { useEffect, useRef, useState } from "react";
 import lvLogo from "../assets/lv-logo.png";
 import { MdLogout } from "react-icons/md";
+import { TaxCertificateModal } from "./TaxCertificateModal";
 
-type MenuItem = { label: string; options?: string[] };
+type MenuOption = { label: string; action?: string };
+type MenuItem = { label: string; options?: MenuOption[] };
 
 const MENU_ITEMS: MenuItem[] = [
   { label: "Options" },
   { label: "Process" },
   {
     label: "Print",
-    options: ["Calculate", "Copy P60", "Reprint MAR's", "MAR's Diary Report"],
+    options: [
+      { label: "Print Certificate", action: "tax-certificate" },
+      { label: "Copy P60" },
+      { label: "Reprint MAR's" },
+      { label: "MAR's Diary Report" },
+    ],
   },
   { label: "Supervisor" },
   { label: "Help" },
@@ -17,6 +24,7 @@ const MENU_ITEMS: MenuItem[] = [
 
 export function Header({ title }: { title: string }) {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
+  const [taxCertOpen, setTaxCertOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -28,6 +36,11 @@ export function Header({ title }: { title: string }) {
     document.addEventListener("mousedown", onDocClick);
     return () => document.removeEventListener("mousedown", onDocClick);
   }, []);
+
+  const handleOption = (action?: string) => {
+    setOpenIdx(null);
+    if (action === "tax-certificate") setTaxCertOpen(true);
+  };
 
   return (
     <header className="shrink-0">
@@ -69,15 +82,15 @@ export function Header({ title }: { title: string }) {
                 {item.label.slice(1)}
               </button>
               {item.options && isOpen && (
-                <div className="absolute left-0 top-full mt-0.5 z-30 min-w-[180px] bg-white border border-[#7a7a7a] shadow-md py-0.5 font-['Mulish'] text-[13px] text-[#3d3d3d]">
+                <div className="absolute left-0 top-full mt-0.5 z-30 min-w-[200px] bg-white border border-[#7a7a7a] shadow-md py-0.5 font-['Mulish'] text-[13px] text-[#3d3d3d]">
                   {item.options.map((opt) => (
                     <button
-                      key={opt}
+                      key={opt.label}
                       type="button"
-                      onClick={() => setOpenIdx(null)}
+                      onClick={() => handleOption(opt.action)}
                       className="block w-full text-left px-3 py-1 hover:bg-[#1f4f8a] hover:text-white"
                     >
-                      {opt}
+                      {opt.label}
                     </button>
                   ))}
                 </div>
@@ -86,6 +99,11 @@ export function Header({ title }: { title: string }) {
           );
         })}
       </nav>
+
+      <TaxCertificateModal
+        open={taxCertOpen}
+        onClose={() => setTaxCertOpen(false)}
+      />
     </header>
   );
 }

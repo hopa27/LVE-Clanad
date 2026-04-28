@@ -1,0 +1,90 @@
+import { useState } from "react";
+import { MdPrint, MdClose } from "react-icons/md";
+import { DatePicker } from "./DatePicker";
+
+export function TaxCertificateModal({
+  open,
+  onClose,
+}: {
+  open: boolean;
+  onClose: () => void;
+}) {
+  const [startDate, setStartDate] = useState<string>("10, Oct, 2022");
+  const [endDate, setEndDate] = useState<string>("");
+
+  if (!open) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+      <div className="lve-panel w-[420px] bg-white">
+        <header className="lve-panel-header">Tax Certificate</header>
+        <div className="lve-panel-body">
+          <p className="font-['Mulish'] text-[13px] text-[#3d3d3d] mb-4">
+            Please enter the dates of the first and last payments you want to see
+            on the certificate.
+          </p>
+
+          <div className="space-y-3">
+            <div className="flex items-center gap-3">
+              <label className="lve-label w-[90px] shrink-0 text-right">
+                Start Date:
+              </label>
+              <div className="flex-1">
+                <DatePicker
+                  value={startDate}
+                  placeholder="Start Date"
+                  onChange={(d) =>
+                    setStartDate(
+                      d
+                        ? `${String(d.getDate()).padStart(2, "0")}, ${[
+                            "Jan","Feb","Mar","Apr","May","Jun",
+                            "Jul","Aug","Sep","Oct","Nov","Dec",
+                          ][d.getMonth()]}, ${d.getFullYear()}`
+                        : ""
+                    )
+                  }
+                />
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <label className="lve-label w-[90px] shrink-0 text-right">
+                End Date:
+              </label>
+              <div className="flex-1">
+                <DatePicker
+                  value={endDate}
+                  placeholder="End Date"
+                  onChange={(d) =>
+                    setEndDate(
+                      d
+                        ? `${String(d.getDate()).padStart(2, "0")}, ${[
+                            "Jan","Feb","Mar","Apr","May","Jun",
+                            "Jul","Aug","Sep","Oct","Nov","Dec",
+                          ][d.getMonth()]}, ${d.getFullYear()}`
+                        : ""
+                    )
+                  }
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-6 flex items-center justify-end gap-3">
+            <button
+              type="button"
+              className="lve-btn lve-btn-secondary"
+              onClick={onClose}
+            >
+              <MdClose size={16} />
+              Cancel
+            </button>
+            <button type="button" className="lve-btn" onClick={onClose}>
+              <MdPrint size={16} />
+              Print
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

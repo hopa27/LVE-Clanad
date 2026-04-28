@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MdPrint, MdClose } from "react-icons/md";
+import { MdPrint, MdClose, MdHelpOutline } from "react-icons/md";
 import { DatePicker } from "./DatePicker";
 
 export function TaxCertificateModal({
@@ -11,8 +11,14 @@ export function TaxCertificateModal({
 }) {
   const [startDate, setStartDate] = useState<string>("10, Oct, 2022");
   const [endDate, setEndDate] = useState<string>("");
+  const [confirmOpen, setConfirmOpen] = useState(false);
 
   if (!open) return null;
+
+  const handleConfirmYes = () => {
+    setConfirmOpen(false);
+    onClose();
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
@@ -78,13 +84,52 @@ export function TaxCertificateModal({
               <MdClose size={16} />
               Cancel
             </button>
-            <button type="button" className="lve-btn" onClick={onClose}>
+            <button
+              type="button"
+              className="lve-btn"
+              onClick={() => setConfirmOpen(true)}
+            >
               <MdPrint size={16} />
               Print
             </button>
           </div>
         </div>
       </div>
+
+      {confirmOpen && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/30">
+          <div className="lve-panel w-[360px] bg-white">
+            <header className="lve-panel-header">Confirm</header>
+            <div className="lve-panel-body">
+              <div className="flex items-start gap-3">
+                <MdHelpOutline
+                  size={32}
+                  className="text-[#006cf4] shrink-0 mt-0.5"
+                />
+                <p className="font-['Mulish'] text-[13px] text-[#3d3d3d]">
+                  Do you wish to generate the PDF report?
+                </p>
+              </div>
+              <div className="mt-6 flex items-center justify-end gap-3">
+                <button
+                  type="button"
+                  className="lve-btn lve-btn-secondary"
+                  onClick={() => setConfirmOpen(false)}
+                >
+                  No
+                </button>
+                <button
+                  type="button"
+                  className="lve-btn"
+                  onClick={handleConfirmYes}
+                >
+                  Yes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

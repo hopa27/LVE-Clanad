@@ -15,7 +15,7 @@ const MENU_ITEMS: MenuItem[] = [
       { label: "Print Certificate", action: "tax-certificate" },
       { label: "Copy P60" },
       { label: "Reprint MAR's" },
-      { label: "MAR's Diary Report" },
+      { label: "Diary Report" },
     ],
   },
   { label: "Supervisor" },

@@ -11,6 +11,7 @@ import {
   MdBusiness,
 } from "react-icons/md";
 import { ConfirmDialog } from "./ConfirmDialog";
+import { QuoteLookupModal } from "./QuoteLookupModal";
 
 const TOOLS = [
   { label: "New App", icon: MdAdd, enabled: true, action: "new-app" as const },
@@ -26,6 +27,7 @@ const TOOLS = [
 
 export function Toolbar() {
   const [newAppConfirm, setNewAppConfirm] = useState(false);
+  const [quoteLookupOpen, setQuoteLookupOpen] = useState(false);
 
   return (
     <div className="flex flex-wrap items-center gap-2 mb-6">
@@ -51,8 +53,16 @@ export function Toolbar() {
       <ConfirmDialog
         open={newAppConfirm}
         message="Create a new Application?"
-        onYes={() => setNewAppConfirm(false)}
+        onYes={() => {
+          setNewAppConfirm(false);
+          setQuoteLookupOpen(true);
+        }}
         onNo={() => setNewAppConfirm(false)}
+      />
+
+      <QuoteLookupModal
+        open={quoteLookupOpen}
+        onClose={() => setQuoteLookupOpen(false)}
       />
     </div>
   );

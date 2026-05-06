@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   MdAdd,
   MdNoteAdd,
@@ -9,9 +10,10 @@ import {
   MdBarChart,
   MdBusiness,
 } from "react-icons/md";
+import { ConfirmDialog } from "./ConfirmDialog";
 
 const TOOLS = [
-  { label: "New App", icon: MdAdd, enabled: true },
+  { label: "New App", icon: MdAdd, enabled: true, action: "new-app" as const },
   { label: "New Quote", icon: MdNoteAdd, enabled: false },
   { label: "Sim App", icon: MdContentCopy, enabled: true },
   { label: "Edit", icon: MdEdit, enabled: true },
@@ -23,6 +25,8 @@ const TOOLS = [
 ];
 
 export function Toolbar() {
+  const [newAppConfirm, setNewAppConfirm] = useState(false);
+
   return (
     <div className="flex flex-wrap items-center gap-2 mb-6">
       {TOOLS.map((tool) => {
@@ -32,6 +36,9 @@ export function Toolbar() {
             key={tool.label}
             type="button"
             disabled={!tool.enabled}
+            onClick={() => {
+              if (tool.action === "new-app") setNewAppConfirm(true);
+            }}
             className="lve-btn lve-btn-secondary lve-btn-sm"
             title={tool.label}
           >
@@ -40,6 +47,13 @@ export function Toolbar() {
           </button>
         );
       })}
+
+      <ConfirmDialog
+        open={newAppConfirm}
+        message="Create a new Application?"
+        onYes={() => setNewAppConfirm(false)}
+        onNo={() => setNewAppConfirm(false)}
+      />
     </div>
   );
 }

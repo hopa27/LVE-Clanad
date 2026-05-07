@@ -22,7 +22,10 @@ export function PolicyHeader() {
         Liverpool Victoria Friendly Society Limited
       </div>
 
-      <div className="px-3 h-9 inline-flex items-center rounded-[8px] bg-[#eaf5f8] text-[#0d2c41] font-['Mulish'] text-sm">
+      <div
+        title="CLANAD Number"
+        className="px-3 h-9 inline-flex items-center rounded-[8px] bg-[#eaf5f8] text-[#0d2c41] font-['Mulish'] text-sm cursor-help"
+      >
         225810
       </div>
 

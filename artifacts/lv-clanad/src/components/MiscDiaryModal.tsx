@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { MdCheck, MdClose } from "react-icons/md";
+import { useEffect, useRef, useState } from "react";
+import { MdCheck, MdClose, MdArrowDropDown } from "react-icons/md";
 import { DatePicker } from "./DatePicker";
 
 const TYPE_OPTIONS = [
@@ -53,6 +53,19 @@ export function MiscDiaryModal({
 }) {
   const [type, setType] = useState("");
   const [notes, setNotes] = useState("");
+  const [typeOpen, setTypeOpen] = useState(false);
+  const typeRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!typeOpen) return;
+    const handler = (e: MouseEvent) => {
+      if (typeRef.current && !typeRef.current.contains(e.target as Node)) {
+        setTypeOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [typeOpen]);
 
   if (!open) return null;
 
@@ -74,17 +87,36 @@ export function MiscDiaryModal({
             <label className="lve-label w-[80px] shrink-0 text-right">
               Type:
             </label>
-            <select
-              className="lve-input flex-1"
-              value={type}
-              onChange={(e) => setType(e.target.value)}
-            >
-              {TYPE_OPTIONS.map((o) => (
-                <option key={o} value={o}>
-                  {o}
-                </option>
-              ))}
-            </select>
+            <div ref={typeRef} className="relative flex-1">
+              <button
+                type="button"
+                className="lve-input w-full flex items-center justify-between text-left"
+                onClick={() => setTypeOpen((v) => !v)}
+              >
+                <span className={type ? "" : "text-transparent"}>
+                  {type || "."}
+                </span>
+                <MdArrowDropDown size={20} className="text-[#555]" />
+              </button>
+              {typeOpen && (
+                <ul className="absolute z-10 left-0 right-0 mt-1 max-h-[180px] overflow-auto bg-white border border-[#bcd] rounded-[8px] shadow-md font-['Mulish'] text-[12px]">
+                  {TYPE_OPTIONS.filter((o) => o !== "").map((o) => (
+                    <li
+                      key={o}
+                      className={`px-3 py-1.5 cursor-pointer hover:bg-[#05579B] hover:text-white ${
+                        o === type ? "bg-[#eaf5f8]" : ""
+                      }`}
+                      onClick={() => {
+                        setType(o);
+                        setTypeOpen(false);
+                      }}
+                    >
+                      {o}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
 
           <div className="flex items-start gap-3">

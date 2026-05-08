@@ -1,5 +1,11 @@
 import { Section } from "../components/Field";
-import { MdAdd, MdRemove, MdEdit } from "react-icons/md";
+import {
+  MdAdd,
+  MdRemove,
+  MdEdit,
+  MdAccessTime,
+  MdPerson,
+} from "react-icons/md";
 
 const NOTES = [
   {
@@ -32,32 +38,85 @@ const NOTES = [
   },
 ];
 
+const AVATAR_COLORS = [
+  "bg-[#006cf4]",
+  "bg-[#04589b]",
+  "bg-[#00263e]",
+  "bg-[#178830]",
+  "bg-[#005a9c]",
+  "bg-[#05579B]",
+];
+
+function initials(name: string) {
+  return name
+    .split(" ")
+    .map((w) => w[0])
+    .filter(Boolean)
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+}
+
+function colorFor(name: string) {
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) hash = (hash * 31 + name.charCodeAt(i)) | 0;
+  return AVATAR_COLORS[Math.abs(hash) % AVATAR_COLORS.length];
+}
+
 export function NotesTab() {
   return (
-    <Section title="Notes">
-      <div className="flex flex-wrap gap-2 mb-4">
-        <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
-          <MdAdd size={16} /> Add
-        </button>
-        <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
-          <MdRemove size={16} /> Delete
-        </button>
-        <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
-          <MdEdit size={16} /> Edit
-        </button>
-      </div>
-
-      <div className="border border-[#e0e0e0] rounded-[8px] bg-white divide-y divide-[#e0e0e0] max-h-[560px] overflow-auto">
+    <Section
+      title={`Notes (${NOTES.length})`}
+      headerAction={
+        <div className="flex items-center gap-2">
+          <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
+            <MdAdd size={16} /> Add
+          </button>
+          <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
+            <MdEdit size={16} /> Edit
+          </button>
+          <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
+            <MdRemove size={16} /> Delete
+          </button>
+        </div>
+      }
+    >
+      <div className="space-y-3 max-h-[620px] overflow-auto pr-1">
         {NOTES.map((n, i) => (
-          <article key={i} className="p-4 hover:bg-[#eaf5f8]">
-            <header className="font-['Mulish'] text-[12px] text-[#555] mb-2">
-              Added by{" "}
-              <span className="font-semibold text-[#00263e]">{n.author}</span>,{" "}
-              {n.date}
-            </header>
-            <pre className="font-['Mulish'] text-[12px] whitespace-pre-wrap text-[#3d3d3d] leading-relaxed">
-              {n.body}
-            </pre>
+          <article
+            key={i}
+            className="group relative bg-white rounded-[8px] border border-[#e0e0e0] hover:border-[#006cf4] hover:shadow-sm transition-all overflow-hidden"
+          >
+            <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-[#006cf4] opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="p-4 pl-5">
+              <header className="flex items-center justify-between gap-3 mb-3 pb-3 border-b border-[#eef2f5]">
+                <div className="flex items-center gap-3 min-w-0">
+                  <span
+                    className={`inline-flex items-center justify-center w-9 h-9 rounded-full text-white font-['Livvic'] font-semibold text-[13px] shrink-0 ${colorFor(
+                      n.author,
+                    )}`}
+                  >
+                    {initials(n.author)}
+                  </span>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-1.5 font-['Livvic'] font-semibold text-[14px] text-[#00263e] truncate">
+                      <MdPerson size={14} className="text-[#777] shrink-0" />
+                      {n.author}
+                    </div>
+                    <div className="flex items-center gap-1.5 font-['Mulish'] text-[11px] text-[#777] mt-0.5">
+                      <MdAccessTime size={12} />
+                      {n.date}
+                    </div>
+                  </div>
+                </div>
+                <span className="font-['Mulish'] text-[10px] tracking-wider uppercase text-[#04589b] bg-[#eaf5f8] border border-[#d6e7ef] rounded-full px-2.5 py-0.5 shrink-0">
+                  Note #{NOTES.length - i}
+                </span>
+              </header>
+              <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#3d3d3d] leading-[1.6] m-0">
+                {n.body}
+              </pre>
+            </div>
           </article>
         ))}
       </div>

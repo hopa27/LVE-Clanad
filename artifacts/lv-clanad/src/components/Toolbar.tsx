@@ -13,9 +13,16 @@ import {
 import { ConfirmDialog } from "./ConfirmDialog";
 import { QuoteLookupModal } from "./QuoteLookupModal";
 
-const TOOLS = [
-  { label: "New App", icon: MdAdd, enabled: true, action: "new-app" as const },
-  { label: "New Quote", icon: MdNoteAdd, enabled: false },
+type ToolAction = "new-app" | "new-quote";
+
+const TOOLS: {
+  label: string;
+  icon: typeof MdAdd;
+  enabled: boolean;
+  action?: ToolAction;
+}[] = [
+  { label: "New App", icon: MdAdd, enabled: true, action: "new-app" },
+  { label: "New Quote", icon: MdNoteAdd, enabled: true, action: "new-quote" },
   { label: "Sim App", icon: MdContentCopy, enabled: true },
   { label: "Edit", icon: MdEdit, enabled: true },
   { label: "Cancel", icon: MdBlock, enabled: false },
@@ -28,6 +35,12 @@ const TOOLS = [
 export function Toolbar() {
   const [newAppConfirm, setNewAppConfirm] = useState(false);
   const [quoteLookupOpen, setQuoteLookupOpen] = useState(false);
+  const [newQuoteOpen, setNewQuoteOpen] = useState(false);
+
+  const handleClick = (action?: ToolAction) => {
+    if (action === "new-app") setNewAppConfirm(true);
+    else if (action === "new-quote") setNewQuoteOpen(true);
+  };
 
   return (
     <div className="flex flex-wrap items-center gap-2 mb-6">
@@ -38,9 +51,7 @@ export function Toolbar() {
             key={tool.label}
             type="button"
             disabled={!tool.enabled}
-            onClick={() => {
-              if (tool.action === "new-app") setNewAppConfirm(true);
-            }}
+            onClick={() => handleClick(tool.action)}
             className="lve-btn lve-btn-secondary lve-btn-sm"
             title={tool.label}
           >
@@ -63,6 +74,13 @@ export function Toolbar() {
       <QuoteLookupModal
         open={quoteLookupOpen}
         onClose={() => setQuoteLookupOpen(false)}
+      />
+
+      <QuoteLookupModal
+        open={newQuoteOpen}
+        onClose={() => setNewQuoteOpen(false)}
+        empty
+        initialQuery="20824110"
       />
     </div>
   );

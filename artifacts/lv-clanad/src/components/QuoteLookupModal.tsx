@@ -40,11 +40,17 @@ const VARIANT_COLS = [
 export function QuoteLookupModal({
   open,
   onClose,
+  empty = false,
+  initialQuery = "20150570",
 }: {
   open: boolean;
   onClose: () => void;
+  empty?: boolean;
+  initialQuery?: string;
 }) {
   if (!open) return null;
+  const illustrations = empty ? [] : ILLUSTRATIONS;
+  const variants = empty ? [] : VARIANTS;
 
   const navBtn =
     "h-8 w-8 inline-flex items-center justify-center rounded-[8px] border border-[#BBBBBB] bg-white text-[#3d3d3d] hover:border-[#178830]";
@@ -85,8 +91,9 @@ export function QuoteLookupModal({
               </button>
             </div>
             <input
+              key={initialQuery}
               type="text"
-              defaultValue="20150570"
+              defaultValue={initialQuery}
               className="lve-input w-[140px]"
             />
             <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
@@ -133,7 +140,17 @@ export function QuoteLookupModal({
                 </tr>
               </thead>
               <tbody>
-                {ILLUSTRATIONS.map((row, i) => (
+                {illustrations.length === 0 && (
+                  <tr>
+                    <td
+                      colSpan={ILLUSTRATION_COLS.length}
+                      className="!px-3 py-12 text-center text-[#888] font-['Mulish']"
+                    >
+                      No records
+                    </td>
+                  </tr>
+                )}
+                {illustrations.map((row, i) => (
                   <tr key={i}>
                     {row.map((v, j) => (
                       <td key={j} className="!px-3 whitespace-nowrap">
@@ -162,7 +179,17 @@ export function QuoteLookupModal({
                 </tr>
               </thead>
               <tbody>
-                {VARIANTS.map((row, i) => (
+                {variants.length === 0 && (
+                  <tr>
+                    <td
+                      colSpan={VARIANT_COLS.length}
+                      className="!px-3 py-12 text-center text-[#888] font-['Mulish']"
+                    >
+                      No records
+                    </td>
+                  </tr>
+                )}
+                {variants.map((row, i) => (
                   <tr key={i}>
                     {row.map((v, j) => (
                       <td key={j} className="!px-3 whitespace-nowrap">

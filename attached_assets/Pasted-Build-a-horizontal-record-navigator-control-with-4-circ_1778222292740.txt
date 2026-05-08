@@ -1,0 +1,103 @@
+Build a horizontal record-navigator control with 4 circular nav buttons and a centered counter, used to step through records in a toolbar.
+
+Layout
+Container: div, flex items-center gap-2
+Order (left → right):
+First Record button (ChevronFirst icon)
+Previous Record button (ChevronLeft icon)
+Counter span ({currentIndex + 1} of {total})
+Next Record button (ChevronRight icon)
+Last Record button (ChevronLast icon)
+Buttons (all 4 nav buttons share identical styling)
+Property	Value
+Size	44px × 44px (w-[44px] h-[44px])
+Shape	rounded-[30px] (fully circular)
+Background	white
+Border	1px solid #04589b
+Text/Icon Colour	#04589b
+Shadow	shadow-sm
+Icon	lucide-react, w-5 h-5
+Hover	bg #003578, text white, border #003578
+Disabled	opacity-30, cursor-not-allowed
+Transition	transition-colors
+Tooltip (title attr)	"First Record" / "Previous Record" / "Next Record" / "Last Record"
+Full button class:
+
+w-[44px] h-[44px] flex items-center justify-center rounded-[30px]
+border border-[#04589b] bg-white text-[#04589b] shadow-sm
+hover:bg-[#003578] hover:text-white hover:border-[#003578]
+disabled:opacity-30 disabled:cursor-not-allowed transition-colors
+
+Counter
+Property	Value
+Padding	px-2
+Min width	80px (min-w-[80px])
+Text align	center
+Font size	14px (text-sm)
+Font weight	bold
+Font family	Mulish (font-['Mulish'])
+Colour	#4a4a49
+User select	none (select-none)
+Format	"{currentIndex + 1} of {total}" (e.g. "1 of 6"); fallback "0 of 0" when no broker
+Counter class:
+
+px-2 min-w-[80px] text-center text-sm font-bold text-[#4a4a49]
+select-none font-['Mulish']
+
+Disabled Logic
+Button	Disabled when
+First / Previous	!hasBroker || currentIndex <= 0
+Next / Last	!hasBroker || currentIndex >= total - 1
+Handlers
+goFirst() → setActiveBrokerId(brokers[0].id)
+goPrev() → setActiveBrokerId(brokers[currentIndex - 1].id)
+goNext() → setActiveBrokerId(brokers[currentIndex + 1].id)
+goLast() → setActiveBrokerId(brokers[total - 1].id)
+Reference JSX
+<div className="flex items-center gap-2">
+  <button
+    onClick={goFirst}
+    disabled={!hasBroker || currentIndex <= 0}
+    title="First Record"
+    className="w-[44px] h-[44px] flex items-center justify-center rounded-[30px] border border-[#04589b] bg-white text-[#04589b] shadow-sm hover:bg-[#003578] hover:text-white hover:border-[#003578] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+  >
+    <ChevronFirst className="w-5 h-5" />
+  </button>
+ 
+  <button
+    onClick={goPrev}
+    disabled={!hasBroker || currentIndex <= 0}
+    title="Previous Record"
+    className="w-[44px] h-[44px] flex items-center justify-center rounded-[30px] border border-[#04589b] bg-white text-[#04589b] shadow-sm hover:bg-[#003578] hover:text-white hover:border-[#003578] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+  >
+    <ChevronLeft className="w-5 h-5" />
+  </button>
+ 
+  <span className="px-2 min-w-[80px] text-center text-sm font-bold text-[#4a4a49] select-none font-['Mulish']">
+    {hasBroker && currentIndex >= 0 ? `${currentIndex + 1} of ${total}` : '0 of 0'}
+  </span>
+ 
+  <button
+    onClick={goNext}
+    disabled={!hasBroker || currentIndex >= total - 1}
+    title="Next Record"
+    className="w-[44px] h-[44px] flex items-center justify-center rounded-[30px] border border-[#04589b] bg-white text-[#04589b] shadow-sm hover:bg-[#003578] hover:text-white hover:border-[#003578] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+  >
+    <ChevronRight className="w-5 h-5" />
+  </button>
+ 
+  <button
+    onClick={goLast}
+    disabled={!hasBroker || currentIndex >= total - 1}
+    title="Last Record"
+    className="w-[44px] h-[44px] flex items-center justify-center rounded-[30px] border border-[#04589b] bg-white text-[#04589b] shadow-sm hover:bg-[#003578] hover:text-white hover:border-[#003578] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+  >
+    <ChevronLast className="w-5 h-5" />
+  </button>
+</div>
+
+Token Reference
+Button Blue #04589b — border + icon idle
+Hover Blue #003578 — bg/border on hover
+Counter Grey #4a4a49 — counter text
+Border Grey #BBBBBB — used for surrounding vertical dividers (h-6 w-px bg-[#BBBBBB]) placed before/after the navigator group

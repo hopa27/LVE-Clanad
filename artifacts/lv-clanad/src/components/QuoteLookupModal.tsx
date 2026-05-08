@@ -1,12 +1,13 @@
+import { useState } from "react";
 import {
   MdCheck,
   MdClose,
   MdSkipPrevious,
   MdChevronLeft,
   MdChevronRight,
-  MdSkipNext,
+  MdFirstPage,
+  MdLastPage,
   MdSearch,
-  MdFastRewind,
 } from "react-icons/md";
 
 const ILLUSTRATIONS = [
@@ -45,12 +46,24 @@ export function QuoteLookupModal({
   empty?: boolean;
   initialQuery?: string;
 }) {
-  if (!open) return null;
   const illustrations = empty ? [] : ILLUSTRATIONS;
   const variants = empty ? [] : VARIANTS;
+  const total = illustrations.length;
+  const hasRecords = total > 0;
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  if (!open) return null;
 
   const navBtn =
-    "h-8 w-8 inline-flex items-center justify-center rounded-[8px] border border-[#BBBBBB] bg-white text-[#3d3d3d] hover:border-[#178830]";
+    "w-[44px] h-[44px] flex items-center justify-center rounded-[30px] border border-[#04589b] bg-white text-[#04589b] shadow-sm hover:bg-[#003578] hover:text-white hover:border-[#003578] disabled:opacity-30 disabled:cursor-not-allowed transition-colors";
+  const divider = "h-6 w-px bg-[#BBBBBB]";
+
+  const goFirst = () => setCurrentIndex(0);
+  const goPrev = () => setCurrentIndex((i) => Math.max(0, i - 1));
+  const goNext = () => setCurrentIndex((i) => Math.min(total - 1, i + 1));
+  const goLast = () => setCurrentIndex(total - 1);
+  const atStart = !hasRecords || currentIndex <= 0;
+  const atEnd = !hasRecords || currentIndex >= total - 1;
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
@@ -73,20 +86,49 @@ export function QuoteLookupModal({
             <span className="font-['Mulish'] text-[12px] font-semibold text-[#3d3d3d]">
               Get Records
             </span>
-            <div className="flex items-center gap-1">
-              <button type="button" className={navBtn} title="First">
-                <MdFastRewind size={16} />
+            <span className={divider} />
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={goFirst}
+                disabled={atStart}
+                title="First Record"
+                className={navBtn}
+              >
+                <MdFirstPage size={20} />
               </button>
-              <button type="button" className={navBtn} title="Previous">
-                <MdChevronLeft size={16} />
+              <button
+                type="button"
+                onClick={goPrev}
+                disabled={atStart}
+                title="Previous Record"
+                className={navBtn}
+              >
+                <MdChevronLeft size={20} />
               </button>
-              <button type="button" className={navBtn} title="Next">
-                <MdChevronRight size={16} />
+              <span className="px-2 min-w-[80px] text-center text-sm font-bold text-[#4a4a49] select-none font-['Mulish']">
+                {hasRecords ? `${currentIndex + 1} of ${total}` : "0 of 0"}
+              </span>
+              <button
+                type="button"
+                onClick={goNext}
+                disabled={atEnd}
+                title="Next Record"
+                className={navBtn}
+              >
+                <MdChevronRight size={20} />
               </button>
-              <button type="button" className={navBtn} title="Last">
-                <MdSkipNext size={16} />
+              <button
+                type="button"
+                onClick={goLast}
+                disabled={atEnd}
+                title="Last Record"
+                className={navBtn}
+              >
+                <MdLastPage size={20} />
               </button>
             </div>
+            <span className={divider} />
             <input
               key={initialQuery}
               type="text"
@@ -148,7 +190,13 @@ export function QuoteLookupModal({
                   </tr>
                 )}
                 {illustrations.map((row, i) => (
-                  <tr key={i}>
+                  <tr
+                    key={i}
+                    onClick={() => setCurrentIndex(i)}
+                    className={`cursor-pointer ${
+                      i === currentIndex ? "bg-[#eaf5f8]" : ""
+                    }`}
+                  >
                     {row.map((v, j) => (
                       <td key={j} className="!px-3 whitespace-nowrap">
                         {v}

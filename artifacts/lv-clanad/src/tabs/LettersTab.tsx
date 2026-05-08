@@ -1,4 +1,5 @@
-import { Field, Checkbox, Section } from "../components/Field";
+import { Field, SelectInput, TextInput, Checkbox, Section } from "../components/Field";
+import { MdSend } from "react-icons/md";
 
 const LETTERS = [
   "Chaser Letter OS Application Client",
@@ -14,13 +15,16 @@ export function LettersTab() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
       <Section title="Select Letter" className="lg:col-span-2">
-        <select className="field-input w-full mb-3">
-          <option>— Select a letter —</option>
-        </select>
-        <div className="border border-[color:var(--color-panel-border)] rounded-md overflow-auto max-h-[260px]">
-          <ul className="divide-y divide-[color:var(--color-panel-border)]">
+        <div className="mb-3">
+          <SelectInput value="" options={["", ...LETTERS]} />
+        </div>
+        <div className="border border-[#e0e0e0] rounded-[8px] bg-white overflow-auto max-h-[260px]">
+          <ul className="divide-y divide-[#e0e0e0]">
             {LETTERS.map((l) => (
-              <li key={l} className="px-3 py-2 text-[12px] hover:bg-[color:var(--color-row-hover)] cursor-pointer">
+              <li
+                key={l}
+                className="px-3 py-2 font-['Mulish'] text-[12px] text-[#005a9c] hover:bg-[#eaf5f8] cursor-pointer"
+              >
                 {l}
               </li>
             ))}
@@ -29,26 +33,28 @@ export function LettersTab() {
       </Section>
 
       <Section title="Letter Specific Info">
-        <p className="text-[12px] text-[color:var(--color-text-muted)] italic">
+        <p className="font-['Mulish'] text-[12px] italic text-[#777]">
           Select a letter to view its options.
         </p>
       </Section>
 
       <Section title="Additional Text" className="lg:col-span-2">
         <textarea
-          className="field-input w-full min-h-[180px] resize-y"
+          className="lve-input w-full min-h-[180px] resize-y"
           placeholder="Type any additional text to include in the letter…"
         />
       </Section>
 
       <div className="space-y-4">
         <Section title="Distribution Info">
-          <Field label="Print:"><Checkbox /></Field>
-          <Field label="Fax:">
-            <input className="field-input w-full" placeholder="Fax number" />
+          <Field label="Print:" inline>
+            <Checkbox />
           </Field>
-          <Field label="Email:">
-            <input className="field-input w-full" placeholder="recipient@example.com" />
+          <Field label="Fax:" inline>
+            <TextInput placeholder="Fax number" />
+          </Field>
+          <Field label="Email:" inline>
+            <TextInput placeholder="recipient@example.com" />
           </Field>
         </Section>
 
@@ -61,8 +67,8 @@ export function LettersTab() {
           </div>
         </Section>
 
-        <button type="button" className="btn-primary btn w-full justify-center">
-          Generate
+        <button type="button" className="lve-btn w-full justify-center">
+          <MdSend size={16} /> Generate
         </button>
       </div>
     </div>

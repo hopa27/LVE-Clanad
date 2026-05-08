@@ -116,7 +116,7 @@ export function DatePicker({
         <Popover.Content
           align="start"
           sideOffset={6}
-          className={`z-50 rounded-[12px] border-[2px] ${popupBorder} bg-white overflow-hidden shadow-lg`}
+          className={`z-[100] rounded-[12px] border-[2px] ${popupBorder} bg-white overflow-hidden shadow-lg`}
         >
           {view === "days" && (
             <div className="p-3">

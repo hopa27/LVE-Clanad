@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { MdKeyboardArrowDown, MdCheck } from "react-icons/md";
 
 export function Field({
@@ -96,19 +96,40 @@ export function SelectInput({
 export function Checkbox({
   label,
   checked = false,
+  disabled = false,
 }: {
   label?: string;
   checked?: boolean;
+  disabled?: boolean;
 }) {
+  const [isChecked, setIsChecked] = useState(checked);
+  const [focused, setFocused] = useState(false);
+
   return (
-    <label className="inline-flex items-center gap-2 cursor-pointer select-none font-['Mulish'] text-[15px] text-[#3d3d3d]">
-      <span className="relative inline-flex items-center justify-center w-5 h-5 rounded border border-[#979797] bg-white peer-checked:bg-[#178830]">
+    <label
+      className={`inline-flex items-center gap-2 select-none font-['Mulish'] text-[14px] text-[#3d3d3d] ${
+        disabled ? "cursor-not-allowed opacity-60" : "cursor-pointer"
+      }`}
+    >
+      <span className="relative inline-flex items-center justify-center w-5 h-5">
         <input
           type="checkbox"
-          defaultChecked={checked}
-          className="peer absolute inset-0 opacity-0 cursor-pointer"
+          checked={isChecked}
+          disabled={disabled}
+          onChange={(e) => setIsChecked(e.target.checked)}
+          onFocus={() => setFocused(true)}
+          onBlur={() => setFocused(false)}
+          className="peer absolute inset-0 opacity-0 cursor-pointer disabled:cursor-not-allowed"
         />
-        <MdCheck className="hidden peer-checked:[display:block] text-white absolute" size={16} />
+        <span
+          className={`inline-flex items-center justify-center w-5 h-5 rounded-[4px] transition-colors ${
+            isChecked
+              ? "bg-[#006cf4] border-[1px] border-[#006cf4]"
+              : "bg-white border border-[#BBBBBB]"
+          } ${focused ? "ring-2 ring-[#178830] ring-offset-0" : ""}`}
+        >
+          {isChecked && <MdCheck className="text-white" size={14} />}
+        </span>
       </span>
       {label && <span>{label}</span>}
     </label>

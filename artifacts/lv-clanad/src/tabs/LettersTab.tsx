@@ -15,21 +15,7 @@ export function LettersTab() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
       <Section title="Select Letter" className="lg:col-span-2">
-        <div className="mb-3">
-          <SelectInput value="" options={["", ...LETTERS]} />
-        </div>
-        <div className="border border-[#e0e0e0] rounded-[8px] bg-white overflow-auto max-h-[260px]">
-          <ul className="divide-y divide-[#e0e0e0]">
-            {LETTERS.map((l) => (
-              <li
-                key={l}
-                className="px-3 py-2 font-['Mulish'] text-[12px] text-[#005a9c] hover:bg-[#eaf5f8] cursor-pointer"
-              >
-                {l}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <SelectInput value="" options={["", ...LETTERS]} />
       </Section>
 
       <Section title="Letter Specific Info">

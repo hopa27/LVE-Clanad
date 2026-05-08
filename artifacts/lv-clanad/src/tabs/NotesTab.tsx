@@ -1,4 +1,5 @@
-import { Plus, Minus, Pencil } from "lucide-react";
+import { Section } from "../components/Field";
+import { MdAdd, MdRemove, MdEdit } from "react-icons/md";
 
 const NOTES = [
   {
@@ -33,24 +34,33 @@ const NOTES = [
 
 export function NotesTab() {
   return (
-    <div className="panel">
-      <div className="flex items-center gap-1 px-3 py-2 border-b border-[color:var(--color-panel-border)] bg-[#f9fafc]">
-        <button type="button" className="btn"><Plus size={14} /> Add</button>
-        <button type="button" className="btn"><Minus size={14} /> Delete</button>
-        <button type="button" className="btn"><Pencil size={14} /> Edit</button>
+    <Section title="Notes">
+      <div className="flex flex-wrap gap-2 mb-4">
+        <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
+          <MdAdd size={16} /> Add
+        </button>
+        <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
+          <MdRemove size={16} /> Delete
+        </button>
+        <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
+          <MdEdit size={16} /> Edit
+        </button>
       </div>
-      <div className="divide-y divide-[color:var(--color-panel-border)]">
+
+      <div className="border border-[#e0e0e0] rounded-[8px] bg-white divide-y divide-[#e0e0e0] max-h-[560px] overflow-auto">
         {NOTES.map((n, i) => (
-          <article key={i} className="p-4 hover:bg-[color:var(--color-row-alt)]">
-            <header className="text-[12px] text-[color:var(--color-text-secondary)] mb-2">
-              Added by <span className="font-semibold text-[color:var(--color-text-primary)]">{n.author}</span>, {n.date}
+          <article key={i} className="p-4 hover:bg-[#eaf5f8]">
+            <header className="font-['Mulish'] text-[12px] text-[#555] mb-2">
+              Added by{" "}
+              <span className="font-semibold text-[#00263e]">{n.author}</span>,{" "}
+              {n.date}
             </header>
-            <pre className="font-sans text-[12px] whitespace-pre-wrap text-[color:var(--color-text-primary)] leading-relaxed">
+            <pre className="font-['Mulish'] text-[12px] whitespace-pre-wrap text-[#3d3d3d] leading-relaxed">
               {n.body}
             </pre>
           </article>
         ))}
       </div>
-    </div>
+    </Section>
   );
 }

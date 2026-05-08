@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { Section } from "../components/Field";
-import { FileText, Pencil, CheckCircle2, FileSearch, Users } from "lucide-react";
+import {
+  MdNoteAdd,
+  MdEdit,
+  MdCheckCircleOutline,
+  MdManageSearch,
+  MdGroups,
+} from "react-icons/md";
 
 const DIARY = [
   { ref: 14, type: "BCE5A", notes: "BCE 5A check at age 75", created: "28/05/2025", by: "LV67180", due: "26/02/2034", completed: "", byCompleted: "" },
@@ -29,37 +35,36 @@ const AUDIT = [
   "BANK_ACCOUNT_NO changed from to 01841281 by LV67180 on 28/05/2025 at 08:49:07",
 ];
 
+const DIARY_COLS = ["Ref", "Type", "Notes", "Created", "By", "Due", "Completed", "By"];
+
 export function DiaryAuditTab() {
   const [trail, setTrail] = useState<"notes" | "data">("notes");
 
   return (
     <div className="space-y-4">
       <Section title="Diary Details">
-        <div className="overflow-auto max-h-[300px]">
-          <table className="data-table">
+        <div className="overflow-auto max-h-[320px]">
+          <table className="lve-grid">
             <thead>
               <tr>
-                <th>Ref</th>
-                <th>Type</th>
-                <th>Notes</th>
-                <th>Created</th>
-                <th>By</th>
-                <th>Due</th>
-                <th>Completed</th>
-                <th>By</th>
+                {DIARY_COLS.map((c) => (
+                  <th key={c} className="whitespace-nowrap !px-4">
+                    {c}
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
               {DIARY.map((d) => (
                 <tr key={d.ref}>
-                  <td className="font-mono">{d.ref}</td>
-                  <td>{d.type}</td>
-                  <td>{d.notes}</td>
-                  <td className="font-mono">{d.created}</td>
-                  <td className="font-mono">{d.by}</td>
-                  <td className="font-mono">{d.due}</td>
-                  <td className="font-mono">{d.completed}</td>
-                  <td className="font-mono">{d.byCompleted}</td>
+                  <td className="!px-4 whitespace-nowrap">{d.ref}</td>
+                  <td className="!px-4 whitespace-nowrap">{d.type}</td>
+                  <td className="!px-4">{d.notes}</td>
+                  <td className="!px-4 whitespace-nowrap">{d.created}</td>
+                  <td className="!px-4 whitespace-nowrap">{d.by}</td>
+                  <td className="!px-4 whitespace-nowrap">{d.due}</td>
+                  <td className="!px-4 whitespace-nowrap">{d.completed}</td>
+                  <td className="!px-4 whitespace-nowrap">{d.byCompleted}</td>
                 </tr>
               ))}
             </tbody>
@@ -67,11 +72,21 @@ export function DiaryAuditTab() {
         </div>
 
         <div className="flex flex-wrap gap-2 mt-4">
-          <button type="button" className="btn"><FileText size={14} /> New Diary Note</button>
-          <button type="button" className="btn"><Pencil size={14} /> Edit Diary Note</button>
-          <button type="button" className="btn"><CheckCircle2 size={14} /> Complete diary note</button>
-          <button type="button" className="btn"><FileSearch size={14} /> Ceding Scheme Details</button>
-          <button type="button" className="btn"><Users size={14} /> Customer Needs</button>
+          <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
+            <MdNoteAdd size={16} /> New Diary Note
+          </button>
+          <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
+            <MdEdit size={16} /> Edit Diary Note
+          </button>
+          <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
+            <MdCheckCircleOutline size={16} /> Complete diary note
+          </button>
+          <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
+            <MdManageSearch size={16} /> Ceding Scheme Details
+          </button>
+          <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
+            <MdGroups size={16} /> Customer Needs
+          </button>
         </div>
       </Section>
 
@@ -79,31 +94,40 @@ export function DiaryAuditTab() {
         <div className="flex items-center gap-1 mb-3">
           <button
             type="button"
-            className={`tab-btn ${trail === "notes" ? "active" : ""}`}
+            className={`lve-tab ${trail === "notes" ? "active" : ""}`}
             onClick={() => setTrail("notes")}
-          >Notes</button>
+          >
+            Notes
+          </button>
           <button
             type="button"
-            className={`tab-btn ${trail === "data" ? "active" : ""}`}
+            className={`lve-tab ${trail === "data" ? "active" : ""}`}
             onClick={() => setTrail("data")}
-          >Data Changes</button>
+          >
+            Data Changes
+          </button>
         </div>
 
         {trail === "notes" ? (
           <div>
-            <p className="text-[11px] italic text-[color:var(--color-text-muted)] mb-2">
+            <p className="font-['Mulish'] text-[12px] italic text-[#777] mb-2">
               Audit trail — you cannot amend or delete these notes!
             </p>
-            <ul className="divide-y divide-[color:var(--color-panel-border)] max-h-[300px] overflow-auto">
+            <ul className="divide-y divide-[#e0e0e0] border border-[#e0e0e0] rounded-[8px] max-h-[320px] overflow-auto bg-white">
               {AUDIT.map((line, i) => (
-                <li key={i} className="py-1.5 text-[12px] font-mono text-[color:var(--color-link)] hover:bg-[color:var(--color-row-hover)] px-2">
+                <li
+                  key={i}
+                  className="py-2 px-3 font-['Mulish'] text-[12px] text-[#005a9c] hover:bg-[#eaf5f8]"
+                >
                   {line}
                 </li>
               ))}
             </ul>
           </div>
         ) : (
-          <p className="text-[12px] text-[color:var(--color-text-muted)] italic">No data changes to display.</p>
+          <p className="font-['Mulish'] text-[12px] text-[#777] italic">
+            No data changes to display.
+          </p>
         )}
       </Section>
     </div>

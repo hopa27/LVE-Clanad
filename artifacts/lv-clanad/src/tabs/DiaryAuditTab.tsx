@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Section } from "../components/Field";
+import { MiscDiaryModal } from "../components/MiscDiaryModal";
 import {
   MdNoteAdd,
   MdEdit,
@@ -39,6 +40,7 @@ const DIARY_COLS = ["Ref", "Type", "Notes", "Created", "By", "Due", "Completed",
 
 export function DiaryAuditTab() {
   const [trail, setTrail] = useState<"notes" | "data">("notes");
+  const [diaryOpen, setDiaryOpen] = useState(false);
 
   return (
     <div className="space-y-4">
@@ -72,7 +74,11 @@ export function DiaryAuditTab() {
         </div>
 
         <div className="flex flex-wrap gap-2 mt-4">
-          <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
+          <button
+            type="button"
+            className="lve-btn lve-btn-secondary lve-btn-sm"
+            onClick={() => setDiaryOpen(true)}
+          >
             <MdNoteAdd size={16} /> New Diary Note
           </button>
           <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
@@ -130,6 +136,8 @@ export function DiaryAuditTab() {
           </p>
         )}
       </Section>
+
+      <MiscDiaryModal open={diaryOpen} onClose={() => setDiaryOpen(false)} />
     </div>
   );
 }

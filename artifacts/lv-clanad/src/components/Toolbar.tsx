@@ -13,9 +13,15 @@ import {
 } from "react-icons/md";
 import { ConfirmDialog } from "./ConfirmDialog";
 import { QuoteLookupModal } from "./QuoteLookupModal";
+import { CompanySelectionModal } from "./CompanySelectionModal";
 import { useEditMode } from "../context/EditModeContext";
 
-type ToolAction = "new-app" | "new-quote" | "edit-toggle" | "edit-cancel";
+type ToolAction =
+  | "new-app"
+  | "new-quote"
+  | "edit-toggle"
+  | "edit-cancel"
+  | "company";
 
 type Tool = {
   label: string;
@@ -29,6 +35,7 @@ export function Toolbar() {
   const [newAppConfirm, setNewAppConfirm] = useState(false);
   const [quoteLookupOpen, setQuoteLookupOpen] = useState(false);
   const [newQuoteOpen, setNewQuoteOpen] = useState(false);
+  const [companyOpen, setCompanyOpen] = useState(false);
 
   const TOOLS: Tool[] = [
     { label: "New App", icon: MdAdd, enabled: !editing, action: "new-app" },
@@ -44,7 +51,7 @@ export function Toolbar() {
     { label: "Search", icon: MdSearch, enabled: !editing },
     { label: "CRS", icon: MdStorage, enabled: !editing },
     { label: "Reports", icon: MdBarChart, enabled: !editing },
-    { label: "Company", icon: MdBusiness, enabled: !editing },
+    { label: "Company", icon: MdBusiness, enabled: !editing, action: "company" },
   ];
 
   const handleClick = (action?: ToolAction) => {
@@ -52,6 +59,7 @@ export function Toolbar() {
     else if (action === "new-quote") setNewQuoteOpen(true);
     else if (action === "edit-toggle") setEditing(!editing);
     else if (action === "edit-cancel") setEditing(false);
+    else if (action === "company") setCompanyOpen(true);
   };
 
   return (
@@ -96,6 +104,11 @@ export function Toolbar() {
         onClose={() => setNewQuoteOpen(false)}
         empty
         initialQuery="20824110"
+      />
+
+      <CompanySelectionModal
+        open={companyOpen}
+        onClose={() => setCompanyOpen(false)}
       />
     </div>
   );

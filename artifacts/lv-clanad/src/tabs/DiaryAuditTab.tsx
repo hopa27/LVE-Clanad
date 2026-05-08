@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Section } from "../components/Field";
-import { MiscDiaryModal } from "../components/MiscDiaryModal";
+import { MiscDiaryModal, type DiaryEntryInput } from "../components/MiscDiaryModal";
 import {
   MdNoteAdd,
   MdEdit,
@@ -9,7 +9,18 @@ import {
   MdGroups,
 } from "react-icons/md";
 
-const DIARY = [
+type DiaryRow = {
+  ref: number;
+  type: string;
+  notes: string;
+  created: string;
+  by: string;
+  due: string;
+  completed: string;
+  byCompleted: string;
+};
+
+const INITIAL_DIARY: DiaryRow[] = [
   { ref: 14, type: "BCE5A", notes: "BCE 5A check at age 75", created: "28/05/2025", by: "LV67180", due: "26/02/2034", completed: "", byCompleted: "" },
   { ref: 11, type: "Misc", notes: "Is Var 7 ok?", created: "01/05/2025", by: "PENSAK", due: "02/05/2025", completed: "", byCompleted: "" },
   { ref: 13, type: "Misc", notes: "LS form needed", created: "12/05/2025", by: "LV67180", due: "19/05/2025", completed: "28/05/2025", byCompleted: "LV67180" },
@@ -19,6 +30,14 @@ const DIARY = [
   { ref: 2, type: "Fund Correspondence", notes: "Options Case- Prudential- 51641322", created: "13/03/2025", by: "SYSANN", due: "20/03/2025", completed: "28/05/2025", byCompleted: "LV67180" },
   { ref: 1, type: "Funds", notes: "Options Case- Prudential- 51641322", created: "13/03/2025", by: "SYSANN", due: "20/03/2025", completed: "28/05/2025", byCompleted: "LV62209" },
 ];
+
+const CURRENT_USER = "LV67180";
+
+function fmt(d: Date) {
+  const dd = String(d.getDate()).padStart(2, "0");
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  return `${dd}/${mm}/${d.getFullYear()}`;
+}
 
 const AUDIT = [
   "Annuitant Details (Nat ins no) updated from ' - - - ' to 'WE-26-35-52-' by LV67647 on 13/03/2025 at 12:21:04",
@@ -41,6 +60,24 @@ const DIARY_COLS = ["Ref", "Type", "Notes", "Created", "By", "Due", "Completed",
 export function DiaryAuditTab() {
   const [trail, setTrail] = useState<"notes" | "data">("notes");
   const [diaryOpen, setDiaryOpen] = useState(false);
+  const [diary, setDiary] = useState<DiaryRow[]>(INITIAL_DIARY);
+
+  const addDiary = (entry: DiaryEntryInput) => {
+    const nextRef = diary.reduce((max, r) => Math.max(max, r.ref), 0) + 1;
+    setDiary((prev) => [
+      {
+        ref: nextRef,
+        type: entry.type,
+        notes: entry.notes,
+        created: fmt(new Date()),
+        by: CURRENT_USER,
+        due: fmt(entry.due),
+        completed: "",
+        byCompleted: "",
+      },
+      ...prev,
+    ]);
+  };
 
   return (
     <div className="space-y-4">
@@ -57,7 +94,7 @@ export function DiaryAuditTab() {
               </tr>
             </thead>
             <tbody>
-              {DIARY.map((d) => (
+              {diary.map((d) => (
                 <tr key={d.ref}>
                   <td className="!px-4 whitespace-nowrap">{d.ref}</td>
                   <td className="!px-4 whitespace-nowrap">{d.type}</td>
@@ -137,7 +174,11 @@ export function DiaryAuditTab() {
         )}
       </Section>
 
-      <MiscDiaryModal open={diaryOpen} onClose={() => setDiaryOpen(false)} />
+      <MiscDiaryModal
+        open={diaryOpen}
+        onClose={() => setDiaryOpen(false)}
+        onSubmit={addDiary}
+      />
     </div>
   );
 }

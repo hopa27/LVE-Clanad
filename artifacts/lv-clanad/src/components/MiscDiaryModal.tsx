@@ -48,12 +48,20 @@ function startOfDay(d: Date) {
   return new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
 }
 
+export type DiaryEntryInput = {
+  type: string;
+  notes: string;
+  due: Date;
+};
+
 export function MiscDiaryModal({
   open,
   onClose,
+  onSubmit,
 }: {
   open: boolean;
   onClose: () => void;
+  onSubmit?: (entry: DiaryEntryInput) => void;
 }) {
   const [type, setType] = useState("");
   const [notes, setNotes] = useState("");
@@ -61,6 +69,19 @@ export function MiscDiaryModal({
   const [typeOpen, setTypeOpen] = useState(false);
   const [warnOpen, setWarnOpen] = useState(false);
   const typeRef = useRef<HTMLDivElement>(null);
+
+  const reset = () => {
+    setType("");
+    setNotes("");
+    setDueDate(undefined);
+    setTypeOpen(false);
+    setWarnOpen(false);
+  };
+
+  const handleClose = () => {
+    reset();
+    onClose();
+  };
 
   useEffect(() => {
     if (!typeOpen) return;
@@ -76,11 +97,12 @@ export function MiscDiaryModal({
   if (!open) return null;
 
   const handleOk = () => {
-    if (dueDate && startOfDay(dueDate) <= startOfDay(new Date())) {
+    if (!dueDate || startOfDay(dueDate) <= startOfDay(new Date())) {
       setWarnOpen(true);
       return;
     }
-    onClose();
+    onSubmit?.({ type: type || "Misc", notes, due: dueDate });
+    handleClose();
   };
 
   return (
@@ -148,7 +170,7 @@ export function MiscDiaryModal({
             <button
               type="button"
               className="lve-btn lve-btn-secondary"
-              onClick={onClose}
+              onClick={handleClose}
             >
               <MdClose size={16} />
               Cancel

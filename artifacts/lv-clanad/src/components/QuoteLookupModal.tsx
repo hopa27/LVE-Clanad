@@ -10,15 +10,16 @@ import {
 } from "react-icons/md";
 
 const ILLUSTRATIONS = [
-  ["925849", "1", "SANDF-001", "18 Dec 2007", "Mr M Stanislas", "PPA", "JOINT", "64.75", "11110030466", "", "Printed"],
-  ["929540", "1", "QUOTE-001", "18 Dec 2007", "Mr M Graham", "PPA", "Single", "73.75", "11110028372", "", "Printed"],
-  ["929544", "0", "BAPVH-001", "18 Dec 2007", "Mr M A Hamilton", "PPA", "Single", "67.75", "1080003571", "", "Printed"],
-  ["929545", "0", "REGIN-001", "18 Dec 2007", "Mr M Hamilton-Webster", "PPA", "JOINT", "64.75", "1080003571", "", "Printed"],
-  ["929546", "1", "EASTS-001", "17 Dec 2007", "Mr T Owens", "PPA", "Single", "75.75", "1080003571", "", "Printed"],
-  ["929547", "1", "ELEME-004", "18 Dec 2007", "Mr M Chisholm", "PPA", "Single", "60", "1110030466", "", "Printed"],
-  ["930040", "0", "OPENV-001", "18 Dec 2007", "Mr P Cadwell", "PPA", "Single", "67.75", "2000000001", "", "PR"],
-  ["930041", "0", "BAPVH-001", "18 Dec 2007", "Mr G Burrows", "PPA", "JOINT", "60.75", "1110030466", "", "Printed"],
-  ["930058", "0", "WENTW-002", "18 Dec 2007", "Mr R Garnett", "PPA", "Single", "75.75", "1110030466", "", "Printed"],
+  ["925149", "0", "SANDF-001", "18 Dec 2007", "Mr M Stanislas",        "PPA", "JOINT",  "64.75", "111000346", "No", "Printed"],
+  ["925180", "0", "QUOTE-001", "17 Dec 2007", "Mr M Graham",            "CPA", "Single", "73.75", "111002872", "No", "Printed"],
+  ["925189", "0", "BARWE-001", "17 Dec 2007", "Mr M Barwell",           "CPA", "JOINT",  "59.75", "111002872", "No", "PR"],
+  ["925550", "0", "RIDIN-001", "17 Dec 2007", "Mrs J Hamilton-Winter",  "CPA", "Single", "59.75", "106003101", "No", "Printed"],
+  ["925757", "0", "EASTS-001", "17 Dec 2007", "Mr T Diveno",            "CPA", "JOINT",  "64.75", "111002872", "No", "PR"],
+  ["925778", "0", "ELEME-001", "18 Dec 2007", "Mr M Chisholm",          "CPA", "Single", "64.75", "111002872", "No", "Printed"],
+  ["925782", "0", "QUOTE-001", "18 Dec 2007", "Mr M Delapeyer",         "CPA", "JOINT",  "59.75", "111002872", "No", "Printed"],
+  ["925827", "0", "QPCAD-001", "18 Dec 2007", "Mr P Cadwell",           "CPA", "Single", "59.75", "200000000", "No", "Printed"],
+  ["930001", "0", "QUOTE-001", "18 Dec 2007", "Mr G Burrows",           "CPA", "JOINT",  "59.75", "111002872", "No", "Printed"],
+  ["930059", "0", "WENTW-002", "18 Dec 2007", "Mr R Garnett",           "PPA", "JOINT",  "61.75", "111000346", "No", "Printed"],
 ];
 
 const ILLUSTRATION_COLS = [
@@ -26,15 +27,11 @@ const ILLUSTRATION_COLS = [
   "Age 1", "User", "Master", "Status",
 ];
 
-const VARIANTS = [
-  ["16", "222", "25/06/2008", "LORHOP", "PPA", "JOINT", "£3,225.00", "61852.62", "25", "15368.13", "10"],
-  ["17", "333", "25/06/2008", "11060000800", "PPA", "JOINT", "£3,311.00", "61852.62", "25", "15368.13", "10"],
-  ["18", "333", "25/06/2008", "11060000800", "PPA", "JOINT", "£3,441.00", "61852.62", "25", "15413.01", "10"],
-];
+const VARIANTS: string[][] = [];
 
 const VARIANT_COLS = [
-  "Id", "Series", "Created", "Username", "Type", "Life Type",
-  "Gross Annuity Inc", "Tax/I", "TFC %", "TFC", "Dep %",
+  "Variant", "Serino", "Created", "Username", "Type", "Life Type",
+  "Gross Annuity", "Amount", "TFC %", "TFC", "Dep %",
 ];
 
 export function QuoteLookupModal({

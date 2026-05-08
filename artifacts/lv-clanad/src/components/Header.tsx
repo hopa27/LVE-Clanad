@@ -76,7 +76,7 @@ export function Header({ title }: { title: string }) {
       </div>
       <nav
         ref={navRef}
-        className="w-full bg-[#e8e8e8] border-y border-[#b8b8b8] px-[142px] py-1 flex items-center gap-5 font-['Mulish'] text-[13px] text-[#3d3d3d]"
+        className="w-full bg-white border-b border-[#e3e6ea] shadow-sm px-[142px] h-12 flex items-center gap-1 font-['Livvic'] text-[14px] text-[#3d3d3d]"
       >
         {MENU_ITEMS.map((item, idx) => {
           const isOpen = openIdx === idx;
@@ -87,21 +87,22 @@ export function Header({ title }: { title: string }) {
                 onClick={() =>
                   item.options ? setOpenIdx(isOpen ? null : idx) : setOpenIdx(null)
                 }
-                className={`px-1 py-0.5 rounded-sm hover:bg-[#d6d6d6] ${
-                  isOpen ? "bg-[#d6d6d6]" : ""
+                className={`h-8 px-4 rounded-[30px] inline-flex items-center font-medium transition-colors ${
+                  isOpen
+                    ? "bg-[#006cf4] text-white"
+                    : "text-[#04589b] hover:bg-[#eaf5f8]"
                 }`}
               >
-                <span className="underline">{item.label.charAt(0)}</span>
-                {item.label.slice(1)}
+                {item.label}
               </button>
               {item.options && isOpen && (
-                <div className="absolute left-0 top-full mt-0.5 z-30 min-w-[200px] bg-white border border-[#7a7a7a] shadow-md py-0.5 font-['Mulish'] text-[13px] text-[#3d3d3d]">
+                <div className="absolute left-0 top-full mt-1 z-30 min-w-[220px] bg-white border border-[#e3e6ea] rounded-[8px] shadow-lg py-1 font-['Mulish'] text-[14px] text-[#3d3d3d] overflow-hidden">
                   {item.options.map((opt, i) => {
                     if ("kind" in opt && opt.kind === "separator") {
                       return (
                         <div
                           key={`sep-${i}`}
-                          className="my-1 border-t border-[#d6d6d6]"
+                          className="my-1 border-t border-[#e3e6ea]"
                         />
                       );
                     }
@@ -110,11 +111,11 @@ export function Header({ title }: { title: string }) {
                         key={opt.label}
                         type="button"
                         onClick={() => handleOption(opt.action)}
-                        className="flex w-full items-center justify-between px-3 py-1 text-left hover:bg-[#1f4f8a] hover:text-white"
+                        className="flex w-full items-center justify-between px-4 py-2 text-left hover:bg-[#eaf5f8] hover:text-[#003578]"
                       >
                         <span>{opt.label}</span>
                         {opt.hasSubmenu && (
-                          <span className="ml-3 text-[10px]">▶</span>
+                          <span className="ml-3 text-[#04589b]">▶</span>
                         )}
                       </button>
                     );

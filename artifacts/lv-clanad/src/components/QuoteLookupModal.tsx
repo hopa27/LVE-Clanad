@@ -8,6 +8,7 @@ import {
   MdFirstPage,
   MdLastPage,
   MdSearch,
+  MdManageSearch,
 } from "react-icons/md";
 
 const ILLUSTRATIONS = [
@@ -83,9 +84,43 @@ export function QuoteLookupModal({
         <div className="lve-panel-body overflow-auto">
           {/* Toolbar */}
           <div className="flex flex-wrap items-center gap-3 mb-4">
-            <span className="font-['Mulish'] text-[12px] font-semibold text-[#3d3d3d]">
-              Get Records
-            </span>
+            <fieldset className="border border-[#BBBBBB] rounded-[8px] px-3 pt-1 pb-2">
+              <legend className="px-1 font-['Mulish'] text-[12px] font-semibold text-[#3d3d3d]">
+                Get Records
+              </legend>
+              <div className="flex items-center gap-2">
+                <div className="flex flex-col gap-0.5">
+                  <label className="inline-flex items-center cursor-pointer">
+                    <input
+                      type="radio"
+                      name="get-records-mode"
+                      defaultChecked
+                      className="w-3 h-3 accent-[#006cf4] cursor-pointer"
+                    />
+                  </label>
+                  <label className="inline-flex items-center cursor-pointer">
+                    <input
+                      type="radio"
+                      name="get-records-mode"
+                      className="w-3 h-3 accent-[#006cf4] cursor-pointer"
+                    />
+                  </label>
+                </div>
+                <button
+                  type="button"
+                  title="Lookup"
+                  className="w-7 h-7 inline-flex items-center justify-center rounded-[6px] border border-[#BBBBBB] bg-white text-[#04589b] hover:border-[#178830]"
+                >
+                  <MdManageSearch size={16} />
+                </button>
+                <input
+                  key={initialQuery}
+                  type="text"
+                  defaultValue={initialQuery}
+                  className="lve-input h-8 w-[160px]"
+                />
+              </div>
+            </fieldset>
             <span className={divider} />
             <div className="flex items-center gap-2">
               <button
@@ -129,12 +164,6 @@ export function QuoteLookupModal({
               </button>
             </div>
             <span className={divider} />
-            <input
-              key={initialQuery}
-              type="text"
-              defaultValue={initialQuery}
-              className="lve-input w-[140px]"
-            />
             <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
               <MdSkipPrevious size={16} />
               Last 60

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { MdCheck, MdClose, MdArrowDropDown } from "react-icons/md";
+import { MdCheck, MdClose, MdArrowDropDown, MdInfoOutline } from "react-icons/md";
 import { DatePicker } from "./DatePicker";
 
 const TYPE_OPTIONS = [
@@ -44,6 +44,10 @@ const TYPE_OPTIONS = [
   "Post GPR Spouse",
 ];
 
+function startOfDay(d: Date) {
+  return new Date(d.getFullYear(), d.getMonth(), d.getDate()).getTime();
+}
+
 export function MiscDiaryModal({
   open,
   onClose,
@@ -53,7 +57,9 @@ export function MiscDiaryModal({
 }) {
   const [type, setType] = useState("");
   const [notes, setNotes] = useState("");
+  const [dueDate, setDueDate] = useState<Date | undefined>(undefined);
   const [typeOpen, setTypeOpen] = useState(false);
+  const [warnOpen, setWarnOpen] = useState(false);
   const typeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -69,6 +75,14 @@ export function MiscDiaryModal({
 
   if (!open) return null;
 
+  const handleOk = () => {
+    if (dueDate && startOfDay(dueDate) <= startOfDay(new Date())) {
+      setWarnOpen(true);
+      return;
+    }
+    onClose();
+  };
+
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
       <div className="lve-panel w-[460px] bg-white">
@@ -79,7 +93,7 @@ export function MiscDiaryModal({
               Date Due:
             </label>
             <div className="flex-1">
-              <DatePicker placeholder="Date Due" />
+              <DatePicker placeholder="Date Due" onChange={setDueDate} />
             </div>
           </div>
 
@@ -139,13 +153,41 @@ export function MiscDiaryModal({
               <MdClose size={16} />
               Cancel
             </button>
-            <button type="button" className="lve-btn" onClick={onClose}>
+            <button type="button" className="lve-btn" onClick={handleOk}>
               <MdCheck size={16} />
               OK
             </button>
           </div>
         </div>
       </div>
+
+      {warnOpen && (
+        <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/40">
+          <div className="lve-panel w-[420px] bg-white">
+            <header className="lve-panel-header">
+              Client Annuity Administration System
+            </header>
+            <div className="lve-panel-body">
+              <div className="flex items-start gap-3">
+                <MdInfoOutline size={28} className="text-[#006cf4] shrink-0" />
+                <p className="font-['Mulish'] text-[14px] text-[#3d3d3d] pt-0.5">
+                  All diary notes must be dated later than today!
+                </p>
+              </div>
+              <div className="mt-5 flex items-center justify-end">
+                <button
+                  type="button"
+                  className="lve-btn"
+                  onClick={() => setWarnOpen(false)}
+                >
+                  <MdCheck size={16} />
+                  OK
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

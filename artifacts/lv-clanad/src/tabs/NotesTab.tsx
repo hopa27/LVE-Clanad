@@ -85,10 +85,9 @@ export function NotesTab() {
         {NOTES.map((n, i) => (
           <article
             key={i}
-            className="group relative bg-white rounded-[8px] border border-[#e0e0e0] hover:border-[#006cf4] hover:shadow-sm transition-all overflow-hidden"
+            className="relative bg-white rounded-[8px] border border-[#e0e0e0] overflow-hidden"
           >
-            <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-[#006cf4] opacity-0 group-hover:opacity-100 transition-opacity" />
-            <div className="p-4 pl-5">
+            <div className="p-4">
               <header className="flex items-center justify-between gap-3 mb-3 pb-3 border-b border-[#eef2f5]">
                 <div className="flex items-center gap-3 min-w-0">
                   <span

@@ -3,12 +3,25 @@ import lvLogo from "../assets/lv-logo.png";
 import { MdLogout } from "react-icons/md";
 import { TaxCertificateModal } from "./TaxCertificateModal";
 
-type MenuOption = { label: string; action?: string };
+type MenuOption =
+  | { kind?: "item"; label: string; action?: string; hasSubmenu?: boolean }
+  | { kind: "separator" };
 type MenuItem = { label: string; options?: MenuOption[] };
 
 const MENU_ITEMS: MenuItem[] = [
   { label: "Options" },
-  { label: "Process" },
+  {
+    label: "Process",
+    options: [
+      { label: "Payment Forecast" },
+      { label: "NJ Sweep" },
+      { label: "P45 details" },
+      { label: "Monthly", hasSubmenu: true },
+      { label: "Coding Scheme Details" },
+      { kind: "separator" },
+      { label: "Cancel LTC" },
+    ],
+  },
   {
     label: "Print",
     options: [
@@ -83,16 +96,29 @@ export function Header({ title }: { title: string }) {
               </button>
               {item.options && isOpen && (
                 <div className="absolute left-0 top-full mt-0.5 z-30 min-w-[200px] bg-white border border-[#7a7a7a] shadow-md py-0.5 font-['Mulish'] text-[13px] text-[#3d3d3d]">
-                  {item.options.map((opt) => (
-                    <button
-                      key={opt.label}
-                      type="button"
-                      onClick={() => handleOption(opt.action)}
-                      className="block w-full text-left px-3 py-1 hover:bg-[#1f4f8a] hover:text-white"
-                    >
-                      {opt.label}
-                    </button>
-                  ))}
+                  {item.options.map((opt, i) => {
+                    if ("kind" in opt && opt.kind === "separator") {
+                      return (
+                        <div
+                          key={`sep-${i}`}
+                          className="my-1 border-t border-[#d6d6d6]"
+                        />
+                      );
+                    }
+                    return (
+                      <button
+                        key={opt.label}
+                        type="button"
+                        onClick={() => handleOption(opt.action)}
+                        className="flex w-full items-center justify-between px-3 py-1 text-left hover:bg-[#1f4f8a] hover:text-white"
+                      >
+                        <span>{opt.label}</span>
+                        {opt.hasSubmenu && (
+                          <span className="ml-3 text-[10px]">▶</span>
+                        )}
+                      </button>
+                    );
+                  })}
                 </div>
               )}
             </div>

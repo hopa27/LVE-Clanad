@@ -14,10 +14,10 @@ export function PolicyDetailsTab() {
           </div>
         </Field>
         <Field label="Initial payment method:">
-          <SelectInput value="B" options={["B", "C", "D"]} />
+          <SelectInput value="B" options={["B", "C", "T"]} />
         </Field>
         <Field label="Pay Tax Free Cash by:">
-          <SelectInput value="B" options={["B", "C"]} />
+          <SelectInput value="B" options={["B", "C", "T"]} />
         </Field>
         <div className="my-3 border-t border-[color:var(--color-panel-border)]" />
         <Field label="ReAssurance Premium:"><TextInput value="9000" /></Field>

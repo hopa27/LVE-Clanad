@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEditMode } from "../context/EditModeContext";
 
 type LineDef = { placeholder?: string; readOnly?: boolean };
 
@@ -46,6 +47,7 @@ export function ConnectedAddress({
   lines: LineDef[];
   initial?: string[];
 }) {
+  const { editing } = useEditMode();
   const [values, setValues] = useState<string[]>(() =>
     lines.map((_, i) => initial[i] ?? "")
   );
@@ -117,12 +119,12 @@ export function ConnectedAddress({
           type="text"
           value={values[i] ?? ""}
           placeholder={line.placeholder ?? `Line ${i + 1}`}
-          readOnly={line.readOnly}
+          readOnly={line.readOnly || !editing}
           onChange={(e) => handleChange(i, e.target.value)}
           onKeyDown={(e) => handleKeyDown(i, e)}
-          className={`block w-full h-[42px] px-3 bg-transparent outline-none font-['Mulish'] text-[16px] leading-[26px] text-[#3d3d3d] placeholder:text-[#BBBBBB] ${
-            i > 0 ? "border-t border-[#e3e6ea]" : ""
-          }`}
+          className={`block w-full h-[42px] px-3 outline-none font-['Mulish'] text-[16px] leading-[26px] text-[#3d3d3d] placeholder:text-[#BBBBBB] ${
+            !editing ? "bg-[#fafafa] cursor-default" : "bg-transparent"
+          } ${i > 0 ? "border-t border-[#e3e6ea]" : ""}`}
         />
       ))}
     </div>

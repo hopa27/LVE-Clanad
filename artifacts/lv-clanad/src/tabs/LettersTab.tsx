@@ -1,5 +1,6 @@
 import { Field, SelectInput, TextInput, Checkbox, Section } from "../components/Field";
 import { MdSend } from "react-icons/md";
+import { useEditMode } from "../context/EditModeContext";
 
 const LETTERS = [
   "Chaser Letter OS Application Client",
@@ -12,6 +13,7 @@ const LETTERS = [
 ];
 
 export function LettersTab() {
+  const { editing } = useEditMode();
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
       <Section title="Select Letter" className="lg:col-span-2">
@@ -26,7 +28,10 @@ export function LettersTab() {
 
       <Section title="Additional Text" className="lg:col-span-2">
         <textarea
-          className="lve-input w-full min-h-[180px] resize-y"
+          readOnly={!editing}
+          className={`lve-input w-full min-h-[180px] resize-y ${
+            !editing ? "bg-[#fafafa] cursor-default" : ""
+          }`}
           placeholder="Type any additional text to include in the letter…"
         />
       </Section>

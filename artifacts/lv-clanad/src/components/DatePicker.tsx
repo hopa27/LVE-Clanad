@@ -8,6 +8,7 @@ import {
   MdChevronRight,
 } from "react-icons/md";
 import "react-day-picker/style.css";
+import { useEditMode } from "../context/EditModeContext";
 
 type View = "days" | "months" | "years";
 
@@ -57,12 +58,16 @@ export function DatePicker({
   placeholder = "DOB",
   error = false,
   onChange,
+  disabled,
 }: {
   value?: string;
   placeholder?: string;
   error?: boolean;
   onChange?: (date: Date | undefined) => void;
+  disabled?: boolean;
 }) {
+  const { editing } = useEditMode();
+  const isDisabled = disabled ?? !editing;
   const [date, setDate] = useState<Date | undefined>(() => parseInitial(value));
   const [open, setOpen] = useState(false);
   const [view, setView] = useState<View>("days");
@@ -88,17 +93,18 @@ export function DatePicker({
   };
 
   return (
-    <Popover.Root open={open} onOpenChange={(o) => { setOpen(o); if (o) setView("days"); }}>
+    <Popover.Root open={open && !isDisabled} onOpenChange={(o) => { if (isDisabled) return; setOpen(o); if (o) setView("days"); }}>
       <Popover.Trigger asChild>
         <button
           type="button"
-          className={`relative w-full h-[44px] rounded-[8px] bg-white text-left font-['Mulish'] text-[16px] text-[#3d3d3d] border ${
+          disabled={isDisabled}
+          className={`relative w-full h-[44px] rounded-[8px] text-left font-['Mulish'] text-[16px] text-[#3d3d3d] border ${
             error
               ? "border-[#d72714]"
               : open
                 ? `${errorBorder} border-[2px]`
                 : "border-[#BBBBBB] hover:border-[#178830]"
-          } pl-3 pr-12 transition-colors`}
+          } ${isDisabled ? "bg-[#fafafa] cursor-default hover:!border-[#BBBBBB]" : "bg-white"} pl-3 pr-12 transition-colors`}
         >
           <span className={formatted ? "" : error ? "text-[#d72714]" : "text-[#BBBBBB]"}>
             {formatted || placeholder}

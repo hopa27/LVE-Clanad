@@ -1,4 +1,5 @@
 import { useState, type JSX } from "react";
+import { EditModeProvider } from "./context/EditModeContext";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { Toolbar } from "./components/Toolbar";
@@ -41,18 +42,20 @@ export default function App() {
   const activeLabel = TABS.find((t) => t.key === activeTab)?.label ?? "";
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f0f0f0]">
-      <Header title={`Client Annuity Administration System — ${activeLabel}`} />
-      <main className="flex-1 px-[142px] py-8">
-        <Toolbar />
-        <PolicyHeader />
-        <TabBar activeTab={activeTab} onChange={setActiveTab} />
-        <div className="bg-white rounded-b-lg rounded-tr-lg shadow-sm p-6 -mt-px">
-          <ActiveComponent />
-        </div>
-        <StatusBar />
-      </main>
-      <Footer />
-    </div>
+    <EditModeProvider>
+      <div className="min-h-screen flex flex-col bg-[#f0f0f0]">
+        <Header title={`Client Annuity Administration System — ${activeLabel}`} />
+        <main className="flex-1 px-[142px] py-8">
+          <Toolbar />
+          <PolicyHeader />
+          <TabBar activeTab={activeTab} onChange={setActiveTab} />
+          <div className="bg-white rounded-b-lg rounded-tr-lg shadow-sm p-6 -mt-px">
+            <ActiveComponent />
+          </div>
+          <StatusBar />
+        </main>
+        <Footer />
+      </div>
+    </EditModeProvider>
   );
 }

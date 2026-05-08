@@ -1,5 +1,6 @@
 import { useState, type ReactNode } from "react";
 import { MdKeyboardArrowDown, MdCheck } from "react-icons/md";
+import { useEditMode } from "../context/EditModeContext";
 
 export function Field({
   label,
@@ -45,15 +46,19 @@ export function TextInput({
   error?: boolean;
   className?: string;
 }) {
+  const { editing } = useEditMode();
+  const lockedReadOnly = readOnly || !editing;
   return (
     <input
       type={type}
       defaultValue={value}
-      readOnly={readOnly}
+      readOnly={lockedReadOnly}
       disabled={disabled}
       placeholder={placeholder}
       data-error={error || undefined}
-      className={`lve-input ${disabled ? "bg-[#f0f0f0] text-[#777] cursor-not-allowed" : ""} ${className}`}
+      className={`lve-input ${disabled ? "bg-[#f0f0f0] text-[#777] cursor-not-allowed" : ""} ${
+        lockedReadOnly && !disabled ? "bg-[#fafafa] cursor-default" : ""
+      } ${className}`}
     />
   );
 }
@@ -69,13 +74,17 @@ export function SelectInput({
   className?: string;
   error?: boolean;
 }) {
+  const { editing } = useEditMode();
   const all = value && !options.includes(value) ? [value, ...options] : options;
   return (
     <div className="relative">
       <select
         defaultValue={value}
+        disabled={!editing}
         data-error={error || undefined}
-        className={`lve-input pr-12 appearance-none ${className}`}
+        className={`lve-input pr-12 appearance-none ${
+          !editing ? "bg-[#fafafa] cursor-default" : ""
+        } ${className}`}
       >
         {all.map((opt) => (
           <option key={opt} value={opt}>
@@ -102,20 +111,24 @@ export function Checkbox({
   checked?: boolean;
   disabled?: boolean;
 }) {
+  const { editing } = useEditMode();
   const [isChecked, setIsChecked] = useState(checked);
   const [focused, setFocused] = useState(false);
+  const isLocked = disabled || !editing;
 
   return (
     <label
       className={`inline-flex items-center gap-2 select-none font-['Mulish'] text-[14px] text-[#3d3d3d] ${
-        disabled ? "cursor-not-allowed opacity-60" : "cursor-pointer"
+        isLocked
+          ? `cursor-not-allowed ${disabled ? "opacity-60" : ""}`
+          : "cursor-pointer"
       }`}
     >
       <span className="relative inline-flex items-center justify-center w-5 h-5">
         <input
           type="checkbox"
           checked={isChecked}
-          disabled={disabled}
+          disabled={isLocked}
           onChange={(e) => setIsChecked(e.target.checked)}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}

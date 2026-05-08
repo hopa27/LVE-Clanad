@@ -115,7 +115,7 @@ export function MiscDiaryModal({
               Date Due:
             </label>
             <div className="flex-1">
-              <DatePicker placeholder="Date Due" onChange={setDueDate} />
+              <DatePicker placeholder="Date Due" onChange={setDueDate} disabled={false} />
             </div>
           </div>
 

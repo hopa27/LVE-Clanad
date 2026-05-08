@@ -45,6 +45,7 @@ export function TaxCertificateModal({
                 <DatePicker
                   value={startDate}
                   placeholder="Start Date"
+                  disabled={false}
                   onChange={(d) =>
                     setStartDate(
                       d
@@ -66,6 +67,7 @@ export function TaxCertificateModal({
                 <DatePicker
                   value={endDate}
                   placeholder="End Date"
+                  disabled={false}
                   onChange={(d) =>
                     setEndDate(
                       d

@@ -56,7 +56,7 @@ export function TextInput({
       disabled={disabled}
       placeholder={placeholder}
       data-error={error || undefined}
-      className={`lve-input ${disabled ? "bg-[#f0f0f0] text-[#777] cursor-not-allowed" : ""} ${
+      className={`lve-input ${
         lockedReadOnly && !disabled ? "bg-[#fafafa] cursor-default" : ""
       } ${className}`}
     />

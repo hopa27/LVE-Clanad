@@ -79,9 +79,16 @@
   .lve-input:disabled, .lve-input[data-disabled="true"] {
     background: var(--color-lve-disabled-bg);
     border: 2px solid var(--color-lve-disabled-border);
+    padding: 7px 11px;
     cursor: not-allowed;
     color: var(--color-lve-body);
     opacity: 1;
+  }
+  .lve-input:disabled::placeholder, .lve-input[data-disabled="true"]::placeholder {
+    color: var(--color-lve-body);
+  }
+  .lve-input:disabled:hover, .lve-input[data-disabled="true"]:hover {
+    border-color: var(--color-lve-disabled-border);
   }
   .lve-input[data-error="true"] {
     border-color: var(--color-lve-error);

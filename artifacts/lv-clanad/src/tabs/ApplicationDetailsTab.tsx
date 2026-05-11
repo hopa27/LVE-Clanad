@@ -7,29 +7,29 @@ export function ApplicationDetailsTab() {
       {/* Top main grid - 3 columns */}
       <div className="panel panel-body grid grid-cols-1 lg:grid-cols-3 gap-x-6">
         <div>
-          <Field label="Set Up Date:"><TextInput value="13/03/2025" /></Field>
-          <Field label="Received Date:"><TextInput value="11/03/2025" /></Field>
-          <Field label="Start Date:"><TextInput value="25/04/2025" /></Field>
-          <Field label="Days Since Application:"><TextInput value="385" /></Field>
+          <Field label="Set Up Date:"><TextInput value="13/03/2025" disabled /></Field>
+          <Field label="Received Date:"><TextInput value="11/03/2025" disabled /></Field>
+          <Field label="Start Date:"><TextInput value="25/04/2025" disabled /></Field>
+          <Field label="Days Since Application:"><TextInput value="385" disabled /></Field>
         </div>
         <div>
-          <Field label="Special Status:"><TextInput value="" /></Field>
-          <Field label="Status:"><TextInput value="L" /></Field>
-          <Field label="Suspended:"><TextInput value="N" /></Field>
-          <Field label="Closed:"><TextInput value="" /></Field>
+          <Field label="Special Status:"><TextInput value="" disabled /></Field>
+          <Field label="Status:"><TextInput value="L" disabled /></Field>
+          <Field label="Suspended:"><TextInput value="N" disabled /></Field>
+          <Field label="Closed:"><TextInput value="" disabled /></Field>
         </div>
         <div>
-          <Field label="Life One Dead:"><TextInput value="" /></Field>
-          <Field label="Life Two Dead:"><TextInput value="" /></Field>
-          <Field label="Completed:"><TextInput value="28/05/2025" /></Field>
-          <Field label="Last amended by:"><TextInput value="LV67180" /></Field>
+          <Field label="Life One Dead:"><TextInput value="" disabled /></Field>
+          <Field label="Life Two Dead:"><TextInput value="" disabled /></Field>
+          <Field label="Completed:"><TextInput value="28/05/2025" disabled /></Field>
+          <Field label="Last amended by:"><TextInput value="LV67180" disabled /></Field>
         </div>
       </div>
 
       {/* Second row */}
       <div className="panel panel-body grid grid-cols-1 lg:grid-cols-3 gap-x-6">
         <div>
-          <Field label="IFA Payment Date:"><TextInput value="30/05/2025 08" /></Field>
+          <Field label="IFA Payment Date:"><TextInput value="30/05/2025 08" disabled /></Field>
           <Field label="PostADay:"><Checkbox checked={true} /></Field>
           <Field label="Transfer from Beneficiary Drawdown?:">
             <SelectInput value="Unknown" options={["Unknown", "Yes", "No"]} />
@@ -37,13 +37,13 @@ export function ApplicationDetailsTab() {
         </div>
         <div>
           <Field label=""><TextInput value="10/12/2013" /></Field>
-          <Field label="Rates Ok'd by:"><TextInput value="" /></Field>
-          <Field label="Paykey:"><TextInput value="1016052" /></Field>
-          <Field label="Policy No:"><TextInput value="225810" /></Field>
+          <Field label="Rates Ok'd by:"><TextInput value="" disabled /></Field>
+          <Field label="Paykey:"><TextInput value="1016052" disabled /></Field>
+          <Field label="Policy No:"><TextInput value="225810" disabled /></Field>
         </div>
         <div>
           <Field label="Dependant Eligible to Receive Benefits:">
-            <TextInput value="" />
+            <TextInput value="" disabled />
           </Field>
         </div>
       </div>

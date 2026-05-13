@@ -44,7 +44,7 @@ export default function App() {
   return (
     <EditModeProvider>
       <div className="min-h-screen flex flex-col bg-[#f0f0f0]">
-        <Header title={`Client Annuity Administration System — ${activeLabel}`} />
+        <Header title="Client Annuity Administration System" />
         <main className="flex-1 px-[142px] py-8">
           <Toolbar />
           <PolicyHeader />

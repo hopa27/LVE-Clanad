@@ -4,6 +4,12 @@ import { MdLogout } from "react-icons/md";
 import { TaxCertificateModal } from "./TaxCertificateModal";
 import { AboutModal } from "./AboutModal";
 
+type SubmenuItem = {
+  label: string;
+  accel?: string;
+  action?: string;
+  disabled?: boolean;
+};
 type MenuOption =
   | {
       kind?: "item";
@@ -12,6 +18,7 @@ type MenuOption =
       hasSubmenu?: boolean;
       shortcut?: string;
       disabled?: boolean;
+      submenu?: SubmenuItem[];
     }
   | { kind: "separator" };
 type MenuItem = { label: string; options?: MenuOption[] };
@@ -51,7 +58,15 @@ const MENU_ITEMS: MenuItem[] = [
     label: "Supervisor",
     options: [
       { label: "Final Quote Issued" },
-      { label: "Status Change", hasSubmenu: true },
+      {
+        label: "Status Change",
+        hasSubmenu: true,
+        submenu: [
+          { label: "Surrender", accel: "S" },
+          { label: "Maturity", accel: "M", disabled: true },
+          { label: "Expired", accel: "E" },
+        ],
+      },
       { label: "Amend Cheques" },
       { label: "Approve Bank Changes", disabled: true },
       { label: "Approve Maturity Bank Detail Changes", disabled: true },
@@ -147,27 +162,66 @@ export function Header({ title }: { title: string }) {
                       );
                     }
                     return (
-                      <button
-                        key={opt.label}
-                        type="button"
-                        disabled={opt.disabled}
-                        onClick={() => handleOption(opt.action)}
-                        className={`flex w-full items-center justify-between gap-6 px-4 py-2 text-left ${
-                          opt.disabled
-                            ? "text-[#b8b8b8] cursor-not-allowed"
-                            : "hover:bg-[#eaf5f8] hover:text-[#003578]"
-                        }`}
-                      >
-                        <span>{opt.label}</span>
-                        {opt.shortcut && (
-                          <span className="text-[12px] text-[#7a7a7a] font-['Mulish']">
-                            {opt.shortcut}
-                          </span>
+                      <div key={opt.label} className="relative group">
+                        <button
+                          type="button"
+                          disabled={opt.disabled}
+                          onClick={() =>
+                            opt.hasSubmenu ? null : handleOption(opt.action)
+                          }
+                          className={`flex w-full items-center justify-between gap-6 px-4 py-2 text-left ${
+                            opt.disabled
+                              ? "text-[#b8b8b8] cursor-not-allowed"
+                              : "hover:bg-[#eaf5f8] hover:text-[#003578] group-hover:bg-[#eaf5f8] group-hover:text-[#003578]"
+                          }`}
+                        >
+                          <span>{opt.label}</span>
+                          {opt.shortcut && (
+                            <span className="text-[12px] text-[#7a7a7a] font-['Mulish']">
+                              {opt.shortcut}
+                            </span>
+                          )}
+                          {opt.hasSubmenu && (
+                            <span className="text-[#04589b]">▶</span>
+                          )}
+                        </button>
+                        {opt.hasSubmenu && opt.submenu && (
+                          <div className="hidden group-hover:block absolute left-full top-0 -mt-1 ml-0 z-40 min-w-[180px] bg-white border border-[#e3e6ea] rounded-[8px] shadow-lg py-1 font-['Mulish'] text-[14px] text-[#3d3d3d] overflow-hidden">
+                            {opt.submenu.map((sub) => {
+                              const accelIdx = sub.accel
+                                ? sub.label.toUpperCase().indexOf(sub.accel.toUpperCase())
+                                : -1;
+                              const labelEl =
+                                accelIdx >= 0 ? (
+                                  <span>
+                                    {sub.label.slice(0, accelIdx)}
+                                    <span className="underline">
+                                      {sub.label.charAt(accelIdx)}
+                                    </span>
+                                    {sub.label.slice(accelIdx + 1)}
+                                  </span>
+                                ) : (
+                                  <span>{sub.label}</span>
+                                );
+                              return (
+                                <button
+                                  key={sub.label}
+                                  type="button"
+                                  disabled={sub.disabled}
+                                  onClick={() => handleOption(sub.action)}
+                                  className={`flex w-full items-center px-4 py-2 text-left ${
+                                    sub.disabled
+                                      ? "text-[#b8b8b8] cursor-not-allowed"
+                                      : "hover:bg-[#eaf5f8] hover:text-[#003578]"
+                                  }`}
+                                >
+                                  {labelEl}
+                                </button>
+                              );
+                            })}
+                          </div>
                         )}
-                        {opt.hasSubmenu && (
-                          <span className="text-[#04589b]">▶</span>
-                        )}
-                      </button>
+                      </div>
                     );
                   })}
                 </div>

@@ -9,7 +9,7 @@ export function ApplicationDetailsTab() {
         <div>
           <Field label="Set Up Date:"><TextInput value="13/03/2025" disabled /></Field>
           <Field label="Received Date:"><TextInput value="11/03/2025" /></Field>
-          <Field label="Start Date:"><TextInput value="25/04/2025" disabled /></Field>
+          <Field label="Start Date:"><TextInput value="25/04/2025" /></Field>
           <Field label="Days Since Application:"><TextInput value="385" disabled /></Field>
         </div>
         <div>

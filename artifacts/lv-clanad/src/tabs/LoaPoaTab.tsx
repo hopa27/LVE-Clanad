@@ -25,7 +25,7 @@ export function LoaPoaTab() {
         </div>
         <div>
           <Field label="Postal Code:"><TextInput value="" /></Field>
-          <Field label="Date Appointed:"><DatePicker placeholder="/  /" /></Field>
+          <Field label="Date Appointed:"><DatePicker placeholder="" /></Field>
           <Field label="Telephone:"><TextInput value="" /></Field>
         </div>
       </div>

@@ -6,6 +6,8 @@ import {
   MdSearch,
   MdKeyboardArrowDown,
 } from "react-icons/md";
+import { format } from "date-fns";
+import { DatePicker } from "./DatePicker";
 
 type Report = { name: string; dateRequired: string; path?: string };
 
@@ -158,23 +160,27 @@ export function ReportsModal({
               />
             </div>
 
-            <div className="flex flex-col">
+            <div className="flex flex-col w-[200px]">
               <label className="lve-label">Start Date</label>
-              <input
-                type="text"
+              <DatePicker
                 value={startDate}
-                onChange={(e) => setStartDate(e.target.value)}
-                className="lve-input w-[160px]"
+                placeholder="Start Date"
+                disabled={false}
+                onChange={(d) =>
+                  setStartDate(d ? format(d, "dd/MM/yyyy") : "")
+                }
               />
             </div>
 
-            <div className="flex flex-col">
+            <div className="flex flex-col w-[200px]">
               <label className="lve-label">End Date</label>
-              <input
-                type="text"
+              <DatePicker
                 value={endDate}
-                onChange={(e) => setEndDate(e.target.value)}
-                className="lve-input w-[160px]"
+                placeholder="End Date"
+                disabled={false}
+                onChange={(d) =>
+                  setEndDate(d ? format(d, "dd/MM/yyyy") : "")
+                }
               />
             </div>
 

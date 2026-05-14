@@ -69,7 +69,7 @@ export function PolicyHeader() {
         <MdMoreHoriz size={18} />
       </button>
 
-      <div className="ml-auto px-4 h-9 inline-flex items-center rounded-[8px] bg-[#7fdfdf] text-[#00263e] font-['Livvic'] font-semibold text-sm">
+      <div className="px-4 h-9 inline-flex items-center rounded-[8px] bg-[#7fdfdf] text-[#00263e] font-['Livvic'] font-semibold text-sm">
         RETIREMENT ACCOUNT
       </div>
 

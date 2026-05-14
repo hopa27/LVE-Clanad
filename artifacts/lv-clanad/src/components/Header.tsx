@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import lvLogo from "../assets/lv-logo.png";
 import { MdLogout } from "react-icons/md";
 import { TaxCertificateModal } from "./TaxCertificateModal";
+import { AboutModal } from "./AboutModal";
 
 type MenuOption =
   | {
@@ -68,13 +69,14 @@ const MENU_ITEMS: MenuItem[] = [
   },
   {
     label: "Help",
-    options: [{ label: "About" }],
+    options: [{ label: "About", action: "about" }],
   },
 ];
 
 export function Header({ title }: { title: string }) {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   const [taxCertOpen, setTaxCertOpen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -90,6 +92,7 @@ export function Header({ title }: { title: string }) {
   const handleOption = (action?: string) => {
     setOpenIdx(null);
     if (action === "tax-certificate") setTaxCertOpen(true);
+    else if (action === "about") setAboutOpen(true);
   };
 
   return (
@@ -178,6 +181,8 @@ export function Header({ title }: { title: string }) {
         open={taxCertOpen}
         onClose={() => setTaxCertOpen(false)}
       />
+
+      <AboutModal open={aboutOpen} onClose={() => setAboutOpen(false)} />
     </header>
   );
 }

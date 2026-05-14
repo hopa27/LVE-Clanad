@@ -9,6 +9,25 @@ import {
 
 type Report = { name: string; dateRequired: string; path?: string };
 
+const SYSTEM_NAMES = [
+  "CCRP",
+  "CHEQUE REQUISITION",
+  "DANAD96",
+  "FINANCE",
+  "GENERAL",
+  "HIPPS97",
+  "IFA SALES",
+  "ILA REPORTS",
+  "MARKETING",
+  "MORTGAGE ANNUIT",
+  "MORTGAGE ANNUIT",
+  "NUANAD",
+  "PC96",
+  "PLI ADMIN",
+  "PROPSALE97",
+  "SALES95",
+];
+
 const REPORTS: Report[] = [
   { name: "Anniversary Date Check", dateRequired: "S", path: "\\\\delphiuat\\uat\\anad96\\reports\\32setlive.rpt" },
   { name: "Annuities Time From Application To Completion", dateRequired: "B" },
@@ -73,7 +92,11 @@ export function ReportsModal({
                   onChange={(e) => setSystemName(e.target.value)}
                   className="lve-input pr-12 appearance-none"
                 >
-                  <option>DANAD96</option>
+                  {SYSTEM_NAMES.map((s, i) => (
+                    <option key={`${s}-${i}`} value={s}>
+                      {s}
+                    </option>
+                  ))}
                 </select>
                 <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none">
                   <span className="h-6 w-px bg-[#BBBBBB]" />

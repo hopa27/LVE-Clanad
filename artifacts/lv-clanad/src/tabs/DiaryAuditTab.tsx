@@ -72,6 +72,12 @@ export function DiaryAuditTab() {
   const [editConfirmOpen, setEditConfirmOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);
   const [selectFirstOpen, setSelectFirstOpen] = useState(false);
+  const [selectFirstMsg, setSelectFirstMsg] = useState(
+    "Please select a diary note to edit!",
+  );
+  const [completeConfirmOpen, setCompleteConfirmOpen] = useState(false);
+  const [simPoliciesOpen, setSimPoliciesOpen] = useState(false);
+  const [simUpdate, setSimUpdate] = useState(false);
 
   const selectedRow = diary.find((d) => d.ref === selectedRef) ?? null;
 
@@ -105,10 +111,39 @@ export function DiaryAuditTab() {
 
   const handleEditClick = () => {
     if (selectedRef === null) {
+      setSelectFirstMsg("Please select a diary note to edit!");
       setSelectFirstOpen(true);
       return;
     }
     setEditConfirmOpen(true);
+  };
+
+  const handleCompleteClick = () => {
+    if (selectedRef === null) {
+      setSelectFirstMsg("Please select a diary note to complete!");
+      setSelectFirstOpen(true);
+      return;
+    }
+    if (selectedRow && selectedRow.completed) {
+      setSelectFirstMsg("This diary note is already completed!");
+      setSelectFirstOpen(true);
+      return;
+    }
+    setCompleteConfirmOpen(true);
+  };
+
+  const completeSelected = () => {
+    if (selectedRef === null) return;
+    const today = fmt(new Date());
+    setDiary((prev) =>
+      prev.map((r) =>
+        r.ref === selectedRef
+          ? { ...r, completed: today, byCompleted: CURRENT_USER }
+          : r,
+      ),
+    );
+    setSimPoliciesOpen(false);
+    setSimUpdate(false);
   };
 
   return (
@@ -167,7 +202,11 @@ export function DiaryAuditTab() {
           >
             <MdEdit size={16} /> Edit Diary Note
           </button>
-          <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
+          <button
+            type="button"
+            className="lve-btn lve-btn-secondary lve-btn-sm"
+            onClick={handleCompleteClick}
+          >
             <MdCheckCircleOutline size={16} /> Complete diary note
           </button>
           <button
@@ -346,6 +385,122 @@ export function DiaryAuditTab() {
         </div>
       )}
 
+      {completeConfirmOpen && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40">
+          <div className="w-[380px] bg-white rounded-[8px] shadow-xl overflow-hidden border border-[#bcd]">
+            <header className="bg-[#00263e] text-white font-['Livvic'] text-[13px] font-semibold px-3 py-2">
+              Confirm
+            </header>
+            <div className="p-5">
+              <div className="flex items-start gap-3">
+                <MdHelpOutline size={32} className="text-[#006cf4] shrink-0" />
+                <p className="font-['Mulish'] text-[14px] text-[#3d3d3d] pt-1">
+                  Complete this diary note?
+                </p>
+              </div>
+              <div className="mt-5 flex items-center justify-center gap-3">
+                <button
+                  type="button"
+                  className="lve-btn"
+                  onClick={() => {
+                    setCompleteConfirmOpen(false);
+                    setSimUpdate(false);
+                    setSimPoliciesOpen(true);
+                  }}
+                >
+                  <MdCheck size={16} />
+                  <span><u>Y</u>es</span>
+                </button>
+                <button
+                  type="button"
+                  className="lve-btn lve-btn-secondary"
+                  onClick={() => setCompleteConfirmOpen(false)}
+                >
+                  <MdClose size={16} />
+                  <span><u>N</u>o</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {simPoliciesOpen && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40">
+          <div className="w-[520px] bg-white rounded-[8px] shadow-xl overflow-hidden border border-[#bcd]">
+            <header className="bg-[#00263e] text-white font-['Livvic'] text-[13px] font-semibold px-3 py-2">
+              Simultaneous Policies
+            </header>
+            <div className="p-5">
+              <p className="font-['Livvic'] text-[13px] font-semibold text-[#00263e] mb-3">
+                Select simultaneous policies to update
+              </p>
+              <div className="border border-[#bcd] rounded-[8px] overflow-hidden">
+                <table className="w-full border-collapse font-['Mulish'] text-[12px]">
+                  <thead>
+                    <tr className="bg-[#d4d4d4] text-[#3d3d3d]">
+                      <th className="text-left px-3 py-1.5 border-r border-[#a0a0a0] w-[110px]">
+                        Policy No
+                      </th>
+                      <th className="text-left px-3 py-1.5 border-r border-[#a0a0a0] w-[80px]">
+                        Status
+                      </th>
+                      <th className="text-left px-3 py-1.5 border-r border-[#a0a0a0] w-[120px]">
+                        Product Type
+                      </th>
+                      <th className="text-left px-3 py-1.5 w-[90px]">Update?</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="bg-white text-[#3d3d3d] border-b border-[#e5e5e5]">
+                      <td className="px-3 py-1.5">233424</td>
+                      <td className="px-3 py-1.5">P</td>
+                      <td className="px-3 py-1.5">FTA</td>
+                      <td className="px-3 py-1.5">
+                        <input
+                          type="checkbox"
+                          checked={simUpdate}
+                          onChange={(e) => setSimUpdate(e.target.checked)}
+                          className="w-[14px] h-[14px] accent-[#006cf4]"
+                        />
+                      </td>
+                    </tr>
+                    {Array.from({ length: 9 }).map((_, i) => (
+                      <tr
+                        key={i}
+                        className="bg-[#f4f4f4] border-b border-[#e5e5e5] last:border-b-0"
+                      >
+                        <td className="px-3 py-1.5">&nbsp;</td>
+                        <td className="px-3 py-1.5">&nbsp;</td>
+                        <td className="px-3 py-1.5">&nbsp;</td>
+                        <td className="px-3 py-1.5">&nbsp;</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="mt-5 flex items-center justify-center gap-3">
+                <button type="button" className="lve-btn" onClick={completeSelected}>
+                  <MdCheck size={16} />
+                  OK
+                </button>
+                <button
+                  type="button"
+                  className="lve-btn lve-btn-secondary"
+                  onClick={() => {
+                    setSimPoliciesOpen(false);
+                    setSimUpdate(false);
+                  }}
+                >
+                  <MdClose size={16} />
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       {selectFirstOpen && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40">
           <div className="w-[380px] bg-white rounded-[8px] shadow-xl overflow-hidden border border-[#bcd]">
@@ -354,7 +509,7 @@ export function DiaryAuditTab() {
             </header>
             <div className="p-5">
               <p className="font-['Mulish'] text-[14px] text-[#3d3d3d] text-center">
-                Please select a diary note to edit!
+                {selectFirstMsg}
               </p>
               <div className="mt-5 flex items-center justify-center">
                 <button

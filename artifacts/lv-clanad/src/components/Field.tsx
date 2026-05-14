@@ -68,22 +68,25 @@ export function SelectInput({
   options = [],
   className = "",
   error = false,
+  disabled = false,
 }: {
   value?: string;
   options?: string[];
   className?: string;
   error?: boolean;
+  disabled?: boolean;
 }) {
   const { editing } = useEditMode();
   const all = value && !options.includes(value) ? [value, ...options] : options;
+  const isDisabled = disabled || !editing;
   return (
     <div className="relative">
       <select
         defaultValue={value}
-        disabled={!editing}
+        disabled={isDisabled}
         data-error={error || undefined}
         className={`lve-input pr-12 appearance-none ${
-          !editing ? "bg-[#fafafa] cursor-default" : ""
+          isDisabled ? "bg-[#fafafa] cursor-default" : ""
         } ${className}`}
       >
         {all.map((opt) => (

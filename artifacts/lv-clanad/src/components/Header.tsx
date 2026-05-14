@@ -4,12 +4,26 @@ import { MdLogout } from "react-icons/md";
 import { TaxCertificateModal } from "./TaxCertificateModal";
 
 type MenuOption =
-  | { kind?: "item"; label: string; action?: string; hasSubmenu?: boolean }
+  | {
+      kind?: "item";
+      label: string;
+      action?: string;
+      hasSubmenu?: boolean;
+      shortcut?: string;
+    }
   | { kind: "separator" };
 type MenuItem = { label: string; options?: MenuOption[] };
 
 const MENU_ITEMS: MenuItem[] = [
-  { label: "Options" },
+  {
+    label: "Options",
+    options: [
+      { label: "Screen Print", shortcut: "F1" },
+      { label: "Check Completion" },
+      { label: "Amend IFA" },
+      { label: "Search", shortcut: "F5" },
+    ],
+  },
   {
     label: "Process",
     options: [
@@ -111,11 +125,16 @@ export function Header({ title }: { title: string }) {
                         key={opt.label}
                         type="button"
                         onClick={() => handleOption(opt.action)}
-                        className="flex w-full items-center justify-between px-4 py-2 text-left hover:bg-[#eaf5f8] hover:text-[#003578]"
+                        className="flex w-full items-center justify-between gap-6 px-4 py-2 text-left hover:bg-[#eaf5f8] hover:text-[#003578]"
                       >
                         <span>{opt.label}</span>
+                        {opt.shortcut && (
+                          <span className="text-[12px] text-[#7a7a7a] font-['Mulish']">
+                            {opt.shortcut}
+                          </span>
+                        )}
                         {opt.hasSubmenu && (
-                          <span className="ml-3 text-[#04589b]">▶</span>
+                          <span className="text-[#04589b]">▶</span>
                         )}
                       </button>
                     );

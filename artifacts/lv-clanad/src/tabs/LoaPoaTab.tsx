@@ -6,7 +6,7 @@ export function LoaPoaTab() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 max-w-3xl">
         <div>
           <Field label="LOA/POA:">
-            <SelectInput value="" options={["", "LOA", "POA"]} />
+            <SelectInput value="" options={["", "Letter of Authority", "Power of Attorney"]} />
           </Field>
           <Field label="Name:"><TextInput value="" /></Field>
           <Field label="Company:"><TextInput value="" /></Field>

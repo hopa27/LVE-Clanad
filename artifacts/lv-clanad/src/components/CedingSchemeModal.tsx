@@ -257,153 +257,140 @@ export function CedingSchemeModal({
             </button>
           </div>
 
-          {/* Two-column form */}
-          <div className="grid grid-cols-2 gap-x-8 gap-y-3">
-            {/* Left column */}
-            <div className="space-y-3">
-              <div className="grid grid-cols-[140px_1fr] items-center gap-3">
-                <Label>Policy Number</Label>
-                <FormField
-                  value={form.policyNumber}
-                  onChange={(v) => upd("policyNumber", v)}
-                  enabled={editable}
-                  width="w-[180px]"
-                />
-              </div>
-              <div className="grid grid-cols-[140px_1fr] items-center gap-3">
-                <Label>Scheme Name</Label>
-                <FormField
-                  value={form.schemeName}
-                  onChange={(v) => upd("schemeName", v)}
-                  enabled={editable}
-                />
-              </div>
-              <div className="grid grid-cols-[140px_1fr] items-center gap-3">
-                <Label>Amount</Label>
-                <FormField
-                  value={form.amount}
-                  onChange={(v) => upd("amount", v)}
-                  enabled={editable}
-                  width="w-[180px]"
-                />
-              </div>
-              <div className="space-y-2 pt-1">
-                <Label>Transfer-Type of Ceding Scheme</Label>
-                <div className="relative">
-                  <button
-                    type="button"
-                    disabled={!editable}
-                    className={`w-full flex items-center justify-between text-left h-[44px] rounded-[8px] border-[2px] px-[11px] py-[7px] font-['Mulish'] text-[15px] ${
-                      editable
-                        ? "border-[#178830] bg-white text-[#3d3d3d]"
-                        : "border-[#ACACAC] bg-[#CCCCCC] text-[#3d3d3d] cursor-not-allowed"
-                    }`}
-                    onClick={() => editable && setTransferOpen((v) => !v)}
-                  >
-                    <span className={form.transferType ? "" : "text-transparent"}>
-                      {form.transferType || "."}
-                    </span>
-                    <MdArrowDropDown size={20} className="text-[#555]" />
-                  </button>
-                  {transferOpen && editable && (
-                    <ul className="absolute z-10 left-0 right-0 mt-1 max-h-[180px] overflow-auto bg-white border border-[#bcd] rounded-[8px] shadow-md font-['Mulish'] text-[12px]">
-                      {TRANSFER_TYPES.filter((o) => o !== "").map((o) => (
-                        <li
-                          key={o}
-                          className={`px-3 py-1.5 cursor-pointer hover:bg-[#05579B] hover:text-white ${
-                            o === form.transferType ? "bg-[#eaf5f8]" : ""
-                          }`}
-                          onClick={() => {
-                            upd("transferType", o);
-                            setTransferOpen(false);
-                          }}
-                        >
-                          {o}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                </div>
-              </div>
-            </div>
+          {/* Unified two-column form — labels and fields aligned across both columns */}
+          <div className="grid grid-cols-[150px_minmax(0,1fr)_200px_minmax(0,1fr)] items-center gap-x-4 gap-y-3">
+            {/* Row 1 */}
+            <Label>Policy Number</Label>
+            <FormField
+              value={form.policyNumber}
+              onChange={(v) => upd("policyNumber", v)}
+              enabled={editable}
+            />
+            <Label>Ceding Scheme Policy Ref</Label>
+            <FormField
+              value={form.cedingRef}
+              onChange={(v) => upd("cedingRef", v)}
+              enabled={editable}
+            />
 
-            {/* Right column */}
-            <div className="space-y-3">
-              <div className="grid grid-cols-[180px_1fr] items-center gap-3">
-                <Label>Ceding Scheme Policy Ref</Label>
-                <FormField
-                  value={form.cedingRef}
-                  onChange={(v) => upd("cedingRef", v)}
-                  enabled={editable}
-                />
-              </div>
-              <div className="grid grid-cols-[180px_1fr] items-center gap-3">
-                <Label>Address 1</Label>
-                <FormField
-                  value={form.address1}
-                  onChange={(v) => upd("address1", v)}
-                  enabled={editable}
-                />
-              </div>
-              <div className="grid grid-cols-[180px_1fr] items-center gap-3">
-                <Label>Address 2</Label>
-                <FormField
-                  value={form.address2}
-                  onChange={(v) => upd("address2", v)}
-                  enabled={editable}
-                />
-              </div>
-              <div className="grid grid-cols-[180px_1fr] items-center gap-3">
-                <Label>Address 3</Label>
-                <FormField
-                  value={form.address3}
-                  onChange={(v) => upd("address3", v)}
-                  enabled={editable}
-                />
-              </div>
-              <div className="grid grid-cols-[180px_1fr] items-center gap-3">
-                <Label>Post Code</Label>
-                <FormField
-                  value={form.postCode}
-                  onChange={(v) => upd("postCode", v)}
-                  enabled={editable}
-                  width="w-[180px]"
-                />
-              </div>
-              <div className="grid grid-cols-[180px_1fr] items-center gap-3">
-                <Label>Telephone</Label>
-                <FormField
-                  value={form.telephone}
-                  onChange={(v) => upd("telephone", v)}
-                  enabled={editable}
-                />
-              </div>
+            {/* Row 2 */}
+            <Label>Scheme Name</Label>
+            <FormField
+              value={form.schemeName}
+              onChange={(v) => upd("schemeName", v)}
+              enabled={editable}
+            />
+            <Label>Address 1</Label>
+            <FormField
+              value={form.address1}
+              onChange={(v) => upd("address1", v)}
+              enabled={editable}
+            />
+
+            {/* Row 3 */}
+            <Label>Amount</Label>
+            <FormField
+              value={form.amount}
+              onChange={(v) => upd("amount", v)}
+              enabled={editable}
+            />
+            <Label>Address 2</Label>
+            <FormField
+              value={form.address2}
+              onChange={(v) => upd("address2", v)}
+              enabled={editable}
+            />
+
+            {/* Row 4 — transfer type spans 2 cols on left, address 3 on right */}
+            <Label>Transfer-Type of Ceding Scheme</Label>
+            <div className="relative">
+              <button
+                type="button"
+                disabled={!editable}
+                className={`w-full flex items-center justify-between text-left h-[44px] rounded-[8px] border-[2px] px-[11px] py-[7px] font-['Mulish'] text-[15px] ${
+                  editable
+                    ? "border-[#178830] bg-white text-[#3d3d3d]"
+                    : "border-[#ACACAC] bg-[#CCCCCC] text-[#3d3d3d] cursor-not-allowed"
+                }`}
+                onClick={() => editable && setTransferOpen((v) => !v)}
+              >
+                <span className={`truncate ${form.transferType ? "" : "text-transparent"}`}>
+                  {form.transferType || "."}
+                </span>
+                <MdArrowDropDown size={20} className="text-[#555] shrink-0" />
+              </button>
+              {transferOpen && editable && (
+                <ul className="absolute z-10 left-0 right-0 mt-1 max-h-[220px] overflow-auto bg-white border border-[#bcd] rounded-[8px] shadow-md font-['Mulish'] text-[12px]">
+                  {TRANSFER_TYPES.filter((o) => o !== "").map((o) => (
+                    <li
+                      key={o}
+                      className={`px-3 py-1.5 cursor-pointer hover:bg-[#05579B] hover:text-white ${
+                        o === form.transferType ? "bg-[#eaf5f8]" : ""
+                      }`}
+                      onClick={() => {
+                        upd("transferType", o);
+                        setTransferOpen(false);
+                      }}
+                    >
+                      {o}
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
+            <Label>Address 3</Label>
+            <FormField
+              value={form.address3}
+              onChange={(v) => upd("address3", v)}
+              enabled={editable}
+            />
+
+            {/* Row 5 — empty under transfer-type, post code on right */}
+            <div />
+            <div />
+            <Label>Post Code</Label>
+            <FormField
+              value={form.postCode}
+              onChange={(v) => upd("postCode", v)}
+              enabled={editable}
+            />
+
+            {/* Row 6 — telephone on right */}
+            <div />
+            <div />
+            <Label>Telephone</Label>
+            <FormField
+              value={form.telephone}
+              onChange={(v) => upd("telephone", v)}
+              enabled={editable}
+            />
           </div>
 
           {/* Status row */}
-          <div className="grid grid-cols-2 gap-x-8 items-center pt-1">
-            <fieldset className="border border-[#bcd] rounded-[8px] px-4 py-2">
-              <legend className="font-['Mulish'] text-[12px] text-[#3d3d3d] px-1">
-                Letter Status
-              </legend>
-              <div className="flex items-center gap-6">
-                <Radio
-                  label="Active"
-                  checked={form.letterStatus === "Active"}
-                  enabled={editable}
-                  onChange={() => upd("letterStatus", "Active")}
-                />
-                <Radio
-                  label="Suspended"
-                  checked={form.letterStatus === "Suspended"}
-                  enabled={editable}
-                  onChange={() => upd("letterStatus", "Suspended")}
-                />
-              </div>
-            </fieldset>
-            <div className="flex items-center gap-6 justify-end pr-2">
-              <Label>Option Case?</Label>
+          <div className="grid grid-cols-[150px_minmax(0,1fr)_200px_minmax(0,1fr)] items-center gap-x-4 gap-y-3 pt-1">
+            <div className="col-span-2">
+              <fieldset className="border border-[#bcd] rounded-[8px] px-4 py-2">
+                <legend className="font-['Mulish'] text-[12px] text-[#3d3d3d] px-1">
+                  Letter Status
+                </legend>
+                <div className="flex items-center gap-6">
+                  <Radio
+                    label="Active"
+                    checked={form.letterStatus === "Active"}
+                    enabled={editable}
+                    onChange={() => upd("letterStatus", "Active")}
+                  />
+                  <Radio
+                    label="Suspended"
+                    checked={form.letterStatus === "Suspended"}
+                    enabled={editable}
+                    onChange={() => upd("letterStatus", "Suspended")}
+                  />
+                </div>
+              </fieldset>
+            </div>
+            <Label>Option Case?</Label>
+            <div className="flex items-center gap-6">
               <Radio
                 label="Yes"
                 checked={form.optionCase === "Yes"}

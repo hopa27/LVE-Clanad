@@ -1,5 +1,6 @@
 import { Field, TextInput, SelectInput, Section } from "../components/Field";
 import { DatePicker } from "../components/DatePicker";
+import { ConnectedAddress } from "../components/ConnectedAddress";
 
 export function LoaPoaTab() {
   return (
@@ -11,9 +12,16 @@ export function LoaPoaTab() {
           </Field>
           <Field label="Name:"><TextInput value="" /></Field>
           <Field label="Company:"><TextInput value="" /></Field>
-          <Field label="Address line 1:"><TextInput value="" /></Field>
-          <Field label="Address line 2:"><TextInput value="" /></Field>
-          <Field label="Address line 3:"><TextInput value="" /></Field>
+          <Field label="Address:">
+            <ConnectedAddress
+              lines={[
+                { placeholder: "Line 1" },
+                { placeholder: "Line 2" },
+                { placeholder: "Line 3" },
+              ]}
+              initial={["", "", ""]}
+            />
+          </Field>
         </div>
         <div>
           <Field label="Postal Code:"><TextInput value="" /></Field>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { MdEdit, MdCheck, MdClose } from "react-icons/md";
 import { Field, TextInput, SelectInput, Section } from "../components/Field";
 import { DatePicker } from "../components/DatePicker";
+import { ConnectedAddress } from "../components/ConnectedAddress";
 
 export function MaturitiesSurrenderTab() {
   const [bankModalOpen, setBankModalOpen] = useState(false);
@@ -51,11 +52,17 @@ export function MaturitiesSurrenderTab() {
         <Field label="Salutation:"><TextInput value="" /></Field>
         <Field label="Telephone:"><TextInput value="" /></Field>
         <div className="my-3 border-t border-[color:var(--color-panel-border)]" />
-        <Field label="Line 1:"><TextInput value="" /></Field>
-        <Field label="Line 2:"><TextInput value="" /></Field>
-        <Field label="Line 3:"><TextInput value="" /></Field>
-        <Field label="Line 4:"><TextInput value="" /></Field>
-        <Field label="Line 5 (County):"><TextInput value="" /></Field>
+        <Field label="Address:">
+          <ConnectedAddress
+            lines={[
+              { placeholder: "Line 1" },
+              { placeholder: "Line 2" },
+              { placeholder: "Line 3" },
+              { placeholder: "Line 4" },
+              { placeholder: "Line 5 (County)" },
+            ]}
+          />
+        </Field>
         <Field label="Postcode:"><TextInput value="" /></Field>
         <Field label="Country:">
           <SelectInput value="" options={["", "United Kingdom", "Ireland", "Other"]} />

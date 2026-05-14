@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   MdClose,
   MdPrint,
@@ -8,6 +8,71 @@ import {
 } from "react-icons/md";
 
 type Report = { name: string; dateRequired: string; path?: string };
+
+function SystemNameSelect({
+  value,
+  onChange,
+  options,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  options: string[];
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const handle = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handle);
+    return () => document.removeEventListener("mousedown", handle);
+  }, [open]);
+
+  return (
+    <div ref={ref} className="relative w-[200px]">
+      <button
+        type="button"
+        onClick={() => setOpen((o) => !o)}
+        className="lve-input pr-12 text-left flex items-center"
+      >
+        <span className="truncate">{value}</span>
+      </button>
+      <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none">
+        <span className="h-6 w-px bg-[#BBBBBB]" />
+        <span className="px-3 text-[#006cf4]">
+          <MdKeyboardArrowDown size={22} />
+        </span>
+      </div>
+      {open && (
+        <ul className="absolute left-0 top-full mt-1 z-30 w-full max-h-[180px] overflow-auto bg-white border border-[#BBBBBB] rounded-[8px] shadow-lg font-['Mulish'] text-[14px] text-[#3d3d3d]">
+          {options.map((s, i) => {
+            const isSel = s === value;
+            return (
+              <li
+                key={`${s}-${i}`}
+                onClick={() => {
+                  onChange(s);
+                  setOpen(false);
+                }}
+                className={`px-3 py-1.5 cursor-pointer ${
+                  isSel
+                    ? "bg-[#006cf4] text-white"
+                    : "hover:bg-[#eaf5f8]"
+                }`}
+              >
+                {s}
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </div>
+  );
+}
 
 const SYSTEM_NAMES = [
   "CCRP",
@@ -86,25 +151,11 @@ export function ReportsModal({
           <div className="flex flex-wrap items-end gap-4">
             <div className="flex flex-col">
               <label className="lve-label">System Name</label>
-              <div className="relative w-[200px]">
-                <select
-                  value={systemName}
-                  onChange={(e) => setSystemName(e.target.value)}
-                  className="lve-input pr-12 appearance-none"
-                >
-                  {SYSTEM_NAMES.map((s, i) => (
-                    <option key={`${s}-${i}`} value={s}>
-                      {s}
-                    </option>
-                  ))}
-                </select>
-                <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none">
-                  <span className="h-6 w-px bg-[#BBBBBB]" />
-                  <span className="px-3 text-[#006cf4]">
-                    <MdKeyboardArrowDown size={22} />
-                  </span>
-                </div>
-              </div>
+              <SystemNameSelect
+                value={systemName}
+                onChange={setSystemName}
+                options={SYSTEM_NAMES}
+              />
             </div>
 
             <div className="flex flex-col">

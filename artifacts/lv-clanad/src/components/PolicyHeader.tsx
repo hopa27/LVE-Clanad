@@ -29,7 +29,7 @@ export function PolicyHeader() {
       <button
         type="button"
         className="h-9 w-9 inline-flex items-center justify-center rounded-[8px] border border-[#BBBBBB] bg-white text-[#006cf4] hover:border-[#178830]"
-        title="Open"
+        title="find aplication"
       >
         <MdOpenInNew size={16} />
       </button>

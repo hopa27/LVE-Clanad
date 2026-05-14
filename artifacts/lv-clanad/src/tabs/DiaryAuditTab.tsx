@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Section } from "../components/Field";
 import { MiscDiaryModal, type DiaryEntryInput } from "../components/MiscDiaryModal";
 import { CustomerNeedsModal } from "../components/CustomerNeedsModal";
+import { CedingSchemeModal } from "../components/CedingSchemeModal";
 import {
   MdNoteAdd,
   MdEdit,
@@ -62,6 +63,7 @@ export function DiaryAuditTab() {
   const [trail, setTrail] = useState<"notes" | "data">("notes");
   const [diaryOpen, setDiaryOpen] = useState(false);
   const [needsOpen, setNeedsOpen] = useState(false);
+  const [cedingOpen, setCedingOpen] = useState(false);
   const [diary, setDiary] = useState<DiaryRow[]>(INITIAL_DIARY);
 
   const addDiary = (entry: DiaryEntryInput) => {
@@ -126,7 +128,11 @@ export function DiaryAuditTab() {
           <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
             <MdCheckCircleOutline size={16} /> Complete diary note
           </button>
-          <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
+          <button
+            type="button"
+            className="lve-btn lve-btn-secondary lve-btn-sm"
+            onClick={() => setCedingOpen(true)}
+          >
             <MdManageSearch size={16} /> Ceding Scheme Details
           </button>
           <button
@@ -237,6 +243,11 @@ export function DiaryAuditTab() {
       <CustomerNeedsModal
         open={needsOpen}
         onClose={() => setNeedsOpen(false)}
+      />
+
+      <CedingSchemeModal
+        open={cedingOpen}
+        onClose={() => setCedingOpen(false)}
       />
     </div>
   );

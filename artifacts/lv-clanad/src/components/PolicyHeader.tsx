@@ -1,6 +1,22 @@
-import { MdKeyboardArrowDown, MdOpenInNew, MdMoreHoriz } from "react-icons/md";
+import { useState } from "react";
+import {
+  MdKeyboardArrowDown,
+  MdOpenInNew,
+  MdMoreHoriz,
+  MdCheck,
+  MdClose,
+} from "react-icons/md";
+
+type SimRow = { policyNo: string; status: string; productType: string };
+
+const SIM_ROWS: SimRow[] = [
+  { policyNo: "233424", status: "P", productType: "FTA" },
+];
 
 export function PolicyHeader() {
+  const [simOpen, setSimOpen] = useState(false);
+  const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
+
   return (
     <div className="lve-panel mb-6 p-4 flex flex-wrap items-center gap-3">
       <button
@@ -43,6 +59,10 @@ export function PolicyHeader() {
 
       <button
         type="button"
+        onClick={() => {
+          setSelectedIdx(null);
+          setSimOpen(true);
+        }}
         className="h-9 w-9 inline-flex items-center justify-center rounded-[8px] border border-[#BBBBBB] bg-white text-[#3d3d3d] hover:border-[#178830]"
         title="More"
       >
@@ -54,6 +74,81 @@ export function PolicyHeader() {
         placeholder="Quick find…"
         className="lve-input ml-auto max-w-xs"
       />
+
+      {simOpen && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
+          <div className="w-[460px] bg-white rounded-[8px] shadow-xl overflow-hidden border border-[#bcd]">
+            <header className="bg-[#00263e] text-white font-['Livvic'] text-[13px] font-semibold px-3 py-2">
+              Simultaneous Policies
+            </header>
+            <div className="p-5">
+              <div className="border border-[#bcd] rounded-[8px] overflow-hidden">
+                <table className="w-full border-collapse font-['Mulish'] text-[12px]">
+                  <thead>
+                    <tr className="bg-[#d4d4d4] text-[#3d3d3d]">
+                      <th className="text-left px-3 py-1.5 border-r border-[#a0a0a0] w-[120px]">
+                        Policy No
+                      </th>
+                      <th className="text-left px-3 py-1.5 border-r border-[#a0a0a0] w-[90px]">
+                        Status
+                      </th>
+                      <th className="text-left px-3 py-1.5">Product Type</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {SIM_ROWS.map((r, i) => {
+                      const isSel = selectedIdx === i;
+                      const tdStyle = isSel
+                        ? { backgroundColor: "#05579B", color: "#ffffff" }
+                        : undefined;
+                      return (
+                        <tr
+                          key={i}
+                          onClick={() => setSelectedIdx(i)}
+                          className="cursor-pointer bg-white text-[#3d3d3d] border-b border-[#e5e5e5]"
+                        >
+                          <td className="px-3 py-1.5" style={tdStyle}>{r.policyNo}</td>
+                          <td className="px-3 py-1.5" style={tdStyle}>{r.status}</td>
+                          <td className="px-3 py-1.5" style={tdStyle}>{r.productType}</td>
+                        </tr>
+                      );
+                    })}
+                    {Array.from({ length: 9 }).map((_, i) => (
+                      <tr
+                        key={`blank-${i}`}
+                        className="bg-[#f4f4f4] border-b border-[#e5e5e5] last:border-b-0"
+                      >
+                        <td className="px-3 py-1.5">&nbsp;</td>
+                        <td className="px-3 py-1.5">&nbsp;</td>
+                        <td className="px-3 py-1.5">&nbsp;</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="mt-5 flex items-center justify-center gap-3">
+                <button
+                  type="button"
+                  className="lve-btn"
+                  disabled={selectedIdx === null}
+                  onClick={() => setSimOpen(false)}
+                >
+                  <MdCheck size={16} />
+                  Open
+                </button>
+                <button
+                  type="button"
+                  className="lve-btn lve-btn-secondary"
+                  onClick={() => setSimOpen(false)}
+                >
+                  <MdClose size={16} />
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

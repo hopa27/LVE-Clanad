@@ -14,6 +14,7 @@ import {
 import { ConfirmDialog } from "./ConfirmDialog";
 import { QuoteLookupModal } from "./QuoteLookupModal";
 import { CompanySelectionModal } from "./CompanySelectionModal";
+import { ReportsModal } from "./ReportsModal";
 import { useEditMode } from "../context/EditModeContext";
 
 type ToolAction =
@@ -21,7 +22,8 @@ type ToolAction =
   | "new-quote"
   | "edit-toggle"
   | "edit-cancel"
-  | "company";
+  | "company"
+  | "reports";
 
 type Tool = {
   label: string;
@@ -36,6 +38,7 @@ export function Toolbar() {
   const [quoteLookupOpen, setQuoteLookupOpen] = useState(false);
   const [newQuoteOpen, setNewQuoteOpen] = useState(false);
   const [companyOpen, setCompanyOpen] = useState(false);
+  const [reportsOpen, setReportsOpen] = useState(false);
 
   const TOOLS: Tool[] = [
     { label: "New App", icon: MdAdd, enabled: !editing, action: "new-app" },
@@ -50,7 +53,7 @@ export function Toolbar() {
     { label: "Cancel", icon: MdBlock, enabled: editing, action: "edit-cancel" },
     { label: "Search", icon: MdSearch, enabled: !editing },
     { label: "CRS", icon: MdStorage, enabled: !editing },
-    { label: "Reports", icon: MdBarChart, enabled: !editing },
+    { label: "Reports", icon: MdBarChart, enabled: !editing, action: "reports" },
     { label: "Company", icon: MdBusiness, enabled: !editing, action: "company" },
   ];
 
@@ -60,6 +63,7 @@ export function Toolbar() {
     else if (action === "edit-toggle") setEditing(!editing);
     else if (action === "edit-cancel") setEditing(false);
     else if (action === "company") setCompanyOpen(true);
+    else if (action === "reports") setReportsOpen(true);
   };
 
   return (
@@ -109,6 +113,11 @@ export function Toolbar() {
       <CompanySelectionModal
         open={companyOpen}
         onClose={() => setCompanyOpen(false)}
+      />
+
+      <ReportsModal
+        open={reportsOpen}
+        onClose={() => setReportsOpen(false)}
       />
     </div>
   );

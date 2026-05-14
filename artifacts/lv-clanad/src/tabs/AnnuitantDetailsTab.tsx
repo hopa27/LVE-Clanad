@@ -45,8 +45,8 @@ function AnnuitantBlock({
       <div>
         <Field label="MAR required?:"><TextInput value={marRequired as string} /></Field>
         <Field label="MAR Copy to PH?:"><TextInput value={marCopyToPH as string} /></Field>
-        <Field label="Date MAR Sent:"><TextInput value={dateMarSent as string} /></Field>
-        <Field label="Date MAR Received:"><TextInput value={dateMarRec as string} /></Field>
+        <Field label="Date MAR Sent:"><TextInput value={dateMarSent as string} disabled /></Field>
+        <Field label="Date MAR Received:"><TextInput value={dateMarRec as string} disabled /></Field>
         {showUwRef && (
           <Field label="U/W Ref:"><TextInput value={uwRef as string} /></Field>
         )}

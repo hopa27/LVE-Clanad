@@ -1,5 +1,6 @@
 import { Field, TextInput, SelectInput, Checkbox, Section } from "../components/Field";
 import { ConnectedAddress } from "../components/ConnectedAddress";
+import { DatePicker } from "../components/DatePicker";
 
 export function ApplicationDetailsTab() {
   return (
@@ -29,7 +30,7 @@ export function ApplicationDetailsTab() {
       {/* Second row */}
       <div className="panel panel-body grid grid-cols-1 lg:grid-cols-3 gap-x-6">
         <div>
-          <Field label="IFA Payment Date:"><TextInput value="30/05/2025 08" disabled /></Field>
+          <Field label="IFA Payment Date:"><DatePicker value="30/05/2025" placeholder="IFA Payment Date" /></Field>
           <Field label="PostADay:"><Checkbox checked={true} /></Field>
           <Field label="Transfer from Beneficiary Drawdown?:">
             <SelectInput value="Unknown" options={["Unknown", "Yes", "No"]} />

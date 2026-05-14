@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { MdClose } from "react-icons/md";
 import lvLogo from "../assets/lv-logo.png";
 
@@ -8,6 +9,8 @@ export function AboutModal({
   open: boolean;
   onClose: () => void;
 }) {
+  const [emailOpen, setEmailOpen] = useState(false);
+
   if (!open) return null;
 
   return (
@@ -105,6 +108,7 @@ export function AboutModal({
                 </button>
                 <button
                   type="button"
+                  onClick={() => setEmailOpen(true)}
                   className="lve-btn lve-btn-secondary lve-btn-sm min-w-[80px] justify-center"
                 >
                   email
@@ -121,6 +125,52 @@ export function AboutModal({
           </div>
         </div>
       </div>
+
+      {emailOpen && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40 p-6">
+          <div className="lve-panel bg-white w-[440px] max-w-full">
+            <header className="lve-panel-header flex items-center justify-between">
+              <span>Email About Box contents to IT</span>
+              <button
+                type="button"
+                className="inline-flex items-center justify-center w-7 h-7 rounded-[4px] text-[#00263e] hover:bg-[#d72714] hover:text-white transition-colors"
+                onClick={() => setEmailOpen(false)}
+                title="Close"
+                aria-label="Close"
+              >
+                <MdClose size={18} />
+              </button>
+            </header>
+            <div className="lve-panel-body flex flex-col gap-4">
+              <div>
+                <label className="lve-label">Subject:</label>
+                <input
+                  type="text"
+                  defaultValue="Press cancel to abort."
+                  autoFocus
+                  className="lve-input"
+                />
+              </div>
+              <div className="flex justify-center items-center gap-3 pt-1">
+                <button
+                  type="button"
+                  onClick={() => setEmailOpen(false)}
+                  className="lve-btn lve-btn-sm min-w-[90px] justify-center"
+                >
+                  OK
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setEmailOpen(false)}
+                  className="lve-btn lve-btn-secondary lve-btn-sm min-w-[90px] justify-center"
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

@@ -223,30 +223,38 @@ export function CedingSchemeModal({
 
         <div className="lve-panel-body space-y-4">
           {/* Toolbar */}
-          <div className="flex items-center gap-1 border-b border-[#e0e0e0] pb-2">
-            <ToolBtn
-              icon={<MdInsertDriveFile size={20} />}
-              label="New"
+          <div className="flex items-center gap-2 border-b border-[#e0e0e0] pb-3">
+            <button
+              type="button"
+              className="lve-btn lve-btn-secondary lve-btn-sm"
               disabled={editable}
               onClick={handleNew}
-            />
-            <ToolBtn
-              icon={<MdEdit size={20} />}
-              label="Edit"
+            >
+              <MdInsertDriveFile size={16} /> New
+            </button>
+            <button
+              type="button"
+              className="lve-btn lve-btn-secondary lve-btn-sm"
               disabled={editable}
               onClick={handleEdit}
-            />
-            <ToolBtn
-              icon={<MdSave size={20} />}
-              label="Save"
+            >
+              <MdEdit size={16} /> Edit
+            </button>
+            <button
+              type="button"
+              className="lve-btn lve-btn-secondary lve-btn-sm"
               disabled={!editable}
               onClick={handleSave}
-            />
-            <ToolBtn
-              icon={<MdCheck size={20} className="text-[#178830]" />}
-              label="Ok"
+            >
+              <MdSave size={16} /> Save
+            </button>
+            <button
+              type="button"
+              className="lve-btn lve-btn-sm"
               onClick={handleClose}
-            />
+            >
+              <MdCheck size={16} /> Ok
+            </button>
           </div>
 
           {/* Two-column form */}

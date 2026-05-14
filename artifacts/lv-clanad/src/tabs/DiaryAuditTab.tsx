@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Section } from "../components/Field";
 import { MiscDiaryModal, type DiaryEntryInput } from "../components/MiscDiaryModal";
+import { CustomerNeedsModal } from "../components/CustomerNeedsModal";
 import {
   MdNoteAdd,
   MdEdit,
@@ -60,6 +61,7 @@ const DIARY_COLS = ["Ref", "Type", "Notes", "Created", "By", "Due", "Completed",
 export function DiaryAuditTab() {
   const [trail, setTrail] = useState<"notes" | "data">("notes");
   const [diaryOpen, setDiaryOpen] = useState(false);
+  const [needsOpen, setNeedsOpen] = useState(false);
   const [diary, setDiary] = useState<DiaryRow[]>(INITIAL_DIARY);
 
   const addDiary = (entry: DiaryEntryInput) => {
@@ -127,7 +129,11 @@ export function DiaryAuditTab() {
           <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
             <MdManageSearch size={16} /> Ceding Scheme Details
           </button>
-          <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
+          <button
+            type="button"
+            className="lve-btn lve-btn-secondary lve-btn-sm"
+            onClick={() => setNeedsOpen(true)}
+          >
             <MdGroups size={16} /> Customer Needs
           </button>
         </div>
@@ -178,6 +184,11 @@ export function DiaryAuditTab() {
         open={diaryOpen}
         onClose={() => setDiaryOpen(false)}
         onSubmit={addDiary}
+      />
+
+      <CustomerNeedsModal
+        open={needsOpen}
+        onClose={() => setNeedsOpen(false)}
       />
     </div>
   );

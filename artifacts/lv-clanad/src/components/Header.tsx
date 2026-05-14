@@ -66,7 +66,10 @@ const MENU_ITEMS: MenuItem[] = [
       { label: "Reprint Maturity Letters" },
     ],
   },
-  { label: "Help" },
+  {
+    label: "Help",
+    options: [{ label: "About" }],
+  },
 ];
 
 export function Header({ title }: { title: string }) {

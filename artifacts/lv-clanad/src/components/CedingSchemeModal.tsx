@@ -412,50 +412,42 @@ export function CedingSchemeModal({
           </div>
 
           {/* Cheques data grid */}
-          <div className="border border-[#bcd] rounded-[8px] overflow-hidden">
-            <div className="overflow-auto max-h-[260px] bg-[#cccccc]">
-              <table className="w-full border-collapse font-['Mulish'] text-[12px]">
-                <thead>
-                  <tr className="bg-[#d4d4d4] text-[#3d3d3d]">
-                    <th className="text-left px-3 py-1.5 border-r border-[#a0a0a0] w-[100px]">
-                      Cheque No
-                    </th>
-                    <th className="text-left px-3 py-1.5 border-r border-[#a0a0a0] w-[120px]">
-                      Amount
-                    </th>
-                    <th className="text-left px-3 py-1.5 border-r border-[#a0a0a0]">
-                      Ceding Scheme
-                    </th>
-                    <th className="text-left px-3 py-1.5 w-[200px]">
-                      Scheme Ref
-                    </th>
+          <div className="overflow-auto max-h-[260px]">
+            <table className="lve-grid">
+              <thead>
+                <tr>
+                  <th className="!px-4 whitespace-nowrap w-[110px] text-right">
+                    Cheque No
+                  </th>
+                  <th className="!px-4 whitespace-nowrap w-[140px] text-right">
+                    Amount
+                  </th>
+                  <th className="!px-4">Ceding Scheme</th>
+                  <th className="!px-4 w-[220px]">Scheme Ref</th>
+                </tr>
+              </thead>
+              <tbody>
+                {CHEQUES.map((c, i) => (
+                  <tr
+                    key={i}
+                    onClick={() => setSelectedRow(i)}
+                    className="cursor-pointer"
+                    style={
+                      selectedRow === i
+                        ? { background: "#05579B", color: "#ffffff" }
+                        : undefined
+                    }
+                  >
+                    <td className="!px-4 text-right">{c.chequeNo}</td>
+                    <td className="!px-4 text-right">
+                      {c.amount.toLocaleString("en-GB")}
+                    </td>
+                    <td className="!px-4">{c.scheme}</td>
+                    <td className="!px-4">{c.schemeRef}</td>
                   </tr>
-                </thead>
-                <tbody>
-                  {CHEQUES.map((c, i) => (
-                    <tr
-                      key={i}
-                      onClick={() => setSelectedRow(i)}
-                      className={`cursor-pointer ${
-                        selectedRow === i
-                          ? "bg-[#002f5c] text-white"
-                          : "bg-white text-[#3d3d3d] hover:bg-[#eaf5f8]"
-                      }`}
-                    >
-                      <td className="px-3 py-1.5 text-right">{c.chequeNo}</td>
-                      <td className="px-3 py-1.5 text-right">
-                        {c.amount.toLocaleString("en-GB")}
-                      </td>
-                      <td className="px-3 py-1.5">{c.scheme}</td>
-                      <td className="px-3 py-1.5">{c.schemeRef}</td>
-                    </tr>
-                  ))}
-                  <tr>
-                    <td colSpan={4} className="h-[180px]" />
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

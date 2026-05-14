@@ -108,10 +108,27 @@ type ChequeRow = {
   amount: number;
   scheme: string;
   schemeRef: string;
+  address1: string;
+  address2: string;
+  address3: string;
+  postcode: string;
+  letterStatus: string;
+  telephone: string;
 };
 
 const CHEQUES: ChequeRow[] = [
-  { chequeNo: 1, amount: 10000, scheme: "NMPTL", schemeRef: "" },
+  {
+    chequeNo: 1,
+    amount: 10000,
+    scheme: "NMPTL",
+    schemeRef: "",
+    address1: "NM Pensions Trustees Ltd",
+    address2: "Keynes House",
+    address3: "Tilehouse Street",
+    postcode: "SG5 2DX",
+    letterStatus: "",
+    telephone: "",
+  },
 ];
 
 type Mode = "view" | "new" | "edit";
@@ -588,17 +605,19 @@ export function CedingSchemeModal({
 
           {/* Cheques data grid */}
           <div className="overflow-auto max-h-[260px]">
-            <table className="lve-grid">
+            <table className="lve-grid w-full">
               <thead>
                 <tr>
-                  <th className="!px-4 whitespace-nowrap w-[110px] text-right">
-                    Cheque No
-                  </th>
-                  <th className="!px-4 whitespace-nowrap w-[140px] text-right">
-                    Amount
-                  </th>
-                  <th className="!px-4">Ceding Scheme</th>
-                  <th className="!px-4 w-[220px]">Scheme Ref</th>
+                  <th className="!px-4 whitespace-nowrap w-[90px] text-right">Cheque No</th>
+                  <th className="!px-4 whitespace-nowrap w-[110px] text-right">Amount</th>
+                  <th className="!px-4 whitespace-nowrap w-[140px]">Ceding Scheme</th>
+                  <th className="!px-4 whitespace-nowrap w-[140px]">Scheme Ref</th>
+                  <th className="!px-4 whitespace-nowrap w-[200px]">Address 1</th>
+                  <th className="!px-4 whitespace-nowrap w-[160px]">Address 2</th>
+                  <th className="!px-4 whitespace-nowrap w-[160px]">Address 3</th>
+                  <th className="!px-4 whitespace-nowrap w-[100px]">Postcode</th>
+                  <th className="!px-4 whitespace-nowrap w-[110px]">Letter Status</th>
+                  <th className="!px-4 whitespace-nowrap w-[140px]">Telephone</th>
                 </tr>
               </thead>
               <tbody>
@@ -613,18 +632,20 @@ export function CedingSchemeModal({
                       onClick={() => setSelectedRow(i)}
                       className="cursor-pointer"
                     >
-                      <td className="!px-4 text-right" style={tdStyle}>
+                      <td className="!px-4 text-right whitespace-nowrap" style={tdStyle}>
                         {c.chequeNo}
                       </td>
-                      <td className="!px-4 text-right" style={tdStyle}>
+                      <td className="!px-4 text-right whitespace-nowrap" style={tdStyle}>
                         {c.amount.toLocaleString("en-GB")}
                       </td>
-                      <td className="!px-4" style={tdStyle}>
-                        {c.scheme}
-                      </td>
-                      <td className="!px-4" style={tdStyle}>
-                        {c.schemeRef}
-                      </td>
+                      <td className="!px-4 whitespace-nowrap" style={tdStyle}>{c.scheme}</td>
+                      <td className="!px-4 whitespace-nowrap" style={tdStyle}>{c.schemeRef}</td>
+                      <td className="!px-4 whitespace-nowrap" style={tdStyle}>{c.address1}</td>
+                      <td className="!px-4 whitespace-nowrap" style={tdStyle}>{c.address2}</td>
+                      <td className="!px-4 whitespace-nowrap" style={tdStyle}>{c.address3}</td>
+                      <td className="!px-4 whitespace-nowrap" style={tdStyle}>{c.postcode}</td>
+                      <td className="!px-4 whitespace-nowrap" style={tdStyle}>{c.letterStatus}</td>
+                      <td className="!px-4 whitespace-nowrap" style={tdStyle}>{c.telephone}</td>
                     </tr>
                   );
                 })}

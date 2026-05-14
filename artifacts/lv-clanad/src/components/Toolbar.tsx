@@ -22,6 +22,7 @@ import { useEditMode } from "../context/EditModeContext";
 type ToolAction =
   | "new-app"
   | "new-quote"
+  | "sim-app"
   | "edit-toggle"
   | "edit-cancel"
   | "company"
@@ -49,7 +50,7 @@ export function Toolbar() {
   const TOOLS: Tool[] = [
     { label: "New App", icon: MdAdd, enabled: !editing, action: "new-app" },
     { label: "New Quote", icon: MdNoteAdd, enabled: !editing, action: "new-quote" },
-    { label: "Sim App", icon: MdContentCopy, enabled: !editing },
+    { label: "Sim App", icon: MdContentCopy, enabled: !editing, action: "sim-app" },
     {
       label: editing ? "Save" : "Edit",
       icon: editing ? MdSave : MdEdit,
@@ -66,6 +67,7 @@ export function Toolbar() {
   const handleClick = (action?: ToolAction) => {
     if (action === "new-app") setNewAppConfirm(true);
     else if (action === "new-quote") setNewQuoteOpen(true);
+    else if (action === "sim-app") setQuoteLookupOpen(true);
     else if (action === "edit-toggle") setEditing(!editing);
     else if (action === "edit-cancel") setEditing(false);
     else if (action === "company") setCompanyOpen(true);

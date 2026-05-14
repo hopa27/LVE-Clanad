@@ -442,7 +442,7 @@ export function CedingSchemeModal({
             >
               <MdInsertDriveFile size={16} /> New
             </button>
-            {mode === "new" ? (
+            {editable ? (
               <button
                 type="button"
                 className="lve-btn lve-btn-secondary lve-btn-sm"
@@ -454,7 +454,6 @@ export function CedingSchemeModal({
               <button
                 type="button"
                 className="lve-btn lve-btn-secondary lve-btn-sm"
-                disabled={editable}
                 onClick={handleEdit}
               >
                 <MdEdit size={16} /> Edit
@@ -471,6 +470,7 @@ export function CedingSchemeModal({
             <button
               type="button"
               className="lve-btn lve-btn-sm"
+              disabled={editable}
               onClick={handleClose}
             >
               <MdCheck size={16} /> Ok

@@ -11,10 +11,11 @@ import {
 
 const TRANSFER_TYPES = [
   "",
-  "Transfer In",
-  "Transfer Out",
-  "Internal Transfer",
-  "Pension Sharing Order",
+  "UK Registered Defined Benefit Occupational Pension Scheme",
+  "UK Registered Defined Contribution Occupational Pension Scheme",
+  'Other UK Registered Pension Scheme (eg. "Personal Pension" or "SIPP")',
+  "Deferred Annuity Contract (Section 32)",
+  "Other - Please Specify",
 ];
 
 type ChequeRow = {

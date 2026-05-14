@@ -33,7 +33,7 @@ export function ApplicationDetailsTab() {
           <Field label="IFA Payment Date:"><DatePicker value="30/05/2025" placeholder="IFA Payment Date" /></Field>
           <Field label="PostADay:"><Checkbox checked={true} /></Field>
           <Field label="Transfer from Beneficiary Drawdown?:">
-            <SelectInput value="Unknown" options={["Unknown", "Yes", "No"]} />
+            <SelectInput value="Unknown" options={["Yes", "No", "Unknown"]} />
           </Field>
         </div>
         <div>

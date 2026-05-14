@@ -33,7 +33,13 @@ export function MaturitiesSurrenderTab() {
           <Field label="Payment Method:"><SelectInput value="" options={["", "B", "C", "T"]} /></Field>
           <Field label="Payment Date:"><TextInput value="/  /" /></Field>
           <Field label="Gross:"><TextInput value="" /></Field>
-          <button type="button" className="btn mt-2" disabled>Create payment…</button>
+          <button
+            type="button"
+            className="lve-btn lve-btn-sm mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled
+          >
+            Create payment…
+          </button>
         </Section>
       </div>
 

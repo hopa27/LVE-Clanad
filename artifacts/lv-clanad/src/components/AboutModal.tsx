@@ -136,7 +136,7 @@ export function AboutModal({
                 <div>Memory available to Windows: 2,097,152 KB</div>
               </div>
 
-              <div className="flex justify-end items-center gap-3 mt-6">
+              <div className="flex justify-end items-center gap-3 mt-auto pt-6">
                 <button
                   type="button"
                   onClick={handleCopy}

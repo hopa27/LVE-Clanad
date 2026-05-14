@@ -1,4 +1,4 @@
-import { Field, SelectInput, TextInput, Checkbox, Section } from "../components/Field";
+import { SelectInput, TextInput, Checkbox, Section } from "../components/Field";
 import { MdSend } from "react-icons/md";
 import { useEditMode } from "../context/EditModeContext";
 
@@ -43,15 +43,26 @@ export function LettersTab() {
 
       <div className="space-y-4">
         <Section title="Distribution Info">
-          <Field label="Print:" inline>
-            <Checkbox />
-          </Field>
-          <Field label="Fax:" inline>
-            <TextInput placeholder="Fax number" />
-          </Field>
-          <Field label="Email:" inline>
-            <TextInput placeholder="recipient@example.com" />
-          </Field>
+          <div className="space-y-3">
+            <div className="flex items-center gap-3">
+              <label className="lve-label !mb-0 text-right shrink-0 w-[70px]">Print:</label>
+              <div className="flex-1 min-w-0">
+                <Checkbox />
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <label className="lve-label !mb-0 text-right shrink-0 w-[70px]">Fax:</label>
+              <div className="flex-1 min-w-0">
+                <TextInput placeholder="Fax number" />
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <label className="lve-label !mb-0 text-right shrink-0 w-[70px]">Email:</label>
+              <div className="flex-1 min-w-0">
+                <TextInput placeholder="recipient@example.com" />
+              </div>
+            </div>
+          </div>
 
           <div className="mt-4 pt-3 border-t border-[#d8d8d8]">
             <div className="font-['Livvic'] text-[13px] font-semibold text-[#00263e] mb-2">

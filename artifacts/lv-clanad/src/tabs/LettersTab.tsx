@@ -52,14 +52,17 @@ export function LettersTab() {
           <Field label="Email:" inline>
             <TextInput placeholder="recipient@example.com" />
           </Field>
-        </Section>
 
-        <Section title="Send To">
-          <div className="grid grid-cols-2 gap-y-2">
-            <Checkbox label="Client" />
-            <Checkbox label="IFA" />
-            <Checkbox label="Ceding Scheme" />
-            <Checkbox label="Other" />
+          <div className="mt-4 pt-3 border-t border-[#d8d8d8]">
+            <div className="font-['Livvic'] text-[13px] font-semibold text-[#00263e] mb-2">
+              Send To
+            </div>
+            <div className="grid grid-cols-2 gap-y-2">
+              <Checkbox label="Client" />
+              <Checkbox label="IFA" />
+              <Checkbox label="Ceding Scheme" />
+              <Checkbox label="Other" />
+            </div>
           </div>
         </Section>
 

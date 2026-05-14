@@ -355,6 +355,7 @@ export function CedingSchemeModal({
   const [transferOpen, setTransferOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState<number>(0);
   const [confirmNewOpen, setConfirmNewOpen] = useState(false);
+  const [confirmEditOpen, setConfirmEditOpen] = useState(false);
 
   if (!open) return null;
 
@@ -374,7 +375,30 @@ export function CedingSchemeModal({
   };
 
   const handleEdit = () => {
+    setConfirmEditOpen(true);
+  };
+
+  const confirmEdit = () => {
+    const row = CHEQUES[selectedRow];
+    if (row) {
+      setForm((f) => ({
+        ...f,
+        schemeName: row.scheme,
+        cedingRef: row.schemeRef,
+        amount: row.amount.toLocaleString("en-GB"),
+        address1: row.address1,
+        address2: row.address2,
+        address3: row.address3,
+        postCode: row.postcode,
+        telephone: row.telephone,
+        letterStatus:
+          row.letterStatus === "Active" || row.letterStatus === "Suspended"
+            ? row.letterStatus
+            : f.letterStatus,
+      }));
+    }
     setMode("edit");
+    setConfirmEditOpen(false);
   };
 
   const handleCancel = () => {
@@ -678,6 +702,36 @@ export function CedingSchemeModal({
                 >
                   <MdClose size={16} />
                   No
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {confirmEditOpen && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40">
+          <div className="lve-panel w-[400px] bg-white">
+            <header className="lve-panel-header">Confirm</header>
+            <div className="lve-panel-body">
+              <div className="flex items-start gap-3">
+                <MdHelpOutline size={32} className="text-[#006cf4] shrink-0" />
+                <p className="font-['Mulish'] text-[14px] text-[#3d3d3d] pt-1">
+                  Have you selected the correct scheme?
+                </p>
+              </div>
+              <div className="mt-5 flex items-center justify-center gap-3">
+                <button type="button" className="lve-btn" onClick={confirmEdit}>
+                  <MdCheck size={16} />
+                  <span><u>Y</u>es</span>
+                </button>
+                <button
+                  type="button"
+                  className="lve-btn lve-btn-secondary"
+                  onClick={() => setConfirmEditOpen(false)}
+                >
+                  <MdClose size={16} />
+                  <span><u>N</u>o</span>
                 </button>
               </div>
             </div>

@@ -10,6 +10,23 @@ export function AboutModal({
   onClose: () => void;
 }) {
   const [emailOpen, setEmailOpen] = useState(false);
+  const [subject, setSubject] = useState("");
+  const [emailError, setEmailError] = useState(false);
+
+  const openEmail = () => {
+    setSubject("");
+    setEmailError(false);
+    setEmailOpen(true);
+  };
+
+  const handleEmailOk = () => {
+    if (subject.trim() === "") {
+      setEmailError(true);
+      return;
+    }
+    window.location.href = `mailto:IT@lv.com?subject=${encodeURIComponent(subject)}`;
+    setEmailOpen(false);
+  };
 
   if (!open) return null;
 
@@ -108,7 +125,7 @@ export function AboutModal({
                 </button>
                 <button
                   type="button"
-                  onClick={() => setEmailOpen(true)}
+                  onClick={openEmail}
                   className="lve-btn lve-btn-secondary lve-btn-sm min-w-[80px] justify-center"
                 >
                   email
@@ -146,7 +163,9 @@ export function AboutModal({
                 <label className="lve-label">Subject:</label>
                 <input
                   type="text"
-                  defaultValue="Press cancel to abort."
+                  value={subject}
+                  onChange={(e) => setSubject(e.target.value)}
+                  placeholder="Press cancel to abort."
                   autoFocus
                   className="lve-input"
                 />
@@ -154,7 +173,7 @@ export function AboutModal({
               <div className="flex justify-center items-center gap-3 pt-1">
                 <button
                   type="button"
-                  onClick={() => setEmailOpen(false)}
+                  onClick={handleEmailOk}
                   className="lve-btn lve-btn-sm min-w-[90px] justify-center"
                 >
                   OK
@@ -165,6 +184,40 @@ export function AboutModal({
                   className="lve-btn lve-btn-secondary lve-btn-sm min-w-[90px] justify-center"
                 >
                   Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {emailError && (
+        <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/40 p-6">
+          <div className="lve-panel bg-white w-[460px] max-w-full">
+            <header className="lve-panel-header flex items-center justify-between">
+              <span>Information</span>
+              <button
+                type="button"
+                className="inline-flex items-center justify-center w-7 h-7 rounded-[4px] text-[#00263e] hover:bg-[#d72714] hover:text-white transition-colors"
+                onClick={() => setEmailError(false)}
+                title="Close"
+                aria-label="Close"
+              >
+                <MdClose size={18} />
+              </button>
+            </header>
+            <div className="lve-panel-body flex flex-col gap-5">
+              <div className="font-['Mulish'] text-[14px] text-[#3d3d3d] space-y-2">
+                <p>Sorry, your email could not be sent due to the following error:</p>
+                <p>You did not type a subject.</p>
+              </div>
+              <div className="flex justify-center">
+                <button
+                  type="button"
+                  onClick={() => setEmailError(false)}
+                  className="lve-btn lve-btn-sm min-w-[100px] justify-center"
+                >
+                  OK
                 </button>
               </div>
             </div>

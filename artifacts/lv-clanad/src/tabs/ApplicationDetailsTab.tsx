@@ -8,7 +8,7 @@ export function ApplicationDetailsTab() {
       <div className="panel panel-body grid grid-cols-1 lg:grid-cols-3 gap-x-6">
         <div>
           <Field label="Set Up Date:"><TextInput value="13/03/2025" disabled /></Field>
-          <Field label="Received Date:"><TextInput value="11/03/2025" disabled /></Field>
+          <Field label="Received Date:"><TextInput value="11/03/2025" /></Field>
           <Field label="Start Date:"><TextInput value="25/04/2025" disabled /></Field>
           <Field label="Days Since Application:"><TextInput value="385" disabled /></Field>
         </div>

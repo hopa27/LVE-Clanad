@@ -69,7 +69,15 @@ const MENU_ITEMS: MenuItem[] = [
       },
       { label: "Amend Cheques" },
       { label: "Approve Bank Changes", disabled: true },
-      { label: "Approve Maturity Bank Detail Changes", disabled: true },
+      {
+        label: "Approve Maturity Bank Detail Changes",
+        hasSubmenu: true,
+        submenu: [
+          { label: "Bank Changes Awaiting Approval" },
+          { label: "Approve Bank Changes", disabled: true },
+          { label: "Approve Maturity Bank Changes", disabled: true },
+        ],
+      },
       { kind: "separator" },
       { label: "Set Live" },
       { label: "Force Set Live" },

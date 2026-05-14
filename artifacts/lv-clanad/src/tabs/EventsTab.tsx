@@ -27,6 +27,12 @@ const fmt = (d: Date | undefined) => {
   return `${dd}/${mm}/${d.getFullYear()}`;
 };
 
+const parseDate = (s: string): Date | undefined => {
+  const m = /^(\d{2})\/(\d{2})\/(\d{4})$/.exec(s);
+  if (!m) return undefined;
+  return new Date(Number(m[3]), Number(m[2]) - 1, Number(m[1]));
+};
+
 type FormState = {
   type: string;
   date: Date | undefined;
@@ -47,27 +53,54 @@ const SAMPLE_ROWS: EventRow[] = [
 
 export function EventsTab() {
   const [rows, setRows] = useState<EventRow[]>(SAMPLE_ROWS);
+  const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
   const [newEventOpen, setNewEventOpen] = useState(false);
+  const [editingIdx, setEditingIdx] = useState<number | null>(null);
   const [form, setForm] = useState<FormState>(emptyForm);
 
-  const openModal = () => {
+  const openNew = () => {
+    setEditingIdx(null);
     setForm(emptyForm);
     setNewEventOpen(true);
   };
 
+  const openEdit = () => {
+    if (selectedIdx === null) return;
+    const r = rows[selectedIdx];
+    setEditingIdx(selectedIdx);
+    setForm({
+      type: r.type,
+      date: parseDate(r.date),
+      no: r.no,
+      gross: r.gross,
+      tax: r.tax,
+    });
+    setNewEventOpen(true);
+  };
+
+  const handleDelete = () => {
+    if (selectedIdx === null) return;
+    setRows((prev) => prev.filter((_, i) => i !== selectedIdx));
+    setSelectedIdx(null);
+  };
+
   const handleOk = () => {
-    setRows((prev) => [
-      ...prev,
-      {
-        date: fmt(form.date),
-        no: form.no,
-        gross: form.gross,
-        tax: form.tax,
-        type: form.type,
-      },
-    ]);
+    const next: EventRow = {
+      date: fmt(form.date),
+      no: form.no,
+      gross: form.gross,
+      tax: form.tax,
+      type: form.type,
+    };
+    if (editingIdx !== null) {
+      setRows((prev) => prev.map((r, i) => (i === editingIdx ? next : r)));
+    } else {
+      setRows((prev) => [...prev, next]);
+    }
     setNewEventOpen(false);
   };
+
+  const hasSelection = selectedIdx !== null;
 
   return (
     <Section title="Event Details">
@@ -93,15 +126,25 @@ export function EventsTab() {
                 </td>
               </tr>
             ) : (
-              rows.map((r, i) => (
-                <tr key={i}>
-                  <td className="!px-4">{r.date}</td>
-                  <td className="!px-4">{r.no}</td>
-                  <td className="!px-4">{r.gross}</td>
-                  <td className="!px-4">{r.tax}</td>
-                  <td className="!px-4">{r.type}</td>
-                </tr>
-              ))
+              rows.map((r, i) => {
+                const isSel = selectedIdx === i;
+                const tdStyle = isSel
+                  ? { backgroundColor: "#05579B", color: "#ffffff" }
+                  : undefined;
+                return (
+                  <tr
+                    key={i}
+                    onClick={() => setSelectedIdx(i)}
+                    className="cursor-pointer"
+                  >
+                    <td className="!px-4" style={tdStyle}>{r.date}</td>
+                    <td className="!px-4" style={tdStyle}>{r.no}</td>
+                    <td className="!px-4" style={tdStyle}>{r.gross}</td>
+                    <td className="!px-4" style={tdStyle}>{r.tax}</td>
+                    <td className="!px-4" style={tdStyle}>{r.type}</td>
+                  </tr>
+                );
+              })
             )}
           </tbody>
         </table>
@@ -111,21 +154,23 @@ export function EventsTab() {
         <button
           type="button"
           className="lve-btn lve-btn-secondary lve-btn-sm"
-          onClick={openModal}
+          onClick={openNew}
         >
           <MdAdd size={16} /> New Event
         </button>
         <button
           type="button"
-          className="lve-btn lve-btn-secondary lve-btn-sm"
-          disabled
+          className="lve-btn lve-btn-secondary lve-btn-sm disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled={!hasSelection}
+          onClick={openEdit}
         >
           <MdEdit size={16} /> Edit Event
         </button>
         <button
           type="button"
-          className="lve-btn lve-btn-secondary lve-btn-sm"
-          disabled
+          className="lve-btn lve-btn-secondary lve-btn-sm disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled={!hasSelection}
+          onClick={handleDelete}
         >
           <MdDelete size={16} /> Delete Event
         </button>
@@ -135,7 +180,7 @@ export function EventsTab() {
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
           <div className="lve-panel bg-white w-[520px] max-w-full">
             <header className="lve-panel-header flex items-center justify-between">
-              <span>New Event</span>
+              <span>{editingIdx !== null ? "Edit Event" : "New Event"}</span>
               <button
                 type="button"
                 className="inline-flex items-center justify-center w-7 h-7 rounded-[4px] text-[#00263e] hover:bg-[#d72714] hover:text-white transition-colors"

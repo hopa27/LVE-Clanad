@@ -2,7 +2,6 @@ import { useState, useRef, useEffect } from "react";
 import {
   MdClose,
   MdPrint,
-  MdLogout,
   MdSearch,
   MdKeyboardArrowDown,
   MdError,
@@ -218,14 +217,6 @@ export function ReportsModal({
               >
                 <MdPrint size={16} />
                 Print
-              </button>
-              <button
-                type="button"
-                onClick={onClose}
-                className="lve-btn lve-btn-secondary lve-btn-sm"
-                title="Exit"
-              >
-                <MdLogout size={16} />
               </button>
             </div>
           </div>

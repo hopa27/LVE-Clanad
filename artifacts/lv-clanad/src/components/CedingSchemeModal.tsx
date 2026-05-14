@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import {
   MdClose,
   MdInsertDriveFile,
@@ -8,6 +8,91 @@ import {
   MdArrowDropDown,
   MdHelpOutline,
 } from "react-icons/md";
+
+const SCHEME_NAMES = [
+  "@sipp |Pension Trustees| Ltd",
+  "3i Group Pension Plan",
+  "3M Pension and Life Assurance Scheme",
+  "A.G BARR p.l.c (2008) Pension and Life Assurance Scheme",
+  "A1 Hydraulics Executive Pension Scheme - SSAS",
+  "AA",
+  "ABB Pension Scheme",
+  "Abbey Life",
+  "Abbey National",
+  "Abbott Laboratories Pension Fund",
+  "ABE",
+  "Aberdeen County Council",
+  "Aberdeen Elevate",
+  "ABF Pension Scheme",
+  "ABN AMRO PENSION",
+  "ABRDN",
+  "AC Management & Administration Limited",
+  "Accenture",
+  "Accenture Pension Plan",
+  "Accenture Retirement Savings Plan",
+  "accolade wines",
+  "Ace Ina UK Capita",
+  "Acer",
+  "ACS HR Solutions UK Ltd",
+  "Action For Children Pension Fund",
+  "Admenta Pension Scheme",
+  "Advance Tapes Group",
+  "AE THOMPSON LTD",
+  "Aegon",
+  "Aegon .",
+  "Aegon Cofunds Administration",
+  "Aegon Digital Solutions",
+  "Aegon One Retirement",
+  "Aegon Packaged",
+  "Aegon Platform",
+  "Aegon platform (Aegon Retirement Choices Ritiready and one Retiremen",
+  "AEGON RETAIL (AEGON SIPP Only)",
+  "Aegon Scottish Equitable",
+  "Aegon Targetplan",
+  "Aegon UK Staff Retirement Scheme",
+  "AGA Foodservices",
+  "AGA Rangemaster",
+  "Age Concern",
+  "Age Uk Retirement Benefits Scheme",
+  "Aggregate Industries",
+  "Agilent Technologies UK Ltd",
+  "Ahli United Bank",
+  "AIB Group UK Pension Scheme",
+  "AIG Life",
+  "AIG Pensions",
+  "Air Products",
+  "Aitkin & Co",
+  "AJ Bell Invest Centre",
+  "Aker Solutions DC Pension Scheme",
+  "Akzo Nobel",
+  "ALBA Life Ltd",
+  "Alcan Adminco Inc",
+  "Alcan Packaging Pension Plan",
+  "Alcatel Lucent Pension Scheme",
+  "Alcatel - Lucent",
+  "Alcatel Telecom Limited",
+  "Alcatel-Lucent Pension Scheme",
+  "Alcatel-Lucent Pension Scheme (Nokia)",
+  "Alderley Park",
+  "ALECTA",
+  "Alexander Forbes Financial Services Ltd",
+  "Alico",
+  "Alico Isle of Man Ltd",
+  "Allegion UK Pension Plan",
+  "Alliance & Leicester",
+  "Alliance Healthcare & Boots Pensions",
+  "Alliance Trust",
+  "Alliance Trust Pensions Ltd",
+  "Alliance Trust Savings Ltd",
+  "Alliance Trust Savings.",
+  "Allianz Retirement",
+  "Allianz Retirement & Death Benefit Fund",
+  "Allied  Domecq Pension Fund",
+  "Allied Domecq",
+  "Allied Domecq Pensions",
+  "ALLIED DUNBAR",
+  "Allied Dunbar/Zurich",
+];
 
 const TRANSFER_TYPES = [
   "",
@@ -94,6 +179,85 @@ function ToolBtn({
       <span className="mb-0.5">{icon}</span>
       {label}
     </button>
+  );
+}
+
+function SchemeCombobox({
+  value,
+  onChange,
+  enabled,
+  options,
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  enabled: boolean;
+  options: string[];
+}) {
+  const [open, setOpen] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  const filtered = useMemo(() => {
+    const q = value.trim().toLowerCase();
+    if (!q) return options;
+    return options.filter((o) => o.toLowerCase().includes(q));
+  }, [value, options]);
+
+  if (!enabled) {
+    return (
+      <div className="flex h-[44px] w-full items-center rounded-[8px] border-[2px] border-[#ACACAC] bg-[#CCCCCC] px-[11px] py-[7px] font-['Mulish'] text-[15px] text-[#3d3d3d] cursor-not-allowed">
+        {value}
+      </div>
+    );
+  }
+
+  return (
+    <div className="relative w-full">
+      <div className="flex h-[44px] w-full items-center rounded-[8px] border-[2px] border-[#178830] bg-white pl-[11px] pr-1 py-[7px]">
+        <input
+          ref={inputRef}
+          type="text"
+          value={value}
+          onChange={(e) => {
+            onChange(e.target.value);
+            setOpen(true);
+          }}
+          onFocus={() => setOpen(true)}
+          onBlur={() => setTimeout(() => setOpen(false), 150)}
+          className="flex-1 min-w-0 bg-transparent outline-none font-['Mulish'] text-[15px] text-[#3d3d3d]"
+        />
+        <button
+          type="button"
+          onMouseDown={(e) => {
+            e.preventDefault();
+            setOpen((v) => !v);
+            inputRef.current?.focus();
+          }}
+          className="shrink-0 inline-flex items-center justify-center w-7 h-8 text-[#555] hover:text-[#003578]"
+          aria-label="Open list"
+        >
+          <MdArrowDropDown size={20} />
+        </button>
+      </div>
+      {open && filtered.length > 0 && (
+        <ul className="absolute z-20 left-0 right-0 mt-1 max-h-[260px] overflow-auto bg-white border border-[#bcd] rounded-[8px] shadow-md font-['Mulish'] text-[13px]">
+          {filtered.map((o) => (
+            <li
+              key={o}
+              onMouseDown={(e) => {
+                e.preventDefault();
+                onChange(o);
+                setOpen(false);
+              }}
+              className={`px-3 py-1.5 cursor-pointer hover:bg-[#05579B] hover:text-white ${
+                o === value ? "bg-[#eaf5f8]" : ""
+              }`}
+            >
+              {o}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }
 
@@ -275,10 +439,11 @@ export function CedingSchemeModal({
 
             {/* Row 2 */}
             <Label>Scheme Name</Label>
-            <FormField
+            <SchemeCombobox
               value={form.schemeName}
               onChange={(v) => upd("schemeName", v)}
               enabled={editable}
+              options={SCHEME_NAMES}
             />
             <Label>Address 1</Label>
             <FormField

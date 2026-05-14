@@ -112,13 +112,13 @@ export function CrsModal({
   const [editing, setEditing] = useState(false);
   const [info, setInfo] = useState<{ title: string; message: string } | null>(null);
 
-  if (!open) return null;
-
   const rec = REQS[index]!;
   const total = useMemo(
     () => rec.items.reduce((sum, it) => sum + it.itemValue, 0),
     [rec],
   );
+
+  if (!open) return null;
 
   const isDrawn = rec.requisitionNo === "181947";
   const isProcessed = rec.acctsOnly === "Yes";

@@ -427,25 +427,32 @@ export function CedingSchemeModal({
                 </tr>
               </thead>
               <tbody>
-                {CHEQUES.map((c, i) => (
-                  <tr
-                    key={i}
-                    onClick={() => setSelectedRow(i)}
-                    className="cursor-pointer"
-                    style={
-                      selectedRow === i
-                        ? { background: "#05579B", color: "#ffffff" }
-                        : undefined
-                    }
-                  >
-                    <td className="!px-4 text-right">{c.chequeNo}</td>
-                    <td className="!px-4 text-right">
-                      {c.amount.toLocaleString("en-GB")}
-                    </td>
-                    <td className="!px-4">{c.scheme}</td>
-                    <td className="!px-4">{c.schemeRef}</td>
-                  </tr>
-                ))}
+                {CHEQUES.map((c, i) => {
+                  const sel = selectedRow === i;
+                  const tdStyle = sel
+                    ? { background: "#05579B", color: "#ffffff" }
+                    : undefined;
+                  return (
+                    <tr
+                      key={i}
+                      onClick={() => setSelectedRow(i)}
+                      className="cursor-pointer"
+                    >
+                      <td className="!px-4 text-right" style={tdStyle}>
+                        {c.chequeNo}
+                      </td>
+                      <td className="!px-4 text-right" style={tdStyle}>
+                        {c.amount.toLocaleString("en-GB")}
+                      </td>
+                      <td className="!px-4" style={tdStyle}>
+                        {c.scheme}
+                      </td>
+                      <td className="!px-4" style={tdStyle}>
+                        {c.schemeRef}
+                      </td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>

@@ -26,12 +26,12 @@ export function MaturitiesSurrenderTab() {
         </Section>
 
         <Section title="Payment">
-          <Field label="Claim Form Received:"><TextInput value="/  /" /></Field>
+          <Field label="Claim Form Received:"><DatePicker placeholder="" /></Field>
           <Field label="Nature of Payment:">
             <SelectInput value="" options={["", "Lump Sum", "Annuity"]} />
           </Field>
           <Field label="Payment Method:"><SelectInput value="" options={["", "B", "C", "T"]} /></Field>
-          <Field label="Payment Date:"><TextInput value="/  /" /></Field>
+          <Field label="Payment Date:"><DatePicker placeholder="" /></Field>
           <Field label="Gross:"><TextInput value="" /></Field>
           <button
             type="button"

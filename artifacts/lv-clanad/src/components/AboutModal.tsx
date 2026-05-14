@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { MdClose } from "react-icons/md";
 import lvLogo from "../assets/lv-logo.png";
+import coinsBg from "@assets/image_1778782056161.png";
 
 export function AboutModal({
   open,
@@ -69,12 +70,17 @@ export function AboutModal({
         <div className="lve-panel-body">
           <div className="grid grid-cols-[220px_1fr] gap-6">
             {/* Left: Clanad branding panel */}
-            <div className="bg-[#e8e8e8] border border-[#BBBBBB] rounded-[4px] flex flex-col items-center justify-between py-5 px-3 min-h-[320px]">
-              <div className="font-['Livvic'] text-[#178830] italic text-[14px] text-center font-semibold leading-tight">
+            <div className="relative overflow-hidden border border-[#BBBBBB] rounded-[8px] flex flex-col items-center justify-between py-5 px-3 min-h-[320px] bg-gradient-to-b from-[#e8f3ee] to-[#cfe6da]">
+              <div
+                aria-hidden
+                className="absolute inset-0 bg-center bg-cover pointer-events-none"
+                style={{ backgroundImage: `url(${coinsBg})`, opacity: 0.2 }}
+              />
+              <div className="relative font-['Livvic'] text-[#178830] italic text-[14px] text-center font-semibold leading-tight drop-shadow-sm">
                 Annuity Administration System
               </div>
               <div
-                className="font-['Livvic'] text-[#178830] font-bold tracking-wider"
+                className="relative font-['Livvic'] text-[#178830] font-bold tracking-wider drop-shadow-sm"
                 style={{
                   writingMode: "vertical-rl",
                   transform: "rotate(180deg)",
@@ -84,7 +90,7 @@ export function AboutModal({
               >
                 Clanad
               </div>
-              <img src={lvLogo} alt="LV=" className="h-10 mt-3" />
+              <img src={lvLogo} alt="LV=" className="relative h-10 mt-3" />
             </div>
 
             {/* Right: details */}

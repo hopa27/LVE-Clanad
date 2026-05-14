@@ -24,7 +24,7 @@ export function BankAccDetailsTab() {
             <Field inline label="Bank sort code:"><TextInput value="30-15-52" /></Field>
             <Field inline label="Bank account no:"><TextInput value="01841281" /></Field>
             <Field inline label="Bank account name:"><TextInput value="Mrs Linda Turner" /></Field>
-            <Field inline label="Bank name:"><TextInput value="LLOYDS BANK PLC, WIRRAL" /></Field>
+            <Field inline label="Bank name:"><TextInput value="LLOYDS BANK PLC, WIRRAL" disabled /></Field>
           </div>
           <div>
             <Field inline label="Payment Ref:"><TextInput value="225810" /></Field>

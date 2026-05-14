@@ -1,4 +1,5 @@
 import { Field, TextInput, SelectInput, Section } from "../components/Field";
+import { DatePicker } from "../components/DatePicker";
 
 export function LoaPoaTab() {
   return (
@@ -16,7 +17,7 @@ export function LoaPoaTab() {
         </div>
         <div>
           <Field label="Postal Code:"><TextInput value="" /></Field>
-          <Field label="Date Appointed:"><TextInput value="/  /" /></Field>
+          <Field label="Date Appointed:"><DatePicker placeholder="/  /" /></Field>
           <Field label="Telephone:"><TextInput value="" /></Field>
         </div>
       </div>

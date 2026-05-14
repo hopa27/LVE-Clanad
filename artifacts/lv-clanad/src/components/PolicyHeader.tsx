@@ -34,7 +34,7 @@ export function PolicyHeader() {
         <MdOpenInNew size={16} />
       </button>
 
-      <div className="px-4 h-9 inline-flex items-center rounded-[30px] bg-[#00263e] text-white font-['Livvic'] font-semibold text-sm">
+      <div className="px-4 h-9 inline-flex items-center rounded-[8px] bg-[#00263e] text-white font-['Livvic'] font-semibold text-sm">
         Liverpool Victoria Friendly Society Limited
       </div>
 
@@ -49,7 +49,7 @@ export function PolicyHeader() {
         87
       </div>
 
-      <div className="px-4 h-9 inline-flex items-center rounded-[30px] bg-[#178830] text-white font-['Livvic'] font-semibold text-sm">
+      <div className="px-4 h-9 inline-flex items-center rounded-[8px] bg-[#178830] text-white font-['Livvic'] font-semibold text-sm">
         Turner
       </div>
 
@@ -69,7 +69,7 @@ export function PolicyHeader() {
         <MdMoreHoriz size={18} />
       </button>
 
-      <div className="ml-auto px-4 h-9 inline-flex items-center rounded-[30px] bg-[#7fdfdf] text-[#00263e] font-['Livvic'] font-semibold text-sm">
+      <div className="ml-auto px-4 h-9 inline-flex items-center rounded-[8px] bg-[#7fdfdf] text-[#00263e] font-['Livvic'] font-semibold text-sm">
         RETIREMENT ACCOUNT
       </div>
 

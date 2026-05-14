@@ -1,0 +1,313 @@
+Cheque Requisition System — Complete Application Prompt
+Build a Cheque Requisition System for Liverpool Victoria (LV=). This is a React + Express + PostgreSQL application using Vite, TypeScript, Tailwind CSS v4, Shadcn/UI (Radix primitives), and Wouter routing. The primary route / is the main requisition viewer/editor. The application is a frontend-driven prototype with mock data — no backend persistence is used at runtime.
+
+DESIGN SYSTEM
+Fonts
+Livvic (weight 600): Used for headings, page titles, dialog titles, tab triggers, grid column headers, link text, and button text.
+Mulish (weights 300–700): Used for body text, labels, form inputs, grid cell text, navigation counter, and dialog message content.
+Both loaded via Google Fonts in index.html.
+Color Palette
+Token	Hex	Usage
+Dark navy	#00263e	Header background
+Heading blue	#0d2c41	Section headings ("Requisition Details", panel titles)
+Primary blue	#005a9c	Dialog title text
+Action blue	#006cf4	Brand buttons bg, chevron icons, radio buttons
+Dark action blue	#003578	Brand button hover, grid row hover/selected bg
+Toolbar border blue	#04589b	Grid header top/bottom 3px borders, secondary button border/text
+Body text	#3d3d3d	All body text, input text
+Label text	#4a4a49	Form labels, toolbar counter, footer text
+Border gray	#BBBBBB	Default input borders, close button borders
+Disabled bg	#CCCCCC	Disabled input background
+Disabled border	#ACACAC	Disabled input border
+Green focus	#178830	Input focus border, combobox open border
+Error red	#d72714	Error state borders and text
+Teal scrollbar	#62bda8	ScrollArea thumb color
+Page bg	#F7F7F7	Content area background
+Disabled button bg	#979797	Disabled buttons and visually-disabled Edit button
+Tab inactive bg	#eaf5f8	Custom tab inactive state
+Grid row alt bg	#e7ebec34	Odd row zebra striping (transparent)
+Component Design Tokens
+Input (base): h-[44px], rounded-[8px], border border-[#BBBBBB], bg-white, px-[12px] py-[8px], font-['Mulish'] text-[16px] leading-[26px] text-[#3d3d3d].
+
+Hover (not disabled, no error): border-[#178830]
+Focus: border-[2px] border-[#178830], padding adjusts to px-[11px] py-[7px]
+Disabled: bg-[#CCCCCC] border-[#ACACAC] border-[2px] px-[11px] py-[7px] cursor-not-allowed text-[#3d3d3d] opacity-100
+Error: border-[#d72714] text-[#d72714] placeholder:text-[#d72714]
+Supports prefix and suffix ReactNode props (absolutely positioned inside)
+PrimaryInput: Same as Input but without prefix/suffix wrapper div — a plain <input> element. Placeholder color: text-[#BBBBBB].
+
+Button variants (using cva):
+
+Base: rounded-full, font-['Livvic'] font-medium, h-[44px], disabled state: bg-[#979797] text-white border-[#979797]
+brand: bg-[#006EF3] text-white hover:bg-[#003578] px-6
+secondary: bg-white text-[#04589b] border border-[#04589b] font-bold hover:bg-[#003578] hover:border-[#003578] hover:text-white
+Sizes: default h-[44px] px-4 py-2, sm min-h-8 px-3 text-xs, icon h-9 w-9
+Combobox (searchable dropdown built on cmdk):
+
+Trigger: same dimensions as Input (h-[44px], rounded-[8px])
+Open state: border-[3px] border-[#178830] border-b-0 rounded-b-none, padding adjusts to px-[10px] py-[6px]
+Dropdown: absolute top-[100%] w-full rounded-b-[8px] border-[3px] border-t-0 border-[#178830] bg-white shadow-lg
+Dropdown items: text-[16px] font-['Mulish'], hover/selected: bg-[#003578] text-white
+Chevron: custom SVG, text-[#006cf4], rotates 180° when open
+ScrollArea inside dropdown: h-[200px]
+Disabled state: same as Input disabled
+CounterInput (numeric spinner):
+
+Same base as Input with £ prefix (by default) on left, up/down chevron buttons on right
+Right control area: w-[30px], vertical divider w-[1px] bg-[#BBBBBB] h-[24px]
+Chevrons: text-[#006cf4] hover:text-[#003578] (Lucide ChevronUp/ChevronDown)
+DatePicker: h-[44px], rounded-[8px], shows CalendarTodayOutlined icon in text-[#006cf4], divider h-6 w-[1px] bg-[#BBBBBB] mx-3 between text and icon. Open state: border-[#178830] border-[2px]. Popover: rounded-[12px] border-2 border-[#178830].
+
+ScrollArea: Radix ScrollArea with teal thumb bg-[#62bda8], forceMount on scrollbars, both vertical and horizontal scrollbars.
+
+CustomTabs (Radix Tabs):
+
+Tab list: inline-flex items-end gap-4 bg-transparent
+Tab trigger: min-w-[180px] px-8 py-4 rounded-t-[8px] font-['Livvic'] text-lg font-semibold
+Inactive: bg-[#eaf5f8] text-[#0d2c41]
+Active: bg-white text-[#4a4a49] border border-[#eaf5f8] border-b-0
+Link: font-['Livvic'] font-semibold underline underline-offset-2 text-[#04589b] hover:text-[#4a4a49]
+
+SortIcon: Custom SVG diamond/arrow shape, w-1.5 h-auto fill-current (used in grid column headers).
+
+Close Button (shared across all dialogs): h-8 w-8 rounded-full border border-[#BBBBBB] bg-white hover:border-[#05579B] hover:bg-[#f0f4f8], icon: Lucide X in h-4 w-4 text-[#05579B].
+
+Disabled Field Display (read-only values): flex h-[44px] items-center rounded-[8px] border border-[#ACACAC] border-[2px] bg-[#CCCCCC] px-[11px] py-[7px] font-['Mulish'] text-[16px] leading-[26px] text-[#3d3d3d] shadow-sm cursor-not-allowed.
+
+Grid Header Row: border-y-[3px] border-[#04589b] bg-white text-[18px] font-['Livvic'] font-semibold text-[#002f5c], column header cells have py-[24px] px-3.
+
+Grid Body Rows: font-['Mulish'] font-light text-[16px] text-[#3d3d3d], cells p-[5px] px-3, zebra: odd:bg-[#e7ebec34] even:bg-white, hover: bg-[#003578] text-white, selected: bg-[#003578] text-white.
+
+PAGE LAYOUT
+LVHeader
+Full-width bar: bg-[#00263e] text-white pt-4 pb-6 px-[142px]
+Top row: LV= logo (PNG, h-6) on left, "Logout" button (variant brand, size sm, h-8) on right
+Divider: h-px bg-slate-600/50 w-full mb-6
+Title: <h1> "Cheque Requisition System", text-3xl font-['Livvic'] font-normal text-white
+Logout triggers a QueryDialog with message "Are you sure you want to log out?"
+LVFooter
+bg-white border-t border-slate-200 py-4 px-[142px] mt-auto
+Left: LV= footer logo (separate PNG, h-6)
+Right: text-[10px] text-slate-400 font-medium — "Liverpool Victoria, County Gates, Bournemouth BH1 2NF, UK"
+Main Content Area
+px-[142px] py-[25px] bg-[#F7F7F7]
+Toolbar container: bg-white rounded-[12px] border border-slate-200 mb-4
+Form container: bg-white py-6 px-8 rounded-[12px] border border-slate-200 shadow-sm
+TOOLBAR
+Layout: flex items-center justify-between px-6 py-3
+
+Left: Navigation Controls — flex items-center gap-2:
+
+4 nav buttons (First, Prev, Next, Last): variant="secondary" size="icon", h-[44px] w-[44px] rounded-[30px] shadow-sm
+Icons: MdFirstPage, MdNavigateBefore, MdNavigateNext, MdLastPage (from react-icons/md), h-5 w-5
+First/Prev disabled when currentIndex <= 1; Next/Last disabled when currentIndex >= totalRecords
+Counter between Prev and Next: text-sm font-['Mulish'] font-bold text-[#4a4a49] px-2 min-w-[80px] text-center select-none — displays "{currentIndex} of {totalRecords}"
+Right: Action Buttons — flex gap-3:
+
+New: secondary, FilePlus icon, label "New", rounded-[30px]
+Edit/Save: toggles between variant="secondary" (Edit, MdOutlineEdit) and variant="brand" (Save, MdOutlineSave). When editVisuallyDisabled, forced to !bg-[#979797] !text-white !border-[#979797] cursor-not-allowed
+Find: secondary, MdOutlineSearch, label "Find"
+Accts: secondary, MdOutlineCalculate, label "Accts"
+Print: secondary, MdOutlinePrint, label "Print"
+Codes: secondary, MdOutlineLocalOffer, label "Codes"
+All action buttons: gap-2 rounded-[30px], icon h-4 w-4, text font-bold text-sm.
+
+Disable Rules:
+
+editVisuallyDisabled: when acctsOnly === 'Yes' OR requisitionNo === '181947'
+disableAccts: same condition
+disablePrint: when acctsOnly === 'Yes'
+disableCodes: same as editVisuallyDisabled
+REQUISITION DETAILS FORM (View Mode)
+Section Header
+py-6 pr-6 pl-10 rounded-t-lg -mx-8 -mt-6 mb-8 flex justify-between items-center
+Left: <h2> "Requisition Details" — font-['Livvic'] font-semibold text-[22px] text-[#0d2c41]
+Right (view mode): "Find Req" search input (PrimaryInput, w-80, placeholder="Find Req", search icon as suffix)
+Typing filters and shows a dropdown: border-2 border-[#178830] rounded-[12px] shadow-lg mt-1 max-h-60, items show requisitionNo (bold text-[#005a9c]) and payableTo (text-[#4a4a49]), hover bg-[#eef4f8]
+Right (edit mode): OK button (variant="brand", Check icon) + Cancel button (variant="secondary", Cross icon)
+Form Fields (2-column layout, gap-10 between column pairs)
+All labels: w-32 text-right font-['Mulish'] font-bold text-[#4a4a49] text-[16px]
+All read-only fields: disabled field display style, w-[18.125rem]
+Labels and inputs paired with gap-5.
+
+Row 1: Requisition No (always disabled) | Status Badge
+
+Badge logic: requisitionNo === '181947' → "Drawn" (green), acctsOnly === 'Yes' → "Processed" (blue), else → "Draft" (slate)
+Badge: px-3 py-1 rounded text-xs font-bold uppercase tracking-wider border
+Row 2: Req'd on (disabled) | Requested By (disabled)
+
+When requisitionNo === '181947': both show ***
+Row 3: Accts Only (disabled) | Approved By (disabled)
+
+When requisitionNo === '181947': Accts Only shows "No", Approved By shows ***
+When acctsOnly === 'Yes': both show ***, Approved By gets opacity-50
+Row 4: Policy No | Account No
+
+Editable in edit mode (PrimaryInput), disabled display in view mode
+When acctsOnly === 'Yes': Policy No shows *** with opacity-50
+Row 5: Payable To — full width w-[48rem]
+
+When acctsOnly === 'Yes': shows *** with opacity-50
+Row 6: Details — full width w-[48rem]
+
+When acctsOnly === 'Yes': shows *** with opacity-50
+Line Items Grid (hidden when acctsOnly === 'Yes')
+Container: max-w-[57.25rem]
+In edit mode: "Click here to add line" link above grid (Link component with Plus icon)
+Header columns: Ref No (w-[10%]), Cost Centre (w-[35%]), Expense Code (w-[35%]), Item Value (£) (w-[20%])
+Header text: uppercase, py-[24px]
+In edit mode: Cost Centre and Expense Code cells show Input + ... lookup button (h-[44px] w-[44px]), Item Value shows CounterInput, plus remove (X) button
+Minimum 3 rows shown (empty filler rows: h-[54px])
+Value display: £{value.toFixed(2)}
+Total Amount Footer
+flex justify-end items-center gap-4, label "Total Amount"
+Value in disabled field: min-w-[140px] font-bold justify-end
+MOCK DATA (11 records)
+interface RequisitionItem {
+  id: string; refNo: number; costCentre: string; expenseCode: string; itemValue: number;
+}
+interface Requisition {
+  id: string; requisitionNo: string; date: string; requestedBy: string;
+  approvedBy: string; acctsOnly: string; policyNo: string; accountNo: string;
+  payableTo: string; details: string; items: RequisitionItem[];
+}
+
+#	id	requisitionNo	date	requestedBy	approvedBy	acctsOnly	policyNo	accountNo	payableTo	details	items
+1	"1"	181947	""	LOPCXS	""	No	117147	62	Dr Moncrieff	Medical Fees Invoice	[{id:"101",refNo:1,costCentre:"MED",expenseCode:"290",itemValue:89.00}]
+2	"2"	181948	2008-01-09	UATS	Amanda Harman	No	117150	843	Dr A Attard	Med Fee	[{id:"201",refNo:1,costCentre:"MED",expenseCode:"300",itemValue:90.00}]
+3	"3"	181949	2008-01-09	WQU	Amanda Harman	No	117150	843	Dr Waters & Partners	Med Fee	[{...expenseCode:"300",itemValue:79.20}]
+4	"4"	181950	2008-01-09	LOPCXS	Amanda Harman	No	117150	843	Dr K Bhatt & Tanna	Med Fee	[{...itemValue:35.00}]
+5	"5"	181951	2008-01-09	UATS	Amanda Harman	Yes	117150	843	Dr J Southgate	Med Fee	[{...itemValue:79.20}]
+6	"6"	181952	2008-01-09	WQU	Amanda Harman	No	117150	843	Dr Jefferies	Med Fee	[{...itemValue:79.20}]
+7	"7"	181953	2008-01-09	LOPCXS	Amanda Harman	No	117150	843	Dr H Owen	Med Fee	[{...itemValue:40.00}]
+8	"8"	181954	2008-01-09	UATS	Amanda Harman	No	117150	843	Dr Crimmins & Partners	Med Fee	[{...itemValue:34.85}]
+9	"9"	181955	2008-01-09	WQU	Amanda Harman	No	117150	843	Denton Turret Medical Centre	Med Fee	[{...itemValue:99.40}]
+10	"10"	181956	2008-01-09	LOPCXS	Amanda Harman	No	117150	843	Dr R Fry	Med Fee	[{...itemValue:79.20}]
+11	"11"	197828	2025-12-16	UATS	JULIE SHARP	Yes	197810	12345678	Confidential Payee	Confidential Payment	[]
+Special record behaviors:
+
+requisitionNo === '181947': Status "Drawn", date/requestedBy/approvedBy show ***, Accts Only shows "No", cannot be edited (error: "You can not edit this cheque rec as it has already been drawn by accounts")
+acctsOnly === 'Yes' (records 5, 11): Status "Processed", most fields show *** with opacity-50, grid hidden, Edit/Accts/Codes disabled
+requestedBy === 'WQU' (records 3, 6, 9): Print triggers error "Queue Print Error: No User profile exists - please contact IT"
+DIALOGS
+Message Dialogs (shared layout)
+All three use: sm:max-w-[500px] p-[26px] gap-3 bg-white rounded-[12px] border border-slate-200 shadow-xl, default close button hidden [&>button]:hidden.
+
+Title: font-['Livvic'] text-[24px] font-medium text-[#005a9c] tracking-tight
+Message: font-['Mulish'] text-[16px] text-[#3d3d3d] leading-[24px]
+Buttons: left-aligned (flex justify-start), w-[140px]
+InformationDialog: Title "Information", single "OK" button (bg-blue-600 hover:bg-blue-700 text-white)
+ErrorDialog: Title "Error", single "OK" button (same style)
+QueryDialog: Title "Query", "Yes" button (blue) + "No" button (variant="secondary"), gap-4
+
+New Requisition Panel (in Dialog wrapper max-w-4xl h-[80vh])
+Panel title: "New Cheque" — font-['Livvic'] font-semibold text-[18px] text-[#0d2c41]
+Scrollable content with form fields in grid-cols-2 gap-8 layout:
+Row 1: Serial No (disabled, value "197810") | Requested By (disabled, value "UAT5")
+Row 2: Requested Date (disabled, today's date in dd/MM/yyyy) | Authorised By (Combobox: "JULIE SHARP", "DAVID KORN", "BRAD GILHAM", placeholder "Select or type...")
+Row 3: Payable To (full width Input)
+Row 4: Details (full width Combobox with options: "Revaluation Fee", "Instalment of annuity due xx.xx.xx returned by BACS", "Instalment of annuity due xx.xx.xx", "Surveyor Fee", "Settlement of claim", "Cash facility loan", "Commission Due", "Tax Free Cash & 1st Annuity payment")
+Row 5: Policy No (Input) | Policy Holder (Input)
+Row 6: Plan Code (Input + ... lookup button) | Plan Description (disabled, default "LAUTRO")
+Row 7: Acc No (Input + ... lookup button, error state if empty on Create) | Code Description (disabled, default "LVFS Ltd")
+Labels: w-32 text-right font-['Mulish'] font-bold text-[#4a4a49] text-[16px] shrink-0, with colon suffix
+Grid area: 3-column table (Cost Centre, Expense Code, Item Value (£)) with editable rows, each with Input + lookup buttons, CounterInput for value, X remove button
+Grid header: text-[18px] font-['Livvic'] font-semibold text-[#002f5c] border-y-[3px] border-[#04589b], uppercase, py-[24px]
+Footer: "Create" button — w-24 bg-[#006cf4] hover:bg-[#003578] text-white h-[44px] rounded-[30px] font-['Livvic']
+Validation: If Acc No is empty on Create → sets error state on Acc No field + label turns text-[#d72714] + shows ErrorDialog with message "you canot leave this record until a account number is added" (intentional typos preserved exactly)
+Confidential flow: After validation passes → QueryDialog "is this requisition confidential" → Yes sets acctsOnly: "Yes", No sets acctsOnly: "No"
+Find Requisition Panel (in Dialog wrapper max-w-4xl h-[80vh])
+Title: "Find Cheque Rec" — font-['Livvic'] font-semibold text-[18px] text-[#0d2c41]
+Search section: "Search Characters" (Input with Search suffix icon) + "Search By" (Combobox: "SERIAL NO", "PAYABLE TO", "DRAWN DATE", "ACCOUNT NO", "TOTAL AMOUNT")
+Search Characters label: font-['Livvic'] font-normal text-[#4a4a49] text-[16px]
+Grid: 8 draggable columns (DnD Kit sortable): Serial No (w-[120px]), Requested By (w-[150px]), Approved By (w-[150px]), Account No (w-[130px]), Drawn Date (w-[130px]), Amount (w-[130px], right-aligned), Payable To (w-[200px]), Details (w-[300px])
+Min-width: 1310px for horizontal scroll
+Column reorder: selecting "Search By" moves that column to first position
+Single-click on a row selects and navigates to that requisition
+Accounts Dialog (max-w-4xl min-h-[80vh] max-h-[80vh])
+Title: "Account Details" — font-['Livvic'] font-medium text-[#005a9c] text-[18px]
+Two tabs using CustomTabs: "Individual Printing" | "Batch Printing"
+Individual Printing tab:
+
+Form: grid-cols-[140px_1fr], fields: Requisition No (disabled), Payable To (disabled), Total amount (disabled, £{amount}), Accounts Only (disabled, "No"), Drawn Date (DatePicker) + Cheque No (CounterInput, defaultValue "18", no prefix, decimals 0)
+Footer: "Save" button (variant="brand", w-24 h-[44px])
+Batch Printing tab:
+
+Additional fields: Next Cheque no (editable Input), Batch no. (disabled, default "7099") + "New Batch" button (secondary, rounded-[30px]), Requisition No (disabled) + second field "TP50538" (disabled), Payable To, Total amount, Accounts Only, Drawn Date + Cheque No
+"Cheque Req Batch" table: header bg-[#eef4f8], columns: "Serial No" + empty, body: empty, footer: "0 records"
+Footer: Print Options with RadioGroup (Single/Batch/Batch Summary) — custom radio using MUI RadioButtonChecked/RadioButtonUnchecked icons in text-[#006cf4] + "Print" button (secondary)
+Codes Dialog (max-w-4xl h-[85vh])
+Title: "Code Amendment/Insertion" — font-['Livvic'] font-medium text-[#005a9c] text-[18px]
+Three tabs: "Cost Codes" | "Expense Codes" | "Account Codes"
+Each tab: 2-column grid (Code w-24, Description flex-1) + w-4 spacer
+Rows: click to select → inline Input editing for both code and description
+Selected row: transparent bg (not highlighted), editing inputs shown
+Non-selected rows: normal zebra + hover bg-[#003578] text-white
+Footer: If changes made → "Cancel" (secondary) + "Save" (brand), both h-[44px] w-24. If no changes → single "OK" (secondary)
+Cost Codes data (25 entries): 845/Tax Deducted/Refunded (PAYE), 855/Ann Premiums unallocated, 856/PRP Premiums Unallocated, 885/Application Fees Refunded, 926/Tax Free Cash, 929/LTA excess tax deduction, 930/Triviality Tax, 931/Value Protection Death Benefit, 932/Value Protection Tax Deduction, 933/PRP Maturity, 934/PRP Surrender, 935/Maturity, 936/Death Benefit, 937/Transfer Value, 938/Annuity Payment, 939/Pension Payment, 940/Lump Sum, 941/Commutation, 942/Refund of Contributions, 943/Serious Ill Health, 944/Small Pot, 945/Trivial Commutation, 946/Winding Up Lump Sum, 947/Uncrystallised Funds Pension Lump Sum, 948/Drawdown Income, 949/Flexi-Access Drawdown
+
+Expense Codes data (17 entries): 5/-, 6/-, 7/-, 8/-, 9/-, A/-, B/MARKETING, C/SALES - MIKE G TEAM, D/SALES - FRANK TEAM, E/SALES - GWYN TEAM, F/SALES - VIC TEAM, G/-, H/FINANCE, I/HR, J/IT, K/LEGAL, L/OPERATIONS, M/COMPLIANCE, N/RISK, O/AUDIT, P/FACILITIES, Q/PROCUREMENT
+
+Account Codes data (1 entry): 842/LVFS Ltd
+
+Lookup Dialog (max-w-[600px] h-[600px])
+Title: dynamic (e.g., "Lookup Cost Centre", "Lookup Expense Code") — font-['Livvic'] font-medium text-[#005a9c] text-[18px]
+Search: "Search Characters" (Input + Search icon suffix) + "Search By" Combobox ("Code"/"Desc"), w-32
+Search labels: font-['Mulish'] font-bold text-[#4a4a49] text-[16px]
+Grid: Code (w-20) | Desc (flex-1) + w-4 spacer
+Single click selects AND closes dialog, returning the ref/code value
+Cost Centre Lookup data: L/SALES SUPP - CUST SERVICES, M/SALES SUPP - IFA SUPPORT, N/SALES SUPP - ANNUITY DIV, O/-, P/TRAINING, Q/POLICY SERVICES, R/COMPUTER SUPPORT, S/ACCOUNTS, T/OFFICE, U/COMPLIANCE, V/CENTRAL COSTS
+
+Expense Code Lookup data: 150/Claims Surrender (PPP), 158/Claims Annuity, 170/Ex Gratia Payments, 180/Commissions, 290/Medical Fees, 760/Annuity paid direct, 830/Commission payable, 845/Tax Deducted/Refunded (PAYE), 855/Ann Premiums unallocated, 856/PRP Premiums Unallocated, 885/Application Fees Refunded
+
+Plan Lookup Dialog (max-w-[600px] h-[600px])
+Title: "Lookup Plan Code"
+Grid: Code (w-24) | System (flex-1) | Plan Type (w-32) + w-4 spacer
+Data: 00/LAUTRO/, 02/Domestic Assurance/, 04/Investment Bond/, 05/Saving Plan/, 06/Protected Pension Plan/, 07/Houses Pension Bond/, 21/SHIP/, 36/Purchase Life Annuity/PLA, 37/Property Income Plan/PIP, 38/Temporary Annuity/TA, 41/Compulsory Purchase Annuity/CPA
+Account Lookup Dialog (max-w-[600px] h-[600px])
+Title: "Lookup Account Number"
+Grid: No (w-20) | Name (flex-1) + w-4 spacer
+Search By options: "No"/"Name"
+Data: 843/LVFS Ltd, 844/LVFS Services, 850/General Account, 900/Suspense Account
+Amend Requisition Dialog (max-w-4xl max-h-[85vh])
+Title: "Amend Existing Cheque" — font-['Livvic'] text-[24px] (uses message dialog title size)
+Form: 4-column grid for Rec Number/Requested On/Acc No/Policy no, then 2-column for Payable to/Detail (editable)
+Embedded grid with SortIcon headers: REF NO/COST CENTRE/EXPENSE CODE/ITEM VALUE, borders between columns
+"Click here to insert a new detail line" button centered below grid
+Footer: "OK" (blue) + "Cancel" (outline) buttons centered, both w-24 h-8
+Find Requisition Dialog (max-w-5xl max-h-[85vh])
+Title: "Find Cheque Rec" — font-['Livvic'] text-[24px]
+Search: "Search Characters" + "Search By" (native <select>: SERIAL NO/PAYABLE TO/DETAILS)
+Grid: row selector indicator column (w-8, selected: white triangle arrow), SERIAL NO/REQUESTED BY/APPROVED BY/ACCOUNT NO/DRAWN DATE/AMOUNT/PAYABLE TO/DETAILS with SortIcon on each
+Selected row: bg-[#006cf4] text-white
+Footer: "Cancel" + "OK" buttons right-aligned
+INTERACTION FLOWS
+Navigate records: First/Prev/Next/Last buttons update currentIndex (0-based) in state, counter shows currentIndex + 1 of data.length
+Edit flow: Click Edit → if drawn/processed shows ErrorDialog → else enters edit mode, Edit button becomes Save (brand variant), header shows OK/Cancel buttons, form fields become PrimaryInputs
+Save flow: OK or Save → merges editData into data array → shows InformationDialog "Requisition updated successfully"
+New flow: Click New → opens NewRequisitionPanel dialog → fill form → Create → validates Acc No (error if empty) → asks confidential → creates record → toast notification
+Find flow: Type in "Find Req" → filters dropdown → click result OR click Find button with no search → opens FindRequisitionPanel dialog
+Print flow: Click Print → if requestedBy === 'WQU' → ErrorDialog "Queue Print Error: No User profile exists - please contact IT" → else → react-to-print prints content + InformationDialog "Your cheque rec has been submitted to the Print Queue and will be printed shortly..."
+Accounts flow: Click Accts → opens AccountsDialog with current record data
+Codes flow: Click Codes → opens CodesDialog for code management
+Logout flow: Click Logout → QueryDialog "Are you sure you want to log out?" → Yes logs out, No dismisses
+ROUTES
+/ — Main RequisitionPage (described above)
+/v2 — RequisitionSplitPage (split panel layout variant)
+/v3 — RequisitionTabsPage (tabbed interface variant)
+/find — Dedicated FindPage
+* — NotFound page
+TECH STACK
+React 18, TypeScript, Vite, Tailwind CSS v4
+Wouter for routing
+TanStack React Query (provider wrapper, not actively used for data fetching)
+Radix UI primitives (Dialog, ScrollArea, Tabs, Popover, RadioGroup, etc.)
+cmdk for combobox command palette
+@dnd-kit/core + @dnd-kit/sortable for drag-and-drop column reordering in Find panel
+react-icons/md for Material Design icons in toolbar
+@mui/icons-material for icons in dialogs and panels
+lucide-react for X close icons and counter chevrons
+react-to-print for print functionality
+date-fns for date formatting
+class-variance-authority for button variants
+Express backend (minimal, serves Vite in dev)

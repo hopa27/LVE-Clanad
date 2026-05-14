@@ -5,6 +5,8 @@ import {
   MdLogout,
   MdSearch,
   MdKeyboardArrowDown,
+  MdError,
+  MdCheck,
 } from "react-icons/md";
 import { format } from "date-fns";
 import { DatePicker } from "./DatePicker";
@@ -150,6 +152,7 @@ export function ReportsModal({
   const [endDate, setEndDate] = useState("17/04/2017");
   const [printDefault, setPrintDefault] = useState(false);
   const [selected, setSelected] = useState(0);
+  const [printError, setPrintError] = useState(false);
 
   if (!open) return null;
 
@@ -208,7 +211,11 @@ export function ReportsModal({
             </div>
 
             <div className="ml-auto flex items-center gap-2">
-              <button type="button" className="lve-btn lve-btn-sm">
+              <button
+                type="button"
+                onClick={() => setPrintError(true)}
+                className="lve-btn lve-btn-sm"
+              >
                 <MdPrint size={16} />
                 Print
               </button>
@@ -285,6 +292,44 @@ export function ReportsModal({
           </div>
         </div>
       </div>
+
+      {printError && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40 p-6">
+          <div className="lve-panel bg-white w-[460px] max-w-full">
+            <header className="lve-panel-header flex items-center justify-between">
+              <span>DANAD96 Reporting System</span>
+              <button
+                type="button"
+                className="text-white/80 hover:text-white"
+                onClick={() => setPrintError(false)}
+                title="Close"
+              >
+                <MdClose size={18} />
+              </button>
+            </header>
+            <div className="lve-panel-body flex flex-col gap-5">
+              <div className="flex items-start gap-4">
+                <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#d72714] text-white shrink-0">
+                  <MdError size={24} />
+                </span>
+                <p className="font-['Mulish'] text-[14px] text-[#3d3d3d] pt-2">
+                  Error:200 Formula Name could not be found - Formulas.ByName.
+                </p>
+              </div>
+              <div className="flex justify-center">
+                <button
+                  type="button"
+                  onClick={() => setPrintError(false)}
+                  className="lve-btn lve-btn-sm min-w-[100px] justify-center"
+                >
+                  <MdCheck size={16} />
+                  OK
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

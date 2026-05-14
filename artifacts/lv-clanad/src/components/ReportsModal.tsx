@@ -165,9 +165,10 @@ export function ReportsModal({
           <span>DANAD96 Reporting System</span>
           <button
             type="button"
-            className="text-white/80 hover:text-white"
+            className="inline-flex items-center justify-center w-7 h-7 rounded-[4px] text-white hover:bg-[#d72714] transition-colors"
             onClick={onClose}
             title="Close"
+            aria-label="Close"
           >
             <MdClose size={18} />
           </button>
@@ -291,9 +292,10 @@ export function ReportsModal({
               <span>DANAD96 Reporting System</span>
               <button
                 type="button"
-                className="text-white/80 hover:text-white"
+                className="inline-flex items-center justify-center w-7 h-7 rounded-[4px] text-white hover:bg-[#d72714] transition-colors"
                 onClick={() => setPrintError(false)}
                 title="Close"
+                aria-label="Close"
               >
                 <MdClose size={18} />
               </button>

@@ -10,6 +10,11 @@ const LETTERS = [
   "IFA Acceptance Pack",
   "IRF Acceptance Pack inc Client Ltr",
   "IRF Letter",
+  "MPAA Letter",
+  "Plan Schedule",
+  "Return Original Certificates",
+  "Rewrite Completion Pack",
+  "Transfer Forms",
 ];
 
 export function LettersTab() {

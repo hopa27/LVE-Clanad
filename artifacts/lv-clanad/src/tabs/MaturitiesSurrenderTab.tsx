@@ -30,7 +30,7 @@ export function MaturitiesSurrenderTab() {
           <Field label="Nature of Payment:">
             <SelectInput value="" options={["", "Lump Sum", "Annuity"]} />
           </Field>
-          <Field label="Payment Method:"><SelectInput value="" options={["", "B", "C"]} /></Field>
+          <Field label="Payment Method:"><SelectInput value="" options={["", "B", "C", "T"]} /></Field>
           <Field label="Payment Date:"><TextInput value="/  /" /></Field>
           <Field label="Gross:"><TextInput value="" /></Field>
           <button type="button" className="btn mt-2" disabled>Create payment…</button>
@@ -89,7 +89,7 @@ export function MaturitiesSurrenderTab() {
                   <Field inline label="Bank account no:"><TextInput value="" /></Field>
                   <Field inline label="Account Type:"><TextInput value="0" disabled /></Field>
                   <Field inline label="Payment method:">
-                    <SelectInput value="" options={["", "B", "C"]} />
+                    <SelectInput value="" options={["", "B", "C", "T"]} />
                   </Field>
                 </div>
               </div>

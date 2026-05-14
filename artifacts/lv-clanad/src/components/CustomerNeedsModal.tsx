@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { MdCheck, MdClose, MdArrowDropDown, MdDelete } from "react-icons/md";
+import { MdCheck, MdClose, MdArrowDropDown, MdDelete, MdHelpOutline } from "react-icons/md";
 import { DatePicker } from "./DatePicker";
 
 const NEEDS_OPTIONS = [
@@ -70,6 +70,9 @@ export function CustomerNeedsModal({
   const [rows, setRows] = useState<NeedRow[]>([]);
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
   const [addedOpen, setAddedOpen] = useState(false);
+  const [selectFirstOpen, setSelectFirstOpen] = useState(false);
+  const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
+  const [deletedOpen, setDeletedOpen] = useState(false);
   const needRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -106,10 +109,27 @@ export function CustomerNeedsModal({
   };
 
   const handleDelete = () => {
+    if (selectedIdx === null) {
+      setSelectFirstOpen(true);
+      return;
+    }
+    setConfirmDeleteOpen(true);
+  };
+
+  const performDelete = () => {
     if (selectedIdx === null) return;
     setRows((prev) => prev.filter((_, i) => i !== selectedIdx));
     setSelectedIdx(null);
+    setConfirmDeleteOpen(false);
+    setDeletedOpen(true);
   };
+
+  const selectedDescShort = (() => {
+    if (selectedIdx === null) return "";
+    const desc = rows[selectedIdx]?.description ?? "";
+    const parts = desc.split(" | ");
+    return parts.length > 1 ? parts[1] : desc;
+  })();
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
@@ -228,7 +248,6 @@ export function CustomerNeedsModal({
               type="button"
               className="lve-btn lve-btn-secondary"
               onClick={handleDelete}
-              disabled={selectedIdx === null}
             >
               <MdDelete size={16} />
               DELETE
@@ -260,6 +279,88 @@ export function CustomerNeedsModal({
                   type="button"
                   className="lve-btn"
                   onClick={() => setAddedOpen(false)}
+                >
+                  <MdCheck size={16} />
+                  OK
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {selectFirstOpen && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40">
+          <div className="w-[380px] bg-white rounded-[8px] shadow-xl overflow-hidden border border-[#bcd]">
+            <header className="bg-[#00263e] text-white font-['Livvic'] text-[13px] font-semibold px-3 py-2">
+              Client Annuity Administration System
+            </header>
+            <div className="p-5">
+              <p className="font-['Mulish'] text-[14px] text-[#3d3d3d] text-center">
+                Select the Customer Need for deletion!
+              </p>
+              <div className="mt-5 flex items-center justify-center">
+                <button
+                  type="button"
+                  className="lve-btn"
+                  onClick={() => setSelectFirstOpen(false)}
+                >
+                  <MdCheck size={16} />
+                  OK
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {confirmDeleteOpen && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40">
+          <div className="w-[460px] bg-white rounded-[8px] shadow-xl overflow-hidden border border-[#bcd]">
+            <header className="bg-[#00263e] text-white font-['Livvic'] text-[13px] font-semibold px-3 py-2">
+              Confirm
+            </header>
+            <div className="p-5">
+              <div className="flex items-start gap-3">
+                <MdHelpOutline size={32} className="text-[#006cf4] shrink-0" />
+                <p className="font-['Mulish'] text-[14px] text-[#3d3d3d] pt-1">
+                  Are you sure you want to delete the Customer Need "{selectedDescShort}" ?
+                </p>
+              </div>
+              <div className="mt-5 flex items-center justify-center gap-3">
+                <button type="button" className="lve-btn" onClick={performDelete}>
+                  <MdCheck size={16} />
+                  <span><u>Y</u>es</span>
+                </button>
+                <button
+                  type="button"
+                  className="lve-btn lve-btn-secondary"
+                  onClick={() => setConfirmDeleteOpen(false)}
+                >
+                  <MdClose size={16} />
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {deletedOpen && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40">
+          <div className="w-[380px] bg-white rounded-[8px] shadow-xl overflow-hidden border border-[#bcd]">
+            <header className="bg-[#00263e] text-white font-['Livvic'] text-[13px] font-semibold px-3 py-2">
+              Client Annuity Administration System
+            </header>
+            <div className="p-5">
+              <p className="font-['Mulish'] text-[14px] text-[#3d3d3d] text-center">
+                Customer Need details deleted successfully!
+              </p>
+              <div className="mt-5 flex items-center justify-center">
+                <button
+                  type="button"
+                  className="lve-btn"
+                  onClick={() => setDeletedOpen(false)}
                 >
                   <MdCheck size={16} />
                   OK

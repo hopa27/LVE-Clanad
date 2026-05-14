@@ -147,7 +147,7 @@ export function ReportsModal({
   onClose: () => void;
 }) {
   const [systemName, setSystemName] = useState("DANAD96");
-  const [startDate, setStartDate] = useState("06/06/2017");
+  const startDate = format(new Date(), "dd/MM/yyyy");
   const [endDate, setEndDate] = useState("17/04/2017");
   const [printDefault, setPrintDefault] = useState(false);
   const [selected, setSelected] = useState(0);
@@ -188,14 +188,9 @@ export function ReportsModal({
 
             <div className="flex flex-col w-[200px]">
               <label className="lve-label">Start Date</label>
-              <DatePicker
-                value={startDate}
-                placeholder="Start Date"
-                disabled={false}
-                onChange={(d) =>
-                  setStartDate(d ? format(d, "dd/MM/yyyy") : "")
-                }
-              />
+              <div className="flex h-[44px] items-center rounded-[8px] border-[2px] border-[#ACACAC] bg-[#CCCCCC] px-[11px] py-[7px] font-['Mulish'] text-[15px] text-[#3d3d3d] cursor-not-allowed">
+                {startDate}
+              </div>
             </div>
 
             <div className="flex flex-col w-[200px]">

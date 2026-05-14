@@ -69,6 +69,7 @@ export function CustomerNeedsModal({
   const [needOpen, setNeedOpen] = useState(false);
   const [rows, setRows] = useState<NeedRow[]>([]);
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
+  const [addedOpen, setAddedOpen] = useState(false);
   const needRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -101,6 +102,7 @@ export function CustomerNeedsModal({
     setRows((prev) => [...prev, { dateAdded: fmt(dateUpdated), description: need }]);
     setNeed("");
     setDateUpdated(undefined);
+    setAddedOpen(true);
   };
 
   const handleDelete = () => {
@@ -242,6 +244,31 @@ export function CustomerNeedsModal({
           </div>
         </div>
       </div>
+
+      {addedOpen && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40">
+          <div className="w-[380px] bg-white rounded-[8px] shadow-xl overflow-hidden border border-[#bcd]">
+            <header className="bg-[#00263e] text-white font-['Livvic'] text-[13px] font-semibold px-3 py-2">
+              Client Annuity Administration System
+            </header>
+            <div className="p-5">
+              <p className="font-['Mulish'] text-[14px] text-[#3d3d3d] text-center">
+                Customer Need details added successfully!
+              </p>
+              <div className="mt-5 flex items-center justify-center">
+                <button
+                  type="button"
+                  className="lve-btn"
+                  onClick={() => setAddedOpen(false)}
+                >
+                  <MdCheck size={16} />
+                  OK
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

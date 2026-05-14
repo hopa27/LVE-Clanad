@@ -1,10 +1,10 @@
 import { useState, type JSX } from "react";
-import { EditModeProvider } from "./context/EditModeContext";
+import { EditModeProvider, useEditMode } from "./context/EditModeContext";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { Toolbar } from "./components/Toolbar";
 import { PolicyHeader } from "./components/PolicyHeader";
-import { TabBar, type TabKey, TABS } from "./components/TabBar";
+import { TabBar, type TabKey } from "./components/TabBar";
 import { StatusBar } from "./components/StatusBar";
 import { ApplicationDetailsTab } from "./tabs/ApplicationDetailsTab";
 import { AnnuitantDetailsTab } from "./tabs/AnnuitantDetailsTab";
@@ -36,26 +36,32 @@ const TAB_COMPONENTS: Record<TabKey, () => JSX.Element> = {
   loa: LoaPoaTab,
 };
 
-export default function App() {
+function AppShell() {
   const [activeTab, setActiveTab] = useState<TabKey>("application");
   const ActiveComponent = TAB_COMPONENTS[activeTab];
-  const activeLabel = TABS.find((t) => t.key === activeTab)?.label ?? "";
+  const { cancelKey } = useEditMode();
 
   return (
+    <div className="min-h-screen flex flex-col bg-[#f0f0f0]">
+      <Header title="Client Annuity Administration System" />
+      <main className="flex-1 px-[142px] py-8">
+        <Toolbar />
+        <PolicyHeader />
+        <TabBar activeTab={activeTab} onChange={setActiveTab} />
+        <div className="bg-white rounded-b-lg rounded-tr-lg shadow-sm p-6 -mt-px">
+          <ActiveComponent key={`${activeTab}:${cancelKey}`} />
+        </div>
+        <StatusBar />
+      </main>
+      <Footer />
+    </div>
+  );
+}
+
+export default function App() {
+  return (
     <EditModeProvider>
-      <div className="min-h-screen flex flex-col bg-[#f0f0f0]">
-        <Header title="Client Annuity Administration System" />
-        <main className="flex-1 px-[142px] py-8">
-          <Toolbar />
-          <PolicyHeader />
-          <TabBar activeTab={activeTab} onChange={setActiveTab} />
-          <div className="bg-white rounded-b-lg rounded-tr-lg shadow-sm p-6 -mt-px">
-            <ActiveComponent />
-          </div>
-          <StatusBar />
-        </main>
-        <Footer />
-      </div>
+      <AppShell />
     </EditModeProvider>
   );
 }

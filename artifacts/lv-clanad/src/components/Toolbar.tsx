@@ -38,7 +38,7 @@ type Tool = {
 };
 
 export function Toolbar() {
-  const { editing, setEditing } = useEditMode();
+  const { editing, setEditing, cancel } = useEditMode();
   const [newAppConfirm, setNewAppConfirm] = useState(false);
   const [quoteLookupOpen, setQuoteLookupOpen] = useState(false);
   const [newQuoteOpen, setNewQuoteOpen] = useState(false);
@@ -69,7 +69,7 @@ export function Toolbar() {
     else if (action === "new-quote") setNewQuoteOpen(true);
     else if (action === "sim-app") setQuoteLookupOpen(true);
     else if (action === "edit-toggle") setEditing(!editing);
-    else if (action === "edit-cancel") setEditing(false);
+    else if (action === "edit-cancel") cancel();
     else if (action === "company") setCompanyOpen(true);
     else if (action === "reports") setReportsOpen(true);
     else if (action === "crs") setCrsOpen(true);

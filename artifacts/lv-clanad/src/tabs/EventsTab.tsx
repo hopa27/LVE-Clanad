@@ -6,6 +6,7 @@ import {
   MdCheck,
   MdClose,
   MdKeyboardArrowDown,
+  MdHelpOutline,
 } from "react-icons/md";
 import { Section, Field } from "../components/Field";
 import { DatePicker } from "../components/DatePicker";
@@ -57,6 +58,9 @@ export function EventsTab() {
   const [newEventOpen, setNewEventOpen] = useState(false);
   const [editingIdx, setEditingIdx] = useState<number | null>(null);
   const [form, setForm] = useState<FormState>(emptyForm);
+  const [editConfirm, setEditConfirm] = useState(false);
+  const [deleteConfirm, setDeleteConfirm] = useState(false);
+  const [toast, setToast] = useState<string | null>(null);
 
   const openNew = () => {
     setEditingIdx(null);
@@ -64,7 +68,13 @@ export function EventsTab() {
     setNewEventOpen(true);
   };
 
-  const openEdit = () => {
+  const askEdit = () => {
+    if (selectedIdx === null) return;
+    setEditConfirm(true);
+  };
+
+  const confirmEdit = () => {
+    setEditConfirm(false);
     if (selectedIdx === null) return;
     const r = rows[selectedIdx];
     setEditingIdx(selectedIdx);
@@ -78,11 +88,21 @@ export function EventsTab() {
     setNewEventOpen(true);
   };
 
-  const handleDelete = () => {
+  const askDelete = () => {
+    if (selectedIdx === null) return;
+    setDeleteConfirm(true);
+  };
+
+  const confirmDelete = () => {
+    setDeleteConfirm(false);
     if (selectedIdx === null) return;
     setRows((prev) => prev.filter((_, i) => i !== selectedIdx));
     setSelectedIdx(null);
+    setToast("Event deleted successfully!");
+    window.setTimeout(() => setToast(null), 2500);
   };
+
+  const selectedNo = selectedIdx !== null ? rows[selectedIdx]?.no ?? "" : "";
 
   const handleOk = () => {
     const next: EventRow = {
@@ -162,7 +182,7 @@ export function EventsTab() {
           type="button"
           className="lve-btn lve-btn-secondary lve-btn-sm disabled:opacity-50 disabled:cursor-not-allowed"
           disabled={!hasSelection}
-          onClick={openEdit}
+          onClick={askEdit}
         >
           <MdEdit size={16} /> Edit Event
         </button>
@@ -170,7 +190,7 @@ export function EventsTab() {
           type="button"
           className="lve-btn lve-btn-secondary lve-btn-sm disabled:opacity-50 disabled:cursor-not-allowed"
           disabled={!hasSelection}
-          onClick={handleDelete}
+          onClick={askDelete}
         >
           <MdDelete size={16} /> Delete Event
         </button>
@@ -257,6 +277,92 @@ export function EventsTab() {
                   onClick={() => setNewEventOpen(false)}
                 >
                   <MdClose size={16} /> Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {editConfirm && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40 p-6">
+          <div className="lve-panel bg-white w-[400px] max-w-full">
+            <header className="lve-panel-header">Confirm</header>
+            <div className="lve-panel-body">
+              <div className="flex items-start gap-3">
+                <span className="text-[#006cf4] mt-0.5"><MdHelpOutline size={28} /></span>
+                <p className="font-['Mulish'] text-[14px] text-[#3d3d3d] pt-1">
+                  Edit this event?
+                </p>
+              </div>
+              <div className="flex justify-center items-center gap-3 mt-5">
+                <button
+                  type="button"
+                  className="lve-btn lve-btn-sm min-w-[80px] justify-center"
+                  onClick={confirmEdit}
+                >
+                  <u>Y</u>es
+                </button>
+                <button
+                  type="button"
+                  className="lve-btn lve-btn-secondary lve-btn-sm min-w-[80px] justify-center"
+                  onClick={() => setEditConfirm(false)}
+                >
+                  <u>N</u>o
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {deleteConfirm && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40 p-6">
+          <div className="lve-panel bg-white w-[440px] max-w-full">
+            <header className="lve-panel-header">Confirm</header>
+            <div className="lve-panel-body">
+              <div className="flex items-start gap-3">
+                <span className="text-[#006cf4] mt-0.5"><MdHelpOutline size={28} /></span>
+                <p className="font-['Mulish'] text-[14px] text-[#3d3d3d] pt-1">
+                  Are you sure you want to delete the Event '{selectedNo}' ?
+                </p>
+              </div>
+              <div className="flex justify-center items-center gap-3 mt-5">
+                <button
+                  type="button"
+                  className="lve-btn lve-btn-sm min-w-[80px] justify-center"
+                  onClick={confirmDelete}
+                >
+                  <u>Y</u>es
+                </button>
+                <button
+                  type="button"
+                  className="lve-btn lve-btn-secondary lve-btn-sm min-w-[80px] justify-center"
+                  onClick={() => setDeleteConfirm(false)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {toast && (
+        <div className="fixed inset-0 z-[90] flex items-center justify-center bg-black/40 p-6">
+          <div className="lve-panel bg-white w-[400px] max-w-full">
+            <header className="lve-panel-header">Client Annuity Administration System</header>
+            <div className="lve-panel-body">
+              <p className="text-center font-['Mulish'] text-[14px] text-[#3d3d3d] py-2">
+                {toast}
+              </p>
+              <div className="flex justify-center mt-4">
+                <button
+                  type="button"
+                  className="lve-btn lve-btn-sm min-w-[90px] justify-center"
+                  onClick={() => setToast(null)}
+                >
+                  OK
                 </button>
               </div>
             </div>

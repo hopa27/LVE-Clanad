@@ -360,6 +360,11 @@ export function CedingSchemeModal({
     setMode("edit");
   };
 
+  const handleCancel = () => {
+    setForm(INITIAL_FORM);
+    setMode("view");
+  };
+
   const handleSave = () => {
     setMode("view");
   };
@@ -396,14 +401,24 @@ export function CedingSchemeModal({
             >
               <MdInsertDriveFile size={16} /> New
             </button>
-            <button
-              type="button"
-              className="lve-btn lve-btn-secondary lve-btn-sm"
-              disabled={editable}
-              onClick={handleEdit}
-            >
-              <MdEdit size={16} /> Edit
-            </button>
+            {mode === "new" ? (
+              <button
+                type="button"
+                className="lve-btn lve-btn-secondary lve-btn-sm"
+                onClick={handleCancel}
+              >
+                <MdClose size={16} /> Cancel
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="lve-btn lve-btn-secondary lve-btn-sm"
+                disabled={editable}
+                onClick={handleEdit}
+              >
+                <MdEdit size={16} /> Edit
+              </button>
+            )}
             <button
               type="button"
               className="lve-btn lve-btn-secondary lve-btn-sm"

@@ -37,8 +37,16 @@ type FormState = {
 
 const emptyForm: FormState = { type: "", date: undefined, no: "", gross: "", tax: "" };
 
+const SAMPLE_ROWS: EventRow[] = [
+  { date: "12/04/2018", no: "1001", gross: "12,500.00", tax: "2,500.00", type: "Reportable" },
+  { date: "06/09/2019", no: "1002", gross: "8,750.00", tax: "1,750.00", type: "Taxable" },
+  { date: "21/01/2021", no: "1003", gross: "15,300.00", tax: "3,060.00", type: "Reportable" },
+  { date: "30/11/2022", no: "1004", gross: "6,420.00", tax: "1,284.00", type: "Taxable" },
+  { date: "14/07/2024", no: "1005", gross: "10,000.00", tax: "2,000.00", type: "Reportable" },
+];
+
 export function EventsTab() {
-  const [rows, setRows] = useState<EventRow[]>([]);
+  const [rows, setRows] = useState<EventRow[]>(SAMPLE_ROWS);
   const [newEventOpen, setNewEventOpen] = useState(false);
   const [form, setForm] = useState<FormState>(emptyForm);
 

@@ -159,7 +159,7 @@ export function Header({ title }: { title: string }) {
                 {item.label}
               </button>
               {item.options && isOpen && (
-                <div className="absolute left-0 top-full mt-1 z-30 min-w-[220px] bg-white border border-[#e3e6ea] rounded-[8px] shadow-lg py-1 font-['Mulish'] text-[14px] text-[#3d3d3d] overflow-hidden">
+                <div className="absolute left-0 top-full mt-1 z-30 min-w-[220px] bg-white border border-[#e3e6ea] rounded-[8px] shadow-lg py-1 font-['Mulish'] text-[14px] text-[#3d3d3d]">
                   {item.options.map((opt, i) => {
                     if ("kind" in opt && opt.kind === "separator") {
                       return (

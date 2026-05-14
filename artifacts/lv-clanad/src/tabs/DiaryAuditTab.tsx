@@ -162,16 +162,37 @@ export function DiaryAuditTab() {
             <p className="font-['Mulish'] text-[12px] italic text-[#777] mb-2">
               Audit trail — you cannot amend or delete these notes!
             </p>
-            <ul className="divide-y divide-[#e0e0e0] border border-[#e0e0e0] rounded-[8px] max-h-[320px] overflow-auto bg-white">
-              {AUDIT.map((line, i) => (
-                <li
-                  key={i}
-                  className="py-2 px-3 font-['Mulish'] text-[12px] text-[#005a9c] hover:bg-[#eaf5f8]"
-                >
-                  {line}
-                </li>
-              ))}
-            </ul>
+            <div className="overflow-auto max-h-[320px]">
+              <table className="lve-grid">
+                <thead>
+                  <tr>
+                    <th className="!px-4">Description</th>
+                    <th className="whitespace-nowrap !px-4 w-[110px]">By</th>
+                    <th className="whitespace-nowrap !px-4 w-[120px]">Date</th>
+                    <th className="whitespace-nowrap !px-4 w-[110px]">Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {AUDIT.map((line, i) => {
+                    const m = line.match(
+                      /^(.*?)\s+by\s+(\S+)\s+on\s+(\S+)\s+at\s+(\S+)\s*$/,
+                    );
+                    const desc = m ? m[1] : line;
+                    const by = m ? m[2] : "";
+                    const date = m ? m[3] : "";
+                    const time = m ? m[4] : "";
+                    return (
+                      <tr key={i}>
+                        <td className="!px-4">{desc}</td>
+                        <td className="!px-4 whitespace-nowrap">{by}</td>
+                        <td className="!px-4 whitespace-nowrap">{date}</td>
+                        <td className="!px-4 whitespace-nowrap">{time}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
           </div>
         ) : (
           <p className="font-['Mulish'] text-[12px] text-[#777] italic">

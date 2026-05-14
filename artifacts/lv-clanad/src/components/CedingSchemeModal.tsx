@@ -6,6 +6,7 @@ import {
   MdSave,
   MdCheck,
   MdArrowDropDown,
+  MdHelpOutline,
 } from "react-icons/md";
 
 const TRANSFER_TYPES = [
@@ -171,6 +172,7 @@ export function CedingSchemeModal({
   const [form, setForm] = useState<FormState>(INITIAL_FORM);
   const [transferOpen, setTransferOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState<number>(0);
+  const [confirmNewOpen, setConfirmNewOpen] = useState(false);
 
   if (!open) return null;
 
@@ -180,8 +182,13 @@ export function CedingSchemeModal({
     setForm((f) => ({ ...f, [k]: v }));
 
   const handleNew = () => {
+    setConfirmNewOpen(true);
+  };
+
+  const confirmNew = () => {
     setForm({ ...INITIAL_FORM, policyNumber: "" });
     setMode("new");
+    setConfirmNewOpen(false);
   };
 
   const handleEdit = () => {
@@ -451,6 +458,36 @@ export function CedingSchemeModal({
           </div>
         </div>
       </div>
+
+      {confirmNewOpen && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40">
+          <div className="lve-panel w-[360px] bg-white">
+            <header className="lve-panel-header">Confirm</header>
+            <div className="lve-panel-body">
+              <div className="flex items-start gap-3">
+                <MdHelpOutline size={32} className="text-[#006cf4] shrink-0" />
+                <p className="font-['Mulish'] text-[14px] text-[#3d3d3d] pt-1">
+                  Insert a new record?
+                </p>
+              </div>
+              <div className="mt-5 flex items-center justify-center gap-3">
+                <button type="button" className="lve-btn" onClick={confirmNew}>
+                  <MdCheck size={16} />
+                  Yes
+                </button>
+                <button
+                  type="button"
+                  className="lve-btn lve-btn-secondary"
+                  onClick={() => setConfirmNewOpen(false)}
+                >
+                  <MdClose size={16} />
+                  No
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

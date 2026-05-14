@@ -9,6 +9,9 @@ import {
   MdCheckCircleOutline,
   MdManageSearch,
   MdGroups,
+  MdHelpOutline,
+  MdCheck,
+  MdClose,
 } from "react-icons/md";
 
 type DiaryRow = {
@@ -65,6 +68,12 @@ export function DiaryAuditTab() {
   const [needsOpen, setNeedsOpen] = useState(false);
   const [cedingOpen, setCedingOpen] = useState(false);
   const [diary, setDiary] = useState<DiaryRow[]>(INITIAL_DIARY);
+  const [selectedRef, setSelectedRef] = useState<number | null>(null);
+  const [editConfirmOpen, setEditConfirmOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
+  const [selectFirstOpen, setSelectFirstOpen] = useState(false);
+
+  const selectedRow = diary.find((d) => d.ref === selectedRef) ?? null;
 
   const addDiary = (entry: DiaryEntryInput) => {
     const nextRef = diary.reduce((max, r) => Math.max(max, r.ref), 0) + 1;
@@ -83,6 +92,25 @@ export function DiaryAuditTab() {
     ]);
   };
 
+  const updateDiary = (entry: DiaryEntryInput) => {
+    if (selectedRef === null) return;
+    setDiary((prev) =>
+      prev.map((r) =>
+        r.ref === selectedRef
+          ? { ...r, type: entry.type, notes: entry.notes, due: fmt(entry.due) }
+          : r,
+      ),
+    );
+  };
+
+  const handleEditClick = () => {
+    if (selectedRef === null) {
+      setSelectFirstOpen(true);
+      return;
+    }
+    setEditConfirmOpen(true);
+  };
+
   return (
     <div className="space-y-4">
       <Section title="Diary Details">
@@ -98,18 +126,28 @@ export function DiaryAuditTab() {
               </tr>
             </thead>
             <tbody>
-              {diary.map((d) => (
-                <tr key={d.ref}>
-                  <td className="!px-4 whitespace-nowrap">{d.ref}</td>
-                  <td className="!px-4 whitespace-nowrap">{d.type}</td>
-                  <td className="!px-4">{d.notes}</td>
-                  <td className="!px-4 whitespace-nowrap">{d.created}</td>
-                  <td className="!px-4 whitespace-nowrap">{d.by}</td>
-                  <td className="!px-4 whitespace-nowrap">{d.due}</td>
-                  <td className="!px-4 whitespace-nowrap">{d.completed}</td>
-                  <td className="!px-4 whitespace-nowrap">{d.byCompleted}</td>
-                </tr>
-              ))}
+              {diary.map((d) => {
+                const isSel = selectedRef === d.ref;
+                const tdStyle = isSel
+                  ? { backgroundColor: "#05579B", color: "#ffffff" }
+                  : undefined;
+                return (
+                  <tr
+                    key={d.ref}
+                    onClick={() => setSelectedRef(d.ref)}
+                    className="cursor-pointer"
+                  >
+                    <td className="!px-4 whitespace-nowrap" style={tdStyle}>{d.ref}</td>
+                    <td className="!px-4 whitespace-nowrap" style={tdStyle}>{d.type}</td>
+                    <td className="!px-4" style={tdStyle}>{d.notes}</td>
+                    <td className="!px-4 whitespace-nowrap" style={tdStyle}>{d.created}</td>
+                    <td className="!px-4 whitespace-nowrap" style={tdStyle}>{d.by}</td>
+                    <td className="!px-4 whitespace-nowrap" style={tdStyle}>{d.due}</td>
+                    <td className="!px-4 whitespace-nowrap" style={tdStyle}>{d.completed}</td>
+                    <td className="!px-4 whitespace-nowrap" style={tdStyle}>{d.byCompleted}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
@@ -122,7 +160,11 @@ export function DiaryAuditTab() {
           >
             <MdNoteAdd size={16} /> New Diary Note
           </button>
-          <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
+          <button
+            type="button"
+            className="lve-btn lve-btn-secondary lve-btn-sm"
+            onClick={handleEditClick}
+          >
             <MdEdit size={16} /> Edit Diary Note
           </button>
           <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
@@ -240,6 +282,21 @@ export function DiaryAuditTab() {
         onSubmit={addDiary}
       />
 
+      {editOpen && selectedRow && (
+        <MiscDiaryModal
+          open={editOpen}
+          onClose={() => setEditOpen(false)}
+          onSubmit={updateDiary}
+          title="Mini-Diary"
+          allowPastDue
+          initial={{
+            type: selectedRow.type,
+            notes: selectedRow.notes,
+            due: selectedRow.due,
+          }}
+        />
+      )}
+
       <CustomerNeedsModal
         open={needsOpen}
         onClose={() => setNeedsOpen(false)}
@@ -249,6 +306,70 @@ export function DiaryAuditTab() {
         open={cedingOpen}
         onClose={() => setCedingOpen(false)}
       />
+
+      {editConfirmOpen && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40">
+          <div className="w-[360px] bg-white rounded-[8px] shadow-xl overflow-hidden border border-[#bcd]">
+            <header className="bg-[#00263e] text-white font-['Livvic'] text-[13px] font-semibold px-3 py-2">
+              Confirm
+            </header>
+            <div className="p-5">
+              <div className="flex items-start gap-3">
+                <MdHelpOutline size={32} className="text-[#006cf4] shrink-0" />
+                <p className="font-['Mulish'] text-[14px] text-[#3d3d3d] pt-1">
+                  Edit this diary note?
+                </p>
+              </div>
+              <div className="mt-5 flex items-center justify-center gap-3">
+                <button
+                  type="button"
+                  className="lve-btn"
+                  onClick={() => {
+                    setEditConfirmOpen(false);
+                    setEditOpen(true);
+                  }}
+                >
+                  <MdCheck size={16} />
+                  <span><u>Y</u>es</span>
+                </button>
+                <button
+                  type="button"
+                  className="lve-btn lve-btn-secondary"
+                  onClick={() => setEditConfirmOpen(false)}
+                >
+                  <MdClose size={16} />
+                  <span><u>N</u>o</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {selectFirstOpen && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40">
+          <div className="w-[380px] bg-white rounded-[8px] shadow-xl overflow-hidden border border-[#bcd]">
+            <header className="bg-[#00263e] text-white font-['Livvic'] text-[13px] font-semibold px-3 py-2">
+              Client Annuity Administration System
+            </header>
+            <div className="p-5">
+              <p className="font-['Mulish'] text-[14px] text-[#3d3d3d] text-center">
+                Please select a diary note to edit!
+              </p>
+              <div className="mt-5 flex items-center justify-center">
+                <button
+                  type="button"
+                  className="lve-btn"
+                  onClick={() => setSelectFirstOpen(false)}
+                >
+                  <MdCheck size={16} />
+                  OK
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

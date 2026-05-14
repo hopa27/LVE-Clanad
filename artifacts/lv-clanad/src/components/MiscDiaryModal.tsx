@@ -54,18 +54,41 @@ export type DiaryEntryInput = {
   due: Date;
 };
 
+export type DiaryInitial = {
+  type?: string;
+  notes?: string;
+  due?: string;
+};
+
+function parseDDMMYYYY(value?: string): Date | undefined {
+  if (!value) return undefined;
+  const parts = value.split(/[\/\-\.]/).map((p) => parseInt(p, 10));
+  if (parts.length !== 3 || parts.some((n) => Number.isNaN(n))) return undefined;
+  const [d, m, y] = parts;
+  const dt = new Date(y, m - 1, d);
+  return Number.isNaN(dt.getTime()) ? undefined : dt;
+}
+
 export function MiscDiaryModal({
   open,
   onClose,
   onSubmit,
+  title = "Misc Diary",
+  initial,
+  allowPastDue = false,
 }: {
   open: boolean;
   onClose: () => void;
   onSubmit?: (entry: DiaryEntryInput) => void;
+  title?: string;
+  initial?: DiaryInitial;
+  allowPastDue?: boolean;
 }) {
-  const [type, setType] = useState("");
-  const [notes, setNotes] = useState("");
-  const [dueDate, setDueDate] = useState<Date | undefined>(undefined);
+  const [type, setType] = useState(initial?.type ?? "");
+  const [notes, setNotes] = useState(initial?.notes ?? "");
+  const [dueDate, setDueDate] = useState<Date | undefined>(
+    parseDDMMYYYY(initial?.due),
+  );
   const [typeOpen, setTypeOpen] = useState(false);
   const [warnOpen, setWarnOpen] = useState(false);
   const typeRef = useRef<HTMLDivElement>(null);
@@ -96,8 +119,19 @@ export function MiscDiaryModal({
 
   if (!open) return null;
 
+  const initialDue = parseDDMMYYYY(initial?.due);
+  const dueChanged =
+    !initialDue ||
+    !dueDate ||
+    startOfDay(dueDate) !== startOfDay(initialDue);
+
   const handleOk = () => {
-    if (!dueDate || startOfDay(dueDate) <= startOfDay(new Date())) {
+    if (!dueDate) {
+      setWarnOpen(true);
+      return;
+    }
+    const mustBeFuture = !allowPastDue || dueChanged;
+    if (mustBeFuture && startOfDay(dueDate) <= startOfDay(new Date())) {
       setWarnOpen(true);
       return;
     }
@@ -108,14 +142,19 @@ export function MiscDiaryModal({
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
       <div className="lve-panel w-[460px] bg-white">
-        <header className="lve-panel-header">Misc Diary</header>
+        <header className="lve-panel-header">{title}</header>
         <div className="lve-panel-body space-y-4">
           <div className="flex items-center gap-3">
             <label className="lve-label w-[80px] shrink-0 text-right">
               Date Due:
             </label>
             <div className="flex-1">
-              <DatePicker placeholder="Date Due" onChange={setDueDate} disabled={false} />
+              <DatePicker
+                placeholder="Date Due"
+                value={initial?.due}
+                onChange={setDueDate}
+                disabled={false}
+              />
             </div>
           </div>
 

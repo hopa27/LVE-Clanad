@@ -12,6 +12,26 @@ export function AboutModal({
   const [emailOpen, setEmailOpen] = useState(false);
   const [subject, setSubject] = useState("");
   const [emailError, setEmailError] = useState(false);
+  const [toast, setToast] = useState<string | null>(null);
+
+  const handleCopy = () => {
+    const text = [
+      "Client Annuity Administration System",
+      "Version 2.0.153.303",
+      "",
+      "Executable: \\\\whynvap13\\UAT\\Anad96\\Exe\\Clanad.exe",
+      "Working directory: H:\\",
+      "Environment: BDE is not used",
+      "User: UAT3",
+      "Workstation: WHYNVCX16",
+      "",
+      "Windows NT 5.2 (Build 3790: Service Pack 2)",
+      "Memory available to Windows: 2,097,152 KB",
+    ].join("\n");
+    void navigator.clipboard?.writeText(text);
+    setToast("About Box contents copied to clipboard");
+    window.setTimeout(() => setToast(null), 2500);
+  };
 
   const openEmail = () => {
     setSubject("");
@@ -119,6 +139,7 @@ export function AboutModal({
               <div className="flex justify-end items-center gap-3 mt-6">
                 <button
                   type="button"
+                  onClick={handleCopy}
                   className="lve-btn lve-btn-secondary lve-btn-sm min-w-[110px] justify-center"
                 >
                   Copy To Clip
@@ -187,6 +208,15 @@ export function AboutModal({
                 </button>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+
+      {toast && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[90] pointer-events-none">
+          <div className="bg-[#00263e] text-white font-['Mulish'] text-[14px] px-5 py-3 rounded-[8px] shadow-lg flex items-center gap-2">
+            <span className="inline-block w-2 h-2 rounded-full bg-[#178830]" />
+            {toast}
           </div>
         </div>
       )}

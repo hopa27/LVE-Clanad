@@ -10,6 +10,7 @@ type MenuOption =
       action?: string;
       hasSubmenu?: boolean;
       shortcut?: string;
+      disabled?: boolean;
     }
   | { kind: "separator" };
 type MenuItem = { label: string; options?: MenuOption[] };
@@ -45,7 +46,26 @@ const MENU_ITEMS: MenuItem[] = [
       { label: "Diary Report" },
     ],
   },
-  { label: "Supervisor" },
+  {
+    label: "Supervisor",
+    options: [
+      { label: "Final Quote Issued" },
+      { label: "Status Change", hasSubmenu: true },
+      { label: "Amend Cheques" },
+      { label: "Approve Bank Changes", disabled: true },
+      { label: "Approve Maturity Bank Detail Changes", disabled: true },
+      { kind: "separator" },
+      { label: "Set Live" },
+      { label: "Force Set Live" },
+      { kind: "separator" },
+      { label: "Set Status To Hold" },
+      { label: "Set Status To Pending", disabled: true },
+      { kind: "separator" },
+      { label: "Reprint Annual Statements" },
+      { label: "Annual Statement Recalculation" },
+      { label: "Reprint Maturity Letters" },
+    ],
+  },
   { label: "Help" },
 ];
 
@@ -124,8 +144,13 @@ export function Header({ title }: { title: string }) {
                       <button
                         key={opt.label}
                         type="button"
+                        disabled={opt.disabled}
                         onClick={() => handleOption(opt.action)}
-                        className="flex w-full items-center justify-between gap-6 px-4 py-2 text-left hover:bg-[#eaf5f8] hover:text-[#003578]"
+                        className={`flex w-full items-center justify-between gap-6 px-4 py-2 text-left ${
+                          opt.disabled
+                            ? "text-[#b8b8b8] cursor-not-allowed"
+                            : "hover:bg-[#eaf5f8] hover:text-[#003578]"
+                        }`}
                       >
                         <span>{opt.label}</span>
                         {opt.shortcut && (

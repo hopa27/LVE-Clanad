@@ -31,7 +31,6 @@ export function QuoteDetailsTab() {
             </Field>
           </div>
           <div>
-            <h4 className="text-[12px] font-semibold mb-2">Notional Value</h4>
             <Field label="Notional Value:"><TextInput value="14,828" disabled /></Field>
             <Field label="Value Date:"><TextInput value="25/03/2026" disabled /></Field>
             <Field label="Total Withheld Minimal Income:"><TextInput value="" disabled /></Field>

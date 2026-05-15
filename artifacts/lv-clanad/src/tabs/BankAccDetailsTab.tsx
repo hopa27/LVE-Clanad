@@ -1,6 +1,7 @@
 import { Field, TextInput, Section } from "../components/Field";
 import { DatePicker } from "../components/DatePicker";
 import { MdEdit } from "react-icons/md";
+import { useCheques } from "../context/ChequesContext";
 
 const TRANSFERS = [
   { company: "PRUDENTIAL", ref: "225810", date: "25/04/2025", amount: "32,760.42" },
@@ -8,7 +9,19 @@ const TRANSFERS = [
   { company: "TLS", ref: "", date: "02/05/2025", amount: "-9,570.32" },
 ];
 
+const SEED_CHEQUE_NOS = new Set(["232693", "232694", "232695"]);
+
 export function BankAccDetailsTab() {
+  const { cheques } = useCheques();
+  const postedRows = cheques
+    .filter((c) => !SEED_CHEQUE_NOS.has(c.chequeNo))
+    .map((c) => ({
+      company: c.transferCompany,
+      ref: c.chequeNo,
+      date: c.date,
+      amount: c.amount,
+    }));
+  const rows = [...TRANSFERS, ...postedRows];
   return (
     <div className="space-y-4">
       <Section
@@ -47,7 +60,7 @@ export function BankAccDetailsTab() {
               </tr>
             </thead>
             <tbody>
-              {TRANSFERS.map((t, i) => (
+              {rows.map((t, i) => (
                 <tr key={i}>
                   <td>{t.company}</td>
                   <td>{t.ref}</td>

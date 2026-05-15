@@ -10,14 +10,7 @@ import {
   MdSearch,
   MdCloudDownload,
 } from "react-icons/md";
-
-type Cheque = {
-  chequeNo: string;
-  transferCompany: string;
-  amount: string;
-  loggedBy: string;
-  date: string;
-};
+import { useCheques, type Cheque } from "../context/ChequesContext";
 
 const CHEQUE_DB: Record<string, { date: string; amount: string; transferCompany: string }> = {
   "232693": { date: "12/05/2026", amount: "12,450.00", transferCompany: "Liverpool Victoria Friendly Society Limited" },
@@ -27,30 +20,6 @@ const CHEQUE_DB: Record<string, { date: string; amount: string; transferCompany:
   "232697": { date: "15/05/2026", amount: "9,980.00", transferCompany: "Standard Life Assurance Limited" },
 };
 
-const INITIAL_CHEQUES: Cheque[] = [
-  {
-    chequeNo: "232693",
-    transferCompany: "Liverpool Victoria Friendly Society Limited",
-    amount: "12,450.00",
-    loggedBy: "JSMITH",
-    date: "12/05/2026",
-  },
-  {
-    chequeNo: "232694",
-    transferCompany: "Aviva Life & Pensions UK Limited",
-    amount: "3,200.50",
-    loggedBy: "AKHAN",
-    date: "13/05/2026",
-  },
-  {
-    chequeNo: "232695",
-    transferCompany: "Legal & General Assurance Society",
-    amount: "8,775.00",
-    loggedBy: "RBROWN",
-    date: "14/05/2026",
-  },
-];
-
 export function ChequeLoggerModal({
   open,
   onClose,
@@ -58,7 +27,7 @@ export function ChequeLoggerModal({
   open: boolean;
   onClose: () => void;
 }) {
-  const [cheques, setCheques] = useState<Cheque[]>(INITIAL_CHEQUES);
+  const { cheques, addCheque } = useCheques();
   const [selected, setSelected] = useState(0);
   const [findValue, setFindValue] = useState("");
   const [creating, setCreating] = useState(false);
@@ -78,7 +47,7 @@ export function ChequeLoggerModal({
 
   if (!open) return null;
 
-  const rec = cheques[selected] ?? INITIAL_CHEQUES[0]!;
+  const rec = cheques[selected] ?? cheques[0]!;
 
   const startNew = () => {
     const today = new Date().toLocaleDateString("en-GB");
@@ -118,9 +87,8 @@ export function ChequeLoggerModal({
     setPosted(hit);
     const newCheque: Cheque = { chequeNo: no, loggedBy: "JSMITH", ...hit };
     setDraft((d) => ({ ...d, ...hit }));
-    const next = [...cheques, newCheque];
-    setCheques(next);
-    setSelected(next.length - 1);
+    addCheque(newCheque);
+    setSelected(cheques.length);
   };
 
   const saveNew = () => {
@@ -128,9 +96,8 @@ export function ChequeLoggerModal({
       setInfo("Please enter a Cheque No.");
       return;
     }
-    const next = [...cheques, draft];
-    setCheques(next);
-    setSelected(next.length - 1);
+    addCheque(draft);
+    setSelected(cheques.length);
     setCreating(false);
     setPosted({ date: "", amount: "", transferCompany: "" });
     setInfo("Cheque added successfully");

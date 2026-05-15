@@ -173,10 +173,53 @@ export function ChequeLoggerModal({
 
           {/* Header fields row */}
           <div className="flex gap-3">
-            <HeaderField label="Cheque No" value={rec.chequeNo} width={120} />
-            <HeaderField label="Date" value={rec.date} width={120} />
-            <HeaderField label="Amount" value={rec.amount} width={140} />
-            <HeaderField label="Transfer Company" value={rec.transferCompany} width={420} />
+            <div className="flex flex-col gap-1" style={{ width: 120 }}>
+              <span className="font-['Livvic'] font-semibold text-[13px] text-[#0d2c41]">
+                Cheque No
+              </span>
+              <input
+                type="text"
+                value={creating ? draft.chequeNo : rec.chequeNo}
+                onChange={(e) =>
+                  creating && setDraft({ ...draft, chequeNo: e.target.value })
+                }
+                readOnly={!creating}
+                className="lve-input !h-[36px] !text-[14px]"
+              />
+            </div>
+            <div className="flex flex-col gap-1" style={{ width: 120 }}>
+              <span className="font-['Livvic'] font-semibold text-[13px] text-[#0d2c41]">
+                Date
+              </span>
+              <input
+                type="text"
+                value={rec.date}
+                disabled
+                className="lve-input !h-[36px] !text-[14px]"
+              />
+            </div>
+            <div className="flex flex-col gap-1" style={{ width: 140 }}>
+              <span className="font-['Livvic'] font-semibold text-[13px] text-[#0d2c41]">
+                Amount
+              </span>
+              <input
+                type="text"
+                value={rec.amount}
+                disabled
+                className="lve-input !h-[36px] !text-[14px] text-right"
+              />
+            </div>
+            <div className="flex flex-col gap-1 flex-1">
+              <span className="font-['Livvic'] font-semibold text-[13px] text-[#0d2c41]">
+                Transfer Company
+              </span>
+              <input
+                type="text"
+                value={rec.transferCompany}
+                disabled
+                className="lve-input !h-[36px] !text-[14px]"
+              />
+            </div>
           </div>
 
           {/* Data grid */}

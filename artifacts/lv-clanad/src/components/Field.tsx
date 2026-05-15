@@ -129,7 +129,7 @@ export function Checkbox({
 
   return (
     <label
-      className={`inline-flex items-center gap-2 select-none font-['Mulish'] text-[14px] text-[#3d3d3d] ${
+      className={`inline-flex items-center h-[44px] gap-2 select-none font-['Mulish'] text-[14px] text-[#3d3d3d] ${
         isLocked
           ? `cursor-not-allowed ${disabled ? "opacity-60" : ""}`
           : "cursor-pointer"

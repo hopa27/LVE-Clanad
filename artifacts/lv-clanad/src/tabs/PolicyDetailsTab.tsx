@@ -96,11 +96,11 @@ export function PolicyDetailsTab() {
         </Section>
 
         <Section title="IFA Details">
-          <Field label="IFA Ref:"><TextInput value="AGEPA-002" /></Field>
-          <Field label="Comm. %:"><TextInput value="1.8" /></Field>
-          <Field label="Commission:"><TextInput value="270" /></Field>
-          <Field label="Key Account:"><TextInput value="Z" /></Field>
-          <Field label="Region:"><TextInput value="MAN" /></Field>
+          <Field label="IFA Ref:"><TextInput value="AGEPA-002" disabled /></Field>
+          <Field label="Comm. %:"><TextInput value="1.8" disabled /></Field>
+          <Field label="Commission:"><TextInput value="270" disabled /></Field>
+          <Field label="Key Account:"><TextInput value="Z" disabled /></Field>
+          <Field label="Region:"><TextInput value="MAN" disabled /></Field>
         </Section>
       </div>
     </div>

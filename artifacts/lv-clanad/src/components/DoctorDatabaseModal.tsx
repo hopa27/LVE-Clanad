@@ -105,6 +105,20 @@ function ActiveField({ value, editing }: { value: string; editing: boolean }) {
   );
 }
 
+const BLANK_DOCTOR: Doctor = {
+  id: 0,
+  name: "",
+  salutation: "",
+  surgery: "",
+  line1: "",
+  line2: "",
+  line3: "",
+  line4: "",
+  county: "",
+  postcode: "",
+  telephone: "",
+};
+
 export function DoctorDatabaseModal({
   open,
   onClose,
@@ -114,17 +128,29 @@ export function DoctorDatabaseModal({
 }) {
   const [index, setIndex] = useState(0);
   const [editing, setEditing] = useState(false);
+  const [creating, setCreating] = useState(false);
   const [search, setSearch] = useState("");
   const [info, setInfo] = useState<{ title: string; message: string } | null>(null);
 
   if (!open) return null;
 
-  const rec = DOCTORS[index]!;
   const total = DOCTORS.length;
+  const nextId = (DOCTORS[total - 1]?.id ?? 0) + 1;
+  const rec: Doctor = creating ? { ...BLANK_DOCTOR, id: nextId } : DOCTORS[index]!;
 
   const go = (target: number) => {
-    if (editing) return;
+    if (editing || creating) return;
     setIndex(Math.max(0, Math.min(total - 1, target)));
+  };
+
+  const startNew = () => {
+    setCreating(true);
+    setEditing(true);
+  };
+
+  const cancelEdit = () => {
+    setEditing(false);
+    setCreating(false);
   };
 
   const Value = ({ value }: { value: string }) => (
@@ -201,12 +227,12 @@ export function DoctorDatabaseModal({
           <FieldRow label="ID:">
             <div className="flex items-center gap-2">
               <div className="flex h-[36px] w-[80px] items-center justify-end rounded-[6px] border-[2px] border-[#ACACAC] bg-[#002f5c] px-3 font-['Mulish'] text-[14px] font-semibold text-white">
-                {rec.id}
+                {creating ? "new" : rec.id}
               </div>
               <button
                 type="button"
-                disabled={editing}
-                onClick={() => setEditing(true)}
+                disabled={editing || creating}
+                onClick={startNew}
                 className="lve-btn lve-btn-secondary lve-btn-sm !px-2"
                 title="New"
               >
@@ -214,7 +240,7 @@ export function DoctorDatabaseModal({
               </button>
               <button
                 type="button"
-                onClick={() => setEditing((v) => !v)}
+                onClick={() => (editing ? cancelEdit() : setEditing(true))}
                 className="lve-btn lve-btn-secondary lve-btn-sm !px-2"
                 title={editing ? "Cancel" : "Edit"}
               >
@@ -224,8 +250,13 @@ export function DoctorDatabaseModal({
                 type="button"
                 disabled={!editing}
                 onClick={() => {
-                  setEditing(false);
-                  setInfo({ title: "Information", message: "Doctor record saved successfully" });
+                  cancelEdit();
+                  setInfo({
+                    title: "Information",
+                    message: creating
+                      ? "New doctor record created successfully"
+                      : "Doctor record saved successfully",
+                  });
                 }}
                 className="lve-btn lve-btn-secondary lve-btn-sm !px-2"
                 title="Save"
@@ -234,7 +265,7 @@ export function DoctorDatabaseModal({
               </button>
               <button
                 type="button"
-                disabled={editing}
+                disabled={editing || creating}
                 onClick={() =>
                   setInfo({
                     title: "Confirm",
@@ -273,7 +304,7 @@ export function DoctorDatabaseModal({
             <button
               type="button"
               onClick={() => {
-                setEditing(false);
+                cancelEdit();
                 onClose();
               }}
               className="lve-btn lve-btn-sm min-w-[100px] justify-center"
@@ -283,7 +314,7 @@ export function DoctorDatabaseModal({
             <button
               type="button"
               onClick={() => {
-                setEditing(false);
+                cancelEdit();
                 onClose();
               }}
               className="lve-btn lve-btn-secondary lve-btn-sm min-w-[100px] justify-center"

@@ -8,6 +8,7 @@ import {
   MdLightbulbOutline,
   MdFolderOpen,
   MdSearch,
+  MdCloudDownload,
 } from "react-icons/md";
 
 type Cheque = {
@@ -16,6 +17,14 @@ type Cheque = {
   amount: string;
   loggedBy: string;
   date: string;
+};
+
+const CHEQUE_DB: Record<string, { date: string; amount: string; transferCompany: string }> = {
+  "232693": { date: "12/05/2026", amount: "12,450.00", transferCompany: "Liverpool Victoria Friendly Society Limited" },
+  "232694": { date: "13/05/2026", amount: "3,200.50", transferCompany: "Aviva Life & Pensions UK Limited" },
+  "232695": { date: "14/05/2026", amount: "8,775.00", transferCompany: "Legal & General Assurance Society" },
+  "232696": { date: "15/05/2026", amount: "5,120.75", transferCompany: "Prudential Assurance Company Limited" },
+  "232697": { date: "15/05/2026", amount: "9,980.00", transferCompany: "Standard Life Assurance Limited" },
 };
 
 const INITIAL_CHEQUES: Cheque[] = [
@@ -61,6 +70,11 @@ export function ChequeLoggerModal({
     date: "",
   });
   const [info, setInfo] = useState<string | null>(null);
+  const [posted, setPosted] = useState<{ date: string; amount: string; transferCompany: string }>({
+    date: "",
+    amount: "",
+    transferCompany: "",
+  });
 
   if (!open) return null;
 
@@ -77,9 +91,29 @@ export function ChequeLoggerModal({
       date: today,
     });
     setCreating(true);
+    setPosted({ date: "", amount: "", transferCompany: "" });
   };
 
-  const cancelNew = () => setCreating(false);
+  const cancelNew = () => {
+    setCreating(false);
+    setPosted({ date: "", amount: "", transferCompany: "" });
+  };
+
+  const postCheque = () => {
+    const no = draft.chequeNo.trim();
+    if (!no) {
+      setInfo("Please enter a Cheque No before posting.");
+      return;
+    }
+    const hit = CHEQUE_DB[no];
+    if (!hit) {
+      setInfo(`No cheque found in database for Cheque No ${no}.`);
+      setPosted({ date: "", amount: "", transferCompany: "" });
+      return;
+    }
+    setPosted(hit);
+    setDraft((d) => ({ ...d, ...hit }));
+  };
 
   const saveNew = () => {
     if (!draft.chequeNo.trim()) {
@@ -90,6 +124,7 @@ export function ChequeLoggerModal({
     setCheques(next);
     setSelected(next.length - 1);
     setCreating(false);
+    setPosted({ date: "", amount: "", transferCompany: "" });
     setInfo("Cheque added successfully");
   };
 
@@ -172,7 +207,7 @@ export function ChequeLoggerModal({
           </div>
 
           {/* Header fields row */}
-          <div className="flex gap-3">
+          <div className="flex items-end gap-3">
             <div className="flex flex-col gap-1" style={{ width: 120 }}>
               <span className="font-['Livvic'] font-semibold text-[13px] text-[#0d2c41]">
                 Cheque No
@@ -187,13 +222,23 @@ export function ChequeLoggerModal({
                 className="lve-input !h-[36px] !text-[14px]"
               />
             </div>
+            <button
+              type="button"
+              onClick={postCheque}
+              disabled={!creating}
+              className="lve-btn lve-btn-sm !h-[36px]"
+              title="Post Cheque"
+            >
+              <MdCloudDownload size={16} />
+              <span>Post Cheque</span>
+            </button>
             <div className="flex flex-col gap-1" style={{ width: 120 }}>
               <span className="font-['Livvic'] font-semibold text-[13px] text-[#0d2c41]">
                 Date
               </span>
               <input
                 type="text"
-                value=""
+                value={posted.date}
                 disabled
                 className="lve-input !h-[36px] !text-[14px]"
               />
@@ -204,7 +249,7 @@ export function ChequeLoggerModal({
               </span>
               <input
                 type="text"
-                value=""
+                value={posted.amount}
                 disabled
                 className="lve-input !h-[36px] !text-[14px] text-right"
               />
@@ -215,7 +260,7 @@ export function ChequeLoggerModal({
               </span>
               <input
                 type="text"
-                value=""
+                value={posted.transferCompany}
                 disabled
                 className="lve-input !h-[36px] !text-[14px]"
               />

@@ -180,44 +180,35 @@ export function ChequeLoggerModal({
           </div>
 
           {/* Data grid */}
-          <div className="border border-[#BBBBBB] rounded-[4px] overflow-hidden">
-            <table className="w-full text-[13px] font-['Mulish']">
+          <div className="overflow-auto">
+            <table className="lve-grid">
               <thead>
-                <tr className="bg-[#002f5c] text-white text-left">
-                  <th className="px-3 py-2 font-semibold w-[120px]">CHEQNO</th>
-                  <th className="px-3 py-2 font-semibold">TRANSFERCOMPANY</th>
-                  <th className="px-3 py-2 font-semibold w-[120px] text-right">AMOUNT</th>
-                  <th className="px-3 py-2 font-semibold w-[120px]">LOGGEDBY</th>
+                <tr>
+                  <th style={{ width: 120 }}>CHEQNO</th>
+                  <th>TRANSFERCOMPANY</th>
+                  <th style={{ width: 120, textAlign: "right" }}>AMOUNT</th>
+                  <th style={{ width: 120 }}>LOGGEDBY</th>
                 </tr>
               </thead>
-              <tbody className="text-[#3d3d3d]">
-                {cheques.map((c, i) => {
-                  const isSel = i === selected;
-                  return (
-                    <tr
-                      key={c.chequeNo}
-                      onClick={() => setSelected(i)}
-                      className={`cursor-pointer ${
-                        isSel
-                          ? "bg-[#002f5c] text-white"
-                          : i % 2
-                          ? "bg-[#f7f7f7]"
-                          : "bg-white"
-                      }`}
-                    >
-                      <td className="px-3 py-2 border-b border-[#e5e5e5]">{c.chequeNo}</td>
-                      <td className="px-3 py-2 border-b border-[#e5e5e5]">{c.transferCompany}</td>
-                      <td className="px-3 py-2 border-b border-[#e5e5e5] text-right">{c.amount}</td>
-                      <td className="px-3 py-2 border-b border-[#e5e5e5]">{c.loggedBy}</td>
-                    </tr>
-                  );
-                })}
+              <tbody>
+                {cheques.map((c, i) => (
+                  <tr
+                    key={c.chequeNo}
+                    onClick={() => setSelected(i)}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <td>{c.chequeNo}</td>
+                    <td>{c.transferCompany}</td>
+                    <td style={{ textAlign: "right" }}>{c.amount}</td>
+                    <td>{c.loggedBy}</td>
+                  </tr>
+                ))}
                 {Array.from({ length: 6 }).map((_, i) => (
-                  <tr key={`empty-${i}`} className={i % 2 ? "bg-[#f7f7f7]" : "bg-white"}>
-                    <td className="px-3 py-2 border-b border-[#e5e5e5]">&nbsp;</td>
-                    <td className="px-3 py-2 border-b border-[#e5e5e5]"></td>
-                    <td className="px-3 py-2 border-b border-[#e5e5e5]"></td>
-                    <td className="px-3 py-2 border-b border-[#e5e5e5]"></td>
+                  <tr key={`empty-${i}`}>
+                    <td>&nbsp;</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                   </tr>
                 ))}
               </tbody>

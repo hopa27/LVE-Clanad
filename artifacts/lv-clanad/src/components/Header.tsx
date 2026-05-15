@@ -6,6 +6,7 @@ import { AboutModal } from "./AboutModal";
 import { AmendChequesModal } from "./AmendChequesModal";
 import { CompletionCheckerModal } from "./CompletionCheckerModal";
 import { ScreenPrintModal } from "./ScreenPrintModal";
+import { AmendIfaModal } from "./AmendIfaModal";
 
 type SubmenuItem = {
   label: string;
@@ -32,7 +33,7 @@ const MENU_ITEMS: MenuItem[] = [
     options: [
       { label: "Screen Print", shortcut: "F1", action: "screen-print" },
       { label: "Check Completion", action: "check-completion" },
-      { label: "Amend IFA" },
+      { label: "Amend IFA", action: "amend-ifa" },
       { label: "Search", shortcut: "F5" },
     ],
   },
@@ -106,6 +107,7 @@ export function Header({ title }: { title: string }) {
   const [amendChequesOpen, setAmendChequesOpen] = useState(false);
   const [completionOpen, setCompletionOpen] = useState(false);
   const [screenPrintOpen, setScreenPrintOpen] = useState(false);
+  const [amendIfaOpen, setAmendIfaOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -125,6 +127,7 @@ export function Header({ title }: { title: string }) {
     else if (action === "amend-cheques") setAmendChequesOpen(true);
     else if (action === "check-completion") setCompletionOpen(true);
     else if (action === "screen-print") setScreenPrintOpen(true);
+    else if (action === "amend-ifa") setAmendIfaOpen(true);
   };
 
   return (
@@ -268,6 +271,11 @@ export function Header({ title }: { title: string }) {
       <ScreenPrintModal
         open={screenPrintOpen}
         onClose={() => setScreenPrintOpen(false)}
+      />
+
+      <AmendIfaModal
+        open={amendIfaOpen}
+        onClose={() => setAmendIfaOpen(false)}
       />
     </header>
   );

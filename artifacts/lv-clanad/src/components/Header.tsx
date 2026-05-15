@@ -43,7 +43,11 @@ const MENU_ITEMS: MenuItem[] = [
       { label: "Payment Forecast" },
       { label: "NJ Sweep" },
       { label: "P45 details" },
-      { label: "Monthly", hasSubmenu: true },
+      {
+        label: "Monthly",
+        hasSubmenu: true,
+        submenu: [{ label: "Monthly Processing" }],
+      },
       { label: "Coding Scheme Details" },
       { kind: "separator" },
       { label: "Cancel LTC" },

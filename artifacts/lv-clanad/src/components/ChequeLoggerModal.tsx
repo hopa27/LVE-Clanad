@@ -111,8 +111,16 @@ export function ChequeLoggerModal({
       setPosted({ date: "", amount: "", transferCompany: "" });
       return;
     }
+    if (cheques.some((c) => c.chequeNo === no)) {
+      setInfo(`Cheque No ${no} has already been logged.`);
+      return;
+    }
     setPosted(hit);
+    const newCheque: Cheque = { chequeNo: no, loggedBy: "JSMITH", ...hit };
     setDraft((d) => ({ ...d, ...hit }));
+    const next = [...cheques, newCheque];
+    setCheques(next);
+    setSelected(next.length - 1);
   };
 
   const saveNew = () => {

@@ -78,7 +78,8 @@ export function SelectInput({
 }) {
   const { editing } = useEditMode();
   const all = value && !options.includes(value) ? [value, ...options] : options;
-  const isDisabled = disabled || !editing;
+  const lockedReadOnly = !editing;
+  const isDisabled = disabled || lockedReadOnly;
   return (
     <div className="relative">
       <select
@@ -86,7 +87,7 @@ export function SelectInput({
         disabled={isDisabled}
         data-error={error || undefined}
         className={`lve-input pr-12 appearance-none ${
-          isDisabled ? "bg-[#fafafa] cursor-default" : ""
+          lockedReadOnly && !disabled ? "bg-[#fafafa] cursor-default" : ""
         } ${className}`}
       >
         {all.map((opt) => (
@@ -97,7 +98,7 @@ export function SelectInput({
       </select>
       <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none">
         <span className="h-6 w-px bg-[#BBBBBB]" />
-        <span className={`px-3 ${error ? "text-[#d72714]" : "text-[#006cf4]"}`}>
+        <span className={`px-3 ${error ? "text-[#d72714]" : disabled ? "text-[#3d3d3d]" : "text-[#006cf4]"}`}>
           <MdKeyboardArrowDown size={22} />
         </span>
       </div>

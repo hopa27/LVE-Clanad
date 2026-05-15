@@ -165,7 +165,7 @@ export function ChequeLoggerModal({
             <ToolBtn icon={MdFolderOpen} title="Open" />
             <input
               type="text"
-              value={creating ? "" : rec.transferCompany}
+              value="Liverpool Victoria Friendly Society Limited"
               disabled
               className="lve-input !h-[36px] !text-[14px] flex-1"
             />

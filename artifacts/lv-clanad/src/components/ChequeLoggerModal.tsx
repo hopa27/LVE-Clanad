@@ -179,7 +179,7 @@ export function ChequeLoggerModal({
               </span>
               <input
                 type="text"
-                value={creating ? draft.chequeNo : rec.chequeNo}
+                value={creating ? draft.chequeNo : ""}
                 onChange={(e) =>
                   creating && setDraft({ ...draft, chequeNo: e.target.value })
                 }
@@ -193,7 +193,7 @@ export function ChequeLoggerModal({
               </span>
               <input
                 type="text"
-                value={rec.date}
+                value=""
                 disabled
                 className="lve-input !h-[36px] !text-[14px]"
               />
@@ -204,7 +204,7 @@ export function ChequeLoggerModal({
               </span>
               <input
                 type="text"
-                value={rec.amount}
+                value=""
                 disabled
                 className="lve-input !h-[36px] !text-[14px] text-right"
               />
@@ -215,7 +215,7 @@ export function ChequeLoggerModal({
               </span>
               <input
                 type="text"
-                value={rec.transferCompany}
+                value=""
                 disabled
                 className="lve-input !h-[36px] !text-[14px]"
               />

@@ -100,19 +100,17 @@ export function DatePicker({
         <button
           type="button"
           disabled={isDisabled}
-          className={`relative w-full h-[44px] rounded-[8px] text-left font-['Mulish'] text-[16px] border ${
-            explicitlyDisabled ? "text-[#9a9a9a]" : "text-[#3d3d3d]"
-          } ${
+          className={`relative w-full h-[44px] rounded-[8px] text-left font-['Mulish'] text-[16px] text-[#3d3d3d] ${
             error
-              ? "border-[#d72714]"
+              ? "border border-[#d72714]"
               : open
-                ? `${errorBorder} border-[2px]`
+                ? `border-[2px] ${errorBorder}`
                 : explicitlyDisabled
-                  ? "border-[#d8d8d8]"
-                  : "border-[#BBBBBB] hover:border-[#178830]"
+                  ? "border-[2px] border-[#ACACAC] hover:!border-[#ACACAC]"
+                  : "border border-[#BBBBBB] hover:border-[#178830]"
           } ${
             explicitlyDisabled
-              ? "bg-[#ececec] cursor-not-allowed opacity-70 hover:!border-[#d8d8d8]"
+              ? "bg-[#CCCCCC] cursor-not-allowed"
               : isLockedReadOnly
                 ? "bg-[#fafafa] cursor-default"
                 : "bg-white"
@@ -123,7 +121,7 @@ export function DatePicker({
           </span>
           <span className="absolute inset-y-0 right-0 flex items-center pointer-events-none">
             <span className="h-6 w-px bg-[#BBBBBB]" />
-            <span className={`px-3 ${error ? "text-[#d72714]" : explicitlyDisabled ? "text-[#9a9a9a]" : "text-[#006cf4]"}`}>
+            <span className={`px-3 ${error ? "text-[#d72714]" : explicitlyDisabled ? "text-[#3d3d3d]" : "text-[#006cf4]"}`}>
               <MdOutlineCalendarToday size={20} />
             </span>
           </span>

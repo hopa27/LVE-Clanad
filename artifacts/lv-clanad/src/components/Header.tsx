@@ -3,6 +3,7 @@ import lvLogo from "../assets/lv-logo.png";
 import { MdLogout } from "react-icons/md";
 import { TaxCertificateModal } from "./TaxCertificateModal";
 import { AboutModal } from "./AboutModal";
+import { AmendChequesModal } from "./AmendChequesModal";
 
 type SubmenuItem = {
   label: string;
@@ -67,7 +68,7 @@ const MENU_ITEMS: MenuItem[] = [
           { label: "Expired", accel: "E" },
         ],
       },
-      { label: "Amend Cheques" },
+      { label: "Amend Cheques", action: "amend-cheques" },
       { label: "Approve Bank Changes", disabled: true },
       {
         label: "Approve Maturity Bank Detail Changes",
@@ -100,6 +101,7 @@ export function Header({ title }: { title: string }) {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   const [taxCertOpen, setTaxCertOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
+  const [amendChequesOpen, setAmendChequesOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -116,6 +118,7 @@ export function Header({ title }: { title: string }) {
     setOpenIdx(null);
     if (action === "tax-certificate") setTaxCertOpen(true);
     else if (action === "about") setAboutOpen(true);
+    else if (action === "amend-cheques") setAmendChequesOpen(true);
   };
 
   return (
@@ -245,6 +248,11 @@ export function Header({ title }: { title: string }) {
       />
 
       <AboutModal open={aboutOpen} onClose={() => setAboutOpen(false)} />
+
+      <AmendChequesModal
+        open={amendChequesOpen}
+        onClose={() => setAmendChequesOpen(false)}
+      />
     </header>
   );
 }

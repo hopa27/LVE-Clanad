@@ -48,15 +48,15 @@ export function PolicyDetailsTab() {
 
       <div className="space-y-4 lg:col-span-1">
         <Section title="IFA Contact Details">
-          <Field label="Name:"><TextInput value="Age Partnership Wealth Management Limited" /></Field>
-          <Field label="Building:"><TextInput value="2200 Century Way" /></Field>
-          <Field label="City:"><TextInput value="Leeds" /></Field>
-          <Field label="County:"><TextInput value="" /></Field>
-          <Field label="FAO:"><TextInput value="Sirs" /></Field>
+          <Field label="Name:"><TextInput value="Age Partnership Wealth Management Limited" disabled /></Field>
+          <Field label="Building:"><TextInput value="2200 Century Way" disabled /></Field>
+          <Field label="City:"><TextInput value="Leeds" disabled /></Field>
+          <Field label="County:"><TextInput value="" disabled /></Field>
+          <Field label="FAO:"><TextInput value="Sirs" disabled /></Field>
           <Field label="Tel:"><TextInput value="" /></Field>
-          <Field label="Street:"><TextInput value="Thorpe Park" /></Field>
-          <Field label="District:"><TextInput value="" /></Field>
-          <Field label="Post Code:"><TextInput value="LS15 8ZB" /></Field>
+          <Field label="Street:"><TextInput value="Thorpe Park" disabled /></Field>
+          <Field label="District:"><TextInput value="" disabled /></Field>
+          <Field label="Post Code:"><TextInput value="LS15 8ZB" disabled /></Field>
           <Field label="Email:"><TextInput value="WMCS@agepartnership.com" /></Field>
         </Section>
 

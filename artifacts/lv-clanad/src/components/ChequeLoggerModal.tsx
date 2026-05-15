@@ -155,11 +155,9 @@ export function ChequeLoggerModal({
               onChange={(e) =>
                 creating && setDraft({ ...draft, chequeNo: e.target.value })
               }
-              readOnly={!creating}
+              disabled={!creating}
               placeholder={creating ? "Cheque No" : ""}
-              className={`lve-input !h-[36px] !text-[14px] !w-[120px] ${
-                creating ? "" : "!bg-[#fafafa]"
-              }`}
+              className="lve-input !h-[36px] !text-[14px] !w-[120px]"
             />
             <ToolBtn icon={MdNoteAdd} title="New" onClick={startNew} />
             <ToolBtn icon={MdSave} title="Save" onClick={creating ? saveNew : undefined} />

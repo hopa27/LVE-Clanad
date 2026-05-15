@@ -67,7 +67,9 @@ export function DatePicker({
   disabled?: boolean;
 }) {
   const { editing } = useEditMode();
-  const isDisabled = disabled ?? !editing;
+  const explicitlyDisabled = disabled === true;
+  const isDisabled = explicitlyDisabled || !editing;
+  const isLockedReadOnly = isDisabled && !explicitlyDisabled;
   const [date, setDate] = useState<Date | undefined>(() => parseInitial(value));
   const [open, setOpen] = useState(false);
   const [view, setView] = useState<View>("days");
@@ -99,23 +101,29 @@ export function DatePicker({
           type="button"
           disabled={isDisabled}
           className={`relative w-full h-[44px] rounded-[8px] text-left font-['Mulish'] text-[16px] border ${
-            isDisabled ? "text-[#9a9a9a]" : "text-[#3d3d3d]"
+            explicitlyDisabled ? "text-[#9a9a9a]" : "text-[#3d3d3d]"
           } ${
             error
               ? "border-[#d72714]"
               : open
                 ? `${errorBorder} border-[2px]`
-                : isDisabled
+                : explicitlyDisabled
                   ? "border-[#d8d8d8]"
                   : "border-[#BBBBBB] hover:border-[#178830]"
-          } ${isDisabled ? "bg-[#ececec] cursor-not-allowed opacity-70 hover:!border-[#d8d8d8]" : "bg-white"} pl-3 pr-12 transition-colors`}
+          } ${
+            explicitlyDisabled
+              ? "bg-[#ececec] cursor-not-allowed opacity-70 hover:!border-[#d8d8d8]"
+              : isLockedReadOnly
+                ? "bg-[#fafafa] cursor-default"
+                : "bg-white"
+          } pl-3 pr-12 transition-colors`}
         >
           <span className={formatted ? "" : error ? "text-[#d72714]" : "text-[#BBBBBB]"}>
             {formatted || placeholder}
           </span>
           <span className="absolute inset-y-0 right-0 flex items-center pointer-events-none">
             <span className="h-6 w-px bg-[#BBBBBB]" />
-            <span className={`px-3 ${error ? "text-[#d72714]" : isDisabled ? "text-[#9a9a9a]" : "text-[#006cf4]"}`}>
+            <span className={`px-3 ${error ? "text-[#d72714]" : explicitlyDisabled ? "text-[#9a9a9a]" : "text-[#006cf4]"}`}>
               <MdOutlineCalendarToday size={20} />
             </span>
           </span>

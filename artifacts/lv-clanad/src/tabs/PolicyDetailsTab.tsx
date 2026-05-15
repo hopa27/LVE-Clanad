@@ -14,28 +14,28 @@ export function PolicyDetailsTab() {
           </div>
         </Field>
         <Field label="Initial payment method:">
-          <SelectInput value="B" options={["B", "C", "T"]} />
+          <SelectInput value="B" options={["B", "C", "T"]} disabled />
         </Field>
         <Field label="Pay Tax Free Cash by:">
-          <SelectInput value="B" options={["B", "C", "T"]} />
+          <SelectInput value="B" options={["B", "C", "T"]} disabled />
         </Field>
         <div className="my-3 border-t border-[color:var(--color-panel-border)]" />
-        <Field label="ReAssurance Premium:"><TextInput value="9000" /></Field>
+        <Field label="ReAssurance Premium:"><TextInput value="9000" disabled /></Field>
         <Field label="ReAssurer:"><TextInput value="RGA 1" /></Field>
         <Field label="Evidence of Age:"><TextInput value="Y" /></Field>
         <Field label="Advice Type:">
-          <SelectInput value="Non advised" options={["Non advised", "Advised"]} />
+          <SelectInput value="Non advised" options={["Non advised", "Advised"]} disabled />
         </Field>
         <Field label="Distribution Channel:">
-          <SelectInput value="Whole of market" options={["Whole of market", "Restricted"]} />
+          <SelectInput value="Whole of market" options={["Whole of market", "Restricted"]} disabled />
         </Field>
         <div className="my-3 border-t border-[color:var(--color-panel-border)]" />
         <Field label="Internal Maturity Transfer:"><Checkbox /></Field>
         <Field label="Scheme Pension:">
           <SelectInput value="No" options={["No", "Yes"]} />
         </Field>
-        <Field label="Purchaser:"><TextInput value="Mrs L Turner" /></Field>
-        <Field label="Policy Owner:"><TextInput value="Mrs L Turner" /></Field>
+        <Field label="Purchaser:"><TextInput value="Mrs L Turner" disabled /></Field>
+        <Field label="Policy Owner:"><TextInput value="Mrs L Turner" disabled /></Field>
       </Section>
 
       <Section title="Non Standard Policy">
@@ -61,9 +61,9 @@ export function PolicyDetailsTab() {
         </Section>
 
         <Section title="P45 Details">
-          <Field label="P45 date rec'd:"><TextInput value="" /></Field>
-          <Field label="P45 Tax Paid:"><TextInput value="" /></Field>
-          <Field label="P45 Gross Pay:"><TextInput value="" /></Field>
+          <Field label="P45 date rec'd:"><TextInput value="" disabled /></Field>
+          <Field label="P45 Tax Paid:"><TextInput value="" disabled /></Field>
+          <Field label="P45 Gross Pay:"><TextInput value="" disabled /></Field>
         </Section>
 
         <Section title="Adviser">
@@ -74,24 +74,24 @@ export function PolicyDetailsTab() {
 
       <div className="space-y-4 lg:col-span-1">
         <Section title="Agency Deceased">
-          <Field label="Deceased Date:"><DatePicker placeholder="Deceased Date" /></Field>
-          <Field label="Agency Ref:"><TextInput value="" /></Field>
-          <Field label="Agency Unique Ref:"><TextInput value="" /></Field>
-          <Field label="Notification Date:"><DatePicker placeholder="Notification Date" /></Field>
+          <Field label="Deceased Date:"><DatePicker placeholder="Deceased Date" disabled /></Field>
+          <Field label="Agency Ref:"><TextInput value="" disabled /></Field>
+          <Field label="Agency Unique Ref:"><TextInput value="" disabled /></Field>
+          <Field label="Notification Date:"><DatePicker placeholder="Notification Date" disabled /></Field>
         </Section>
 
         <Section title="Statements & Letters">
           <Field label="Issue Statements:">
-            <SelectInput value="Yes" options={["Yes", "No"]} />
+            <SelectInput value="Yes" options={["Yes", "No"]} disabled />
           </Field>
           <Field label="Copy Annual Statement to IFA:">
-            <SelectInput value="Yes" options={["Yes", "No"]} />
+            <SelectInput value="Yes" options={["Yes", "No"]} disabled />
           </Field>
           <Field label="Copy Annual Statement to Policyholder:">
-            <SelectInput value="Yes" options={["Yes", "No"]} />
+            <SelectInput value="Yes" options={["Yes", "No"]} disabled />
           </Field>
           <Field label="Issue wake up letters/maturity chasers:">
-            <SelectInput value="Yes" options={["Yes", "No"]} />
+            <SelectInput value="Yes" options={["Yes", "No"]} disabled />
           </Field>
         </Section>
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MdEmergency } from "react-icons/md";
+import { MdMedicalServices } from "react-icons/md";
 import { Field, TextInput, SelectInput, Checkbox, Section } from "../components/Field";
 import { DatePicker } from "../components/DatePicker";
 import { DoctorDatabaseModal } from "../components/DoctorDatabaseModal";
@@ -53,7 +53,7 @@ function AnnuitantBlock({
               title="Doctor Database"
               aria-label="Doctor Database"
             >
-              <MdEmergency size={18} />
+              <MdMedicalServices size={18} />
             </button>
           </div>
         </Field>

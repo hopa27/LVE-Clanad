@@ -10,7 +10,7 @@ export function ApplicationDetailsTab() {
         <div>
           <Field label="Set Up Date:"><TextInput value="13/03/2025" disabled /></Field>
           <Field label="Received Date:"><TextInput value="11/03/2025" /></Field>
-          <Field label="Start Date:"><TextInput value="25/04/2025" /></Field>
+          <Field label="Start Date:"><TextInput value="25/04/2025" disabled /></Field>
           <Field label="Days Since Application:"><TextInput value="385" disabled /></Field>
         </div>
         <div>
@@ -30,7 +30,7 @@ export function ApplicationDetailsTab() {
       {/* Second row */}
       <div className="panel panel-body grid grid-cols-1 lg:grid-cols-3 gap-x-6">
         <div>
-          <Field label="IFA Payment Date:"><DatePicker value="30/05/2025" placeholder="IFA Payment Date" /></Field>
+          <Field label="IFA Payment Date:"><DatePicker value="30/05/2025" placeholder="IFA Payment Date" disabled /></Field>
           <Field label="PostADay:"><Checkbox checked={true} /></Field>
           <Field label="Transfer from Beneficiary Drawdown?:">
             <SelectInput value="Unknown" options={["Yes", "No", "Unknown"]} />

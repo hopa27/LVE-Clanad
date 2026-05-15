@@ -7,16 +7,23 @@ export function Field({
   children,
   className = "",
   inline = false,
+  labelWidth,
 }: {
   label: ReactNode;
   children: ReactNode;
   className?: string;
   inline?: boolean;
+  labelWidth?: number;
 }) {
   if (inline) {
     return (
       <div className={`mb-4 flex items-center gap-3 ${className}`}>
-        <label className="lve-label !mb-0 text-right shrink-0 w-[170px]">{label}</label>
+        <label
+          className="lve-label !mb-0 text-right shrink-0 leading-tight"
+          style={{ width: labelWidth ?? 170 }}
+        >
+          {label}
+        </label>
         <div className="flex-1 min-w-0">{children}</div>
       </div>
     );

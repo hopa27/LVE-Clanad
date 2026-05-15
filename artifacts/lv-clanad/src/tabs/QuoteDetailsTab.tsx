@@ -42,24 +42,24 @@ export function QuoteDetailsTab() {
         <Section title="LTA Details">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
             <div>
-              <Field label="LTA% Crystallised:"><TextInput value="0" disabled /></Field>
-              <Field label="Pension Fund within LTA:"><TextInput value="15,000" disabled /></Field>
-              <Field label="Net LTA Excess Pension Fund Retained:"><TextInput value="0" disabled /></Field>
-              <Field label="Standard Lifetime Allowance:"><TextInput value="1,073,100" disabled /></Field>
-              <Field label="First BCE:"><Checkbox checked={true} disabled /></Field>
-              <Field label="LTA Protection type:"><TextInput value="N" disabled /></Field>
-              <Field label="Enhancement:"><TextInput value="0" disabled /></Field>
-              <Field label="HMRC Certificate Number:"><TextInput value="" /></Field>
+              <Field inline labelWidth={260} label="LTA% Crystallised:"><TextInput value="0" disabled /></Field>
+              <Field inline labelWidth={260} label="Pension Fund within LTA:"><TextInput value="15,000" disabled /></Field>
+              <Field inline labelWidth={260} label="Net LTA Excess Pension Fund Retained:"><TextInput value="0" disabled /></Field>
+              <Field inline labelWidth={260} label="Standard Lifetime Allowance:"><TextInput value="1,073,100" disabled /></Field>
+              <Field inline labelWidth={260} label="First BCE:"><Checkbox checked={true} disabled /></Field>
+              <Field inline labelWidth={260} label="LTA Protection type:"><TextInput value="N" disabled /></Field>
+              <Field inline labelWidth={260} label="Enhancement:"><TextInput value="0" disabled /></Field>
+              <Field inline labelWidth={260} label="HMRC Certificate Number:"><TextInput value="" /></Field>
             </div>
             <div>
-              <Field label="Cumulative LTA%:"><TextInput value="0" disabled /></Field>
-              <Field label="LTA Excess Tax:"><TextInput value="0" disabled /></Field>
-              <Field label="Net LTA Excess Lumpsum:"><TextInput value="0" disabled /></Field>
-              <Field label="Pensions In Payment LTA%:"><TextInput value="0" disabled /></Field>
-              <Field label="LSA Amount:"><TextInput value="8,190" /></Field>
-              <Field label="PCLS Protection:"><TextInput value="N" disabled /></Field>
-              <Field label="Enhancement:"><TextInput value="0.25" disabled /></Field>
-              <Field label="% Crystallised Post 5th Apr 2024:"><TextInput value="100" /></Field>
+              <Field inline labelWidth={260} label="Cumulative LTA%:"><TextInput value="0" disabled /></Field>
+              <Field inline labelWidth={260} label="LTA Excess Tax:"><TextInput value="0" disabled /></Field>
+              <Field inline labelWidth={260} label="Net LTA Excess Lumpsum:"><TextInput value="0" disabled /></Field>
+              <Field inline labelWidth={260} label="Pensions In Payment LTA%:"><TextInput value="0" disabled /></Field>
+              <Field inline labelWidth={260} label="LSA Amount:"><TextInput value="8,190" /></Field>
+              <Field inline labelWidth={260} label="PCLS Protection:"><TextInput value="N" disabled /></Field>
+              <Field inline labelWidth={260} label="Enhancement:"><TextInput value="0.25" disabled /></Field>
+              <Field inline labelWidth={260} label="% Crystallised Post 5th Apr 2024:"><TextInput value="100" /></Field>
             </div>
           </div>
         </Section>

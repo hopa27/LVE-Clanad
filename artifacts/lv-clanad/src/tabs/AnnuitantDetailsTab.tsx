@@ -49,7 +49,7 @@ function AnnuitantBlock({
             <button
               type="button"
               onClick={() => setDoctorOpen(true)}
-              className="lve-btn lve-btn-secondary lve-btn-sm !px-3 shrink-0"
+              className="lve-btn lve-btn-secondary !rounded-full !p-0 !w-10 !h-10 shrink-0 inline-flex items-center justify-center"
               title="Doctor Database"
               aria-label="Doctor Database"
             >

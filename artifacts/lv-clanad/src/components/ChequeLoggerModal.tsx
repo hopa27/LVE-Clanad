@@ -156,7 +156,7 @@ export function ChequeLoggerModal({
     value: string;
     width: number;
   }) => (
-    <div className="flex flex-col gap-1" style={{ width }}>
+    <div className="flex flex-col gap-1" style={width ? { width } : undefined}>
       <span className="font-['Livvic'] font-semibold text-[13px] text-[#0d2c41]">
         {label}
       </span>
@@ -193,7 +193,7 @@ export function ChequeLoggerModal({
               className="lve-input !h-[36px] !text-[14px] !w-[120px]"
             />
             <ToolBtn icon={MdNoteAdd} title="New" onClick={startNew} />
-            <ToolBtn icon={MdSave} title="Save" onClick={creating ? saveNew : undefined} />
+            <ToolBtn icon={MdSave} title="Post Cheque" onClick={postCheque} />
             <ToolBtn icon={MdEdit} title="Edit" />
             <ToolBtn icon={MdDelete} title="Delete" />
             <ToolBtn icon={MdLightbulbOutline} title="Info" />
@@ -222,48 +222,10 @@ export function ChequeLoggerModal({
                 className="lve-input !h-[36px] !text-[14px]"
               />
             </div>
-            <button
-              type="button"
-              onClick={postCheque}
-              disabled={!creating}
-              className="lve-btn lve-btn-sm !h-[36px]"
-              title="Post Cheque"
-            >
-              <MdCloudDownload size={16} />
-              <span>Post Cheque</span>
-            </button>
-            <div className="flex flex-col gap-1" style={{ width: 120 }}>
-              <span className="font-['Livvic'] font-semibold text-[13px] text-[#0d2c41]">
-                Date
-              </span>
-              <input
-                type="text"
-                value={posted.date}
-                disabled
-                className="lve-input !h-[36px] !text-[14px]"
-              />
-            </div>
-            <div className="flex flex-col gap-1" style={{ width: 140 }}>
-              <span className="font-['Livvic'] font-semibold text-[13px] text-[#0d2c41]">
-                Amount
-              </span>
-              <input
-                type="text"
-                value={posted.amount}
-                disabled
-                className="lve-input !h-[36px] !text-[14px] text-right"
-              />
-            </div>
-            <div className="flex flex-col gap-1 flex-1">
-              <span className="font-['Livvic'] font-semibold text-[13px] text-[#0d2c41]">
-                Transfer Company
-              </span>
-              <input
-                type="text"
-                value={posted.transferCompany}
-                disabled
-                className="lve-input !h-[36px] !text-[14px]"
-              />
+            <HeaderField label="Date" value={posted.date} width={120} />
+            <HeaderField label="Amount" value={posted.amount} width={140} />
+            <div className="flex-1">
+              <HeaderField label="Transfer Company" value={posted.transferCompany} width={0} />
             </div>
           </div>
 

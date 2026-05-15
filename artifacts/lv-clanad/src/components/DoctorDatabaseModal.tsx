@@ -10,6 +10,7 @@ import {
   MdSave,
   MdDelete,
   MdCheck,
+  MdCancel,
 } from "react-icons/md";
 
 type Doctor = {
@@ -213,12 +214,11 @@ export function DoctorDatabaseModal({
               </button>
               <button
                 type="button"
-                disabled={editing}
-                onClick={() => setEditing(true)}
+                onClick={() => setEditing((v) => !v)}
                 className="lve-btn lve-btn-secondary lve-btn-sm !px-2"
-                title="Edit"
+                title={editing ? "Cancel" : "Edit"}
               >
-                <MdEdit size={16} />
+                {editing ? <MdCancel size={16} /> : <MdEdit size={16} />}
               </button>
               <button
                 type="button"

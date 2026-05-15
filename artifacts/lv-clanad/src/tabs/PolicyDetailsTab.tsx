@@ -14,28 +14,28 @@ export function PolicyDetailsTab() {
           </div>
         </Field>
         <Field label="Initial payment method:">
-          <SelectInput value="B" options={["B", "C", "T"]} disabled />
+          <SelectInput value="B" options={["B", "C", "T"]} />
         </Field>
         <Field label="Pay Tax Free Cash by:">
-          <SelectInput value="B" options={["B", "C", "T"]} disabled />
+          <SelectInput value="B" options={["B", "C", "T"]} />
         </Field>
         <div className="my-3 border-t border-[color:var(--color-panel-border)]" />
-        <Field label="ReAssurance Premium:"><TextInput value="9000" disabled /></Field>
+        <Field label="ReAssurance Premium:"><TextInput value="9000" /></Field>
         <Field label="ReAssurer:"><TextInput value="RGA 1" /></Field>
         <Field label="Evidence of Age:"><TextInput value="Y" /></Field>
         <Field label="Advice Type:">
-          <SelectInput value="Non advised" options={["Non advised", "Advised"]} disabled />
+          <SelectInput value="Non advised" options={["Non advised", "Advised"]} />
         </Field>
         <Field label="Distribution Channel:">
-          <SelectInput value="Whole of market" options={["Whole of market", "Restricted"]} disabled />
+          <SelectInput value="Whole of market" options={["Whole of market", "Restricted"]} />
         </Field>
         <div className="my-3 border-t border-[color:var(--color-panel-border)]" />
         <Field label="Internal Maturity Transfer:"><Checkbox /></Field>
         <Field label="Scheme Pension:">
           <SelectInput value="No" options={["No", "Yes"]} />
         </Field>
-        <Field label="Purchaser:"><TextInput value="Mrs L Turner" disabled /></Field>
-        <Field label="Policy Owner:"><TextInput value="Mrs L Turner" disabled /></Field>
+        <Field label="Purchaser:"><TextInput value="Mrs L Turner" /></Field>
+        <Field label="Policy Owner:"><TextInput value="Mrs L Turner" /></Field>
       </Section>
 
       <Section title="Non Standard Policy">

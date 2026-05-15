@@ -4,6 +4,7 @@ import { MdLogout } from "react-icons/md";
 import { TaxCertificateModal } from "./TaxCertificateModal";
 import { AboutModal } from "./AboutModal";
 import { AmendChequesModal } from "./AmendChequesModal";
+import { CompletionCheckerModal } from "./CompletionCheckerModal";
 
 type SubmenuItem = {
   label: string;
@@ -29,7 +30,7 @@ const MENU_ITEMS: MenuItem[] = [
     label: "Options",
     options: [
       { label: "Screen Print", shortcut: "F1" },
-      { label: "Check Completion" },
+      { label: "Check Completion", action: "check-completion" },
       { label: "Amend IFA" },
       { label: "Search", shortcut: "F5" },
     ],
@@ -102,6 +103,7 @@ export function Header({ title }: { title: string }) {
   const [taxCertOpen, setTaxCertOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [amendChequesOpen, setAmendChequesOpen] = useState(false);
+  const [completionOpen, setCompletionOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -119,6 +121,7 @@ export function Header({ title }: { title: string }) {
     if (action === "tax-certificate") setTaxCertOpen(true);
     else if (action === "about") setAboutOpen(true);
     else if (action === "amend-cheques") setAmendChequesOpen(true);
+    else if (action === "check-completion") setCompletionOpen(true);
   };
 
   return (
@@ -252,6 +255,11 @@ export function Header({ title }: { title: string }) {
       <AmendChequesModal
         open={amendChequesOpen}
         onClose={() => setAmendChequesOpen(false)}
+      />
+
+      <CompletionCheckerModal
+        open={completionOpen}
+        onClose={() => setCompletionOpen(false)}
       />
     </header>
   );

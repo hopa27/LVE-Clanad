@@ -18,7 +18,7 @@ type Cheque = {
   date: string;
 };
 
-const CHEQUES: Cheque[] = [
+const INITIAL_CHEQUES: Cheque[] = [
   {
     chequeNo: "232693",
     transferCompany: "Liverpool Victoria Friendly Society Limited",
@@ -49,12 +49,48 @@ export function ChequeLoggerModal({
   open: boolean;
   onClose: () => void;
 }) {
+  const [cheques, setCheques] = useState<Cheque[]>(INITIAL_CHEQUES);
   const [selected, setSelected] = useState(0);
   const [findValue, setFindValue] = useState("");
+  const [creating, setCreating] = useState(false);
+  const [draft, setDraft] = useState<Cheque>({
+    chequeNo: "",
+    transferCompany: "",
+    amount: "",
+    loggedBy: "JSMITH",
+    date: "",
+  });
+  const [info, setInfo] = useState<string | null>(null);
 
   if (!open) return null;
 
-  const rec = CHEQUES[selected]!;
+  const rec = cheques[selected] ?? INITIAL_CHEQUES[0]!;
+
+  const startNew = () => {
+    const today = new Date().toLocaleDateString("en-GB");
+    setDraft({
+      chequeNo: "",
+      transferCompany: "",
+      amount: "",
+      loggedBy: "JSMITH",
+      date: today,
+    });
+    setCreating(true);
+  };
+
+  const cancelNew = () => setCreating(false);
+
+  const saveNew = () => {
+    if (!draft.chequeNo.trim() || !draft.transferCompany.trim()) {
+      setInfo("Please enter a Cheque No and Transfer Company.");
+      return;
+    }
+    const next = [...cheques, draft];
+    setCheques(next);
+    setSelected(next.length - 1);
+    setCreating(false);
+    setInfo("Cheque added successfully");
+  };
 
   const ToolBtn = ({
     icon: Icon,
@@ -115,31 +151,63 @@ export function ChequeLoggerModal({
           <div className="flex items-center gap-2">
             <input
               type="text"
-              value={rec.chequeNo}
-              readOnly
-              className="lve-input !h-[36px] !text-[14px] !w-[120px] !bg-[#fafafa]"
+              value={creating ? draft.chequeNo : rec.chequeNo}
+              onChange={(e) =>
+                creating && setDraft({ ...draft, chequeNo: e.target.value })
+              }
+              readOnly={!creating}
+              placeholder={creating ? "Cheque No" : ""}
+              className={`lve-input !h-[36px] !text-[14px] !w-[120px] ${
+                creating ? "" : "!bg-[#fafafa]"
+              }`}
             />
-            <ToolBtn icon={MdNoteAdd} title="New" />
-            <ToolBtn icon={MdSave} title="Save" />
+            <ToolBtn icon={MdNoteAdd} title="New" onClick={startNew} />
+            <ToolBtn icon={MdSave} title="Save" onClick={creating ? saveNew : undefined} />
             <ToolBtn icon={MdEdit} title="Edit" />
             <ToolBtn icon={MdDelete} title="Delete" />
             <ToolBtn icon={MdLightbulbOutline} title="Info" />
             <ToolBtn icon={MdFolderOpen} title="Open" />
             <input
               type="text"
-              value={rec.transferCompany}
-              readOnly
-              className="lve-input !h-[36px] !text-[14px] flex-1 !bg-[#fafafa]"
+              value={creating ? draft.transferCompany : rec.transferCompany}
+              onChange={(e) =>
+                creating && setDraft({ ...draft, transferCompany: e.target.value })
+              }
+              readOnly={!creating}
+              placeholder={creating ? "Transfer Company" : ""}
+              className={`lve-input !h-[36px] !text-[14px] flex-1 ${
+                creating ? "" : "!bg-[#fafafa]"
+              }`}
             />
             <button
               type="button"
-              onClick={onClose}
-              title="Exit"
+              onClick={creating ? cancelNew : onClose}
+              title={creating ? "Cancel" : "Exit"}
               className="lve-btn lve-btn-secondary lve-btn-sm !px-2"
             >
               <MdClose size={16} />
             </button>
           </div>
+
+          {creating && (
+            <div className="flex items-center gap-3 -mt-1">
+              <label className="font-['Livvic'] text-[13px] text-[#0d2c41] w-[80px]">Amount:</label>
+              <input
+                type="text"
+                value={draft.amount}
+                onChange={(e) => setDraft({ ...draft, amount: e.target.value })}
+                placeholder="0.00"
+                className="lve-input !h-[36px] !text-[14px] !w-[160px]"
+              />
+              <label className="font-['Livvic'] text-[13px] text-[#0d2c41] w-[60px]">Date:</label>
+              <input
+                type="text"
+                value={draft.date}
+                onChange={(e) => setDraft({ ...draft, date: e.target.value })}
+                className="lve-input !h-[36px] !text-[14px] !w-[140px]"
+              />
+            </div>
+          )}
 
           {/* Header fields row */}
           <div className="flex gap-3">
@@ -161,7 +229,7 @@ export function ChequeLoggerModal({
                 </tr>
               </thead>
               <tbody className="text-[#3d3d3d]">
-                {CHEQUES.map((c, i) => {
+                {cheques.map((c, i) => {
                   const isSel = i === selected;
                   return (
                     <tr
@@ -205,7 +273,7 @@ export function ChequeLoggerModal({
             <button
               type="button"
               onClick={() => {
-                const idx = CHEQUES.findIndex((c) =>
+                const idx = cheques.findIndex((c) =>
                   c.chequeNo.toLowerCase().includes(findValue.trim().toLowerCase()),
                 );
                 if (idx >= 0) setSelected(idx);
@@ -218,6 +286,37 @@ export function ChequeLoggerModal({
           </div>
         </div>
       </div>
+
+      {info && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40 p-6">
+          <div className="lve-panel bg-white w-[440px] max-w-full">
+            <header className="lve-panel-header flex items-center justify-between">
+              <span>Information</span>
+              <button
+                type="button"
+                className="inline-flex items-center justify-center w-7 h-7 rounded-[4px] text-[#00263e] hover:bg-[#d72714] hover:text-white transition-colors"
+                onClick={() => setInfo(null)}
+                aria-label="Close"
+                title="Close"
+              >
+                <MdClose size={18} />
+              </button>
+            </header>
+            <div className="lve-panel-body flex flex-col gap-5">
+              <p className="font-['Mulish'] text-[14px] text-[#3d3d3d]">{info}</p>
+              <div className="flex justify-center">
+                <button
+                  type="button"
+                  onClick={() => setInfo(null)}
+                  className="lve-btn lve-btn-sm min-w-[100px] justify-center"
+                >
+                  OK
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

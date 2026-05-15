@@ -222,10 +222,38 @@ export function ChequeLoggerModal({
                 className="lve-input !h-[36px] !text-[14px]"
               />
             </div>
-            <HeaderField label="Date" value={posted.date} width={120} />
-            <HeaderField label="Amount" value={posted.amount} width={140} />
-            <div className="flex-1">
-              <HeaderField label="Transfer Company" value={posted.transferCompany} width={0} />
+            <div className="flex flex-col gap-1" style={{ width: 120 }}>
+              <span className="font-['Livvic'] font-semibold text-[13px] text-[#0d2c41]">
+                Date
+              </span>
+              <input
+                type="text"
+                value={posted.date}
+                disabled
+                className="lve-input !h-[36px] !text-[14px]"
+              />
+            </div>
+            <div className="flex flex-col gap-1" style={{ width: 140 }}>
+              <span className="font-['Livvic'] font-semibold text-[13px] text-[#0d2c41]">
+                Amount
+              </span>
+              <input
+                type="text"
+                value={posted.amount}
+                disabled
+                className="lve-input !h-[36px] !text-[14px] text-right"
+              />
+            </div>
+            <div className="flex flex-col gap-1 flex-1">
+              <span className="font-['Livvic'] font-semibold text-[13px] text-[#0d2c41]">
+                Transfer Company
+              </span>
+              <input
+                type="text"
+                value={posted.transferCompany}
+                disabled
+                className="lve-input !h-[36px] !text-[14px]"
+              />
             </div>
           </div>
 

@@ -68,8 +68,9 @@ export function ChequeLoggerModal({
 
   const startNew = () => {
     const today = new Date().toLocaleDateString("en-GB");
+    const lastNo = parseInt(cheques[cheques.length - 1]?.chequeNo ?? "232695", 10);
     setDraft({
-      chequeNo: "",
+      chequeNo: String(lastNo + 1),
       transferCompany: "",
       amount: "",
       loggedBy: "JSMITH",
@@ -151,12 +152,9 @@ export function ChequeLoggerModal({
           <div className="flex items-center gap-2">
             <input
               type="text"
-              value={creating ? draft.chequeNo : rec.chequeNo}
-              onChange={(e) =>
-                creating && setDraft({ ...draft, chequeNo: e.target.value })
-              }
-              disabled={!creating}
-              placeholder={creating ? "Cheque No" : ""}
+              value="225810"
+              disabled
+              title="Policy No"
               className="lve-input !h-[36px] !text-[14px] !w-[120px]"
             />
             <ToolBtn icon={MdNoteAdd} title="New" onClick={startNew} />

@@ -170,8 +170,8 @@ export function ChequeLoggerModal({
             <input
               type="text"
               value={creating ? "" : rec.transferCompany}
-              readOnly
-              className="lve-input !h-[36px] !text-[14px] flex-1 !bg-[#fafafa]"
+              disabled
+              className="lve-input !h-[36px] !text-[14px] flex-1"
             />
           </div>
 

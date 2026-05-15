@@ -173,14 +173,6 @@ export function ChequeLoggerModal({
               readOnly
               className="lve-input !h-[36px] !text-[14px] flex-1 !bg-[#fafafa]"
             />
-            <button
-              type="button"
-              onClick={creating ? cancelNew : onClose}
-              title={creating ? "Cancel" : "Exit"}
-              className="lve-btn lve-btn-secondary lve-btn-sm !px-2"
-            >
-              <MdClose size={16} />
-            </button>
           </div>
 
           {/* Header fields row */}

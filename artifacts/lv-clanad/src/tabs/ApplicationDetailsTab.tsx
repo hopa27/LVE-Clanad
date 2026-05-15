@@ -37,7 +37,6 @@ export function ApplicationDetailsTab() {
           </Field>
         </div>
         <div>
-          <Field label=""><TextInput value="10/12/2013" /></Field>
           <Field label="Rates Ok'd by:"><TextInput value="" disabled /></Field>
           <Field label="Paykey:"><TextInput value="1016052" disabled /></Field>
           <Field label="Policy No:"><TextInput value="225810" disabled /></Field>

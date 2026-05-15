@@ -81,8 +81,8 @@ export function ChequeLoggerModal({
   const cancelNew = () => setCreating(false);
 
   const saveNew = () => {
-    if (!draft.chequeNo.trim() || !draft.transferCompany.trim()) {
-      setInfo("Please enter a Cheque No and Transfer Company.");
+    if (!draft.chequeNo.trim()) {
+      setInfo("Please enter a Cheque No.");
       return;
     }
     const next = [...cheques, draft];
@@ -169,15 +169,9 @@ export function ChequeLoggerModal({
             <ToolBtn icon={MdFolderOpen} title="Open" />
             <input
               type="text"
-              value={creating ? draft.transferCompany : rec.transferCompany}
-              onChange={(e) =>
-                creating && setDraft({ ...draft, transferCompany: e.target.value })
-              }
-              readOnly={!creating}
-              placeholder={creating ? "Transfer Company" : ""}
-              className={`lve-input !h-[36px] !text-[14px] flex-1 ${
-                creating ? "" : "!bg-[#fafafa]"
-              }`}
+              value={creating ? "" : rec.transferCompany}
+              readOnly
+              className="lve-input !h-[36px] !text-[14px] flex-1 !bg-[#fafafa]"
             />
             <button
               type="button"
@@ -188,26 +182,6 @@ export function ChequeLoggerModal({
               <MdClose size={16} />
             </button>
           </div>
-
-          {creating && (
-            <div className="flex items-center gap-3 -mt-1">
-              <label className="font-['Livvic'] text-[13px] text-[#0d2c41] w-[80px]">Amount:</label>
-              <input
-                type="text"
-                value={draft.amount}
-                onChange={(e) => setDraft({ ...draft, amount: e.target.value })}
-                placeholder="0.00"
-                className="lve-input !h-[36px] !text-[14px] !w-[160px]"
-              />
-              <label className="font-['Livvic'] text-[13px] text-[#0d2c41] w-[60px]">Date:</label>
-              <input
-                type="text"
-                value={draft.date}
-                onChange={(e) => setDraft({ ...draft, date: e.target.value })}
-                className="lve-input !h-[36px] !text-[14px] !w-[140px]"
-              />
-            </div>
-          )}
 
           {/* Header fields row */}
           <div className="flex gap-3">

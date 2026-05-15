@@ -1,5 +1,8 @@
+import { useState } from "react";
+import { MdLocalHospital } from "react-icons/md";
 import { Field, TextInput, SelectInput, Checkbox, Section } from "../components/Field";
 import { DatePicker } from "../components/DatePicker";
+import { DoctorDatabaseModal } from "../components/DoctorDatabaseModal";
 
 function AnnuitantBlock({
   surname = "",
@@ -21,6 +24,7 @@ function AnnuitantBlock({
   showShortName = true,
   showUwRef = true,
 }: Record<string, string | boolean | undefined>) {
+  const [doctorOpen, setDoctorOpen] = useState(false);
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-6">
       <div>
@@ -37,7 +41,22 @@ function AnnuitantBlock({
         <Field label="Death Cert Received?:"><Checkbox checked={deathCert as boolean} /></Field>
         <Field label="Nat ins no:"><TextInput value={natIns as string} /></Field>
         <Field label="Enhanced?:"><TextInput value={enhanced as string} disabled /></Field>
-        <Field label="Doctor:"><TextInput value={doctor as string} /></Field>
+        <Field label="Doctor:">
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setDoctorOpen(true)}
+              className="lve-btn lve-btn-secondary lve-btn-sm !px-3 shrink-0"
+              title="Doctor Database"
+              aria-label="Doctor Database"
+            >
+              <MdLocalHospital size={18} />
+            </button>
+            <div className="flex-1 min-w-0">
+              <TextInput value={doctor as string} />
+            </div>
+          </div>
+        </Field>
         <Field label="Gender:">
           <SelectInput value={gender as string} options={["", "Male", "Female"]} />
         </Field>
@@ -51,6 +70,7 @@ function AnnuitantBlock({
           <Field label="U/W Ref:"><TextInput value={uwRef as string} disabled /></Field>
         )}
       </div>
+      <DoctorDatabaseModal open={doctorOpen} onClose={() => setDoctorOpen(false)} />
     </div>
   );
 }

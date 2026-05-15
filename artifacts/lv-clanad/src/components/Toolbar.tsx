@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   MdAdd,
   MdNoteAdd,
@@ -50,6 +50,12 @@ export function Toolbar() {
   const [crsOpen, setCrsOpen] = useState(false);
   const [logOpen, setLogOpen] = useState(false);
   const [findPolicyOpen, setFindPolicyOpen] = useState(false);
+
+  useEffect(() => {
+    const handler = () => setFindPolicyOpen(true);
+    window.addEventListener("clanad:open-find-policy", handler);
+    return () => window.removeEventListener("clanad:open-find-policy", handler);
+  }, []);
 
   const TOOLS: Tool[] = [
     { label: "New App", icon: MdAdd, enabled: !editing, action: "new-app" },

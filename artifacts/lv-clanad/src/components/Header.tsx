@@ -34,7 +34,7 @@ const MENU_ITEMS: MenuItem[] = [
       { label: "Screen Print", shortcut: "F1", action: "screen-print" },
       { label: "Check Completion", action: "check-completion" },
       { label: "Amend IFA", action: "amend-ifa" },
-      { label: "Search", shortcut: "F5" },
+      { label: "Search", shortcut: "F5", action: "search" },
     ],
   },
   {
@@ -128,6 +128,8 @@ export function Header({ title }: { title: string }) {
     else if (action === "check-completion") setCompletionOpen(true);
     else if (action === "screen-print") setScreenPrintOpen(true);
     else if (action === "amend-ifa") setAmendIfaOpen(true);
+    else if (action === "search")
+      window.dispatchEvent(new Event("clanad:open-find-policy"));
   };
 
   return (

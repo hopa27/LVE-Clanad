@@ -90,20 +90,16 @@ function FieldRow({
   );
 }
 
-function ReadField({ value }: { value: string }) {
-  return (
-    <div className="flex h-[36px] items-center rounded-[6px] border-[2px] border-[#ACACAC] bg-[#CCCCCC] px-3 font-['Mulish'] text-[14px] text-[#3d3d3d] cursor-not-allowed">
-      {value || "\u00A0"}
-    </div>
-  );
-}
-
-function EditField({ value }: { value: string }) {
+function ActiveField({ value, editing }: { value: string; editing: boolean }) {
   return (
     <input
+      key={value}
       type="text"
       defaultValue={value}
-      className="lve-input !h-[36px] !text-[14px]"
+      readOnly={!editing}
+      className={`lve-input !h-[36px] !text-[14px] ${
+        !editing ? "bg-[#fafafa] cursor-default" : ""
+      }`}
     />
   );
 }
@@ -130,7 +126,9 @@ export function DoctorDatabaseModal({
     setIndex(Math.max(0, Math.min(total - 1, target)));
   };
 
-  const Value = editing ? EditField : ReadField;
+  const Value = ({ value }: { value: string }) => (
+    <ActiveField value={value} editing={editing} />
+  );
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">

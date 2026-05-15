@@ -43,6 +43,9 @@ function AnnuitantBlock({
         <Field label="Enhanced?:"><TextInput value={enhanced as string} disabled /></Field>
         <Field label="Doctor:">
           <div className="flex items-center gap-2">
+            <div className="flex-1 min-w-0">
+              <TextInput value={doctor as string} />
+            </div>
             <button
               type="button"
               onClick={() => setDoctorOpen(true)}
@@ -52,9 +55,6 @@ function AnnuitantBlock({
             >
               <MdLocalHospital size={18} />
             </button>
-            <div className="flex-1 min-w-0">
-              <TextInput value={doctor as string} />
-            </div>
           </div>
         </Field>
         <Field label="Gender:">

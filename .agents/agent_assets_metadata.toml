@@ -6,3 +6,9 @@ id = "QF6JLafRacJuNOuehWHJ6"
 uri = "file://docs/CHEQUE_LOGGER_SCREEN_FLOW(Angular).md"
 type = "text"
 title = "Cheque Logger Screen Flow (Angular)"
+
+[[outputs]]
+id = "AnnM68rPxi67cIgmGaoU-"
+uri = "file://docs/CHEQUE_LOGGER_DIGEST(Angular).md"
+type = "text"
+title = "Cheque Logger Digest (Angular)"

@@ -29,6 +29,11 @@ export function QuoteDetailsTab() {
             <Field label="Policy Type:">
               <SelectInput value="with profit" options={["with profit", "without profit"]} disabled />
             </Field>
+            <Field label="Original GAD Limit Upper:"><TextInput value="" disabled /></Field>
+            <Field label="Original GAD Limit:"><TextInput value="" disabled /></Field>
+            <Field label="Original GAD Review Date:"><TextInput value="" disabled /></Field>
+            <Field label="GAD Review Maximum:"><TextInput value="" disabled /></Field>
+            <Field label="GAD Review Date:"><TextInput value="" disabled /></Field>
           </div>
           <div>
             <Field label="Notional Value:"><TextInput value="14,828" disabled /></Field>

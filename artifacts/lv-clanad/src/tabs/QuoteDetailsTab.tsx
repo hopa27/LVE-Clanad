@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { Field, TextInput, SelectInput, Checkbox, Section } from "../components/Field";
+import { ViewNotionalValueModal } from "../components/ViewNotionalValueModal";
 
 const QUOTE_ROWS = [
   {
@@ -10,6 +12,7 @@ const QUOTE_ROWS = [
 ];
 
 export function QuoteDetailsTab() {
+  const [notionalOpen, setNotionalOpen] = useState(false);
   return (
     <div className="space-y-4">
       <Section title="Basis Details">
@@ -40,7 +43,13 @@ export function QuoteDetailsTab() {
             <Field label="Value Date:"><TextInput value="25/03/2026" disabled /></Field>
             <Field label="Total Withheld Minimal Income:"><TextInput value="" disabled /></Field>
             <Field label="Total Mutual Bonus:"><TextInput value="" disabled /></Field>
-            <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm mt-2">View Notional Value</button>
+            <button
+              type="button"
+              onClick={() => setNotionalOpen(true)}
+              className="lve-btn lve-btn-secondary lve-btn-sm mt-2"
+            >
+              View Notional Value
+            </button>
           </div>
         </div>
 
@@ -100,6 +109,8 @@ export function QuoteDetailsTab() {
           </table>
         </div>
       </Section>
+
+      <ViewNotionalValueModal open={notionalOpen} onClose={() => setNotionalOpen(false)} />
     </div>
   );
 }

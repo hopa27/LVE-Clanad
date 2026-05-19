@@ -42,7 +42,11 @@ const MENU_ITEMS: MenuItem[] = [
     options: [
       { label: "Payment Forecast" },
       { label: "NJ Sweep" },
-      { label: "P45 details" },
+      {
+        label: "P45 details",
+        hasSubmenu: true,
+        submenu: [{ label: "P45 Details" }],
+      },
       {
         label: "Monthly",
         hasSubmenu: true,

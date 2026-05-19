@@ -136,7 +136,7 @@ export function FindPolicyModal({
 
           {/* Results grid */}
           <div className="border border-[#BBBBBB] rounded-[8px] overflow-hidden">
-            <div className="overflow-x-auto">
+            <div className="overflow-auto max-h-[320px]">
               <table className="w-full font-['Mulish'] text-[13px] text-[#3d3d3d] min-w-[1160px]">
                 <thead>
                   <tr className="bg-white border-y-[3px] border-[#04589b] font-['Livvic'] font-semibold text-[13px] uppercase text-[#002f5c]">

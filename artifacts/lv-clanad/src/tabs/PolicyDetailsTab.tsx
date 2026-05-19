@@ -20,6 +20,7 @@ export function PolicyDetailsTab() {
           <SelectInput value="B" options={["B", "C", "T"]} />
         </Field>
         <div className="my-3 border-t border-[color:var(--color-panel-border)]" />
+        <Field label="IR Balance:"><TextInput value="" /></Field>
         <Field label="ReAssurance Premium:"><TextInput value="9000" /></Field>
         <Field label="ReAssurer:"><TextInput value="RGA 1" /></Field>
         <Field label="Evidence of Age:"><TextInput value="Y" /></Field>

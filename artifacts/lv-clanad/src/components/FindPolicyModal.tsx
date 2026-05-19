@@ -9,24 +9,36 @@ type PolicyRow = {
   natInsNo: string;
   originalQuote: string;
   status: string;
+  phPostCode: string;
+  ifaRef: string;
+  dob1: string;
+  policyNo: string;
+  cocode: string;
   premium: string;
   fullName1: string;
   fullName2: string;
 };
 
 const POLICIES: PolicyRow[] = [
-  {
-    policyRef: "233433",
-    planType: "FTA",
-    planCode: "88",
-    surname: "TEST",
-    natInsNo: "JK-90-90-90-C",
-    originalQuote: "20825118",
-    status: "L",
-    premium: "£10,000.00",
-    fullName1: "Test  Test",
-    fullName2: "",
-  },
+  { policyRef: "100001",   planType: "CPA", planCode: "61i", surname: "TESTPEBAAAAB",    natInsNo: "",              originalQuote: "965685", status: "N", phPostCode: "",         ifaRef: "HARGR-00",  dob1: "18/04/1948", policyNo: "100001",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Pebaaaab",   fullName2: "" },
+  { policyRef: "100002",   planType: "CPA", planCode: "51",  surname: "TESTCBAAAAAC",   natInsNo: "CH-26-10-47-A", originalQuote: "929591", status: "D", phPostCode: "",         ifaRef: "THEM&-005", dob1: "26/10/1947", policyNo: "100002",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Cbaaaaac",  fullName2: "" },
+  { policyRef: "100003",   planType: "PPA", planCode: "621", surname: "TESTSEBAAAAD",   natInsNo: "SB-25-07-53-A", originalQuote: "930942", status: "D", phPostCode: "DA99 9AB", ifaRef: "",          dob1: "25/07/1953", policyNo: "100003",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Sebaaaad",   fullName2: "" },
+  { policyRef: "100004",   planType: "PPA", planCode: "621", surname: "TESTFRBAAAAE",   natInsNo: "EX-07-01-43-A", originalQuote: "919598", status: "D", phPostCode: "",         ifaRef: "FORUM-00",  dob1: "07/01/1943", policyNo: "100004",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Frbaaaae",   fullName2: "" },
+  { policyRef: "100004.1", planType: "PPA", planCode: "621", surname: "TESTFRBAAAAE.B", natInsNo: "EX-07-01-43-A", originalQuote: "919598", status: "D", phPostCode: "QU99 9AB", ifaRef: "",          dob1: "07/01/1943", policyNo: "100004.1", cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Frbaaaae.B", fullName2: "" },
+  { policyRef: "100005",   planType: "CPA", planCode: "519", surname: "TESTBIBAAAAF",   natInsNo: "BB-13-08-34-A", originalQuote: "916856", status: "D", phPostCode: "",         ifaRef: "TOWER-02",  dob1: "13/08/1934", policyNo: "100005",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Bibaaaaf",   fullName2: "" },
+  { policyRef: "100006",   planType: "CPA", planCode: "51",  surname: "TESTBEBAAAAG",   natInsNo: "BB-28-10-49-A", originalQuote: "925272", status: "L", phPostCode: "QU99 9AB", ifaRef: "ACPFI-001", dob1: "28/10/1949", policyNo: "100006",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Bebaaaag",   fullName2: "" },
+  { policyRef: "100007",   planType: "CPA", planCode: "51",  surname: "TESTLNBAAAAH",   natInsNo: "LT-12-01-48-A", originalQuote: "925463", status: "L", phPostCode: "CO99 9AB", ifaRef: "OAKFI-006", dob1: "12/01/1948", policyNo: "100007",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Lnbaaaah",   fullName2: "" },
+  { policyRef: "100008",   planType: "CPA", planCode: "51",  surname: "TESTCSBAAAAI",   natInsNo: "CH-03-10-42-A", originalQuote: "922618", status: "D", phPostCode: "RE99 9AB", ifaRef: "",          dob1: "03/10/1942", policyNo: "100008",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Csbaaaai",   fullName2: "" },
+  { policyRef: "100008.1", planType: "CPA", planCode: "51",  surname: "TESTCSBAAAAI.B", natInsNo: "CH-03-10-42-A", originalQuote: "922618", status: "D", phPostCode: "",         ifaRef: "WILLI-027", dob1: "03/10/1942", policyNo: "100008.1", cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Csbaaaai.B", fullName2: "" },
+  { policyRef: "100009",   planType: "CPA", planCode: "51",  surname: "TESTBSBAAAAJ",   natInsNo: "BB-15-12-47-A", originalQuote: "922132", status: "D", phPostCode: "LE99 9AB", ifaRef: "AAMIN-001", dob1: "15/12/1947", policyNo: "100009",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Bsbaaaaj",   fullName2: "" },
+  { policyRef: "100010",   planType: "CPA", planCode: "61a", surname: "TESTHSBAAABA",   natInsNo: "HA-20-01-43-A", originalQuote: "909862", status: "L", phPostCode: "EX99 9AB", ifaRef: "",          dob1: "20/01/1943", policyNo: "100010",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Hsbaaaba",   fullName2: "" },
+  { policyRef: "100010.1", planType: "CPA", planCode: "61a", surname: "TESTHSBAAABA.B", natInsNo: "HA-20-01-43-A", originalQuote: "909862", status: "L", phPostCode: "",         ifaRef: "CRTOO-001", dob1: "20/01/1943", policyNo: "100010.1", cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Hsbaaaba.B", fullName2: "" },
+  { policyRef: "100011",   planType: "PPA", planCode: "62a", surname: "TESTHSBAAABB",   natInsNo: "YT-26-09-35-A", originalQuote: "926191", status: "D", phPostCode: "",         ifaRef: "HENRY-001", dob1: "26/09/1935", policyNo: "100011",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Hsbaaabb",   fullName2: "" },
+  { policyRef: "100011.1", planType: "PPA", planCode: "62a", surname: "TESTHSBAAABB.B", natInsNo: "HA-20-01-43-A", originalQuote: "909862", status: "D", phPostCode: "CO99 9AB", ifaRef: "",          dob1: "20/01/1943", policyNo: "100011.1", cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Hsbaaabb.B", fullName2: "" },
+  { policyRef: "100012",   planType: "CPA", planCode: "62a", surname: "TESTHSBAAABC",   natInsNo: "HA-20-01-43-A", originalQuote: "909862", status: "D", phPostCode: "",         ifaRef: "WILLI-027", dob1: "20/01/1943", policyNo: "100012",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Hsbaaabc",   fullName2: "" },
+  { policyRef: "100012.1", planType: "CPA", planCode: "62a", surname: "TESTHSBAAABC.B", natInsNo: "HA-20-01-43-A", originalQuote: "909862", status: "D", phPostCode: "",         ifaRef: "CRTOO-001", dob1: "20/01/1943", policyNo: "100012.1", cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Hsbaaabc.B", fullName2: "" },
+  { policyRef: "100013",   planType: "CPA", planCode: "61i", surname: "TESTHDBAAABD",   natInsNo: "HA-27-06-49-A", originalQuote: "917616", status: "D", phPostCode: "JA99 9AB", ifaRef: "BANKO-011", dob1: "27/06/1949", policyNo: "100013",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Hdbaaabd",   fullName2: "" },
+  { policyRef: "100014",   planType: "CPA", planCode: "61a", surname: "TESTCDBAAABE",   natInsNo: "CH-20-02-53-A", originalQuote: "930977", status: "L", phPostCode: "RE99 9AB", ifaRef: "JELFF-001", dob1: "20/02/1953", policyNo: "100014",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Cdbaaabe",   fullName2: "" },
 ];
 
 const STATUSES = ["Pending", "Completed", "Shelved", "ALL"] as const;
@@ -68,7 +80,7 @@ export function FindPolicyModal({
   open: boolean;
   onClose: () => void;
 }) {
-  const [search, setSearch] = useState("233433");
+  const [search, setSearch] = useState("100001");
   const [status, setStatus] = useState<Status>("ALL");
   const [selected, setSelected] = useState(0);
 
@@ -78,7 +90,7 @@ export function FindPolicyModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
-      <div className="lve-panel bg-white w-[940px] max-w-full max-h-[92vh] flex flex-col">
+      <div className="lve-panel bg-white w-[1200px] max-w-full max-h-[92vh] flex flex-col">
         <header className="lve-panel-header flex items-center justify-between">
           <span>Find Policy</span>
           <button
@@ -125,7 +137,7 @@ export function FindPolicyModal({
           {/* Results grid */}
           <div className="border border-[#BBBBBB] rounded-[8px] overflow-hidden">
             <div className="overflow-x-auto">
-              <table className="w-full font-['Mulish'] text-[13px] text-[#3d3d3d] min-w-[860px]">
+              <table className="w-full font-['Mulish'] text-[13px] text-[#3d3d3d] min-w-[1160px]">
                 <thead>
                   <tr className="bg-white border-y-[3px] border-[#04589b] font-['Livvic'] font-semibold text-[13px] uppercase text-[#002f5c]">
                     <th className="px-3 py-3 text-left text-[#005a9c] underline">POLICY_REF</th>
@@ -135,6 +147,11 @@ export function FindPolicyModal({
                     <th className="px-3 py-3 text-left">NAT_INS_NO_1</th>
                     <th className="px-3 py-3 text-right">ORIGINALQUOTE</th>
                     <th className="px-3 py-3 text-left">STATUS</th>
+                    <th className="px-3 py-3 text-left">PH_POST_CODE</th>
+                    <th className="px-3 py-3 text-left">IFA_REF</th>
+                    <th className="px-3 py-3 text-left">DOB_1</th>
+                    <th className="px-3 py-3 text-left">POLICY_NO</th>
+                    <th className="px-3 py-3 text-left">COCODE</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -157,6 +174,11 @@ export function FindPolicyModal({
                       <td className="px-3 py-2">{p.natInsNo}</td>
                       <td className="px-3 py-2 text-right">{p.originalQuote}</td>
                       <td className="px-3 py-2">{p.status}</td>
+                      <td className="px-3 py-2">{p.phPostCode}</td>
+                      <td className="px-3 py-2">{p.ifaRef}</td>
+                      <td className="px-3 py-2">{p.dob1}</td>
+                      <td className="px-3 py-2 text-right">{p.policyNo}</td>
+                      <td className="px-3 py-2">{p.cocode}</td>
                     </tr>
                   ))}
                   {Array.from({ length: Math.max(0, 4 - POLICIES.length) }).map(
@@ -165,13 +187,11 @@ export function FindPolicyModal({
                         key={`empty-${i}`}
                         className={i % 2 === 0 ? "bg-[#e7ebec34]" : "bg-white"}
                       >
-                        <td className="px-3 py-2">&nbsp;</td>
-                        <td className="px-3 py-2"></td>
-                        <td className="px-3 py-2"></td>
-                        <td className="px-3 py-2"></td>
-                        <td className="px-3 py-2"></td>
-                        <td className="px-3 py-2"></td>
-                        <td className="px-3 py-2"></td>
+                        {Array.from({ length: 12 }).map((__, j) => (
+                          <td key={j} className="px-3 py-2">
+                            {j === 0 ? "\u00A0" : ""}
+                          </td>
+                        ))}
                       </tr>
                     ),
                   )}

@@ -6,7 +6,6 @@ import {
   MdCheck,
   MdClose,
 } from "react-icons/md";
-import { PlanCodeSearchModal } from "./PlanCodeSearchModal";
 import { usePlanCode } from "../context/PlanCodeContext";
 
 type SimRow = { policyNo: string; status: string; productType: string };
@@ -18,8 +17,7 @@ const SIM_ROWS: SimRow[] = [
 export function PolicyHeader() {
   const [simOpen, setSimOpen] = useState(false);
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
-  const { planCode, setPlanCode } = usePlanCode();
-  const [planCodeOpen, setPlanCodeOpen] = useState(false);
+  const { planCode } = usePlanCode();
 
   return (
     <div className="lve-panel mb-6 p-4 flex flex-wrap items-center gap-3">
@@ -49,14 +47,12 @@ export function PolicyHeader() {
         225810
       </div>
 
-      <button
-        type="button"
-        onClick={() => setPlanCodeOpen(true)}
-        title="Plan Code — click to change"
-        className="px-3 h-9 inline-flex items-center rounded-[8px] bg-[#006cf4] text-white font-['Livvic'] font-semibold text-sm hover:bg-[#003578] transition-colors"
+      <div
+        title="Plan Code"
+        className="px-3 h-9 inline-flex items-center rounded-[8px] bg-[#006cf4] text-white font-['Livvic'] font-semibold text-sm"
       >
         {planCode}
-      </button>
+      </div>
 
       <div className="px-4 h-9 inline-flex items-center rounded-[8px] bg-[#178830] text-white font-['Livvic'] font-semibold text-sm">
         Turner
@@ -81,13 +77,6 @@ export function PolicyHeader() {
       <div className="px-4 h-9 inline-flex items-center rounded-[8px] bg-[#7fdfdf] text-[#00263e] font-['Livvic'] font-semibold text-sm">
         RETIREMENT ACCOUNT
       </div>
-
-      <PlanCodeSearchModal
-        open={planCodeOpen}
-        current={planCode}
-        onClose={() => setPlanCodeOpen(false)}
-        onSelect={(code) => setPlanCode(code)}
-      />
 
       {simOpen && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">

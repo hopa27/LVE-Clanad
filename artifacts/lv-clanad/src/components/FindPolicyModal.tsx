@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { MdClose, MdRadioButtonChecked, MdRadioButtonUnchecked } from "react-icons/md";
+import { usePlanCode, PLAN_CODE_VERSIONS, type PlanCodeVersion } from "../context/PlanCodeContext";
 
 type PolicyRow = {
   policyRef: string;
@@ -20,8 +21,8 @@ type PolicyRow = {
 };
 
 const POLICIES: PolicyRow[] = [
-  { policyRef: "100001",   planType: "CPA", planCode: "61i", surname: "TESTPEBAAAAB",    natInsNo: "",              originalQuote: "965685", status: "N", phPostCode: "",         ifaRef: "HARGR-00",  dob1: "18/04/1948", policyNo: "100001",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Pebaaaab",   fullName2: "" },
-  { policyRef: "100002",   planType: "CPA", planCode: "51",  surname: "TESTCBAAAAAC",   natInsNo: "CH-26-10-47-A", originalQuote: "929591", status: "D", phPostCode: "",         ifaRef: "THEM&-005", dob1: "26/10/1947", policyNo: "100002",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Cbaaaaac",  fullName2: "" },
+  { policyRef: "100001",   planType: "CPA", planCode: "1",   surname: "TESTPEBAAAAB",    natInsNo: "",              originalQuote: "965685", status: "N", phPostCode: "",         ifaRef: "HARGR-00",  dob1: "18/04/1948", policyNo: "100001",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Pebaaaab",   fullName2: "" },
+  { policyRef: "100002",   planType: "FTA", planCode: "87",  surname: "TESTCBAAAAAC",   natInsNo: "CH-26-10-47-A", originalQuote: "929591", status: "D", phPostCode: "",         ifaRef: "THEM&-005", dob1: "26/10/1947", policyNo: "100002",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Cbaaaaac",  fullName2: "" },
   { policyRef: "100003",   planType: "PPA", planCode: "621", surname: "TESTSEBAAAAD",   natInsNo: "SB-25-07-53-A", originalQuote: "930942", status: "D", phPostCode: "DA99 9AB", ifaRef: "",          dob1: "25/07/1953", policyNo: "100003",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Sebaaaad",   fullName2: "" },
   { policyRef: "100004",   planType: "PPA", planCode: "621", surname: "TESTFRBAAAAE",   natInsNo: "EX-07-01-43-A", originalQuote: "919598", status: "D", phPostCode: "",         ifaRef: "FORUM-00",  dob1: "07/01/1943", policyNo: "100004",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Frbaaaae",   fullName2: "" },
   { policyRef: "100004.1", planType: "PPA", planCode: "621", surname: "TESTFRBAAAAE.B", natInsNo: "EX-07-01-43-A", originalQuote: "919598", status: "D", phPostCode: "QU99 9AB", ifaRef: "",          dob1: "07/01/1943", policyNo: "100004.1", cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Frbaaaae.B", fullName2: "" },
@@ -37,7 +38,7 @@ const POLICIES: PolicyRow[] = [
   { policyRef: "100011.1", planType: "PPA", planCode: "62a", surname: "TESTHSBAAABB.B", natInsNo: "HA-20-01-43-A", originalQuote: "909862", status: "D", phPostCode: "CO99 9AB", ifaRef: "",          dob1: "20/01/1943", policyNo: "100011.1", cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Hsbaaabb.B", fullName2: "" },
   { policyRef: "100012",   planType: "CPA", planCode: "62a", surname: "TESTHSBAAABC",   natInsNo: "HA-20-01-43-A", originalQuote: "909862", status: "D", phPostCode: "",         ifaRef: "WILLI-027", dob1: "20/01/1943", policyNo: "100012",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Hsbaaabc",   fullName2: "" },
   { policyRef: "100012.1", planType: "CPA", planCode: "62a", surname: "TESTHSBAAABC.B", natInsNo: "HA-20-01-43-A", originalQuote: "909862", status: "D", phPostCode: "",         ifaRef: "CRTOO-001", dob1: "20/01/1943", policyNo: "100012.1", cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Hsbaaabc.B", fullName2: "" },
-  { policyRef: "100013",   planType: "CPA", planCode: "61i", surname: "TESTHDBAAABD",   natInsNo: "HA-27-06-49-A", originalQuote: "917616", status: "D", phPostCode: "JA99 9AB", ifaRef: "BANKO-011", dob1: "27/06/1949", policyNo: "100013",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Hdbaaabd",   fullName2: "" },
+  { policyRef: "100013",   planType: "FTA", planCode: "84",  surname: "TESTHDBAAABD",   natInsNo: "HA-27-06-49-A", originalQuote: "917616", status: "D", phPostCode: "JA99 9AB", ifaRef: "BANKO-011", dob1: "27/06/1949", policyNo: "100013",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Hdbaaabd",   fullName2: "" },
   { policyRef: "100014",   planType: "CPA", planCode: "61a", surname: "TESTCDBAAABE",   natInsNo: "CH-20-02-53-A", originalQuote: "930977", status: "L", phPostCode: "RE99 9AB", ifaRef: "JELFF-001", dob1: "20/02/1953", policyNo: "100014",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Cdbaaabe",   fullName2: "" },
 ];
 
@@ -83,10 +84,20 @@ export function FindPolicyModal({
   const [search, setSearch] = useState("100001");
   const [status, setStatus] = useState<Status>("ALL");
   const [selected, setSelected] = useState(0);
+  const { setPlanCode } = usePlanCode();
 
   if (!open) return null;
 
   const rec = POLICIES[selected];
+
+  const versionCodes = PLAN_CODE_VERSIONS.map((v) => v.code) as string[];
+
+  const handleOk = () => {
+    if (rec && versionCodes.includes(rec.planCode)) {
+      setPlanCode(rec.planCode as PlanCodeVersion);
+    }
+    onClose();
+  };
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
@@ -136,7 +147,7 @@ export function FindPolicyModal({
             <div className="flex flex-col gap-2 pb-1">
               <button
                 type="button"
-                onClick={onClose}
+                onClick={handleOk}
                 className="lve-btn lve-btn-sm min-w-[100px] justify-center"
               >
                 OK

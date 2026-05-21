@@ -35,6 +35,7 @@ const INITIAL_CHEQUES: Cheque[] = [
 type Ctx = {
   cheques: Cheque[];
   addCheque: (c: Cheque) => void;
+  removeCheque: (chequeNo: string) => void;
   setCheques: (c: Cheque[]) => void;
 };
 
@@ -43,8 +44,10 @@ const ChequesContext = createContext<Ctx | null>(null);
 export function ChequesProvider({ children }: { children: ReactNode }) {
   const [cheques, setCheques] = useState<Cheque[]>(INITIAL_CHEQUES);
   const addCheque = (c: Cheque) => setCheques((prev) => [...prev, c]);
+  const removeCheque = (chequeNo: string) =>
+    setCheques((prev) => prev.filter((c) => c.chequeNo !== chequeNo));
   return (
-    <ChequesContext.Provider value={{ cheques, addCheque, setCheques }}>
+    <ChequesContext.Provider value={{ cheques, addCheque, removeCheque, setCheques }}>
       {children}
     </ChequesContext.Provider>
   );

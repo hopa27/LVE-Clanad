@@ -28,7 +28,7 @@ export function ChequeLoggerModal({
   open: boolean;
   onClose: () => void;
 }) {
-  const { cheques, addCheque } = useCheques();
+  const { cheques, addCheque, removeCheque } = useCheques();
   const [selected, setSelected] = useState(0);
   const [findValue, setFindValue] = useState("");
   const [creating, setCreating] = useState(false);
@@ -41,6 +41,7 @@ export function ChequeLoggerModal({
   });
   const [info, setInfo] = useState<string | null>(null);
   const [companyOpen, setCompanyOpen] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState<Cheque | null>(null);
   const [companyName, setCompanyName] = useState(
     "Liverpool Victoria Friendly Society Limited",
   );
@@ -175,7 +176,14 @@ export function ChequeLoggerModal({
             <ToolBtn icon={MdNoteAdd} title="New" onClick={startNew} />
             <ToolBtn icon={MdSave} title="Post Cheque" onClick={postCheque} />
             <ToolBtn icon={MdEdit} title="Edit" />
-            <ToolBtn icon={MdDelete} title="Delete" />
+            <ToolBtn
+              icon={MdDelete}
+              title="Delete"
+              onClick={() => {
+                const target = cheques[selected];
+                if (target) setConfirmDelete(target);
+              }}
+            />
             <ToolBtn
               icon={MdLightbulb}
               title="Change Company"
@@ -307,6 +315,50 @@ export function ChequeLoggerModal({
         onClose={() => setCompanyOpen(false)}
         onSelect={(name) => setCompanyName(name)}
       />
+
+      {confirmDelete && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40 p-6">
+          <div className="lve-panel bg-white w-[420px] max-w-full">
+            <header className="lve-panel-header flex items-center justify-between">
+              <span>Information</span>
+              <button
+                type="button"
+                className="inline-flex items-center justify-center w-7 h-7 rounded-[4px] text-[#00263e] hover:bg-[#d72714] hover:text-white transition-colors"
+                onClick={() => setConfirmDelete(null)}
+                aria-label="Close"
+                title="Close"
+              >
+                <MdClose size={18} />
+              </button>
+            </header>
+            <div className="lve-panel-body flex flex-col gap-5">
+              <p className="font-['Mulish'] text-[14px] text-[#3d3d3d]">
+                Remove this Cheque {confirmDelete.chequeNo} from the Log?
+              </p>
+              <div className="flex justify-center gap-3">
+                <button
+                  type="button"
+                  onClick={() => {
+                    removeCheque(confirmDelete.chequeNo);
+                    setConfirmDelete(null);
+                    setSelected(0);
+                  }}
+                  className="lve-btn lve-btn-sm min-w-[100px] justify-center"
+                >
+                  Yes
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setConfirmDelete(null)}
+                  className="lve-btn lve-btn-secondary lve-btn-sm min-w-[100px] justify-center"
+                >
+                  No
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {info && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40 p-6">

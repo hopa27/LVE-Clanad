@@ -116,7 +116,7 @@ export function ChequeLoggerModal({
       type="button"
       onClick={onClick}
       title={title}
-      className="lve-btn lve-btn-secondary lve-btn-sm !px-2"
+      className="lve-btn lve-btn-sm !px-2"
     >
       <Icon size={16} />
     </button>

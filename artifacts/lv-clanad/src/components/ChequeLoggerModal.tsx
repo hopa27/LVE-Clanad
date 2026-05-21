@@ -174,13 +174,13 @@ export function ChequeLoggerModal({
             />
             <ToolBtn icon={MdNoteAdd} title="New" onClick={startNew} />
             <ToolBtn icon={MdSave} title="Post Cheque" onClick={postCheque} />
+            <ToolBtn icon={MdEdit} title="Edit" />
+            <ToolBtn icon={MdDelete} title="Delete" />
             <ToolBtn
-              icon={MdEdit}
+              icon={MdLightbulb}
               title="Change Company"
               onClick={() => setCompanyOpen(true)}
             />
-            <ToolBtn icon={MdDelete} title="Delete" />
-            <ToolBtn icon={MdLightbulb} title="Info" />
             <ToolBtn icon={MdFolderOpen} title="Open" />
             <input
               type="text"

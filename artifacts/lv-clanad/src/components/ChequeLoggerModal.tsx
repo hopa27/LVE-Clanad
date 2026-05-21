@@ -5,7 +5,7 @@ import {
   MdEdit,
   MdSave,
   MdDelete,
-  MdLightbulbOutline,
+  MdLightbulb,
   MdFolderOpen,
   MdSearch,
   MdCloudDownload,
@@ -116,7 +116,7 @@ export function ChequeLoggerModal({
       type="button"
       onClick={onClick}
       title={title}
-      className="lve-btn lve-btn-sm !px-2"
+      className="lve-btn lve-btn-secondary lve-btn-sm !px-2"
     >
       <Icon size={16} />
     </button>
@@ -171,7 +171,7 @@ export function ChequeLoggerModal({
             <ToolBtn icon={MdSave} title="Post Cheque" onClick={postCheque} />
             <ToolBtn icon={MdEdit} title="Edit" />
             <ToolBtn icon={MdDelete} title="Delete" />
-            <ToolBtn icon={MdLightbulbOutline} title="Info" />
+            <ToolBtn icon={MdLightbulb} title="Info" />
             <ToolBtn icon={MdFolderOpen} title="Open" />
             <input
               type="text"

@@ -261,18 +261,24 @@ export function ChequeLoggerModal({
                 </tr>
               </thead>
               <tbody>
-                {cheques.map((c, i) => (
-                  <tr
-                    key={c.chequeNo}
-                    onClick={() => setSelected(i)}
-                    style={{ cursor: "pointer" }}
-                  >
-                    <td>{c.chequeNo}</td>
-                    <td>{c.transferCompany}</td>
-                    <td style={{ textAlign: "right" }}>{c.amount}</td>
-                    <td>{c.loggedBy}</td>
-                  </tr>
-                ))}
+                {cheques.map((c, i) => {
+                  const isSel = i === selected;
+                  const tdStyle = isSel
+                    ? { backgroundColor: "#003578", color: "#ffffff" }
+                    : undefined;
+                  return (
+                    <tr
+                      key={c.chequeNo}
+                      onClick={() => setSelected(i)}
+                      style={{ cursor: "pointer" }}
+                    >
+                      <td style={tdStyle}>{c.chequeNo}</td>
+                      <td style={tdStyle}>{c.transferCompany}</td>
+                      <td style={{ textAlign: "right", ...(tdStyle ?? {}) }}>{c.amount}</td>
+                      <td style={tdStyle}>{c.loggedBy}</td>
+                    </tr>
+                  );
+                })}
                 {Array.from({ length: 6 }).map((_, i) => (
                   <tr key={`empty-${i}`}>
                     <td>&nbsp;</td>

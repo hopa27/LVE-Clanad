@@ -26,7 +26,7 @@ const INITIAL_CHEQUES: Cheque[] = [
     deletedBy: "",
     assigned: "Y",
     assignedDate: "12/05/2026",
-    assignedBy: "JSMITH",
+    assignedBy: "UAT1",
   },
   {
     chequeNo: "232694",
@@ -39,7 +39,7 @@ const INITIAL_CHEQUES: Cheque[] = [
     deletedBy: "",
     assigned: "Y",
     assignedDate: "13/05/2026",
-    assignedBy: "AKHAN",
+    assignedBy: "UAT2",
   },
   {
     chequeNo: "232695",
@@ -50,9 +50,9 @@ const INITIAL_CHEQUES: Cheque[] = [
     deleted: "N",
     deletedDate: "",
     deletedBy: "",
-    assigned: "N",
-    assignedDate: "",
-    assignedBy: "",
+    assigned: "Y",
+    assignedDate: "14/05/2026",
+    assignedBy: "UAT3",
   },
 ];
 

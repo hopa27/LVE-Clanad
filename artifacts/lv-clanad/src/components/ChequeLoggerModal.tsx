@@ -3,7 +3,7 @@ import {
   MdClose,
   MdNoteAdd,
   MdCancel,
-  MdSave,
+  MdPublish,
   MdDelete,
   MdLightbulb,
   MdFolderOpen,
@@ -174,7 +174,7 @@ export function ChequeLoggerModal({
               className="lve-input !h-[36px] !text-[14px] !w-[120px]"
             />
             <ToolBtn icon={MdNoteAdd} title="New" onClick={startNew} />
-            <ToolBtn icon={MdSave} title="Post Cheque" onClick={postCheque} />
+            <ToolBtn icon={MdPublish} title="Post Cheque" onClick={postCheque} />
             <ToolBtn icon={MdCancel} title="Cancel" />
             <ToolBtn
               icon={MdDelete}

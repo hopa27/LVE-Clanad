@@ -251,13 +251,20 @@ export function ChequeLoggerModal({
 
           {/* Data grid */}
           <div className="overflow-auto">
-            <table className="lve-grid">
+            <table className="lve-grid min-w-[1400px]">
               <thead>
                 <tr>
-                  <th style={{ width: 120 }}>CHEQNO</th>
-                  <th>TRANSFERCOMPANY</th>
-                  <th style={{ width: 120, textAlign: "right" }}>AMOUNT</th>
-                  <th style={{ width: 120 }}>LOGGEDBY</th>
+                  <th style={{ width: 110 }}>CHEQNO</th>
+                  <th style={{ minWidth: 260 }}>TRANSFERCOMPANY</th>
+                  <th style={{ width: 110, textAlign: "right" }}>AMOUNT</th>
+                  <th style={{ width: 110 }}>LOGGEDBY</th>
+                  <th style={{ width: 120 }}>DATELOGGED</th>
+                  <th style={{ width: 90 }}>DELETED</th>
+                  <th style={{ width: 120 }}>DELETEDDATE</th>
+                  <th style={{ width: 110 }}>DELETEDBY</th>
+                  <th style={{ width: 90 }}>ASSIGNED</th>
+                  <th style={{ width: 120 }}>ASSIGNEDDATE</th>
+                  <th style={{ width: 110 }}>ASSIGNEDBY</th>
                 </tr>
               </thead>
               <tbody>
@@ -276,12 +283,26 @@ export function ChequeLoggerModal({
                       <td style={tdStyle}>{c.transferCompany}</td>
                       <td style={{ textAlign: "right", ...(tdStyle ?? {}) }}>{c.amount}</td>
                       <td style={tdStyle}>{c.loggedBy}</td>
+                      <td style={tdStyle}>{c.date}</td>
+                      <td style={tdStyle}>{c.deleted ?? ""}</td>
+                      <td style={tdStyle}>{c.deletedDate ?? ""}</td>
+                      <td style={tdStyle}>{c.deletedBy ?? ""}</td>
+                      <td style={tdStyle}>{c.assigned ?? ""}</td>
+                      <td style={tdStyle}>{c.assignedDate ?? ""}</td>
+                      <td style={tdStyle}>{c.assignedBy ?? ""}</td>
                     </tr>
                   );
                 })}
                 {Array.from({ length: 6 }).map((_, i) => (
                   <tr key={`empty-${i}`}>
                     <td>&nbsp;</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                     <td></td>

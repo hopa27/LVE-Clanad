@@ -6,6 +6,12 @@ export type Cheque = {
   amount: string;
   loggedBy: string;
   date: string;
+  deleted?: string;
+  deletedDate?: string;
+  deletedBy?: string;
+  assigned?: string;
+  assignedDate?: string;
+  assignedBy?: string;
 };
 
 const INITIAL_CHEQUES: Cheque[] = [
@@ -15,6 +21,12 @@ const INITIAL_CHEQUES: Cheque[] = [
     amount: "12,450.00",
     loggedBy: "JSMITH",
     date: "12/05/2026",
+    deleted: "N",
+    deletedDate: "",
+    deletedBy: "",
+    assigned: "Y",
+    assignedDate: "12/05/2026",
+    assignedBy: "JSMITH",
   },
   {
     chequeNo: "232694",
@@ -22,6 +34,12 @@ const INITIAL_CHEQUES: Cheque[] = [
     amount: "3,200.50",
     loggedBy: "AKHAN",
     date: "13/05/2026",
+    deleted: "N",
+    deletedDate: "",
+    deletedBy: "",
+    assigned: "Y",
+    assignedDate: "13/05/2026",
+    assignedBy: "AKHAN",
   },
   {
     chequeNo: "232695",
@@ -29,6 +47,12 @@ const INITIAL_CHEQUES: Cheque[] = [
     amount: "8,775.00",
     loggedBy: "RBROWN",
     date: "14/05/2026",
+    deleted: "N",
+    deletedDate: "",
+    deletedBy: "",
+    assigned: "N",
+    assignedDate: "",
+    assignedBy: "",
   },
 ];
 

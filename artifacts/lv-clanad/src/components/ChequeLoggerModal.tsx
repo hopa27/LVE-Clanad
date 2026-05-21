@@ -11,6 +11,7 @@ import {
   MdCloudDownload,
 } from "react-icons/md";
 import { useCheques, type Cheque } from "../context/ChequesContext";
+import { CompanySelectionModal } from "./CompanySelectionModal";
 
 const CHEQUE_DB: Record<string, { date: string; amount: string; transferCompany: string }> = {
   "232693": { date: "12/05/2026", amount: "12,450.00", transferCompany: "Liverpool Victoria Friendly Society Limited" },
@@ -39,6 +40,10 @@ export function ChequeLoggerModal({
     date: "",
   });
   const [info, setInfo] = useState<string | null>(null);
+  const [companyOpen, setCompanyOpen] = useState(false);
+  const [companyName, setCompanyName] = useState(
+    "Liverpool Victoria Friendly Society Limited",
+  );
   const [posted, setPosted] = useState<{ date: string; amount: string; transferCompany: string }>({
     date: "",
     amount: "",
@@ -169,13 +174,17 @@ export function ChequeLoggerModal({
             />
             <ToolBtn icon={MdNoteAdd} title="New" onClick={startNew} />
             <ToolBtn icon={MdSave} title="Post Cheque" onClick={postCheque} />
-            <ToolBtn icon={MdEdit} title="Edit" />
+            <ToolBtn
+              icon={MdEdit}
+              title="Change Company"
+              onClick={() => setCompanyOpen(true)}
+            />
             <ToolBtn icon={MdDelete} title="Delete" />
             <ToolBtn icon={MdLightbulb} title="Info" />
             <ToolBtn icon={MdFolderOpen} title="Open" />
             <input
               type="text"
-              value="Liverpool Victoria Friendly Society Limited"
+              value={companyName}
               disabled
               className="lve-input !h-[36px] !text-[14px] flex-1"
             />
@@ -292,6 +301,12 @@ export function ChequeLoggerModal({
           </div>
         </div>
       </div>
+
+      <CompanySelectionModal
+        open={companyOpen}
+        onClose={() => setCompanyOpen(false)}
+        onSelect={(name) => setCompanyName(name)}
+      />
 
       {info && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40 p-6">

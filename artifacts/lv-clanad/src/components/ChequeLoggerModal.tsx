@@ -2,7 +2,7 @@ import { useState } from "react";
 import {
   MdClose,
   MdNoteAdd,
-  MdEdit,
+  MdCancel,
   MdSave,
   MdDelete,
   MdLightbulb,
@@ -175,7 +175,7 @@ export function ChequeLoggerModal({
             />
             <ToolBtn icon={MdNoteAdd} title="New" onClick={startNew} />
             <ToolBtn icon={MdSave} title="Post Cheque" onClick={postCheque} />
-            <ToolBtn icon={MdEdit} title="Edit" />
+            <ToolBtn icon={MdCancel} title="Cancel" />
             <ToolBtn
               icon={MdDelete}
               title="Delete"

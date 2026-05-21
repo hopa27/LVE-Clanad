@@ -149,7 +149,7 @@ export function ChequeLoggerModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
-      <div className="lve-panel bg-white w-[920px] max-w-full max-h-[90vh] flex flex-col">
+      <div className="lve-panel bg-white w-[1500px] max-w-full max-h-[90vh] flex flex-col">
         <header className="lve-panel-header flex items-center justify-between">
           <span>Cheque Logger</span>
           <button
@@ -251,20 +251,20 @@ export function ChequeLoggerModal({
 
           {/* Data grid */}
           <div className="overflow-auto">
-            <table className="lve-grid min-w-[1400px]">
+            <table className="lve-grid w-full [&_td]:whitespace-nowrap [&_th]:whitespace-nowrap">
               <thead>
                 <tr>
-                  <th style={{ width: 110 }}>CHEQNO</th>
-                  <th style={{ minWidth: 260 }}>TRANSFERCOMPANY</th>
+                  <th style={{ width: 100 }}>CHEQNO</th>
+                  <th>TRANSFERCOMPANY</th>
                   <th style={{ width: 110, textAlign: "right" }}>AMOUNT</th>
-                  <th style={{ width: 110 }}>LOGGEDBY</th>
+                  <th style={{ width: 100 }}>LOGGEDBY</th>
                   <th style={{ width: 120 }}>DATELOGGED</th>
                   <th style={{ width: 90 }}>DELETED</th>
-                  <th style={{ width: 120 }}>DELETEDDATE</th>
+                  <th style={{ width: 130 }}>DELETEDDATE</th>
                   <th style={{ width: 110 }}>DELETEDBY</th>
-                  <th style={{ width: 90 }}>ASSIGNED</th>
-                  <th style={{ width: 120 }}>ASSIGNEDDATE</th>
-                  <th style={{ width: 110 }}>ASSIGNEDBY</th>
+                  <th style={{ width: 95 }}>ASSIGNED</th>
+                  <th style={{ width: 130 }}>ASSIGNEDDATE</th>
+                  <th style={{ width: 115 }}>ASSIGNEDBY</th>
                 </tr>
               </thead>
               <tbody>

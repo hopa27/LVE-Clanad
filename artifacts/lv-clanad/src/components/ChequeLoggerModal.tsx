@@ -1,7 +1,7 @@
 import { useState } from "react";
 import {
   MdClose,
-  MdNoteAdd,
+  MdAddCircle,
   MdCancel,
   MdPublish,
   MdDelete,
@@ -114,7 +114,7 @@ export function ChequeLoggerModal({
     title,
     onClick,
   }: {
-    icon: typeof MdNoteAdd;
+    icon: typeof MdAddCircle;
     title: string;
     onClick?: () => void;
   }) => (
@@ -173,7 +173,7 @@ export function ChequeLoggerModal({
               title="Policy No"
               className="lve-input !h-[36px] !text-[14px] !w-[120px]"
             />
-            <ToolBtn icon={MdNoteAdd} title="New" onClick={startNew} />
+            <ToolBtn icon={MdAddCircle} title="Add Cheque" onClick={startNew} />
             <ToolBtn icon={MdPublish} title="Post Cheque" onClick={postCheque} />
             <ToolBtn icon={MdCancel} title="Cancel" />
             <ToolBtn

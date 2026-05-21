@@ -60,6 +60,7 @@ type Ctx = {
   cheques: Cheque[];
   addCheque: (c: Cheque) => void;
   removeCheque: (chequeNo: string) => void;
+  markChequeDeleted: (chequeNo: string, deletedBy: string) => void;
   setCheques: (c: Cheque[]) => void;
 };
 
@@ -70,8 +71,20 @@ export function ChequesProvider({ children }: { children: ReactNode }) {
   const addCheque = (c: Cheque) => setCheques((prev) => [...prev, c]);
   const removeCheque = (chequeNo: string) =>
     setCheques((prev) => prev.filter((c) => c.chequeNo !== chequeNo));
+  const markChequeDeleted = (chequeNo: string, deletedBy: string) => {
+    const today = new Date().toLocaleDateString("en-GB");
+    setCheques((prev) =>
+      prev.map((c) =>
+        c.chequeNo === chequeNo
+          ? { ...c, deleted: "Y", deletedDate: today, deletedBy }
+          : c,
+      ),
+    );
+  };
   return (
-    <ChequesContext.Provider value={{ cheques, addCheque, removeCheque, setCheques }}>
+    <ChequesContext.Provider
+      value={{ cheques, addCheque, removeCheque, markChequeDeleted, setCheques }}
+    >
       {children}
     </ChequesContext.Provider>
   );

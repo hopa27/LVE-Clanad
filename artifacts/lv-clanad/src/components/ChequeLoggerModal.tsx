@@ -28,7 +28,7 @@ export function ChequeLoggerModal({
   open: boolean;
   onClose: () => void;
 }) {
-  const { cheques, addCheque, removeCheque } = useCheques();
+  const { cheques, addCheque, markChequeDeleted } = useCheques();
   const [selected, setSelected] = useState(0);
   const [findValue, setFindValue] = useState("");
   const [creating, setCreating] = useState(false);
@@ -366,9 +366,8 @@ export function ChequeLoggerModal({
                 <button
                   type="button"
                   onClick={() => {
-                    removeCheque(confirmDelete.chequeNo);
+                    markChequeDeleted(confirmDelete.chequeNo, "UAT1");
                     setConfirmDelete(null);
-                    setSelected(0);
                   }}
                   className="lve-btn lve-btn-sm min-w-[100px] justify-center"
                 >

@@ -113,16 +113,19 @@ export function ChequeLoggerModal({
     icon: Icon,
     title,
     onClick,
+    disabled,
   }: {
     icon: typeof MdAddCircle;
     title: string;
     onClick?: () => void;
+    disabled?: boolean;
   }) => (
     <button
       type="button"
       onClick={onClick}
       title={title}
-      className="lve-btn lve-btn-secondary lve-btn-sm !px-2"
+      disabled={disabled}
+      className="lve-btn lve-btn-secondary lve-btn-sm !px-2 disabled:opacity-40 disabled:cursor-not-allowed"
     >
       <Icon size={16} />
     </button>
@@ -173,9 +176,9 @@ export function ChequeLoggerModal({
               title="Policy No"
               className="lve-input !h-[36px] !text-[14px] !w-[120px]"
             />
-            <ToolBtn icon={MdAddCircle} title="Add Cheque" onClick={startNew} />
-            <ToolBtn icon={MdPublish} title="Post Cheque" onClick={postCheque} />
-            <ToolBtn icon={MdCancel} title="Cancel" />
+            <ToolBtn icon={MdAddCircle} title="Add Cheque" onClick={startNew} disabled={creating} />
+            <ToolBtn icon={MdPublish} title="Post Cheque" onClick={postCheque} disabled={!creating} />
+            <ToolBtn icon={MdCancel} title="Cancel" onClick={cancelNew} disabled={!creating} />
             <ToolBtn
               icon={MdDelete}
               title="Delete"

@@ -1,7 +1,10 @@
 import { Field, TextInput, SelectInput, Checkbox, Section } from "../components/Field";
 import { DatePicker } from "../components/DatePicker";
+import { usePlanCode } from "../context/PlanCodeContext";
 
 export function PolicyDetailsTab() {
+  const { planCode } = usePlanCode();
+  const showIrBalance = planCode === "84";
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
       <div className="space-y-4 lg:col-span-1">
@@ -20,7 +23,7 @@ export function PolicyDetailsTab() {
           <SelectInput value="B" options={["B", "C", "T"]} />
         </Field>
         <div className="my-3 border-t border-[color:var(--color-panel-border)]" />
-        <Field label="IR Balance:"><TextInput value="" /></Field>
+        {showIrBalance && <Field label="IR Balance:"><TextInput value="" /></Field>}
         <Field label="ReAssurance Premium:"><TextInput value="9000" /></Field>
         <Field label="ReAssurer:"><TextInput value="RGA 1" /></Field>
         <Field label="Evidence of Age:"><TextInput value="Y" /></Field>

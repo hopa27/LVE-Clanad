@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Field, TextInput, SelectInput, Checkbox, Section } from "../components/Field";
 import { ViewNotionalValueModal } from "../components/ViewNotionalValueModal";
+import { usePlanCode } from "../context/PlanCodeContext";
 
 const QUOTE_ROWS = [
   {
@@ -13,6 +14,8 @@ const QUOTE_ROWS = [
 
 export function QuoteDetailsTab() {
   const [notionalOpen, setNotionalOpen] = useState(false);
+  const { planCode } = usePlanCode();
+  const showGad = planCode === "84";
   return (
     <div className="space-y-4">
       <Section title="Basis Details">
@@ -32,11 +35,15 @@ export function QuoteDetailsTab() {
             <Field label="Policy Type:">
               <SelectInput value="with profit" options={["with profit", "without profit"]} disabled />
             </Field>
-            <Field label="Original GAD Limit Upper:"><TextInput value="" disabled /></Field>
-            <Field label="Original GAD Limit:"><TextInput value="" disabled /></Field>
-            <Field label="Original GAD Review Date:"><TextInput value="" disabled /></Field>
-            <Field label="GAD Review Maximum:"><TextInput value="" disabled /></Field>
-            <Field label="GAD Review Date:"><TextInput value="" disabled /></Field>
+            {showGad && (
+              <>
+                <Field label="Original GAD Limit Upper:"><TextInput value="" disabled /></Field>
+                <Field label="Original GAD Limit:"><TextInput value="" disabled /></Field>
+                <Field label="Original GAD Review Date:"><TextInput value="" disabled /></Field>
+                <Field label="GAD Review Maximum:"><TextInput value="" disabled /></Field>
+                <Field label="GAD Review Date:"><TextInput value="" disabled /></Field>
+              </>
+            )}
           </div>
           <div>
             <Field label="Notional Value:"><TextInput value="14,828" disabled /></Field>

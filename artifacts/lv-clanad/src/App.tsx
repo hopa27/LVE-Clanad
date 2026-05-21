@@ -1,6 +1,7 @@
 import { useState, type JSX } from "react";
 import { EditModeProvider, useEditMode } from "./context/EditModeContext";
 import { ChequesProvider } from "./context/ChequesContext";
+import { PlanCodeProvider } from "./context/PlanCodeContext";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { Toolbar } from "./components/Toolbar";
@@ -63,7 +64,9 @@ export default function App() {
   return (
     <EditModeProvider>
       <ChequesProvider>
-        <AppShell />
+        <PlanCodeProvider>
+          <AppShell />
+        </PlanCodeProvider>
       </ChequesProvider>
     </EditModeProvider>
   );

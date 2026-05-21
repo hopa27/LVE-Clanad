@@ -7,6 +7,7 @@ import {
   MdClose,
 } from "react-icons/md";
 import { PlanCodeSearchModal } from "./PlanCodeSearchModal";
+import { usePlanCode } from "../context/PlanCodeContext";
 
 type SimRow = { policyNo: string; status: string; productType: string };
 
@@ -17,7 +18,7 @@ const SIM_ROWS: SimRow[] = [
 export function PolicyHeader() {
   const [simOpen, setSimOpen] = useState(false);
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
-  const [planCode, setPlanCode] = useState("87");
+  const { planCode, setPlanCode } = usePlanCode();
   const [planCodeOpen, setPlanCodeOpen] = useState(false);
 
   return (
@@ -85,7 +86,7 @@ export function PolicyHeader() {
         open={planCodeOpen}
         current={planCode}
         onClose={() => setPlanCodeOpen(false)}
-        onSelect={(p) => setPlanCode(p.code)}
+        onSelect={(code) => setPlanCode(code)}
       />
 
       {simOpen && (

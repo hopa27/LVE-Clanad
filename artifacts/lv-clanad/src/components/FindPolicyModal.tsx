@@ -132,6 +132,23 @@ export function FindPolicyModal({
                 ))}
               </div>
             </fieldset>
+
+            <div className="flex flex-col gap-2 pb-1">
+              <button
+                type="button"
+                onClick={onClose}
+                className="lve-btn lve-btn-sm min-w-[100px] justify-center"
+              >
+                OK
+              </button>
+              <button
+                type="button"
+                onClick={onClose}
+                className="lve-btn lve-btn-secondary lve-btn-sm min-w-[100px] justify-center"
+              >
+                Cancel
+              </button>
+            </div>
           </div>
 
           {/* Results grid */}

@@ -95,6 +95,7 @@ export function ChequeLoggerModal({
     setDraft((d) => ({ ...d, ...hit }));
     addCheque(newCheque);
     setSelected(cheques.length);
+    setCreating(false);
   };
 
   const saveNew = () => {

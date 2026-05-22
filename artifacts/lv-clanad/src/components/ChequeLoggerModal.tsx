@@ -182,6 +182,7 @@ export function ChequeLoggerModal({
             <ToolBtn
               icon={MdDelete}
               title="Delete"
+              disabled={creating}
               onClick={() => {
                 const target = cheques[selected];
                 if (target) setConfirmDelete(target);

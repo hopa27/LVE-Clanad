@@ -21,7 +21,7 @@ type PolicyRow = {
 };
 
 const POLICIES: PolicyRow[] = [
-  { policyRef: "100001",   planType: "master", planCode: "0",   surname: "TESTPEBAAAAB",    natInsNo: "",              originalQuote: "965685", status: "N", phPostCode: "",         ifaRef: "HARGR-00",  dob1: "18/04/1948", policyNo: "100001",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Pebaaaab",   fullName2: "" },
+  { policyRef: "100001",   planType: "master", planCode: "0",   surname: "Master",    natInsNo: "",              originalQuote: "965685", status: "N", phPostCode: "",         ifaRef: "HARGR-00",  dob1: "18/04/1948", policyNo: "100001",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Pebaaaab",   fullName2: "" },
   { policyRef: "100002",   planType: "FTA", planCode: "87",  surname: "TESTCBAAAAAC",   natInsNo: "CH-26-10-47-A", originalQuote: "929591", status: "D", phPostCode: "",         ifaRef: "THEM&-005", dob1: "26/10/1947", policyNo: "100002",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Cbaaaaac",  fullName2: "" },
   { policyRef: "100003",   planType: "PPA", planCode: "621", surname: "TESTSEBAAAAD",   natInsNo: "SB-25-07-53-A", originalQuote: "930942", status: "D", phPostCode: "DA99 9AB", ifaRef: "",          dob1: "25/07/1953", policyNo: "100003",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Sebaaaad",   fullName2: "" },
   { policyRef: "100004",   planType: "PPA", planCode: "621", surname: "TESTFRBAAAAE",   natInsNo: "EX-07-01-43-A", originalQuote: "919598", status: "D", phPostCode: "",         ifaRef: "FORUM-00",  dob1: "07/01/1943", policyNo: "100004",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Frbaaaae",   fullName2: "" },

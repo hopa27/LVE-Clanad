@@ -55,7 +55,7 @@ export function PolicyHeader() {
       </div>
 
       <div className="px-4 h-9 inline-flex items-center rounded-[8px] bg-[#178830] text-white font-['Livvic'] font-semibold text-sm">
-        TESTPEBAAAAB
+        Master
       </div>
 
       <div className="px-3 h-9 inline-flex items-center rounded-[8px] bg-[#eaf5f8] text-[#0d2c41] font-['Mulish'] text-sm">

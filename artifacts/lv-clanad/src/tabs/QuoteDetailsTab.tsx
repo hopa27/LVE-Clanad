@@ -219,6 +219,21 @@ export function QuoteDetailsTab() {
         </div>
       </Section>
 
+      {isPlan0 && (
+        <Section title="GroupBox1">
+          <div className="overflow-auto">
+            <table className="lve-grid">
+              <thead>
+                <tr>
+                  <th className="!px-4">&nbsp;</th>
+                </tr>
+              </thead>
+              <tbody />
+            </table>
+          </div>
+        </Section>
+      )}
+
       <ViewNotionalValueModal open={notionalOpen} onClose={() => setNotionalOpen(false)} />
     </div>
   );

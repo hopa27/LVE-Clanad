@@ -1,6 +1,7 @@
 import { SelectInput, TextInput, Checkbox, Section } from "../components/Field";
 import { MdSend } from "react-icons/md";
 import { useEditMode } from "../context/EditModeContext";
+import { usePlanCode } from "../context/PlanCodeContext";
 
 const LETTERS = [
   "Chaser Letter OS Application Client",
@@ -19,6 +20,8 @@ const LETTERS = [
 
 export function LettersTab() {
   const { editing } = useEditMode();
+  const { planCode } = usePlanCode();
+  const isPlan0 = planCode === "0";
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
       <Section title="Select Letter" className="lg:col-span-2">
@@ -53,15 +56,23 @@ export function LettersTab() {
             <div className="flex items-center gap-3">
               <label className="lve-label !mb-0 text-right shrink-0 w-[70px]">Fax:</label>
               <div className="flex-1 min-w-0">
-                <TextInput placeholder="Fax number" />
+                <TextInput value={isPlan0 ? "dbedFaxNo" : ""} placeholder="Fax number" />
               </div>
             </div>
             <div className="flex items-center gap-3">
               <label className="lve-label !mb-0 text-right shrink-0 w-[70px]">Email:</label>
               <div className="flex-1 min-w-0">
-                <TextInput placeholder="recipient@example.com" />
+                <TextInput value={isPlan0 ? "dbedEmail" : ""} placeholder="recipient@example.com" />
               </div>
             </div>
+            {isPlan0 && (
+              <div className="flex items-center gap-3">
+                <label className="lve-label !mb-0 text-right shrink-0 w-[70px]">Archive:</label>
+                <div className="flex-1 min-w-0">
+                  <Checkbox />
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="mt-4 pt-3 border-t border-[#d8d8d8]">

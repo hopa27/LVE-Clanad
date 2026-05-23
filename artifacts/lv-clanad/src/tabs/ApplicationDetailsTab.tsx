@@ -108,7 +108,7 @@ export function ApplicationDetailsTab() {
           </Field>
           <Field label="Postcode:"><TextInput value="phpc" /></Field>
           <Field label="Country:">
-            <SelectInput value="cmbCountry" options={["United Kingdom", "Ireland", "Other"]} disabled />
+            <SelectInput value="cmbCountry" options={["United Kingdom", "Ireland", "Other"]} />
           </Field>
           <div className="mt-2"><Checkbox label="Address Unknown / Gone Away" /></div>
         </Section>

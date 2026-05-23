@@ -14,6 +14,7 @@ import { TabBar, type TabKey } from "./components/TabBar";
 import { StatusBar } from "./components/StatusBar";
 import { ApplicationDetailsTab } from "./tabs/ApplicationDetailsTab";
 import { AnnuitantDetailsTab } from "./tabs/AnnuitantDetailsTab";
+import { ContactsTab } from "./tabs/ContactsTab";
 import { PolicyDetailsTab } from "./tabs/PolicyDetailsTab";
 import { BankAccDetailsTab } from "./tabs/BankAccDetailsTab";
 import { PaymentsTab } from "./tabs/PaymentsTab";
@@ -35,6 +36,7 @@ const PLAN_CODE_ACCENT: Record<PlanCodeVersion, string> = {
 const TAB_COMPONENTS: Record<TabKey, () => JSX.Element> = {
   application: ApplicationDetailsTab,
   annuitant: AnnuitantDetailsTab,
+  contacts: ContactsTab,
   policy: PolicyDetailsTab,
   bank: BankAccDetailsTab,
   payments: PaymentsTab,

@@ -28,8 +28,8 @@ import { LoaPoaTab } from "./tabs/LoaPoaTab";
 
 const PLAN_CODE_ACCENT: Record<PlanCodeVersion, string> = {
   "0":  "#848285",
-  "87": "#00263e",
-  "84": "#00263e",
+  "87": "#F28C28",
+  "84": "#97C697",
 };
 
 const TAB_COMPONENTS: Record<TabKey, () => JSX.Element> = {

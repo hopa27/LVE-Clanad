@@ -105,7 +105,7 @@ export function MaturitiesSurrenderTab() {
             <div className="mt-2">
               <Field label="Postcode:"><TextInput value="DBMatPostCode" /></Field>
               <Field label="Country:">
-                <SelectInput value="cbMatCountry" options={["cbMatCountry"]} disabled />
+                <SelectInput value="cbMatCountry" options={["cbMatCountry"]} />
               </Field>
             </div>
           </Section>
@@ -124,7 +124,7 @@ export function MaturitiesSurrenderTab() {
             <div className="mt-2">
               <Field label="Postcode:"><TextInput value="DBEdit37" /></Field>
               <Field label="Country:">
-                <SelectInput value="DBLookupComboBox1" options={["DBLookupComboBox1"]} disabled />
+                <SelectInput value="DBLookupComboBox1" options={["DBLookupComboBox1"]} />
               </Field>
             </div>
           </Section>

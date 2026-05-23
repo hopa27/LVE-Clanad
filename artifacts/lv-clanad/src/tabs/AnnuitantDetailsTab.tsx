@@ -203,7 +203,7 @@ export function AnnuitantDetailsTab() {
           dob="dob2"
           dod="DOD2"
           natIns="NI2"
-          enhanced="ENHANCEI"
+          enhanced="ENHANCED"
           doctor="doctor2"
           doctorName="dbDoctor2Name"
           marRequired="DbedEL"

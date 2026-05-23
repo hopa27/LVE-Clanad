@@ -3,6 +3,7 @@ import { Section } from "../components/Field";
 import { MiscDiaryModal, type DiaryEntryInput } from "../components/MiscDiaryModal";
 import { CustomerNeedsModal } from "../components/CustomerNeedsModal";
 import { CedingSchemeModal } from "../components/CedingSchemeModal";
+import { usePlanCode } from "../context/PlanCodeContext";
 import {
   MdNoteAdd,
   MdEdit,
@@ -63,6 +64,8 @@ const AUDIT = [
 const DIARY_COLS = ["Ref", "Type", "Notes", "Created", "By", "Due", "Completed", "By"];
 
 export function DiaryAuditTab() {
+  const { planCode } = usePlanCode();
+  const isPlan0 = planCode === "0";
   const [trail, setTrail] = useState<"notes" | "data">("notes");
   const [diaryOpen, setDiaryOpen] = useState(false);
   const [needsOpen, setNeedsOpen] = useState(false);
@@ -161,7 +164,7 @@ export function DiaryAuditTab() {
               </tr>
             </thead>
             <tbody>
-              {diary.map((d) => {
+              {(isPlan0 ? [] : diary).map((d) => {
                 const isSel = selectedRef === d.ref;
                 const tdStyle = isSel
                   ? { backgroundColor: "#05579B", color: "#ffffff" }
@@ -260,7 +263,7 @@ export function DiaryAuditTab() {
                   </tr>
                 </thead>
                 <tbody>
-                  {AUDIT.map((line, i) => {
+                  {(isPlan0 ? [] : AUDIT).map((line, i) => {
                     const m = line.match(
                       /^(.*?)\s+by\s+(\S+)\s+on\s+(\S+)\s+at\s+(\S+)\s*$/,
                     );
@@ -294,7 +297,7 @@ export function DiaryAuditTab() {
                 </tr>
               </thead>
               <tbody>
-                {AUDIT.map((line, i) => {
+                {(isPlan0 ? [] : AUDIT).map((line, i) => {
                   const m = line.match(
                     /^(.*?)\s+by\s+(\S+)\s+on\s+(\S+)\s+at\s+(\S+)\s*$/,
                   );

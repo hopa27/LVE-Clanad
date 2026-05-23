@@ -26,14 +26,14 @@ const PlanCodeContext = createContext<PlanCodeValue>({
   setPlanCode: () => {},
   surname: "Master",
   setSurname: () => {},
-  policyRef: "225810",
+  policyRef: "dbePolNo",
   setPolicyRef: () => {},
 });
 
 export function PlanCodeProvider({ children }: { children: ReactNode }) {
   const [planCode, setPlanCode] = useState<PlanCodeVersion>("0");
   const [surname, setSurname] = useState<string>("Master");
-  const [policyRef, setPolicyRef] = useState<string>("225810");
+  const [policyRef, setPolicyRef] = useState<string>("dbePolNo");
   return (
     <PlanCodeContext.Provider
       value={{

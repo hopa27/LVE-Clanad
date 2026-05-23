@@ -120,11 +120,14 @@ export function PolicyDetailsTab() {
         <Field label="P45 date rec'd:"><TextInput value="bdp45recd" /></Field>
         <Field label="P45 Tax Paid:"><TextInput value="bdp45taxpaid" /></Field>
         <Field label="P45 Gross Pay:"><TextInput value="bdp45grosspay" /></Field>
+      </Section>
+
+      <div className="mb-4 px-1 space-y-3 break-inside-avoid">
         <Field label="Adviser Charge:"><Checkbox /></Field>
         <Field label="Serious ill health:">
           <DatePicker value="DbEdSeriou" placeholder="DbEdSeriou" />
         </Field>
-      </Section>
+      </div>
 
       <Section title="IFA Details">
         <Field label="IFA Ref:"><TextInput value="BDIFAREF" disabled /></Field>

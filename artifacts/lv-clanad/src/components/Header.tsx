@@ -54,7 +54,7 @@ const MENU_ITEMS: MenuItem[] = [
       },
       { label: "Coding Scheme Details" },
       { kind: "separator" },
-      { label: "Cancel LTC" },
+      { label: "Cancel LTC", disabled: true },
     ],
   },
   {

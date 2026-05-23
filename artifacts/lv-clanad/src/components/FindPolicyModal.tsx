@@ -266,8 +266,8 @@ export function FindPolicyModal({
                             c.align === "right" ? "text-right" : "text-left"
                           } ${
                             active
-                              ? "bg-[#003578] text-white underline"
-                              : "text-[#005a9c] hover:bg-[#eaf5f8]"
+                              ? "bg-[#eaf5f8] text-[#005a9c] underline"
+                              : "text-[#005a9c] hover:bg-[#f4f9fb]"
                           }`}
                         >
                           {c.label}

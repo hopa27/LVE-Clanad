@@ -90,7 +90,7 @@ export function ApplicationDetailsTab() {
           <Field label="Correspond Name:"><TextInput value="correspname" /></Field>
           <Field label="Salutation Name:"><TextInput value="salname" /></Field>
           <Field label="Telephone:"><TextInput value="anntele" /></Field>
-          <Field label="E-mail:"><TextInput value="DBEditPH_EMAIL" disabled /></Field>
+          <Field label="E-mail:"><TextInput value="DBEditPH_EMAIL" /></Field>
         </Section>
 
         <Section title="Correspondence Address">

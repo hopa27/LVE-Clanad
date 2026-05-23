@@ -1,6 +1,5 @@
 import { Field, TextInput, SelectInput, Checkbox, Section } from "../components/Field";
 import { DatePicker } from "../components/DatePicker";
-import { MdMoreHoriz } from "react-icons/md";
 
 export function PolicyDetailsTab() {
   return (
@@ -57,18 +56,8 @@ export function PolicyDetailsTab() {
 
         <Section title="Non Standard Policy">
           <Field label="Non Std Flag:">
-            <div className="flex items-center gap-2">
-              <div className="w-24">
-                <TextInput value="" />
-              </div>
-              <button
-                type="button"
-                className="lve-btn lve-btn-secondary !rounded-full !p-0 !w-10 !h-10 shrink-0 inline-flex items-center justify-center"
-                title="Non Std Flag"
-                aria-label="Non Std Flag"
-              >
-                <MdMoreHoriz size={18} />
-              </button>
+            <div className="w-24">
+              <TextInput value="" />
             </div>
           </Field>
           <Field label="Non Standard Policy:">

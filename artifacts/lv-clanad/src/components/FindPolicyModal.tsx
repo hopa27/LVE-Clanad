@@ -116,6 +116,35 @@ function Radio({
   );
 }
 
+type ColumnKey =
+  | "policyRef"
+  | "planType"
+  | "planCode"
+  | "surname"
+  | "natInsNo"
+  | "originalQuote"
+  | "status"
+  | "phPostCode"
+  | "ifaRef"
+  | "dob1"
+  | "policyNo"
+  | "cocode";
+
+const COLUMNS: { key: ColumnKey; label: string; align?: "left" | "right" }[] = [
+  { key: "policyRef",     label: "POLICY_REF",      align: "right" },
+  { key: "planType",      label: "PLANTYPE" },
+  { key: "planCode",      label: "PLAN_CODE" },
+  { key: "surname",       label: "SURNAME_1_UPPER" },
+  { key: "natInsNo",      label: "NAT_INS_NO_1" },
+  { key: "originalQuote", label: "ORIGINALQUOTE",   align: "right" },
+  { key: "status",        label: "STATUS" },
+  { key: "phPostCode",    label: "PH_POST_CODE" },
+  { key: "ifaRef",        label: "IFA_REF" },
+  { key: "dob1",          label: "DOB_1" },
+  { key: "policyNo",      label: "POLICY_NO",       align: "right" },
+  { key: "cocode",        label: "COCODE" },
+];
+
 export function FindPolicyModal({
   open,
   onClose,
@@ -123,14 +152,23 @@ export function FindPolicyModal({
   open: boolean;
   onClose: () => void;
 }) {
-  const [search, setSearch] = useState("100001");
+  const [search, setSearch] = useState("");
   const [status, setStatus] = useState<Status>("ALL");
   const [selected, setSelected] = useState(0);
+  const [searchColumn, setSearchColumn] = useState<ColumnKey>("policyRef");
   const { setPlanCode } = usePlanCode();
 
   if (!open) return null;
 
-  const rec = POLICIES[selected];
+  const placeholder = POLICIES[0]?.[searchColumn] ?? "";
+  const q = search.trim().toLowerCase();
+  const filtered = q
+    ? POLICIES.filter((p) =>
+        String(p[searchColumn] ?? "").toLowerCase().includes(q),
+      )
+    : POLICIES;
+
+  const rec = filtered[selected] ?? filtered[0];
 
   const versionCodes = PLAN_CODE_VERSIONS.map((v) => v.code) as string[];
 
@@ -165,7 +203,11 @@ export function FindPolicyModal({
               <input
                 type="text"
                 value={search}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  setSelected(0);
+                }}
+                placeholder={String(placeholder)}
                 className="lve-input"
               />
             </div>
@@ -210,22 +252,32 @@ export function FindPolicyModal({
               <table className="w-full font-['Mulish'] text-[13px] text-[#3d3d3d] min-w-[1160px]">
                 <thead>
                   <tr className="bg-white border-y-[3px] border-[#04589b] font-['Livvic'] font-semibold text-[13px] uppercase text-[#002f5c]">
-                    <th className="px-3 py-3 text-left text-[#005a9c] underline">POLICY_REF</th>
-                    <th className="px-3 py-3 text-left">PLANTYPE</th>
-                    <th className="px-3 py-3 text-left">PLAN_CODE</th>
-                    <th className="px-3 py-3 text-left">SURNAME_1_UPPER</th>
-                    <th className="px-3 py-3 text-left">NAT_INS_NO_1</th>
-                    <th className="px-3 py-3 text-right">ORIGINALQUOTE</th>
-                    <th className="px-3 py-3 text-left">STATUS</th>
-                    <th className="px-3 py-3 text-left">PH_POST_CODE</th>
-                    <th className="px-3 py-3 text-left">IFA_REF</th>
-                    <th className="px-3 py-3 text-left">DOB_1</th>
-                    <th className="px-3 py-3 text-left">POLICY_NO</th>
-                    <th className="px-3 py-3 text-left">COCODE</th>
+                    {COLUMNS.map((c) => {
+                      const active = c.key === searchColumn;
+                      return (
+                        <th
+                          key={c.key}
+                          onClick={() => {
+                            setSearchColumn(c.key);
+                            setSearch("");
+                            setSelected(0);
+                          }}
+                          className={`px-3 py-3 cursor-pointer select-none ${
+                            c.align === "right" ? "text-right" : "text-left"
+                          } ${
+                            active
+                              ? "bg-[#003578] text-white underline"
+                              : "text-[#005a9c] hover:bg-[#eaf5f8]"
+                          }`}
+                        >
+                          {c.label}
+                        </th>
+                      );
+                    })}
                   </tr>
                 </thead>
                 <tbody>
-                  {POLICIES.map((p, i) => (
+                  {filtered.map((p, i) => (
                     <tr
                       key={p.policyRef}
                       onClick={() => setSelected(i)}
@@ -237,21 +289,19 @@ export function FindPolicyModal({
                             : "bg-[#e7ebec34] hover:bg-[#003578] hover:text-white"
                       }`}
                     >
-                      <td className="px-3 py-2 text-right">{p.policyRef}</td>
-                      <td className="px-3 py-2">{p.planType}</td>
-                      <td className="px-3 py-2">{p.planCode}</td>
-                      <td className="px-3 py-2">{p.surname}</td>
-                      <td className="px-3 py-2">{p.natInsNo}</td>
-                      <td className="px-3 py-2 text-right">{p.originalQuote}</td>
-                      <td className="px-3 py-2">{p.status}</td>
-                      <td className="px-3 py-2">{p.phPostCode}</td>
-                      <td className="px-3 py-2">{p.ifaRef}</td>
-                      <td className="px-3 py-2">{p.dob1}</td>
-                      <td className="px-3 py-2 text-right">{p.policyNo}</td>
-                      <td className="px-3 py-2">{p.cocode}</td>
+                      {COLUMNS.map((c) => (
+                        <td
+                          key={c.key}
+                          className={`px-3 py-2 ${
+                            c.align === "right" ? "text-right" : ""
+                          }`}
+                        >
+                          {p[c.key]}
+                        </td>
+                      ))}
                     </tr>
                   ))}
-                  {Array.from({ length: Math.max(0, 4 - POLICIES.length) }).map(
+                  {Array.from({ length: Math.max(0, 4 - filtered.length) }).map(
                     (_, i) => (
                       <tr
                         key={`empty-${i}`}

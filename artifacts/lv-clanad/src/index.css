@@ -172,7 +172,10 @@
     font-family: 'Livvic', sans-serif;
     font-size: 18px;
     font-weight: 600;
-    color: var(--color-lve-dark-navy);
+    color: #ffffff;
+    background: var(--lve-accent, var(--color-lve-dark-navy));
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
   }
   .lve-panel-body { padding: 24px; }
 

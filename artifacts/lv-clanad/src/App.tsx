@@ -1,7 +1,11 @@
 import { useState, type JSX } from "react";
 import { EditModeProvider, useEditMode } from "./context/EditModeContext";
 import { ChequesProvider } from "./context/ChequesContext";
-import { PlanCodeProvider } from "./context/PlanCodeContext";
+import {
+  PlanCodeProvider,
+  usePlanCode,
+  type PlanCodeVersion,
+} from "./context/PlanCodeContext";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { Toolbar } from "./components/Toolbar";
@@ -21,6 +25,12 @@ import { LettersTab } from "./tabs/LettersTab";
 import { EventsTab } from "./tabs/EventsTab";
 import { MaturitiesSurrenderTab } from "./tabs/MaturitiesSurrenderTab";
 import { LoaPoaTab } from "./tabs/LoaPoaTab";
+
+const PLAN_CODE_ACCENT: Record<PlanCodeVersion, string> = {
+  "0":  "#848285",
+  "87": "#00263e",
+  "84": "#00263e",
+};
 
 const TAB_COMPONENTS: Record<TabKey, () => JSX.Element> = {
   application: ApplicationDetailsTab,
@@ -42,9 +52,13 @@ function AppShell() {
   const [activeTab, setActiveTab] = useState<TabKey>("application");
   const ActiveComponent = TAB_COMPONENTS[activeTab];
   const { cancelKey } = useEditMode();
+  const { planCode } = usePlanCode();
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f0f0f0]">
+    <div
+      className="min-h-screen flex flex-col bg-[#f0f0f0]"
+      style={{ ["--lve-accent" as string]: PLAN_CODE_ACCENT[planCode] }}
+    >
       <Header title="Client Annuity Administration System" />
       <main className="flex-1 px-[142px] py-8">
         <Toolbar />

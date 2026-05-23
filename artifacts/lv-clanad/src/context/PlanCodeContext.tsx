@@ -17,6 +17,8 @@ type PlanCodeValue = {
   setPlanCode: (code: PlanCodeVersion) => void;
   surname: string;
   setSurname: (s: string) => void;
+  policyRef: string;
+  setPolicyRef: (s: string) => void;
 };
 
 const PlanCodeContext = createContext<PlanCodeValue>({
@@ -24,14 +26,24 @@ const PlanCodeContext = createContext<PlanCodeValue>({
   setPlanCode: () => {},
   surname: "Master",
   setSurname: () => {},
+  policyRef: "225810",
+  setPolicyRef: () => {},
 });
 
 export function PlanCodeProvider({ children }: { children: ReactNode }) {
   const [planCode, setPlanCode] = useState<PlanCodeVersion>("0");
   const [surname, setSurname] = useState<string>("Master");
+  const [policyRef, setPolicyRef] = useState<string>("225810");
   return (
     <PlanCodeContext.Provider
-      value={{ planCode, setPlanCode, surname, setSurname }}
+      value={{
+        planCode,
+        setPlanCode,
+        surname,
+        setSurname,
+        policyRef,
+        setPolicyRef,
+      }}
     >
       {children}
     </PlanCodeContext.Provider>

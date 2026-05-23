@@ -17,7 +17,7 @@ const SIM_ROWS: SimRow[] = [
 export function PolicyHeader() {
   const [simOpen, setSimOpen] = useState(false);
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
-  const { planCode, surname } = usePlanCode();
+  const { planCode, surname, policyRef } = usePlanCode();
 
   return (
     <div className="lve-panel mb-6 p-4 flex flex-wrap items-center gap-3">
@@ -26,7 +26,7 @@ export function PolicyHeader() {
         title="Policy No"
         className="inline-flex items-center gap-1 px-3 h-9 rounded-[8px] border border-[#BBBBBB] bg-white font-['Mulish'] text-[#3d3d3d] hover:border-[#178830]"
       >
-        225810 <MdKeyboardArrowDown />
+        {policyRef} <MdKeyboardArrowDown />
       </button>
       <button
         type="button"
@@ -44,7 +44,7 @@ export function PolicyHeader() {
         title="CLANAD Number"
         className="px-3 h-9 inline-flex items-center rounded-[8px] bg-[#eaf5f8] text-[#0d2c41] font-['Mulish'] text-sm cursor-help"
       >
-        225810
+        {policyRef}
       </div>
 
       <div

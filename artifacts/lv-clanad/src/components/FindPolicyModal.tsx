@@ -156,7 +156,7 @@ export function FindPolicyModal({
   const [status, setStatus] = useState<Status>("ALL");
   const [selected, setSelected] = useState(0);
   const [searchColumn, setSearchColumn] = useState<ColumnKey>("policyRef");
-  const { setPlanCode, setSurname } = usePlanCode();
+  const { setPlanCode, setSurname, setPolicyRef } = usePlanCode();
 
   if (!open) return null;
 
@@ -178,6 +178,7 @@ export function FindPolicyModal({
     }
     if (rec) {
       setSurname(rec.surname);
+      setPolicyRef(rec.policyRef);
     }
     onClose();
   };

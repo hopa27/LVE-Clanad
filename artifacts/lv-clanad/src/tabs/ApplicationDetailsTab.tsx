@@ -56,7 +56,7 @@ export function ApplicationDetailsTab() {
           <Field label="Paid net:">
             <div className="flex items-center gap-2">
               <Checkbox />
-              <TextInput value="dbedPaidNet" />
+              <TextInput value="dbedPaidNet" disabled />
             </div>
           </Field>
           <Field label="Date Paid:"><DatePicker value="" placeholder="Date Paid" /></Field>

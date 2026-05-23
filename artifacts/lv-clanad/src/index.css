@@ -177,6 +177,10 @@
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
   }
+  /* Modals / popups never use the policy accent — always LV dark navy */
+  div[class*="fixed"][class*="inset-0"] {
+    --lve-accent: var(--color-lve-dark-navy);
+  }
   .lve-panel-body { padding: 24px; }
 
   /* DATA GRID (per spec) */

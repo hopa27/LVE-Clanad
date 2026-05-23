@@ -18,10 +18,10 @@ export function ApplicationDetailsTab() {
           <Field label="From:"><TextInput value="" disabled /></Field>
           <Field label="To:"><TextInput value="" disabled /></Field>
           <Field label="Accept Date:"><TextInput value="DBEdit21" disabled /></Field>
-          <Field label="IFA Payment Date:"><TextInput value="DBEdit13" disabled /></Field>
+          <Field label="IFA Payment Date:"><TextInput value="DBEdit13" /></Field>
           <Field label="PostADay:"><Checkbox /></Field>
           <Field label="Transfer from Beneficiary Drawdown?:">
-            <SelectInput value="DBBeneficiary" options={["Yes", "No", "Unknown"]} disabled />
+            <SelectInput value="DBBeneficiary" options={["Yes", "No", "Unknown"]} />
           </Field>
         </div>
 

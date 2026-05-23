@@ -34,13 +34,13 @@ export function BankAccDetailsTab() {
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
           <div>
-            <Field inline label="Bank sort code:"><TextInput value="30-15-52" disabled /></Field>
-            <Field inline label="Bank account no:"><TextInput value="01841281" disabled /></Field>
-            <Field inline label="Bank account name:"><TextInput value="Mrs Linda Turner" disabled /></Field>
-            <Field inline label="Bank name:"><TextInput value="LLOYDS BANK PLC, WIRRAL" disabled /></Field>
+            <Field inline label="Bank sort code:"><TextInput value="DBEdit41" /></Field>
+            <Field inline label="Bank account no:"><TextInput value="DBEdit77" /></Field>
+            <Field inline label="Bank account name:"><TextInput value="DBEdit79" /></Field>
+            <Field inline label="Bank name:"><TextInput value="" disabled /></Field>
           </div>
           <div>
-            <Field inline label="Payment Ref:"><TextInput value="225810" disabled /></Field>
+            <Field inline label="Payment Ref:"><TextInput value="DBEdit6" /></Field>
             <Field inline label="Payment Method:"><TextInput value="B" disabled /></Field>
             <Field inline label="Change Effective Date:"><DatePicker placeholder="Change Effective Date" disabled /></Field>
             <Field inline label="TOTAL:"><TextInput value="£15,000.00" disabled /></Field>

@@ -60,9 +60,12 @@ const MENU_ITEMS: MenuItem[] = [
   {
     label: "Print",
     options: [
-      { label: "Print Certificate", action: "tax-certificate" },
-      { label: "Copy P60" },
-      { label: "Reprint MAR's" },
+      {
+        label: "Print MAR",
+        hasSubmenu: true,
+        submenu: [{ label: "Print MAR" }],
+      },
+      { label: "Auto Set Live Report" },
       { label: "Diary Report" },
     ],
   },

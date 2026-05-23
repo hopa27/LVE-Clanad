@@ -63,7 +63,10 @@ const MENU_ITEMS: MenuItem[] = [
       {
         label: "Print MAR",
         hasSubmenu: true,
-        submenu: [{ label: "Print MAR" }],
+        submenu: [
+          { label: "1st Life MAR" },
+          { label: "2nd Life MAR" },
+        ],
       },
       { label: "Auto Set Live Report" },
       { label: "Diary Report" },

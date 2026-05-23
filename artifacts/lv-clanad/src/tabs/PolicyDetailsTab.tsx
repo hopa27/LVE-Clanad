@@ -52,6 +52,17 @@ export function PolicyDetailsTab() {
         </Field>
       </Section>
 
+      <Section title="Non Standard Policy">
+        <Field label="Non Std Flag:">
+          <div className="w-24">
+            <TextInput value="" />
+          </div>
+        </Field>
+        <Field label="Non Standard Policy:">
+          <TextInput value="dbNonStdNote" />
+        </Field>
+      </Section>
+
       <Section title="IFA Contact Details">
         <Field label="Name:"><TextInput value="DBEditBrokerName" disabled /></Field>
         <Field label="Building:"><TextInput value="DBEdBuilding" disabled /></Field>
@@ -147,16 +158,6 @@ export function PolicyDetailsTab() {
         </Field>
       </Section>
 
-      <Section title="Non Standard Policy">
-        <Field label="Non Std Flag:">
-          <div className="w-24">
-            <TextInput value="" />
-          </div>
-        </Field>
-        <Field label="Non Standard Policy:">
-          <TextInput value="dbNonStdNote" />
-        </Field>
-      </Section>
     </div>
   );
 }

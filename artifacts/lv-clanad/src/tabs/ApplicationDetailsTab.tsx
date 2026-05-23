@@ -11,17 +11,17 @@ export function ApplicationDetailsTab() {
         <div>
           <Field label="Set Up Date:"><TextInput value="DBEditAPPLI" disabled /></Field>
           <Field label="Received Date:"><TextInput value="DBEditAPPLIC" /></Field>
-          <Field label="Start Date:"><TextInput value="edtStartdate" disabled /></Field>
+          <Field label="Start Date:"><TextInput value="edtStartdate" /></Field>
           <div className="mb-2 mt-1 font-['Livvic'] text-[13px] font-semibold text-[#0d2c41]">
             WPPA amendment notification date
           </div>
           <Field label="From:"><TextInput value="" /></Field>
           <Field label="To:"><TextInput value="" /></Field>
-          <Field label="Accept Date:"><TextInput value="DBEdit21" /></Field>
-          <Field label="IFA Payment Date:"><TextInput value="DBEdit13" /></Field>
+          <Field label="Accept Date:"><TextInput value="DBEdit21" disabled /></Field>
+          <Field label="IFA Payment Date:"><TextInput value="DBEdit13" disabled /></Field>
           <Field label="PostADay:"><Checkbox /></Field>
           <Field label="Transfer from Beneficiary Drawdown?:">
-            <SelectInput value="DBBeneficiary" options={["Yes", "No", "Unknown"]} />
+            <SelectInput value="DBBeneficiary" options={["Yes", "No", "Unknown"]} disabled />
           </Field>
         </div>
 
@@ -40,11 +40,11 @@ export function ApplicationDetailsTab() {
         <div>
           <Field label="GAD Anniversary:">
             <div className="flex gap-2">
-              <TextInput value="10" className="!w-16" />
+              <TextInput value="10" className="!w-16" disabled />
               <SelectInput value="dbe" options={[
                 "Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec",
-              ]} />
-              <TextInput value="13" className="!w-16" />
+              ]} disabled />
+              <TextInput value="13" className="!w-16" disabled />
             </div>
           </Field>
           <Field label="Life One Dead:"><TextInput value="DBLifeOneDe" disabled /></Field>
@@ -90,7 +90,7 @@ export function ApplicationDetailsTab() {
           <Field label="Correspond Name:"><TextInput value="correspname" /></Field>
           <Field label="Salutation Name:"><TextInput value="salname" /></Field>
           <Field label="Telephone:"><TextInput value="anntele" /></Field>
-          <Field label="E-mail:"><TextInput value="DBEditPH_EMAIL" /></Field>
+          <Field label="E-mail:"><TextInput value="DBEditPH_EMAIL" disabled /></Field>
         </Section>
 
         <Section title="Correspondence Address">
@@ -108,7 +108,7 @@ export function ApplicationDetailsTab() {
           </Field>
           <Field label="Postcode:"><TextInput value="phpc" /></Field>
           <Field label="Country:">
-            <SelectInput value="cmbCountry" options={["United Kingdom", "Ireland", "Other"]} />
+            <SelectInput value="cmbCountry" options={["United Kingdom", "Ireland", "Other"]} disabled />
           </Field>
           <div className="mt-2"><Checkbox label="Address Unknown / Gone Away" /></div>
         </Section>

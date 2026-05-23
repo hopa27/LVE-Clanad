@@ -67,23 +67,23 @@ export function QuoteDetailsTab() {
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-8">
                 <div>
                   <Field label="LTA% Crystallised:"><TextInput value="dbeLTACrys" disabled /></Field>
-                  <Field label="Scheme Name:"><TextInput value="dbedSchem" disabled /></Field>
-                  <Field label="NHMRC Scheme Pension Number:"><TextInput value="DBEDSCHE" disabled /></Field>
+                  <Field label="Scheme Name:"><TextInput value="dbedSchem" /></Field>
+                  <Field label="NHMRC Scheme Pension Number:"><TextInput value="DBEDSCHE" /></Field>
                   <Field label="Standard Lifetime Allowance:"><TextInput value="DBEdit29" disabled /></Field>
                   <Field label="First BCE:"><Checkbox disabled /></Field>
                   <Field label="LTA Protection type:"><TextInput value="edtlblLtaPro" disabled /></Field>
                 </div>
                 <div>
                   <Field label="Enhancement:"><TextInput value="edtOtherLad" disabled /></Field>
-                  <Field label="HMRC Certificate Number:"><TextInput value="EDTHMRCC" disabled /></Field>
-                  <Field label="% Crystallised Post 5th Apr 2024:"><TextInput value="DBEditCrtyl" disabled /></Field>
+                  <Field label="HMRC Certificate Number:"><TextInput value="EDTHMRCC" /></Field>
+                  <Field label="% Crystallised Post 5th Apr 2024:"><TextInput value="DBEditCrtyl" /></Field>
                   <Field label="Cumulative LTA%:"><TextInput value="dbeLTACurr" disabled /></Field>
                   <Field label="LTA Excess Tax:"><TextInput value="DBEdit31" disabled /></Field>
                 </div>
                 <div>
                   <Field label="Net LTA Excess Lumpsum:"><TextInput value="DBEdit32" disabled /></Field>
                   <Field label="Pensions In Payment LTA%:"><TextInput value="DBEdit33" disabled /></Field>
-                  <Field label="LSA Amount:"><TextInput value="DBEdit25" disabled /></Field>
+                  <Field label="LSA Amount:"><TextInput value="DBEdit25" /></Field>
                   <Field label="PCLS Protection:"><TextInput value="edtPclsProt" disabled /></Field>
                   <Field label="Enhancement:"><TextInput value="edtProtec" disabled /></Field>
                 </div>

@@ -6,6 +6,7 @@ import {
   MdAccessTime,
   MdPerson,
 } from "react-icons/md";
+import { usePlanCode } from "../context/PlanCodeContext";
 
 const NOTES = [
   {
@@ -64,6 +65,38 @@ function colorFor(name: string) {
 }
 
 export function NotesTab() {
+  const { planCode } = usePlanCode();
+  const isPlan0 = planCode === "0";
+  if (isPlan0) {
+    return (
+      <Section
+        title="Notes (0)"
+        headerAction={
+          <div className="flex items-center gap-2">
+            <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
+              <MdAdd size={16} /> Add
+            </button>
+            <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
+              <MdEdit size={16} /> Edit
+            </button>
+            <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
+              <MdRemove size={16} /> Delete
+            </button>
+          </div>
+        }
+      >
+        <div className="space-y-3 max-h-[620px] overflow-auto pr-1">
+          <article className="relative bg-white rounded-[8px] border border-[#e0e0e0] overflow-hidden">
+            <div className="p-4">
+              <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#3d3d3d] leading-[1.6] m-0">
+                ImmoNotes
+              </pre>
+            </div>
+          </article>
+        </div>
+      </Section>
+    );
+  }
   return (
     <Section
       title={`Notes (${NOTES.length})`}

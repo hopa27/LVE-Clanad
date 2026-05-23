@@ -100,19 +100,19 @@ export function PolicyDetailsTab() {
           <DatePicker value="DbEdCoEDu" placeholder="DbEdCoEDu" disabled />
         </Field>
         <Field label="CoE Due — Sent Date:">
-          <DatePicker value="DbEdCoESe" placeholder="DbEdCoESe" disabled />
+          <DatePicker value="DbEdCoESe" placeholder="DbEdCoESe" />
         </Field>
         <Field label="CoE Follow Up 1 Date:">
           <DatePicker value="DbEdFollow" placeholder="DbEdFollow" />
         </Field>
         <Field label="Follow Up 1 — Sent Date:">
-          <DatePicker value="DbEdCoEFo" placeholder="DbEdCoEFo" disabled />
+          <DatePicker value="DbEdCoEFo" placeholder="DbEdCoEFo" />
         </Field>
         <Field label="CoE Follow Up 2 Date:">
           <DatePicker value="DbEdFollow" placeholder="DbEdFollow" />
         </Field>
         <Field label="Follow Up 2 — Sent Date:">
-          <DatePicker value="DbEdCoEFo" placeholder="DbEdCoEFo" disabled />
+          <DatePicker value="DbEdCoEFo" placeholder="DbEdCoEFo" />
         </Field>
       </Section>
 

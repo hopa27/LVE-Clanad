@@ -131,8 +131,8 @@ export function PolicyDetailsTab() {
 
       <Section title="IFA Details">
         <Field label="IFA Ref:"><TextInput value="BDIFAREF" disabled /></Field>
-        <Field label="Adviser Charge %:"><TextInput value="edtAdviserChar" /></Field>
-        <Field label="Adviser Charge:"><TextInput value="edtAdviserChar" /></Field>
+        <Field label="Adviser Charge %:"><TextInput value="edtAdviserChar" disabled /></Field>
+        <Field label="Adviser Charge:"><TextInput value="edtAdviserChar" disabled /></Field>
         <Field label="Key Account:"><TextInput value="DBEdit4" disabled /></Field>
         <Field label="Region:"><TextInput value="DBEdit12" disabled /></Field>
       </Section>

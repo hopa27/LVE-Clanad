@@ -142,7 +142,7 @@ export function PolicyDetailsTab() {
           <Checkbox label="MPAA Rules Triggered" />
         </Field>
         <Field label="Date MPAA Letter Issued:">
-          <TextInput value="dbEditMPAAIssued" disabled />
+          <TextInput value="dbEditMPAAIssued" />
         </Field>
       </Section>
 

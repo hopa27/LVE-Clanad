@@ -10,6 +10,7 @@ import {
 } from "react-icons/md";
 import { Section, Field } from "../components/Field";
 import { DatePicker } from "../components/DatePicker";
+import { usePlanCode } from "../context/PlanCodeContext";
 
 const EVENT_COLS = ["Date of Event", "Event No", "Gross Amount", "Tax Amount", "Event Type"];
 
@@ -53,7 +54,8 @@ const SAMPLE_ROWS: EventRow[] = [
 ];
 
 export function EventsTab() {
-  const [rows, setRows] = useState<EventRow[]>(SAMPLE_ROWS);
+  const { planCode } = usePlanCode();
+  const [rows, setRows] = useState<EventRow[]>(planCode === "0" ? [] : SAMPLE_ROWS);
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
   const [newEventOpen, setNewEventOpen] = useState(false);
   const [editingIdx, setEditingIdx] = useState<number | null>(null);

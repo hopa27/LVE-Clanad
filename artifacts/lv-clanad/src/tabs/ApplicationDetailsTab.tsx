@@ -15,8 +15,8 @@ export function ApplicationDetailsTab() {
           <div className="mb-2 mt-1 font-['Livvic'] text-[13px] font-semibold text-[#0d2c41]">
             WPPA amendment notification date
           </div>
-          <Field label="From:"><TextInput value="" /></Field>
-          <Field label="To:"><TextInput value="" /></Field>
+          <Field label="From:"><TextInput value="" disabled /></Field>
+          <Field label="To:"><TextInput value="" disabled /></Field>
           <Field label="Accept Date:"><TextInput value="DBEdit21" disabled /></Field>
           <Field label="IFA Payment Date:"><TextInput value="DBEdit13" disabled /></Field>
           <Field label="PostADay:"><Checkbox /></Field>

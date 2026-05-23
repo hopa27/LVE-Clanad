@@ -3,11 +3,7 @@ import { DatePicker } from "../components/DatePicker";
 import { MdEdit } from "react-icons/md";
 import { useCheques } from "../context/ChequesContext";
 
-const TRANSFERS = [
-  { company: "PRUDENTIAL", ref: "225810", date: "25/04/2025", amount: "32,760.42" },
-  { company: "TFC", ref: "", date: "02/05/2025", amount: "-8,190.10" },
-  { company: "TLS", ref: "", date: "02/05/2025", amount: "-9,570.32" },
-];
+const TRANSFERS: { company: string; ref: string; date: string; amount: string }[] = [];
 
 const SEED_CHEQUE_NOS = new Set(["232693", "232694", "232695"]);
 

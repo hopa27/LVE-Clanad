@@ -58,19 +58,15 @@ export function PolicyDetailsTab() {
       {/* MIDDLE COLUMN */}
       <div className="space-y-4 lg:col-span-1">
         <Section title="IFA Contact Details">
-          <Field label="Name:">
-            <TextInput value="DBEditBrokerName" disabled />
-          </Field>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3">
-            <Field label="Building:"><TextInput value="DBEdBuilding" disabled /></Field>
-            <Field label="Street:"><TextInput value="DBEdStreet" disabled /></Field>
-            <Field label="City:"><TextInput value="DBEdCity" disabled /></Field>
-            <Field label="District:"><TextInput value="DBEdDistrict" disabled /></Field>
-            <Field label="County:"><TextInput value="DBEdCounty" disabled /></Field>
-            <Field label="Post Code:"><TextInput value="DBEdPostcode" disabled /></Field>
-            <Field label="FAO:"><TextInput value="DBEditCONTACT_TXT" disabled /></Field>
-            <Field label="Email:"><TextInput value="DBEditEMAIL_TO_TXT" /></Field>
-          </div>
+          <Field label="Name:"><TextInput value="DBEditBrokerName" disabled /></Field>
+          <Field label="Building:"><TextInput value="DBEdBuilding" disabled /></Field>
+          <Field label="Street:"><TextInput value="DBEdStreet" disabled /></Field>
+          <Field label="City:"><TextInput value="DBEdCity" disabled /></Field>
+          <Field label="District:"><TextInput value="DBEdDistrict" disabled /></Field>
+          <Field label="County:"><TextInput value="DBEdCounty" disabled /></Field>
+          <Field label="Post Code:"><TextInput value="DBEdPostcode" disabled /></Field>
+          <Field label="FAO:"><TextInput value="DBEditCONTACT_TXT" disabled /></Field>
+          <Field label="Email:"><TextInput value="DBEditEMAIL_TO_TXT" /></Field>
           <Field label="Tel:"><TextInput value="DBEdIFA_TEL" disabled /></Field>
         </Section>
 
@@ -121,33 +117,28 @@ export function PolicyDetailsTab() {
         </Section>
 
         <Section title="Certificate of Existence Details">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3">
-            <Field label="CoE Received Date:">
-              <DatePicker value="DbEdCoERe" placeholder="DbEdCoERe" />
-            </Field>
-            <Field label="CoE No:"><TextInput value="" /></Field>
-
-            <Field label="CoE Due Date:">
-              <DatePicker value="DbEdCoEDu" placeholder="DbEdCoEDu" disabled />
-            </Field>
-            <Field label="Sent Date:">
-              <DatePicker value="DbEdCoESe" placeholder="DbEdCoESe" disabled />
-            </Field>
-
-            <Field label="CoE Follow Up 1 Date:">
-              <DatePicker value="DbEdFollow" placeholder="DbEdFollow" />
-            </Field>
-            <Field label="Sent Date:">
-              <DatePicker value="DbEdCoEFo" placeholder="DbEdCoEFo" disabled />
-            </Field>
-
-            <Field label="CoE Follow Up 2 Date:">
-              <DatePicker value="DbEdFollow" placeholder="DbEdFollow" />
-            </Field>
-            <Field label="Sent Date:">
-              <DatePicker value="DbEdCoEFo" placeholder="DbEdCoEFo" disabled />
-            </Field>
-          </div>
+          <Field label="CoE No:"><TextInput value="" /></Field>
+          <Field label="CoE Received Date:">
+            <DatePicker value="DbEdCoERe" placeholder="DbEdCoERe" />
+          </Field>
+          <Field label="CoE Due Date:">
+            <DatePicker value="DbEdCoEDu" placeholder="DbEdCoEDu" disabled />
+          </Field>
+          <Field label="CoE Due — Sent Date:">
+            <DatePicker value="DbEdCoESe" placeholder="DbEdCoESe" disabled />
+          </Field>
+          <Field label="CoE Follow Up 1 Date:">
+            <DatePicker value="DbEdFollow" placeholder="DbEdFollow" />
+          </Field>
+          <Field label="Follow Up 1 — Sent Date:">
+            <DatePicker value="DbEdCoEFo" placeholder="DbEdCoEFo" disabled />
+          </Field>
+          <Field label="CoE Follow Up 2 Date:">
+            <DatePicker value="DbEdFollow" placeholder="DbEdFollow" />
+          </Field>
+          <Field label="Follow Up 2 — Sent Date:">
+            <DatePicker value="DbEdCoEFo" placeholder="DbEdCoEFo" disabled />
+          </Field>
         </Section>
 
         <Section title="P45 Details">

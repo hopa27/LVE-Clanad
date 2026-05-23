@@ -30,89 +30,96 @@ export function QuoteDetailsTab() {
       <Section title="Basis Details">
         {isPlan0 ? (
           <div className="space-y-4">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
-            <div>
-              <Field label="Life Type:"><TextInput value="DBEd" disabled /></Field>
-              <Field label="Plan Type:">
-                <div className="grid grid-cols-2 gap-2">
-                  <TextInput value="DBEdit1" disabled />
-                  <TextInput value="DBEdit" disabled />
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-8">
+              <div>
+                <Field label="Life Type:"><TextInput value="DBEd" disabled /></Field>
+                <Field label="Plan Type:">
+                  <div className="grid grid-cols-2 gap-2">
+                    <TextInput value="DBEdit1" disabled />
+                    <TextInput value="DBEdit" disabled />
+                  </div>
+                </Field>
+                <Field label="Overlap:"><TextInput value="DBEd" disabled /></Field>
+                <Field label="Payments:"><TextInput value="payty" disabled /></Field>
+                <Field label="Frequency:"><TextInput value="payfre" disabled /></Field>
+                <Field label="DMT:"><TextInput value="Dbed" disabled /></Field>
+                <Field label="Value Protection %:"><TextInput value="ValueProte" disabled /></Field>
+              </div>
+              <div>
+                <Field label="ELE:"><TextInput value="EdELE" disabled /></Field>
+                <Field label="Original Amnt Vested:"><TextInput value="DBOriginal" disabled /></Field>
+                <Field label="Series:"><TextInput value="bdseri" disabled /></Field>
+                <Field label="With Profit Series:"><TextInput value="EdWithProfit" disabled /></Field>
+                <Field label="Policy Type:"><TextInput value="EdPolicyTyp" disabled /></Field>
+                <Field label="Last Survivor?:"><TextInput value="DBEd" disabled /></Field>
+                <Field label="Escalation Rate:"><TextInput value="DBEdit" disabled /></Field>
+              </div>
+              <div>
+                <Field label="Escalation Type:"><TextInput value="dbedEscTy" disabled /></Field>
+                <Field label="Capital Protection?:"><TextInput value="DBEdit" disabled /></Field>
+                <Field label="Max Tax Free Cash:"><Checkbox disabled /></Field>
+                <Field label="Value Protection:"><Checkbox disabled /></Field>
+                <Field label="Withheld Minimal Income:"><Checkbox disabled /></Field>
+              </div>
+            </div>
+
+            <Section title="LTA Details">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-8">
+                <div>
+                  <Field label="LTA% Crystallised:"><TextInput value="dbeLTACrys" disabled /></Field>
+                  <Field label="Scheme Name:"><TextInput value="dbedSchem" disabled /></Field>
+                  <Field label="NHMRC Scheme Pension Number:"><TextInput value="DBEDSCHE" disabled /></Field>
+                  <Field label="Standard Lifetime Allowance:"><TextInput value="DBEdit29" disabled /></Field>
+                  <Field label="First BCE:"><Checkbox disabled /></Field>
+                  <Field label="LTA Protection type:"><TextInput value="edtlblLtaPro" disabled /></Field>
                 </div>
-              </Field>
-              <Field label="Overlap:"><TextInput value="DBEd" disabled /></Field>
-              <Field label="Payments:"><TextInput value="payty" disabled /></Field>
-              <Field label="Frequency:"><TextInput value="payfre" disabled /></Field>
-              <Field label="DMT:"><TextInput value="Dbed" disabled /></Field>
-              <Field label="Value Protection %:"><TextInput value="ValueProte" disabled /></Field>
-              <Field label="ELE:"><TextInput value="EdELE" disabled /></Field>
-              <Field label="Original Amnt Vested:"><TextInput value="DBOriginal" disabled /></Field>
-            </div>
-            <div>
-              <Field label="Series:"><TextInput value="bdseri" disabled /></Field>
-              <Field label="With Profit Series:"><TextInput value="EdWithProfit" disabled /></Field>
-              <Field label="Policy Type:"><TextInput value="EdPolicyTyp" disabled /></Field>
-              <Field label="Last Survivor?:"><TextInput value="DBEd" disabled /></Field>
-              <Field label="Escalation Rate:"><TextInput value="DBEdit" disabled /></Field>
-              <Field label="Escalation Type:"><TextInput value="dbedEscTy" disabled /></Field>
-              <Field label="Capital Protection?:"><TextInput value="DBEdit" disabled /></Field>
-              <Field label="Max Tax Free Cash:"><Checkbox disabled /></Field>
-              <Field label="Value Protection:"><Checkbox disabled /></Field>
-              <Field label="Withheld Minimal Income:"><Checkbox disabled /></Field>
-            </div>
-          </div>
+                <div>
+                  <Field label="Enhancement:"><TextInput value="edtOtherLad" disabled /></Field>
+                  <Field label="HMRC Certificate Number:"><TextInput value="EDTHMRCC" disabled /></Field>
+                  <Field label="% Crystallised Post 5th Apr 2024:"><TextInput value="DBEditCrtyl" disabled /></Field>
+                  <Field label="Cumulative LTA%:"><TextInput value="dbeLTACurr" disabled /></Field>
+                  <Field label="LTA Excess Tax:"><TextInput value="DBEdit31" disabled /></Field>
+                </div>
+                <div>
+                  <Field label="Net LTA Excess Lumpsum:"><TextInput value="DBEdit32" disabled /></Field>
+                  <Field label="Pensions In Payment LTA%:"><TextInput value="DBEdit33" disabled /></Field>
+                  <Field label="LSA Amount:"><TextInput value="DBEdit25" disabled /></Field>
+                  <Field label="PCLS Protection:"><TextInput value="edtPclsProt" disabled /></Field>
+                  <Field label="Enhancement:"><TextInput value="edtProtec" disabled /></Field>
+                </div>
+              </div>
+            </Section>
 
-          <Section title="LTA Details">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-8 pt-4 border-t border-[#e0e0e0]">
               <div>
-                <Field inline labelWidth={260} label="LTA% Crystallised:"><TextInput value="dbeLTACrys" disabled /></Field>
-                <Field inline labelWidth={260} label="Scheme Name:"><TextInput value="dbedSchem" disabled /></Field>
-                <Field inline labelWidth={260} label="NHMRC Scheme Pension Number:"><TextInput value="DBEDSCHE" disabled /></Field>
-                <Field inline labelWidth={260} label="Standard Lifetime Allowance:"><TextInput value="DBEdit29" disabled /></Field>
-                <Field inline labelWidth={260} label="First BCE:"><Checkbox disabled /></Field>
-                <Field inline labelWidth={260} label="LTA Protection type:"><TextInput value="edtlblLtaPro" disabled /></Field>
-                <Field inline labelWidth={260} label="Enhancement:"><TextInput value="edtOtherLad" disabled /></Field>
-                <Field inline labelWidth={260} label="HMRC Certificate Number:"><TextInput value="EDTHMRCC" disabled /></Field>
-                <Field inline labelWidth={260} label="% Crystallised Post 5th Apr 2024:"><TextInput value="DBEditCrtyl" disabled /></Field>
+                <Field label="Policy Term (months):"><TextInput value="dbedPolicy" disabled /></Field>
+                <Field label="Last Payment Date:"><TextInput value="dbedLastPa" disabled /></Field>
+                <Field label="Maturity Date:"><TextInput value="dbedMaturit" disabled /></Field>
+                <Field label="Guaranteed Maturity:"><TextInput value="dbedGuaran" disabled /></Field>
+                <Field label="Original GAD Limit Upper:"><TextInput value="dbedGADLi" disabled /></Field>
               </div>
               <div>
-                <Field inline labelWidth={260} label="Cumulative LTA%:"><TextInput value="dbeLTACurr" disabled /></Field>
-                <Field inline labelWidth={260} label="LTA Excess Tax:"><TextInput value="DBEdit31" disabled /></Field>
-                <Field inline labelWidth={260} label="Net LTA Excess Lumpsum:"><TextInput value="DBEdit32" disabled /></Field>
-                <Field inline labelWidth={260} label="Pensions In Payment LTA%:"><TextInput value="DBEdit33" disabled /></Field>
-                <Field inline labelWidth={260} label="LSA Amount:"><TextInput value="DBEdit25" disabled /></Field>
-                <Field inline labelWidth={260} label="PCLS Protection:"><TextInput value="edtPclsProt" disabled /></Field>
-                <Field inline labelWidth={260} label="Enhancement:"><TextInput value="edtProtec" disabled /></Field>
+                <Field label="Original GAD Limit:"><TextInput value="dbedGADLi" disabled /></Field>
+                <Field label="Original GAD Review Date:"><TextInput value="dbedCalcul" disabled /></Field>
+                <Field label="GAD Review Maximum:"><TextInput value="dbedGADR" disabled /></Field>
+                <Field label="GAD Review Date:"><TextInput value="dbedGADR" disabled /></Field>
+                <Field label="Notional Value:"><TextInput value="DBEdit48" disabled /></Field>
+              </div>
+              <div>
+                <Field label="Value Date:"><TextInput value="DBEdit49" disabled /></Field>
+                <Field label="Total Withheld Minimal Income:"><TextInput value="edTW" disabled /></Field>
+                <Field label="Total Mutual Bonus:"><TextInput value="edTW" disabled /></Field>
+                <div className="mt-2">
+                  <button
+                    type="button"
+                    onClick={() => setNotionalOpen(true)}
+                    className="lve-btn lve-btn-secondary lve-btn-sm"
+                  >
+                    View Notional Value
+                  </button>
+                </div>
               </div>
             </div>
-          </Section>
-
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-6 pt-4 border-t border-[#e0e0e0]">
-            <Field label="Policy Term (months):"><TextInput value="dbedPolicy" disabled /></Field>
-            <Field label="Last Payment Date:"><TextInput value="dbedLastPa" disabled /></Field>
-            <Field label="Maturity Date:"><TextInput value="dbedMaturit" disabled /></Field>
-            <Field label="Guaranteed Maturity:"><TextInput value="dbedGuaran" disabled /></Field>
-
-            <Field label="Original GAD Limit Upper:"><TextInput value="dbedGADLi" disabled /></Field>
-            <Field label="Original GAD Limit:"><TextInput value="dbedGADLi" disabled /></Field>
-            <Field label="Original GAD Review Date:"><TextInput value="dbedCalcul" disabled /></Field>
-            <Field label="GAD Review Maximum:"><TextInput value="dbedGADR" disabled /></Field>
-
-            <Field label="GAD Review Date:"><TextInput value="dbedGADR" disabled /></Field>
-            <Field label="Notional Value:"><TextInput value="DBEdit48" disabled /></Field>
-            <Field label="Value Date:"><TextInput value="DBEdit49" disabled /></Field>
-            <Field label="Total Withheld Minimal Income:"><TextInput value="edTW" disabled /></Field>
-
-            <Field label="Total Mutual Bonus:"><TextInput value="edTW" disabled /></Field>
-            <div className="flex items-end">
-              <button
-                type="button"
-                onClick={() => setNotionalOpen(true)}
-                className="lve-btn lve-btn-secondary lve-btn-sm"
-              >
-                View Notional Value
-              </button>
-            </div>
-          </div>
           </div>
         ) : (
           <>

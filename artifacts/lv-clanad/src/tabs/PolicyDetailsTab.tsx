@@ -117,9 +117,9 @@ export function PolicyDetailsTab() {
       </Section>
 
       <Section title="P45 Details">
-        <Field label="P45 date rec'd:"><TextInput value="bdp45recd" /></Field>
-        <Field label="P45 Tax Paid:"><TextInput value="bdp45taxpaid" /></Field>
-        <Field label="P45 Gross Pay:"><TextInput value="bdp45grosspay" /></Field>
+        <Field label="P45 date rec'd:"><TextInput value="bdp45recd" disabled /></Field>
+        <Field label="P45 Tax Paid:"><TextInput value="bdp45taxpaid" disabled /></Field>
+        <Field label="P45 Gross Pay:"><TextInput value="bdp45grosspay" disabled /></Field>
       </Section>
 
       <div className="mb-4 px-1 space-y-3 break-inside-avoid">

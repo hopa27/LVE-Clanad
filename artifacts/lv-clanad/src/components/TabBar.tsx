@@ -2,6 +2,7 @@ export type TabKey =
   | "application"
   | "annuitant"
   | "contacts"
+  | "contacts2"
   | "policy"
   | "bank"
   | "payments"
@@ -18,6 +19,7 @@ export const TABS: { key: TabKey; label: string }[] = [
   { key: "application", label: "Application Details" },
   { key: "annuitant", label: "Annuitant(s) Details" },
   { key: "contacts", label: "Contacts" },
+  { key: "contacts2", label: "Contacts" },
   { key: "policy", label: "Policy Details" },
   { key: "bank", label: "Bank Acc Details" },
   { key: "payments", label: "Payments" },

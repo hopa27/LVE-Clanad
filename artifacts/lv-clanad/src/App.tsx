@@ -15,6 +15,7 @@ import { StatusBar } from "./components/StatusBar";
 import { ApplicationDetailsTab } from "./tabs/ApplicationDetailsTab";
 import { AnnuitantDetailsTab } from "./tabs/AnnuitantDetailsTab";
 import { ContactsTab } from "./tabs/ContactsTab";
+import { ContactsTab2 } from "./tabs/ContactsTab2";
 import { PolicyDetailsTab } from "./tabs/PolicyDetailsTab";
 import { BankAccDetailsTab } from "./tabs/BankAccDetailsTab";
 import { PaymentsTab } from "./tabs/PaymentsTab";
@@ -37,6 +38,7 @@ const TAB_COMPONENTS: Record<TabKey, () => JSX.Element> = {
   application: ApplicationDetailsTab,
   annuitant: AnnuitantDetailsTab,
   contacts: ContactsTab,
+  contacts2: ContactsTab2,
   policy: PolicyDetailsTab,
   bank: BankAccDetailsTab,
   payments: PaymentsTab,

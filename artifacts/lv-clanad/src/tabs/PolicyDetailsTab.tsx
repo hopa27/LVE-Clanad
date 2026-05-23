@@ -3,8 +3,8 @@ import { DatePicker } from "../components/DatePicker";
 
 export function PolicyDetailsTab() {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-      {/* LEFT COLUMN */}
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 items-start">
+      {/* LEFT COLUMN — Policy Details (tall) */}
       <div className="space-y-4 lg:col-span-1">
         <Section title="Policy Details">
           <Field label="Online Application:"><Checkbox /></Field>
@@ -53,17 +53,6 @@ export function PolicyDetailsTab() {
             <SelectInput value="" options={[""]} />
           </Field>
         </Section>
-
-        <Section title="Non Standard Policy">
-          <Field label="Non Std Flag:">
-            <div className="w-24">
-              <TextInput value="" />
-            </div>
-          </Field>
-          <Field label="Non Standard Policy:">
-            <TextInput value="dbNonStdNote" />
-          </Field>
-        </Section>
       </div>
 
       {/* MIDDLE COLUMN */}
@@ -85,6 +74,37 @@ export function PolicyDetailsTab() {
           <Field label="Tel:"><TextInput value="DBEdIFA_TEL" disabled /></Field>
         </Section>
 
+        <Section title="IFA Details">
+          <Field label="IFA Ref:"><TextInput value="BDIFAREF" disabled /></Field>
+          <Field label="Adviser Charge %:"><TextInput value="edtAdviserChar" /></Field>
+          <Field label="Adviser Charge:"><TextInput value="edtAdviserChar" /></Field>
+          <Field label="Key Account:"><TextInput value="DBEdit4" disabled /></Field>
+          <Field label="Region:"><TextInput value="DBEdit12" disabled /></Field>
+        </Section>
+
+        <Section title="MPAA">
+          <Field label=" ">
+            <Checkbox label="MPAA Rules Triggered" />
+          </Field>
+          <Field label="Date MPAA Letter Issued:">
+            <TextInput value="dbEditMPAAIssued" disabled />
+          </Field>
+        </Section>
+
+        <Section title="Non Standard Policy">
+          <Field label="Non Std Flag:">
+            <div className="w-24">
+              <TextInput value="" />
+            </div>
+          </Field>
+          <Field label="Non Standard Policy:">
+            <TextInput value="dbNonStdNote" />
+          </Field>
+        </Section>
+      </div>
+
+      {/* RIGHT COLUMN */}
+      <div className="space-y-4 lg:col-span-1">
         <Section title="Statements & Letters">
           <Field label="Issue Statements:">
             <SelectInput value="" options={[""]} />
@@ -129,37 +149,15 @@ export function PolicyDetailsTab() {
             </Field>
           </div>
         </Section>
-      </div>
 
-      {/* RIGHT COLUMN */}
-      <div className="space-y-4 lg:col-span-1">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          <Section title="P45 Details">
-            <Field label="P45 date rec'd:"><TextInput value="bdp45recd" /></Field>
-            <Field label="P45 Tax Paid:"><TextInput value="bdp45taxpaid" /></Field>
-            <Field label="P45 Gross Pay:"><TextInput value="bdp45grosspay" /></Field>
-            <Field label="Adviser Charge:"><Checkbox /></Field>
-            <Field label="Serious ill health:">
-              <DatePicker value="DbEdSeriou" placeholder="DbEdSeriou" />
-            </Field>
-          </Section>
-
-          <Section title="IFA Details">
-            <Field label="IFA Ref:"><TextInput value="BDIFAREF" disabled /></Field>
-            <Field label="Adviser Charge %:"><TextInput value="edtAdviserChar" /></Field>
-            <Field label="Adviser Charge:"><TextInput value="edtAdviserChar" /></Field>
-            <Field label="Key Account:"><TextInput value="DBEdit4" disabled /></Field>
-            <Field label="Region:"><TextInput value="DBEdit12" disabled /></Field>
-          </Section>
-        </div>
-
-        <Section title="MPAA">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3 items-center">
-            <Checkbox label="MPAA Rules Triggered" />
-            <Field label="Date MPAA Letter Issued:">
-              <TextInput value="dbEditMPAAIssued" disabled />
-            </Field>
-          </div>
+        <Section title="P45 Details">
+          <Field label="P45 date rec'd:"><TextInput value="bdp45recd" /></Field>
+          <Field label="P45 Tax Paid:"><TextInput value="bdp45taxpaid" /></Field>
+          <Field label="P45 Gross Pay:"><TextInput value="bdp45grosspay" /></Field>
+          <Field label="Adviser Charge:"><Checkbox /></Field>
+          <Field label="Serious ill health:">
+            <DatePicker value="DbEdSeriou" placeholder="DbEdSeriou" />
+          </Field>
         </Section>
 
         <Section title="Agency Deceased">

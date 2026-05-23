@@ -73,7 +73,7 @@ export function PolicyDetailsTab() {
         <Field label="Post Code:"><TextInput value="DBEdPostcode" disabled /></Field>
         <Field label="FAO:"><TextInput value="DBEditCONTACT_TXT" disabled /></Field>
         <Field label="Email:"><TextInput value="DBEditEMAIL_TO_TXT" /></Field>
-        <Field label="Tel:"><TextInput value="DBEdIFA_TEL" disabled /></Field>
+        <Field label="Tel:"><TextInput value="DBEdIFA_TEL" /></Field>
       </Section>
 
       <Section title="Statements & Letters">

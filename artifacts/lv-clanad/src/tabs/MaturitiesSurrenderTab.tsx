@@ -24,7 +24,7 @@ export function MaturitiesSurrenderTab() {
             <Field label="Bank name:"><TextInput value="" disabled /></Field>
             <Field label="Payment Ref:"><TextInput value="DBMatBankRef" /></Field>
             <Field label="Change Effective Date:">
-              <TextInput value="DBMatEffectiveDate" disabled />
+              <TextInput value="DBMatEffectiveDate" />
             </Field>
             <button
               type="button"

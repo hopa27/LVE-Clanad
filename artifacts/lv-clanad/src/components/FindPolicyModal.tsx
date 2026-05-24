@@ -227,6 +227,15 @@ export function FindPolicyModal({
                     <tr
                       key={p.policyRef}
                       onClick={() => setSelected(i)}
+                      onDoubleClick={() => {
+                        setSelected(i);
+                        if (versionCodes.includes(p.planCode)) {
+                          setPlanCode(p.planCode as PlanCodeVersion);
+                        }
+                        setSurname(p.surname);
+                        setPolicyRef(p.policyRef);
+                        onClose();
+                      }}
                       className={`cursor-pointer ${
                         i === selected
                           ? "bg-[#003578] text-white"

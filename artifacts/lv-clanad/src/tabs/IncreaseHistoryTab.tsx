@@ -7,6 +7,9 @@ const COLUMNS = [
   "Esc Rate", "New Basic Annual Income", "Regular Annual Bonus Rate",
   "Topup Bonus Rate", "Regular Bonus Dec Date", "Topup Bonus Amount",
   "Topup Bonus Dec Date", "Guar Charge", "Fund Mngmnt Charge",
+  "Next GAD review date", "GAD Maximum", "Withheld Income",
+  "Income Restricted", "Mutual Bonus Added", "New Guarantee Min Income",
+  "New Yearly Income Before Guarantee", "Declared Investment Return",
 ];
 
 const ROW_DEFAULT = [
@@ -15,12 +18,15 @@ const ROW_DEFAULT = [
   "0", "0", "0",
   "0", "", "£0.00",
   "", "0", "0",
+  "n/a", "", "",
+  "n/a", "", "", "", "",
 ];
 
 export function IncreaseHistoryTab() {
   const { planCode } = usePlanCode();
   const isPlan0 = planCode === "0";
-  const rows: string[][] = isPlan0 ? [] : [ROW_DEFAULT];
+  const isPlan87 = planCode === "87";
+  const rows: string[][] = isPlan0 || isPlan87 ? [] : [ROW_DEFAULT];
 
   return (
     <div className="space-y-4">

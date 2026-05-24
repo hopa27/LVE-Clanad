@@ -55,7 +55,9 @@ const SAMPLE_ROWS: EventRow[] = [
 
 export function EventsTab() {
   const { planCode } = usePlanCode();
-  const [rows, setRows] = useState<EventRow[]>(planCode === "0" ? [] : SAMPLE_ROWS);
+  const [rows, setRows] = useState<EventRow[]>(
+    planCode === "0" || planCode === "87" ? [] : SAMPLE_ROWS,
+  );
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
   const [newEventOpen, setNewEventOpen] = useState(false);
   const [editingIdx, setEditingIdx] = useState<number | null>(null);

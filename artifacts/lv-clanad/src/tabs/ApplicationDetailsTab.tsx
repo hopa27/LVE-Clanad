@@ -31,7 +31,9 @@ export function ApplicationDetailsTab() {
               <Field label="To:"><TextInput value="" disabled /></Field>
             </>
           )}
-          <Field label="Accept Date:"><TextInput value="DBEdit21" disabled /></Field>
+          <Field label="Accept Date:">
+            <TextInput value={isPlan87 ? "" : "DBEdit21"} disabled />
+          </Field>
           <Field label="IFA Payment Date:">
             <TextInput value={isPlan87 ? "" : "DBEdit13"} />
           </Field>
@@ -49,14 +51,18 @@ export function ApplicationDetailsTab() {
           {!isPlan87 && (
             <Field label="Special Status:"><TextInput value="DBSp" disabled /></Field>
           )}
-          <Field label="Final Quote Issued Date:"><TextInput value="DBEdit16" disabled /></Field>
+          <Field label="Final Quote Issued Date:">
+            <TextInput value={isPlan87 ? "" : "DBEdit16"} disabled />
+          </Field>
           <Field label="Status:">
             <TextInput value={isPlan87 ? "P" : "status"} disabled />
           </Field>
           {!isPlan87 && (
             <Field label="Suspended:"><TextInput value="DBSu" disabled /></Field>
           )}
-          <Field label="Days Since Application:"><TextInput value="dbday" disabled /></Field>
+          <Field label="Days Since Application:">
+            <TextInput value={isPlan87 ? "" : "dbday"} disabled />
+          </Field>
           {!isPlan87 && (
             <>
               <Field label="Hosp'd Date:"><TextInput value="dbedHospdDat" /></Field>
@@ -119,8 +125,12 @@ export function ApplicationDetailsTab() {
           <Field label="App Created by:">
             <TextInput value={isPlan87 ? "saimeenakshinathan" : "DBEdit14"} disabled />
           </Field>
-          <Field label="Final Quote Issued by:"><TextInput value="DBEdit19" disabled /></Field>
-          <Field label="Rates Ok'd by:"><TextInput value="DBEdit7" disabled /></Field>
+          <Field label="Final Quote Issued by:">
+            <TextInput value={isPlan87 ? "" : "DBEdit19"} disabled />
+          </Field>
+          <Field label="Rates Ok'd by:">
+            <TextInput value={isPlan87 ? "" : "DBEdit7"} disabled />
+          </Field>
           <Field label="Paykey:">
             <TextInput value={isPlan87 ? "1023693" : "DBEdit20"} disabled />
           </Field>
@@ -128,7 +138,7 @@ export function ApplicationDetailsTab() {
             <TextInput value={isPlan87 ? "233451" : "DBEdit24"} disabled />
           </Field>
           <Field label="Dependant Eligible to Receive Benefits:">
-            <TextInput value="edtEli" disabled />
+            <TextInput value={isPlan87 ? "" : "edtEli"} disabled />
           </Field>
         </div>
       </div>

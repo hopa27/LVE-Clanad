@@ -153,7 +153,7 @@ export function ApplicationDetailsTab() {
         <div>
           {(isPlan87 || isPlan84) && (
             <Field label="">
-              <DatePicker value="10/12/2013" placeholder="" disabled />
+              <DatePicker value="10/12/2013" placeholder="" disabled={isPlan87} />
             </Field>
           )}
           {!isPlan84 && (

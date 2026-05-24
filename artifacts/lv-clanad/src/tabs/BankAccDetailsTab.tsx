@@ -44,13 +44,13 @@ export function BankAccDetailsTab() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
           <div>
             <Field inline label="Bank sort code:">
-              <TextInput value={isPlan87 ? "20-00-00" : isPlan84 ? "77-48-14" : "DBEdit41"} />
+              <TextInput value={isPlan87 ? "20-00-00" : isPlan84 ? "77-48-14" : "DBEdit41"} disabled={isPlan84} />
             </Field>
             <Field inline label="Bank account no:">
-              <TextInput value={isPlan87 ? "83608808" : isPlan84 ? "24782346" : "DBEdit77"} />
+              <TextInput value={isPlan87 ? "83608808" : isPlan84 ? "24782346" : "DBEdit77"} disabled={isPlan84} />
             </Field>
             <Field inline label="Bank account name:">
-              <TextInput value={isPlan87 ? "Test" : isPlan84 ? "Testktbbbide" : "DBEdit79"} />
+              <TextInput value={isPlan87 ? "Test" : isPlan84 ? "Testktbbbide" : "DBEdit79"} disabled={isPlan84} />
             </Field>
             <Field inline label="Bank name:">
               <TextInput
@@ -67,7 +67,7 @@ export function BankAccDetailsTab() {
           </div>
           <div>
             <Field inline label="Payment Ref:">
-              <TextInput value={isPlan87 ? "233451" : isPlan84 ? "111834" : "DBEdit6"} />
+              <TextInput value={isPlan87 ? "233451" : isPlan84 ? "111834" : "DBEdit6"} disabled={isPlan84} />
             </Field>
             <Field inline label="Payment Method:">
               <TextInput value={isPreset ? "B" : "DB"} disabled />

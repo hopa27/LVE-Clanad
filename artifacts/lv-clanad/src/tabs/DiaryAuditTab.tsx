@@ -26,6 +26,17 @@ type DiaryRow = {
   byCompleted: string;
 };
 
+const PLAN_84_DIARY: DiaryRow[] = [
+  { ref: 8, type: "Quote",   notes: "Is Var 4 ok?",                                       created: "12/04/2010", by: "LOPNS", due: "19/04/2010", completed: "13/04/2010", byCompleted: "LOPJT1" },
+  { ref: 6, type: "Misc",    notes: "IFA email address - admin@lifetimefinancial.biz",    created: "17/03/2010", by: "LONLM", due: "24/03/2010", completed: "13/04/2010", byCompleted: "LOPJT1" },
+  { ref: 7, type: "Misc",    notes: "AWAIT ORIGINAL APP",                                 created: "17/03/2010", by: "LONLM", due: "24/03/2010", completed: "07/04/2010", byCompleted: "LOPNS" },
+  { ref: 2, type: "Cheques", notes: "Chase for application cheques of AXA",               created: "17/03/2010", by: "LONLM", due: "07/04/2010", completed: "06/04/2010", byCompleted: "LOPRXS" },
+  { ref: 3, type: "Misc",    notes: "Confirmation of transfer - AXA",                     created: "17/03/2010", by: "LONLM", due: "24/03/2010", completed: "01/04/2010", byCompleted: "LOPTR" },
+  { ref: 5, type: "Misc",    notes: "CVI Form",                                           created: "17/03/2010", by: "LONLM", due: "24/03/2010", completed: "29/03/2010", byCompleted: "PENJOX" },
+  { ref: 4, type: "Misc",    notes: "Confirmation of transfer - Friends Provident",      created: "17/03/2010", by: "LONLM", due: "24/03/2010", completed: "26/03/2010", byCompleted: "LOPNS" },
+  { ref: 1, type: "Cheques", notes: "Chase for application cheques of Friends Provident", created: "17/03/2010", by: "LONLM", due: "07/04/2010", completed: "26/03/2010", byCompleted: "LOPNS" },
+];
+
 const PLAN_87_DIARY: DiaryRow[] = [
   { ref: 6, type: "Death Ben Nom Form", notes: "DBNF missing, incomplete or invalid", created: "15/05/2026", by: "SYSRV", due: "22/05/2026", completed: "", byCompleted: "" },
   { ref: 5, type: "CVI", notes: "Confirmation of Verification of Identity", created: "15/05/2026", by: "SYSRV", due: "22/05/2026", completed: "", byCompleted: "" },
@@ -55,6 +66,8 @@ function fmt(d: Date) {
   return `${dd}/${mm}/${d.getFullYear()}`;
 }
 
+const AUDIT_84 = Array.from({ length: 10 }, () => "Test Note");
+
 const AUDIT = [
   "Annuitant Details (Nat ins no) updated from ' - - - ' to 'WE-26-35-52-' by LV67647 on 13/03/2025 at 12:21:04",
   "Annuitant Details (Gender) updated from 'Female' to 'Male' by LV67647 on 13/03/2025 at 12:21:04",
@@ -77,12 +90,13 @@ export function DiaryAuditTab() {
   const { planCode } = usePlanCode();
   const isPlan0 = planCode === "0";
   const isPlan87 = planCode === "87";
+  const isPlan84 = planCode === "84";
   const [trail, setTrail] = useState<"notes" | "data">("notes");
   const [diaryOpen, setDiaryOpen] = useState(false);
   const [needsOpen, setNeedsOpen] = useState(false);
   const [cedingOpen, setCedingOpen] = useState(false);
   const [diary, setDiary] = useState<DiaryRow[]>(
-    isPlan87 ? PLAN_87_DIARY : INITIAL_DIARY,
+    isPlan87 ? PLAN_87_DIARY : isPlan84 ? PLAN_84_DIARY : INITIAL_DIARY,
   );
   const [selectedRef, setSelectedRef] = useState<number | null>(null);
   const [editConfirmOpen, setEditConfirmOpen] = useState(false);
@@ -276,7 +290,7 @@ export function DiaryAuditTab() {
                   </tr>
                 </thead>
                 <tbody>
-                  {(isPlan0 || isPlan87 ? [] : AUDIT).map((line, i) => {
+                  {(isPlan0 || isPlan87 ? [] : isPlan84 ? AUDIT_84 : AUDIT).map((line, i) => {
                     const m = line.match(
                       /^(.*?)\s+by\s+(\S+)\s+on\s+(\S+)\s+at\s+(\S+)\s*$/,
                     );
@@ -310,7 +324,7 @@ export function DiaryAuditTab() {
                 </tr>
               </thead>
               <tbody>
-                {(isPlan0 || isPlan87 ? [] : AUDIT).map((line, i) => {
+                {(isPlan0 || isPlan87 ? [] : isPlan84 ? AUDIT_84 : AUDIT).map((line, i) => {
                   const m = line.match(
                     /^(.*?)\s+by\s+(\S+)\s+on\s+(\S+)\s+at\s+(\S+)\s*$/,
                   );

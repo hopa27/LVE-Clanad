@@ -76,21 +76,25 @@ export function SelectInput({
   className = "",
   error = false,
   disabled = false,
+  onChange,
 }: {
   value?: string;
   options?: string[];
   className?: string;
   error?: boolean;
   disabled?: boolean;
+  onChange?: (value: string) => void;
 }) {
   const { editing } = useEditMode();
   const all = value && !options.includes(value) ? [value, ...options] : options;
   const lockedReadOnly = !editing;
   const isDisabled = disabled || lockedReadOnly;
+  const isControlled = onChange !== undefined;
   return (
     <div className="relative">
       <select
-        defaultValue={value}
+        {...(isControlled ? { value } : { defaultValue: value })}
+        onChange={(e) => onChange?.(e.target.value)}
         disabled={isDisabled}
         data-error={error || undefined}
         className={`lve-input pr-12 appearance-none ${

@@ -1,7 +1,10 @@
+import { useState } from "react";
 import { SelectInput, TextInput, Checkbox, Section } from "../components/Field";
 import { MdSend } from "react-icons/md";
 import { useEditMode } from "../context/EditModeContext";
 import { usePlanCode } from "../context/PlanCodeContext";
+
+const CLAIM_FORM_POLICY_TYPES = ["Transfer", "Open Market Option", "Flexible Drawdown Income"];
 
 const LETTERS = [
   "Chaser Letter OS Application Client",
@@ -23,16 +26,28 @@ export function LettersTab() {
   const { planCode } = usePlanCode();
   const isPlan0 = planCode === "0";
   const isPlan84 = planCode === "84";
+  const [selectedLetter, setSelectedLetter] = useState("");
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
       <Section title="Select Letter" className="lg:col-span-2">
-        <SelectInput value="" options={["", ...LETTERS]} />
+        <SelectInput
+          value={selectedLetter}
+          options={["", ...LETTERS]}
+          onChange={setSelectedLetter}
+        />
       </Section>
 
       <Section title="Letter Specific Info">
-        <p className="font-['Mulish'] text-[12px] italic text-[#777]">
-          Select a letter to view its options.
-        </p>
+        {selectedLetter === "Claim Form" ? (
+          <div>
+            <label className="lve-label">Policy Type</label>
+            <SelectInput value="" options={["", ...CLAIM_FORM_POLICY_TYPES]} />
+          </div>
+        ) : (
+          <p className="font-['Mulish'] text-[12px] italic text-[#777]">
+            Select a letter to view its options.
+          </p>
+        )}
       </Section>
 
       <Section title="Additional Text" className="lg:col-span-2">

@@ -12,6 +12,15 @@ const QUOTE_ROWS = [
   },
 ];
 
+const QUOTE_ROWS_87 = [
+  {
+    type: "Std Post 97", premium: "£100,000.00", tfc: "", original: "£1.00",
+    escType: "Fixed", escRate: "0", currentInc: "", spousePct: "0",
+    spouseInc: "£0.00", guarantee: "", lastPay: "", overlap: "",
+    valProt: "", taxFree: "", maxFree: "",
+  },
+];
+
 const QUOTE_COLUMNS = [
   "Type","Premium","Tax Free Cash Amount","Original Income","Esc Type","Esc Rate %",
   "Current Income","Spouse %","Spouse Income","Guarantee","Last Pay Under Guarantee",
@@ -23,7 +32,8 @@ export function QuoteDetailsTab() {
   const { planCode } = usePlanCode();
   const isPlan0 = planCode === "0";
   const showGad = planCode === "84";
-  const quoteRows = isPlan0 ? [] : QUOTE_ROWS;
+  const isPlan87 = planCode === "87";
+  const quoteRows = isPlan0 ? [] : isPlan87 ? QUOTE_ROWS_87 : QUOTE_ROWS;
 
   return (
     <div className="space-y-4">
@@ -125,17 +135,17 @@ export function QuoteDetailsTab() {
           <>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-8">
               <div>
-                <Field label="Life Type:"><TextInput value="F" disabled /></Field>
+                <Field label="Life Type:"><TextInput value={isPlan87 ? "M" : "F"} disabled /></Field>
                 <Field label="Plan Type:"><TextInput value="FTA" disabled /></Field>
                 <Field label="Payments:"><TextInput value="AR" disabled /></Field>
-                <Field label="Frequency:"><TextInput value="2" disabled /></Field>
+                <Field label="Frequency:"><TextInput value={isPlan87 ? "1" : "2"} disabled /></Field>
                 <Field label="ELE:"><TextInput value="" disabled /></Field>
                 <Field label="Capital Protection?:"><TextInput value="" disabled /></Field>
                 <Field label="Original Amnt Vested:"><TextInput value="" disabled /></Field>
-                <Field label="Withheld Minimal Income:"><Checkbox disabled /></Field>
+                <Field label="Withheld Minimal Income:"><Checkbox checked={isPlan87} disabled /></Field>
               </div>
               <div>
-                <Field label="Series:"><TextInput value="893" disabled /></Field>
+                <Field label="Series:"><TextInput value={isPlan87 ? "912" : "893"} disabled /></Field>
                 <Field label="Policy Type:">
                   <SelectInput value="with profit" options={["with profit", "without profit"]} disabled />
                 </Field>
@@ -148,43 +158,51 @@ export function QuoteDetailsTab() {
                     <Field label="GAD Review Date:"><TextInput value="" disabled /></Field>
                   </>
                 )}
+                {isPlan87 && (
+                  <>
+                    <Field label="Guaranteed Maturity:"><TextInput value="127081" disabled /></Field>
+                    <Field label="Maturity Date:"><TextInput value="09/09/2031" disabled /></Field>
+                  </>
+                )}
               </div>
-              <div>
-                <Field label="Notional Value:"><TextInput value="14,828" disabled /></Field>
-                <Field label="Value Date:"><TextInput value="25/03/2026" disabled /></Field>
-                <Field label="Total Withheld Minimal Income:"><TextInput value="" disabled /></Field>
-                <Field label="Total Mutual Bonus:"><TextInput value="" disabled /></Field>
-                <button
-                  type="button"
-                  onClick={() => setNotionalOpen(true)}
-                  className="lve-btn lve-btn-secondary lve-btn-sm mt-2"
-                >
-                  View Notional Value
-                </button>
-              </div>
+              {!isPlan87 && (
+                <div>
+                  <Field label="Notional Value:"><TextInput value="14,828" disabled /></Field>
+                  <Field label="Value Date:"><TextInput value="25/03/2026" disabled /></Field>
+                  <Field label="Total Withheld Minimal Income:"><TextInput value="" disabled /></Field>
+                  <Field label="Total Mutual Bonus:"><TextInput value="" disabled /></Field>
+                  <button
+                    type="button"
+                    onClick={() => setNotionalOpen(true)}
+                    className="lve-btn lve-btn-secondary lve-btn-sm mt-2"
+                  >
+                    View Notional Value
+                  </button>
+                </div>
+              )}
             </div>
 
             <Section title="LTA Details">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
                 <div>
                   <Field inline labelWidth={260} label="LTA% Crystallised:"><TextInput value="0" disabled /></Field>
-                  <Field inline labelWidth={260} label="Pension Fund within LTA:"><TextInput value="15,000" disabled /></Field>
-                  <Field inline labelWidth={260} label="Net LTA Excess Pension Fund Retained:"><TextInput value="0" disabled /></Field>
-                  <Field inline labelWidth={260} label="Standard Lifetime Allowance:"><TextInput value="1,073,100" disabled /></Field>
+                  <Field inline labelWidth={260} label="Pension Fund within LTA:"><TextInput value={isPlan87 ? "" : "15,000"} disabled /></Field>
+                  <Field inline labelWidth={260} label="Net LTA Excess Pension Fund Retained:"><TextInput value={isPlan87 ? "" : "0"} disabled /></Field>
+                  <Field inline labelWidth={260} label="Standard Lifetime Allowance:"><TextInput value={isPlan87 ? "" : "1,073,100"} disabled /></Field>
                   <Field inline labelWidth={260} label="First BCE:"><Checkbox checked={true} disabled /></Field>
-                  <Field inline labelWidth={260} label="LTA Protection type:"><TextInput value="N" disabled /></Field>
-                  <Field inline labelWidth={260} label="Enhancement:"><TextInput value="0" disabled /></Field>
+                  <Field inline labelWidth={260} label="LTA Protection type:"><TextInput value={isPlan87 ? "" : "N"} disabled /></Field>
+                  <Field inline labelWidth={260} label="Enhancement:"><TextInput value={isPlan87 ? "" : "0"} disabled /></Field>
                   <Field inline labelWidth={260} label="HMRC Certificate Number:"><TextInput value="" /></Field>
                 </div>
                 <div>
-                  <Field inline labelWidth={260} label="Cumulative LTA%:"><TextInput value="0" disabled /></Field>
-                  <Field inline labelWidth={260} label="LTA Excess Tax:"><TextInput value="0" disabled /></Field>
-                  <Field inline labelWidth={260} label="Net LTA Excess Lumpsum:"><TextInput value="0" disabled /></Field>
-                  <Field inline labelWidth={260} label="Pensions In Payment LTA%:"><TextInput value="0" disabled /></Field>
-                  <Field inline labelWidth={260} label="LSA Amount:"><TextInput value="8,190" /></Field>
-                  <Field inline labelWidth={260} label="PCLS Protection:"><TextInput value="N" disabled /></Field>
-                  <Field inline labelWidth={260} label="Enhancement:"><TextInput value="0.25" disabled /></Field>
-                  <Field inline labelWidth={260} label="% Crystallised Post 5th Apr 2024:"><TextInput value="100" /></Field>
+                  <Field inline labelWidth={260} label="Cumulative LTA%:"><TextInput value={isPlan87 ? "" : "0"} disabled /></Field>
+                  <Field inline labelWidth={260} label="LTA Excess Tax:"><TextInput value={isPlan87 ? "" : "0"} disabled /></Field>
+                  <Field inline labelWidth={260} label="Net LTA Excess Lumpsum:"><TextInput value={isPlan87 ? "" : "0"} disabled /></Field>
+                  <Field inline labelWidth={260} label="Pensions In Payment LTA%:"><TextInput value={isPlan87 ? "" : "0"} disabled /></Field>
+                  <Field inline labelWidth={260} label="LSA Amount:"><TextInput value={isPlan87 ? "" : "8,190"} /></Field>
+                  <Field inline labelWidth={260} label="PCLS Protection:"><TextInput value={isPlan87 ? "" : "N"} disabled /></Field>
+                  <Field inline labelWidth={260} label="Enhancement:"><TextInput value={isPlan87 ? "" : "0.25"} disabled /></Field>
+                  <Field inline labelWidth={260} label="% Crystallised Post 5th Apr 2024:"><TextInput value={isPlan87 ? "0" : "100"} /></Field>
                 </div>
               </div>
             </Section>

@@ -147,28 +147,24 @@ export function PolicyDetailsTab() {
           <SelectInput
             value={isPlan87 ? "Yes" : ""}
             options={isPlan87 ? ["Yes", "No"] : [""]}
-            disabled={isPlan87}
           />
         </Field>
         <Field label="Copy Annual Statement to IFA:">
           <SelectInput
             value={isPlan87 ? "Yes" : ""}
             options={isPlan87 ? ["Yes", "No"] : [""]}
-            disabled={isPlan87}
           />
         </Field>
         <Field label="Copy Annual Statement to Policyholder:">
           <SelectInput
             value={isPlan87 ? "Yes" : ""}
             options={isPlan87 ? ["Yes", "No"] : [""]}
-            disabled={isPlan87}
           />
         </Field>
         <Field label="Issue wake up letters/maturity chasers:">
           <SelectInput
             value={isPlan87 ? "Yes" : "dblcMat"}
             options={isPlan87 ? ["Yes", "No"] : ["dblcMat"]}
-            disabled={isPlan87}
           />
         </Field>
       </Section>

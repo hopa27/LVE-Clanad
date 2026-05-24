@@ -46,8 +46,11 @@ export function PolicyDetailsTab() {
             <div className="flex-1 min-w-0">
               <SelectInput
                 value={isPlan87 ? "Independent" : ""}
-                options={isPlan87 ? ["Independent"] : ["", "Non advised", "Advised"]}
-                disabled={isPlan87}
+                options={
+                  isPlan87
+                    ? ["Independent", "Non advised", "Advised"]
+                    : ["", "Non advised", "Advised"]
+                }
               />
             </div>
             {!isPlan87 && (
@@ -61,7 +64,6 @@ export function PolicyDetailsTab() {
           <SelectInput
             value={isPlan87 ? "Whole of market" : ""}
             options={["", "Whole of market", "Restricted"]}
-            disabled={isPlan87}
           />
         </Field>
         {!isPlan87 && (

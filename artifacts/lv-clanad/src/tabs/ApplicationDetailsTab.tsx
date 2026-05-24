@@ -14,28 +14,35 @@ export function ApplicationDetailsTab() {
         {/* Column 1 */}
         <div>
           <Field label="Set Up Date:">
-            <TextInput value={isPlan87 ? "15/05/2026" : "DBEditAPPLI"} disabled />
+            <DatePicker
+              value={isPlan87 ? "15/05/2026" : ""}
+              placeholder={isPlan87 ? "" : "DBEditAPPLI"}
+              disabled
+            />
           </Field>
           <Field label="Received Date:">
-            <TextInput value={isPlan87 ? "" : "DBEditAPPLIC"} />
+            <DatePicker value="" placeholder={isPlan87 ? "" : "DBEditAPPLIC"} />
           </Field>
           <Field label="Start Date:">
-            <TextInput value={isPlan87 ? "15/05/2026" : "edtStartdate"} />
+            <DatePicker
+              value={isPlan87 ? "15/05/2026" : ""}
+              placeholder={isPlan87 ? "" : "edtStartdate"}
+            />
           </Field>
           {!isPlan87 && (
             <>
               <div className="mb-2 mt-1 font-['Livvic'] text-[13px] font-semibold text-[#0d2c41]">
                 WPPA amendment notification date
               </div>
-              <Field label="From:"><TextInput value="" disabled /></Field>
-              <Field label="To:"><TextInput value="" disabled /></Field>
+              <Field label="From:"><DatePicker value="" placeholder="" disabled /></Field>
+              <Field label="To:"><DatePicker value="" placeholder="" disabled /></Field>
             </>
           )}
           <Field label="Accept Date:">
-            <TextInput value={isPlan87 ? "" : "DBEdit21"} disabled />
+            <DatePicker value="" placeholder={isPlan87 ? "" : "DBEdit21"} disabled />
           </Field>
           <Field label="IFA Payment Date:">
-            <TextInput value={isPlan87 ? "" : "DBEdit13"} />
+            <DatePicker value="" placeholder={isPlan87 ? "" : "DBEdit13"} />
           </Field>
           <Field label="PostADay:"><Checkbox checked={isPlan87} /></Field>
           <Field label="Transfer from Beneficiary Drawdown?:">
@@ -52,7 +59,7 @@ export function ApplicationDetailsTab() {
             <Field label="Special Status:"><TextInput value="DBSp" disabled /></Field>
           )}
           <Field label="Final Quote Issued Date:">
-            <TextInput value={isPlan87 ? "" : "DBEdit16"} disabled />
+            <DatePicker value="" placeholder={isPlan87 ? "" : "DBEdit16"} disabled />
           </Field>
           <Field label="Status:">
             <TextInput value={isPlan87 ? "P" : "status"} disabled />
@@ -65,7 +72,9 @@ export function ApplicationDetailsTab() {
           </Field>
           {!isPlan87 && (
             <>
-              <Field label="Hosp'd Date:"><TextInput value="dbedHospdDat" /></Field>
+              <Field label="Hosp'd Date:">
+                <DatePicker value="" placeholder="dbedHospdDat" />
+              </Field>
               <Field label="LTA Details:"><Checkbox /></Field>
             </>
           )}
@@ -113,11 +122,15 @@ export function ApplicationDetailsTab() {
         <div>
           {isPlan87 && (
             <Field label="">
-              <TextInput value="10/12/2013" disabled />
+              <DatePicker value="10/12/2013" placeholder="" disabled />
             </Field>
           )}
           <Field label="Quote Expiry Date:">
-            <TextInput value={isPlan87 ? "14/06/2026" : "dbedQuoteEx"} disabled />
+            <DatePicker
+              value={isPlan87 ? "14/06/2026" : ""}
+              placeholder={isPlan87 ? "" : "dbedQuoteEx"}
+              disabled
+            />
           </Field>
           <Field label="Last amended by:">
             <TextInput value={isPlan87 ? "SAIMEENAKSHINA" : "DBEdit18"} disabled />

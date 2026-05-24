@@ -3,6 +3,7 @@ import { MdMedicalServices, MdEdit } from "react-icons/md";
 import { Field, TextInput, SelectInput, Checkbox, Section } from "../components/Field";
 import { DatePicker } from "../components/DatePicker";
 import { DoctorDatabaseModal } from "../components/DoctorDatabaseModal";
+import { usePlanCode } from "../context/PlanCodeContext";
 
 type BlockProps = {
   surname?: string;
@@ -30,10 +31,13 @@ type BlockProps = {
   uwDate?: string;
   daysSinceUW?: string;
   showUwBlock?: boolean;
+  showUwDateBlock?: boolean;
 
   icd1?: string;
   icd2?: string;
   icd3?: string;
+  showCauseOfDeath?: boolean;
+  showDod?: boolean;
 };
 
 function AnnuitantBlock({
@@ -62,10 +66,13 @@ function AnnuitantBlock({
   uwDate = "",
   daysSinceUW = "",
   showUwBlock = true,
+  showUwDateBlock = true,
 
   icd1 = "",
   icd2 = "",
   icd3 = "",
+  showCauseOfDeath = true,
+  showDod = true,
 }: BlockProps) {
   const [doctorOpen, setDoctorOpen] = useState(false);
 
@@ -80,29 +87,35 @@ function AnnuitantBlock({
           <Field label="Short Name:"><TextInput value={shortName} /></Field>
         )}
 
-        <div className="mt-2 mb-2 font-['Livvic'] text-[13px] font-semibold text-[#0d2c41]">
-          Cause of Death:
-        </div>
-        <div className="grid grid-cols-3 gap-2">
-          <Field label="ICD#1"><TextInput value={icd1} /></Field>
-          <Field label="ICD#2"><TextInput value={icd2} /></Field>
-          <Field label="ICD#3"><TextInput value={icd3} /></Field>
-        </div>
+        {showCauseOfDeath && (
+          <>
+            <div className="mt-2 mb-2 font-['Livvic'] text-[13px] font-semibold text-[#0d2c41]">
+              Cause of Death:
+            </div>
+            <div className="grid grid-cols-3 gap-2">
+              <Field label="ICD#1"><TextInput value={icd1} /></Field>
+              <Field label="ICD#2"><TextInput value={icd2} /></Field>
+              <Field label="ICD#3"><TextInput value={icd3} /></Field>
+            </div>
+          </>
+        )}
       </div>
 
       {/* Column 2 — DOB / DOD / Nat ins / Enhanced / Doctor / Gender */}
       <div>
         <Field label="DOB:"><DatePicker value={dob} placeholder="DOB" /></Field>
-        <Field label="DOD:">
-          <div className="flex items-center gap-3">
-            <div className="flex-1 min-w-0">
-              <DatePicker value={dod} placeholder="DOD" />
+        {showDod && (
+          <Field label="DOD:">
+            <div className="flex items-center gap-3">
+              <div className="flex-1 min-w-0">
+                <DatePicker value={dod} placeholder="DOD" />
+              </div>
+              <div className="shrink-0">
+                <Checkbox label="Death Cert Received?" />
+              </div>
             </div>
-            <div className="shrink-0">
-              <Checkbox label="Death Cert Received?" />
-            </div>
-          </div>
-        </Field>
+          </Field>
+        )}
         <Field label="Nat ins no:">
           <div className="flex items-center gap-2">
             <div className="flex-1 min-w-0">
@@ -154,8 +167,12 @@ function AnnuitantBlock({
         {showUwBlock && (
           <>
             <Field label="U/W Ref:"><TextInput value={uwRef} disabled /></Field>
-            <Field label="U/W Date:"><TextInput value={uwDate} disabled /></Field>
-            <Field label="Days Since U/W:"><TextInput value={daysSinceUW} disabled /></Field>
+            {showUwDateBlock && (
+              <>
+                <Field label="U/W Date:"><TextInput value={uwDate} disabled /></Field>
+                <Field label="Days Since U/W:"><TextInput value={daysSinceUW} disabled /></Field>
+              </>
+            )}
           </>
         )}
       </div>
@@ -166,27 +183,34 @@ function AnnuitantBlock({
 }
 
 export function AnnuitantDetailsTab() {
+  const { planCode } = usePlanCode();
+  const isPlan87 = planCode === "87";
+
   return (
     <div className="space-y-4">
       <Section title="Annuitant">
         <AnnuitantBlock
-          surname="surname1"
-          forename="Forename1"
-          second="Middlename"
-          shortName="ANNSNAME"
-          dob="dob1"
-          dod="DOD1"
-          natIns="NI1"
-          enhanced="ENHANCED"
-          doctor="Doctor1"
-          doctorName="dbDoctorName"
-          marRequired="MAR1R"
-          marCopyToPH="MAR1C"
-          dateMarSent="Mar1sent"
-          dateMarRec="mar1recd"
-          uwRef="DBEdUWRef"
-          uwDate="DBEdUWDat"
+          surname={isPlan87 ? "Uggiu" : "surname1"}
+          forename={isPlan87 ? "Test" : "Forename1"}
+          second={isPlan87 ? "" : "Middlename"}
+          shortName={isPlan87 ? "UGGIU T" : "ANNSNAME"}
+          dob={isPlan87 ? "09/09/1956" : "dob1"}
+          dod={isPlan87 ? "" : "DOD1"}
+          natIns={isPlan87 ? "JK-90-90-90-C" : "NI1"}
+          enhanced={isPlan87 ? "" : "ENHANCED"}
+          doctor={isPlan87 ? "" : "Doctor1"}
+          doctorName={isPlan87 ? "" : "dbDoctorName"}
+          gender={isPlan87 ? "Male" : ""}
+          marRequired={isPlan87 ? "" : "MAR1R"}
+          marCopyToPH={isPlan87 ? "" : "MAR1C"}
+          dateMarSent={isPlan87 ? "" : "Mar1sent"}
+          dateMarRec={isPlan87 ? "" : "mar1recd"}
+          uwRef={isPlan87 ? "" : "DBEdUWRef"}
+          uwDate={isPlan87 ? "" : "DBEdUWDat"}
           daysSinceUW=""
+          showCauseOfDeath={!isPlan87}
+          showDod={!isPlan87}
+          showUwDateBlock={!isPlan87}
           icd1="DbedLif"
           icd2="DbedLif"
           icd3="DbedLif"
@@ -197,21 +221,23 @@ export function AnnuitantDetailsTab() {
         <AnnuitantBlock
           showShortName={false}
           showUwBlock={false}
-          surname="surname2"
-          forename="forename2"
-          second="middlename2"
-          dob="dob2"
-          dod="DOD2"
-          natIns="NI2"
-          enhanced="ENHANCED"
-          doctor="doctor2"
-          doctorName="dbDoctor2Name"
-          marRequired="DbedEL"
+          surname={isPlan87 ? "" : "surname2"}
+          forename={isPlan87 ? "" : "forename2"}
+          second={isPlan87 ? "" : "middlename2"}
+          dob={isPlan87 ? "" : "dob2"}
+          dod={isPlan87 ? "" : "DOD2"}
+          natIns={isPlan87 ? "" : "NI2"}
+          enhanced={isPlan87 ? "" : "ENHANCED"}
+          doctor={isPlan87 ? "" : "doctor2"}
+          doctorName={isPlan87 ? "" : "dbDoctor2Name"}
+          marRequired={isPlan87 ? "" : "DbedEL"}
           marRequiredDisabled
           marCopyLabel="Copy to PH?:"
-          marCopyToPH="PH2RE"
-          dateMarSent="mar2sent"
-          dateMarRec="mar2recd"
+          marCopyToPH={isPlan87 ? "" : "PH2RE"}
+          dateMarSent={isPlan87 ? "" : "mar2sent"}
+          dateMarRec={isPlan87 ? "" : "mar2recd"}
+          showCauseOfDeath={!isPlan87}
+          showDod={!isPlan87}
           icd1="DBedLif"
           icd2="DBedLif"
           icd3="DBedLif"

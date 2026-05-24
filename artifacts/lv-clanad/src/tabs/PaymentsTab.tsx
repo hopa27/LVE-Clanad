@@ -18,9 +18,10 @@ const TAX_HISTORY_DEFAULT: Row[] = [
 export function PaymentsTab() {
   const { planCode } = usePlanCode();
   const isPlan0 = planCode === "0";
+  const isPlan87 = planCode === "87";
 
-  const paymentHistory = isPlan0 ? [] : PAYMENT_HISTORY_DEFAULT;
-  const taxHistory = isPlan0 ? [] : TAX_HISTORY_DEFAULT;
+  const paymentHistory = isPlan0 || isPlan87 ? [] : PAYMENT_HISTORY_DEFAULT;
+  const taxHistory = isPlan0 || isPlan87 ? [] : TAX_HISTORY_DEFAULT;
 
   return (
     <div className="space-y-4">
@@ -65,24 +66,24 @@ export function PaymentsTab() {
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-8">
             <div>
-              <Field label="Premium:"><TextInput value="15,000" disabled /></Field>
+              <Field label="Premium:"><TextInput value={isPlan87 ? "100000" : "15,000"} disabled /></Field>
               <Field label="Tax Free Cash:"><TextInput value="0" disabled /></Field>
-              <Field label="Total:"><TextInput value="15,000" disabled /></Field>
-              <Field label="1st Annuitants Gross:"><TextInput value="1,399" disabled /></Field>
+              <Field label="Total:"><TextInput value={isPlan87 ? "100000" : "15,000"} disabled /></Field>
+              <Field label="1st Annuitants Gross:"><TextInput value={isPlan87 ? "0" : "1,399"} disabled /></Field>
               <Field label="2nd Annuitants Gross:"><TextInput value="0" disabled /></Field>
             </div>
             <div>
-              <Field label="Cumulative Instal:"><TextInput value="10,269.82" disabled /></Field>
-              <Field label="BAL Gross Annuity:"><TextInput value="699.50" disabled /></Field>
-              <Field label="Taxable pay:"><TextInput value="-5,590.06" disabled /></Field>
-              <Field label="Cumulative Free Pay:"><TextInput value="6,289.56" disabled /></Field>
-              <Field label="PAYE Tax Due To Date:"><TextInput value="-2,780.46" disabled /></Field>
+              <Field label="Cumulative Instal:"><TextInput value={isPlan87 ? "" : "10,269.82"} disabled /></Field>
+              <Field label="BAL Gross Annuity:"><TextInput value={isPlan87 ? "" : "699.50"} disabled /></Field>
+              <Field label="Taxable pay:"><TextInput value={isPlan87 ? "" : "-5,590.06"} disabled /></Field>
+              <Field label="Cumulative Free Pay:"><TextInput value={isPlan87 ? "" : "6,289.56"} disabled /></Field>
+              <Field label="PAYE Tax Due To Date:"><TextInput value={isPlan87 ? "" : "-2,780.46"} disabled /></Field>
             </div>
             <div>
               <Field label="Next Anniversary:"><DatePicker placeholder="Next Anniversary" disabled /></Field>
               <Field label="Next Payment Due:"><DatePicker placeholder="Next Payment Due" disabled /></Field>
-              <Field label="Inst Remaining:"><TextInput value="1" disabled /></Field>
-              <Field label="Nth Inst:"><TextInput value="6" disabled /></Field>
+              <Field label="Inst Remaining:"><TextInput value={isPlan87 ? "" : "1"} disabled /></Field>
+              <Field label="Nth Inst:"><TextInput value={isPlan87 ? "" : "6"} disabled /></Field>
               <Field label="PAYE Tax Deduction:"><TextInput value="0" disabled /></Field>
             </div>
           </div>

@@ -68,6 +68,18 @@ function fmt(d: Date) {
 
 const AUDIT_84 = Array.from({ length: 10 }, () => "Test Note");
 
+const DATA_CHANGES_84: { changeDate: string; description: string; userId: string }[] = [
+  { changeDate: "24/04/2018 08:48:47", description: "Field Annuities-Gross Balance was changed from 1294 to 1186.17.",                userId: "LOPJSH" },
+  { changeDate: "24/04/2018 08:48:47", description: "Field Installments-Remaining was changed from 12 to 11.",                       userId: "LOPJSH" },
+  { changeDate: "24/04/2018 08:48:47", description: "Field Next Payment Due was changed from 30/04/2018 to 31/05/2018.",             userId: "LOPJSH" },
+  { changeDate: "24/04/2018 08:48:47", description: "Field Payment-Capital Element for Ref line 97 was inserted with value: 0.",     userId: "LOPJSH" },
+  { changeDate: "24/04/2018 08:48:47", description: "Field Payment-Gross for Ref line 97 was inserted with value: 107.83.",          userId: "LOPJSH" },
+  { changeDate: "24/04/2018 08:48:47", description: "Field Payment-Net for Ref line 97 was inserted with value: 107.83.",            userId: "LOPJSH" },
+  { changeDate: "24/04/2018 08:48:47", description: "Field Payment-Pay Date for Ref line 97 was inserted with value: 30/04/2018.",   userId: "LOPJSH" },
+  { changeDate: "24/04/2018 08:48:47", description: "Field Payment-Pay Method for Ref line 97 was inserted with value: B.",          userId: "LOPJSH" },
+  { changeDate: "24/04/2018 08:48:47", description: "Field Payment-Post Adj for Ref line 97 was inserted with value: 0.",            userId: "LOPJSH" },
+];
+
 const AUDIT = [
   "Annuitant Details (Nat ins no) updated from ' - - - ' to 'WE-26-35-52-' by LV67647 on 13/03/2025 at 12:21:04",
   "Annuitant Details (Gender) updated from 'Female' to 'Male' by LV67647 on 13/03/2025 at 12:21:04",
@@ -324,21 +336,29 @@ export function DiaryAuditTab() {
                 </tr>
               </thead>
               <tbody>
-                {(isPlan0 || isPlan87 ? [] : isPlan84 ? AUDIT_84 : AUDIT).map((line, i) => {
-                  const m = line.match(
-                    /^(.*?)\s+by\s+(\S+)\s+on\s+(\S+)\s+at\s+(\S+)\s*$/,
-                  );
-                  const desc = m ? m[1] : line;
-                  const userId = m ? m[2] : "";
-                  const changeDate = m ? `${m[3]} ${m[4]}` : "";
-                  return (
-                    <tr key={i}>
-                      <td className="!px-4 whitespace-nowrap">{changeDate}</td>
-                      <td className="!px-4">{desc}</td>
-                      <td className="!px-4 whitespace-nowrap">{userId}</td>
-                    </tr>
-                  );
-                })}
+                {isPlan84
+                  ? DATA_CHANGES_84.map((r, i) => (
+                      <tr key={i}>
+                        <td className="!px-4 whitespace-nowrap">{r.changeDate}</td>
+                        <td className="!px-4">{r.description}</td>
+                        <td className="!px-4 whitespace-nowrap">{r.userId}</td>
+                      </tr>
+                    ))
+                  : (isPlan0 || isPlan87 ? [] : AUDIT).map((line, i) => {
+                      const m = line.match(
+                        /^(.*?)\s+by\s+(\S+)\s+on\s+(\S+)\s+at\s+(\S+)\s*$/,
+                      );
+                      const desc = m ? m[1] : line;
+                      const userId = m ? m[2] : "";
+                      const changeDate = m ? `${m[3]} ${m[4]}` : "";
+                      return (
+                        <tr key={i}>
+                          <td className="!px-4 whitespace-nowrap">{changeDate}</td>
+                          <td className="!px-4">{desc}</td>
+                          <td className="!px-4 whitespace-nowrap">{userId}</td>
+                        </tr>
+                      );
+                    })}
               </tbody>
             </table>
           </div>

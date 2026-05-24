@@ -15,13 +15,44 @@ const TAX_HISTORY_DEFAULT: Row[] = [
   { date: "25/10/2025", code: "1257L*", n: "6", gross: "699.50", cum: "10,269.82", free: "6,289.56", taxable: "-5,590.06", tax: "0", ytd: "-2,780.46" },
 ];
 
+const PAYMENT_HISTORY_84: Row[] = [
+  { date: "30/04/2010", gross: "107.83", cap: "0", tax: "0", postAdj: "0", net: "107.83", method: "B", reason: "FIRST", bacs: "29/04/2010", hash: "" },
+  { date: "31/05/2010", gross: "107.83", cap: "0", tax: "0", postAdj: "0", net: "107.83", method: "B", reason: "PROC",  bacs: "27/05/2010", hash: "" },
+  { date: "30/06/2010", gross: "107.83", cap: "0", tax: "0", postAdj: "0", net: "107.83", method: "B", reason: "PROC",  bacs: "29/06/2010", hash: "" },
+  { date: "31/07/2010", gross: "107.83", cap: "0", tax: "0", postAdj: "0", net: "107.83", method: "B", reason: "PROC",  bacs: "29/07/2010", hash: "" },
+  { date: "31/08/2010", gross: "107.83", cap: "0", tax: "0", postAdj: "0", net: "107.83", method: "B", reason: "PROC",  bacs: "27/08/2010", hash: "" },
+  { date: "30/09/2010", gross: "107.83", cap: "0", tax: "0", postAdj: "0", net: "107.83", method: "B", reason: "PROC",  bacs: "29/09/2010", hash: "" },
+  { date: "31/10/2010", gross: "107.83", cap: "0", tax: "0", postAdj: "0", net: "107.83", method: "B", reason: "PROC",  bacs: "28/10/2010", hash: "" },
+  { date: "30/11/2010", gross: "107.83", cap: "0", tax: "0", postAdj: "0", net: "107.83", method: "B", reason: "PROC",  bacs: "29/11/2010", hash: "" },
+  { date: "31/12/2010", gross: "107.83", cap: "0", tax: "0", postAdj: "0", net: "107.83", method: "B", reason: "PROC",  bacs: "30/12/2010", hash: "" },
+];
+
+const TAX_HISTORY_84: Row[] = [
+  { date: "30/04/2010", code: "647L*", n: "1", gross: "107.83", cum: "107.83", free: "539.92",  taxable: "-432.09",  tax: "0", ytd: "0" },
+  { date: "31/05/2010", code: "647L*", n: "1", gross: "107.83", cum: "215.66", free: "539.92",  taxable: "-432.09",  tax: "0", ytd: "0" },
+  { date: "30/06/2010", code: "647L*", n: "1", gross: "107.83", cum: "323.49", free: "539.92",  taxable: "-432.09",  tax: "0", ytd: "0" },
+  { date: "31/07/2010", code: "647L*", n: "1", gross: "107.83", cum: "431.32", free: "539.92",  taxable: "-432.09",  tax: "0", ytd: "0" },
+  { date: "31/08/2010", code: "647L",  n: "5", gross: "107.83", cum: "539.15", free: "2699.6",  taxable: "-2160.45", tax: "0", ytd: "0" },
+  { date: "30/09/2010", code: "647L",  n: "6", gross: "107.83", cum: "646.98", free: "3239.52", taxable: "-2592.54", tax: "0", ytd: "0" },
+  { date: "31/10/2010", code: "647L",  n: "7", gross: "107.83", cum: "754.81", free: "3779.44", taxable: "-3024.63", tax: "0", ytd: "0" },
+];
+
 export function PaymentsTab() {
   const { planCode } = usePlanCode();
   const isPlan0 = planCode === "0";
   const isPlan87 = planCode === "87";
+  const isPlan84 = planCode === "84";
 
-  const paymentHistory = isPlan0 || isPlan87 ? [] : PAYMENT_HISTORY_DEFAULT;
-  const taxHistory = isPlan0 || isPlan87 ? [] : TAX_HISTORY_DEFAULT;
+  const paymentHistory = isPlan84
+    ? PAYMENT_HISTORY_84
+    : isPlan0 || isPlan87
+    ? []
+    : PAYMENT_HISTORY_DEFAULT;
+  const taxHistory = isPlan84
+    ? TAX_HISTORY_84
+    : isPlan0 || isPlan87
+    ? []
+    : TAX_HISTORY_DEFAULT;
 
   return (
     <div className="space-y-4">
@@ -66,11 +97,11 @@ export function PaymentsTab() {
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-8">
             <div>
-              <Field label="Premium:"><TextInput value={isPlan87 ? "100000" : "15,000"} disabled /></Field>
-              <Field label="Tax Free Cash:"><TextInput value="0" disabled /></Field>
+              <Field label="Premium:"><TextInput value={isPlan87 ? "100000" : isPlan84 ? "20348.97" : "15,000"} disabled /></Field>
+              <Field label="Tax Free Cash:"><TextInput value={isPlan84 ? "6782.99" : "0"} disabled /></Field>
               <Field
                 label={
-                  isPlan87 ? (
+                  isPlan87 || isPlan84 ? (
                     <span className="text-[#d72714]">Total:</span>
                   ) : (
                     "Total:"
@@ -78,27 +109,31 @@ export function PaymentsTab() {
                 }
               >
                 <TextInput
-                  value={isPlan87 ? "100000" : "15,000"}
+                  value={isPlan87 ? "100000" : isPlan84 ? "27131.96" : "15,000"}
                   disabled
-                  className={isPlan87 ? "!text-[#d72714] underline" : ""}
+                  className={isPlan87 || isPlan84 ? "!text-[#d72714] underline" : ""}
                 />
               </Field>
-              <Field label="1st Annuitants Gross:"><TextInput value={isPlan87 ? "0" : "1,399"} disabled /></Field>
+              <Field label="1st Annuitants Gross:"><TextInput value={isPlan87 ? "0" : isPlan84 ? "1294" : "1,399"} disabled /></Field>
               <Field label="2nd Annuitants Gross:"><TextInput value="0" disabled /></Field>
             </div>
             <div>
-              <Field label="Cumulative Instal:"><TextInput value={isPlan87 ? "" : "10,269.82"} disabled /></Field>
-              <Field label="BAL Gross Annuity:"><TextInput value={isPlan87 ? "" : "699.50"} disabled /></Field>
-              <Field label="Taxable pay:"><TextInput value={isPlan87 ? "" : "-5,590.06"} disabled /></Field>
-              <Field label="Cumulative Free Pay:"><TextInput value={isPlan87 ? "" : "6,289.56"} disabled /></Field>
-              <Field label="PAYE Tax Due To Date:"><TextInput value={isPlan87 ? "" : "-2,780.46"} disabled /></Field>
+              <Field label="Cumulative Instal:"><TextInput value={isPlan87 ? "" : isPlan84 ? "107.83" : "10,269.82"} disabled /></Field>
+              <Field label="BAL Gross Annuity:"><TextInput value={isPlan87 ? "" : isPlan84 ? "1186.17" : "699.50"} disabled /></Field>
+              <Field label="Taxable pay:"><TextInput value={isPlan87 ? "" : isPlan84 ? "63.74" : "-5,590.06"} disabled /></Field>
+              <Field label="Cumulative Free Pay:"><TextInput value={isPlan87 ? "" : isPlan84 ? "44.09" : "6,289.56"} disabled /></Field>
+              <Field label="PAYE Tax Due To Date:"><TextInput value={isPlan87 ? "" : isPlan84 ? "-12.6" : "-2,780.46"} disabled /></Field>
             </div>
             <div>
-              <Field label="Next Anniversary:"><DatePicker placeholder="Next Anniversary" disabled /></Field>
-              <Field label="Next Payment Due:"><DatePicker placeholder="Next Payment Due" disabled /></Field>
-              <Field label="Inst Remaining:"><TextInput value={isPlan87 ? "" : "1"} disabled /></Field>
-              <Field label="Nth Inst:"><TextInput value={isPlan87 ? "" : "6"} disabled /></Field>
-              <Field label="PAYE Tax Deduction:"><TextInput value="0" disabled /></Field>
+              <Field label="Next Anniversary:">
+                <DatePicker value={isPlan84 ? "31/03/2027" : ""} placeholder="Next Anniversary" disabled />
+              </Field>
+              <Field label="Next Payment Due:">
+                <DatePicker value={isPlan84 ? "31/05/2026" : ""} placeholder="Next Payment Due" disabled />
+              </Field>
+              <Field label="Inst Remaining:"><TextInput value={isPlan87 ? "" : isPlan84 ? "11" : "1"} disabled /></Field>
+              <Field label="Nth Inst:"><TextInput value={isPlan87 ? "" : isPlan84 ? "1" : "6"} disabled /></Field>
+              <Field label="PAYE Tax Deduction:"><TextInput value={isPlan84 ? "-12.6" : "0"} disabled /></Field>
             </div>
           </div>
         )}

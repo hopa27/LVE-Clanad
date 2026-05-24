@@ -34,6 +34,12 @@ const PLAN_CODE_ACCENT: Record<PlanCodeVersion, string> = {
   "84": "#97C697",
 };
 
+const PLAN_CODE_ACCENT_FG: Record<PlanCodeVersion, string> = {
+  "0":  "#ffffff",
+  "87": "#ffffff",
+  "84": "#145A14",
+};
+
 const TAB_COMPONENTS: Record<TabKey, () => JSX.Element> = {
   application: ApplicationDetailsTab,
   annuitant: AnnuitantDetailsTab,
@@ -61,7 +67,10 @@ function AppShell() {
   return (
     <div
       className="min-h-screen flex flex-col bg-[#f0f0f0]"
-      style={{ ["--lve-accent" as string]: PLAN_CODE_ACCENT[planCode] }}
+      style={{
+        ["--lve-accent" as string]: PLAN_CODE_ACCENT[planCode],
+        ["--lve-accent-fg" as string]: PLAN_CODE_ACCENT_FG[planCode],
+      }}
     >
       <Header title="Client Annuity Administration System" />
       <main className="flex-1 px-[142px] py-8">

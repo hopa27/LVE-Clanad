@@ -172,7 +172,7 @@
     font-family: 'Livvic', sans-serif;
     font-size: 18px;
     font-weight: 600;
-    color: #ffffff;
+    color: var(--lve-accent-fg, #ffffff);
     background: var(--lve-accent, var(--color-lve-dark-navy));
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
@@ -180,6 +180,7 @@
   /* Modals / popups never use the policy accent — always LV dark navy */
   div[class*="fixed"][class*="inset-0"] {
     --lve-accent: var(--color-lve-dark-navy);
+    --lve-accent-fg: #ffffff;
   }
   .lve-panel-body { padding: 24px; }
 

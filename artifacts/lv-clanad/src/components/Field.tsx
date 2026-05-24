@@ -30,7 +30,7 @@ export function Field({
   }
   return (
     <div className={`mb-4 ${className}`}>
-      <label className="lve-label">{label}</label>
+      <label className="lve-label">{label || "\u00a0"}</label>
       {children}
     </div>
   );

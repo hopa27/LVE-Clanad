@@ -185,32 +185,34 @@ function AnnuitantBlock({
 export function AnnuitantDetailsTab() {
   const { planCode } = usePlanCode();
   const isPlan87 = planCode === "87";
+  const isPlan84 = planCode === "84";
+  const isPreset = isPlan87 || isPlan84;
 
   return (
     <div className="space-y-4">
       <Section title="Annuitant">
         <AnnuitantBlock
-          surname={isPlan87 ? "Uggiu" : "surname1"}
-          forename={isPlan87 ? "Test" : "Forename1"}
-          second={isPlan87 ? "" : "Middlename"}
-          shortName={isPlan87 ? "UGGIU T" : "ANNSNAME"}
-          dob={isPlan87 ? "09/09/1956" : "dob1"}
-          dod={isPlan87 ? "" : "DOD1"}
-          natIns={isPlan87 ? "JK-90-90-90-C" : "NI1"}
-          enhanced={isPlan87 ? "" : "ENHANCED"}
-          doctor={isPlan87 ? "" : "Doctor1"}
-          doctorName={isPlan87 ? "" : "dbDoctorName"}
-          gender={isPlan87 ? "Male" : ""}
-          marRequired={isPlan87 ? "" : "MAR1R"}
-          marCopyToPH={isPlan87 ? "" : "MAR1C"}
-          dateMarSent={isPlan87 ? "" : "Mar1sent"}
-          dateMarRec={isPlan87 ? "" : "mar1recd"}
-          uwRef={isPlan87 ? "" : "DBEdUWRef"}
-          uwDate={isPlan87 ? "" : "DBEdUWDat"}
+          surname={isPlan87 ? "Uggiu" : isPlan84 ? "Testptbbbide" : "surname1"}
+          forename={isPlan87 ? "Test" : isPlan84 ? "Rachael" : "Forename1"}
+          second={isPlan87 ? "" : isPlan84 ? "Colin" : "Middlename"}
+          shortName={isPlan87 ? "UGGIU T" : isPlan84 ? "TESTPTBBBIDE R C" : "ANNSNAME"}
+          dob={isPlan87 ? "09/09/1956" : isPlan84 ? "25/10/1958" : "dob1"}
+          dod={isPreset ? "" : "DOD1"}
+          natIns={isPlan87 ? "JK-90-90-90-C" : isPlan84 ? "PK-25-10-58-A" : "NI1"}
+          enhanced={isPreset ? "" : "ENHANCED"}
+          doctor={isPreset ? "" : "Doctor1"}
+          doctorName={isPreset ? "" : "dbDoctorName"}
+          gender={isPlan87 ? "Male" : isPlan84 ? "Female" : ""}
+          marRequired={isPreset ? "" : "MAR1R"}
+          marCopyToPH={isPreset ? "" : "MAR1C"}
+          dateMarSent={isPreset ? "" : "Mar1sent"}
+          dateMarRec={isPreset ? "" : "mar1recd"}
+          uwRef={isPreset ? "" : "DBEdUWRef"}
+          uwDate={isPreset ? "" : "DBEdUWDat"}
           daysSinceUW=""
-          showCauseOfDeath={!isPlan87}
+          showCauseOfDeath={!isPreset}
           showDod={!isPlan87}
-          showUwDateBlock={!isPlan87}
+          showUwDateBlock={!isPreset}
           icd1="DbedLif"
           icd2="DbedLif"
           icd3="DbedLif"
@@ -221,22 +223,22 @@ export function AnnuitantDetailsTab() {
         <AnnuitantBlock
           showShortName={false}
           showUwBlock={false}
-          surname={isPlan87 ? "" : "surname2"}
-          forename={isPlan87 ? "" : "forename2"}
-          second={isPlan87 ? "" : "middlename2"}
-          dob={isPlan87 ? "" : "dob2"}
-          dod={isPlan87 ? "" : "DOD2"}
-          natIns={isPlan87 ? "" : "NI2"}
-          enhanced={isPlan87 ? "" : "ENHANCED"}
-          doctor={isPlan87 ? "" : "doctor2"}
-          doctorName={isPlan87 ? "" : "dbDoctor2Name"}
-          marRequired={isPlan87 ? "" : "DbedEL"}
+          surname={isPreset ? "" : "surname2"}
+          forename={isPreset ? "" : "forename2"}
+          second={isPreset ? "" : "middlename2"}
+          dob={isPreset ? "" : "dob2"}
+          dod={isPreset ? "" : "DOD2"}
+          natIns={isPreset ? "" : "NI2"}
+          enhanced={isPreset ? "" : "ENHANCED"}
+          doctor={isPreset ? "" : "doctor2"}
+          doctorName={isPreset ? "" : "dbDoctor2Name"}
+          marRequired={isPreset ? "" : "DbedEL"}
           marRequiredDisabled
           marCopyLabel="Copy to PH?:"
-          marCopyToPH={isPlan87 ? "" : "PH2RE"}
-          dateMarSent={isPlan87 ? "" : "mar2sent"}
-          dateMarRec={isPlan87 ? "" : "mar2recd"}
-          showCauseOfDeath={!isPlan87}
+          marCopyToPH={isPreset ? "" : "PH2RE"}
+          dateMarSent={isPreset ? "" : "mar2sent"}
+          dateMarRec={isPreset ? "" : "mar2recd"}
+          showCauseOfDeath={!isPreset}
           showDod={!isPlan87}
           icd1="DBedLif"
           icd2="DBedLif"

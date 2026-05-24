@@ -78,9 +78,11 @@ export function PolicyHeader() {
         <MdMoreHoriz size={18} />
       </button>
 
-      <div className="px-4 h-9 inline-flex items-center rounded-[8px] bg-[#7fdfdf] text-[#00263e] font-['Livvic'] font-semibold text-sm">
-        RETIREMENT ACCOUNT
-      </div>
+      {planCode !== "84" && (
+        <div className="px-4 h-9 inline-flex items-center rounded-[8px] bg-[#7fdfdf] text-[#00263e] font-['Livvic'] font-semibold text-sm">
+          RETIREMENT ACCOUNT
+        </div>
+      )}
 
       {simOpen && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">

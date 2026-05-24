@@ -22,6 +22,7 @@ export function LettersTab() {
   const { editing } = useEditMode();
   const { planCode } = usePlanCode();
   const isPlan0 = planCode === "0";
+  const isPlan84 = planCode === "84";
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
       <Section title="Select Letter" className="lg:col-span-2">
@@ -80,10 +81,10 @@ export function LettersTab() {
               Send To
             </div>
             <div className="grid grid-cols-2 gap-y-2">
-              <Checkbox label="Client" />
-              <Checkbox label="IFA" />
-              <Checkbox label="Ceding Scheme" />
-              <Checkbox label="Other" />
+              <Checkbox label="Client" disabled={isPlan84} />
+              <Checkbox label="IFA" disabled={isPlan84} />
+              <Checkbox label="Ceding Scheme" disabled={isPlan84} />
+              <Checkbox label="Other" disabled={isPlan84} />
             </div>
           </div>
         </Section>

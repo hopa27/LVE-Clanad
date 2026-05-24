@@ -1,8 +1,15 @@
 import { useState } from "react";
 import { Field, SelectInput, TextInput, Checkbox, Section } from "../components/Field";
 import { MdSend } from "react-icons/md";
-import { useEditMode } from "../context/EditModeContext";
+import { EditModeContext } from "../context/EditModeContext";
 import { usePlanCode } from "../context/PlanCodeContext";
+
+const ALWAYS_EDITING = {
+  editing: true,
+  setEditing: () => {},
+  cancel: () => {},
+  cancelKey: 0,
+};
 
 const CLAIM_FORM_POLICY_TYPES = ["Transfer", "Open Market Option", "Flexible Drawdown Income"];
 const IRF_CEDING_SCHEMES = ["Friends Provident - Z99999/9999", "AXA - ZZ9999999"];
@@ -23,7 +30,14 @@ const LETTERS = [
 ];
 
 export function LettersTab() {
-  const { editing } = useEditMode();
+  return (
+    <EditModeContext.Provider value={ALWAYS_EDITING}>
+      <LettersTabInner />
+    </EditModeContext.Provider>
+  );
+}
+
+function LettersTabInner() {
   const { planCode } = usePlanCode();
   const isPlan0 = planCode === "0";
   const isPlan84 = planCode === "84";
@@ -76,10 +90,7 @@ export function LettersTab() {
 
       <Section title="Additional Text" className="lg:col-span-2">
         <textarea
-          readOnly={!editing}
-          className={`lve-input w-full min-h-[180px] resize-y ${
-            !editing ? "bg-[#fafafa] cursor-default" : ""
-          }`}
+          className="lve-input w-full min-h-[180px] resize-y"
           placeholder="Type any additional text to include in the letter…"
         />
       </Section>

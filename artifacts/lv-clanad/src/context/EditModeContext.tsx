@@ -7,7 +7,7 @@ type EditModeValue = {
   cancelKey: number;
 };
 
-const EditModeContext = createContext<EditModeValue>({
+export const EditModeContext = createContext<EditModeValue>({
   editing: false,
   setEditing: () => {},
   cancel: () => {},

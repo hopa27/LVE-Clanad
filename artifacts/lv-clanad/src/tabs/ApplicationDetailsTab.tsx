@@ -31,6 +31,7 @@ export function ApplicationDetailsTab() {
             <DatePicker
               value={isPlan87 ? "15/05/2026" : isPlan84 ? "31/03/2010" : ""}
               placeholder={isPlan87 || isPlan84 ? "" : "edtStartdate"}
+              disabled={isPlan84}
             />
           </Field>
           {!isPlan87 && !isPlan84 && (
@@ -51,6 +52,7 @@ export function ApplicationDetailsTab() {
             <DatePicker
               value={isPlan84 ? "13/04/2010 10" : ""}
               placeholder={isPlan87 || isPlan84 ? "" : "DBEdit13"}
+              disabled={isPlan84}
             />
           </Field>
           <Field label="PostADay:"><Checkbox checked={isPlan87 || isPlan84} /></Field>

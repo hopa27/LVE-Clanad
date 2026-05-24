@@ -7,6 +7,7 @@ import { AmendChequesModal } from "./AmendChequesModal";
 import { CompletionCheckerModal } from "./CompletionCheckerModal";
 import { ScreenPrintModal } from "./ScreenPrintModal";
 import { AmendIfaModal } from "./AmendIfaModal";
+import { usePlanCode } from "../context/PlanCodeContext";
 
 type SubmenuItem = {
   label: string;
@@ -26,6 +27,35 @@ type MenuOption =
     }
   | { kind: "separator" };
 type MenuItem = { label: string; options?: MenuOption[] };
+
+const SUPERVISOR_87: MenuOption[] = [
+  { label: "Final Quote Issued" },
+  {
+    label: "Status Change",
+    hasSubmenu: true,
+    submenu: [
+      { label: "NTU", accel: "N" },
+      { label: "Backdate", accel: "B" },
+      { label: "Cancel", accel: "C" },
+      { label: "XDuplicate", accel: "X" },
+      { label: "Surrender", accel: "S" },
+      { label: "Maturity", accel: "M" },
+    ],
+  },
+  { label: "Amend Cheques", action: "amend-cheques" },
+  { label: "Approve Bank Changes", disabled: true },
+  { label: "Approve Maturity Bank Detail Changes", disabled: true },
+  { kind: "separator" },
+  { label: "Set Live" },
+  { label: "Force Set Live" },
+  { kind: "separator" },
+  { label: "Set Status To Hold" },
+  { label: "Set Status To Pending", disabled: true },
+  { kind: "separator" },
+  { label: "Reprint Annual Statements" },
+  { label: "Annual Statement Recalculation" },
+  { label: "Reprint Maturity Letters" },
+];
 
 const MENU_ITEMS: MenuItem[] = [
   {
@@ -121,6 +151,12 @@ export function Header({ title }: { title: string }) {
   const [screenPrintOpen, setScreenPrintOpen] = useState(false);
   const [amendIfaOpen, setAmendIfaOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
+  const { planCode } = usePlanCode();
+  const menuItems: MenuItem[] = MENU_ITEMS.map((m) =>
+    m.label === "Supervisor" && planCode === "87"
+      ? { ...m, options: SUPERVISOR_87 }
+      : m,
+  );
 
   useEffect(() => {
     function onDocClick(e: MouseEvent) {
@@ -167,7 +203,7 @@ export function Header({ title }: { title: string }) {
         ref={navRef}
         className="w-full bg-white border-b border-[#e3e6ea] shadow-sm px-[142px] h-12 flex items-center gap-1 font-['Livvic'] text-[14px] text-[#3d3d3d]"
       >
-        {MENU_ITEMS.map((item, idx) => {
+        {menuItems.map((item, idx) => {
           const isOpen = openIdx === idx;
           return (
             <div key={item.label} className="relative">

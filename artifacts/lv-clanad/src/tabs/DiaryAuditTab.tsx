@@ -26,6 +26,16 @@ type DiaryRow = {
   byCompleted: string;
 };
 
+const PLAN_87_DIARY: DiaryRow[] = [
+  { ref: 6, type: "Death Ben Nom Form", notes: "DBNF missing, incomplete or invalid", created: "15/05/2026", by: "SYSRV", due: "22/05/2026", completed: "", byCompleted: "" },
+  { ref: 5, type: "CVI", notes: "Confirmation of Verification of Identity", created: "15/05/2026", by: "SYSRV", due: "22/05/2026", completed: "", byCompleted: "" },
+  { ref: 2, type: "Bank Validation", notes: "Supplied bank details do not match to Client 1st Life", created: "15/05/2026", by: "SYSRV", due: "22/05/2026", completed: "", byCompleted: "" },
+  { ref: 7, type: "LTA Form", notes: "LTA Form missing, incomplete or invalid", created: "15/05/2026", by: "SYSRV", due: "22/05/2026", completed: "15/05/2026", byCompleted: "SYSRV" },
+  { ref: 3, type: "EOA Client", notes: "Annuitant EOA missing, incomplete or invalid", created: "15/05/2026", by: "SYSRV", due: "22/05/2026", completed: "", byCompleted: "" },
+  { ref: 1, type: "App Form (B)", notes: "Client bank account details missing/incomplete", created: "15/05/2026", by: "SYSRV", due: "22/05/2026", completed: "15/05/2026", byCompleted: "SYSRV" },
+  { ref: 4, type: "App Form (E/F)", notes: "Client declaration not signed", created: "15/05/2026", by: "SYSRV", due: "22/05/2026", completed: "15/05/2026", byCompleted: "SYSRV" },
+];
+
 const INITIAL_DIARY: DiaryRow[] = [
   { ref: 14, type: "BCE5A", notes: "BCE 5A check at age 75", created: "28/05/2025", by: "LV67180", due: "26/02/2034", completed: "", byCompleted: "" },
   { ref: 11, type: "Misc", notes: "Is Var 7 ok?", created: "01/05/2025", by: "PENSAK", due: "02/05/2025", completed: "", byCompleted: "" },
@@ -66,11 +76,14 @@ const DIARY_COLS = ["Ref", "Type", "Notes", "Created", "By", "Due", "Completed",
 export function DiaryAuditTab() {
   const { planCode } = usePlanCode();
   const isPlan0 = planCode === "0";
+  const isPlan87 = planCode === "87";
   const [trail, setTrail] = useState<"notes" | "data">("notes");
   const [diaryOpen, setDiaryOpen] = useState(false);
   const [needsOpen, setNeedsOpen] = useState(false);
   const [cedingOpen, setCedingOpen] = useState(false);
-  const [diary, setDiary] = useState<DiaryRow[]>(INITIAL_DIARY);
+  const [diary, setDiary] = useState<DiaryRow[]>(
+    isPlan87 ? PLAN_87_DIARY : INITIAL_DIARY,
+  );
   const [selectedRef, setSelectedRef] = useState<number | null>(null);
   const [editConfirmOpen, setEditConfirmOpen] = useState(false);
   const [editOpen, setEditOpen] = useState(false);

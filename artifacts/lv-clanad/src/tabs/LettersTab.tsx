@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { SelectInput, TextInput, Checkbox, Section } from "../components/Field";
+import { Field, SelectInput, TextInput, Checkbox, Section } from "../components/Field";
 import { MdSend } from "react-icons/md";
 import { useEditMode } from "../context/EditModeContext";
 import { usePlanCode } from "../context/PlanCodeContext";
@@ -43,6 +43,18 @@ export function LettersTab() {
           <div>
             <label className="lve-label">Policy Type</label>
             <SelectInput value="" options={["", ...CLAIM_FORM_POLICY_TYPES]} />
+          </div>
+        ) : selectedLetter === "Rewrite Completion Pack" ? (
+          <div className="space-y-1">
+            <Field inline label="Next Income Amount" labelWidth={200}>
+              <TextInput value="" />
+            </Field>
+            <Field inline label="Next Income Date" labelWidth={200}>
+              <TextInput value="" type="date" />
+            </Field>
+            <Field inline label="Next Regular Income Amount" labelWidth={200}>
+              <TextInput value="" />
+            </Field>
           </div>
         ) : selectedLetter === "IRF Letter" ? (
           <div>

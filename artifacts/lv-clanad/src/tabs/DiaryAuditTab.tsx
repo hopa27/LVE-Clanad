@@ -276,7 +276,7 @@ export function DiaryAuditTab() {
                   </tr>
                 </thead>
                 <tbody>
-                  {(isPlan0 ? [] : AUDIT).map((line, i) => {
+                  {(isPlan0 || isPlan87 ? [] : AUDIT).map((line, i) => {
                     const m = line.match(
                       /^(.*?)\s+by\s+(\S+)\s+on\s+(\S+)\s+at\s+(\S+)\s*$/,
                     );
@@ -310,7 +310,7 @@ export function DiaryAuditTab() {
                 </tr>
               </thead>
               <tbody>
-                {(isPlan0 ? [] : AUDIT).map((line, i) => {
+                {(isPlan0 || isPlan87 ? [] : AUDIT).map((line, i) => {
                   const m = line.match(
                     /^(.*?)\s+by\s+(\S+)\s+on\s+(\S+)\s+at\s+(\S+)\s*$/,
                   );

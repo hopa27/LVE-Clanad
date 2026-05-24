@@ -1,3 +1,5 @@
+import { usePlanCode } from "../context/PlanCodeContext";
+
 export type TabKey =
   | "application"
   | "annuitant"
@@ -40,10 +42,15 @@ export function TabBar({
   activeTab: TabKey;
   onChange: (key: TabKey) => void;
 }) {
+  const { planCode } = usePlanCode();
+  const visibleTabs =
+    planCode === "87"
+      ? TABS.filter((t) => t.key !== "contacts" && t.key !== "contacts2")
+      : TABS;
   return (
     <div className="overflow-x-auto">
       <div className="flex flex-row gap-4 min-w-max">
-        {TABS.map((tab) => (
+        {visibleTabs.map((tab) => (
           <button
             key={tab.key}
             type="button"

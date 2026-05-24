@@ -57,13 +57,13 @@ export function LettersTab() {
             <div className="flex items-center gap-3">
               <label className="lve-label !mb-0 text-right shrink-0 w-[70px]">Fax:</label>
               <div className="flex-1 min-w-0">
-                <TextInput value={isPlan0 ? "dbedFaxNo" : ""} placeholder="Fax number" />
+                <TextInput value={isPlan0 ? "dbedFaxNo" : ""} placeholder="Fax number" disabled={isPlan84} />
               </div>
             </div>
             <div className="flex items-center gap-3">
               <label className="lve-label !mb-0 text-right shrink-0 w-[70px]">Email:</label>
               <div className="flex-1 min-w-0">
-                <TextInput value={isPlan0 ? "dbedEmail" : ""} placeholder="recipient@example.com" />
+                <TextInput value={isPlan0 ? "dbedEmail" : ""} placeholder="recipient@example.com" disabled={isPlan84} />
               </div>
             </div>
             {isPlan0 && (

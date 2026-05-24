@@ -32,7 +32,6 @@ export function PolicyDetailsTab() {
           <SelectInput
             value={isPlan84 ? "B" : ""}
             options={isPlan84 ? ["B", "C", "T"] : ["", "B", "C", "T"]}
-            disabled={isPlan84}
           />
         </Field>
         {!isPreset && (
@@ -60,7 +59,6 @@ export function PolicyDetailsTab() {
                     ? ["Independent", "Non advised", "Advised"]
                     : ["", "Non advised", "Advised"]
                 }
-                disabled={isPlan84}
               />
             </div>
             {!isPreset && (
@@ -73,8 +71,7 @@ export function PolicyDetailsTab() {
         <Field label="Distribution Channel:">
           <SelectInput
             value={isPlan87 ? "Whole of market" : ""}
-            options={isPlan87 || isPlan84 ? ["", "Whole of market", "Restricted"] : ["", "Whole of market", "Restricted"]}
-            disabled={isPlan84}
+            options={["", "Whole of market", "Restricted"]}
           />
         </Field>
         {!isPreset && (

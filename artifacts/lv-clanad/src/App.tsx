@@ -69,7 +69,7 @@ function AppShell() {
         <PolicyHeader />
         <TabBar activeTab={activeTab} onChange={setActiveTab} />
         <div className="bg-white rounded-b-lg rounded-tr-lg shadow-sm p-6 -mt-px">
-          <ActiveComponent key={`${activeTab}:${cancelKey}`} />
+          <ActiveComponent key={`${activeTab}:${cancelKey}:${planCode}`} />
         </div>
         <StatusBar />
       </main>

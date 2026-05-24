@@ -5,6 +5,7 @@ import { useEditMode } from "../context/EditModeContext";
 import { usePlanCode } from "../context/PlanCodeContext";
 
 const CLAIM_FORM_POLICY_TYPES = ["Transfer", "Open Market Option", "Flexible Drawdown Income"];
+const IRF_CEDING_SCHEMES = ["Friends Provident - Z99999/9999", "AXA - ZZ9999999"];
 
 const LETTERS = [
   "Chaser Letter OS Application Client",
@@ -42,6 +43,17 @@ export function LettersTab() {
           <div>
             <label className="lve-label">Policy Type</label>
             <SelectInput value="" options={["", ...CLAIM_FORM_POLICY_TYPES]} />
+          </div>
+        ) : selectedLetter === "IRF Letter" ? (
+          <div>
+            <div className="font-['Livvic'] text-[13px] font-semibold text-[#00263e] mb-2">
+              Ceding Scheme
+            </div>
+            <div className="flex flex-col">
+              {IRF_CEDING_SCHEMES.map((s) => (
+                <Checkbox key={s} label={s} />
+              ))}
+            </div>
           </div>
         ) : (
           <p className="font-['Mulish'] text-[12px] italic text-[#777]">

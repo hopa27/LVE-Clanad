@@ -28,6 +28,91 @@ type MenuOption =
   | { kind: "separator" };
 type MenuItem = { label: string; options?: MenuOption[] };
 
+const OPTIONS_84: MenuOption[] = [
+  { label: "P45 Details" },
+  { label: "Screen Print", shortcut: "F1", action: "screen-print" },
+  { label: "Search", shortcut: "F5", action: "search" },
+];
+
+const PROCESS_84: MenuOption[] = [
+  {
+    label: "Set Dead",
+    hasSubmenu: true,
+    submenu: [
+      { label: "1st Life" },
+      { label: "2nd Life" },
+    ],
+  },
+  {
+    label: "Payments",
+    hasSubmenu: true,
+    submenu: [
+      { label: "Suspend Payments" },
+      { label: "Resume Payments" },
+    ],
+  },
+  { label: "PLA Cancellation" },
+  { kind: "separator" },
+  { label: "Ceding Scheme Details" },
+  { kind: "separator" },
+  { label: "LTC Benefit", disabled: true },
+  { label: "Cancel LTC", disabled: true },
+];
+
+const PRINT_84: MenuOption[] = [
+  { label: "Tax Certificate", action: "tax-certificate" },
+  { label: "Copy P60" },
+  {
+    label: "Reprint Mar's",
+    hasSubmenu: true,
+    submenu: [
+      { label: "1st Life MAR" },
+      { label: "2nd Life MAR" },
+    ],
+  },
+  { label: "Diary Report" },
+];
+
+const SUPERVISOR_84: MenuOption[] = [
+  { label: "Supervisory Edit" },
+  {
+    label: "Status Change",
+    hasSubmenu: true,
+    submenu: [
+      { label: "NTU", accel: "N" },
+      { label: "Backdate", accel: "B" },
+      { label: "Cancel", accel: "C" },
+      { label: "XDuplicate", accel: "X" },
+      { label: "Surrender", accel: "S" },
+      { label: "Maturity", accel: "M" },
+    ],
+  },
+  { label: "Amend Cheques", action: "amend-cheques" },
+  { label: "Amend IFA", action: "amend-ifa" },
+  { label: "C(ancel) Application" },
+  {
+    label: "Bank Detail Changes",
+    hasSubmenu: true,
+    submenu: [
+      { label: "Approve Bank Changes" },
+      { label: "Approve Maturity Bank Detail Changes" },
+    ],
+  },
+  { label: "Convert to Flexi-Access", disabled: true },
+  { kind: "separator" },
+  {
+    label: "LTC",
+    hasSubmenu: true,
+    disabled: true,
+    submenu: [{ label: "LTC Benefit" }],
+  },
+  { label: "Pull Quote" },
+  { kind: "separator" },
+  { label: "Reprint Annual Statements" },
+  { label: "Annual Statement Recalculation" },
+  { label: "Reprint Maturity Letters" },
+];
+
 const SUPERVISOR_87: MenuOption[] = [
   { label: "Final Quote Issued" },
   {
@@ -152,11 +237,17 @@ export function Header({ title }: { title: string }) {
   const [amendIfaOpen, setAmendIfaOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const { planCode } = usePlanCode();
-  const menuItems: MenuItem[] = MENU_ITEMS.map((m) =>
-    m.label === "Supervisor" && planCode === "87"
-      ? { ...m, options: SUPERVISOR_87 }
-      : m,
-  );
+  const menuItems: MenuItem[] = MENU_ITEMS.map((m) => {
+    if (planCode === "87" && m.label === "Supervisor")
+      return { ...m, options: SUPERVISOR_87 };
+    if (planCode === "84") {
+      if (m.label === "Options") return { ...m, options: OPTIONS_84 };
+      if (m.label === "Process") return { ...m, options: PROCESS_84 };
+      if (m.label === "Print") return { ...m, options: PRINT_84 };
+      if (m.label === "Supervisor") return { ...m, options: SUPERVISOR_84 };
+    }
+    return m;
+  });
 
   useEffect(() => {
     function onDocClick(e: MouseEvent) {

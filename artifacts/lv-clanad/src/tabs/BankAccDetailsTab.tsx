@@ -2,21 +2,26 @@ import { Field, TextInput, Section } from "../components/Field";
 import { DatePicker } from "../components/DatePicker";
 import { MdEdit } from "react-icons/md";
 import { useCheques } from "../context/ChequesContext";
+import { usePlanCode } from "../context/PlanCodeContext";
 
 const TRANSFERS: { company: string; ref: string; date: string; amount: string }[] = [];
 
 const SEED_CHEQUE_NOS = new Set(["232693", "232694", "232695"]);
 
 export function BankAccDetailsTab() {
+  const { planCode } = usePlanCode();
+  const isPlan87 = planCode === "87";
   const { cheques } = useCheques();
-  const postedRows = cheques
-    .filter((c) => !SEED_CHEQUE_NOS.has(c.chequeNo))
-    .map((c) => ({
-      company: c.transferCompany,
-      ref: c.chequeNo,
-      date: c.date,
-      amount: c.amount,
-    }));
+  const postedRows = isPlan87
+    ? []
+    : cheques
+        .filter((c) => !SEED_CHEQUE_NOS.has(c.chequeNo))
+        .map((c) => ({
+          company: c.transferCompany,
+          ref: c.chequeNo,
+          date: c.date,
+          amount: c.amount,
+        }));
   const rows = [...TRANSFERS, ...postedRows];
   return (
     <div className="space-y-4">
@@ -30,16 +35,44 @@ export function BankAccDetailsTab() {
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
           <div>
-            <Field inline label="Bank sort code:"><TextInput value="DBEdit41" /></Field>
-            <Field inline label="Bank account no:"><TextInput value="DBEdit77" /></Field>
-            <Field inline label="Bank account name:"><TextInput value="DBEdit79" /></Field>
-            <Field inline label="Bank name:"><TextInput value="" disabled /></Field>
+            <Field inline label="Bank sort code:">
+              <TextInput value={isPlan87 ? "20-00-00" : "DBEdit41"} />
+            </Field>
+            <Field inline label="Bank account no:">
+              <TextInput value={isPlan87 ? "83608808" : "DBEdit77"} />
+            </Field>
+            <Field inline label="Bank account name:">
+              <TextInput value={isPlan87 ? "Test" : "DBEdit79"} />
+            </Field>
+            <Field inline label="Bank name:">
+              <TextInput
+                value={isPlan87 ? "BARCLAY'S BANK PLC, 1 CHURCHILL  PLACE" : ""}
+                disabled
+              />
+            </Field>
           </div>
           <div>
-            <Field inline label="Payment Ref:"><TextInput value="DBEdit6" /></Field>
-            <Field inline label="Payment Method:"><TextInput value="DB" disabled /></Field>
-            <Field inline label="Change Effective Date:"><DatePicker value="dbedChangeEffect" placeholder="dbedChangeEffect" disabled /></Field>
-            <Field inline label="TOTAL:"><TextInput value="" disabled /></Field>
+            <Field inline label="Payment Ref:">
+              <TextInput value={isPlan87 ? "233451" : "DBEdit6"} />
+            </Field>
+            <Field inline label="Payment Method:">
+              <TextInput value={isPlan87 ? "B" : "DB"} disabled />
+            </Field>
+            {!isPlan87 && (
+              <>
+                <Field inline label="Change Effective Date:">
+                  <DatePicker
+                    value="dbedChangeEffect"
+                    placeholder="dbedChangeEffect"
+                    disabled
+                  />
+                </Field>
+                <Field inline label="TOTAL:"><TextInput value="" disabled /></Field>
+              </>
+            )}
+            {isPlan87 && (
+              <Field inline label="TOTAL:"><TextInput value="" disabled /></Field>
+            )}
           </div>
         </div>
       </Section>

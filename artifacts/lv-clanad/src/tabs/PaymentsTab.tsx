@@ -68,7 +68,21 @@ export function PaymentsTab() {
             <div>
               <Field label="Premium:"><TextInput value={isPlan87 ? "100000" : "15,000"} disabled /></Field>
               <Field label="Tax Free Cash:"><TextInput value="0" disabled /></Field>
-              <Field label="Total:"><TextInput value={isPlan87 ? "100000" : "15,000"} disabled /></Field>
+              <Field
+                label={
+                  isPlan87 ? (
+                    <span className="text-[#d72714]">Total:</span>
+                  ) : (
+                    "Total:"
+                  )
+                }
+              >
+                <TextInput
+                  value={isPlan87 ? "100000" : "15,000"}
+                  disabled
+                  className={isPlan87 ? "!text-[#d72714] underline" : ""}
+                />
+              </Field>
               <Field label="1st Annuitants Gross:"><TextInput value={isPlan87 ? "0" : "1,399"} disabled /></Field>
               <Field label="2nd Annuitants Gross:"><TextInput value="0" disabled /></Field>
             </div>

@@ -22,11 +22,43 @@ const ROW_DEFAULT = [
   "n/a", "", "", "", "",
 ];
 
+const PLAN_84_ANNIV: string[] = [
+  "03/03/2011", "04/03/2012", "03/03/2013", "03/03/2014",
+  "03/03/2015", "03/03/2016", "05/03/2017", "04/03/2018",
+  "03/03/2019", "03/03/2020", "03/03/2021", "03/03/2022",
+  "05/03/2023", "03/03/2024", "03/03/2025", "03/03/2026",
+];
+
+function plan84GadFor(idx: number): { date: string; max: string } {
+  if (idx <= 3) return { date: "31/03/2015", max: "1294.19" };
+  if (idx <= 6) return { date: "31/03/2018", max: "1377.9" };
+  if (idx === 7) return { date: "31/03/2021", max: "1377.9" };
+  return { date: "30/12/1899", max: "0" };
+}
+
+const ROWS_84: string[][] = PLAN_84_ANNIV.map((d, i) => {
+  const gad = plan84GadFor(i);
+  return [
+    "Std Pre 97", "A", d, d,
+    "£1,294.00", "£1,294.00", "Fixed",
+    "0", "n/a", "n/a",
+    "n/a", "n/a", "n/a",
+    "n/a", "n/a", "n/a",
+    gad.date, gad.max, "0",
+    "No", "0", "0", "0", "0",
+  ];
+});
+
 export function IncreaseHistoryTab() {
   const { planCode } = usePlanCode();
   const isPlan0 = planCode === "0";
   const isPlan87 = planCode === "87";
-  const rows: string[][] = isPlan0 || isPlan87 ? [] : [ROW_DEFAULT];
+  const isPlan84 = planCode === "84";
+  const rows: string[][] = isPlan0 || isPlan87
+    ? []
+    : isPlan84
+      ? ROWS_84
+      : [ROW_DEFAULT];
 
   return (
     <div className="space-y-4">

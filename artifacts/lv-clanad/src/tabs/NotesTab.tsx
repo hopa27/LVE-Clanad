@@ -67,6 +67,29 @@ function colorFor(name: string) {
 export function NotesTab() {
   const { planCode } = usePlanCode();
   const isPlan0 = planCode === "0";
+  const isPlan87 = planCode === "87";
+  if (isPlan87) {
+    return (
+      <Section
+        title="Notes (0)"
+        headerAction={
+          <div className="flex items-center gap-2">
+            <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
+              <MdAdd size={16} /> Add
+            </button>
+            <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled>
+              <MdEdit size={16} /> Edit
+            </button>
+            <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled>
+              <MdRemove size={16} /> Delete
+            </button>
+          </div>
+        }
+      >
+        <div className="space-y-3 max-h-[620px] overflow-auto pr-1" />
+      </Section>
+    );
+  }
   if (isPlan0) {
     return (
       <Section

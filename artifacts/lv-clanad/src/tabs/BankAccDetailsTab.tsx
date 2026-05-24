@@ -11,8 +11,16 @@ const SEED_CHEQUE_NOS = new Set(["232693", "232694", "232695"]);
 export function BankAccDetailsTab() {
   const { planCode } = usePlanCode();
   const isPlan87 = planCode === "87";
+  const isPlan84 = planCode === "84";
+  const isPreset = isPlan87 || isPlan84;
   const { cheques } = useCheques();
-  const postedRows = isPlan87
+  const plan84Rows = isPlan84
+    ? [
+        { company: "FPMS Gladis PYMTS", ref: "", date: "25/03/2010", amount: "24064.73" },
+        { company: "Axa Sun Life PLC", ref: "", date: "31/03/2010", amount: "3067.23" },
+      ]
+    : [];
+  const postedRows = isPreset
     ? []
     : cheques
         .filter((c) => !SEED_CHEQUE_NOS.has(c.chequeNo))
@@ -22,7 +30,7 @@ export function BankAccDetailsTab() {
           date: c.date,
           amount: c.amount,
         }));
-  const rows = [...TRANSFERS, ...postedRows];
+  const rows = [...TRANSFERS, ...plan84Rows, ...postedRows];
   return (
     <div className="space-y-4">
       <Section
@@ -36,43 +44,46 @@ export function BankAccDetailsTab() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
           <div>
             <Field inline label="Bank sort code:">
-              <TextInput value={isPlan87 ? "20-00-00" : "DBEdit41"} />
+              <TextInput value={isPlan87 ? "20-00-00" : isPlan84 ? "77-48-14" : "DBEdit41"} />
             </Field>
             <Field inline label="Bank account no:">
-              <TextInput value={isPlan87 ? "83608808" : "DBEdit77"} />
+              <TextInput value={isPlan87 ? "83608808" : isPlan84 ? "24782346" : "DBEdit77"} />
             </Field>
             <Field inline label="Bank account name:">
-              <TextInput value={isPlan87 ? "Test" : "DBEdit79"} />
+              <TextInput value={isPlan87 ? "Test" : isPlan84 ? "Testktbbbide" : "DBEdit79"} />
             </Field>
             <Field inline label="Bank name:">
               <TextInput
-                value={isPlan87 ? "BARCLAY'S BANK PLC, 1 CHURCHILL  PLACE" : ""}
+                value={
+                  isPlan87
+                    ? "BARCLAY'S BANK PLC, 1 CHURCHILL  PLACE"
+                    : isPlan84
+                    ? "TSB, WINSFORD"
+                    : ""
+                }
                 disabled
               />
             </Field>
           </div>
           <div>
             <Field inline label="Payment Ref:">
-              <TextInput value={isPlan87 ? "233451" : "DBEdit6"} />
+              <TextInput value={isPlan87 ? "233451" : isPlan84 ? "111834" : "DBEdit6"} />
             </Field>
             <Field inline label="Payment Method:">
-              <TextInput value={isPlan87 ? "B" : "DB"} disabled />
+              <TextInput value={isPreset ? "B" : "DB"} disabled />
             </Field>
-            {!isPlan87 && (
-              <>
-                <Field inline label="Change Effective Date:">
-                  <DatePicker
-                    value="dbedChangeEffect"
-                    placeholder="dbedChangeEffect"
-                    disabled
-                  />
-                </Field>
-                <Field inline label="TOTAL:"><TextInput value="" disabled /></Field>
-              </>
+            {!isPreset && (
+              <Field inline label="Change Effective Date:">
+                <DatePicker
+                  value="dbedChangeEffect"
+                  placeholder="dbedChangeEffect"
+                  disabled
+                />
+              </Field>
             )}
-            {isPlan87 && (
-              <Field inline label="TOTAL:"><TextInput value="" disabled /></Field>
-            )}
+            <Field inline label="TOTAL:">
+              <TextInput value={isPlan84 ? "27131.96" : ""} disabled />
+            </Field>
           </div>
         </div>
       </Section>

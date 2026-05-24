@@ -70,7 +70,7 @@ function LettersTabInner() {
               <TextInput value="" />
             </Field>
           </div>
-        ) : selectedLetter === "IRF Letter" ? (
+        ) : selectedLetter === "IRF Letter" || selectedLetter === "Transfer Forms" ? (
           <div>
             <div className="font-['Livvic'] text-[13px] font-semibold text-[#00263e] mb-2">
               Ceding Scheme

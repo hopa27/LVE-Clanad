@@ -97,6 +97,10 @@ const SYSTEM_NAMES = [
   "SALES95",
 ];
 
+const IFA_SALES_REPORTS: Report[] = [
+  { name: "ANNUITY RATE EXTRACT", dateRequired: "", path: "\\\\delphiuat\\uat\\cpa95\\reports\\extract report.rpt" },
+];
+
 const GENERAL_REPORTS: Report[] = [
   { name: "Telephone List", dateRequired: "", path: "\\\\delphiuat\\uat\\pdoxdata\\telelist.rpt" },
 ];
@@ -176,6 +180,7 @@ export function ReportsModal({
   const isChequeRequisition = systemName === "CHEQUE REQUISITION";
   const isFinance = systemName === "FINANCE";
   const isGeneral = systemName === "GENERAL";
+  const isIfaSales = systemName === "IFA SALES";
   const isEmptySystem = NOT_IN_ORACLE.has(systemName) || EMPTY_NO_WARNING.has(systemName);
 
   const visibleReports = isEmptySystem
@@ -186,6 +191,8 @@ export function ReportsModal({
     ? FINANCE_REPORTS
     : isGeneral
     ? GENERAL_REPORTS
+    : isIfaSales
+    ? IFA_SALES_REPORTS
     : REPORTS;
 
   const handleSystemNameChange = (v: string) => {
@@ -210,6 +217,9 @@ export function ReportsModal({
     } else if (v === "GENERAL") {
       setStartDate("01/07/2009");
       setEndDate("15/07/2009");
+    } else if (v === "IFA SALES") {
+      setStartDate("01/01/2006");
+      setEndDate("31/12/2006");
     }
   };
 

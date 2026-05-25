@@ -66,9 +66,7 @@ export function PolicyHeader() {
         {surname}
       </div>
 
-      <div
-        className={`w-[220px] h-9 rounded-[8px] ${planCode === "87" ? "bg-[#00263e]" : "bg-[#eaf5f8]"}`}
-      />
+      <div className="w-[220px] h-9 rounded-[8px] bg-[#eaf5f8]" />
 
       <button
         type="button"

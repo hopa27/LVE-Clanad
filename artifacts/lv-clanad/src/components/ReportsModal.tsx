@@ -287,7 +287,7 @@ export function ReportsModal({
             <input
               type="text"
               readOnly
-              value={reportPath}
+              value={isCcrp ? "" : reportPath}
               className="lve-input flex-1 bg-[#fafafa] cursor-default"
             />
             <button

@@ -97,6 +97,13 @@ const SYSTEM_NAMES = [
   "SALES95",
 ];
 
+const FINANCE_REPORTS: Report[] = [
+  { name: "Annuity Payment - Details",  dateRequired: "B", path: "\\\\delphiuat\\uat\\accts\\reports\\AnnPay - Details(Exe).rpt" },
+  { name: "Annuity Payment - Summary",  dateRequired: "B" },
+  { name: "Premium By Period",          dateRequired: "B" },
+  { name: "Seamus Report",              dateRequired: "B" },
+];
+
 const CHEQUE_REQUISITION_REPORTS: Report[] = [
   { name: "CHEQUE REQUISITION LISTING", dateRequired: "", path: "\\\\delphiuat\\uat\\pdoxdata\\hipps96\\reports\\" },
 ];
@@ -161,11 +168,14 @@ export function ReportsModal({
 
   const isCcrp = systemName === "CCRP";
   const isChequeRequisition = systemName === "CHEQUE REQUISITION";
+  const isFinance = systemName === "FINANCE";
 
   const visibleReports = isCcrp
     ? []
     : isChequeRequisition
     ? CHEQUE_REQUISITION_REPORTS
+    : isFinance
+    ? FINANCE_REPORTS
     : REPORTS;
 
   const handleSystemNameChange = (v: string) => {
@@ -181,6 +191,9 @@ export function ReportsModal({
     } else if (v === "DANAD96") {
       setStartDate("06/06/2017");
       setEndDate("17/04/2017");
+    } else if (v === "FINANCE") {
+      setStartDate("01/07/2011");
+      setEndDate("31/07/2015");
     }
   };
 

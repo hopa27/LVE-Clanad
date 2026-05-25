@@ -166,6 +166,7 @@ const SUPERVISOR_90: MenuOption[] = [
   },
   { label: "Amend Cheques", action: "amend-cheques" },
   { label: "Amend IFA", action: "amend-ifa" },
+  { label: "C(ancel) Application" },
   {
     label: "Bank Detail Changes",
     hasSubmenu: true,

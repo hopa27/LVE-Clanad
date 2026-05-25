@@ -64,7 +64,7 @@ export function Toolbar() {
 
   const TOOLS: Tool[] = [
     { label: "New App", icon: MdAdd, enabled: !editing, action: "new-app" },
-    { label: "New Quote", icon: MdNoteAdd, enabled: !editing, action: "new-quote" },
+    { label: "New Quote", icon: MdNoteAdd, enabled: !editing && !isPlan84 && !isPlan90, action: "new-quote" },
     { label: "Sim App", icon: MdContentCopy, enabled: !editing, action: "sim-app" },
     {
       label: editing ? "Save" : "Edit",

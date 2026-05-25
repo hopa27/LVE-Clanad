@@ -14,6 +14,7 @@ import {
 } from "react-icons/md";
 import { ConfirmDialog } from "./ConfirmDialog";
 import { QuoteLookupModal } from "./QuoteLookupModal";
+import { PullQuoteModal } from "./PullQuoteModal";
 import { CompanySelectionModal } from "./CompanySelectionModal";
 import { ReportsModal } from "./ReportsModal";
 import { CrsModal } from "./CrsModal";
@@ -140,11 +141,9 @@ export function Toolbar() {
         onClose={() => setQuoteLookupOpen(false)}
       />
 
-      <QuoteLookupModal
+      <PullQuoteModal
         open={newQuoteOpen}
         onClose={() => setNewQuoteOpen(false)}
-        empty
-        initialQuery="20824110"
       />
 
       <CompanySelectionModal

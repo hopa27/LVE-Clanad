@@ -227,14 +227,16 @@ export function MaturitiesSurrenderTab() {
         </Section>
       </div>
 
-      <Section title="Maturity / Surrender Address">
+      <div className="mb-1">
         <Field label="Maturity Destination:">
           <SelectInput value="" options={["", "Client", "IFA", "Other"]} />
         </Field>
         <Field label="Correspondance Name:"><TextInput value="" /></Field>
         <Field label="Salutation:"><TextInput value="" /></Field>
         <Field label="Telephone:"><TextInput value="" /></Field>
-        <div className="my-3 border-t border-[color:var(--color-panel-border)]" />
+      </div>
+
+      <Section title="Maturity / Surrender Address">
         <Field label="Address:">
           <ConnectedAddress
             lines={[

@@ -12,6 +12,7 @@ import { SetDeadModal } from "./SetDeadModal";
 import { CedingSchemeModal } from "./CedingSchemeModal";
 import { CopyP60Modal } from "./CopyP60Modal";
 import { SupervisoryEditModal } from "./SupervisoryEditModal";
+import { BankChangesReportModal } from "./BankChangesReportModal";
 import { usePlanCode } from "../context/PlanCodeContext";
 
 type SubItem = {
@@ -171,7 +172,7 @@ const SUPERVISOR_90: MenuOption[] = [
     label: "Bank Detail Changes",
     hasSubmenu: true,
     submenu: [
-      { label: "Bank Changes Awaiting Approval" },
+      { label: "Bank Changes Awaiting Approval", action: "bank-changes-awaiting" },
       { label: "Approve Bank Changes", disabled: true },
       { label: "Approve Maturity Bank Changes", disabled: true },
     ],
@@ -295,6 +296,7 @@ export function Header({ title }: { title: string }) {
   const [supervisoryEditOpen, setSupervisoryEditOpen] = useState(false);
   const [expiredConfirmOpen, setExpiredConfirmOpen] = useState(false);
   const [cancelAppOpen, setCancelAppOpen] = useState(false);
+  const [bankChangesReportOpen, setBankChangesReportOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const { planCode } = usePlanCode();
   const menuItems: MenuItem[] = MENU_ITEMS.map((m) => {
@@ -336,6 +338,7 @@ export function Header({ title }: { title: string }) {
     else if (action === "copy-p60") setCopyP60Open(true);
     else if (action === "expired-confirm") setExpiredConfirmOpen(true);
     else if (action === "cancel-application") setCancelAppOpen(true);
+    else if (action === "bank-changes-awaiting") setBankChangesReportOpen(true);
     else if (action === "supervisory-edit") {
       window.dispatchEvent(new CustomEvent("clanad:switch-tab", { detail: "payments" }));
       setSupervisoryEditOpen(true);
@@ -565,6 +568,11 @@ export function Header({ title }: { title: string }) {
         open={supervisoryEditOpen}
         onClose={() => setSupervisoryEditOpen(false)}
         planCode={planCode}
+      />
+
+      <BankChangesReportModal
+        open={bankChangesReportOpen}
+        onClose={() => setBankChangesReportOpen(false)}
       />
 
       {cancelAppOpen && (

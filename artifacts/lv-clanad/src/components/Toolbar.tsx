@@ -43,6 +43,7 @@ type Tool = {
 export function Toolbar() {
   const { editing, setEditing, cancel } = useEditMode();
   const [newAppConfirm, setNewAppConfirm] = useState(false);
+  const [simAppConfirm, setSimAppConfirm] = useState(false);
   const [quoteLookupOpen, setQuoteLookupOpen] = useState(false);
   const [newQuoteOpen, setNewQuoteOpen] = useState(false);
   const [companyOpen, setCompanyOpen] = useState(false);
@@ -78,7 +79,7 @@ export function Toolbar() {
   const handleClick = (action?: ToolAction) => {
     if (action === "new-app") setNewAppConfirm(true);
     else if (action === "new-quote") setNewQuoteOpen(true);
-    else if (action === "sim-app") setQuoteLookupOpen(true);
+    else if (action === "sim-app") setSimAppConfirm(true);
     else if (action === "edit-toggle") setEditing(!editing);
     else if (action === "edit-cancel") cancel();
     else if (action === "company") setCompanyOpen(true);
@@ -118,6 +119,16 @@ export function Toolbar() {
           setQuoteLookupOpen(true);
         }}
         onNo={() => setNewAppConfirm(false)}
+      />
+
+      <ConfirmDialog
+        open={simAppConfirm}
+        message="Are you sure you wish to generate simultaneous policy?"
+        onYes={() => {
+          setSimAppConfirm(false);
+          setQuoteLookupOpen(true);
+        }}
+        onNo={() => setSimAppConfirm(false)}
       />
 
       <QuoteLookupModal

@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 
-export type PlanCodeVersion = "0" | "87" | "84";
+export type PlanCodeVersion = "0" | "87" | "84" | "90";
 
 export const PLAN_CODE_VERSIONS: {
   code: PlanCodeVersion;
@@ -10,6 +10,7 @@ export const PLAN_CODE_VERSIONS: {
   { code: "0",  planType: "master", description: "Master — Default version" },
   { code: "87", planType: "FTA",    description: "Version 87 — Standard controls" },
   { code: "84", planType: "FTA",    description: "Version 84 — Full controls (incl. GAD & IR)" },
+  { code: "90", planType: "MCP",    description: "Version 90 — MCP" },
 ];
 
 type PlanCodeValue = {

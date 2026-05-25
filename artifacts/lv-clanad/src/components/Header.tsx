@@ -49,7 +49,7 @@ const PROCESS_84: MenuOption[] = [
     label: "Payments",
     hasSubmenu: true,
     submenu: [
-      { label: "Suspend" },
+      { label: "Suspend", action: "suspend" },
     ],
   },
   { label: "PLA Cancellation", action: "pla-cancellation" },
@@ -240,6 +240,8 @@ export function Header({ title }: { title: string }) {
   const [setDeadOpen, setSetDeadOpen] = useState(false);
   const [noSecondLifeOpen, setNoSecondLifeOpen] = useState(false);
   const [plaCancellationOpen, setPlaCancellationOpen] = useState(false);
+  const [suspendClicks, setSuspendClicks] = useState(0);
+  const [suspendOpen, setSuspendOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const { planCode } = usePlanCode();
   const menuItems: MenuItem[] = MENU_ITEMS.map((m) => {
@@ -276,6 +278,14 @@ export function Header({ title }: { title: string }) {
     else if (action === "set-dead-life-one") setSetDeadOpen(true);
     else if (action === "set-dead-life-two") setNoSecondLifeOpen(true);
     else if (action === "pla-cancellation") setPlaCancellationOpen(true);
+    else if (action === "suspend") {
+      if (suspendClicks === 0) {
+        setSuspendClicks(1);
+      } else {
+        setSuspendClicks(0);
+        setSuspendOpen(true);
+      }
+    }
     else if (action === "search")
       window.dispatchEvent(new Event("clanad:open-find-policy"));
   };
@@ -437,6 +447,37 @@ export function Header({ title }: { title: string }) {
         open={setDeadOpen}
         onClose={() => setSetDeadOpen(false)}
       />
+
+      {suspendOpen && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
+          <div className="lve-panel bg-white w-[400px] max-w-full">
+            <header className="lve-panel-header flex items-center justify-between">
+              <span>Client Annuity Administration System</span>
+              <button
+                type="button"
+                className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-white hover:bg-[#d72714] transition-colors"
+                onClick={() => setSuspendOpen(false)}
+                aria-label="Close"
+              >
+                <MdClose size={18} />
+              </button>
+            </header>
+            <div className="lve-panel-body flex flex-col items-center gap-5">
+              <p className="text-center font-['Mulish'] text-[14px] text-[#3d3d3d] py-2">
+                This records payments are already suspended!
+              </p>
+              <button
+                type="button"
+                onClick={() => setSuspendOpen(false)}
+                className="lve-btn lve-btn-sm min-w-[80px] justify-center"
+              >
+                <MdCheck size={16} />
+                OK
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {plaCancellationOpen && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">

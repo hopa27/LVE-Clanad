@@ -356,6 +356,7 @@ export function CedingSchemeModal({
   const [selectedRow, setSelectedRow] = useState<number>(0);
   const [confirmNewOpen, setConfirmNewOpen] = useState(false);
   const [confirmEditOpen, setConfirmEditOpen] = useState(false);
+  const [confirmCancelOpen, setConfirmCancelOpen] = useState(false);
 
   if (!open) return null;
 
@@ -402,8 +403,13 @@ export function CedingSchemeModal({
   };
 
   const handleCancel = () => {
+    setConfirmCancelOpen(true);
+  };
+
+  const doCancel = () => {
     setForm(INITIAL_FORM);
     setMode("view");
+    setConfirmCancelOpen(false);
   };
 
   const handleSave = () => {
@@ -702,6 +708,34 @@ export function CedingSchemeModal({
                 >
                   <MdClose size={16} />
                   No
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {confirmCancelOpen && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40">
+          <div className="lve-panel w-[400px] bg-white">
+            <header className="lve-panel-header">Confirm</header>
+            <div className="lve-panel-body">
+              <div className="flex items-start gap-3">
+                <MdHelpOutline size={32} className="text-[#006cf4] shrink-0" />
+                <p className="font-['Mulish'] text-[14px] text-[#3d3d3d] pt-1">
+                  Changes made, if any, will not be saved. Are you sure?
+                </p>
+              </div>
+              <div className="mt-5 flex items-center justify-center gap-3">
+                <button type="button" className="lve-btn" onClick={doCancel}>
+                  <MdCheck size={16} /> Yes
+                </button>
+                <button
+                  type="button"
+                  className="lve-btn lve-btn-secondary"
+                  onClick={() => setConfirmCancelOpen(false)}
+                >
+                  <MdClose size={16} /> No
                 </button>
               </div>
             </div>

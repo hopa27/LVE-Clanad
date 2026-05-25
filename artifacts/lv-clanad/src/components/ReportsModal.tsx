@@ -97,6 +97,10 @@ const SYSTEM_NAMES = [
   "SALES95",
 ];
 
+const GENERAL_REPORTS: Report[] = [
+  { name: "Telephone List", dateRequired: "", path: "\\\\delphiuat\\uat\\pdoxdata\\telelist.rpt" },
+];
+
 const FINANCE_REPORTS: Report[] = [
   { name: "Annuity Payment - Details",  dateRequired: "B", path: "\\\\delphiuat\\uat\\accts\\reports\\AnnPay - Details(Exe).rpt" },
   { name: "Annuity Payment - Summary",  dateRequired: "B" },
@@ -169,6 +173,7 @@ export function ReportsModal({
   const isCcrp = systemName === "CCRP";
   const isChequeRequisition = systemName === "CHEQUE REQUISITION";
   const isFinance = systemName === "FINANCE";
+  const isGeneral = systemName === "GENERAL";
 
   const visibleReports = isCcrp
     ? []
@@ -176,6 +181,8 @@ export function ReportsModal({
     ? CHEQUE_REQUISITION_REPORTS
     : isFinance
     ? FINANCE_REPORTS
+    : isGeneral
+    ? GENERAL_REPORTS
     : REPORTS;
 
   const handleSystemNameChange = (v: string) => {
@@ -194,6 +201,9 @@ export function ReportsModal({
     } else if (v === "FINANCE") {
       setStartDate("01/07/2011");
       setEndDate("31/07/2015");
+    } else if (v === "GENERAL") {
+      setStartDate("01/07/2009");
+      setEndDate("15/07/2009");
     }
   };
 

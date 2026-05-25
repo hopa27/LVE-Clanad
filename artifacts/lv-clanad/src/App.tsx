@@ -32,7 +32,7 @@ const PLAN_CODE_ACCENT: Record<PlanCodeVersion, string> = {
   "0":  "#848285",
   "87": "#F28C28",
   "84": "#97C697",
-  "90": "#E1ABC9",
+  "90": "#F4D9E8",
 };
 
 const PLAN_CODE_ACCENT_FG: Record<PlanCodeVersion, string> = {

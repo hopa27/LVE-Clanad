@@ -87,7 +87,7 @@ export function PolicyHeader() {
       </button>
 
       {planCode === "90" ? (
-        <div className="px-4 h-9 inline-flex items-center rounded-[8px] bg-[#E1ABC9] text-[#710340] font-['Livvic'] font-semibold text-sm">
+        <div className="px-4 h-9 inline-flex items-center rounded-[8px] bg-[#F4D9E8] text-[#710340] font-['Livvic'] font-semibold text-sm">
           MONTHLY CASH POLICY
         </div>
       ) : (

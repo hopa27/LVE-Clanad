@@ -170,7 +170,7 @@ export function ReportsModal({
   const [printError, setPrintError] = useState(false);
   const [warningMessage, setWarningMessage] = useState<string | null>(null);
 
-  const NOT_IN_ORACLE = new Set(["CCRP", "SALES95"]);
+  const NOT_IN_ORACLE = new Set(["CCRP", "PLI ADMIN", "SALES95"]);
 
   const isChequeRequisition = systemName === "CHEQUE REQUISITION";
   const isFinance = systemName === "FINANCE";

@@ -171,7 +171,7 @@ export function ReportsModal({
   const [warningMessage, setWarningMessage] = useState<string | null>(null);
 
   const NOT_IN_ORACLE = new Set(["CCRP", "PLI ADMIN", "SALES95"]);
-  const EMPTY_NO_WARNING = new Set(["MORTGAGE ANNUIT", "PC96", "PROPSALE97"]);
+  const EMPTY_NO_WARNING = new Set(["HIPPS97", "MORTGAGE ANNUIT", "PC96", "PROPSALE97"]);
 
   const isChequeRequisition = systemName === "CHEQUE REQUISITION";
   const isFinance = systemName === "FINANCE";

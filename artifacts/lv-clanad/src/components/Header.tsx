@@ -14,11 +14,18 @@ import { CopyP60Modal } from "./CopyP60Modal";
 import { SupervisoryEditModal } from "./SupervisoryEditModal";
 import { usePlanCode } from "../context/PlanCodeContext";
 
+type SubItem = {
+  label: string;
+  accel?: string;
+  action?: string;
+};
 type SubmenuItem = {
   label: string;
   accel?: string;
   action?: string;
   disabled?: boolean;
+  hasSubmenu?: boolean;
+  submenu?: SubItem[];
 };
 type MenuOption =
   | {
@@ -146,6 +153,54 @@ const SUPERVISOR_87: MenuOption[] = [
   { label: "Reprint Maturity Letters" },
 ];
 
+const SUPERVISOR_90: MenuOption[] = [
+  { label: "Supervisory Edit", action: "supervisory-edit" },
+  {
+    label: "Status Change",
+    hasSubmenu: true,
+    submenu: [
+      {
+        label: "NTU",
+        accel: "N",
+        hasSubmenu: true,
+        submenu: [
+          { label: "Surrender", accel: "S" },
+          { label: "Maturity", accel: "M" },
+          { label: "Expired", accel: "E" },
+        ],
+      },
+      { label: "Backdate", accel: "B" },
+      { label: "Cancel", accel: "C" },
+      { label: "XDuplicate", accel: "X" },
+      { label: "Surrender", accel: "S" },
+      { label: "Maturity", accel: "M" },
+    ],
+  },
+  { label: "Amend Cheques", action: "amend-cheques" },
+  { label: "Amend IFA", action: "amend-ifa" },
+  {
+    label: "Bank Detail Changes",
+    hasSubmenu: true,
+    submenu: [
+      { label: "Approve Bank Changes" },
+      { label: "Approve Maturity Bank Detail Changes" },
+    ],
+  },
+  { label: "Convert to Flexi-Access", disabled: true },
+  { kind: "separator" },
+  {
+    label: "LTC",
+    hasSubmenu: true,
+    disabled: true,
+    submenu: [{ label: "LTC Benefit" }],
+  },
+  { label: "Pull Quote" },
+  { kind: "separator" },
+  { label: "Reprint Annual Statements" },
+  { label: "Annual Statement Recalculation" },
+  { label: "Reprint Maturity Letters" },
+];
+
 const MENU_ITEMS: MenuItem[] = [
   {
     label: "Options",
@@ -257,7 +312,8 @@ export function Header({ title }: { title: string }) {
       if (m.label === "Options") return { ...m, options: OPTIONS_84 };
       if (m.label === "Process") return { ...m, options: PROCESS_84 };
       if (m.label === "Print") return { ...m, options: PRINT_84 };
-      if (m.label === "Supervisor") return { ...m, options: SUPERVISOR_84 };
+      if (m.label === "Supervisor")
+        return { ...m, options: planCode === "90" ? SUPERVISOR_90 : SUPERVISOR_84 };
     }
     return m;
   });
@@ -395,6 +451,46 @@ export function Header({ title }: { title: string }) {
                                 ) : (
                                   <span>{sub.label}</span>
                                 );
+                              if (sub.hasSubmenu && sub.submenu) {
+                                return (
+                                  <div key={sub.label} className="relative group/sub">
+                                    <button
+                                      type="button"
+                                      className="flex w-full items-center justify-between gap-4 px-4 py-2 text-left hover:bg-[#eaf5f8] hover:text-[#003578] group-hover/sub:bg-[#eaf5f8] group-hover/sub:text-[#003578]"
+                                    >
+                                      {labelEl}
+                                      <span className="text-[#04589b]">▶</span>
+                                    </button>
+                                    <div className="hidden group-hover/sub:block absolute left-full top-0 -mt-1 z-50 min-w-[160px] bg-white border border-[#e3e6ea] rounded-[8px] shadow-lg py-1 font-['Mulish'] text-[14px] text-[#3d3d3d]">
+                                      {sub.submenu.map((item) => {
+                                        const ai = item.accel
+                                          ? item.label.toUpperCase().indexOf(item.accel.toUpperCase())
+                                          : -1;
+                                        const el =
+                                          ai >= 0 ? (
+                                            <span>
+                                              {item.label.slice(0, ai)}
+                                              <span className="underline">{item.label.charAt(ai)}</span>
+                                              {item.label.slice(ai + 1)}
+                                            </span>
+                                          ) : (
+                                            <span>{item.label}</span>
+                                          );
+                                        return (
+                                          <button
+                                            key={item.label}
+                                            type="button"
+                                            onClick={() => handleOption(item.action)}
+                                            className="flex w-full items-center px-4 py-2 text-left hover:bg-[#eaf5f8] hover:text-[#003578]"
+                                          >
+                                            {el}
+                                          </button>
+                                        );
+                                      })}
+                                    </div>
+                                  </div>
+                                );
+                              }
                               return (
                                 <button
                                   key={sub.label}

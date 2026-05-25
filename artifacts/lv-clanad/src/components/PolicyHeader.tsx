@@ -83,9 +83,7 @@ export function PolicyHeader() {
       {planCode === "87" ? (
         <div className="w-[140px] h-9 rounded-[8px] bg-[#d4d4d4]" />
       ) : planCode !== "84" ? (
-        <div className="px-4 h-9 inline-flex items-center rounded-[8px] bg-[#7fdfdf] text-[#00263e] font-['Livvic'] font-semibold text-sm">
-          RETIREMENT ACCOUNT
-        </div>
+        <div className="w-[180px] h-9 rounded-[8px] bg-[#7fdfdf]" />
       ) : null}
 
       {simOpen && (

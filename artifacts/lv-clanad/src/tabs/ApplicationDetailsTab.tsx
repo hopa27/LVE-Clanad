@@ -222,64 +222,68 @@ export function ApplicationDetailsTab() {
         </div>
       </div>
 
-      {/* Two-column section panels */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <Section title="Correspondence Details">
-          <Field label="Correspond Name:">
-            <TextInput
-              value={isPlan87 ? "Dr T Uggiu" : isPlan84 ? "Testmtbbbide" : isPlan90 ? "Testmtcchibd" : "correspname"}
-            />
-          </Field>
-          <Field label="Salutation Name:">
-            <TextInput
-              value={isPlan87 ? "Dr Uggiu" : isPlan84 ? "Testmtbbbide" : isPlan90 ? "Testmtcchibd" : "salname"}
-            />
-          </Field>
-          <Field label="Telephone:">
-            <TextInput value={isPlan87 ? "" : isPlan84 ? "01632 391651" : isPlan90 ? "" : "anntele"} />
-          </Field>
-          <Field label="E-mail:">
-            <TextInput
-              value={isPlan87 || isPlan84 ? "" : isPlan90 ? "zzzzzz99@zzzzzzz.zz.zz" : "DBEditPH_EMAIL"}
-            />
-          </Field>
-        </Section>
+      {/* Correspondence Details — two-column inner layout */}
+      <Section title="Correspondence Details">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
+          {/* Left: contact fields */}
+          <div>
+            <Field label="Correspond Name:">
+              <TextInput
+                value={isPlan87 ? "Dr T Uggiu" : isPlan84 ? "Testmtbbbide" : isPlan90 ? "Testmtcchibd" : "correspname"}
+              />
+            </Field>
+            <Field label="Salutation Name:">
+              <TextInput
+                value={isPlan87 ? "Dr Uggiu" : isPlan84 ? "Testmtbbbide" : isPlan90 ? "Testmtcchibd" : "salname"}
+              />
+            </Field>
+            <Field label="Telephone:">
+              <TextInput value={isPlan87 ? "" : isPlan84 ? "01632 391651" : isPlan90 ? "" : "anntele"} />
+            </Field>
+            <Field label="E-mail:">
+              <TextInput
+                value={isPlan87 || isPlan84 ? "" : isPlan90 ? "zzzzzz99@zzzzzzz.zz.zz" : "DBEditPH_EMAIL"}
+              />
+            </Field>
+          </div>
 
-        <Section title="Correspondence Address">
-          <Field label="Address:">
-            <ConnectedAddress
-              lines={[
-                { placeholder: "Line 1" },
-                { placeholder: "Line 2" },
-                { placeholder: "Line 3" },
-                { placeholder: "Line 4" },
-                { placeholder: "Line 5 (County)" },
-              ]}
-              initial={
-                isPlan87
-                  ? ["Test", "Test", "", "", ""]
-                  : isPlan84
-                  ? ["17 North Road", "Marshwood", "Exeter", "", "Leicester"]
-                  : isPlan90
-                  ? ["26 Eastern Close", "Queensferry", "Verwood", "", ""]
-                  : ["phad1", "phad2", "phad3", "phad4", "phad5"]
-              }
-            />
-          </Field>
-          <Field label="Postcode:">
-            <TextInput
-              value={isPlan87 ? "OP9 0OP" : isPlan84 ? "ZE99 9AB" : isPlan90 ? "KI99 9AB" : "phpc"}
-            />
-          </Field>
-          <Field label="Country:">
-            <SelectInput
-              value={isPlan90 ? "United Kingdom" : "cmbCountry"}
-              options={["United Kingdom", "Ireland", "Other"]}
-            />
-          </Field>
-          <div className="mt-2"><Checkbox label="Address Unknown / Gone Away" /></div>
-        </Section>
-      </div>
+          {/* Right: address fields */}
+          <div>
+            <Field label="Address:">
+              <ConnectedAddress
+                lines={[
+                  { placeholder: "Line 1" },
+                  { placeholder: "Line 2" },
+                  { placeholder: "Line 3" },
+                  { placeholder: "Line 4" },
+                  { placeholder: "Line 5 (County)" },
+                ]}
+                initial={
+                  isPlan87
+                    ? ["Test", "Test", "", "", ""]
+                    : isPlan84
+                    ? ["17 North Road", "Marshwood", "Exeter", "", "Leicester"]
+                    : isPlan90
+                    ? ["26 Eastern Close", "Queensferry", "Verwood", "", ""]
+                    : ["phad1", "phad2", "phad3", "phad4", "phad5"]
+                }
+              />
+            </Field>
+            <Field label="Postcode:">
+              <TextInput
+                value={isPlan87 ? "OP9 0OP" : isPlan84 ? "ZE99 9AB" : isPlan90 ? "KI99 9AB" : "phpc"}
+              />
+            </Field>
+            <Field label="Country:">
+              <SelectInput
+                value={isPlan90 ? "United Kingdom" : "cmbCountry"}
+                options={["United Kingdom", "Ireland", "Other"]}
+              />
+            </Field>
+            <div className="mt-2"><Checkbox label="Address Unknown / Gone Away" /></div>
+          </div>
+        </div>
+      </Section>
     </div>
   );
 }

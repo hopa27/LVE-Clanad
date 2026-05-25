@@ -1,4 +1,4 @@
-import { useState, type JSX } from "react";
+import { useState, useEffect, type JSX } from "react";
 import { EditModeProvider, useEditMode } from "./context/EditModeContext";
 import { ChequesProvider } from "./context/ChequesContext";
 import {
@@ -65,6 +65,16 @@ function AppShell() {
   const ActiveComponent = TAB_COMPONENTS[activeTab];
   const { cancelKey } = useEditMode();
   const { planCode } = usePlanCode();
+
+  // Allow Header menus to switch the active tab via a custom event
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const tab = (e as CustomEvent<TabKey>).detail;
+      if (tab) setActiveTab(tab);
+    };
+    window.addEventListener("clanad:switch-tab", handler);
+    return () => window.removeEventListener("clanad:switch-tab", handler);
+  }, []);
 
   return (
     <div

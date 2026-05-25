@@ -11,6 +11,7 @@ import { P45DetailsModal } from "./P45DetailsModal";
 import { SetDeadModal } from "./SetDeadModal";
 import { CedingSchemeModal } from "./CedingSchemeModal";
 import { CopyP60Modal } from "./CopyP60Modal";
+import { SupervisoryEditModal } from "./SupervisoryEditModal";
 import { usePlanCode } from "../context/PlanCodeContext";
 
 type SubmenuItem = {
@@ -77,7 +78,7 @@ const PRINT_84: MenuOption[] = [
 ];
 
 const SUPERVISOR_84: MenuOption[] = [
-  { label: "Supervisory Edit" },
+  { label: "Supervisory Edit", action: "supervisory-edit" },
   {
     label: "Status Change",
     hasSubmenu: true,
@@ -246,6 +247,7 @@ export function Header({ title }: { title: string }) {
   const [suspendOpen, setSuspendOpen] = useState(false);
   const [cedingOpen, setCedingOpen] = useState(false);
   const [copyP60Open, setCopyP60Open] = useState(false);
+  const [supervisoryEditOpen, setSupervisoryEditOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const { planCode } = usePlanCode();
   const menuItems: MenuItem[] = MENU_ITEMS.map((m) => {
@@ -284,6 +286,10 @@ export function Header({ title }: { title: string }) {
     else if (action === "pla-cancellation") setPlaCancellationOpen(true);
     else if (action === "ceding-scheme") setCedingOpen(true);
     else if (action === "copy-p60") setCopyP60Open(true);
+    else if (action === "supervisory-edit") {
+      window.dispatchEvent(new CustomEvent("clanad:switch-tab", { detail: "payments" }));
+      setSupervisoryEditOpen(true);
+    }
     else if (action === "suspend") {
       if (suspendClicks === 0) {
         setSuspendClicks(1);
@@ -463,6 +469,12 @@ export function Header({ title }: { title: string }) {
       <CopyP60Modal
         open={copyP60Open}
         onClose={() => setCopyP60Open(false)}
+      />
+
+      <SupervisoryEditModal
+        open={supervisoryEditOpen}
+        onClose={() => setSupervisoryEditOpen(false)}
+        planCode={planCode}
       />
 
       {suspendOpen && (

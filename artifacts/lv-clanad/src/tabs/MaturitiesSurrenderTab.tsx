@@ -203,7 +203,7 @@ export function MaturitiesSurrenderTab() {
           <button
             type="button"
             className="lve-btn lve-btn-secondary lve-btn-sm mt-2"
-            onClick={() => setBankModalOpen(true)}
+            disabled
           >
             <MdEdit size={14} /> Edit Bank Details
           </button>

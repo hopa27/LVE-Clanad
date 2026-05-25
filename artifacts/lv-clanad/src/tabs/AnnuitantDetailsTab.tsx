@@ -186,23 +186,24 @@ export function AnnuitantDetailsTab() {
   const { planCode } = usePlanCode();
   const isPlan87 = planCode === "87";
   const isPlan84 = planCode === "84";
-  const isPreset = isPlan87 || isPlan84;
+  const isPlan90 = planCode === "90";
+  const isPreset = isPlan87 || isPlan84 || isPlan90;
 
   return (
     <div className="space-y-4">
       <Section title="Annuitant">
         <AnnuitantBlock
-          surname={isPlan87 ? "Uggiu" : isPlan84 ? "Testptbbbide" : "surname1"}
-          forename={isPlan87 ? "Test" : isPlan84 ? "Rachael" : "Forename1"}
-          second={isPlan87 ? "" : isPlan84 ? "Colin" : "Middlename"}
-          shortName={isPlan87 ? "UGGIU T" : isPlan84 ? "TESTPTBBBIDE R C" : "ANNSNAME"}
-          dob={isPlan87 ? "09/09/1956" : isPlan84 ? "25/10/1958" : "dob1"}
+          surname={isPlan87 ? "Uggiu" : isPlan84 ? "Testptbbbide" : isPlan90 ? "Testctcchibd" : "surname1"}
+          forename={isPlan87 ? "Test" : isPlan84 ? "Rachael" : isPlan90 ? "Belinda" : "Forename1"}
+          second={isPlan87 ? "" : isPlan84 ? "Colin" : isPlan90 ? "" : "Middlename"}
+          shortName={isPlan87 ? "UGGIU T" : isPlan84 ? "TESTPTBBBIDE R C" : isPlan90 ? "TESTCTCCHIBD B" : "ANNSNAME"}
+          dob={isPlan87 ? "09/09/1956" : isPlan84 ? "25/10/1958" : isPlan90 ? "10/05/1959" : "dob1"}
           dod={isPreset ? "" : "DOD1"}
-          natIns={isPlan87 ? "JK-90-90-90-C" : isPlan84 ? "PK-25-10-58-A" : "NI1"}
+          natIns={isPlan87 ? "JK-90-90-90-C" : isPlan84 ? "PK-25-10-58-A" : isPlan90 ? "CH-10-05-59-A" : "NI1"}
           enhanced={isPreset ? "" : "ENHANCED"}
           doctor={isPreset ? "" : "Doctor1"}
           doctorName={isPreset ? "" : "dbDoctorName"}
-          gender={isPlan87 ? "Male" : isPlan84 ? "Female" : ""}
+          gender={isPlan87 ? "Male" : isPlan84 ? "Female" : isPlan90 ? "Male" : ""}
           marRequired={isPreset ? "" : "MAR1R"}
           marCopyToPH={isPreset ? "" : "MAR1C"}
           dateMarSent={isPreset ? "" : "Mar1sent"}
@@ -211,7 +212,7 @@ export function AnnuitantDetailsTab() {
           uwDate={isPreset ? "" : "DBEdUWDat"}
           daysSinceUW=""
           showCauseOfDeath={!isPreset}
-          showDod={!isPlan87}
+          showDod={!isPlan87 && !isPlan90}
           showUwDateBlock={!isPreset}
           icd1="DbedLif"
           icd2="DbedLif"

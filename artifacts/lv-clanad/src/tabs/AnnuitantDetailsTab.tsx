@@ -234,7 +234,7 @@ export function AnnuitantDetailsTab() {
           doctor={isPreset ? "" : "doctor2"}
           doctorName={isPreset ? "" : "dbDoctor2Name"}
           marRequired={isPreset ? "" : "DbedEL"}
-          marRequiredDisabled
+          marRequiredDisabled={!isPlan90}
           marCopyLabel="Copy to PH?:"
           marCopyToPH={isPreset ? "" : "PH2RE"}
           dateMarSent={isPreset ? "" : "mar2sent"}

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { MdClose, MdCheck, MdCancel } from "react-icons/md";
 
 function ROField({
@@ -50,6 +51,9 @@ export function SupervisoryEditModal({
   const overlap       = "N";
   const escalation    = "0";
 
+  const [policyServicesStatus, setPolicyServicesStatus] = useState("");
+  const [ifaCommission, setIfaCommission] = useState("");
+
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
       <div className="lve-panel bg-white w-[880px] max-w-[96vw]">
@@ -68,9 +72,29 @@ export function SupervisoryEditModal({
         <div className="lve-panel-body space-y-4">
           {/* Row 1 */}
           <div className="grid grid-cols-3 gap-4">
-            <ROField label="Policy Services Status:" value="" labelWidth={160} />
+            <div className="flex items-center gap-3">
+              <span className="lve-label text-right shrink-0" style={{ width: 160 }}>
+                Policy Services Status:
+              </span>
+              <input
+                type="text"
+                className="lve-input flex-1"
+                value={policyServicesStatus}
+                onChange={(e) => setPolicyServicesStatus(e.target.value)}
+              />
+            </div>
             <ROField label="Start Date:" value={startDate} labelWidth={90} />
-            <ROField label="IFA Commission:" value="" labelWidth={120} />
+            <div className="flex items-center gap-3">
+              <span className="lve-label text-right shrink-0" style={{ width: 120 }}>
+                IFA Commission:
+              </span>
+              <input
+                type="text"
+                className="lve-input flex-1"
+                value={ifaCommission}
+                onChange={(e) => setIfaCommission(e.target.value)}
+              />
+            </div>
           </div>
 
           <div className="border-t border-[#e3e6ea]" />

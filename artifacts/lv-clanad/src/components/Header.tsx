@@ -16,6 +16,7 @@ import { BankChangesReportModal } from "./BankChangesReportModal";
 import { ReprintMaturityModal } from "./ReprintMaturityModal";
 import { RecalcAnnStatModal } from "./RecalcAnnStatModal";
 import { ReprintAnnualStatementsModal } from "./ReprintAnnualStatementsModal";
+import { PullQuoteModal } from "./PullQuoteModal";
 import { usePlanCode } from "../context/PlanCodeContext";
 
 type SubItem = {
@@ -121,7 +122,7 @@ const SUPERVISOR_84: MenuOption[] = [
     disabled: true,
     submenu: [{ label: "LTC Benefit" }],
   },
-  { label: "Pull Quote" },
+  { label: "Pull Quote", action: "pull-quote" },
   { kind: "separator" },
   { label: "Reprint Annual Statements", action: "reprint-annual-statements" },
   { label: "Annual Statement Recalculation", action: "annual-statement-recalc" },
@@ -188,7 +189,7 @@ const SUPERVISOR_90: MenuOption[] = [
     disabled: true,
     submenu: [{ label: "LTC Benefit" }],
   },
-  { label: "Pull Quote" },
+  { label: "Pull Quote", action: "pull-quote" },
   { kind: "separator" },
   { label: "Reprint Annual Statements", action: "reprint-annual-statements" },
   { label: "Annual Statement Recalculation", action: "annual-statement-recalc" },
@@ -303,6 +304,7 @@ export function Header({ title }: { title: string }) {
   const [reprintMaturityOpen, setReprintMaturityOpen] = useState(false);
   const [recalcAnnStatOpen, setRecalcAnnStatOpen] = useState(false);
   const [reprintAnnStmtOpen, setReprintAnnStmtOpen] = useState(false);
+  const [pullQuoteOpen, setPullQuoteOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const { planCode } = usePlanCode();
   const menuItems: MenuItem[] = MENU_ITEMS.map((m) => {
@@ -348,6 +350,7 @@ export function Header({ title }: { title: string }) {
     else if (action === "reprint-maturity-letters") setReprintMaturityOpen(true);
     else if (action === "annual-statement-recalc") setRecalcAnnStatOpen(true);
     else if (action === "reprint-annual-statements") setReprintAnnStmtOpen(true);
+    else if (action === "pull-quote") setPullQuoteOpen(true);
     else if (action === "supervisory-edit") {
       window.dispatchEvent(new CustomEvent("clanad:switch-tab", { detail: "payments" }));
       setSupervisoryEditOpen(true);
@@ -597,6 +600,11 @@ export function Header({ title }: { title: string }) {
       <ReprintAnnualStatementsModal
         open={reprintAnnStmtOpen}
         onClose={() => setReprintAnnStmtOpen(false)}
+      />
+
+      <PullQuoteModal
+        open={pullQuoteOpen}
+        onClose={() => setPullQuoteOpen(false)}
       />
 
       {cancelAppOpen && (

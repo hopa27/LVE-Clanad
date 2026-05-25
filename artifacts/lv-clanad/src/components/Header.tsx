@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import lvLogo from "../assets/lv-logo.png";
-import { MdLogout } from "react-icons/md";
+import { MdLogout, MdClose, MdCheck } from "react-icons/md";
 import { TaxCertificateModal } from "./TaxCertificateModal";
 import { AboutModal } from "./AboutModal";
 import { AmendChequesModal } from "./AmendChequesModal";

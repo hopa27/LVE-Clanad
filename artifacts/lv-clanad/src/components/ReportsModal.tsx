@@ -6,6 +6,7 @@ import {
   MdKeyboardArrowDown,
   MdError,
   MdCheck,
+  MdWarning,
 } from "react-icons/md";
 import { format } from "date-fns";
 import { DatePicker } from "./DatePicker";
@@ -152,6 +153,19 @@ export function ReportsModal({
   const [printDefault, setPrintDefault] = useState(false);
   const [selected, setSelected] = useState(0);
   const [printError, setPrintError] = useState(false);
+  const [ccrpWarning, setCcrpWarning] = useState(false);
+
+  const isCcrp = systemName === "CCRP";
+
+  const handleSystemNameChange = (v: string) => {
+    setSystemName(v);
+    if (v === "CCRP") {
+      setStartDate("");
+      setEndDate("");
+      setSelected(0);
+      setCcrpWarning(true);
+    }
+  };
 
   if (!open) return null;
 
@@ -181,7 +195,7 @@ export function ReportsModal({
               <label className="lve-label">System Name</label>
               <SystemNameSelect
                 value={systemName}
-                onChange={setSystemName}
+                onChange={handleSystemNameChange}
                 options={SYSTEM_NAMES}
               />
             </div>
@@ -239,7 +253,10 @@ export function ReportsModal({
               <div className="px-4 py-2">DateRequired</div>
             </div>
             <div className="overflow-auto font-['Mulish'] text-[14px] text-[#3d3d3d]">
-              {REPORTS.map((r, i) => {
+              {isCcrp && (
+                <div className="px-4 py-3 text-[#888]">&nbsp;</div>
+              )}
+              {!isCcrp && REPORTS.map((r, i) => {
                 const isSel = i === selected;
                 return (
                   <div
@@ -313,6 +330,45 @@ export function ReportsModal({
                 <button
                   type="button"
                   onClick={() => setPrintError(false)}
+                  className="lve-btn lve-btn-sm min-w-[100px] justify-center"
+                >
+                  <MdCheck size={16} />
+                  OK
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {ccrpWarning && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40 p-6">
+          <div className="lve-panel bg-white w-[460px] max-w-full">
+            <header className="lve-panel-header flex items-center justify-between">
+              <span>Warning</span>
+              <button
+                type="button"
+                className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-white hover:bg-[#d72714] hover:text-white transition-colors"
+                onClick={() => setCcrpWarning(false)}
+                title="Close"
+                aria-label="Close"
+              >
+                <MdClose size={18} />
+              </button>
+            </header>
+            <div className="lve-panel-body flex flex-col gap-5">
+              <div className="flex items-start gap-4">
+                <span className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[#f5a623] text-white shrink-0">
+                  <MdWarning size={24} />
+                </span>
+                <p className="font-['Mulish'] text-[14px] text-[#3d3d3d] pt-2">
+                  System CCRP is not present in ORACLE database!
+                </p>
+              </div>
+              <div className="flex justify-center">
+                <button
+                  type="button"
+                  onClick={() => setCcrpWarning(false)}
                   className="lve-btn lve-btn-sm min-w-[100px] justify-center"
                 >
                   <MdCheck size={16} />

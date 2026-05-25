@@ -50,19 +50,19 @@ export function BankAccDetailsTab() {
             <Field inline label="Bank sort code:">
               <TextInput
                 value={isPlan87 ? "20-00-00" : isPlan84 || isPlan90 ? "77-48-14" : "DBEdit41"}
-                disabled={isPlan84}
+                disabled={isPlan84 || isPlan90}
               />
             </Field>
             <Field inline label="Bank account no:">
               <TextInput
                 value={isPlan87 ? "83608808" : isPlan84 || isPlan90 ? "24782346" : "DBEdit77"}
-                disabled={isPlan84}
+                disabled={isPlan84 || isPlan90}
               />
             </Field>
             <Field inline label="Bank account name:">
               <TextInput
                 value={isPlan87 ? "Test" : isPlan84 ? "Testktbbbide" : isPlan90 ? "Testmtcchibd" : "DBEdit79"}
-                disabled={isPlan84}
+                disabled={isPlan84 || isPlan90}
               />
             </Field>
             <Field inline label="Bank name:">
@@ -82,7 +82,7 @@ export function BankAccDetailsTab() {
             <Field inline label="Payment Ref:">
               <TextInput
                 value={isPlan87 ? "233451" : isPlan84 ? "111834" : isPlan90 ? "227813" : "DBEdit6"}
-                disabled={isPlan84}
+                disabled={isPlan84 || isPlan90}
               />
             </Field>
             <Field inline label="Payment Method:">

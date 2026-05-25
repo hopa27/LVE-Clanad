@@ -63,7 +63,7 @@ export function PolicyHeader() {
       </div>
 
       {planCode === "87" ? (
-        <div className="w-[220px] h-9 rounded-[8px] bg-[#00263e]" />
+        <div className="w-[220px] h-9 rounded-[8px] bg-[#eaf5f8]" />
       ) : (
         <div className="px-3 h-9 inline-flex items-center rounded-[8px] bg-[#eaf5f8] text-[#0d2c41] font-['Mulish'] text-sm">
           Simultaneous Policies

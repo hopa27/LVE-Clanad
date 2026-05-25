@@ -97,6 +97,25 @@ const SYSTEM_NAMES = [
   "SALES95",
 ];
 
+const NUANAD_REPORTS: Report[] = [
+  { name: "ABI STATS",                                dateRequired: "B", path: "JOHNS-043" },
+  { name: "ANNUITY COMPLETIONS (ADMIN PRINTER)",      dateRequired: "B" },
+  { name: "ANNUITY LIST (POLAD001)",                  dateRequired: "B" },
+  { name: "BACS PAYMENTS CURRENT MONTH",              dateRequired: "" },
+  { name: "CHEQUE PAYMENTS CURRENT MONTH",            dateRequired: "" },
+  { name: "COMPLETED MAR REPORT",                     dateRequired: "B" },
+  { name: "DEATHS & CLOSURES REPORT",                 dateRequired: "B" },
+  { name: "DEATHS & CLOSURES REPORT (MK2)",           dateRequired: "B" },
+  { name: "DIARY REPORT",                             dateRequired: "" },
+  { name: "JOURNAL LISTING",                          dateRequired: "" },
+  { name: "NEW BUSINESS (POLAD002)",                  dateRequired: "B" },
+  { name: "NON MONTHLY INSTALMENTS",                  dateRequired: "B" },
+  { name: "P60 SUMMARY",                              dateRequired: "" },
+  { name: "RENEWALS SCHEDULES (ADVANCE)",             dateRequired: "B" },
+  { name: "RENEWALS SCHEDULES (ARREARS)",             dateRequired: "B" },
+  { name: "STANDARD NON REASSURED ANNUITY PAYMENTS", dateRequired: "B" },
+];
+
 const IFA_SALES_REPORTS: Report[] = [
   { name: "ANNUITY RATE EXTRACT", dateRequired: "", path: "\\\\delphiuat\\uat\\cpa95\\reports\\extract report.rpt" },
 ];
@@ -181,6 +200,7 @@ export function ReportsModal({
   const isFinance = systemName === "FINANCE";
   const isGeneral = systemName === "GENERAL";
   const isIfaSales = systemName === "IFA SALES";
+  const isNuanad = systemName === "NUANAD";
   const isEmptySystem = NOT_IN_ORACLE.has(systemName) || EMPTY_NO_WARNING.has(systemName);
 
   const visibleReports = isEmptySystem
@@ -193,6 +213,8 @@ export function ReportsModal({
     ? GENERAL_REPORTS
     : isIfaSales
     ? IFA_SALES_REPORTS
+    : isNuanad
+    ? NUANAD_REPORTS
     : REPORTS;
 
   const handleSystemNameChange = (v: string) => {
@@ -220,6 +242,9 @@ export function ReportsModal({
     } else if (v === "IFA SALES") {
       setStartDate("01/01/2006");
       setEndDate("31/12/2006");
+    } else if (v === "NUANAD") {
+      setStartDate("25/09/2016");
+      setEndDate("29/09/2016");
     }
   };
 

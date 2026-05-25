@@ -42,7 +42,7 @@ const PROCESS_84: MenuOption[] = [
     hasSubmenu: true,
     submenu: [
       { label: "Life One", accel: "L", action: "set-dead-life-one" },
-      { label: "Life Two/Current Beneficiary", accel: "L" },
+      { label: "Life Two/Current Beneficiary", accel: "L", action: "set-dead-life-two" },
     ],
   },
   {
@@ -239,6 +239,7 @@ export function Header({ title }: { title: string }) {
   const [amendIfaOpen, setAmendIfaOpen] = useState(false);
   const [p45DetailsOpen, setP45DetailsOpen] = useState(false);
   const [setDeadOpen, setSetDeadOpen] = useState(false);
+  const [noSecondLifeOpen, setNoSecondLifeOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const { planCode } = usePlanCode();
   const menuItems: MenuItem[] = MENU_ITEMS.map((m) => {
@@ -273,6 +274,7 @@ export function Header({ title }: { title: string }) {
     else if (action === "amend-ifa") setAmendIfaOpen(true);
     else if (action === "p45-details") setP45DetailsOpen(true);
     else if (action === "set-dead-life-one") setSetDeadOpen(true);
+    else if (action === "set-dead-life-two") setNoSecondLifeOpen(true);
     else if (action === "search")
       window.dispatchEvent(new Event("clanad:open-find-policy"));
   };
@@ -434,6 +436,37 @@ export function Header({ title }: { title: string }) {
         open={setDeadOpen}
         onClose={() => setSetDeadOpen(false)}
       />
+
+      {noSecondLifeOpen && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
+          <div className="lve-panel bg-white w-[380px] max-w-full">
+            <header className="lve-panel-header flex items-center justify-between">
+              <span>Client Annuity Administration System</span>
+              <button
+                type="button"
+                className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-white hover:bg-[#d72714] transition-colors"
+                onClick={() => setNoSecondLifeOpen(false)}
+                aria-label="Close"
+              >
+                <MdClose size={18} />
+              </button>
+            </header>
+            <div className="lve-panel-body flex flex-col items-center gap-5">
+              <p className="text-center font-['Mulish'] text-[14px] text-[#3d3d3d] py-2">
+                There is no second life for this record!
+              </p>
+              <button
+                type="button"
+                onClick={() => setNoSecondLifeOpen(false)}
+                className="lve-btn lve-btn-sm min-w-[80px] justify-center"
+              >
+                <MdCheck size={16} />
+                OK
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   );
 }

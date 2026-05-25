@@ -454,6 +454,7 @@ export function Header({ title }: { title: string }) {
       <CedingSchemeModal
         open={cedingOpen}
         onClose={() => setCedingOpen(false)}
+        planCode={planCode}
       />
 
       {suspendOpen && (

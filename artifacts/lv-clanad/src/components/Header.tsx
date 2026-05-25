@@ -240,7 +240,7 @@ export function Header({ title }: { title: string }) {
   const menuItems: MenuItem[] = MENU_ITEMS.map((m) => {
     if (planCode === "87" && m.label === "Supervisor")
       return { ...m, options: SUPERVISOR_87 };
-    if (planCode === "84") {
+    if (planCode === "84" || planCode === "90") {
       if (m.label === "Options") return { ...m, options: OPTIONS_84 };
       if (m.label === "Process") return { ...m, options: PROCESS_84 };
       if (m.label === "Print") return { ...m, options: PRINT_84 };

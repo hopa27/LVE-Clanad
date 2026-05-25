@@ -10,6 +10,7 @@ import { AmendIfaModal } from "./AmendIfaModal";
 import { P45DetailsModal } from "./P45DetailsModal";
 import { SetDeadModal } from "./SetDeadModal";
 import { CedingSchemeModal } from "./CedingSchemeModal";
+import { CopyP60Modal } from "./CopyP60Modal";
 import { usePlanCode } from "../context/PlanCodeContext";
 
 type SubmenuItem = {
@@ -63,7 +64,7 @@ const PROCESS_84: MenuOption[] = [
 
 const PRINT_84: MenuOption[] = [
   { label: "Tax Certificate", action: "tax-certificate" },
-  { label: "Copy P60" },
+  { label: "Copy P60", action: "copy-p60" },
   {
     label: "Reprint Mar's",
     hasSubmenu: true,
@@ -244,6 +245,7 @@ export function Header({ title }: { title: string }) {
   const [suspendClicks, setSuspendClicks] = useState(0);
   const [suspendOpen, setSuspendOpen] = useState(false);
   const [cedingOpen, setCedingOpen] = useState(false);
+  const [copyP60Open, setCopyP60Open] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const { planCode } = usePlanCode();
   const menuItems: MenuItem[] = MENU_ITEMS.map((m) => {
@@ -281,6 +283,7 @@ export function Header({ title }: { title: string }) {
     else if (action === "set-dead-life-two") setNoSecondLifeOpen(true);
     else if (action === "pla-cancellation") setPlaCancellationOpen(true);
     else if (action === "ceding-scheme") setCedingOpen(true);
+    else if (action === "copy-p60") setCopyP60Open(true);
     else if (action === "suspend") {
       if (suspendClicks === 0) {
         setSuspendClicks(1);
@@ -455,6 +458,11 @@ export function Header({ title }: { title: string }) {
         open={cedingOpen}
         onClose={() => setCedingOpen(false)}
         planCode={planCode}
+      />
+
+      <CopyP60Modal
+        open={copyP60Open}
+        onClose={() => setCopyP60Open(false)}
       />
 
       {suspendOpen && (

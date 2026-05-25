@@ -88,8 +88,8 @@ const SYSTEM_NAMES = [
   "IFA SALES",
   "ILA REPORTS",
   "MARKETING",
-  "MORTGAGE ANNUIT",
-  "MORTGAGE ANNUIT",
+  "MORTGAGE ANNUIT(Admin)",
+  "MORTGAGE ANNUIT(NB)",
   "NUANAD",
   "PC96",
   "PLI ADMIN",
@@ -175,7 +175,7 @@ export function ReportsModal({
   const [warningMessage, setWarningMessage] = useState<string | null>(null);
 
   const NOT_IN_ORACLE = new Set(["CCRP", "MARKETING", "PLI ADMIN", "SALES95"]);
-  const EMPTY_NO_WARNING = new Set(["HIPPS97", "ILA REPORTS", "MORTGAGE ANNUIT", "PC96", "PROPSALE97"]);
+  const EMPTY_NO_WARNING = new Set(["HIPPS97", "ILA REPORTS", "MORTGAGE ANNUIT(Admin)", "MORTGAGE ANNUIT(NB)", "PC96", "PROPSALE97"]);
 
   const isChequeRequisition = systemName === "CHEQUE REQUISITION";
   const isFinance = systemName === "FINANCE";

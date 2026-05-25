@@ -49,8 +49,7 @@ const PROCESS_84: MenuOption[] = [
     label: "Payments",
     hasSubmenu: true,
     submenu: [
-      { label: "Suspend Payments" },
-      { label: "Resume Payments" },
+      { label: "Suspend" },
     ],
   },
   { label: "PLA Cancellation", action: "pla-cancellation" },

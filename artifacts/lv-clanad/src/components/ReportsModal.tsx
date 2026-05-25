@@ -165,7 +165,7 @@ export function ReportsModal({
           <span>DANAD96 Reporting System</span>
           <button
             type="button"
-            className="inline-flex items-center justify-center w-7 h-7 rounded-[4px] text-[#00263e] hover:bg-[#d72714] hover:text-white transition-colors"
+            className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-white hover:bg-[#d72714] hover:text-white transition-colors"
             onClick={onClose}
             title="Close"
             aria-label="Close"
@@ -287,7 +287,7 @@ export function ReportsModal({
               <span>DANAD96 Reporting System</span>
               <button
                 type="button"
-                className="inline-flex items-center justify-center w-7 h-7 rounded-[4px] text-[#00263e] hover:bg-[#d72714] hover:text-white transition-colors"
+                className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-white hover:bg-[#d72714] hover:text-white transition-colors"
                 onClick={() => setPrintError(false)}
                 title="Close"
                 aria-label="Close"

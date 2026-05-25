@@ -424,7 +424,7 @@ export function CedingSchemeModal({
           <button
             type="button"
             onClick={handleClose}
-            className="inline-flex items-center justify-center w-7 h-7 rounded-[4px] text-[#00263e] hover:bg-[#d72714] hover:text-white transition-colors"
+            className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-white hover:bg-[#d72714] hover:text-white transition-colors"
             aria-label="Close"
           >
             <MdClose size={18} />

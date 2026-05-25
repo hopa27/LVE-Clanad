@@ -8,6 +8,7 @@ import { CompletionCheckerModal } from "./CompletionCheckerModal";
 import { ScreenPrintModal } from "./ScreenPrintModal";
 import { AmendIfaModal } from "./AmendIfaModal";
 import { P45DetailsModal } from "./P45DetailsModal";
+import { SetDeadModal } from "./SetDeadModal";
 import { usePlanCode } from "../context/PlanCodeContext";
 
 type SubmenuItem = {
@@ -40,7 +41,7 @@ const PROCESS_84: MenuOption[] = [
     label: "Set Dead",
     hasSubmenu: true,
     submenu: [
-      { label: "Life One", accel: "L" },
+      { label: "Life One", accel: "L", action: "set-dead-life-one" },
       { label: "Life Two/Current Beneficiary", accel: "L" },
     ],
   },
@@ -237,6 +238,7 @@ export function Header({ title }: { title: string }) {
   const [screenPrintOpen, setScreenPrintOpen] = useState(false);
   const [amendIfaOpen, setAmendIfaOpen] = useState(false);
   const [p45DetailsOpen, setP45DetailsOpen] = useState(false);
+  const [setDeadOpen, setSetDeadOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const { planCode } = usePlanCode();
   const menuItems: MenuItem[] = MENU_ITEMS.map((m) => {
@@ -270,6 +272,7 @@ export function Header({ title }: { title: string }) {
     else if (action === "screen-print") setScreenPrintOpen(true);
     else if (action === "amend-ifa") setAmendIfaOpen(true);
     else if (action === "p45-details") setP45DetailsOpen(true);
+    else if (action === "set-dead-life-one") setSetDeadOpen(true);
     else if (action === "search")
       window.dispatchEvent(new Event("clanad:open-find-policy"));
   };
@@ -425,6 +428,11 @@ export function Header({ title }: { title: string }) {
       <P45DetailsModal
         open={p45DetailsOpen}
         onClose={() => setP45DetailsOpen(false)}
+      />
+
+      <SetDeadModal
+        open={setDeadOpen}
+        onClose={() => setSetDeadOpen(false)}
       />
     </header>
   );

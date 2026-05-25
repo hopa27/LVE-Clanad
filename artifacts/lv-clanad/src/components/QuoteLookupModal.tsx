@@ -74,7 +74,7 @@ export function QuoteLookupModal({
   initialQuery?: string;
 }) {
   const illustrations = ILLUSTRATIONS;
-  const variants = VARIANTS;
+  const variants = empty ? [] : VARIANTS;
   const total = illustrations.length;
   const hasRecords = total > 0;
   const [currentIndex, setCurrentIndex] = useState(0);

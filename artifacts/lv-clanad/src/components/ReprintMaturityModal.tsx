@@ -1,7 +1,16 @@
 import { useState } from "react";
 import { MdClose, MdPrint, MdCancel } from "react-icons/md";
+import { DatePicker } from "./DatePicker";
+import { EditModeContext } from "../context/EditModeContext";
 
 const LETTER_TYPES = ["", "4 Month", "6 Week", "3 Week", "10 Day"];
+
+const ALWAYS_EDITING = {
+  editing: true,
+  setEditing: () => {},
+  cancel: () => {},
+  cancelKey: 0,
+};
 
 export function ReprintMaturityModal({
   open,
@@ -10,7 +19,9 @@ export function ReprintMaturityModal({
   open: boolean;
   onClose: () => void;
 }) {
-  const [reprintDate, setReprintDate] = useState("2026-05-25");
+  const [reprintDate, setReprintDate] = useState<Date | undefined>(
+    new Date(2026, 4, 25)
+  );
   const [letterType, setLetterType] = useState("");
 
   if (!open) return null;
@@ -38,12 +49,15 @@ export function ReprintMaturityModal({
           <div className="space-y-3">
             <div className="flex items-center gap-3">
               <span className="lve-label text-right shrink-0 w-[140px]">Reprint Date</span>
-              <input
-                type="date"
-                className="lve-input flex-1"
-                value={reprintDate}
-                onChange={(e) => setReprintDate(e.target.value)}
-              />
+              <div className="flex-1">
+                <EditModeContext.Provider value={ALWAYS_EDITING}>
+                  <DatePicker
+                    value="25/05/2026"
+                    placeholder="DD/MM/YYYY"
+                    onChange={setReprintDate}
+                  />
+                </EditModeContext.Provider>
+              </div>
             </div>
 
             <div className="flex items-center gap-3">

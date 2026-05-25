@@ -265,7 +265,6 @@ export function ApplicationDetailsTab() {
             <SelectInput
               value={isPlan90 ? "United Kingdom" : "cmbCountry"}
               options={["United Kingdom", "Ireland", "Other"]}
-              disabled={isPlan90}
             />
           </Field>
           <div className="mt-2"><Checkbox label="Address Unknown / Gone Away" /></div>

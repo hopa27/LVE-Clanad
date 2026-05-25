@@ -12,13 +12,17 @@ export function BankAccDetailsTab() {
   const { planCode } = usePlanCode();
   const isPlan87 = planCode === "87";
   const isPlan84 = planCode === "84";
-  const isPreset = isPlan87 || isPlan84;
+  const isPlan90 = planCode === "90";
+  const isPreset = isPlan87 || isPlan84 || isPlan90;
   const { cheques } = useCheques();
   const plan84Rows = isPlan84
     ? [
         { company: "FPMS Gladis PYMTS", ref: "", date: "25/03/2010", amount: "24064.73" },
         { company: "Axa Sun Life PLC", ref: "", date: "31/03/2010", amount: "3067.23" },
       ]
+    : [];
+  const plan90Rows = isPlan90
+    ? [{ company: "NM PENSIONS TRUSTE  MCP227813  BGCFrom:", ref: "", date: "01/07/2025", amount: "3021.57" }]
     : [];
   const postedRows = isPreset
     ? []
@@ -30,7 +34,7 @@ export function BankAccDetailsTab() {
           date: c.date,
           amount: c.amount,
         }));
-  const rows = [...TRANSFERS, ...plan84Rows, ...postedRows];
+  const rows = [...TRANSFERS, ...plan84Rows, ...plan90Rows, ...postedRows];
   return (
     <div className="space-y-4">
       <Section
@@ -44,20 +48,29 @@ export function BankAccDetailsTab() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
           <div>
             <Field inline label="Bank sort code:">
-              <TextInput value={isPlan87 ? "20-00-00" : isPlan84 ? "77-48-14" : "DBEdit41"} disabled={isPlan84} />
+              <TextInput
+                value={isPlan87 ? "20-00-00" : isPlan84 || isPlan90 ? "77-48-14" : "DBEdit41"}
+                disabled={isPlan84}
+              />
             </Field>
             <Field inline label="Bank account no:">
-              <TextInput value={isPlan87 ? "83608808" : isPlan84 ? "24782346" : "DBEdit77"} disabled={isPlan84} />
+              <TextInput
+                value={isPlan87 ? "83608808" : isPlan84 || isPlan90 ? "24782346" : "DBEdit77"}
+                disabled={isPlan84}
+              />
             </Field>
             <Field inline label="Bank account name:">
-              <TextInput value={isPlan87 ? "Test" : isPlan84 ? "Testktbbbide" : "DBEdit79"} disabled={isPlan84} />
+              <TextInput
+                value={isPlan87 ? "Test" : isPlan84 ? "Testktbbbide" : isPlan90 ? "Testmtcchibd" : "DBEdit79"}
+                disabled={isPlan84}
+              />
             </Field>
             <Field inline label="Bank name:">
               <TextInput
                 value={
                   isPlan87
                     ? "BARCLAY'S BANK PLC, 1 CHURCHILL  PLACE"
-                    : isPlan84
+                    : isPlan84 || isPlan90
                     ? "TSB, WINSFORD"
                     : ""
                 }
@@ -67,22 +80,28 @@ export function BankAccDetailsTab() {
           </div>
           <div>
             <Field inline label="Payment Ref:">
-              <TextInput value={isPlan87 ? "233451" : isPlan84 ? "111834" : "DBEdit6"} disabled={isPlan84} />
+              <TextInput
+                value={isPlan87 ? "233451" : isPlan84 ? "111834" : isPlan90 ? "227813" : "DBEdit6"}
+                disabled={isPlan84}
+              />
             </Field>
             <Field inline label="Payment Method:">
               <TextInput value={isPreset ? "B" : "DB"} disabled />
             </Field>
-            {!isPreset && (
+            {(!isPreset || isPlan90) && (
               <Field inline label="Change Effective Date:">
                 <DatePicker
-                  value="dbedChangeEffect"
-                  placeholder="dbedChangeEffect"
+                  value={isPlan90 ? "" : "dbedChangeEffect"}
+                  placeholder={isPlan90 ? "" : "dbedChangeEffect"}
                   disabled
                 />
               </Field>
             )}
             <Field inline label="TOTAL:">
-              <TextInput value={isPlan84 ? "27131.96" : ""} disabled />
+              <TextInput
+                value={isPlan84 ? "27131.96" : isPlan90 ? "3021.57" : ""}
+                disabled
+              />
             </Field>
           </div>
         </div>

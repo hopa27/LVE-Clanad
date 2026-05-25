@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { MdClose, MdCheck, MdCancel, MdFirstPage, MdLastPage, MdChevronLeft, MdChevronRight } from "react-icons/md";
+import {
+  MdClose,
+  MdCheck,
+  MdCancel,
+  MdFirstPage,
+  MdLastPage,
+  MdChevronLeft,
+  MdChevronRight,
+} from "react-icons/md";
 
 const ILLUSTRATIONS = [
   { quote: 929149, variant: 0, ifa: "SANDF-001", created: "18 Dec 2007", name: "Test44Mr Stanislas",          type: "PPA", lifeType: "JOINT",  age1: 64.75, user: "111003046", master: "No", status: "Printed", cocode: "STALW-00" },
@@ -14,8 +22,8 @@ const ILLUSTRATIONS = [
   { quote: 930059, variant: 0, ifa: "WENTW-002", created: "18 Dec 2007", name: "Test44Mr R Garnett",          type: "PPA", lifeType: "JOINT",  age1: 61.75, user: "111003046", master: "No", status: "Printed", cocode: "STALW-00" },
 ];
 
-const W32_BTN = "px-2 h-6 flex items-center justify-center gap-1 border border-[#808080] bg-[#d4d0c8] font-['Mulish'] text-[12px] text-[#3d3d3d] hover:bg-[#e0e0e0] disabled:text-[#b8b8b8] disabled:cursor-not-allowed whitespace-nowrap";
-const NAV_BTN = "px-1 h-6 w-6 flex items-center justify-center border border-[#808080] bg-[#d4d0c8] text-[#3d3d3d] hover:bg-[#e0e0e0] disabled:text-[#b8b8b8] disabled:cursor-not-allowed";
+const NAV_BTN =
+  "lve-btn lve-btn-secondary lve-btn-sm !px-2 !min-w-0 flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed";
 
 export function PullQuoteModal({
   open,
@@ -33,93 +41,118 @@ export function PullQuoteModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
-      <div
-        className="bg-[#d4d0c8] border-2 border-[#808080] shadow-[2px_2px_8px_rgba(0,0,0,0.5)] flex flex-col"
-        style={{ width: 900, maxWidth: "96vw", maxHeight: "90vh" }}
-      >
-        {/* Win32 title bar */}
-        <div className="bg-[#000080] flex items-center justify-between px-2 py-[3px] flex-shrink-0">
-          <span className="text-white font-['Mulish'] text-[12px] font-bold">Quote Lookup</span>
+      <div className="lve-panel w-[940px] max-w-[96vw] max-h-[90vh] flex flex-col">
+
+        {/* Modal header */}
+        <header className="flex items-center justify-between px-5 py-3 border-b border-[#d0d5dd] shrink-0">
+          <span className="font-['Livvic'] font-bold text-[15px] text-[#00263e]">Quote Lookup</span>
           <button
             type="button"
             onClick={onClose}
-            className="w-5 h-5 bg-[#d4d0c8] border border-[#808080] flex items-center justify-center text-[#3d3d3d] hover:bg-[#e0e0e0] text-[11px]"
+            className="lve-btn lve-btn-secondary lve-btn-sm !px-2"
+            aria-label="Close"
           >
-            <MdClose size={12} />
+            <MdClose size={18} />
           </button>
-        </div>
+        </header>
 
         {/* Body */}
-        <div className="flex flex-col gap-3 p-3 overflow-hidden flex-1">
+        <div className="lve-panel-body flex flex-col gap-4 overflow-hidden">
 
-          {/* ── Toolbar row ── */}
-          <div className="flex items-start gap-3 flex-wrap">
+          {/* ── Filter / nav toolbar ── */}
+          <div className="flex items-start gap-6 flex-wrap">
 
-            {/* Get Records fieldset */}
-            <fieldset className="border border-[#808080] px-2 pt-0 pb-1">
-              <legend className="font-['Mulish'] text-[11px] text-[#3d3d3d] px-1">Get Records</legend>
-              <div className="flex flex-col gap-1">
-                <label className="flex items-center gap-1 font-['Mulish'] text-[12px] text-[#3d3d3d] cursor-pointer">
-                  <input type="radio" name="pqFilter" checked={filterMode === ">="} onChange={() => setFilterMode(">=")} className="w-3 h-3" />
-                  <span>&gt;=</span>
+            {/* Get Records */}
+            <div className="border border-[#d0d5dd] rounded-[8px] px-4 py-3">
+              <p className="font-['Livvic'] font-semibold text-[11px] text-[#00263e] uppercase tracking-wide mb-2">
+                Get Records
+              </p>
+              <div className="flex flex-col gap-2">
+                <label className="flex items-center gap-2 font-['Mulish'] text-[13px] text-[#3d3d3d] cursor-pointer">
+                  <input
+                    type="radio"
+                    name="pqFilter"
+                    checked={filterMode === ">="}
+                    onChange={() => setFilterMode(">=")}
+                    className="accent-[#006cf4] w-4 h-4"
+                  />
+                  <span className="font-semibold">&gt;=</span>
                 </label>
-                <label className="flex items-center gap-1 font-['Mulish'] text-[12px] text-[#3d3d3d] cursor-pointer">
-                  <input type="radio" name="pqFilter" checked={filterMode === "="} onChange={() => setFilterMode("=")} className="w-3 h-3" />
-                  <span>=</span>
+                <label className="flex items-center gap-2 font-['Mulish'] text-[13px] text-[#3d3d3d] cursor-pointer">
+                  <input
+                    type="radio"
+                    name="pqFilter"
+                    checked={filterMode === "="}
+                    onChange={() => setFilterMode("=")}
+                    className="accent-[#006cf4] w-4 h-4"
+                  />
+                  <span className="font-semibold">=</span>
                   <input
                     type="text"
                     value={filterValue}
                     onChange={(e) => setFilterValue(e.target.value)}
-                    className="border border-[#808080] bg-white font-['Mulish'] text-[12px] px-1 h-5 w-[80px]"
+                    className="lve-input h-[32px] w-[80px] text-[13px]"
                   />
                 </label>
               </div>
-            </fieldset>
+            </div>
 
             {/* Nav buttons + counter */}
-            <div className="flex flex-col gap-1 justify-center">
-              <div className="flex items-center gap-[2px]">
-                <button type="button" className={NAV_BTN} title="First">   <MdFirstPage   size={14} /></button>
-                <button type="button" className={NAV_BTN} title="Previous"><MdChevronLeft  size={14} /></button>
-                <button type="button" className={NAV_BTN} title="Next">    <MdChevronRight size={14} /></button>
-                <button type="button" className={NAV_BTN} title="Last">    <MdLastPage    size={14} /></button>
+            <div className="flex flex-col gap-1 justify-center pt-1">
+              <div className="flex items-center gap-1">
+                <button type="button" className={NAV_BTN} title="First">   <MdFirstPage   size={16} /></button>
+                <button type="button" className={NAV_BTN} title="Previous"><MdChevronLeft  size={16} /></button>
+                <button type="button" className={NAV_BTN} title="Next">    <MdChevronRight size={16} /></button>
+                <button type="button" className={NAV_BTN} title="Last">    <MdLastPage    size={16} /></button>
               </div>
-              <span className="font-['Mulish'] text-[11px] text-[#3d3d3d] text-center">20275369</span>
+              <span className="font-['Mulish'] text-[12px] text-[#7a7a7a] text-center">20275369</span>
             </div>
 
             {/* Action buttons + checkbox */}
-            <div className="flex flex-col gap-2">
-              <div className="flex items-center gap-1 flex-wrap">
-                <button type="button" className={W32_BTN}>Last 60</button>
-                <button type="button" className={W32_BTN}>Locate (F3 Next)</button>
-                <button type="button" className={W32_BTN} disabled>
-                  <MdCheck size={12} /> OK
+            <div className="flex flex-col gap-3 justify-center flex-1">
+              <div className="flex items-center gap-2 flex-wrap">
+                <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm min-w-[80px] justify-center">
+                  Last 60
                 </button>
-                <button type="button" className={W32_BTN} onClick={onClose}>
-                  <MdCancel size={12} /> Cancel
+                <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm min-w-[130px] justify-center">
+                  Locate (F3 Next)
+                </button>
+                <button type="button" className="lve-btn lve-btn-sm min-w-[70px] justify-center" disabled>
+                  <MdCheck size={15} />
+                  OK
+                </button>
+                <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm min-w-[90px] justify-center" onClick={onClose}>
+                  <MdCancel size={15} />
+                  Cancel
                 </button>
               </div>
-              <label className="flex items-center gap-1 font-['Mulish'] text-[12px] text-[#3d3d3d] cursor-pointer">
+              <label className="flex items-center gap-2 font-['Mulish'] text-[13px] text-[#3d3d3d] cursor-pointer select-none">
                 <input
                   type="checkbox"
                   checked={monthlyCash}
                   onChange={(e) => setMonthlyCash(e.target.checked)}
-                  className="w-3 h-3"
+                  className="accent-[#006cf4] w-4 h-4"
                 />
                 Monthly Cash Policy
               </label>
             </div>
           </div>
 
-          {/* ── Illustrations table ── */}
-          <fieldset className="border border-[#808080] flex flex-col overflow-hidden">
-            <legend className="font-['Mulish'] text-[11px] text-[#3d3d3d] px-1">Illustrations (Variant 0 only)</legend>
+          {/* ── Illustrations grid ── */}
+          <div className="flex flex-col overflow-hidden rounded-[8px] border border-[#d0d5dd]">
+            <div className="bg-[#eaf5f8] px-3 py-[6px] shrink-0 border-b border-[#d0d5dd]">
+              <span className="font-['Livvic'] font-bold text-[13px] text-[#00263e]">
+                Illustrations (Variant 0 only)
+              </span>
+            </div>
             <div className="overflow-auto" style={{ maxHeight: 220 }}>
-              <table className="w-full text-[11px] font-['Mulish'] border-collapse">
+              <table className="w-full text-[12px] font-['Mulish'] border-collapse">
                 <thead className="sticky top-0">
-                  <tr className="bg-[#d4d0c8] text-[#3d3d3d] text-left">
+                  <tr className="bg-[#002f5c] text-white text-left">
                     {["Quote","Variant(T)","IFA","Created","Name","Type","LifeType","Age 1","User","Master","Status","COCODE"].map((h) => (
-                      <th key={h} className="px-2 py-[3px] font-bold border border-[#808080] whitespace-nowrap">{h}</th>
+                      <th key={h} className="px-2 py-[5px] font-semibold border-r border-[#1a4a7a] last:border-r-0 whitespace-nowrap">
+                        {h}
+                      </th>
                     ))}
                   </tr>
                 </thead>
@@ -130,50 +163,60 @@ export function PullQuoteModal({
                       <tr
                         key={row.quote}
                         onClick={() => setSelectedIdx(i)}
-                        className={`cursor-pointer ${sel ? "bg-[#000080] text-white" : "bg-white hover:bg-[#d4d0c8] text-[#3d3d3d]"}`}
+                        className={`cursor-pointer border-b border-[#e3e6ea] transition-colors ${
+                          sel
+                            ? "bg-[#006cf4] text-white"
+                            : i % 2 === 0
+                              ? "bg-white hover:bg-[#eaf5f8] text-[#3d3d3d]"
+                              : "bg-[#f7f9fc] hover:bg-[#eaf5f8] text-[#3d3d3d]"
+                        }`}
                       >
-                        <td className="px-2 py-[2px] border border-[#c0c0c0]">{row.quote}</td>
-                        <td className="px-2 py-[2px] border border-[#c0c0c0] text-center">{row.variant}</td>
-                        <td className="px-2 py-[2px] border border-[#c0c0c0]">{row.ifa}</td>
-                        <td className="px-2 py-[2px] border border-[#c0c0c0] whitespace-nowrap">{row.created}</td>
-                        <td className="px-2 py-[2px] border border-[#c0c0c0]">{row.name}</td>
-                        <td className="px-2 py-[2px] border border-[#c0c0c0]">{row.type}</td>
-                        <td className="px-2 py-[2px] border border-[#c0c0c0]">{row.lifeType}</td>
-                        <td className="px-2 py-[2px] border border-[#c0c0c0] text-right">{row.age1}</td>
-                        <td className="px-2 py-[2px] border border-[#c0c0c0]">{row.user}</td>
-                        <td className="px-2 py-[2px] border border-[#c0c0c0]">{row.master}</td>
-                        <td className="px-2 py-[2px] border border-[#c0c0c0]">{row.status}</td>
-                        <td className="px-2 py-[2px] border border-[#c0c0c0]">{row.cocode}</td>
+                        <td className="px-2 py-[3px] border-r border-[#e3e6ea]">{row.quote}</td>
+                        <td className="px-2 py-[3px] border-r border-[#e3e6ea] text-center">{row.variant}</td>
+                        <td className="px-2 py-[3px] border-r border-[#e3e6ea]">{row.ifa}</td>
+                        <td className="px-2 py-[3px] border-r border-[#e3e6ea] whitespace-nowrap">{row.created}</td>
+                        <td className="px-2 py-[3px] border-r border-[#e3e6ea]">{row.name}</td>
+                        <td className="px-2 py-[3px] border-r border-[#e3e6ea]">{row.type}</td>
+                        <td className="px-2 py-[3px] border-r border-[#e3e6ea]">{row.lifeType}</td>
+                        <td className="px-2 py-[3px] border-r border-[#e3e6ea] text-right">{row.age1}</td>
+                        <td className="px-2 py-[3px] border-r border-[#e3e6ea]">{row.user}</td>
+                        <td className="px-2 py-[3px] border-r border-[#e3e6ea]">{row.master}</td>
+                        <td className="px-2 py-[3px] border-r border-[#e3e6ea]">{row.status}</td>
+                        <td className="px-2 py-[3px]">{row.cocode}</td>
                       </tr>
                     );
                   })}
                 </tbody>
               </table>
             </div>
-          </fieldset>
+          </div>
 
-          {/* ── Variants table ── */}
-          <fieldset className="border border-[#808080] flex flex-col">
-            <legend className="font-['Mulish'] text-[11px] text-[#3d3d3d] px-1">Variants</legend>
-            <div className="overflow-auto" style={{ maxHeight: 100 }}>
-              <table className="w-full text-[11px] font-['Mulish'] border-collapse">
+          {/* ── Variants grid ── */}
+          <div className="flex flex-col rounded-[8px] border border-[#d0d5dd]">
+            <div className="bg-[#eaf5f8] px-3 py-[6px] shrink-0 border-b border-[#d0d5dd]">
+              <span className="font-['Livvic'] font-bold text-[13px] text-[#00263e]">Variants</span>
+            </div>
+            <div className="overflow-auto" style={{ maxHeight: 110 }}>
+              <table className="w-full text-[12px] font-['Mulish'] border-collapse">
                 <thead>
-                  <tr className="bg-[#d4d0c8] text-[#3d3d3d] text-left">
+                  <tr className="bg-[#002f5c] text-white text-left">
                     {["Variant","Series","Created","Username","Type","Life Type","Gross Annuity","Amount","TFC %","TFC","Dep %","O/lap","Gtee"].map((h) => (
-                      <th key={h} className="px-2 py-[3px] font-bold border border-[#808080] whitespace-nowrap">{h}</th>
+                      <th key={h} className="px-2 py-[5px] font-semibold border-r border-[#1a4a7a] last:border-r-0 whitespace-nowrap">
+                        {h}
+                      </th>
                     ))}
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td colSpan={13} className="px-2 py-3 text-center text-[#808080] bg-white border border-[#c0c0c0]">
+                    <td colSpan={13} className="px-2 py-4 text-center text-[#b8b8b8] font-['Mulish'] text-[12px]">
                       No variants
                     </td>
                   </tr>
                 </tbody>
               </table>
             </div>
-          </fieldset>
+          </div>
 
         </div>
       </div>

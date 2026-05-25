@@ -15,6 +15,7 @@ import { SupervisoryEditModal } from "./SupervisoryEditModal";
 import { BankChangesReportModal } from "./BankChangesReportModal";
 import { ReprintMaturityModal } from "./ReprintMaturityModal";
 import { RecalcAnnStatModal } from "./RecalcAnnStatModal";
+import { ReprintAnnualStatementsModal } from "./ReprintAnnualStatementsModal";
 import { usePlanCode } from "../context/PlanCodeContext";
 
 type SubItem = {
@@ -122,7 +123,7 @@ const SUPERVISOR_84: MenuOption[] = [
   },
   { label: "Pull Quote" },
   { kind: "separator" },
-  { label: "Reprint Annual Statements" },
+  { label: "Reprint Annual Statements", action: "reprint-annual-statements" },
   { label: "Annual Statement Recalculation", action: "annual-statement-recalc" },
   { label: "Reprint Maturity Letters", action: "reprint-maturity-letters" },
 ];
@@ -151,7 +152,7 @@ const SUPERVISOR_87: MenuOption[] = [
   { label: "Set Status To Hold" },
   { label: "Set Status To Pending", disabled: true },
   { kind: "separator" },
-  { label: "Reprint Annual Statements" },
+  { label: "Reprint Annual Statements", action: "reprint-annual-statements" },
   { label: "Annual Statement Recalculation", action: "annual-statement-recalc" },
   { label: "Reprint Maturity Letters", action: "reprint-maturity-letters" },
 ];
@@ -189,7 +190,7 @@ const SUPERVISOR_90: MenuOption[] = [
   },
   { label: "Pull Quote" },
   { kind: "separator" },
-  { label: "Reprint Annual Statements" },
+  { label: "Reprint Annual Statements", action: "reprint-annual-statements" },
   { label: "Annual Statement Recalculation", action: "annual-statement-recalc" },
   { label: "Reprint Maturity Letters", action: "reprint-maturity-letters" },
 ];
@@ -266,7 +267,7 @@ const MENU_ITEMS: MenuItem[] = [
       { label: "Set Status To Hold" },
       { label: "Set Status To Pending" },
       { kind: "separator" },
-      { label: "Reprint Annual Statements" },
+      { label: "Reprint Annual Statements", action: "reprint-annual-statements" },
       { label: "Annual Statement Recalculation", action: "annual-statement-recalc" },
       { label: "Reprint Maturity Letters", action: "reprint-maturity-letters" },
       { kind: "separator" },
@@ -301,6 +302,7 @@ export function Header({ title }: { title: string }) {
   const [bankChangesReportOpen, setBankChangesReportOpen] = useState(false);
   const [reprintMaturityOpen, setReprintMaturityOpen] = useState(false);
   const [recalcAnnStatOpen, setRecalcAnnStatOpen] = useState(false);
+  const [reprintAnnStmtOpen, setReprintAnnStmtOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const { planCode } = usePlanCode();
   const menuItems: MenuItem[] = MENU_ITEMS.map((m) => {
@@ -345,6 +347,7 @@ export function Header({ title }: { title: string }) {
     else if (action === "bank-changes-awaiting") setBankChangesReportOpen(true);
     else if (action === "reprint-maturity-letters") setReprintMaturityOpen(true);
     else if (action === "annual-statement-recalc") setRecalcAnnStatOpen(true);
+    else if (action === "reprint-annual-statements") setReprintAnnStmtOpen(true);
     else if (action === "supervisory-edit") {
       window.dispatchEvent(new CustomEvent("clanad:switch-tab", { detail: "payments" }));
       setSupervisoryEditOpen(true);
@@ -589,6 +592,11 @@ export function Header({ title }: { title: string }) {
       <RecalcAnnStatModal
         open={recalcAnnStatOpen}
         onClose={() => setRecalcAnnStatOpen(false)}
+      />
+
+      <ReprintAnnualStatementsModal
+        open={reprintAnnStmtOpen}
+        onClose={() => setReprintAnnStmtOpen(false)}
       />
 
       {cancelAppOpen && (

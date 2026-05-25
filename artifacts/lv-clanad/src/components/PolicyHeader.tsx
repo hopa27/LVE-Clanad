@@ -36,7 +36,7 @@ export function PolicyHeader() {
         <MdOpenInNew size={16} />
       </button>
 
-      {planCode === "87" || planCode === "84" ? (
+      {planCode === "87" || planCode === "84" || planCode === "90" ? (
         <div className="px-4 h-9 inline-flex items-center rounded-[8px] bg-[#006cf4] text-white font-['Livvic'] font-semibold text-sm">
           Liverpool Victoria Friendly Society Limited
         </div>
@@ -70,6 +70,8 @@ export function PolicyHeader() {
         <div className="px-3 h-9 inline-flex items-center rounded-[8px] bg-[#eaf5f8] text-[#0d2c41] font-['Mulish'] text-sm">
           Simultaneous Policies
         </div>
+      ) : planCode === "90" ? (
+        <div className="w-[220px] h-9 rounded-[8px] bg-[#00263e]" />
       ) : (
         <div className="w-[220px] h-9 rounded-[8px] bg-[#eaf5f8]" />
       )}
@@ -86,7 +88,13 @@ export function PolicyHeader() {
         <MdMoreHoriz size={18} />
       </button>
 
-      <div className="w-[180px] h-9 rounded-[8px] bg-[#eaf5f8]" />
+      {planCode === "90" ? (
+        <div className="px-4 h-9 inline-flex items-center rounded-[8px] bg-[#E1ABC9] text-white font-['Livvic'] font-semibold text-sm">
+          MONTHLY CASH POLICY
+        </div>
+      ) : (
+        <div className="w-[180px] h-9 rounded-[8px] bg-[#eaf5f8]" />
+      )}
 
       {simOpen && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">

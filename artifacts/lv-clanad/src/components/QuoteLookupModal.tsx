@@ -29,11 +29,37 @@ const ILLUSTRATION_COLS = [
   "Age 1", "User", "Master", "Status", "COCODE",
 ];
 
-const VARIANTS: string[][] = [];
-
 const VARIANT_COLS = [
-  "Variant", "Serino", "Created", "Username", "Type", "Life Type",
-  "Gross Annuity", "Amount", "TFC %", "TFC", "Dep %",
+  "Variant", "Series", "Created", "Username", "Type", "Life Type",
+  "Gross Annuity", "Amount", "TFC %", "TFC", "Dep %", "O/lap", "Gtee",
+  "Esc %", "Frequency", "Pay Type",
+  "Name 1", "Sex 1", "DOB 1", "Age 1", "Smk 1", "Special 1",
+  "Name 2", "Sex 2", "DOB 2", "Age 2", "Smk 2", "Special 2",
+  "Commence", "B/D Fee", "IFA", "Network", "Master",
+  "Expense %", "Comm %", "Brok Split %", "Memb Split %",
+  "PLATAXRATE", "CAPITALELEMENT", "TAXRATE", "SINGLEGRATE", "JOINTGRATE", "GRATE",
+  "C.Age 1", "C.Age 2", "APRIME1", "APRIME2",
+];
+
+const VARIANTS: string[][] = [
+  [
+    "16","333","25/06/2008","LOPRXP","PPA","JOINT","£3,231.00","61552.52","25","15388.13","50","No","10 year","0","Monthly","Arrears",
+    "Test66Mr R Stanislas","Male","29/12/1942","65.25","No","SP2",
+    "Test66Mrs J Stanislas","Female","","60","No","No",
+    "25/06/2008","","SANDF-001","No","No","2.9","1","","","","","","","","","","59.25","59.25","","",
+  ],
+  [
+    "17","333","25/06/2008","106003590","PPA","JOINT","£3,311.00","61552.52","25","15388.13","50","No","10 year","0","Monthly","Arrears",
+    "Test66Mr Stanislas","Male","29/12/1942","65.25","No","SP2",
+    "Test66Mrs Stanislas","Female","","60","No","No",
+    "25/06/2008","","SANDF-001","No","No","2.9","1","","","","","","","","","","59.25","59.25","","",
+  ],
+  [
+    "18","333","25/07/2008","106003142","PPA","JOINT","£3,441.00","61652.05","25","15413.01","50","No","10 year","0","Monthly","Arrears",
+    "Test66Mr Stanislas","Male","29/12/1942","65.5","No","SP2",
+    "Test66Mrs Stanislas","Female","12/06/1948","60","No","No",
+    "22/07/2008","","SANDF-001","No","No","2.9","","","","","","","","","","","59.5","59.5","","",
+  ],
 ];
 
 export function QuoteLookupModal({

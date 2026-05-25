@@ -127,7 +127,7 @@ export function FindPolicyModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
-      <div className="lve-panel bg-white w-[1200px] max-w-full max-h-[92vh] flex flex-col">
+      <div className="lve-panel bg-white w-[1200px] max-w-full h-[96vh] flex flex-col">
         <header className="lve-panel-header flex items-center justify-between">
           <span>Find Policy</span>
           <button
@@ -141,7 +141,7 @@ export function FindPolicyModal({
           </button>
         </header>
 
-        <div className="lve-panel-body overflow-auto flex flex-col gap-5">
+        <div className="lve-panel-body overflow-auto flex flex-col gap-4 flex-1 min-h-0">
           {/* Search row */}
           <div className="flex items-end justify-between gap-6">
             <div className="flex-1 max-w-[440px]">
@@ -193,8 +193,8 @@ export function FindPolicyModal({
           </div>
 
           {/* Results grid */}
-          <div className="border border-[#BBBBBB] rounded-[8px] overflow-hidden">
-            <div className="overflow-auto max-h-[320px]">
+          <div className="border border-[#BBBBBB] rounded-[8px] overflow-hidden flex-1 min-h-[200px] flex flex-col">
+            <div className="overflow-auto flex-1">
               <table className="w-full font-['Mulish'] text-[13px] text-[#3d3d3d] min-w-[1160px]">
                 <thead>
                   <tr className="bg-white border-y-[3px] border-[#04589b] font-['Livvic'] font-semibold text-[13px] uppercase text-[#002f5c]">
@@ -276,45 +276,42 @@ export function FindPolicyModal({
           </div>
 
           {/* Detail panel */}
-          <div className="border border-[#BBBBBB] rounded-[8px] p-5 space-y-4 font-['Mulish'] text-[14px] text-[#3d3d3d]">
-            <div className="grid grid-cols-[110px_180px_110px_1fr] items-center gap-x-4 gap-y-3">
+          <div className="border border-[#BBBBBB] rounded-[8px] p-3 space-y-2 font-['Mulish'] text-[13px] text-[#3d3d3d] shrink-0">
+            <div className="grid grid-cols-[90px_160px_90px_1fr_90px_1fr] items-center gap-x-3 gap-y-2">
               <div className="font-bold text-[#4a4a49]">Premium</div>
-              <div className="flex h-[36px] items-center justify-end rounded-[8px] border-[2px] border-[#ACACAC] bg-[#CCCCCC] px-3 cursor-not-allowed">
+              <div className="flex h-[28px] items-center justify-end rounded-[6px] border border-[#ACACAC] bg-[#CCCCCC] px-2 cursor-not-allowed">
                 {rec?.premium}
               </div>
               <div className="font-bold text-[#4a4a49]">Full Name 1</div>
-              <div className="flex h-[36px] items-center rounded-[8px] border-[2px] border-[#ACACAC] bg-[#CCCCCC] px-3 cursor-not-allowed">
+              <div className="flex h-[28px] items-center rounded-[6px] border border-[#ACACAC] bg-[#CCCCCC] px-2 cursor-not-allowed">
                 {rec?.fullName1}
               </div>
-
-              <div></div>
-              <div></div>
               <div className="font-bold text-[#4a4a49]">Full Name 2</div>
-              <div className="flex h-[36px] items-center rounded-[8px] border-[2px] border-[#ACACAC] bg-[#CCCCCC] px-3 cursor-not-allowed">
+              <div className="flex h-[28px] items-center rounded-[6px] border border-[#ACACAC] bg-[#CCCCCC] px-2 cursor-not-allowed">
                 {rec?.fullName2}
               </div>
             </div>
 
-            <div className="grid grid-cols-[110px_1fr] gap-4 items-start">
-              <div className="font-bold text-[#4a4a49] pt-2">Cheques Rec</div>
-              <div className="border border-[#BBBBBB] rounded-[8px] overflow-hidden">
-                <table className="w-full text-[13px]">
+            <div className="grid grid-cols-[90px_1fr] gap-3 items-start">
+              <div className="font-bold text-[#4a4a49] pt-1">Cheques Rec</div>
+              <div className="border border-[#BBBBBB] rounded-[6px] overflow-hidden">
+                <table className="w-full text-[12px]">
                   <thead>
-                    <tr className="bg-white border-y-[3px] border-[#04589b] font-['Livvic'] font-semibold text-[13px] text-[#002f5c]">
-                      <th className="px-3 py-2 text-left">Transfer Company</th>
-                      <th className="px-3 py-2 text-left w-[140px]">Date</th>
-                      <th className="px-3 py-2 text-right w-[140px]">Amount</th>
+                    <tr className="bg-white border-y-[2px] border-[#04589b] font-['Livvic'] font-semibold text-[12px] text-[#002f5c]">
+                      <th className="px-2 py-1 text-left">Transfer Company</th>
+                      <th className="px-2 py-1 text-left w-[140px]">Date</th>
+                      <th className="px-2 py-1 text-right w-[140px]">Amount</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {Array.from({ length: 3 }).map((_, i) => (
+                    {Array.from({ length: 2 }).map((_, i) => (
                       <tr
                         key={i}
                         className={i % 2 === 0 ? "bg-white" : "bg-[#e7ebec34]"}
                       >
-                        <td className="px-3 py-2">&nbsp;</td>
-                        <td className="px-3 py-2"></td>
-                        <td className="px-3 py-2"></td>
+                        <td className="px-2 py-1">&nbsp;</td>
+                        <td className="px-2 py-1"></td>
+                        <td className="px-2 py-1"></td>
                       </tr>
                     ))}
                   </tbody>

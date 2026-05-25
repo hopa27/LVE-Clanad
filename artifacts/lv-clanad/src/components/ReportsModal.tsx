@@ -171,11 +171,12 @@ export function ReportsModal({
   const [warningMessage, setWarningMessage] = useState<string | null>(null);
 
   const NOT_IN_ORACLE = new Set(["CCRP", "PLI ADMIN", "SALES95"]);
+  const EMPTY_NO_WARNING = new Set(["MORTGAGE ANNUIT", "PC96", "PROPSALE97"]);
 
   const isChequeRequisition = systemName === "CHEQUE REQUISITION";
   const isFinance = systemName === "FINANCE";
   const isGeneral = systemName === "GENERAL";
-  const isEmptySystem = NOT_IN_ORACLE.has(systemName);
+  const isEmptySystem = NOT_IN_ORACLE.has(systemName) || EMPTY_NO_WARNING.has(systemName);
 
   const visibleReports = isEmptySystem
     ? []
@@ -194,6 +195,9 @@ export function ReportsModal({
       setStartDate("");
       setEndDate("");
       setWarningMessage(`System ${v} is not present in ORACLE database!`);
+    } else if (EMPTY_NO_WARNING.has(v)) {
+      setStartDate("");
+      setEndDate("");
     } else if (v === "CHEQUE REQUISITION") {
       setStartDate("01/04/2016");
       setEndDate("21/09/2026");

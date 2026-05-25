@@ -137,11 +137,11 @@ const CHEQUES_90: ChequeRow[] = [
     amount: 3021.57,
     scheme: "LV= Retirement Solutions",
     schemeRef: "999999",
-    address1: "",
-    address2: "",
-    address3: "",
-    postcode: "",
-    letterStatus: "",
+    address1: "Pease House",
+    address2: "Tilehouse Street",
+    address3: "Hitchin, Herts",
+    postcode: "SG5 2DX",
+    letterStatus: "Active",
     telephone: "",
   },
 ];
@@ -164,11 +164,12 @@ type FormState = {
 };
 
 function initialForm(planCode: string): FormState {
+  const is90 = planCode === "90";
   return {
-    policyNumber: planCode === "90" ? "227813" : planCode === "84" ? "111834" : planCode === "87" ? "233451" : "233433",
+    policyNumber: is90 ? "227813" : planCode === "84" ? "111834" : planCode === "87" ? "233451" : "233433",
     schemeName: "",
     amount: "",
-    transferType: "",
+    transferType: is90 ? 'Other UK Registered Pension Scheme (eg. "Personal Pension" or "SIPP")' : "",
     cedingRef: "",
     address1: "",
     address2: "",
@@ -176,7 +177,7 @@ function initialForm(planCode: string): FormState {
     postCode: "",
     telephone: "",
     letterStatus: "",
-    optionCase: "",
+    optionCase: is90 ? "No" : "",
   };
 }
 

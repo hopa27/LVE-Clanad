@@ -62,9 +62,13 @@ export function PolicyHeader() {
         {surname}
       </div>
 
-      <div className="px-3 h-9 inline-flex items-center rounded-[8px] bg-[#eaf5f8] text-[#0d2c41] font-['Mulish'] text-sm">
-        Simultaneous Policies
-      </div>
+      {planCode === "87" ? (
+        <div className="w-[220px] h-9 rounded-[8px] bg-[#00263e]" />
+      ) : (
+        <div className="px-3 h-9 inline-flex items-center rounded-[8px] bg-[#eaf5f8] text-[#0d2c41] font-['Mulish'] text-sm">
+          Simultaneous Policies
+        </div>
+      )}
 
       <button
         type="button"
@@ -78,11 +82,13 @@ export function PolicyHeader() {
         <MdMoreHoriz size={18} />
       </button>
 
-      {planCode !== "84" && (
+      {planCode === "87" ? (
+        <div className="w-[140px] h-9 rounded-[8px] bg-[#d4d4d4]" />
+      ) : planCode !== "84" ? (
         <div className="px-4 h-9 inline-flex items-center rounded-[8px] bg-[#7fdfdf] text-[#00263e] font-['Livvic'] font-semibold text-sm">
           RETIREMENT ACCOUNT
         </div>
-      )}
+      ) : null}
 
       {simOpen && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">

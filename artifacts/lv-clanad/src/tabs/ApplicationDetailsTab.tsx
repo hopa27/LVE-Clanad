@@ -27,7 +27,6 @@ export function ApplicationDetailsTab() {
             <DatePicker
               value={isPlan84 ? "17/03/2010" : isPlan90 ? "25/06/2025" : ""}
               placeholder={isCompact ? "" : "DBEditAPPLIC"}
-              disabled={isPlan90}
             />
           </Field>
           <Field label={isPlan90 ? "Payment Date:" : "Start Date:"}>

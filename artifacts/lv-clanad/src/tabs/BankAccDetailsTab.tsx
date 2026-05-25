@@ -1,14 +1,17 @@
+import { useState } from "react";
 import { Field, TextInput, Section } from "../components/Field";
 import { DatePicker } from "../components/DatePicker";
 import { MdEdit } from "react-icons/md";
 import { useCheques } from "../context/ChequesContext";
 import { usePlanCode } from "../context/PlanCodeContext";
+import { EditBankDetailsModal } from "../components/EditBankDetailsModal";
 
 const TRANSFERS: { company: string; ref: string; date: string; amount: string }[] = [];
 
 const SEED_CHEQUE_NOS = new Set(["232693", "232694", "232695"]);
 
 export function BankAccDetailsTab() {
+  const [editBankOpen, setEditBankOpen] = useState(false);
   const { planCode } = usePlanCode();
   const isPlan87 = planCode === "87";
   const isPlan84 = planCode === "84";
@@ -40,7 +43,7 @@ export function BankAccDetailsTab() {
       <Section
         title="Bank Details"
         headerAction={
-          <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
+          <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" onClick={() => setEditBankOpen(true)}>
             <MdEdit size={16} /> Edit Bank Details
           </button>
         }
@@ -131,6 +134,12 @@ export function BankAccDetailsTab() {
           </table>
         </div>
       </Section>
+
+      <EditBankDetailsModal
+        open={editBankOpen}
+        onClose={() => setEditBankOpen(false)}
+        planCode={planCode}
+      />
     </div>
   );
 }

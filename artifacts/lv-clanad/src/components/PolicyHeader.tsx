@@ -36,7 +36,7 @@ export function PolicyHeader() {
         <MdOpenInNew size={16} />
       </button>
 
-      {planCode === "87" ? (
+      {planCode === "87" || planCode === "84" ? (
         <div className="px-4 h-9 inline-flex items-center rounded-[8px] bg-[#006cf4] text-white font-['Livvic'] font-semibold text-sm">
           Liverpool Victoria Friendly Society Limited
         </div>
@@ -66,7 +66,13 @@ export function PolicyHeader() {
         {surname}
       </div>
 
-      <div className="w-[220px] h-9 rounded-[8px] bg-[#eaf5f8]" />
+      {planCode === "84" ? (
+        <div className="px-3 h-9 inline-flex items-center rounded-[8px] bg-[#eaf5f8] text-[#0d2c41] font-['Mulish'] text-sm">
+          Simultaneous Policies
+        </div>
+      ) : (
+        <div className="w-[220px] h-9 rounded-[8px] bg-[#eaf5f8]" />
+      )}
 
       <button
         type="button"

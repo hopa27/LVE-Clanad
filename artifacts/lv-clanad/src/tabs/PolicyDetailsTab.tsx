@@ -120,7 +120,7 @@ export function PolicyDetailsTab() {
         <Section title="Non Standard Policy">
           <Field label="Non Std Flag:">
             <div className="w-24">
-              <TextInput value="" disabled={isPlan84 || isPlan90} />
+              <TextInput value="" disabled={isPlan84} />
             </div>
           </Field>
           <Field label="Non Standard Policy:">

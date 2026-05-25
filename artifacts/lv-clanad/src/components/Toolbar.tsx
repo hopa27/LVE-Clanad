@@ -20,6 +20,7 @@ import { CrsModal } from "./CrsModal";
 import { ChequeLoggerModal } from "./ChequeLoggerModal";
 import { FindPolicyModal } from "./FindPolicyModal";
 import { useEditMode } from "../context/EditModeContext";
+import { usePlanCode } from "../context/PlanCodeContext";
 
 type ToolAction =
   | "new-app"
@@ -42,6 +43,8 @@ type Tool = {
 
 export function Toolbar() {
   const { editing, setEditing, cancel } = useEditMode();
+  const { planCode } = usePlanCode();
+  const isPlan90 = planCode === "90";
   const [newAppConfirm, setNewAppConfirm] = useState(false);
   const [simAppConfirm, setSimAppConfirm] = useState(false);
   const [quoteLookupOpen, setQuoteLookupOpen] = useState(false);
@@ -78,7 +81,7 @@ export function Toolbar() {
 
   const handleClick = (action?: ToolAction) => {
     if (action === "new-app") setNewAppConfirm(true);
-    else if (action === "new-quote") setNewQuoteOpen(true);
+    else if (action === "new-quote") { if (!isPlan90) setNewQuoteOpen(true); }
     else if (action === "sim-app") setSimAppConfirm(true);
     else if (action === "edit-toggle") setEditing(!editing);
     else if (action === "edit-cancel") cancel();

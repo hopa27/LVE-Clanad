@@ -166,7 +166,7 @@ const SUPERVISOR_90: MenuOption[] = [
   },
   { label: "Amend Cheques", action: "amend-cheques" },
   { label: "Amend IFA", action: "amend-ifa" },
-  { label: "C(ancel) Application" },
+  { label: "C(ancel) Application", action: "cancel-application" },
   {
     label: "Bank Detail Changes",
     hasSubmenu: true,
@@ -293,6 +293,7 @@ export function Header({ title }: { title: string }) {
   const [copyP60Open, setCopyP60Open] = useState(false);
   const [supervisoryEditOpen, setSupervisoryEditOpen] = useState(false);
   const [expiredConfirmOpen, setExpiredConfirmOpen] = useState(false);
+  const [cancelAppOpen, setCancelAppOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const { planCode } = usePlanCode();
   const menuItems: MenuItem[] = MENU_ITEMS.map((m) => {
@@ -333,6 +334,7 @@ export function Header({ title }: { title: string }) {
     else if (action === "ceding-scheme") setCedingOpen(true);
     else if (action === "copy-p60") setCopyP60Open(true);
     else if (action === "expired-confirm") setExpiredConfirmOpen(true);
+    else if (action === "cancel-application") setCancelAppOpen(true);
     else if (action === "supervisory-edit") {
       window.dispatchEvent(new CustomEvent("clanad:switch-tab", { detail: "payments" }));
       setSupervisoryEditOpen(true);
@@ -563,6 +565,44 @@ export function Header({ title }: { title: string }) {
         onClose={() => setSupervisoryEditOpen(false)}
         planCode={planCode}
       />
+
+      {cancelAppOpen && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
+          <div className="lve-panel bg-white w-[400px] max-w-full">
+            <header className="lve-panel-header flex items-center justify-between">
+              <span>Information</span>
+              <button
+                type="button"
+                className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-white hover:bg-[#d72714] transition-colors"
+                onClick={() => setCancelAppOpen(false)}
+                aria-label="Close"
+              >
+                <MdClose size={18} />
+              </button>
+            </header>
+            <div className="lve-panel-body">
+              <div className="flex items-center gap-4 py-2">
+                <div className="w-10 h-10 rounded-full bg-[#006cf4] flex items-center justify-center shrink-0">
+                  <span className="text-white text-[22px] font-bold font-['Mulish'] leading-none">i</span>
+                </div>
+                <p className="font-['Mulish'] text-[14px] text-[#3d3d3d]">
+                  You must reverse cheques first ?
+                </p>
+              </div>
+              <div className="flex justify-center pt-4">
+                <button
+                  type="button"
+                  onClick={() => setCancelAppOpen(false)}
+                  className="lve-btn min-w-[80px] justify-center"
+                >
+                  <MdCheck size={16} />
+                  OK
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {expiredConfirmOpen && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">

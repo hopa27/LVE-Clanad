@@ -97,6 +97,10 @@ const SYSTEM_NAMES = [
   "SALES95",
 ];
 
+const CHEQUE_REQUISITION_REPORTS: Report[] = [
+  { name: "CHEQUE REQUISITION LISTING", dateRequired: "", path: "\\\\delphiuat\\uat\\pdoxdata\\hipps96\\reports\\" },
+];
+
 const REPORTS: Report[] = [
   { name: "Anniversary Date Check", dateRequired: "S", path: "\\\\delphiuat\\uat\\anad96\\reports\\32setlive.rpt" },
   { name: "Annuities Time From Application To Completion", dateRequired: "B" },
@@ -156,20 +160,30 @@ export function ReportsModal({
   const [ccrpWarning, setCcrpWarning] = useState(false);
 
   const isCcrp = systemName === "CCRP";
+  const isChequeRequisition = systemName === "CHEQUE REQUISITION";
+
+  const visibleReports = isCcrp
+    ? []
+    : isChequeRequisition
+    ? CHEQUE_REQUISITION_REPORTS
+    : REPORTS;
 
   const handleSystemNameChange = (v: string) => {
     setSystemName(v);
+    setSelected(0);
     if (v === "CCRP") {
       setStartDate("");
       setEndDate("");
-      setSelected(0);
       setCcrpWarning(true);
+    } else if (v === "CHEQUE REQUISITION") {
+      setStartDate("01/04/2016");
+      setEndDate("21/09/2026");
     }
   };
 
   if (!open) return null;
 
-  const selectedReport = REPORTS[selected];
+  const selectedReport = visibleReports[selected];
   const reportPath = selectedReport?.path ?? "";
 
   return (
@@ -253,10 +267,7 @@ export function ReportsModal({
               <div className="px-4 py-2">DateRequired</div>
             </div>
             <div className="overflow-auto font-['Mulish'] text-[14px] text-[#3d3d3d]">
-              {isCcrp && (
-                <div className="px-4 py-3 text-[#888]">&nbsp;</div>
-              )}
-              {!isCcrp && REPORTS.map((r, i) => {
+              {visibleReports.map((r, i) => {
                 const isSel = i === selected;
                 return (
                   <div
@@ -287,7 +298,7 @@ export function ReportsModal({
             <input
               type="text"
               readOnly
-              value={isCcrp ? "" : reportPath}
+              value={reportPath}
               className="lve-input flex-1 bg-[#fafafa] cursor-default"
             />
             <button

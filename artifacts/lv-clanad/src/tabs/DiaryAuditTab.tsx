@@ -66,7 +66,13 @@ function fmt(d: Date) {
   return `${dd}/${mm}/${d.getFullYear()}`;
 }
 
+const PLAN_90_DIARY: DiaryRow[] = [
+  { ref: 2, type: "Fund Correspondence", notes: "LV= Retirement Solutions- 608513", created: "25/06/2025", by: "SYSANN", due: "02/07/2025", completed: "", byCompleted: "" },
+  { ref: 1, type: "Funds",               notes: "LV= Retirement Solutions- 608513", created: "25/06/2025", by: "SYSANN", due: "02/07/2025", completed: "", byCompleted: "" },
+];
+
 const AUDIT_84 = Array.from({ length: 10 }, () => "Test Note");
+const AUDIT_90 = Array.from({ length: 10 }, () => "Test Note");
 
 const DATA_CHANGES_84: { changeDate: string; description: string; userId: string }[] = [
   { changeDate: "24/04/2018 08:48:47", description: "Field Annuities-Gross Balance was changed from 1294 to 1186.17.",                userId: "LOPJSH" },
@@ -103,12 +109,13 @@ export function DiaryAuditTab() {
   const isPlan0 = planCode === "0";
   const isPlan87 = planCode === "87";
   const isPlan84 = planCode === "84";
+  const isPlan90 = planCode === "90";
   const [trail, setTrail] = useState<"notes" | "data">("notes");
   const [diaryOpen, setDiaryOpen] = useState(false);
   const [needsOpen, setNeedsOpen] = useState(false);
   const [cedingOpen, setCedingOpen] = useState(false);
   const [diary, setDiary] = useState<DiaryRow[]>(
-    isPlan87 ? PLAN_87_DIARY : isPlan84 ? PLAN_84_DIARY : INITIAL_DIARY,
+    isPlan87 ? PLAN_87_DIARY : isPlan84 ? PLAN_84_DIARY : isPlan90 ? PLAN_90_DIARY : INITIAL_DIARY,
   );
   const [selectedRef, setSelectedRef] = useState<number | null>(null);
   const [editConfirmOpen, setEditConfirmOpen] = useState(false);
@@ -302,7 +309,7 @@ export function DiaryAuditTab() {
                   </tr>
                 </thead>
                 <tbody>
-                  {(isPlan0 || isPlan87 ? [] : isPlan84 ? AUDIT_84 : AUDIT).map((line, i) => {
+                  {(isPlan0 || isPlan87 ? [] : isPlan84 ? AUDIT_84 : isPlan90 ? AUDIT_90 : AUDIT).map((line, i) => {
                     const m = line.match(
                       /^(.*?)\s+by\s+(\S+)\s+on\s+(\S+)\s+at\s+(\S+)\s*$/,
                     );
@@ -344,7 +351,7 @@ export function DiaryAuditTab() {
                         <td className="!px-4 whitespace-nowrap">{r.userId}</td>
                       </tr>
                     ))
-                  : (isPlan0 || isPlan87 ? [] : AUDIT).map((line, i) => {
+                  : (isPlan0 || isPlan87 || isPlan90 ? [] : AUDIT).map((line, i) => {
                       const m = line.match(
                         /^(.*?)\s+by\s+(\S+)\s+on\s+(\S+)\s+at\s+(\S+)\s*$/,
                       );

@@ -168,14 +168,16 @@ export function ReportsModal({
   const [printDefault, setPrintDefault] = useState(false);
   const [selected, setSelected] = useState(0);
   const [printError, setPrintError] = useState(false);
-  const [ccrpWarning, setCcrpWarning] = useState(false);
+  const [warningMessage, setWarningMessage] = useState<string | null>(null);
 
-  const isCcrp = systemName === "CCRP";
+  const NOT_IN_ORACLE = new Set(["CCRP", "SALES95"]);
+
   const isChequeRequisition = systemName === "CHEQUE REQUISITION";
   const isFinance = systemName === "FINANCE";
   const isGeneral = systemName === "GENERAL";
+  const isEmptySystem = NOT_IN_ORACLE.has(systemName);
 
-  const visibleReports = isCcrp
+  const visibleReports = isEmptySystem
     ? []
     : isChequeRequisition
     ? CHEQUE_REQUISITION_REPORTS
@@ -188,10 +190,10 @@ export function ReportsModal({
   const handleSystemNameChange = (v: string) => {
     setSystemName(v);
     setSelected(0);
-    if (v === "CCRP") {
+    if (NOT_IN_ORACLE.has(v)) {
       setStartDate("");
       setEndDate("");
-      setCcrpWarning(true);
+      setWarningMessage(`System ${v} is not present in ORACLE database!`);
     } else if (v === "CHEQUE REQUISITION") {
       setStartDate("01/04/2016");
       setEndDate("21/09/2026");
@@ -378,7 +380,7 @@ export function ReportsModal({
         </div>
       )}
 
-      {ccrpWarning && (
+      {warningMessage && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40 p-6">
           <div className="lve-panel bg-white w-[460px] max-w-full">
             <header className="lve-panel-header flex items-center justify-between">
@@ -386,7 +388,7 @@ export function ReportsModal({
               <button
                 type="button"
                 className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-white hover:bg-[#d72714] hover:text-white transition-colors"
-                onClick={() => setCcrpWarning(false)}
+                onClick={() => setWarningMessage(null)}
                 title="Close"
                 aria-label="Close"
               >
@@ -399,13 +401,13 @@ export function ReportsModal({
                   <MdWarning size={24} />
                 </span>
                 <p className="font-['Mulish'] text-[14px] text-[#3d3d3d] pt-2">
-                  System CCRP is not present in ORACLE database!
+                  {warningMessage}
                 </p>
               </div>
               <div className="flex justify-center">
                 <button
                   type="button"
-                  onClick={() => setCcrpWarning(false)}
+                  onClick={() => setWarningMessage(null)}
                   className="lve-btn lve-btn-sm min-w-[100px] justify-center"
                 >
                   <MdCheck size={16} />

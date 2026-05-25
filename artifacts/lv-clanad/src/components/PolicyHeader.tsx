@@ -36,7 +36,13 @@ export function PolicyHeader() {
         <MdOpenInNew size={16} />
       </button>
 
-      <div className="w-[260px] h-9 rounded-[8px] bg-[#006cf4]" />
+      {planCode === "87" ? (
+        <div className="px-4 h-9 inline-flex items-center rounded-[8px] bg-[#006cf4] text-white font-['Livvic'] font-semibold text-sm">
+          Liverpool Victoria Friendly Society Limited
+        </div>
+      ) : (
+        <div className="w-[260px] h-9 rounded-[8px] bg-[#006cf4]" />
+      )}
 
       <div
         title="CLANAD Number"
@@ -60,7 +66,9 @@ export function PolicyHeader() {
         {surname}
       </div>
 
-      <div className="w-[220px] h-9 rounded-[8px] bg-[#eaf5f8]" />
+      <div
+        className={`w-[220px] h-9 rounded-[8px] ${planCode === "87" ? "bg-[#00263e]" : "bg-[#eaf5f8]"}`}
+      />
 
       <button
         type="button"
@@ -74,7 +82,9 @@ export function PolicyHeader() {
         <MdMoreHoriz size={18} />
       </button>
 
-      <div className="w-[180px] h-9 rounded-[8px] bg-[#7fdfdf]" />
+      <div
+        className={`w-[180px] h-9 rounded-[8px] ${planCode === "87" ? "bg-[#d4d4d4]" : "bg-[#7fdfdf]"}`}
+      />
 
       {simOpen && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">

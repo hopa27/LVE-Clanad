@@ -10,7 +10,7 @@ export function ReprintMaturityModal({
   open: boolean;
   onClose: () => void;
 }) {
-  const [reprintDate, setReprintDate] = useState("25/05/2026");
+  const [reprintDate, setReprintDate] = useState("2026-05-25");
   const [letterType, setLetterType] = useState("");
 
   if (!open) return null;
@@ -39,7 +39,7 @@ export function ReprintMaturityModal({
             <div className="flex items-center gap-3">
               <span className="lve-label text-right shrink-0 w-[140px]">Reprint Date</span>
               <input
-                type="text"
+                type="date"
                 className="lve-input flex-1"
                 value={reprintDate}
                 onChange={(e) => setReprintDate(e.target.value)}

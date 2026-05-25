@@ -218,7 +218,7 @@ export function ReportsModal({
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
       <div className="lve-panel bg-white w-[1080px] max-w-full max-h-[90vh] flex flex-col">
         <header className="lve-panel-header flex items-center justify-between">
-          <span>DANAD96 Reporting System</span>
+          <span>{systemName} Reporting System</span>
           <button
             type="button"
             className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-white hover:bg-[#d72714] hover:text-white transition-colors"
@@ -345,7 +345,7 @@ export function ReportsModal({
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40 p-6">
           <div className="lve-panel bg-white w-[460px] max-w-full">
             <header className="lve-panel-header flex items-center justify-between">
-              <span>DANAD96 Reporting System</span>
+              <span>{systemName} Reporting System</span>
               <button
                 type="button"
                 className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-white hover:bg-[#d72714] hover:text-white transition-colors"

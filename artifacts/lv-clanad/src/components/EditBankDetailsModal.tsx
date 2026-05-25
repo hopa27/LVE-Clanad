@@ -96,7 +96,7 @@ export function EditBankDetailsModal({
 
         <div className="p-6 space-y-4">
           {/* Change Effective Date — full width at top */}
-          <div className="flex items-center gap-4 justify-end">
+          <div className="flex items-center gap-4">
             <label className="font-['Livvic'] text-[14px] font-medium text-[#002f5c] whitespace-nowrap">
               Change Effective Date
             </label>
@@ -114,14 +114,16 @@ export function EditBankDetailsModal({
             </div>
           </div>
 
+          <hr className="border-[#dce3ea]" />
+
           {/* Two-column grid */}
           <div className="grid grid-cols-2 gap-x-6 gap-y-3 items-center">
             {/* Left col labels */}
-            <label className="font-['Livvic'] text-[14px] font-medium text-[#002f5c] text-right">
+            <label className="font-['Livvic'] text-[14px] font-medium text-[#002f5c]">
               Bank sort code
             </label>
-            {/* Right — blank for Bank Name label alignment */}
-            <label className="font-['Livvic'] text-[14px] font-medium text-[#002f5c] text-right">
+            {/* Right — Bank Name label */}
+            <label className="font-['Livvic'] text-[14px] font-medium text-[#002f5c]">
               Bank Name
             </label>
 
@@ -137,10 +139,10 @@ export function EditBankDetailsModal({
             </div>
 
             {/* Row 2 labels */}
-            <label className="font-['Livvic'] text-[14px] font-medium text-[#002f5c] text-right">
+            <label className="font-['Livvic'] text-[14px] font-medium text-[#002f5c]">
               Account name
             </label>
-            <label className="font-['Livvic'] text-[14px] font-medium text-[#002f5c] text-right">
+            <label className="font-['Livvic'] text-[14px] font-medium text-[#002f5c]">
               Bank account no
             </label>
 
@@ -157,10 +159,10 @@ export function EditBankDetailsModal({
             />
 
             {/* Row 3 labels */}
-            <label className="font-['Livvic'] text-[14px] font-medium text-[#002f5c] text-right">
+            <label className="font-['Livvic'] text-[14px] font-medium text-[#002f5c]">
               Payment Ref
             </label>
-            <label className="font-['Livvic'] text-[14px] font-medium text-[#002f5c] text-right">
+            <label className="font-['Livvic'] text-[14px] font-medium text-[#002f5c]">
               Account Type
             </label>
 
@@ -178,7 +180,7 @@ export function EditBankDetailsModal({
 
             {/* Row 4 labels — only right col */}
             <div />
-            <label className="font-['Livvic'] text-[14px] font-medium text-[#002f5c] text-right">
+            <label className="font-['Livvic'] text-[14px] font-medium text-[#002f5c]">
               Payment method
             </label>
 

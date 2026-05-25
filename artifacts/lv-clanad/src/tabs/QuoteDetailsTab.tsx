@@ -9,6 +9,7 @@ const QUOTE_ROWS = [
     escType: "Fixed", escRate: "0", currentInc: "0", spousePct: "0",
     spouseInc: "£0.00", guarantee: "", lastPay: "", overlap: "Yes",
     valProt: "100", taxFree: "0", maxFree: "F",
+    valProtFlag: "Y", lsConvert: "", planProt: "", dependant: "None",
   },
 ];
 
@@ -18,6 +19,7 @@ const QUOTE_ROWS_87 = [
     escType: "Fixed", escRate: "0", currentInc: "", spousePct: "0",
     spouseInc: "£0.00", guarantee: "", lastPay: "", overlap: "",
     valProt: "", taxFree: "", maxFree: "",
+    valProtFlag: "", lsConvert: "", planProt: "", dependant: "",
   },
 ];
 
@@ -27,6 +29,7 @@ const QUOTE_ROWS_84 = [
     escType: "Fixed", escRate: "0", currentInc: "£1,294.00", spousePct: "0",
     spouseInc: "£0.00", guarantee: "", lastPay: "", overlap: "No",
     valProt: "100", taxFree: "", maxFree: "",
+    valProtFlag: "", lsConvert: "", planProt: "", dependant: "",
   },
 ];
 
@@ -34,15 +37,17 @@ const QUOTE_ROWS_90 = [
   {
     type: "Std Pre 97", premium: "", tfc: "£0.00", original: "£0.00",
     escType: "Fixed", escRate: "0", currentInc: "£0.00", spousePct: "",
-    spouseInc: "£0.00", guarantee: "", lastPay: "", overlap: "",
-    valProt: "", taxFree: "", maxFree: "",
+    spouseInc: "£0.00", guarantee: "", lastPay: "", overlap: "No",
+    valProt: "100", taxFree: "0", maxFree: "F",
+    valProtFlag: "Y", lsConvert: "", planProt: "", dependant: "None",
   },
 ];
 
 const QUOTE_COLUMNS = [
   "Type","Premium","Tax Free Cash Amount","Original Income","Esc Type","Esc Rate %",
   "Current Income","Spouse %","Spouse Income","Guarantee","Last Pay Under Guarantee",
-  "Overlap","Value Protection %","Tax Free %","Max Tax Free",
+  "Overlap","Value Protection %","Tax Free %","Max Tax Free Cash",
+  "Value Protection Flag","LS_CONVERT","Plan Protection %","DEPENDANT",
 ];
 
 export function QuoteDetailsTab() {
@@ -288,6 +293,7 @@ export function QuoteDetailsTab() {
                     r.type, r.premium, r.tfc, r.original, r.escType, r.escRate,
                     r.currentInc, r.spousePct, r.spouseInc, r.guarantee, r.lastPay,
                     r.overlap, r.valProt, r.taxFree, r.maxFree,
+                    r.valProtFlag, r.lsConvert, r.planProt, r.dependant,
                   ].map((v, j) => (
                     <td key={j} className="!px-4 whitespace-nowrap">{v}</td>
                   ))}

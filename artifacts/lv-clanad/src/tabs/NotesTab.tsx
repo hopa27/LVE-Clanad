@@ -3,10 +3,34 @@ import {
   MdAdd,
   MdRemove,
   MdEdit,
+  MdCheck,
+  MdClose,
   MdAccessTime,
   MdPerson,
 } from "react-icons/md";
 import { usePlanCode } from "../context/PlanCodeContext";
+
+function NoteButtons({ disableEditDelete = false }: { disableEditDelete?: boolean }) {
+  return (
+    <div className="flex items-center gap-2">
+      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" title="Insert Record (Ctrl+Insert)">
+        <MdAdd size={16} /> Insert Record
+      </button>
+      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled={disableEditDelete} title="Delete Record (Ctrl+Delete)">
+        <MdRemove size={16} /> Delete Record
+      </button>
+      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled={disableEditDelete} title="Edit Record">
+        <MdEdit size={16} /> Edit Record
+      </button>
+      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled={disableEditDelete} title="Post Edit">
+        <MdCheck size={16} /> Post Edit
+      </button>
+      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled={disableEditDelete} title="Cancel Edit">
+        <MdClose size={16} /> Cancel Edit
+      </button>
+    </div>
+  );
+}
 
 const NOTES = [
   {
@@ -75,19 +99,7 @@ export function NotesTab() {
     return (
       <Section
         title={`Notes (${count})`}
-        headerAction={
-          <div className="flex items-center gap-2">
-            <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
-              <MdAdd size={16} /> Add
-            </button>
-            <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
-              <MdEdit size={16} /> Edit
-            </button>
-            <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
-              <MdRemove size={16} /> Delete
-            </button>
-          </div>
-        }
+        headerAction={<NoteButtons />}
       >
         <div className="space-y-3 max-h-[620px] overflow-auto pr-1">
           {Array.from({ length: count }).map((_, i) => (
@@ -110,19 +122,7 @@ export function NotesTab() {
     return (
       <Section
         title="Notes (0)"
-        headerAction={
-          <div className="flex items-center gap-2">
-            <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
-              <MdAdd size={16} /> Add
-            </button>
-            <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled>
-              <MdEdit size={16} /> Edit
-            </button>
-            <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled>
-              <MdRemove size={16} /> Delete
-            </button>
-          </div>
-        }
+        headerAction={<NoteButtons disableEditDelete />}
       >
         <div className="space-y-3 max-h-[620px] overflow-auto pr-1" />
       </Section>
@@ -132,19 +132,7 @@ export function NotesTab() {
     return (
       <Section
         title="Notes (0)"
-        headerAction={
-          <div className="flex items-center gap-2">
-            <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
-              <MdAdd size={16} /> Add
-            </button>
-            <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
-              <MdEdit size={16} /> Edit
-            </button>
-            <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
-              <MdRemove size={16} /> Delete
-            </button>
-          </div>
-        }
+        headerAction={<NoteButtons />}
       >
         <div className="space-y-3 max-h-[620px] overflow-auto pr-1">
           <article className="relative bg-white rounded-[8px] border border-[#e0e0e0] overflow-hidden">
@@ -161,19 +149,7 @@ export function NotesTab() {
   return (
     <Section
       title={`Notes (${NOTES.length})`}
-      headerAction={
-        <div className="flex items-center gap-2">
-          <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
-            <MdAdd size={16} /> Add
-          </button>
-          <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
-            <MdEdit size={16} /> Edit
-          </button>
-          <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
-            <MdRemove size={16} /> Delete
-          </button>
-        </div>
-      }
+      headerAction={<NoteButtons />}
     >
       <div className="space-y-3 max-h-[620px] overflow-auto pr-1">
         {NOTES.map((n, i) => (

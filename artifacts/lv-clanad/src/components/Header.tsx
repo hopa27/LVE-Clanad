@@ -13,6 +13,7 @@ import { CedingSchemeModal } from "./CedingSchemeModal";
 import { CopyP60Modal } from "./CopyP60Modal";
 import { SupervisoryEditModal } from "./SupervisoryEditModal";
 import { BankChangesReportModal } from "./BankChangesReportModal";
+import { ReprintMaturityModal } from "./ReprintMaturityModal";
 import { usePlanCode } from "../context/PlanCodeContext";
 
 type SubItem = {
@@ -122,7 +123,7 @@ const SUPERVISOR_84: MenuOption[] = [
   { kind: "separator" },
   { label: "Reprint Annual Statements" },
   { label: "Annual Statement Recalculation" },
-  { label: "Reprint Maturity Letters" },
+  { label: "Reprint Maturity Letters", action: "reprint-maturity-letters" },
 ];
 
 const SUPERVISOR_87: MenuOption[] = [
@@ -151,7 +152,7 @@ const SUPERVISOR_87: MenuOption[] = [
   { kind: "separator" },
   { label: "Reprint Annual Statements" },
   { label: "Annual Statement Recalculation" },
-  { label: "Reprint Maturity Letters" },
+  { label: "Reprint Maturity Letters", action: "reprint-maturity-letters" },
 ];
 
 const SUPERVISOR_90: MenuOption[] = [
@@ -189,7 +190,7 @@ const SUPERVISOR_90: MenuOption[] = [
   { kind: "separator" },
   { label: "Reprint Annual Statements" },
   { label: "Annual Statement Recalculation" },
-  { label: "Reprint Maturity Letters" },
+  { label: "Reprint Maturity Letters", action: "reprint-maturity-letters" },
 ];
 
 const MENU_ITEMS: MenuItem[] = [
@@ -266,7 +267,7 @@ const MENU_ITEMS: MenuItem[] = [
       { kind: "separator" },
       { label: "Reprint Annual Statements" },
       { label: "Annual Statement Recalculation" },
-      { label: "Reprint Maturity Letters" },
+      { label: "Reprint Maturity Letters", action: "reprint-maturity-letters" },
       { kind: "separator" },
       { label: "Tracesmart error - make policy editable" },
     ],
@@ -297,6 +298,7 @@ export function Header({ title }: { title: string }) {
   const [expiredConfirmOpen, setExpiredConfirmOpen] = useState(false);
   const [cancelAppOpen, setCancelAppOpen] = useState(false);
   const [bankChangesReportOpen, setBankChangesReportOpen] = useState(false);
+  const [reprintMaturityOpen, setReprintMaturityOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const { planCode } = usePlanCode();
   const menuItems: MenuItem[] = MENU_ITEMS.map((m) => {
@@ -339,6 +341,7 @@ export function Header({ title }: { title: string }) {
     else if (action === "expired-confirm") setExpiredConfirmOpen(true);
     else if (action === "cancel-application") setCancelAppOpen(true);
     else if (action === "bank-changes-awaiting") setBankChangesReportOpen(true);
+    else if (action === "reprint-maturity-letters") setReprintMaturityOpen(true);
     else if (action === "supervisory-edit") {
       window.dispatchEvent(new CustomEvent("clanad:switch-tab", { detail: "payments" }));
       setSupervisoryEditOpen(true);
@@ -573,6 +576,11 @@ export function Header({ title }: { title: string }) {
       <BankChangesReportModal
         open={bankChangesReportOpen}
         onClose={() => setBankChangesReportOpen(false)}
+      />
+
+      <ReprintMaturityModal
+        open={reprintMaturityOpen}
+        onClose={() => setReprintMaturityOpen(false)}
       />
 
       {cancelAppOpen && (

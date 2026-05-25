@@ -60,7 +60,7 @@ export function ApplicationDetailsTab() {
           <Field label="PostADay:"><Checkbox checked={isPlan87 || isPlan84} /></Field>
           <Field label="Transfer from Beneficiary Drawdown?:">
             <SelectInput
-              value={isCompact ? "Unknown" : "DBBeneficiary"}
+              value="Unknown"
               options={["Yes", "No", "Unknown"]}
             />
           </Field>

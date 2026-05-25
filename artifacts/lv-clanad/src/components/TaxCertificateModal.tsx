@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MdPrint, MdClose, MdHelpOutline, MdInfoOutline } from "react-icons/md";
+import { MdPrint, MdClose, MdHelpOutline, MdInfoOutline, MdCancel } from "react-icons/md";
 import { DatePicker } from "./DatePicker";
 
 export function TaxCertificateModal({
@@ -13,6 +13,7 @@ export function TaxCertificateModal({
   const [endDate, setEndDate] = useState<string>("");
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
+  const [dateErrorOpen, setDateErrorOpen] = useState(false);
 
   if (!open) return null;
 
@@ -95,7 +96,13 @@ export function TaxCertificateModal({
             <button
               type="button"
               className="lve-btn"
-              onClick={() => setConfirmOpen(true)}
+              onClick={() => {
+                if (!startDate || !endDate) {
+                  setDateErrorOpen(true);
+                } else {
+                  setConfirmOpen(true);
+                }
+              }}
             >
               <MdPrint size={16} />
               Print
@@ -103,6 +110,41 @@ export function TaxCertificateModal({
           </div>
         </div>
       </div>
+
+      {dateErrorOpen && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/30">
+          <div className="lve-panel w-[380px] bg-white">
+            <header className="lve-panel-header flex items-center justify-between">
+              <span>Client Annuity Administration System</span>
+              <button
+                type="button"
+                className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-white hover:bg-[#d72714] transition-colors"
+                onClick={() => setDateErrorOpen(false)}
+                aria-label="Close"
+              >
+                <MdClose size={18} />
+              </button>
+            </header>
+            <div className="lve-panel-body">
+              <div className="flex items-start gap-3">
+                <MdCancel size={32} className="text-[#d72714] shrink-0 mt-0.5" />
+                <p className="font-['Mulish'] text-[14px] text-[#3d3d3d] pt-1">
+                  ' / / ' is not a valid date.
+                </p>
+              </div>
+              <div className="mt-5 flex justify-center">
+                <button
+                  type="button"
+                  className="lve-btn lve-btn-sm min-w-[80px] justify-center"
+                  onClick={() => setDateErrorOpen(false)}
+                >
+                  OK
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {infoOpen && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/30">

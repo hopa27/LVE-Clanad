@@ -1,7 +1,16 @@
 import { useState } from "react";
 import { MdClose, MdCheck, MdCancel } from "react-icons/md";
+import { DatePicker } from "./DatePicker";
+import { EditModeContext } from "../context/EditModeContext";
 
 const PRODUCTS = ["With Profits", "Non Profits", "ICFP", "PRP", "PIPA"];
+
+const ALWAYS_EDITING = {
+  editing: true,
+  setEditing: () => {},
+  cancel: () => {},
+  cancelKey: 0,
+};
 
 export function RecalcAnnStatModal({
   open,
@@ -11,8 +20,8 @@ export function RecalcAnnStatModal({
   onClose: () => void;
 }) {
   const [product, setProduct] = useState("With Profits");
-  const [fromDate, setFromDate] = useState("");
-  const [toDate, setToDate] = useState("");
+  const [_fromDate, setFromDate] = useState<Date | undefined>();
+  const [_toDate, setToDate] = useState<Date | undefined>();
 
   if (!open) return null;
 
@@ -52,24 +61,20 @@ export function RecalcAnnStatModal({
 
             <div className="flex items-center gap-3">
               <span className="lve-label text-right shrink-0 w-[100px]">From Date:</span>
-              <input
-                type="text"
-                className="lve-input flex-1"
-                placeholder="  /  /    "
-                value={fromDate}
-                onChange={(e) => setFromDate(e.target.value)}
-              />
+              <div className="flex-1">
+                <EditModeContext.Provider value={ALWAYS_EDITING}>
+                  <DatePicker placeholder="DD/MM/YYYY" onChange={setFromDate} />
+                </EditModeContext.Provider>
+              </div>
             </div>
 
             <div className="flex items-center gap-3">
               <span className="lve-label text-right shrink-0 w-[100px]">To Date:</span>
-              <input
-                type="text"
-                className="lve-input flex-1"
-                placeholder="  /  /    "
-                value={toDate}
-                onChange={(e) => setToDate(e.target.value)}
-              />
+              <div className="flex-1">
+                <EditModeContext.Provider value={ALWAYS_EDITING}>
+                  <DatePicker placeholder="DD/MM/YYYY" onChange={setToDate} />
+                </EditModeContext.Provider>
+              </div>
             </div>
           </div>
 

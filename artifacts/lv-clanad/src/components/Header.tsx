@@ -40,8 +40,8 @@ const PROCESS_84: MenuOption[] = [
     label: "Set Dead",
     hasSubmenu: true,
     submenu: [
-      { label: "1st Life" },
-      { label: "2nd Life" },
+      { label: "Life One", accel: "L" },
+      { label: "Life Two/Current Beneficiary", accel: "L" },
     ],
   },
   {

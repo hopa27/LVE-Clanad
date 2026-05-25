@@ -1,6 +1,7 @@
 import { Field, TextInput, SelectInput, Checkbox, Section } from "../components/Field";
 import { DatePicker } from "../components/DatePicker";
 import { usePlanCode } from "../context/PlanCodeContext";
+import { MdKeyboardArrowDown } from "react-icons/md";
 
 export function PolicyDetailsTab() {
   const { planCode } = usePlanCode();
@@ -119,8 +120,21 @@ export function PolicyDetailsTab() {
       {!isPlan87 && (
         <Section title="Non Standard Policy">
           <Field label="Non Std Flag:">
-            <div className="w-24">
-              <TextInput value="" disabled={isPlan84} />
+            <div className="w-24 relative">
+              <select
+                defaultValue=""
+                className="lve-input pr-10 appearance-none"
+              >
+                <option value="">—</option>
+                <option value="Y">Y</option>
+                <option value="N">N</option>
+              </select>
+              <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none">
+                <span className="h-6 w-px bg-[#BBBBBB]" />
+                <span className="px-2 text-[#006cf4]">
+                  <MdKeyboardArrowDown size={18} />
+                </span>
+              </div>
             </div>
           </Field>
           <Field label="Non Standard Policy:">

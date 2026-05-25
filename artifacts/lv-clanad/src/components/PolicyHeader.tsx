@@ -24,9 +24,9 @@ export function PolicyHeader() {
       <button
         type="button"
         title="Policy No"
-        className="inline-flex items-center gap-1 px-3 h-9 rounded-[8px] border border-[#BBBBBB] bg-white font-['Mulish'] text-[#3d3d3d] hover:border-[#178830]"
+        className="inline-flex items-center justify-end gap-1 w-[140px] h-9 px-3 rounded-[8px] border border-[#BBBBBB] bg-white font-['Mulish'] text-[#3d3d3d] hover:border-[#178830]"
       >
-        {policyRef} <MdKeyboardArrowDown />
+        <MdKeyboardArrowDown />
       </button>
       <button
         type="button"

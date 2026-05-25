@@ -74,11 +74,7 @@ export function PolicyHeader() {
         <MdMoreHoriz size={18} />
       </button>
 
-      {planCode === "87" ? (
-        <div className="w-[140px] h-9 rounded-[8px] bg-[#d4d4d4]" />
-      ) : planCode !== "84" ? (
-        <div className="w-[180px] h-9 rounded-[8px] bg-[#7fdfdf]" />
-      ) : null}
+      <div className="w-[180px] h-9 rounded-[8px] bg-[#7fdfdf]" />
 
       {simOpen && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">

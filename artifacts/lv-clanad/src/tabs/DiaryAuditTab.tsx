@@ -72,7 +72,10 @@ const PLAN_90_DIARY: DiaryRow[] = [
 ];
 
 const AUDIT_84 = Array.from({ length: 10 }, () => "Test Note");
-const AUDIT_90 = Array.from({ length: 10 }, () => "Test Note");
+const AUDIT_90 = [
+  ...Array.from({ length: 10 }, () => "Test Note"),
+  "System Advises: P45 details amended by UAT4 on 25/05/2026 at 13:48:46",
+];
 
 const DATA_CHANGES_84: { changeDate: string; description: string; userId: string }[] = [
   { changeDate: "24/04/2018 08:48:47", description: "Field Annuities-Gross Balance was changed from 1294 to 1186.17.",                userId: "LOPJSH" },

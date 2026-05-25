@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { MdClose } from "react-icons/md";
+import {
+  MdClose,
+  MdFirstPage,
+  MdLastPage,
+  MdChevronLeft,
+  MdChevronRight,
+  MdPrint,
+  MdSearch,
+} from "react-icons/md";
 
 type Row = { policy: string; surname: string; username: string; date: string };
 
@@ -58,6 +66,10 @@ const PAGE_28: Row[] = [
 const TOTAL_PAGES = 28;
 const TOTAL_ROWS = 3404;
 
+const navBtn =
+  "w-[44px] h-[44px] flex items-center justify-center rounded-[30px] border border-[#04589b] bg-white text-[#04589b] shadow-sm hover:bg-[#003578] hover:text-white hover:border-[#003578] disabled:opacity-30 disabled:cursor-not-allowed transition-colors";
+const divider = "h-6 w-px bg-[#BBBBBB]";
+
 export function BankChangesReportModal({
   open,
   onClose,
@@ -72,72 +84,80 @@ export function BankChangesReportModal({
   const isFirst = page === 1;
   const isLast = page === TOTAL_PAGES;
 
-  const NavBtn = ({
-    onClick,
-    disabled,
-    children,
-  }: {
-    onClick: () => void;
-    disabled: boolean;
-    children: React.ReactNode;
-  }) => (
-    <button
-      type="button"
-      onClick={onClick}
-      disabled={disabled}
-      className={`px-1 h-6 flex items-center justify-center border border-[#808080] bg-[#d4d0c8] font-['Mulish'] text-[12px] leading-none ${
-        disabled ? "text-[#b8b8b8] cursor-not-allowed" : "hover:bg-[#e0e0e0] text-[#3d3d3d]"
-      }`}
-    >
-      {children}
-    </button>
-  );
-
   return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
-      <div className="bg-[#d4d0c8] border-2 border-[#808080] shadow-[2px_2px_8px_rgba(0,0,0,0.5)] w-[780px] max-w-[96vw] flex flex-col" style={{ maxHeight: "90vh" }}>
-        {/* Toolbar */}
-        <div className="bg-[#d4d0c8] border-b border-[#808080] flex items-center gap-2 px-2 py-1 flex-shrink-0">
-          <NavBtn onClick={() => setPage(1)} disabled={isFirst}>{"◄◄"}</NavBtn>
-          <NavBtn onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={isFirst}>{"◄"}</NavBtn>
+    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
+      <div className="lve-panel bg-white w-[820px] max-w-full max-h-[90vh] flex flex-col">
 
-          <span className="font-['Mulish'] text-[12px] text-[#3d3d3d] px-1">{page} of {TOTAL_PAGES}</span>
-
-          <NavBtn onClick={() => setPage((p) => Math.min(TOTAL_PAGES, p + 1))} disabled={isLast}>{"►"}</NavBtn>
-          <NavBtn onClick={() => setPage(TOTAL_PAGES)} disabled={isLast}>{"►►"}</NavBtn>
-
-          <div className="w-px h-5 bg-[#808080] mx-1" />
-
-          <button type="button" className="px-1 h-6 border border-[#808080] bg-[#d4d0c8] font-['Mulish'] text-[12px] hover:bg-[#e0e0e0]">🖨</button>
-          <button type="button" className="px-1 h-6 border border-[#808080] bg-[#d4d0c8] font-['Mulish'] text-[12px] hover:bg-[#e0e0e0]">🔍</button>
-
-          <div className="w-px h-5 bg-[#808080] mx-1" />
-
-          <select className="h-6 border border-[#808080] bg-white font-['Mulish'] text-[12px] px-1">
-            <option>100%</option>
-          </select>
-
-          <div className="w-px h-5 bg-[#808080] mx-1" />
-
-          <span className="font-['Mulish'] text-[12px] text-[#3d3d3d]">Total:{TOTAL_ROWS}</span>
-          <span className="font-['Mulish'] text-[12px] text-[#3d3d3d]">100%</span>
-          <span className="font-['Mulish'] text-[12px] text-[#3d3d3d]">{TOTAL_ROWS} of {TOTAL_ROWS}</span>
-
-          <div className="flex-1" />
-
+        {/* LVE header */}
+        <header className="lve-panel-header flex items-center justify-between">
+          <span>Bank Detail Amendments Report</span>
           <button
             type="button"
             onClick={onClose}
-            className="w-5 h-5 bg-[#d4d0c8] border border-[#808080] flex items-center justify-center text-[#3d3d3d] hover:bg-[#e0e0e0] text-[11px] leading-none flex-shrink-0"
+            className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-white hover:bg-[#d72714] transition-colors"
+            aria-label="Close"
           >
-            <MdClose size={13} />
+            <MdClose size={18} />
           </button>
+        </header>
+
+        {/* Toolbar */}
+        <div className="flex flex-wrap items-center gap-3 px-5 py-3 border-b border-[#d0d5dd] shrink-0">
+
+          {/* Page nav */}
+          <div className="flex items-center gap-2">
+            <button type="button" onClick={() => setPage(1)} disabled={isFirst} title="First page" className={navBtn}>
+              <MdFirstPage size={20} />
+            </button>
+            <button type="button" onClick={() => setPage((p) => Math.max(1, p - 1))} disabled={isFirst} title="Previous page" className={navBtn}>
+              <MdChevronLeft size={20} />
+            </button>
+            <span className="px-2 min-w-[80px] text-center text-sm font-bold text-[#4a4a49] select-none font-['Mulish']">
+              {page} of {TOTAL_PAGES}
+            </span>
+            <button type="button" onClick={() => setPage((p) => Math.min(TOTAL_PAGES, p + 1))} disabled={isLast} title="Next page" className={navBtn}>
+              <MdChevronRight size={20} />
+            </button>
+            <button type="button" onClick={() => setPage(TOTAL_PAGES)} disabled={isLast} title="Last page" className={navBtn}>
+              <MdLastPage size={20} />
+            </button>
+          </div>
+
+          <span className={divider} />
+
+          <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
+            <MdPrint size={16} />
+            Print
+          </button>
+          <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
+            <MdSearch size={16} />
+            Find
+          </button>
+
+          <span className={divider} />
+
+          <select className="lve-input h-8 w-[90px] text-[13px]">
+            <option>100%</option>
+            <option>75%</option>
+            <option>50%</option>
+          </select>
+
+          <span className={divider} />
+
+          <span className="font-['Mulish'] text-[13px] text-[#7a7a7a]">
+            Total: <strong className="text-[#3d3d3d]">{TOTAL_ROWS}</strong>
+          </span>
+          <span className="font-['Mulish'] text-[13px] text-[#7a7a7a]">
+            {TOTAL_ROWS} of {TOTAL_ROWS}
+          </span>
         </div>
 
         {/* Document area */}
-        <div className="bg-[#808080] overflow-y-auto flex-1 p-4">
-          <div className="bg-white mx-auto shadow-md font-['Courier_New',monospace]" style={{ width: 680, minHeight: 880, padding: "48px 56px" }}>
-            {/* Report title — only on page 1 */}
+        <div className="bg-[#f0f0f0] overflow-y-auto flex-1 p-6">
+          <div
+            className="bg-white mx-auto shadow-md font-['Courier_New',monospace]"
+            style={{ width: 680, minHeight: 880, padding: "48px 56px" }}
+          >
             {page === 1 && (
               <>
                 <div className="text-center mb-1">
@@ -151,15 +171,11 @@ export function BankChangesReportModal({
               </>
             )}
 
-            {/* Table */}
             <table className="w-full border-collapse text-[12px]">
               <thead>
                 <tr>
                   {["POLICY NUMBER", "CLIENT SURNAME", "USERNAME", "DATE CHANGED"].map((h) => (
-                    <th
-                      key={h}
-                      className="border border-black px-2 py-1 text-left font-bold text-[12px] bg-white"
-                    >
+                    <th key={h} className="border border-black px-2 py-1 text-left font-bold text-[12px] bg-white">
                       {h}
                     </th>
                   ))}
@@ -177,12 +193,12 @@ export function BankChangesReportModal({
               </tbody>
             </table>
 
-            {/* Page footer */}
             <div className="text-center mt-8 text-[12px]">
               Page {page} of {TOTAL_PAGES}
             </div>
           </div>
         </div>
+
       </div>
     </div>
   );

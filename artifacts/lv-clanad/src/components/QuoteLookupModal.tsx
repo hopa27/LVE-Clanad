@@ -12,21 +12,21 @@ import {
 } from "react-icons/md";
 
 const ILLUSTRATIONS = [
-  ["925149", "0", "SANDF-001", "18 Dec 2007", "Mr M Stanislas",        "PPA", "JOINT",  "64.75", "111000346", "No", "Printed"],
-  ["925180", "0", "QUOTE-001", "17 Dec 2007", "Mr M Graham",            "CPA", "Single", "73.75", "111002872", "No", "Printed"],
-  ["925189", "0", "BARWE-001", "17 Dec 2007", "Mr M Barwell",           "CPA", "JOINT",  "59.75", "111002872", "No", "PR"],
-  ["925550", "0", "RIDIN-001", "17 Dec 2007", "Mrs J Hamilton-Winter",  "CPA", "Single", "59.75", "106003101", "No", "Printed"],
-  ["925757", "0", "EASTS-001", "17 Dec 2007", "Mr T Diveno",            "CPA", "JOINT",  "64.75", "111002872", "No", "PR"],
-  ["925778", "0", "ELEME-001", "18 Dec 2007", "Mr M Chisholm",          "CPA", "Single", "64.75", "111002872", "No", "Printed"],
-  ["925782", "0", "QUOTE-001", "18 Dec 2007", "Mr M Delapeyer",         "CPA", "JOINT",  "59.75", "111002872", "No", "Printed"],
-  ["925827", "0", "QPCAD-001", "18 Dec 2007", "Mr P Cadwell",           "CPA", "Single", "59.75", "200000000", "No", "Printed"],
-  ["930001", "0", "QUOTE-001", "18 Dec 2007", "Mr G Burrows",           "CPA", "JOINT",  "59.75", "111002872", "No", "Printed"],
-  ["930059", "0", "WENTW-002", "18 Dec 2007", "Mr R Garnett",           "PPA", "JOINT",  "61.75", "111000346", "No", "Printed"],
+  ["925149", "0", "SANDF-001", "18 Dec 2007", "Mr M Stanislas",        "PPA", "JOINT",  "64.75", "111000346", "No", "Printed", "STALW-001"],
+  ["925180", "0", "QUOTE-001", "17 Dec 2007", "Mr M Graham",            "CPA", "Single", "73.75", "111002872", "No", "Printed", "STALW-001"],
+  ["925189", "0", "BARWE-001", "17 Dec 2007", "Mr M Barwell",           "CPA", "JOINT",  "59.75", "111002872", "No", "PR",      "STALW-001"],
+  ["925550", "0", "RIDIN-001", "17 Dec 2007", "Mrs J Hamilton-Winter",  "CPA", "Single", "59.75", "106003101", "No", "Printed", "STALW-001"],
+  ["925757", "0", "EASTS-001", "17 Dec 2007", "Mr T Diveno",            "CPA", "JOINT",  "64.75", "111002872", "No", "PR",      "STALW-001"],
+  ["925778", "0", "ELEME-001", "18 Dec 2007", "Mr M Chisholm",          "CPA", "Single", "64.75", "111002872", "No", "Printed", "STALW-001"],
+  ["925782", "0", "QUOTE-001", "18 Dec 2007", "Mr M Delapeyer",         "CPA", "JOINT",  "59.75", "111002872", "No", "Printed", "STALW-001"],
+  ["925827", "0", "QPCAD-001", "18 Dec 2007", "Mr P Cadwell",           "CPA", "Single", "59.75", "200000000", "No", "Printed", "STALW-001"],
+  ["930001", "0", "QUOTE-001", "18 Dec 2007", "Mr G Burrows",           "CPA", "JOINT",  "59.75", "111002872", "No", "Printed", "STALW-001"],
+  ["930059", "0", "WENTW-002", "18 Dec 2007", "Mr R Garnett",           "PPA", "JOINT",  "61.75", "111000346", "No", "Printed", "STALW-001"],
 ];
 
 const ILLUSTRATION_COLS = [
   "Quote", "Variant", "IFA", "Created", "Name", "Type", "LifeType",
-  "Age 1", "User", "Master", "Status",
+  "Age 1", "User", "Master", "Status", "COCODE",
 ];
 
 const VARIANTS: string[][] = [];

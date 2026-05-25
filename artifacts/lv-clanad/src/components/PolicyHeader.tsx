@@ -36,9 +36,7 @@ export function PolicyHeader() {
         <MdOpenInNew size={16} />
       </button>
 
-      <div className="px-4 h-9 inline-flex items-center rounded-[8px] bg-[#006cf4] text-white font-['Livvic'] font-semibold text-sm">
-        Liverpool Victoria Friendly Society Limited
-      </div>
+      <div className="w-[260px] h-9 rounded-[8px] bg-[#006cf4]" />
 
       <div
         title="CLANAD Number"

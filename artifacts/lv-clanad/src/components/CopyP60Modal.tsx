@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MdClose, MdCheck, MdCancel } from "react-icons/md";
+import { MdClose, MdCheck, MdCancel, MdInfo } from "react-icons/md";
 
 export function CopyP60Modal({
   open,
@@ -9,8 +9,45 @@ export function CopyP60Modal({
   onClose: () => void;
 }) {
   const [taxYearEnd, setTaxYearEnd] = useState("2026");
+  const [done, setDone] = useState(false);
 
   if (!open) return null;
+
+  if (done) {
+    return (
+      <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
+        <div className="lve-panel bg-white w-[320px] max-w-full">
+          <header className="lve-panel-header flex items-center justify-between">
+            <span>Information</span>
+            <button
+              type="button"
+              className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-white hover:bg-[#d72714] transition-colors"
+              onClick={() => { setDone(false); onClose(); }}
+              aria-label="Close"
+            >
+              <MdClose size={18} />
+            </button>
+          </header>
+          <div className="lve-panel-body flex flex-col items-center gap-5">
+            <div className="flex items-center gap-3">
+              <MdInfo size={36} className="text-[#006cf4] shrink-0" />
+              <p className="font-['Mulish'] text-[14px] text-[#3d3d3d]">
+                Printing Complete!
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => { setDone(false); onClose(); }}
+              className="lve-btn lve-btn-sm min-w-[80px] justify-center"
+            >
+              <MdCheck size={16} />
+              OK
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
@@ -49,7 +86,7 @@ export function CopyP60Modal({
           <div className="flex justify-center gap-3 pt-1">
             <button
               type="button"
-              onClick={onClose}
+              onClick={() => setDone(true)}
               className="lve-btn lve-btn-sm min-w-[80px] justify-center"
             >
               <MdCheck size={16} />

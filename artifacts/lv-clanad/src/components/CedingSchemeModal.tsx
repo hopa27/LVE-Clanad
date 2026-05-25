@@ -116,7 +116,7 @@ type ChequeRow = {
   telephone: string;
 };
 
-const CHEQUES: ChequeRow[] = [
+const CHEQUES_DEFAULT: ChequeRow[] = [
   {
     chequeNo: 1,
     amount: 10000,
@@ -126,6 +126,21 @@ const CHEQUES: ChequeRow[] = [
     address2: "Keynes House",
     address3: "Tilehouse Street",
     postcode: "SG5 2DX",
+    letterStatus: "",
+    telephone: "",
+  },
+];
+
+const CHEQUES_90: ChequeRow[] = [
+  {
+    chequeNo: 1,
+    amount: 3021.57,
+    scheme: "LV= Retirement Solutions",
+    schemeRef: "999999",
+    address1: "",
+    address2: "",
+    address3: "",
+    postcode: "",
     letterStatus: "",
     telephone: "",
   },
@@ -148,20 +163,26 @@ type FormState = {
   optionCase: "" | "Yes" | "No";
 };
 
-const INITIAL_FORM: FormState = {
-  policyNumber: "233433",
-  schemeName: "",
-  amount: "",
-  transferType: "",
-  cedingRef: "",
-  address1: "",
-  address2: "",
-  address3: "",
-  postCode: "",
-  telephone: "",
-  letterStatus: "",
-  optionCase: "",
-};
+function initialForm(planCode: string): FormState {
+  return {
+    policyNumber: planCode === "90" ? "227813" : planCode === "84" ? "111834" : planCode === "87" ? "233451" : "233433",
+    schemeName: "",
+    amount: "",
+    transferType: "",
+    cedingRef: "",
+    address1: "",
+    address2: "",
+    address3: "",
+    postCode: "",
+    telephone: "",
+    letterStatus: "",
+    optionCase: "",
+  };
+}
+
+function chequesFor(planCode: string): ChequeRow[] {
+  return planCode === "90" ? CHEQUES_90 : CHEQUES_DEFAULT;
+}
 
 function Label({ children }: { children: React.ReactNode }) {
   return (
@@ -346,12 +367,15 @@ function Radio({
 export function CedingSchemeModal({
   open,
   onClose,
+  planCode = "0",
 }: {
   open: boolean;
   onClose: () => void;
+  planCode?: string;
 }) {
+  const CHEQUES = chequesFor(planCode);
   const [mode, setMode] = useState<Mode>("view");
-  const [form, setForm] = useState<FormState>(INITIAL_FORM);
+  const [form, setForm] = useState<FormState>(() => initialForm(planCode));
   const [transferOpen, setTransferOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState<number>(0);
   const [confirmNewOpen, setConfirmNewOpen] = useState(false);
@@ -370,7 +394,7 @@ export function CedingSchemeModal({
   };
 
   const confirmNew = () => {
-    setForm({ ...INITIAL_FORM, policyNumber: "" });
+    setForm({ ...initialForm(planCode), policyNumber: "" });
     setMode("new");
     setConfirmNewOpen(false);
   };
@@ -407,7 +431,7 @@ export function CedingSchemeModal({
   };
 
   const doCancel = () => {
-    setForm(INITIAL_FORM);
+    setForm(initialForm(planCode));
     setMode("view");
     setConfirmCancelOpen(false);
   };

@@ -401,6 +401,7 @@ export function DiaryAuditTab() {
       <CedingSchemeModal
         open={cedingOpen}
         onClose={() => setCedingOpen(false)}
+        planCode={planCode}
       />
 
       {editConfirmOpen && (

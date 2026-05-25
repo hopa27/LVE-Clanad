@@ -7,6 +7,7 @@ import { AmendChequesModal } from "./AmendChequesModal";
 import { CompletionCheckerModal } from "./CompletionCheckerModal";
 import { ScreenPrintModal } from "./ScreenPrintModal";
 import { AmendIfaModal } from "./AmendIfaModal";
+import { P45DetailsModal } from "./P45DetailsModal";
 import { usePlanCode } from "../context/PlanCodeContext";
 
 type SubmenuItem = {
@@ -29,7 +30,7 @@ type MenuOption =
 type MenuItem = { label: string; options?: MenuOption[] };
 
 const OPTIONS_84: MenuOption[] = [
-  { label: "P45 Details" },
+  { label: "P45 Details", action: "p45-details" },
   { label: "Screen Print", shortcut: "F1", action: "screen-print" },
   { label: "Search", shortcut: "F5", action: "search" },
 ];
@@ -160,7 +161,7 @@ const MENU_ITEMS: MenuItem[] = [
       {
         label: "P45 details",
         hasSubmenu: true,
-        submenu: [{ label: "P45 Details" }],
+        submenu: [{ label: "P45 Details", action: "p45-details" }],
       },
       {
         label: "Monthly",
@@ -235,6 +236,7 @@ export function Header({ title }: { title: string }) {
   const [completionOpen, setCompletionOpen] = useState(false);
   const [screenPrintOpen, setScreenPrintOpen] = useState(false);
   const [amendIfaOpen, setAmendIfaOpen] = useState(false);
+  const [p45DetailsOpen, setP45DetailsOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const { planCode } = usePlanCode();
   const menuItems: MenuItem[] = MENU_ITEMS.map((m) => {
@@ -267,6 +269,7 @@ export function Header({ title }: { title: string }) {
     else if (action === "check-completion") setCompletionOpen(true);
     else if (action === "screen-print") setScreenPrintOpen(true);
     else if (action === "amend-ifa") setAmendIfaOpen(true);
+    else if (action === "p45-details") setP45DetailsOpen(true);
     else if (action === "search")
       window.dispatchEvent(new Event("clanad:open-find-policy"));
   };
@@ -417,6 +420,11 @@ export function Header({ title }: { title: string }) {
       <AmendIfaModal
         open={amendIfaOpen}
         onClose={() => setAmendIfaOpen(false)}
+      />
+
+      <P45DetailsModal
+        open={p45DetailsOpen}
+        onClose={() => setP45DetailsOpen(false)}
       />
     </header>
   );

@@ -1,29 +1,42 @@
 import { useState } from "react";
 import {
-  MdClose,
   MdCheck,
-  MdCancel,
+  MdClose,
   MdFirstPage,
   MdLastPage,
   MdChevronLeft,
   MdChevronRight,
+  MdSkipPrevious,
+  MdSearch,
+  MdManageSearch,
 } from "react-icons/md";
 
-const ILLUSTRATIONS = [
-  { quote: 929149, variant: 0, ifa: "SANDF-001", created: "18 Dec 2007", name: "Test44Mr Stanislas",          type: "PPA", lifeType: "JOINT",  age1: 64.75, user: "111003046", master: "No", status: "Printed", cocode: "STALW-00" },
-  { quote: 929543, variant: 0, ifa: "QUOTE-001", created: "17 Dec 2007", name: "Test44Ms M Graham",           type: "CPA", lifeType: "Single", age1: 73.75, user: "111002872", master: "No", status: "Printed", cocode: "STALW-00" },
-  { quote: 929549, variant: 0, ifa: "BARWE-001", created: "17 Dec 2007", name: "Test44Mr A Heseltine",        type: "PPA", lifeType: "JOINT",  age1: 64.75, user: "200000001", master: "No", status: "Printed", cocode: "STALW-00" },
-  { quote: 929550, variant: 0, ifa: "RIDIN-001", created: "17 Dec 2007", name: "Test44Mrs J Hamilton-Winter", type: "CPA", lifeType: "JOINT",  age1: 59.75, user: "106003101", master: "PR", status: "Printed", cocode: "STALW-00" },
-  { quote: 929590, variant: 0, ifa: "EASTS-001", created: "17 Dec 2007", name: "Test44Mr T Owens",            type: "CPA", lifeType: "JOINT",  age1: 59.75, user: "200000001", master: "PR", status: "Printed", cocode: "STALW-00" },
-  { quote: 929591, variant: 0, ifa: "ELEME-004", created: "18 Dec 2007", name: "Test44Mr M Chisholm",         type: "PPA", lifeType: "Single", age1: 60,    user: "111003046", master: "No", status: "Printed", cocode: "STALW-00" },
-  { quote: 929782, variant: 0, ifa: "QUOTE-001", created: "17 Dec 2007", name: "Test44Mr M Delapeyre",        type: "CPA", lifeType: "JOINT",  age1: 59.75, user: "200000001", master: "No", status: "Printed", cocode: "STALW-00" },
-  { quote: 930038, variant: 0, ifa: "OPENW-001", created: "18 Dec 2007", name: "Test44Mrs P Cadwell",         type: "CPA", lifeType: "JOINT",  age1: 58.25, user: "106003101", master: "No", status: "Printed", cocode: "STALW-00" },
-  { quote: 930041, variant: 0, ifa: "QUOTE-001", created: "18 Dec 2007", name: "Test44Mrs G Burrows",         type: "CPA", lifeType: "Single", age1: 59.75, user: "111002872", master: "No", status: "Printed", cocode: "STALW-00" },
-  { quote: 930059, variant: 0, ifa: "WENTW-002", created: "18 Dec 2007", name: "Test44Mr R Garnett",          type: "PPA", lifeType: "JOINT",  age1: 61.75, user: "111003046", master: "No", status: "Printed", cocode: "STALW-00" },
+const ILLUSTRATIONS: string[][] = [
+  ["929149", "0", "SANDF-001", "18 Dec 2007", "Test44Mr Stanislas",          "PPA", "JOINT",  "64.75", "111003046", "No", "Printed", "STALW-00"],
+  ["929543", "0", "QUOTE-001", "17 Dec 2007", "Test44Ms M Graham",           "CPA", "Single", "73.75", "111002872", "No", "Printed", "STALW-00"],
+  ["929549", "0", "BARWE-001", "17 Dec 2007", "Test44Mr A Heseltine",        "PPA", "JOINT",  "64.75", "200000001", "No", "Printed", "STALW-00"],
+  ["929550", "0", "RIDIN-001", "17 Dec 2007", "Test44Mrs J Hamilton-Winter", "CPA", "JOINT",  "59.75", "106003101", "PR", "Printed", "STALW-00"],
+  ["929590", "0", "EASTS-001", "17 Dec 2007", "Test44Mr T Owens",            "CPA", "JOINT",  "59.75", "200000001", "PR", "Printed", "STALW-00"],
+  ["929591", "0", "ELEME-004", "18 Dec 2007", "Test44Mr M Chisholm",         "PPA", "Single", "60.00", "111003046", "No", "Printed", "STALW-00"],
+  ["929782", "0", "QUOTE-001", "17 Dec 2007", "Test44Mr M Delapeyre",        "CPA", "JOINT",  "59.75", "200000001", "No", "Printed", "STALW-00"],
+  ["930038", "0", "OPENW-001", "18 Dec 2007", "Test44Mrs P Cadwell",         "CPA", "JOINT",  "58.25", "106003101", "No", "Printed", "STALW-00"],
+  ["930041", "0", "QUOTE-001", "18 Dec 2007", "Test44Mrs G Burrows",         "CPA", "Single", "59.75", "111002872", "No", "Printed", "STALW-00"],
+  ["930059", "0", "WENTW-002", "18 Dec 2007", "Test44Mr R Garnett",          "PPA", "JOINT",  "61.75", "111003046", "No", "Printed", "STALW-00"],
 ];
 
-const NAV_BTN =
-  "lve-btn lve-btn-secondary lve-btn-sm !px-2 !min-w-0 flex items-center justify-center disabled:opacity-40 disabled:cursor-not-allowed";
+const ILLUSTRATION_COLS = [
+  "Quote", "Variant(T)", "IFA", "Created", "Name", "Type",
+  "LifeType", "Age 1", "User", "Master", "Status", "COCODE",
+];
+
+const VARIANT_COLS = [
+  "Variant", "Series", "Created", "Username", "Type", "Life Type",
+  "Gross Annuity", "Amount", "TFC %", "TFC", "Dep %", "O/lap", "Gtee",
+];
+
+const navBtn =
+  "w-[44px] h-[44px] flex items-center justify-center rounded-[30px] border border-[#04589b] bg-white text-[#04589b] shadow-sm hover:bg-[#003578] hover:text-white hover:border-[#003578] disabled:opacity-30 disabled:cursor-not-allowed transition-colors";
+const divider = "h-6 w-px bg-[#BBBBBB]";
 
 export function PullQuoteModal({
   open,
@@ -32,190 +45,164 @@ export function PullQuoteModal({
   open: boolean;
   onClose: () => void;
 }) {
-  const [filterMode, setFilterMode] = useState<">=" | "=">(">=");
-  const [filterValue, setFilterValue] = useState("0");
-  const [selectedIdx, setSelectedIdx] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [monthlyCash, setMonthlyCash] = useState(false);
 
   if (!open) return null;
 
-  return (
-    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
-      <div className="lve-panel w-[940px] max-w-[96vw] max-h-[90vh] flex flex-col">
+  const total = ILLUSTRATIONS.length;
+  const atStart = currentIndex <= 0;
+  const atEnd = currentIndex >= total - 1;
 
-        {/* Modal header */}
-        <header className="flex items-center justify-between px-5 py-3 border-b border-[#d0d5dd] shrink-0">
-          <span className="font-['Livvic'] font-bold text-[15px] text-[#00263e]">Quote Lookup</span>
+  return (
+    <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
+      <div className="lve-panel bg-white w-[1100px] max-w-full max-h-[90vh] flex flex-col">
+
+        <header className="lve-panel-header flex items-center justify-between">
+          <span>Quote Lookup</span>
           <button
             type="button"
-            onClick={onClose}
-            className="lve-btn lve-btn-secondary lve-btn-sm !px-2"
+            className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-white hover:bg-[#d72714] hover:text-white transition-colors"
             aria-label="Close"
+            onClick={onClose}
           >
             <MdClose size={18} />
           </button>
         </header>
 
-        {/* Body */}
-        <div className="lve-panel-body flex flex-col gap-4 overflow-hidden">
+        <div className="lve-panel-body overflow-auto">
 
-          {/* ── Filter / nav toolbar ── */}
-          <div className="flex items-start gap-6 flex-wrap">
+          {/* Toolbar */}
+          <div className="flex flex-wrap items-center gap-3 mb-4">
 
             {/* Get Records */}
-            <div className="border border-[#d0d5dd] rounded-[8px] px-4 py-3">
-              <p className="font-['Livvic'] font-semibold text-[11px] text-[#00263e] uppercase tracking-wide mb-2">
+            <fieldset className="border border-[#BBBBBB] rounded-[8px] px-3 pt-1 pb-2">
+              <legend className="px-1 font-['Mulish'] text-[12px] font-semibold text-[#3d3d3d]">
                 Get Records
-              </p>
-              <div className="flex flex-col gap-2">
-                <label className="flex items-center gap-2 font-['Mulish'] text-[13px] text-[#3d3d3d] cursor-pointer">
-                  <input
-                    type="radio"
-                    name="pqFilter"
-                    checked={filterMode === ">="}
-                    onChange={() => setFilterMode(">=")}
-                    className="accent-[#006cf4] w-4 h-4"
-                  />
-                  <span className="font-semibold">&gt;=</span>
-                </label>
-                <label className="flex items-center gap-2 font-['Mulish'] text-[13px] text-[#3d3d3d] cursor-pointer">
-                  <input
-                    type="radio"
-                    name="pqFilter"
-                    checked={filterMode === "="}
-                    onChange={() => setFilterMode("=")}
-                    className="accent-[#006cf4] w-4 h-4"
-                  />
-                  <span className="font-semibold">=</span>
-                  <input
-                    type="text"
-                    value={filterValue}
-                    onChange={(e) => setFilterValue(e.target.value)}
-                    className="lve-input h-[32px] w-[80px] text-[13px]"
-                  />
-                </label>
+              </legend>
+              <div className="flex items-center gap-2">
+                <div className="flex flex-col gap-0.5">
+                  <label className="inline-flex items-center cursor-pointer">
+                    <input type="radio" name="pq-filter" defaultChecked className="w-3 h-3 accent-[#006cf4] cursor-pointer" />
+                  </label>
+                  <label className="inline-flex items-center cursor-pointer">
+                    <input type="radio" name="pq-filter" className="w-3 h-3 accent-[#006cf4] cursor-pointer" />
+                  </label>
+                </div>
+                <button
+                  type="button"
+                  className="w-7 h-7 inline-flex items-center justify-center rounded-[6px] border border-[#BBBBBB] bg-white text-[#04589b] hover:border-[#178830]"
+                >
+                  <MdManageSearch size={16} />
+                </button>
+                <input type="text" defaultValue="20275369" className="lve-input h-8 w-[160px]" />
               </div>
-            </div>
+            </fieldset>
 
-            {/* Nav buttons + counter */}
-            <div className="flex flex-col gap-1 justify-center pt-1">
-              <div className="flex items-center gap-1">
-                <button type="button" className={NAV_BTN} title="First">   <MdFirstPage   size={16} /></button>
-                <button type="button" className={NAV_BTN} title="Previous"><MdChevronLeft  size={16} /></button>
-                <button type="button" className={NAV_BTN} title="Next">    <MdChevronRight size={16} /></button>
-                <button type="button" className={NAV_BTN} title="Last">    <MdLastPage    size={16} /></button>
-              </div>
-              <span className="font-['Mulish'] text-[12px] text-[#7a7a7a] text-center">20275369</span>
-            </div>
+            <span className={divider} />
 
-            {/* Action buttons + checkbox */}
-            <div className="flex flex-col gap-3 justify-center flex-1">
-              <div className="flex items-center gap-2 flex-wrap">
-                <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm min-w-[80px] justify-center">
-                  Last 60
-                </button>
-                <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm min-w-[130px] justify-center">
-                  Locate (F3 Next)
-                </button>
-                <button type="button" className="lve-btn lve-btn-sm min-w-[70px] justify-center" disabled>
-                  <MdCheck size={15} />
-                  OK
-                </button>
-                <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm min-w-[90px] justify-center" onClick={onClose}>
-                  <MdCancel size={15} />
-                  Cancel
-                </button>
-              </div>
-              <label className="flex items-center gap-2 font-['Mulish'] text-[13px] text-[#3d3d3d] cursor-pointer select-none">
-                <input
-                  type="checkbox"
-                  checked={monthlyCash}
-                  onChange={(e) => setMonthlyCash(e.target.checked)}
-                  className="accent-[#006cf4] w-4 h-4"
-                />
-                Monthly Cash Policy
-              </label>
-            </div>
-          </div>
-
-          {/* ── Illustrations grid ── */}
-          <div className="flex flex-col overflow-hidden rounded-[8px] border border-[#d0d5dd]">
-            <div className="bg-[#eaf5f8] px-3 py-[6px] shrink-0 border-b border-[#d0d5dd]">
-              <span className="font-['Livvic'] font-bold text-[13px] text-[#00263e]">
-                Illustrations (Variant 0 only)
+            {/* Nav buttons */}
+            <div className="flex items-center gap-2">
+              <button type="button" onClick={() => setCurrentIndex(0)} disabled={atStart} title="First" className={navBtn}>
+                <MdFirstPage size={20} />
+              </button>
+              <button type="button" onClick={() => setCurrentIndex((i) => Math.max(0, i - 1))} disabled={atStart} title="Previous" className={navBtn}>
+                <MdChevronLeft size={20} />
+              </button>
+              <span className="px-2 min-w-[80px] text-center text-sm font-bold text-[#4a4a49] select-none font-['Mulish']">
+                {currentIndex + 1} of {total}
               </span>
+              <button type="button" onClick={() => setCurrentIndex((i) => Math.min(total - 1, i + 1))} disabled={atEnd} title="Next" className={navBtn}>
+                <MdChevronRight size={20} />
+              </button>
+              <button type="button" onClick={() => setCurrentIndex(total - 1)} disabled={atEnd} title="Last" className={navBtn}>
+                <MdLastPage size={20} />
+              </button>
             </div>
-            <div className="overflow-auto" style={{ maxHeight: 220 }}>
-              <table className="w-full text-[12px] font-['Mulish'] border-collapse">
-                <thead className="sticky top-0">
-                  <tr className="bg-[#002f5c] text-white text-left">
-                    {["Quote","Variant(T)","IFA","Created","Name","Type","LifeType","Age 1","User","Master","Status","COCODE"].map((h) => (
-                      <th key={h} className="px-2 py-[5px] font-semibold border-r border-[#1a4a7a] last:border-r-0 whitespace-nowrap">
-                        {h}
-                      </th>
-                    ))}
-                  </tr>
-                </thead>
-                <tbody>
-                  {ILLUSTRATIONS.map((row, i) => {
-                    const sel = i === selectedIdx;
-                    return (
-                      <tr
-                        key={row.quote}
-                        onClick={() => setSelectedIdx(i)}
-                        className={`cursor-pointer border-b border-[#e3e6ea] transition-colors ${
-                          sel
-                            ? "bg-[#006cf4] text-white"
-                            : i % 2 === 0
-                              ? "bg-white hover:bg-[#eaf5f8] text-[#3d3d3d]"
-                              : "bg-[#f7f9fc] hover:bg-[#eaf5f8] text-[#3d3d3d]"
-                        }`}
-                      >
-                        <td className="px-2 py-[3px] border-r border-[#e3e6ea]">{row.quote}</td>
-                        <td className="px-2 py-[3px] border-r border-[#e3e6ea] text-center">{row.variant}</td>
-                        <td className="px-2 py-[3px] border-r border-[#e3e6ea]">{row.ifa}</td>
-                        <td className="px-2 py-[3px] border-r border-[#e3e6ea] whitespace-nowrap">{row.created}</td>
-                        <td className="px-2 py-[3px] border-r border-[#e3e6ea]">{row.name}</td>
-                        <td className="px-2 py-[3px] border-r border-[#e3e6ea]">{row.type}</td>
-                        <td className="px-2 py-[3px] border-r border-[#e3e6ea]">{row.lifeType}</td>
-                        <td className="px-2 py-[3px] border-r border-[#e3e6ea] text-right">{row.age1}</td>
-                        <td className="px-2 py-[3px] border-r border-[#e3e6ea]">{row.user}</td>
-                        <td className="px-2 py-[3px] border-r border-[#e3e6ea]">{row.master}</td>
-                        <td className="px-2 py-[3px] border-r border-[#e3e6ea]">{row.status}</td>
-                        <td className="px-2 py-[3px]">{row.cocode}</td>
-                      </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
+
+            <span className={divider} />
+
+            <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
+              <MdSkipPrevious size={16} />
+              Last 60
+            </button>
+            <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
+              <MdSearch size={16} />
+              Locate (F3 Next)
+            </button>
+
+            <label className="inline-flex items-center gap-2 font-['Mulish'] text-[13px] text-[#3d3d3d] cursor-pointer">
+              <input
+                type="checkbox"
+                checked={monthlyCash}
+                onChange={(e) => setMonthlyCash(e.target.checked)}
+                className="accent-[#006cf4]"
+              />
+              Monthly Cash Policy
+            </label>
+
+            <div className="ml-auto flex items-center gap-2">
+              <button type="button" className="lve-btn" onClick={onClose}>
+                <MdCheck size={16} />
+                OK
+              </button>
+              <button type="button" className="lve-btn lve-btn-secondary" onClick={onClose}>
+                <MdClose size={16} />
+                Cancel
+              </button>
             </div>
           </div>
 
-          {/* ── Variants grid ── */}
-          <div className="flex flex-col rounded-[8px] border border-[#d0d5dd]">
-            <div className="bg-[#eaf5f8] px-3 py-[6px] shrink-0 border-b border-[#d0d5dd]">
-              <span className="font-['Livvic'] font-bold text-[13px] text-[#00263e]">Variants</span>
-            </div>
-            <div className="overflow-auto" style={{ maxHeight: 110 }}>
-              <table className="w-full text-[12px] font-['Mulish'] border-collapse">
-                <thead>
-                  <tr className="bg-[#002f5c] text-white text-left">
-                    {["Variant","Series","Created","Username","Type","Life Type","Gross Annuity","Amount","TFC %","TFC","Dep %","O/lap","Gtee"].map((h) => (
-                      <th key={h} className="px-2 py-[5px] font-semibold border-r border-[#1a4a7a] last:border-r-0 whitespace-nowrap">
-                        {h}
-                      </th>
+          {/* Illustrations grid */}
+          <h4 className="font-['Livvic'] text-[13px] font-semibold text-[#3d3d3d] mb-1">
+            Illustrations (Variant 0 only)
+          </h4>
+          <div className="overflow-auto border border-[#BBBBBB] rounded-[8px] mb-4">
+            <table className="lve-grid">
+              <thead>
+                <tr>
+                  {ILLUSTRATION_COLS.map((c) => (
+                    <th key={c} className="whitespace-nowrap !px-3">{c}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {ILLUSTRATIONS.map((row, i) => (
+                  <tr
+                    key={i}
+                    onClick={() => setCurrentIndex(i)}
+                    className={`cursor-pointer ${i === currentIndex ? "bg-[#eaf5f8]" : ""}`}
+                  >
+                    {row.map((v, j) => (
+                      <td key={j} className="!px-3 whitespace-nowrap">{v}</td>
                     ))}
                   </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td colSpan={13} className="px-2 py-4 text-center text-[#b8b8b8] font-['Mulish'] text-[12px]">
-                      No variants
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Variants grid */}
+          <h4 className="font-['Livvic'] text-[13px] font-semibold text-[#3d3d3d] mb-1">
+            Variants
+          </h4>
+          <div className="overflow-auto border border-[#BBBBBB] rounded-[8px]">
+            <table className="lve-grid">
+              <thead>
+                <tr>
+                  {VARIANT_COLS.map((c) => (
+                    <th key={c} className="whitespace-nowrap !px-3">{c}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td colSpan={VARIANT_COLS.length} className="!px-3 py-12 text-center text-[#888] font-['Mulish']">
+                    No records
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
         </div>

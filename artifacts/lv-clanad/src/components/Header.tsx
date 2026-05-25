@@ -9,6 +9,7 @@ import { ScreenPrintModal } from "./ScreenPrintModal";
 import { AmendIfaModal } from "./AmendIfaModal";
 import { P45DetailsModal } from "./P45DetailsModal";
 import { SetDeadModal } from "./SetDeadModal";
+import { CedingSchemeModal } from "./CedingSchemeModal";
 import { usePlanCode } from "../context/PlanCodeContext";
 
 type SubmenuItem = {
@@ -54,7 +55,7 @@ const PROCESS_84: MenuOption[] = [
   },
   { label: "PLA Cancellation", action: "pla-cancellation" },
   { kind: "separator" },
-  { label: "Ceding Scheme Details" },
+  { label: "Ceding Scheme Details", action: "ceding-scheme" },
   { kind: "separator" },
   { label: "LTC Benefit", disabled: true },
   { label: "Cancel LTC", disabled: true },
@@ -242,6 +243,7 @@ export function Header({ title }: { title: string }) {
   const [plaCancellationOpen, setPlaCancellationOpen] = useState(false);
   const [suspendClicks, setSuspendClicks] = useState(0);
   const [suspendOpen, setSuspendOpen] = useState(false);
+  const [cedingOpen, setCedingOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const { planCode } = usePlanCode();
   const menuItems: MenuItem[] = MENU_ITEMS.map((m) => {
@@ -278,6 +280,7 @@ export function Header({ title }: { title: string }) {
     else if (action === "set-dead-life-one") setSetDeadOpen(true);
     else if (action === "set-dead-life-two") setNoSecondLifeOpen(true);
     else if (action === "pla-cancellation") setPlaCancellationOpen(true);
+    else if (action === "ceding-scheme") setCedingOpen(true);
     else if (action === "suspend") {
       if (suspendClicks === 0) {
         setSuspendClicks(1);
@@ -446,6 +449,11 @@ export function Header({ title }: { title: string }) {
       <SetDeadModal
         open={setDeadOpen}
         onClose={() => setSetDeadOpen(false)}
+      />
+
+      <CedingSchemeModal
+        open={cedingOpen}
+        onClose={() => setCedingOpen(false)}
       />
 
       {suspendOpen && (

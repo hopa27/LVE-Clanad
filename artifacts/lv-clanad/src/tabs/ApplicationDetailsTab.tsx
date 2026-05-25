@@ -2,6 +2,7 @@ import { Field, TextInput, SelectInput, Checkbox, Section } from "../components/
 import { ConnectedAddress } from "../components/ConnectedAddress";
 import { DatePicker } from "../components/DatePicker";
 import { usePlanCode } from "../context/PlanCodeContext";
+import { MdKeyboardArrowDown } from "react-icons/md";
 
 export function ApplicationDetailsTab() {
   const { planCode } = usePlanCode();
@@ -59,10 +60,19 @@ export function ApplicationDetailsTab() {
           </Field>
           <Field label="PostADay:"><Checkbox checked={isPlan87 || isPlan84} /></Field>
           <Field label="Transfer from Beneficiary Drawdown?:">
-            <SelectInput
-              value="Unknown"
-              options={["Yes", "No", "Unknown"]}
-            />
+            <div className="relative">
+              <select defaultValue="Unknown" className="lve-input pr-12 appearance-none">
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+                <option value="Unknown">Unknown</option>
+              </select>
+              <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none">
+                <span className="h-6 w-px bg-[#BBBBBB]" />
+                <span className="px-3 text-[#006cf4]">
+                  <MdKeyboardArrowDown size={22} />
+                </span>
+              </div>
+            </div>
           </Field>
         </div>
 

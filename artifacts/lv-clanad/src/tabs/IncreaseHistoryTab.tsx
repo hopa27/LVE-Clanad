@@ -69,7 +69,7 @@ export function IncreaseHistoryTab() {
             <thead>
               <tr>
                 {COLUMNS.map((c) => (
-                  <th key={c} className="!px-4 max-w-[120px]">{c}</th>
+                  <th key={c} className="!px-4 max-w-[120px]"><span className="line-clamp-2">{c}</span></th>
                 ))}
               </tr>
             </thead>

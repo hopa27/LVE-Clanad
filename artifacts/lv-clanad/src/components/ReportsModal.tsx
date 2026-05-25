@@ -152,7 +152,7 @@ export function ReportsModal({
   onClose: () => void;
 }) {
   const [systemName, setSystemName] = useState("DANAD96");
-  const [startDate, setStartDate] = useState(format(new Date(), "dd/MM/yyyy"));
+  const [startDate, setStartDate] = useState("06/06/2017");
   const [endDate, setEndDate] = useState("17/04/2017");
   const [printDefault, setPrintDefault] = useState(false);
   const [selected, setSelected] = useState(0);
@@ -178,6 +178,9 @@ export function ReportsModal({
     } else if (v === "CHEQUE REQUISITION") {
       setStartDate("01/04/2016");
       setEndDate("21/09/2026");
+    } else if (v === "DANAD96") {
+      setStartDate("06/06/2017");
+      setEndDate("17/04/2017");
     }
   };
 

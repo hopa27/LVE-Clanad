@@ -24,3 +24,9 @@ id = "hFXjbwl394tzA5sn--d1C"
 uri = "file://attached_assets/CLANAD_DIGEST(Angular)_LVE.md"
 type = "text"
 title = "CLANAD Application Digest (Angular) — LVE Design System"
+
+[[outputs]]
+id = "MBpus5xa1ngnyWeAhS9Nh"
+uri = "file://artifacts/lv-clanad/public/CLANAD_Docs_Angular_LVE.zip"
+type = "unspecified"
+title = "CLANAD Docs — Digest + Screen Flow (ZIP)"

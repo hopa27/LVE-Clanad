@@ -12,3 +12,9 @@ id = "AnnM68rPxi67cIgmGaoU-"
 uri = "file://docs/CHEQUE_LOGGER_DIGEST(Angular).md"
 type = "text"
 title = "Cheque Logger Digest (Angular)"
+
+[[outputs]]
+id = "2TYdLgo1yhHV_WUCMIVw2"
+uri = "file://attached_assets/CLANAD_SCREEN_FLOW(Angular)_LVE.md"
+type = "text"
+title = "CLANAD Screen Flow (Angular) — LVE Design System"

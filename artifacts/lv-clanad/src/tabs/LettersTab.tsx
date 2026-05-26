@@ -66,8 +66,7 @@ export function LettersTab() {
 
 function LettersTabInner() {
   const { planCode } = usePlanCode();
-  const isPlan0  = planCode === "0";
-  const isPlan84 = planCode === "84";
+  const isPlan0 = planCode === "0";
 
   const [selectedLetter, setSelectedLetter] = useState("");
   const [letterError, setLetterError] = useState(false);
@@ -191,7 +190,7 @@ function LettersTabInner() {
                 <TextInput
                   value={faxValue}
                   placeholder="Fax number"
-                  disabled={!cfg.fax || isPlan84}
+                  disabled={!cfg.fax}
                   onChange={setFaxValue}
                 />
               </div>
@@ -202,7 +201,7 @@ function LettersTabInner() {
                 <TextInput
                   value={emailValue}
                   placeholder="recipient@example.com"
-                  disabled={!cfg.email || isPlan84}
+                  disabled={!cfg.email}
                   onChange={setEmailValue}
                 />
               </div>

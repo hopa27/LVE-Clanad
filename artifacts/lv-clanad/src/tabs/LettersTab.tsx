@@ -44,13 +44,37 @@ function LettersTabInner() {
   const [selectedLetter, setSelectedLetter] = useState("");
   const [letterError, setLetterError] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
+  const [distInfoOpen, setDistInfoOpen] = useState(false);
+
+  // Distribution method state
+  const [printChecked, setPrintChecked] = useState(false);
+  const [faxValue, setFaxValue] = useState(isPlan0 ? "dbedFaxNo" : "");
+  const [emailValue, setEmailValue] = useState(isPlan0 ? "dbedEmail" : "");
+  const [sendToClient, setSendToClient] = useState(false);
+  const [sendToIFA, setSendToIFA] = useState(false);
+  const [sendToCeding, setSendToCeding] = useState(false);
+  const [sendToOther, setSendToOther] = useState(false);
 
   const noLetter = selectedLetter === "";
+
+  const hasDistribution =
+    printChecked ||
+    faxValue.trim() !== "" ||
+    emailValue.trim() !== "" ||
+    sendToClient ||
+    sendToIFA ||
+    sendToCeding ||
+    sendToOther;
 
   function handleGenerate() {
     if (noLetter) {
       setLetterError(true);
       setInfoOpen(true);
+      return;
+    }
+    if (!hasDistribution) {
+      setDistInfoOpen(true);
+      return;
     }
   }
 
@@ -121,19 +145,19 @@ function LettersTabInner() {
             <div className="flex items-center gap-3">
               <label className="lve-label !mb-0 text-right shrink-0 w-[70px]">Print:</label>
               <div className="flex-1 min-w-0">
-                <Checkbox disabled={noLetter} />
+                <Checkbox disabled={noLetter} onChange={setPrintChecked} />
               </div>
             </div>
             <div className="flex items-center gap-3">
               <label className="lve-label !mb-0 text-right shrink-0 w-[70px]">Fax:</label>
               <div className="flex-1 min-w-0">
-                <TextInput value={isPlan0 ? "dbedFaxNo" : ""} placeholder="Fax number" disabled={noLetter || isPlan84} />
+                <TextInput value={faxValue} placeholder="Fax number" disabled={noLetter || isPlan84} onChange={setFaxValue} />
               </div>
             </div>
             <div className="flex items-center gap-3">
               <label className="lve-label !mb-0 text-right shrink-0 w-[70px]">Email:</label>
               <div className="flex-1 min-w-0">
-                <TextInput value={isPlan0 ? "dbedEmail" : ""} placeholder="recipient@example.com" disabled={noLetter || isPlan84} />
+                <TextInput value={emailValue} placeholder="recipient@example.com" disabled={noLetter || isPlan84} onChange={setEmailValue} />
               </div>
             </div>
             {isPlan0 && (
@@ -151,10 +175,10 @@ function LettersTabInner() {
               Send To
             </div>
             <div className="grid grid-cols-2 gap-y-2">
-              <Checkbox label="Client" disabled={noLetter || isPlan84} />
-              <Checkbox label="IFA" disabled={noLetter || isPlan84} />
-              <Checkbox label="Ceding Scheme" disabled={noLetter || isPlan84} />
-              <Checkbox label="Other" disabled={noLetter || isPlan84} />
+              <Checkbox label="Client" disabled={noLetter || isPlan84} onChange={setSendToClient} />
+              <Checkbox label="IFA" disabled={noLetter || isPlan84} onChange={setSendToIFA} />
+              <Checkbox label="Ceding Scheme" disabled={noLetter || isPlan84} onChange={setSendToCeding} />
+              <Checkbox label="Other" disabled={noLetter || isPlan84} onChange={setSendToOther} />
             </div>
           </div>
         </Section>
@@ -183,6 +207,33 @@ function LettersTabInner() {
                 type="button"
                 className="lve-btn lve-btn-sm min-w-[80px] justify-center"
                 onClick={() => setInfoOpen(false)}
+              >
+                <MdCheck size={16} /> OK
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    )}
+
+    {distInfoOpen && (
+      <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
+        <div className="bg-white rounded-[8px] shadow-xl border border-[#bcd] w-[340px] overflow-hidden">
+          <header className="bg-[#00263e] text-white font-['Livvic'] text-[14px] font-semibold px-4 py-2">
+            Information
+          </header>
+          <div className="p-5">
+            <div className="flex items-start gap-3">
+              <MdInfoOutline size={32} className="text-[#006cf4] shrink-0 mt-0.5" />
+              <p className="font-['Mulish'] text-[14px] text-[#3d3d3d] pt-1">
+                Please select at least one distribution method.
+              </p>
+            </div>
+            <div className="mt-5 flex items-center justify-center">
+              <button
+                type="button"
+                className="lve-btn lve-btn-sm min-w-[80px] justify-center"
+                onClick={() => setDistInfoOpen(false)}
               >
                 <MdCheck size={16} /> OK
               </button>

@@ -121,10 +121,12 @@ export function Checkbox({
   label,
   checked = false,
   disabled = false,
+  onChange,
 }: {
   label?: string;
   checked?: boolean;
   disabled?: boolean;
+  onChange?: (checked: boolean) => void;
 }) {
   const { editing } = useEditMode();
   const [isChecked, setIsChecked] = useState(checked);
@@ -144,7 +146,10 @@ export function Checkbox({
           type="checkbox"
           checked={isChecked}
           disabled={isLocked}
-          onChange={(e) => setIsChecked(e.target.checked)}
+          onChange={(e) => {
+            setIsChecked(e.target.checked);
+            onChange?.(e.target.checked);
+          }}
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
           className="peer absolute inset-0 opacity-0 cursor-pointer disabled:cursor-not-allowed"

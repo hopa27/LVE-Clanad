@@ -44,6 +44,7 @@ export function TextInput({
   placeholder,
   error = false,
   className = "",
+  onChange,
 }: {
   value?: string;
   readOnly?: boolean;
@@ -52,17 +53,20 @@ export function TextInput({
   placeholder?: string;
   error?: boolean;
   className?: string;
+  onChange?: (value: string) => void;
 }) {
   const { editing } = useEditMode();
-  const lockedReadOnly = readOnly || !editing;
+  const isControlled = onChange !== undefined;
+  const lockedReadOnly = readOnly || (!editing && !isControlled);
   return (
     <input
       type={type}
-      defaultValue={value}
+      {...(isControlled ? { value } : { defaultValue: value })}
       readOnly={lockedReadOnly}
       disabled={disabled}
       placeholder={placeholder}
       data-error={error || undefined}
+      onChange={isControlled ? (e) => onChange(e.target.value) : undefined}
       className={`lve-input ${
         lockedReadOnly && !disabled ? "bg-[#fafafa] cursor-default" : ""
       } ${className}`}

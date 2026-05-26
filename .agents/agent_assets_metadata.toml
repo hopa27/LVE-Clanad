@@ -30,3 +30,9 @@ id = "MBpus5xa1ngnyWeAhS9Nh"
 uri = "file://artifacts/lv-clanad/public/CLANAD_Docs_Angular_LVE.zip"
 type = "unspecified"
 title = "CLANAD Docs — Digest + Screen Flow (ZIP)"
+
+[[outputs]]
+id = "cRiBZpuHVcDD54UeWNoPw"
+uri = "file://artifacts/lv-clanad/public/ChequeLogger_Docs_Angular_LVE.zip"
+type = "unspecified"
+title = "Cheque Logger Docs — Screen Flow + Digest (ZIP)"

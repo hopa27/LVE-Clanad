@@ -18,3 +18,9 @@ id = "2TYdLgo1yhHV_WUCMIVw2"
 uri = "file://attached_assets/CLANAD_SCREEN_FLOW(Angular)_LVE.md"
 type = "text"
 title = "CLANAD Screen Flow (Angular) — LVE Design System"
+
+[[outputs]]
+id = "hFXjbwl394tzA5sn--d1C"
+uri = "file://attached_assets/CLANAD_DIGEST(Angular)_LVE.md"
+type = "text"
+title = "CLANAD Application Digest (Angular) — LVE Design System"

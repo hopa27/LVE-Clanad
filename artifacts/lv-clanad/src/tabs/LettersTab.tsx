@@ -29,6 +29,33 @@ const LETTERS = [
   "Transfer Forms",
 ];
 
+type DistConfig = {
+  print: boolean;
+  fax: boolean;
+  email: boolean;
+  sendTo: { client: boolean; ifa: boolean; ceding: boolean; other: boolean };
+};
+
+const LETTER_DIST: Record<string, DistConfig> = {
+  "Chaser Letter OS Application Client": { print: true,  fax: true,  email: true,  sendTo: { client: true,  ifa: false, ceding: false, other: false } },
+  "Chaser Letter OS Application IFA":    { print: true,  fax: true,  email: true,  sendTo: { client: false, ifa: true,  ceding: false, other: false } },
+  "Claim Form":                           { print: true,  fax: false, email: true,  sendTo: { client: true,  ifa: true,  ceding: false, other: false } },
+  "Completion Pack":                      { print: true,  fax: false, email: true,  sendTo: { client: true,  ifa: true,  ceding: false, other: true  } },
+  "IFA Acceptance Pack":                  { print: true,  fax: true,  email: true,  sendTo: { client: false, ifa: true,  ceding: false, other: false } },
+  "IRF Acceptance Pack inc Client Ltr":   { print: true,  fax: true,  email: true,  sendTo: { client: true,  ifa: false, ceding: true,  other: false } },
+  "IRF Letter":                           { print: true,  fax: true,  email: false, sendTo: { client: false, ifa: false, ceding: true,  other: false } },
+  "MPAA Letter":                          { print: true,  fax: false, email: true,  sendTo: { client: true,  ifa: false, ceding: false, other: true  } },
+  "Plan Schedule":                        { print: true,  fax: false, email: true,  sendTo: { client: true,  ifa: true,  ceding: false, other: false } },
+  "Return Original Certificates":         { print: true,  fax: false, email: false, sendTo: { client: true,  ifa: false, ceding: false, other: false } },
+  "Rewrite Completion Pack":              { print: true,  fax: false, email: true,  sendTo: { client: true,  ifa: true,  ceding: false, other: true  } },
+  "Transfer Forms":                       { print: true,  fax: true,  email: false, sendTo: { client: true,  ifa: false, ceding: true,  other: false } },
+};
+
+const NO_DIST: DistConfig = {
+  print: false, fax: false, email: false,
+  sendTo: { client: false, ifa: false, ceding: false, other: false },
+};
+
 export function LettersTab() {
   return (
     <EditModeContext.Provider value={ALWAYS_EDITING}>
@@ -39,35 +66,36 @@ export function LettersTab() {
 
 function LettersTabInner() {
   const { planCode } = usePlanCode();
-  const isPlan0 = planCode === "0";
+  const isPlan0  = planCode === "0";
   const isPlan84 = planCode === "84";
+
   const [selectedLetter, setSelectedLetter] = useState("");
   const [letterError, setLetterError] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
   const [distInfoOpen, setDistInfoOpen] = useState(false);
 
-  // Distribution method state
+  // Distribution method state — reset via key when letter changes
   const [printChecked, setPrintChecked] = useState(false);
-  const [faxValue, setFaxValue] = useState(isPlan0 ? "dbedFaxNo" : "");
-  const [emailValue, setEmailValue] = useState(isPlan0 ? "dbedEmail" : "");
-  const [sendToClient, setSendToClient] = useState(false);
-  const [sendToIFA, setSendToIFA] = useState(false);
-  const [sendToCeding, setSendToCeding] = useState(false);
-  const [sendToOther, setSendToOther] = useState(false);
+  const [faxValue,     setFaxValue]     = useState("");
+  const [emailValue,   setEmailValue]   = useState("");
+  const [sendToClient,  setSendToClient]  = useState(false);
+  const [sendToIFA,     setSendToIFA]     = useState(false);
+  const [sendToCeding,  setSendToCeding]  = useState(false);
+  const [sendToOther,   setSendToOther]   = useState(false);
 
-  const noLetter = selectedLetter === "";
+  const cfg = selectedLetter ? (LETTER_DIST[selectedLetter] ?? NO_DIST) : NO_DIST;
 
   const hasDistribution =
-    printChecked ||
-    faxValue.trim() !== "" ||
-    emailValue.trim() !== "" ||
-    sendToClient ||
-    sendToIFA ||
-    sendToCeding ||
-    sendToOther;
+    (cfg.print  && printChecked)        ||
+    (cfg.fax    && faxValue.trim() !== "") ||
+    (cfg.email  && emailValue.trim() !== "") ||
+    (cfg.sendTo.client  && sendToClient)  ||
+    (cfg.sendTo.ifa     && sendToIFA)     ||
+    (cfg.sendTo.ceding  && sendToCeding)  ||
+    (cfg.sendTo.other   && sendToOther);
 
   function handleGenerate() {
-    if (noLetter) {
+    if (!selectedLetter) {
       setLetterError(true);
       setInfoOpen(true);
       return;
@@ -81,6 +109,14 @@ function LettersTabInner() {
   function handleLetterChange(v: string) {
     setSelectedLetter(v);
     if (v) setLetterError(false);
+    // Reset distribution state when letter changes
+    setPrintChecked(false);
+    setFaxValue("");
+    setEmailValue(isPlan0 && v ? "dbedEmail" : "");
+    setSendToClient(false);
+    setSendToIFA(false);
+    setSendToCeding(false);
+    setSendToOther(false);
   }
 
   return (
@@ -139,32 +175,43 @@ function LettersTabInner() {
         />
       </Section>
 
-      <div className="space-y-4">
+      {/* Distribution Info — keyed so checkboxes reset on letter change */}
+      <div className="space-y-4" key={selectedLetter}>
         <Section title="Distribution Info">
           <div className="space-y-3">
             <div className="flex items-center gap-3">
               <label className="lve-label !mb-0 text-right shrink-0 w-[70px]">Print:</label>
               <div className="flex-1 min-w-0">
-                <Checkbox disabled={noLetter} onChange={setPrintChecked} />
+                <Checkbox disabled={!cfg.print} onChange={setPrintChecked} />
               </div>
             </div>
             <div className="flex items-center gap-3">
               <label className="lve-label !mb-0 text-right shrink-0 w-[70px]">Fax:</label>
               <div className="flex-1 min-w-0">
-                <TextInput value={faxValue} placeholder="Fax number" disabled={noLetter || isPlan84} onChange={setFaxValue} />
+                <TextInput
+                  value={faxValue}
+                  placeholder="Fax number"
+                  disabled={!cfg.fax || isPlan84}
+                  onChange={setFaxValue}
+                />
               </div>
             </div>
             <div className="flex items-center gap-3">
               <label className="lve-label !mb-0 text-right shrink-0 w-[70px]">Email:</label>
               <div className="flex-1 min-w-0">
-                <TextInput value={emailValue} placeholder="recipient@example.com" disabled={noLetter || isPlan84} onChange={setEmailValue} />
+                <TextInput
+                  value={emailValue}
+                  placeholder="recipient@example.com"
+                  disabled={!cfg.email || isPlan84}
+                  onChange={setEmailValue}
+                />
               </div>
             </div>
             {isPlan0 && (
               <div className="flex items-center gap-3">
                 <label className="lve-label !mb-0 text-right shrink-0 w-[70px]">Archive:</label>
                 <div className="flex-1 min-w-0">
-                  <Checkbox disabled={noLetter} />
+                  <Checkbox disabled={!selectedLetter} />
                 </div>
               </div>
             )}
@@ -175,10 +222,10 @@ function LettersTabInner() {
               Send To
             </div>
             <div className="grid grid-cols-2 gap-y-2">
-              <Checkbox label="Client" disabled={noLetter || isPlan84} onChange={setSendToClient} />
-              <Checkbox label="IFA" disabled={noLetter || isPlan84} onChange={setSendToIFA} />
-              <Checkbox label="Ceding Scheme" disabled={noLetter || isPlan84} onChange={setSendToCeding} />
-              <Checkbox label="Other" disabled={noLetter || isPlan84} onChange={setSendToOther} />
+              <Checkbox label="Client"        disabled={!cfg.sendTo.client}  onChange={setSendToClient}  />
+              <Checkbox label="IFA"           disabled={!cfg.sendTo.ifa}     onChange={setSendToIFA}     />
+              <Checkbox label="Ceding Scheme" disabled={!cfg.sendTo.ceding}  onChange={setSendToCeding}  />
+              <Checkbox label="Other"         disabled={!cfg.sendTo.other}   onChange={setSendToOther}   />
             </div>
           </div>
         </Section>
@@ -203,11 +250,7 @@ function LettersTabInner() {
               </p>
             </div>
             <div className="mt-5 flex items-center justify-center">
-              <button
-                type="button"
-                className="lve-btn lve-btn-sm min-w-[80px] justify-center"
-                onClick={() => setInfoOpen(false)}
-              >
+              <button type="button" className="lve-btn lve-btn-sm min-w-[80px] justify-center" onClick={() => setInfoOpen(false)}>
                 <MdCheck size={16} /> OK
               </button>
             </div>
@@ -230,11 +273,7 @@ function LettersTabInner() {
               </p>
             </div>
             <div className="mt-5 flex items-center justify-center">
-              <button
-                type="button"
-                className="lve-btn lve-btn-sm min-w-[80px] justify-center"
-                onClick={() => setDistInfoOpen(false)}
-              >
+              <button type="button" className="lve-btn lve-btn-sm min-w-[80px] justify-center" onClick={() => setDistInfoOpen(false)}>
                 <MdCheck size={16} /> OK
               </button>
             </div>

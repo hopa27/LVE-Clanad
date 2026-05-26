@@ -73,6 +73,8 @@ type ColumnKey =
   | "policyNo"
   | "cocode";
 
+const PLAN0_VISIBLE = new Set<ColumnKey>(["policyRef", "planType", "planCode", "surname"]);
+
 const COLUMNS: { key: ColumnKey; label: string; align?: "left" | "right" }[] = [
   { key: "policyRef",     label: "POLICY_REF",      align: "right" },
   { key: "planType",      label: "PLANTYPE" },
@@ -252,7 +254,7 @@ export function FindPolicyModal({
                             c.align === "right" ? "text-right" : ""
                           }`}
                         >
-                          {p[c.key]}
+                          {p.planCode === "0" && !PLAN0_VISIBLE.has(c.key) ? "" : p[c.key]}
                         </td>
                       ))}
                     </tr>

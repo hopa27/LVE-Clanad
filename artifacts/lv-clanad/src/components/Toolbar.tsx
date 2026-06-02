@@ -47,6 +47,7 @@ export function Toolbar() {
   const { planCode } = usePlanCode();
   const isPlan90 = planCode === "90";
   const isPlan84 = planCode === "84";
+  const isPlan51 = planCode === "51";
   const [newAppConfirm, setNewAppConfirm] = useState(false);
   const [simAppConfirm, setSimAppConfirm] = useState(false);
   const [quoteLookupOpen, setQuoteLookupOpen] = useState(false);
@@ -65,15 +66,15 @@ export function Toolbar() {
 
   const TOOLS: Tool[] = [
     { label: "New App", icon: MdAdd, enabled: !editing, action: "new-app" },
-    { label: "New Quote", icon: MdNoteAdd, enabled: !editing && !isPlan84 && !isPlan90, action: "new-quote" },
-    { label: "Sim App", icon: MdContentCopy, enabled: !editing, action: "sim-app" },
+    { label: "New Quote", icon: MdNoteAdd, enabled: !editing && !isPlan84 && !isPlan90 && !isPlan51, action: "new-quote" },
+    { label: "Sim App", icon: MdContentCopy, enabled: !editing && !isPlan51, action: "sim-app" },
     {
       label: editing ? "Save" : "Edit",
       icon: editing ? MdSave : MdEdit,
       enabled: true,
       action: "edit-toggle",
     },
-    { label: "Cancel", icon: MdBlock, enabled: editing, action: "edit-cancel" },
+    { label: "Cancel", icon: MdBlock, enabled: editing && !isPlan51, action: "edit-cancel" },
     { label: "Search", icon: MdSearch, enabled: !editing, action: "search" },
     { label: "Log", icon: MdHistory, enabled: !editing, action: "log" },
     { label: "CRS", icon: MdStorage, enabled: !editing, action: "crs" },

@@ -307,18 +307,23 @@ export function Header({ title }: { title: string }) {
   const [pullQuoteOpen, setPullQuoteOpen] = useState(false);
   const navRef = useRef<HTMLElement>(null);
   const { planCode } = usePlanCode();
-  const menuItems: MenuItem[] = MENU_ITEMS.map((m) => {
-    if (planCode === "87" && m.label === "Supervisor")
-      return { ...m, options: SUPERVISOR_87 };
-    if (planCode === "84" || planCode === "90") {
-      if (m.label === "Options") return { ...m, options: OPTIONS_84 };
-      if (m.label === "Process") return { ...m, options: PROCESS_84 };
-      if (m.label === "Print") return { ...m, options: PRINT_84 };
-      if (m.label === "Supervisor")
-        return { ...m, options: planCode === "90" ? SUPERVISOR_90 : SUPERVISOR_84 };
-    }
-    return m;
-  });
+  const menuItems: MenuItem[] = MENU_ITEMS
+    .filter((m) => {
+      if (planCode === "51") return m.label === "Options" || m.label === "Print" || m.label === "Help";
+      return true;
+    })
+    .map((m) => {
+      if (planCode === "87" && m.label === "Supervisor")
+        return { ...m, options: SUPERVISOR_87 };
+      if (planCode === "84" || planCode === "90") {
+        if (m.label === "Options") return { ...m, options: OPTIONS_84 };
+        if (m.label === "Process") return { ...m, options: PROCESS_84 };
+        if (m.label === "Print") return { ...m, options: PRINT_84 };
+        if (m.label === "Supervisor")
+          return { ...m, options: planCode === "90" ? SUPERVISOR_90 : SUPERVISOR_84 };
+      }
+      return m;
+    });
 
   useEffect(() => {
     function onDocClick(e: MouseEvent) {

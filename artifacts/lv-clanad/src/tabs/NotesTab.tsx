@@ -10,22 +10,22 @@ import {
 } from "react-icons/md";
 import { usePlanCode } from "../context/PlanCodeContext";
 
-function NoteButtons({ disableEditDelete = false }: { disableEditDelete?: boolean }) {
+function NoteButtons({ disableEditDelete = false, disableAll = false }: { disableEditDelete?: boolean; disableAll?: boolean }) {
   return (
     <div className="flex items-center gap-2">
-      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" title="Insert Record (Ctrl+Insert)">
+      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled={disableAll} title="Insert Record (Ctrl+Insert)">
         <MdAdd size={16} /> Insert Record
       </button>
-      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled={disableEditDelete} title="Delete Record (Ctrl+Delete)">
+      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled={disableEditDelete || disableAll} title="Delete Record (Ctrl+Delete)">
         <MdRemove size={16} /> Delete Record
       </button>
-      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled={disableEditDelete} title="Edit Record">
+      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled={disableEditDelete || disableAll} title="Edit Record">
         <MdEdit size={16} /> Edit Record
       </button>
-      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled={disableEditDelete} title="Post Edit">
+      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled={disableEditDelete || disableAll} title="Post Edit">
         <MdCheck size={16} /> Post Edit
       </button>
-      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled={disableEditDelete} title="Cancel Edit">
+      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled={disableEditDelete || disableAll} title="Cancel Edit">
         <MdClose size={16} /> Cancel Edit
       </button>
     </div>
@@ -94,12 +94,13 @@ export function NotesTab() {
   const isPlan87 = planCode === "87";
   const isPlan84 = planCode === "84";
   const isPlan90 = planCode === "90";
-  if (isPlan84 || isPlan90) {
+  const isPlan51 = planCode === "51";
+  if (isPlan84 || isPlan90 || isPlan51) {
     const count = 7;
     return (
       <Section
         title={`Notes (${count})`}
-        headerAction={<NoteButtons />}
+        headerAction={<NoteButtons disableAll={isPlan51} />}
       >
         <div className="space-y-3 max-h-[620px] overflow-auto pr-1">
           {Array.from({ length: count }).map((_, i) => (

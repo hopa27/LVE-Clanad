@@ -232,7 +232,7 @@ export function ApplicationDetailsTab() {
 
       {/* Correspondence Details */}
       {!isPlan83 && (
-        <>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <Section title="Correspondence Details">
             <Field label="Correspond Name:">
               <TextInput
@@ -290,7 +290,7 @@ export function ApplicationDetailsTab() {
             </Field>
             <div className="mt-2"><Checkbox label="Address Unknown / Gone Away" /></div>
           </Section>
-        </>
+        </div>
       )}
     </div>
   );

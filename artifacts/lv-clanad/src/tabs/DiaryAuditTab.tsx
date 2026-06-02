@@ -71,7 +71,25 @@ const PLAN_90_DIARY: DiaryRow[] = [
   { ref: 1, type: "Funds",               notes: "LV= Retirement Solutions- 608513", created: "25/06/2025", by: "SYSANN", due: "02/07/2025", completed: "", byCompleted: "" },
 ];
 
+const PLAN_51_DIARY: DiaryRow[] = [
+  { ref: 11, type: "Death Cert Client",       notes: "Annuitant Death Certificate",       created: "14/11/2014", by: "SYSANN", due: "14/12/2014", completed: "",           byCompleted: "" },
+  { ref: 13, type: "Overpayment",              notes: "Return of overpayment",             created: "14/11/2014", by: "SYSANN", due: "14/12/2014", completed: "03/06/2015", byCompleted: "LOPVB" },
+  { ref: 7,  type: "Beneficiary (NINO)",       notes: "Beneficiary NI Number",             created: "14/11/2014", by: "SYSANN", due: "14/12/2014", completed: "14/11/2014", byCompleted: "LOPSL2" },
+  { ref: 12, type: "Marriage Certificate",     notes: "Marriage Certificate",              created: "14/11/2014", by: "SYSANN", due: "14/12/2014", completed: "14/11/2014", byCompleted: "LOPSL2" },
+  { ref: 10, type: "Benefits Beneficiary Form",notes: "Benefits Beneficiary Form",         created: "14/11/2014", by: "SYSANN", due: "14/12/2014", completed: "14/11/2014", byCompleted: "LOPSL2" },
+  { ref: 9,  type: "Beneficiary (DOB)",        notes: "Beneficiary date of birth",         created: "14/11/2014", by: "SYSANN", due: "14/12/2014", completed: "14/11/2014", byCompleted: "LOPSL2" },
+  { ref: 8,  type: "Beneficiary (Bank Dets)",  notes: "Beneficiary bank account details",  created: "14/11/2014", by: "SYSANN", due: "14/12/2014", completed: "14/11/2014", byCompleted: "LOPSL2" },
+  { ref: 6,  type: "Beneficiary (Name & Add)", notes: "Beneficiary name & address",        created: "14/11/2014", by: "SYSANN", due: "14/12/2014", completed: "14/11/2014", byCompleted: "LOPSL2" },
+];
+
+const DATA_CHANGES_51: { changeDate: string; description: string; userId: string }[] = [
+  { changeDate: "14/11/2014 10:55:14", description: "Field Annuities-Gross Balance was changed from 131.5 to .",      userId: "LOPSL2" },
+  { changeDate: "14/11/2014 10:55:14", description: "Field Installments-Remaining was changed from 1 to .",           userId: "LOPSL2" },
+  { changeDate: "14/11/2014 10:55:14", description: "Field Next Payment Due was changed from 28/01/2015 to .",        userId: "LOPSL2" },
+];
+
 const AUDIT_84 = Array.from({ length: 10 }, () => "Test Note");
+const AUDIT_51 = Array.from({ length: 10 }, () => "Test Note");
 const AUDIT_90 = [
   ...Array.from({ length: 10 }, () => "Test Note"),
   "System Advises: P45 details amended by UAT4 on 25/05/2026 at 13:48:46",
@@ -113,12 +131,13 @@ export function DiaryAuditTab() {
   const isPlan87 = planCode === "87";
   const isPlan84 = planCode === "84";
   const isPlan90 = planCode === "90";
+  const isPlan51 = planCode === "51";
   const [trail, setTrail] = useState<"notes" | "data">("notes");
   const [diaryOpen, setDiaryOpen] = useState(false);
   const [needsOpen, setNeedsOpen] = useState(false);
   const [cedingOpen, setCedingOpen] = useState(false);
   const [diary, setDiary] = useState<DiaryRow[]>(
-    isPlan87 ? PLAN_87_DIARY : isPlan84 ? PLAN_84_DIARY : isPlan90 ? PLAN_90_DIARY : INITIAL_DIARY,
+    isPlan87 ? PLAN_87_DIARY : isPlan84 ? PLAN_84_DIARY : isPlan90 ? PLAN_90_DIARY : isPlan51 ? PLAN_51_DIARY : INITIAL_DIARY,
   );
   const [selectedRef, setSelectedRef] = useState<number | null>(null);
   const [editConfirmOpen, setEditConfirmOpen] = useState(false);
@@ -244,6 +263,7 @@ export function DiaryAuditTab() {
             type="button"
             className="lve-btn lve-btn-secondary lve-btn-sm"
             onClick={() => setDiaryOpen(true)}
+            disabled={isPlan51}
           >
             <MdNoteAdd size={16} /> New Diary Note
           </button>
@@ -251,6 +271,7 @@ export function DiaryAuditTab() {
             type="button"
             className="lve-btn lve-btn-secondary lve-btn-sm"
             onClick={handleEditClick}
+            disabled={isPlan51}
           >
             <MdEdit size={16} /> Edit Diary Note
           </button>
@@ -258,6 +279,7 @@ export function DiaryAuditTab() {
             type="button"
             className="lve-btn lve-btn-secondary lve-btn-sm"
             onClick={handleCompleteClick}
+            disabled={isPlan51}
           >
             <MdCheckCircleOutline size={16} /> Complete diary note
           </button>
@@ -265,6 +287,7 @@ export function DiaryAuditTab() {
             type="button"
             className="lve-btn lve-btn-secondary lve-btn-sm"
             onClick={() => setCedingOpen(true)}
+            disabled={isPlan51}
           >
             <MdManageSearch size={16} /> Ceding Scheme Details
           </button>
@@ -312,7 +335,7 @@ export function DiaryAuditTab() {
                   </tr>
                 </thead>
                 <tbody>
-                  {(isPlan0 || isPlan87 ? [] : isPlan84 ? AUDIT_84 : isPlan90 ? AUDIT_90 : AUDIT).map((line, i) => {
+                  {(isPlan0 || isPlan87 ? [] : isPlan84 ? AUDIT_84 : isPlan90 ? AUDIT_90 : isPlan51 ? AUDIT_51 : AUDIT).map((line, i) => {
                     const m = line.match(
                       /^(.*?)\s+by\s+(\S+)\s+on\s+(\S+)\s+at\s+(\S+)\s*$/,
                     );
@@ -348,6 +371,14 @@ export function DiaryAuditTab() {
               <tbody>
                 {isPlan84
                   ? DATA_CHANGES_84.map((r, i) => (
+                      <tr key={i}>
+                        <td className="!px-4 whitespace-nowrap">{r.changeDate}</td>
+                        <td className="!px-4">{r.description}</td>
+                        <td className="!px-4 whitespace-nowrap">{r.userId}</td>
+                      </tr>
+                    ))
+                  : isPlan51
+                  ? DATA_CHANGES_51.map((r, i) => (
                       <tr key={i}>
                         <td className="!px-4 whitespace-nowrap">{r.changeDate}</td>
                         <td className="!px-4">{r.description}</td>

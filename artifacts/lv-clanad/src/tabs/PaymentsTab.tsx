@@ -261,9 +261,9 @@ export function PaymentsTab() {
       </Section>
 
       <Section title="Payment History">
-        <div className="overflow-auto max-h-48">
+        <div className="overflow-auto max-h-[315px]">
           <table className="lve-grid">
-            <thead>
+            <thead className="sticky top-0 bg-white z-10">
               <tr>
                 <th>Pay Date</th>
                 <th>Gross</th>
@@ -298,9 +298,9 @@ export function PaymentsTab() {
       </Section>
 
       <Section title="Tax History">
-        <div className="overflow-auto max-h-48">
+        <div className="overflow-auto max-h-[315px]">
           <table className="lve-grid">
-            <thead>
+            <thead className="sticky top-0 bg-white z-10">
               <tr>
                 <th>Pay Date</th>
                 <th>Tax Code</th>

@@ -231,29 +231,30 @@ export function ApplicationDetailsTab() {
       </div>
 
       {/* Correspondence Details */}
-      {!isPlan83 && <Section title="Correspondence Details">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
-          <div>
+      {!isPlan83 && (
+        <>
+          <Section title="Correspondence Details">
             <Field label="Correspond Name:">
               <TextInput
-                value={isPlan87 ? "Dr T Uggiu" : isPlan84 ? "Testmtbbbide" : isPlan90 ? "Testmtcchibd" : isPlan51 ? "Testmdbaabii" : isPlan83 ? "Testmnbbgajc" : "correspname"}
+                value={isPlan87 ? "Dr T Uggiu" : isPlan84 ? "Testmtbbbide" : isPlan90 ? "Testmtcchibd" : isPlan51 ? "Testmdbaabii" : "correspname"}
               />
             </Field>
             <Field label="Salutation Name:">
               <TextInput
-                value={isPlan87 ? "Dr Uggiu" : isPlan84 ? "Testmtbbbide" : isPlan90 ? "Testmtcchibd" : isPlan51 ? "Testmdbaabii" : isPlan83 ? "Testmnbbgajc" : "salname"}
+                value={isPlan87 ? "Dr Uggiu" : isPlan84 ? "Testmtbbbide" : isPlan90 ? "Testmtcchibd" : isPlan51 ? "Testmdbaabii" : "salname"}
               />
             </Field>
             <Field label="Telephone:">
-              <TextInput value={isPlan87 ? "" : isPlan84 ? "01632 391651" : isPlan90 ? "" : isPlan51 ? "016324162140" : isPlan83 ? "" : "anntele"} />
+              <TextInput value={isPlan87 ? "" : isPlan84 ? "01632 391651" : isPlan90 ? "" : isPlan51 ? "016324162140" : "anntele"} />
             </Field>
             <Field label="E-mail:">
               <TextInput
-                value={isPlan87 || isPlan84 || isPlan51 || isPlan83 ? "" : isPlan90 ? "zzzzzz99@zzzzzzz.zz.zz" : "DBEditPH_EMAIL"}
+                value={isPlan87 || isPlan84 || isPlan51 ? "" : isPlan90 ? "zzzzzz99@zzzzzzz.zz.zz" : "DBEditPH_EMAIL"}
               />
             </Field>
-          </div>
-          <div>
+          </Section>
+
+          <Section title="Correspondence Address">
             <Field label="Address:">
               <ConnectedAddress
                 lines={[
@@ -272,27 +273,25 @@ export function ApplicationDetailsTab() {
                     ? ["26 Eastern Close", "Queensferry", "Verwood", "", ""]
                     : isPlan51
                     ? ["10 Western Avenue", "Leicester", "", "", ""]
-                    : isPlan83
-                    ? ["26 Eastern Close", "Verwood", "Marshwood", "", ""]
                     : ["phad1", "phad2", "phad3", "phad4", "phad5"]
                 }
               />
             </Field>
             <Field label="Postcode:">
               <TextInput
-                value={isPlan87 ? "OP9 0OP" : isPlan84 ? "ZE99 9AB" : isPlan90 ? "KI99 9AB" : isPlan51 ? "LE99 9AB" : isPlan83 ? "VE99 9AB" : "phpc"}
+                value={isPlan87 ? "OP9 0OP" : isPlan84 ? "ZE99 9AB" : isPlan90 ? "KI99 9AB" : isPlan51 ? "LE99 9AB" : "phpc"}
               />
             </Field>
             <Field label="Country:">
               <SelectInput
-                value={isPlan90 || isPlan51 || isPlan83 ? "United Kingdom" : "cmbCountry"}
+                value={isPlan90 || isPlan51 ? "United Kingdom" : "cmbCountry"}
                 options={["United Kingdom", "Ireland", "Other"]}
               />
             </Field>
             <div className="mt-2"><Checkbox label="Address Unknown / Gone Away" /></div>
-          </div>
-        </div>
-      </Section>}
+          </Section>
+        </>
+      )}
     </div>
   );
 }

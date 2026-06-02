@@ -9,35 +9,36 @@ export function ApplicationDetailsTab() {
   const isPlan87 = planCode === "87";
   const isPlan84 = planCode === "84";
   const isPlan90 = planCode === "90";
+  const isPlan51 = planCode === "51";
   const isCompact = isPlan87 || isPlan84 || isPlan90;
 
   return (
     <div className="space-y-4">
-      {/* Top main grid — 4 columns matching legacy form */}
       <div className="panel panel-body grid grid-cols-1 lg:grid-cols-4 gap-x-6">
+
         {/* Column 1 */}
         <div>
           <Field label="Set Up Date:">
             <DatePicker
-              value={isPlan87 ? "15/05/2026" : isPlan84 ? "17/03/2010" : isPlan90 ? "25/06/2025" : ""}
+              value={isPlan87 ? "15/05/2026" : isPlan84 ? "17/03/2010" : isPlan90 ? "25/06/2025" : isPlan51 ? "22/01/2008" : ""}
               placeholder={isCompact ? "" : "DBEditAPPLI"}
               disabled
             />
           </Field>
           <Field label={isPlan90 ? "MCP Start Date:" : "Received Date:"}>
             <DatePicker
-              value={isPlan84 ? "17/03/2010" : isPlan90 ? "25/06/2025" : ""}
+              value={isPlan84 ? "17/03/2010" : isPlan90 ? "25/06/2025" : isPlan51 ? "21/01/2008" : ""}
               placeholder={isCompact ? "" : "DBEditAPPLIC"}
             />
           </Field>
           <Field label={isPlan90 ? "Payment Date:" : "Start Date:"}>
             <DatePicker
-              value={isPlan87 ? "15/05/2026" : isPlan84 ? "31/03/2010" : isPlan90 ? "28/05/2025" : ""}
+              value={isPlan87 ? "15/05/2026" : isPlan84 ? "31/03/2010" : isPlan90 ? "28/05/2025" : isPlan51 ? "28/01/2008" : ""}
               placeholder={isCompact ? "" : "edtStartdate"}
-              disabled={isPlan84 || isPlan90}
+              disabled={isPlan84 || isPlan90 || isPlan51}
             />
           </Field>
-          {!isCompact && (
+          {!isCompact && !isPlan51 && (
             <>
               <div className="mb-2 mt-1 font-['Livvic'] text-[13px] font-semibold text-[#0d2c41]">
                 WPPA amendment notification date
@@ -46,19 +47,19 @@ export function ApplicationDetailsTab() {
               <Field label="To:"><DatePicker value="" placeholder="" disabled /></Field>
             </>
           )}
-          {!isPlan84 && !isPlan90 && (
+          {!isPlan84 && !isPlan90 && !isPlan51 && (
             <Field label="Accept Date:">
               <DatePicker value="" placeholder={isPlan87 ? "" : "DBEdit21"} disabled />
             </Field>
           )}
           <Field label="IFA Payment Date:">
             <DatePicker
-              value={isPlan84 ? "13/04/2010 10" : isPlan90 ? "07/07/2025 07" : ""}
+              value={isPlan84 ? "13/04/2010 10" : isPlan90 ? "07/07/2025 07" : isPlan51 ? "05/02/2008 09" : ""}
               placeholder={isCompact ? "" : "DBEdit13"}
-              disabled={isPlan84 || isPlan90}
+              disabled={isPlan84 || isPlan90 || isPlan51}
             />
           </Field>
-          <Field label="PostADay:"><Checkbox checked={isPlan87 || isPlan84} /></Field>
+          <Field label="PostADay:"><Checkbox checked={isPlan87 || isPlan84 || isPlan51} /></Field>
           <Field label="Transfer from Beneficiary Drawdown?:">
             <div className="relative">
               <select defaultValue="Unknown" className="lve-input pr-12 appearance-none">
@@ -80,29 +81,29 @@ export function ApplicationDetailsTab() {
         <div>
           {!isPlan87 && (
             <Field label="Special Status:">
-              <TextInput value={isPlan84 || isPlan90 ? "" : "DBSp"} disabled />
+              <TextInput value={isPlan84 || isPlan90 || isPlan51 ? "" : "DBSp"} disabled />
             </Field>
           )}
-          {!isPlan84 && !isPlan90 && (
+          {!isPlan84 && !isPlan90 && !isPlan51 && (
             <Field label="Final Quote Issued Date:">
               <DatePicker value="" placeholder={isPlan87 ? "" : "DBEdit16"} disabled />
             </Field>
           )}
           <Field label="Status:">
-            <TextInput value={isPlan87 ? "P" : isPlan84 || isPlan90 ? "L" : "status"} disabled />
+            <TextInput value={isPlan87 ? "P" : isPlan84 || isPlan90 ? "L" : isPlan51 ? "Q" : "status"} disabled />
           </Field>
           {!isPlan87 && (
             <Field label="Suspended:">
-              <TextInput value={isPlan84 || isPlan90 ? "N" : "DBSu"} disabled />
+              <TextInput value={isPlan84 || isPlan90 ? "N" : isPlan51 ? "Y" : "DBSu"} disabled />
             </Field>
           )}
           <Field label="Days Since Application:">
             <TextInput
-              value={isPlan87 ? "" : isPlan84 ? "5912" : isPlan90 ? "334" : "dbday"}
+              value={isPlan87 ? "" : isPlan84 ? "5912" : isPlan90 ? "334" : isPlan51 ? "6707" : "dbday"}
               disabled
             />
           </Field>
-          {!isCompact && (
+          {!isCompact && !isPlan51 && (
             <>
               <Field label="Hosp'd Date:">
                 <DatePicker value="" placeholder="dbedHospdDat" />
@@ -115,7 +116,7 @@ export function ApplicationDetailsTab() {
         {/* Column 3 — entirely hidden for plan 87 */}
         {!isPlan87 && (
           <div>
-            {!isPlan84 && !isPlan90 && (
+            {!isPlan84 && !isPlan90 && !isPlan51 && (
               <Field label="GAD Anniversary:">
                 <div className="flex gap-2">
                   <TextInput value="10" className="!w-16" disabled />
@@ -127,35 +128,37 @@ export function ApplicationDetailsTab() {
               </Field>
             )}
             <Field label="Life One Dead:">
-              <TextInput value={isPlan84 || isPlan90 ? "" : "DBLifeOneDe"} disabled />
+              <TextInput value={isPlan84 || isPlan90 ? "" : isPlan51 ? "Y" : "DBLifeOneDe"} disabled />
             </Field>
             <Field label="Life Two Dead:">
               <TextInput value={isPlan84 || isPlan90 ? "" : "DBLifeTwoDe"} disabled />
             </Field>
             <Field label="Completed:">
               <TextInput
-                value={isPlan84 ? "13/04/2010" : isPlan90 ? "02/07/2025" : "DBCompeted"}
+                value={isPlan84 ? "13/04/2010" : isPlan90 ? "02/07/2025" : isPlan51 ? "05/02/2008" : "DBCompeted"}
                 disabled
               />
             </Field>
             <Field label="Closed:">
-              <TextInput value={isPlan84 || isPlan90 ? "" : "DBClosed"} disabled />
+              <TextInput value={isPlan84 || isPlan90 ? "" : isPlan51 ? "14/11/2014 1" : "DBClosed"} disabled />
             </Field>
             {!isPlan84 && !isPlan90 && (
               <>
-                <Field label="Age at death:"><TextInput value="edAge" disabled /></Field>
-                <Field label="Gross £:"><TextInput value="dbedGross" /></Field>
+                <Field label="Age at death:">
+                  <TextInput value={isPlan51 ? "58" : "edAge"} disabled />
+                </Field>
+                <Field label="Gross £:"><TextInput value="" /></Field>
                 <Field label="Paid net:">
                   <div className="flex items-center gap-2">
                     <Checkbox />
-                    <TextInput value="dbedPaidNet" disabled />
+                    <TextInput value="" disabled />
                   </div>
                 </Field>
                 <Field label="Date Paid:"><DatePicker value="" placeholder="Date Paid" /></Field>
-                <Field label="Payee:"><TextInput value="dbedPayee" /></Field>
+                <Field label="Payee:"><TextInput value="" /></Field>
                 <Field label="Trustee:"><Checkbox /></Field>
                 <div className="mt-2">
-                  <button type="button" className="lve-btn lve-btn-sm">
+                  <button type="button" className="lve-btn lve-btn-sm" disabled={isPlan51}>
                     Create payment...
                   </button>
                 </div>
@@ -164,7 +167,7 @@ export function ApplicationDetailsTab() {
           </div>
         )}
 
-        {/* Spacer to keep column 4 in its original position when col 3 hidden */}
+        {/* Spacer when col 3 hidden */}
         {isPlan87 && <div />}
 
         {/* Column 4 */}
@@ -174,7 +177,7 @@ export function ApplicationDetailsTab() {
               <DatePicker value="10/12/2013" placeholder="" disabled={isPlan87} />
             </Field>
           )}
-          {!isPlan84 && !isPlan90 && (
+          {!isPlan84 && !isPlan90 && !isPlan51 && (
             <Field label="Quote Expiry Date:">
               <DatePicker
                 value={isPlan87 ? "14/06/2026" : ""}
@@ -185,11 +188,11 @@ export function ApplicationDetailsTab() {
           )}
           <Field label="Last amended by:">
             <TextInput
-              value={isPlan87 ? "SAIMEENAKSHINA" : isPlan84 ? "LOPVH" : isPlan90 ? "LV66664" : "DBEdit18"}
+              value={isPlan87 ? "SAIMEENAKSHINA" : isPlan84 ? "LOPVH" : isPlan90 ? "LV66664" : isPlan51 ? "LOPSL2" : "DBEdit18"}
               disabled
             />
           </Field>
-          {!isPlan84 && !isPlan90 && (
+          {!isPlan84 && !isPlan90 && !isPlan51 && (
             <>
               <Field label="App Created by:">
                 <TextInput value={isPlan87 ? "saimeenakshinathan" : "DBEdit14"} disabled />
@@ -200,21 +203,21 @@ export function ApplicationDetailsTab() {
             </>
           )}
           <Field label="Rates Ok'd by:">
-            <TextInput value={isCompact ? "" : "DBEdit7"} disabled />
+            <TextInput value={isCompact || isPlan51 ? "" : "DBEdit7"} disabled />
           </Field>
           <Field label="Paykey:">
             <TextInput
-              value={isPlan87 ? "1023693" : isPlan84 ? "899032" : isPlan90 ? "1018055" : "DBEdit20"}
+              value={isPlan87 ? "1023693" : isPlan84 ? "899032" : isPlan90 ? "1018055" : isPlan51 ? "887324" : "DBEdit20"}
               disabled
             />
           </Field>
           <Field label="Policy No:">
             <TextInput
-              value={isPlan87 ? "233451" : isPlan84 ? "111834" : isPlan90 ? "227813" : "DBEdit24"}
+              value={isPlan87 ? "233451" : isPlan84 ? "111834" : isPlan90 ? "227813" : isPlan51 ? "100188" : "DBEdit24"}
               disabled
             />
           </Field>
-          {!isPlan90 && (
+          {!isPlan90 && !isPlan51 && (
             <Field label="Dependant Eligible to Receive Benefits:">
               <TextInput value={isPlan87 || isPlan84 ? "" : "edtEli"} disabled />
             </Field>
@@ -222,32 +225,29 @@ export function ApplicationDetailsTab() {
         </div>
       </div>
 
-      {/* Correspondence Details — two-column inner layout */}
+      {/* Correspondence Details */}
       <Section title="Correspondence Details">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
-          {/* Left: contact fields */}
           <div>
             <Field label="Correspond Name:">
               <TextInput
-                value={isPlan87 ? "Dr T Uggiu" : isPlan84 ? "Testmtbbbide" : isPlan90 ? "Testmtcchibd" : "correspname"}
+                value={isPlan87 ? "Dr T Uggiu" : isPlan84 ? "Testmtbbbide" : isPlan90 ? "Testmtcchibd" : isPlan51 ? "Testmdbaabii" : "correspname"}
               />
             </Field>
             <Field label="Salutation Name:">
               <TextInput
-                value={isPlan87 ? "Dr Uggiu" : isPlan84 ? "Testmtbbbide" : isPlan90 ? "Testmtcchibd" : "salname"}
+                value={isPlan87 ? "Dr Uggiu" : isPlan84 ? "Testmtbbbide" : isPlan90 ? "Testmtcchibd" : isPlan51 ? "Testmdbaabii" : "salname"}
               />
             </Field>
             <Field label="Telephone:">
-              <TextInput value={isPlan87 ? "" : isPlan84 ? "01632 391651" : isPlan90 ? "" : "anntele"} />
+              <TextInput value={isPlan87 ? "" : isPlan84 ? "01632 391651" : isPlan90 ? "" : isPlan51 ? "016324162140" : "anntele"} />
             </Field>
             <Field label="E-mail:">
               <TextInput
-                value={isPlan87 || isPlan84 ? "" : isPlan90 ? "zzzzzz99@zzzzzzz.zz.zz" : "DBEditPH_EMAIL"}
+                value={isPlan87 || isPlan84 || isPlan51 ? "" : isPlan90 ? "zzzzzz99@zzzzzzz.zz.zz" : "DBEditPH_EMAIL"}
               />
             </Field>
           </div>
-
-          {/* Right: address fields */}
           <div>
             <Field label="Address:">
               <ConnectedAddress
@@ -265,18 +265,20 @@ export function ApplicationDetailsTab() {
                     ? ["17 North Road", "Marshwood", "Exeter", "", "Leicester"]
                     : isPlan90
                     ? ["26 Eastern Close", "Queensferry", "Verwood", "", ""]
+                    : isPlan51
+                    ? ["10 Western Avenue", "Leicester", "", "", ""]
                     : ["phad1", "phad2", "phad3", "phad4", "phad5"]
                 }
               />
             </Field>
             <Field label="Postcode:">
               <TextInput
-                value={isPlan87 ? "OP9 0OP" : isPlan84 ? "ZE99 9AB" : isPlan90 ? "KI99 9AB" : "phpc"}
+                value={isPlan87 ? "OP9 0OP" : isPlan84 ? "ZE99 9AB" : isPlan90 ? "KI99 9AB" : isPlan51 ? "LE99 9AB" : "phpc"}
               />
             </Field>
             <Field label="Country:">
               <SelectInput
-                value={isPlan90 ? "United Kingdom" : "cmbCountry"}
+                value={isPlan90 || isPlan51 ? "United Kingdom" : "cmbCountry"}
                 options={["United Kingdom", "Ireland", "Other"]}
               />
             </Field>

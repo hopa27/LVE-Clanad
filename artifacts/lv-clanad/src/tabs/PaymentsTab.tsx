@@ -7,12 +7,12 @@ type Row = Record<string, string>;
 
 const PAYMENT_HISTORY_DEFAULT: Row[] = [
   { date: "28/05/2025", gross: "9,570.32", cap: "0", tax: "-2,780.46", postAdj: "0", net: "6,789.86", method: "B", reason: "ONEOFF", bacs: "27/05/2025", hash: "/I ZU" },
-  { date: "25/10/2025", gross: "699.50", cap: "0", tax: "0", postAdj: "0", net: "699.50", method: "B", reason: "PROC", bacs: "23/10/2025", hash: "/VT0" },
+  { date: "25/10/2025", gross: "699.50",   cap: "0", tax: "0",          postAdj: "0", net: "699.50",    method: "B", reason: "PROC",   bacs: "23/10/2025", hash: "/VT0"  },
 ];
 
 const TAX_HISTORY_DEFAULT: Row[] = [
-  { date: "28/05/2025", code: "1257L*", n: "1", gross: "9,570.32", cum: "9,570.32", free: "1,048.26", taxable: "8,522.06", tax: "-2,780.46", ytd: "-2,780.46" },
-  { date: "25/10/2025", code: "1257L*", n: "6", gross: "699.50", cum: "10,269.82", free: "6,289.56", taxable: "-5,590.06", tax: "0", ytd: "-2,780.46" },
+  { date: "28/05/2025", code: "1257L*", n: "1", gross: "9,570.32",  cum: "9,570.32",  free: "1,048.26", taxable: "8,522.06",   tax: "-2,780.46", ytd: "-2,780.46" },
+  { date: "25/10/2025", code: "1257L*", n: "6", gross: "699.50",    cum: "10,269.82", free: "6,289.56", taxable: "-5,590.06",  tax: "0",          ytd: "-2,780.46" },
 ];
 
 const PAYMENT_HISTORY_84: Row[] = [
@@ -58,17 +58,46 @@ const TAX_HISTORY_90: Row[] = [
   { date: "28/11/2025", code: "NT", n: "8", gross: "251.79", cum: "1510.74", free: "0", taxable: "1510.74", tax: "0", ytd: "0" },
 ];
 
+const PAYMENT_HISTORY_51: Row[] = [
+  { date: "28/04/2008", gross: "131.5",  cap: "0", tax: "-26.2", postAdj: "0", net: "105.3",  method: "B", reason: "PROC", bacs: "25/04/2008", hash: "" },
+  { date: "30/04/2008", gross: "-131.5", cap: "0", tax: "26.2",  postAdj: "0", net: "-105.3", method: "R", reason: "",     bacs: "",            hash: "" },
+  { date: "24/05/2008", gross: "131.5",  cap: "0", tax: "-26.2", postAdj: "0", net: "105.3",  method: "C", reason: "",     bacs: "",            hash: "" },
+  { date: "28/07/2008", gross: "131.5",  cap: "0", tax: "-26.4", postAdj: "0", net: "105.1",  method: "B", reason: "PROC", bacs: "25/07/2008",  hash: "" },
+  { date: "30/07/2008", gross: "-131.5", cap: "0", tax: "26.4",  postAdj: "0", net: "-105.1", method: "R", reason: "",     bacs: "",            hash: "" },
+  { date: "11/11/2008", gross: "263",    cap: "0", tax: "-52.6", postAdj: "0", net: "210.4",  method: "T", reason: "PROC", bacs: "10/11/2008",  hash: "" },
+  { date: "28/01/2009", gross: "131.5",  cap: "0", tax: "-26.4", postAdj: "0", net: "105.1",  method: "B", reason: "PROC", bacs: "27/01/2009",  hash: "" },
+  { date: "28/04/2009", gross: "131.5",  cap: "0", tax: "-26.2", postAdj: "0", net: "105.3",  method: "B", reason: "PROC", bacs: "27/04/2009",  hash: "" },
+  { date: "28/07/2009", gross: "131.5",  cap: "0", tax: "-26.4", postAdj: "0", net: "105.1",  method: "B", reason: "PROC", bacs: "27/07/2009",  hash: "" },
+];
+
+const TAX_HISTORY_51: Row[] = [
+  { date: "28/04/2008", code: "BR", n: "3",  gross: "131.5",  cum: "131.5", free: "0", taxable: "131.5", tax: "-26.2", ytd: "-26.2"  },
+  { date: "30/04/2008", code: "BR", n: "3",  gross: "-131.5", cum: "0",     free: "0", taxable: "0",      tax: "26.2",  ytd: "0"      },
+  { date: "24/05/2008", code: "BR", n: "3",  gross: "131.5",  cum: "131.5", free: "0", taxable: "131.5", tax: "-26.2", ytd: "-26.2"  },
+  { date: "28/07/2008", code: "BR", n: "6",  gross: "131.5",  cum: "263",   free: "0", taxable: "263",    tax: "-26.4", ytd: "-52.6"  },
+  { date: "30/07/2008", code: "BR", n: "6",  gross: "-131.5", cum: "131.5", free: "0", taxable: "131.5", tax: "26.4",  ytd: "-26.2"  },
+  { date: "11/11/2008", code: "BR", n: "9",  gross: "263",    cum: "394.5", free: "0", taxable: "394.5", tax: "-52.6", ytd: "-78.8"  },
+  { date: "28/01/2009", code: "BR", n: "12", gross: "131.5",  cum: "526",   free: "0", taxable: "526",    tax: "-26.4", ytd: "-105.2" },
+  { date: "28/04/2009", code: "BR", n: "3",  gross: "131.5",  cum: "131.5", free: "0", taxable: "131.5", tax: "-26.2", ytd: "-26.2"  },
+  { date: "28/07/2009", code: "BR", n: "6",  gross: "131.5",  cum: "263",   free: "0", taxable: "263",    tax: "-26.4", ytd: "-52.6"  },
+  { date: "28/10/2009", code: "BR", n: "9",  gross: "131.5",  cum: "394.5", free: "0", taxable: "394.5", tax: "-52.6", ytd: "-78.8"  },
+  { date: "28/01/2010", code: "BR", n: "12", gross: "131.5",  cum: "526",   free: "0", taxable: "526",    tax: "-26.4", ytd: "-105.2" },
+];
+
 export function PaymentsTab() {
   const { planCode } = usePlanCode();
-  const isPlan0 = planCode === "0";
+  const isPlan0  = planCode === "0";
   const isPlan87 = planCode === "87";
   const isPlan84 = planCode === "84";
   const isPlan90 = planCode === "90";
+  const isPlan51 = planCode === "51";
 
   const paymentHistory = isPlan84
     ? PAYMENT_HISTORY_84
     : isPlan90
     ? PAYMENT_HISTORY_90
+    : isPlan51
+    ? PAYMENT_HISTORY_51
     : isPlan0 || isPlan87
     ? []
     : PAYMENT_HISTORY_DEFAULT;
@@ -76,6 +105,8 @@ export function PaymentsTab() {
     ? TAX_HISTORY_84
     : isPlan90
     ? TAX_HISTORY_90
+    : isPlan51
+    ? TAX_HISTORY_51
     : isPlan0 || isPlan87
     ? []
     : TAX_HISTORY_DEFAULT;
@@ -152,6 +183,36 @@ export function PaymentsTab() {
               </Field>
               <Field label="Inst Remaining:"><TextInput value="12" disabled /></Field>
               <Field label="Nth Inst:"><TextInput value="2" disabled /></Field>
+            </div>
+          </div>
+        ) : isPlan51 ? (
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-8">
+            <div>
+              <Field label="Premium:"><TextInput value="8940.65" disabled /></Field>
+              <Field label="Tax Free Cash:"><TextInput value="0" disabled /></Field>
+              <Field label={<span className="text-[#d72714]">Total:</span>}>
+                <TextInput value="8940.65" disabled className="!text-[#d72714] underline" />
+              </Field>
+              <Field label="1st Annuitants Gross:"><TextInput value="526" disabled /></Field>
+              <Field label="2nd Annuitants Gross:"><TextInput value="0" disabled /></Field>
+            </div>
+            <div>
+              <Field label="Cumulative Instal:"><TextInput value="394.5" disabled /></Field>
+              <Field label="BAL Gross Annuity:"><TextInput value="" disabled /></Field>
+              <Field label="Taxable pay:"><TextInput value="394.5" disabled /></Field>
+              <Field label="Cumulative Free Pay:"><TextInput value="0" disabled /></Field>
+              <Field label="PAYE Tax Due To Date:"><TextInput value="-78.8" disabled /></Field>
+            </div>
+            <div>
+              <Field label="Next Anniversary:">
+                <DatePicker value="28/01/2015" placeholder="" disabled />
+              </Field>
+              <Field label="Next Payment Due:">
+                <DatePicker value="" placeholder="" disabled />
+              </Field>
+              <Field label="Inst Remaining:"><TextInput value="" disabled /></Field>
+              <Field label="Nth Inst:"><TextInput value="9" disabled /></Field>
+              <Field label="PAYE Tax Deduction:"><TextInput value="-26.2" disabled /></Field>
             </div>
           </div>
         ) : (

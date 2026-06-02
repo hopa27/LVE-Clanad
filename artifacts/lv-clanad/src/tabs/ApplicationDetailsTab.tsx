@@ -231,7 +231,7 @@ export function ApplicationDetailsTab() {
       </div>
 
       {/* Correspondence Details */}
-      <Section title="Correspondence Details">
+      {!isPlan83 && <Section title="Correspondence Details">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
           <div>
             <Field label="Correspond Name:">
@@ -292,7 +292,7 @@ export function ApplicationDetailsTab() {
             <div className="mt-2"><Checkbox label="Address Unknown / Gone Away" /></div>
           </div>
         </div>
-      </Section>
+      </Section>}
     </div>
   );
 }

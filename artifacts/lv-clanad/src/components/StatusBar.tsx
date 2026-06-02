@@ -4,17 +4,18 @@ export function StatusBar() {
   const { planCode } = usePlanCode();
   const isPlan0  = planCode === "0";
   const isPlan51 = planCode === "51";
+  const isPlan83 = planCode === "83";
   const items = [
     {
       label: "Status",
-      value: isPlan51 ? "MIGRATED" : "LIVE",
-      highlight: !isPlan51,
-      error: isPlan51,
+      value: isPlan51 ? "MIGRATED" : isPlan83 ? "Maturity Pending" : "LIVE",
+      highlight: !isPlan51 && !isPlan83,
+      error: isPlan51 || isPlan83,
     },
-    { label: "Illustration", value: isPlan0 ? "" : isPlan51 ? "927657" : "20911002" },
-    { label: "Variant",      value: isPlan0 ? "" : isPlan51 ? "8"      : "7"       },
-    { label: "RAQ ID",       value: isPlan51 ? "" : "—" },
-    { label: "User",         value: isPlan51 ? "UAT1" : "UAT3" },
+    { label: "Illustration", value: isPlan0 ? "" : isPlan51 ? "927657" : isPlan83 ? "10578050" : "20911002" },
+    { label: "Variant",      value: isPlan0 ? "" : isPlan51 ? "8"      : isPlan83 ? "3"        : "7"       },
+    { label: "RAQ ID",       value: isPlan51 || isPlan83 ? "" : "—" },
+    { label: "User",         value: isPlan51 || isPlan83 ? "UAT1" : "UAT3" },
   ];
   return (
     <div className="lve-panel mt-6 p-4 flex flex-wrap items-center gap-6">

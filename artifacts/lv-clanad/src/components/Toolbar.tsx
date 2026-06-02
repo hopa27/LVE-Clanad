@@ -45,8 +45,6 @@ type Tool = {
 export function Toolbar() {
   const { editing, setEditing, cancel } = useEditMode();
   const { planCode } = usePlanCode();
-  const isPlan90 = planCode === "90";
-  const isPlan84 = planCode === "84";
   const isPlan51 = planCode === "51";
   const [newAppConfirm, setNewAppConfirm] = useState(false);
   const [simAppConfirm, setSimAppConfirm] = useState(false);
@@ -66,7 +64,7 @@ export function Toolbar() {
 
   const ALL_TOOLS: Tool[] = [
     { label: "New App", icon: MdAdd, enabled: !editing, action: "new-app" },
-    { label: "New Quote", icon: MdNoteAdd, enabled: !editing && !isPlan84 && !isPlan90 && !isPlan51, action: "new-quote" },
+    { label: "New Quote", icon: MdNoteAdd, enabled: false, action: "new-quote" },
     { label: "Sim App", icon: MdContentCopy, enabled: !editing && !isPlan51, action: "sim-app" },
     {
       label: editing ? "Save" : "Edit",
@@ -87,7 +85,7 @@ export function Toolbar() {
 
   const handleClick = (action?: ToolAction) => {
     if (action === "new-app") setNewAppConfirm(true);
-    else if (action === "new-quote") { if (!isPlan90 && !isPlan84) setNewQuoteOpen(true); }
+    else if (action === "new-quote") { /* always disabled */ }
     else if (action === "sim-app") setSimAppConfirm(true);
     else if (action === "edit-toggle") setEditing(!editing);
     else if (action === "edit-cancel") cancel();

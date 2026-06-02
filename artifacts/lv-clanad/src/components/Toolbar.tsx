@@ -64,7 +64,7 @@ export function Toolbar() {
     return () => window.removeEventListener("clanad:open-find-policy", handler);
   }, []);
 
-  const TOOLS: Tool[] = [
+  const ALL_TOOLS: Tool[] = [
     { label: "New App", icon: MdAdd, enabled: !editing, action: "new-app" },
     { label: "New Quote", icon: MdNoteAdd, enabled: !editing && !isPlan84 && !isPlan90 && !isPlan51, action: "new-quote" },
     { label: "Sim App", icon: MdContentCopy, enabled: !editing && !isPlan51, action: "sim-app" },
@@ -81,6 +81,9 @@ export function Toolbar() {
     { label: "Reports", icon: MdBarChart, enabled: !editing, action: "reports" },
     { label: "Company", icon: MdBusiness, enabled: !editing, action: "company" },
   ];
+  const TOOLS = isPlan51
+    ? ALL_TOOLS.filter((t) => t.action !== "edit-toggle" && t.action !== "log")
+    : ALL_TOOLS;
 
   const handleClick = (action?: ToolAction) => {
     if (action === "new-app") setNewAppConfirm(true);

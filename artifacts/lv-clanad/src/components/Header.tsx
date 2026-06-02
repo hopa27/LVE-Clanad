@@ -45,6 +45,23 @@ type MenuOption =
   | { kind: "separator" };
 type MenuItem = { label: string; options?: MenuOption[] };
 
+const OPTIONS_51: MenuOption[] = [
+  { label: "Screen Print", shortcut: "F1", action: "screen-print" },
+  { label: "Search",       shortcut: "F5", action: "search" },
+];
+
+const PRINT_51: MenuOption[] = [
+  {
+    label: "Print MAR",
+    hasSubmenu: true,
+    submenu: [
+      { label: "1st Life MAR" },
+      { label: "2nd Life MAR" },
+    ],
+  },
+  { label: "Diary Report" },
+];
+
 const OPTIONS_84: MenuOption[] = [
   { label: "P45 Details", action: "p45-details" },
   { label: "Screen Print", shortcut: "F1", action: "screen-print" },
@@ -313,6 +330,10 @@ export function Header({ title }: { title: string }) {
       return true;
     })
     .map((m) => {
+      if (planCode === "51") {
+        if (m.label === "Options") return { ...m, options: OPTIONS_51 };
+        if (m.label === "Print")   return { ...m, options: PRINT_51 };
+      }
       if (planCode === "87" && m.label === "Supervisor")
         return { ...m, options: SUPERVISOR_87 };
       if (planCode === "84" || planCode === "90") {

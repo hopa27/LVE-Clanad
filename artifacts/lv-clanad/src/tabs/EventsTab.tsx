@@ -55,8 +55,9 @@ const SAMPLE_ROWS: EventRow[] = [
 
 export function EventsTab() {
   const { planCode } = usePlanCode();
+  const isPlan51 = planCode === "51";
   const [rows, setRows] = useState<EventRow[]>(
-    planCode === "0" || planCode === "87" || planCode === "84" || planCode === "90" ? [] : SAMPLE_ROWS,
+    planCode === "0" || planCode === "87" || planCode === "84" || planCode === "90" || isPlan51 ? [] : SAMPLE_ROWS,
   );
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
   const [newEventOpen, setNewEventOpen] = useState(false);
@@ -179,13 +180,14 @@ export function EventsTab() {
           type="button"
           className="lve-btn lve-btn-secondary lve-btn-sm"
           onClick={openNew}
+          disabled={isPlan51}
         >
           <MdAdd size={16} /> New Event
         </button>
         <button
           type="button"
           className="lve-btn lve-btn-secondary lve-btn-sm disabled:opacity-50 disabled:cursor-not-allowed"
-          disabled={!hasSelection}
+          disabled={!hasSelection || isPlan51}
           onClick={askEdit}
         >
           <MdEdit size={16} /> Edit Event
@@ -193,7 +195,7 @@ export function EventsTab() {
         <button
           type="button"
           className="lve-btn lve-btn-secondary lve-btn-sm disabled:opacity-50 disabled:cursor-not-allowed"
-          disabled={!hasSelection}
+          disabled={!hasSelection || isPlan51}
           onClick={askDelete}
         >
           <MdDelete size={16} /> Delete Event

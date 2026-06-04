@@ -481,7 +481,7 @@ export function Header({ title }: { title: string }) {
         <div className="flex items-center justify-between gap-6 w-full">
           <div className="flex items-center gap-6 min-w-0">
             <img src={lvLogo} alt="LV=" className="h-6 w-auto shrink-0" />
-            <h1 className="font-['Livvic'] text-3xl font-normal tracking-tight text-white truncate">
+            <h1 className="font-['Livvic'] tracking-tight text-white truncate font-extralight text-[50px]">
               {title}
             </h1>
           </div>
@@ -635,86 +635,69 @@ export function Header({ title }: { title: string }) {
           );
         })}
       </nav>
-
       <TaxCertificateModal
         open={taxCertOpen}
         onClose={() => setTaxCertOpen(false)}
       />
-
       <AboutModal open={aboutOpen} onClose={() => setAboutOpen(false)} />
-
       <AmendChequesModal
         open={amendChequesOpen}
         onClose={() => setAmendChequesOpen(false)}
       />
-
       <CompletionCheckerModal
         open={completionOpen}
         onClose={() => setCompletionOpen(false)}
       />
-
       <ScreenPrintModal
         open={screenPrintOpen}
         onClose={() => setScreenPrintOpen(false)}
       />
-
       <AmendIfaModal
         open={amendIfaOpen}
         onClose={() => setAmendIfaOpen(false)}
       />
-
       <P45DetailsModal
         open={p45DetailsOpen}
         onClose={() => setP45DetailsOpen(false)}
       />
-
       <SetDeadModal
         open={setDeadOpen}
         onClose={() => setSetDeadOpen(false)}
       />
-
       <CedingSchemeModal
         open={cedingOpen}
         onClose={() => setCedingOpen(false)}
         planCode={planCode}
       />
-
       <CopyP60Modal
         open={copyP60Open}
         onClose={() => setCopyP60Open(false)}
       />
-
       <SupervisoryEditModal
         open={supervisoryEditOpen}
         onClose={() => setSupervisoryEditOpen(false)}
         planCode={planCode}
       />
-
       <BankChangesReportModal
         open={bankChangesReportOpen}
         onClose={() => setBankChangesReportOpen(false)}
       />
-
       <ReprintMaturityModal
         open={reprintMaturityOpen}
         onClose={() => setReprintMaturityOpen(false)}
       />
-
       <RecalcAnnStatModal
         open={recalcAnnStatOpen}
         onClose={() => setRecalcAnnStatOpen(false)}
       />
-
       <ReprintAnnualStatementsModal
         open={reprintAnnStmtOpen}
         onClose={() => setReprintAnnStmtOpen(false)}
       />
-
       <PullQuoteModal
         open={pullQuoteOpen}
         onClose={() => setPullQuoteOpen(false)}
       />
-
       {cancelAppOpen && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
           <div className="lve-panel bg-white w-[400px] max-w-full">
@@ -752,7 +735,6 @@ export function Header({ title }: { title: string }) {
           </div>
         </div>
       )}
-
       {expiredConfirmOpen && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
           <div className="lve-panel bg-white w-[420px] max-w-full">
@@ -803,7 +785,6 @@ export function Header({ title }: { title: string }) {
           </div>
         </div>
       )}
-
       {suspendOpen && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
           <div className="lve-panel bg-white w-[400px] max-w-full">
@@ -834,7 +815,6 @@ export function Header({ title }: { title: string }) {
           </div>
         </div>
       )}
-
       {plaCancellationOpen && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
           <div className="lve-panel bg-white w-[340px] max-w-full">
@@ -865,7 +845,6 @@ export function Header({ title }: { title: string }) {
           </div>
         </div>
       )}
-
       {noSecondLifeOpen && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
           <div className="lve-panel bg-white w-[380px] max-w-full">

@@ -481,7 +481,7 @@ export function Header({ title }: { title: string }) {
         <div className="flex items-center justify-between gap-6 w-full">
           <div className="flex items-center gap-6 min-w-0">
             <img src={lvLogo} alt="LV=" className="h-6 w-auto shrink-0" />
-            <h1 className="font-['Livvic'] tracking-tight text-white truncate font-extralight text-[50px]">
+            <h1 className="font-['Livvic'] tracking-tight text-white truncate text-[30px] font-normal">
               {title}
             </h1>
           </div>

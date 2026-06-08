@@ -142,9 +142,9 @@ export function BankAccDetailsTab() {
       </Section>
 
       <Section>
-        <div className="overflow-auto">
+        <div className="overflow-auto max-h-[320px]">
           <table className="lve-grid">
-            <thead>
+            <thead className="sticky top-0 bg-white z-10">
               <tr>
                 <th>Transfer Company</th>
                 <th>Ref</th>

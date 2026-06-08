@@ -184,92 +184,101 @@ function AnnuitantBlock({
 
 export function AnnuitantDetailsTab() {
   const { planCode } = usePlanCode();
-  const isPlan87 = planCode === "87";
-  const isPlan84 = planCode === "84";
-  const isPlan90 = planCode === "90";
-  const isPlan51 = planCode === "51";
-  const isPlan83 = planCode === "83";
-  const isPreset = isPlan87 || isPlan84 || isPlan90;
+  const isPlan87  = planCode === "87";
+  const isPlan84  = planCode === "84";
+  const isPlan90  = planCode === "90";
+  const isPlan51  = planCode === "51";
+  const isPlan83  = planCode === "83";
+  const isPlan621 = planCode === "621";
+  const isPreset  = isPlan87 || isPlan84 || isPlan90;
 
   return (
     <div className="space-y-4">
       <Section title="Annuitant">
         <AnnuitantBlock
           surname={
-            isPlan87 ? "Uggiu"
-            : isPlan84 ? "Testptbbbide"
-            : isPlan90 ? "Testctcchibd"
-            : isPlan51 ? "Testsubaabii"
-            : isPlan83 ? "Testenbggajc"
+            isPlan87  ? "Uggiu"
+            : isPlan84  ? "Testptbbbide"
+            : isPlan90  ? "Testctcchibd"
+            : isPlan51  ? "Testsubaabii"
+            : isPlan83  ? "Testenbggajc"
+            : isPlan621 ? "Testfrbaaaae.b"
             : "surname1"
           }
           forename={
-            isPlan87 ? "Test"
-            : isPlan84 ? "Rachael"
-            : isPlan90 ? "Belinda"
-            : isPlan51 ? "Simon"
-            : isPlan83 ? "Simon"
+            isPlan87  ? "Test"
+            : isPlan84  ? "Rachael"
+            : isPlan90  ? "Belinda"
+            : isPlan51  ? "Simon"
+            : isPlan83  ? "Simon"
+            : isPlan621 ? "Michael"
             : "Forename1"
           }
           second={
-            isPlan87 ? ""
-            : isPlan84 ? "Colin"
-            : isPlan90 ? ""
-            : isPlan51 ? "Simon"
-            : isPlan83 ? ""
+            isPlan87  ? ""
+            : isPlan84  ? "Colin"
+            : isPlan90  ? ""
+            : isPlan51  ? "Simon"
+            : isPlan83  ? ""
+            : isPlan621 ? ""
             : "Middlename"
           }
           shortName={
-            isPlan87 ? "UGGIU T"
-            : isPlan84 ? "TESTPTBBBIDE R C"
-            : isPlan90 ? "TESTCTCCHIBD B"
-            : isPlan51 ? "TESTSUBAABII S S"
-            : isPlan83 ? "TESTENBGGAJC S"
+            isPlan87  ? "UGGIU T"
+            : isPlan84  ? "TESTPTBBBIDE R C"
+            : isPlan90  ? "TESTCTCCHIBD B"
+            : isPlan51  ? "TESTSUBAABII S S"
+            : isPlan83  ? "TESTENBGGAJC S"
+            : isPlan621 ? "TESTFRBAAAAE.B M"
             : "ANNSNAME"
           }
           dob={
-            isPlan87 ? "09/09/1956"
-            : isPlan84 ? "25/10/1958"
-            : isPlan90 ? "10/05/1959"
-            : isPlan51 ? "31/01/1956"
-            : isPlan83 ? "06/07/1950"
+            isPlan87  ? "09/09/1956"
+            : isPlan84  ? "25/10/1958"
+            : isPlan90  ? "10/05/1959"
+            : isPlan51  ? "31/01/1956"
+            : isPlan83  ? "06/07/1950"
+            : isPlan621 ? "07/01/1943"
             : "dob1"
           }
           dod={
-            isPreset ? ""
-            : isPlan51 ? "26/09/2014"
-            : isPlan83 ? ""
+            isPreset    ? ""
+            : isPlan51  ? "26/09/2014"
+            : isPlan83  ? ""
+            : isPlan621 ? "06/11/2023"
             : "DOD1"
           }
           natIns={
-            isPlan87 ? "JK-90-90-90-C"
-            : isPlan84 ? "PK-25-10-58-A"
-            : isPlan90 ? "CH-10-05-59-A"
-            : isPlan51 ? "SB-31-01-56-A"
-            : isPlan83 ? "EA-06-07-50-A"
+            isPlan87  ? "JK-90-90-90-C"
+            : isPlan84  ? "PK-25-10-58-A"
+            : isPlan90  ? "CH-10-05-59-A"
+            : isPlan51  ? "SB-31-01-56-A"
+            : isPlan83  ? "EA-06-07-50-A"
+            : isPlan621 ? "EX-07-01-43-A"
             : "NI1"
           }
-          enhanced={isPreset || isPlan51 || isPlan83 ? "" : "ENHANCED"}
-          doctor={isPreset || isPlan51 || isPlan83 ? "" : "Doctor1"}
-          doctorName={isPreset || isPlan51 || isPlan83 ? "" : "dbDoctorName"}
+          enhanced={isPlan621 ? "SP1" : isPreset || isPlan51 || isPlan83 ? "" : "ENHANCED"}
+          doctor={isPreset || isPlan51 || isPlan83 || isPlan621 ? "" : "Doctor1"}
+          doctorName={isPreset || isPlan51 || isPlan83 || isPlan621 ? "" : "dbDoctorName"}
           gender={
-            isPlan87 ? "Male"
-            : isPlan84 ? "Female"
-            : isPlan90 ? "Male"
-            : isPlan51 ? "Male"
-            : isPlan83 ? "Male"
+            isPlan87  ? "Male"
+            : isPlan84  ? "Female"
+            : isPlan90  ? "Male"
+            : isPlan51  ? "Male"
+            : isPlan83  ? "Male"
+            : isPlan621 ? "Male"
             : ""
           }
-          marRequired={isPreset || isPlan51 || isPlan83 ? "" : "MAR1R"}
-          marCopyToPH={isPreset || isPlan51 || isPlan83 ? "" : "MAR1C"}
-          dateMarSent={isPreset || isPlan51 || isPlan83 ? "" : "Mar1sent"}
-          dateMarRec={isPreset || isPlan51 || isPlan83 ? "" : "mar1recd"}
-          uwRef={isPreset || isPlan51 || isPlan83 ? "" : "DBEdUWRef"}
-          uwDate={isPreset || isPlan51 || isPlan83 ? "" : "DBEdUWDat"}
+          marRequired={isPreset || isPlan51 || isPlan83 || isPlan621 ? "" : "MAR1R"}
+          marCopyToPH={isPreset || isPlan51 || isPlan83 || isPlan621 ? "" : "MAR1C"}
+          dateMarSent={isPreset || isPlan51 || isPlan83 || isPlan621 ? "" : "Mar1sent"}
+          dateMarRec={isPreset || isPlan51 || isPlan83 || isPlan621 ? "" : "mar1recd"}
+          uwRef={isPreset || isPlan51 || isPlan83 || isPlan621 ? "" : "DBEdUWRef"}
+          uwDate={isPreset || isPlan51 || isPlan83 || isPlan621 ? "" : "DBEdUWDat"}
           daysSinceUW=""
           showCauseOfDeath={!isPreset && !isPlan83}
           showDod={!isPlan87 && !isPlan90}
-          showUwDateBlock={!isPreset && !isPlan51 && !isPlan83}
+          showUwDateBlock={!isPreset && !isPlan51 && !isPlan83 && !isPlan621}
           icd1=""
           icd2=""
           icd3=""
@@ -280,22 +289,22 @@ export function AnnuitantDetailsTab() {
         <AnnuitantBlock
           showShortName={false}
           showUwBlock={false}
-          surname={isPreset || isPlan51 || isPlan83 ? "" : "surname2"}
-          forename={isPreset || isPlan51 || isPlan83 ? "" : "forename2"}
-          second={isPreset || isPlan51 || isPlan83 ? "" : "middlename2"}
-          dob={isPreset || isPlan51 || isPlan83 ? "" : "dob2"}
-          dod={isPreset || isPlan51 || isPlan83 ? "" : "DOD2"}
-          natIns={isPreset || isPlan51 || isPlan83 ? "" : "NI2"}
-          enhanced={isPreset || isPlan51 || isPlan83 ? "" : "ENHANCED"}
-          doctor={isPreset || isPlan51 || isPlan83 ? "" : "doctor2"}
-          doctorName={isPreset || isPlan51 || isPlan83 ? "" : "dbDoctor2Name"}
-          marRequired={isPreset || isPlan51 || isPlan83 ? "" : "DbedEL"}
+          surname={isPreset || isPlan51 || isPlan83 ? "" : isPlan621 ? "Testgebaaaae.b" : "surname2"}
+          forename={isPreset || isPlan51 || isPlan83 || isPlan621 ? "" : "forename2"}
+          second={isPreset || isPlan51 || isPlan83 || isPlan621 ? "" : "middlename2"}
+          dob={isPreset || isPlan51 || isPlan83 || isPlan621 ? "" : "dob2"}
+          dod={isPreset || isPlan51 || isPlan83 || isPlan621 ? "" : "DOD2"}
+          natIns={isPreset || isPlan51 || isPlan83 || isPlan621 ? "" : "NI2"}
+          enhanced={isPreset || isPlan51 || isPlan83 || isPlan621 ? "" : "ENHANCED"}
+          doctor={isPreset || isPlan51 || isPlan83 || isPlan621 ? "" : "doctor2"}
+          doctorName={isPreset || isPlan51 || isPlan83 || isPlan621 ? "" : "dbDoctor2Name"}
+          marRequired={isPreset || isPlan51 || isPlan83 || isPlan621 ? "" : "DbedEL"}
           marRequiredDisabled={!isPlan90}
           marCopyLabel="Copy to PH?:"
-          marCopyToPH={isPreset || isPlan51 || isPlan83 ? "" : "PH2RE"}
-          dateMarSent={isPreset || isPlan51 || isPlan83 ? "" : "mar2sent"}
-          dateMarRec={isPreset || isPlan51 || isPlan83 ? "" : "mar2recd"}
-          showCauseOfDeath={!isPreset && !isPlan51 && !isPlan83}
+          marCopyToPH={isPreset || isPlan51 || isPlan83 || isPlan621 ? "" : "PH2RE"}
+          dateMarSent={isPreset || isPlan51 || isPlan83 || isPlan621 ? "" : "mar2sent"}
+          dateMarRec={isPreset || isPlan51 || isPlan83 || isPlan621 ? "" : "mar2recd"}
+          showCauseOfDeath={!isPreset && !isPlan51 && !isPlan83 && !isPlan621}
           showDod={!isPlan87}
           icd1=""
           icd2=""

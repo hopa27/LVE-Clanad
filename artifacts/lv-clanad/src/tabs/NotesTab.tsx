@@ -179,7 +179,8 @@ export function NotesTab() {
       </Section>
     );
   }
-  if (isPlan84 || isPlan90 || isPlan51) {
+  const isPlan611 = planCode === "611";
+  if (isPlan84 || isPlan90 || isPlan51 || isPlan611) {
     const count = 7;
     return (
       <Section

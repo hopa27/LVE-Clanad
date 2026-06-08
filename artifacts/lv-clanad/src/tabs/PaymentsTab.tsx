@@ -143,6 +143,7 @@ export function PaymentsTab() {
   const isPlan621 = planCode === "621";
   const isPlan76  = planCode === "76";
   const isPlan62a = planCode === "62a";
+  const isPlan611 = planCode === "611";
 
   const paymentHistory = isPlan84
     ? PAYMENT_HISTORY_84
@@ -156,7 +157,7 @@ export function PaymentsTab() {
     ? PAYMENT_HISTORY_621
     : isPlan76
     ? PAYMENT_HISTORY_76
-    : isPlan62a
+    : isPlan62a || isPlan611
     ? []
     : isPlan0 || isPlan87
     ? []
@@ -173,7 +174,7 @@ export function PaymentsTab() {
     ? TAX_HISTORY_621
     : isPlan76
     ? TAX_HISTORY_76
-    : isPlan62a
+    : isPlan62a || isPlan611
     ? []
     : isPlan0 || isPlan87
     ? []
@@ -407,6 +408,35 @@ export function PaymentsTab() {
               <Field label="Nth Inst:"><TextInput value="" disabled /></Field>
             </div>
           </div>
+        ) : isPlan611 ? (
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-8">
+            <div>
+              <Field label="Premium:"><TextInput value="9483.25" disabled /></Field>
+              <Field label="Tax Free Cash:"><TextInput value="0" disabled /></Field>
+              <Field label={<span className="text-[#d72714]">Total:</span>}>
+                <TextInput value="9483.25" disabled className="!text-[#d72714] underline" />
+              </Field>
+              <Field label="1st Annuitants Gross:"><TextInput value="526" disabled /></Field>
+              <Field label="2nd Annuitants Gross:"><TextInput value="0" disabled /></Field>
+            </div>
+            <div>
+              <Field label="Cumulative Instal:"><TextInput value="" disabled /></Field>
+              <Field label="BAL Gross Annuity:"><TextInput value="" disabled /></Field>
+              <Field label="Taxable pay:"><TextInput value="" disabled /></Field>
+              <Field label="Cumulative Free Pay:"><TextInput value="" disabled /></Field>
+              <Field label="PAYE Tax Due To Date:"><TextInput value="" disabled /></Field>
+            </div>
+            <div>
+              <Field label="Next Anniversary:">
+                <DatePicker value="" placeholder="" disabled />
+              </Field>
+              <Field label="Next Payment Due:">
+                <DatePicker value="" placeholder="" disabled />
+              </Field>
+              <Field label="Inst Remaining:"><TextInput value="" disabled /></Field>
+              <Field label="Nth Inst:"><TextInput value="" disabled /></Field>
+            </div>
+          </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-8">
             <div>
@@ -459,7 +489,7 @@ export function PaymentsTab() {
               <tr>
                 <th>Pay Date</th>
                 <th>Gross</th>
-                {!isPlan83 && !isPlan76 && <><th>Cap Element</th><th>Tax</th><th>Post Adj</th><th>Net</th></>}
+                {!isPlan83 && !isPlan76 && !isPlan611 && <><th>Cap Element</th><th>Tax</th><th>Post Adj</th><th>Net</th></>}
                 <th>Method</th>
                 <th>Reason</th>
                 <th>BACS Date</th>
@@ -471,7 +501,7 @@ export function PaymentsTab() {
                 <tr key={i}>
                   <td>{row.date}</td>
                   <td>{row.gross}</td>
-                  {!isPlan83 && !isPlan76 && <><td>{row.cap}</td><td>{row.tax}</td><td>{row.postAdj}</td><td>{row.net}</td></>}
+                  {!isPlan83 && !isPlan76 && !isPlan611 && <><td>{row.cap}</td><td>{row.tax}</td><td>{row.postAdj}</td><td>{row.net}</td></>}
                   <td>{row.method}</td>
                   <td>{row.reason}</td>
                   <td>{row.bacs}</td>

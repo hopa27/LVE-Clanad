@@ -253,8 +253,8 @@ export function MaturitiesSurrenderTab() {
             options={["", "Client", "IFA", "Trustee", "Other"]}
           />
         </Field>
-        <Field label="Correspondance Name:"><TextInput value={isPlan83 ? "Testmnbbgajc" : ""} /></Field>
-        <Field label="Salutation:"><TextInput value={isPlan83 ? "Testmnbbgajc" : ""} /></Field>
+        <Field label="Correspondance Name:"><TextInput value={isPlan83 ? "Testmnbggajc" : ""} /></Field>
+        <Field label="Salutation:"><TextInput value={isPlan83 ? "Testmnbggajc" : ""} /></Field>
         <Field label="Telephone:"><TextInput value="" /></Field>
       </div>
 

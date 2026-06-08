@@ -239,7 +239,7 @@ export function ApplicationDetailsTab() {
       </div>
 
       {/* Correspondence Details */}
-      {!isPlan83 && (
+      {!isPlan83 && !isPlan76 && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <Section title="Correspondence Details">
             <Field label="Correspond Name:">

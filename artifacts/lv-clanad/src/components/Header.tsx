@@ -129,6 +129,23 @@ const PROCESS_83: MenuOption[] = [
   { label: "Cancel LTC", disabled: true },
 ];
 
+const PROCESS_76: MenuOption[] = [
+  { label: "ICFP Death Letters" },
+  { label: "Set Dead", action: "set-dead" },
+  {
+    label: "Payments",
+    hasSubmenu: true,
+    submenu: [{ label: "Suspend", action: "suspend" }],
+  },
+  { label: "ICFP Statement Print" },
+  { label: "PLA Cancellation", action: "pla-cancellation" },
+  { kind: "separator" },
+  { label: "Ceding Scheme Details", action: "ceding-scheme" },
+  { kind: "separator" },
+  { label: "LIC Benefit", disabled: true },
+  { label: "Cancel LTC", disabled: true },
+];
+
 const PRINT_83: MenuOption[] = [
   { label: "Tax Certificate", action: "tax-certificate" },
   {
@@ -430,6 +447,12 @@ export function Header({ title }: { title: string }) {
         if (m.label === "Process")    return { ...m, options: PROCESS_83 };
         if (m.label === "Print")      return { ...m, options: PRINT_84 };
         if (m.label === "Supervisor") return { ...m, options: SUPERVISOR_83 };
+      }
+      if (planCode === "76") {
+        if (m.label === "Options")    return { ...m, options: OPTIONS_84 };
+        if (m.label === "Process")    return { ...m, options: PROCESS_76 };
+        if (m.label === "Print")      return { ...m, options: PRINT_84 };
+        if (m.label === "Supervisor") return { ...m, options: SUPERVISOR_84 };
       }
       return m;
     });

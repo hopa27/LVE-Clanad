@@ -35,8 +35,8 @@ const PlanCodeContext = createContext<PlanCodeValue>({
 
 export function PlanCodeProvider({ children }: { children: ReactNode }) {
   const [planCode, setPlanCode] = useState<PlanCodeVersion>("90");
-  const [surname, setSurname] = useState<string>("Master");
-  const [policyRef, setPolicyRef] = useState<string>("dbePolNo");
+  const [surname, setSurname] = useState<string>("TESTCTCCHIBD");
+  const [policyRef, setPolicyRef] = useState<string>("227813");
   return (
     <PlanCodeContext.Provider
       value={{

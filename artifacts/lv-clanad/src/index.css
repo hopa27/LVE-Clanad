@@ -207,6 +207,7 @@
   .lve-grid tbody tr:nth-child(even) { background: var(--color-lve-row-alt); }
   .lve-grid tbody tr:hover { background: var(--color-lve-highlight); color: #ffffff; }
   .lve-grid tbody tr:hover td { color: #ffffff; }
+  .lve-grid tbody tr:hover td.lve-sticky-col { background-color: var(--color-lve-highlight) !important; color: #ffffff; }
   .lve-grid tbody tr:hover a { color: #ffffff !important; }
   .lve-grid a { color: var(--color-lve-link); text-decoration: underline; }
 

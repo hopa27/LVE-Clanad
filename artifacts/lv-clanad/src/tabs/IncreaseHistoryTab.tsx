@@ -111,7 +111,7 @@ export function IncreaseHistoryTab() {
                   {row.map((v, i) => (
                     <td
                       key={i}
-                      className={`!px-4 whitespace-nowrap${i === 0 ? " sticky left-0 z-10" : ""}`}
+                      className={`!px-4 whitespace-nowrap${i === 0 ? " sticky left-0 z-10 lve-sticky-col" : ""}`}
                       style={i === 0 ? { backgroundColor: ri % 2 === 0 ? "#ffffff" : "#eaf5f8" } : undefined}
                     >
                       {v}

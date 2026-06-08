@@ -102,6 +102,20 @@ const TAX_HISTORY_621: Row[] = [
   { date: "03/06/2026", code: "1257L", n: "2", gross: "200",  cum: "200", free: "2096.52", taxable: "-1896.52", tax: "0", ytd: "0" },
 ];
 
+const PAYMENT_HISTORY_76: Row[] = [
+  { date: "07/02/2008", gross: "2300", cap: "", tax: "", postAdj: "", net: "", method: "B", reason: "FIRST", bacs: "06/02/2008", hash: "" },
+  { date: "01/03/2008", gross: "1150", cap: "", tax: "", postAdj: "", net: "", method: "B", reason: "PROC",  bacs: "28/02/2008", hash: "" },
+  { date: "01/04/2008", gross: "1150", cap: "", tax: "", postAdj: "", net: "", method: "B", reason: "PROC",  bacs: "31/03/2008", hash: "" },
+  { date: "01/05/2008", gross: "1150", cap: "", tax: "", postAdj: "", net: "", method: "B", reason: "PROC",  bacs: "30/04/2008", hash: "" },
+  { date: "01/06/2008", gross: "1150", cap: "", tax: "", postAdj: "", net: "", method: "B", reason: "PROC",  bacs: "29/05/2008", hash: "" },
+  { date: "01/07/2008", gross: "1150", cap: "", tax: "", postAdj: "", net: "", method: "B", reason: "PROC",  bacs: "30/06/2008", hash: "" },
+  { date: "01/08/2008", gross: "1150", cap: "", tax: "", postAdj: "", net: "", method: "B", reason: "PROC",  bacs: "31/07/2008", hash: "" },
+  { date: "22/10/2008", gross: "2300", cap: "", tax: "", postAdj: "", net: "", method: "C", reason: "",      bacs: "",           hash: "" },
+  { date: "01/11/2008", gross: "1150", cap: "", tax: "", postAdj: "", net: "", method: "B", reason: "PROC",  bacs: "30/10/2008", hash: "" },
+];
+
+const TAX_HISTORY_76: Row[] = [];
+
 const TAX_HISTORY_83: Row[] = [];
 
 const TAX_HISTORY_51: Row[] = [
@@ -127,6 +141,7 @@ export function PaymentsTab() {
   const isPlan51  = planCode === "51";
   const isPlan83  = planCode === "83";
   const isPlan621 = planCode === "621";
+  const isPlan76  = planCode === "76";
 
   const paymentHistory = isPlan84
     ? PAYMENT_HISTORY_84
@@ -138,6 +153,8 @@ export function PaymentsTab() {
     ? PAYMENT_HISTORY_83
     : isPlan621
     ? PAYMENT_HISTORY_621
+    : isPlan76
+    ? PAYMENT_HISTORY_76
     : isPlan0 || isPlan87
     ? []
     : PAYMENT_HISTORY_DEFAULT;
@@ -151,6 +168,8 @@ export function PaymentsTab() {
     ? TAX_HISTORY_83
     : isPlan621
     ? TAX_HISTORY_621
+    : isPlan76
+    ? TAX_HISTORY_76
     : isPlan0 || isPlan87
     ? []
     : TAX_HISTORY_DEFAULT;
@@ -327,6 +346,28 @@ export function PaymentsTab() {
               <Field label="Nth Inst:"><TextInput value="2" disabled /></Field>
             </div>
           </div>
+        ) : isPlan76 ? (
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-8">
+            <div>
+              <Field label="Premium:"><TextInput value="43962" disabled /></Field>
+              <Field label={<span className="text-[#d72714]">Total:</span>}>
+                <TextInput value="43962" disabled className="!text-[#d72714] underline" />
+              </Field>
+              <Field label="1st Annuitants Gross:"><TextInput value="13800" disabled /></Field>
+            </div>
+            <div>
+              <Field label="BAL Gross Annuity:"><TextInput value="" disabled /></Field>
+            </div>
+            <div>
+              <Field label="Next Anniversary:">
+                <DatePicker value="01/01/2010" placeholder="" disabled />
+              </Field>
+              <Field label="Next Payment Due:">
+                <DatePicker value="" placeholder="" disabled />
+              </Field>
+              <Field label="Inst Remaining:"><TextInput value="" disabled /></Field>
+            </div>
+          </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-8">
             <div>
@@ -379,7 +420,7 @@ export function PaymentsTab() {
               <tr>
                 <th>Pay Date</th>
                 <th>Gross</th>
-                {!isPlan83 && <><th>Cap Element</th><th>Tax</th><th>Post Adj</th><th>Net</th></>}
+                {!isPlan83 && !isPlan76 && <><th>Cap Element</th><th>Tax</th><th>Post Adj</th><th>Net</th></>}
                 <th>Method</th>
                 <th>Reason</th>
                 <th>BACS Date</th>
@@ -391,7 +432,7 @@ export function PaymentsTab() {
                 <tr key={i}>
                   <td>{row.date}</td>
                   <td>{row.gross}</td>
-                  {!isPlan83 && <><td>{row.cap}</td><td>{row.tax}</td><td>{row.postAdj}</td><td>{row.net}</td></>}
+                  {!isPlan83 && !isPlan76 && <><td>{row.cap}</td><td>{row.tax}</td><td>{row.postAdj}</td><td>{row.net}</td></>}
                   <td>{row.method}</td>
                   <td>{row.reason}</td>
                   <td>{row.bacs}</td>

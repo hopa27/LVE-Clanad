@@ -49,6 +49,28 @@ const ROWS_84: string[][] = PLAN_84_ANNIV.map((d, i) => {
   ];
 });
 
+const PLAN_83_ROWS: [string, string, string][] = [
+  ["A", "17/07/2017", "14/08/2017"],
+  ["A", "19/07/2018", "14/08/2018"],
+  ["A", "17/07/2019", "14/08/2019"],
+  ["A", "19/07/2020", "14/08/2020"],
+  ["A", "18/07/2021", "14/08/2021"],
+  ["A", "17/07/2022", "14/08/2022"],
+  ["A", "17/07/2023", "14/08/2023"],
+  ["A", "17/07/2024", "14/08/2024"],
+  ["P", "17/07/2025", "14/08/2025"],
+];
+
+const ROWS_83: string[][] = PLAN_83_ROWS.map(([status, stmtDate, annivDate]) => [
+  "Std Post 97", status, stmtDate, annivDate,
+  "£8,424.00", "£8,424.00", "Fixed",
+  "0", "0", "n/a",
+  "n/a", "n/a", "n/a",
+  "n/a", "n/a", "n/a",
+  "30/12/1899", "0", "0",
+  "No", "0", "0", "0", "0",
+]);
+
 export function IncreaseHistoryTab() {
   const { planCode } = usePlanCode();
   const isPlan0 = planCode === "0";
@@ -56,11 +78,14 @@ export function IncreaseHistoryTab() {
   const isPlan84 = planCode === "84";
   const isPlan90 = planCode === "90";
   const isPlan51 = planCode === "51";
+  const isPlan83 = planCode === "83";
   const rows: string[][] = isPlan0 || isPlan87 || isPlan90 || isPlan51
     ? []
     : isPlan84
       ? ROWS_84
-      : [ROW_DEFAULT];
+      : isPlan83
+        ? ROWS_83
+        : [ROW_DEFAULT];
 
   return (
     <div className="space-y-4">

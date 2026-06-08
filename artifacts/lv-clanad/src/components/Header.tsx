@@ -424,7 +424,7 @@ export function Header({ title }: { title: string }) {
       return true;
     })
     .map((m) => {
-      if (planCode === "51") {
+      if (planCode === "51" || planCode === "62a") {
         if (m.label === "Options") return { ...m, options: OPTIONS_51 };
         if (m.label === "Print")   return { ...m, options: PRINT_51 };
       }

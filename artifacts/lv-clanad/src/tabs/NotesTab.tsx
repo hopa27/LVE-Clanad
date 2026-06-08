@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Section } from "../components/Field";
 import {
   MdAdd,
@@ -11,21 +12,22 @@ import {
 import { usePlanCode } from "../context/PlanCodeContext";
 
 function NoteButtons({ disableEditDelete = false, disableAll = false }: { disableEditDelete?: boolean; disableAll?: boolean }) {
+  const [isEditing, setIsEditing] = useState(false);
   return (
     <div className="flex items-center gap-2">
-      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled={disableAll} title="Insert Record (Ctrl+Insert)">
+      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled={disableAll || isEditing} title="Insert Record (Ctrl+Insert)">
         <MdAdd size={16} /> Insert Record
       </button>
-      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled={disableEditDelete || disableAll} title="Delete Record (Ctrl+Delete)">
+      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled={disableEditDelete || disableAll || isEditing} title="Delete Record (Ctrl+Delete)">
         <MdRemove size={16} /> Delete Record
       </button>
-      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled={disableEditDelete || disableAll} title="Edit Record">
+      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled={disableEditDelete || disableAll || isEditing} title="Edit Record" onClick={() => setIsEditing(true)}>
         <MdEdit size={16} /> Edit Record
       </button>
-      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled={disableEditDelete || disableAll} title="Post Edit">
+      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled={!isEditing} title="Post Edit" onClick={() => setIsEditing(false)}>
         <MdCheck size={16} /> Post Edit
       </button>
-      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled={disableEditDelete || disableAll} title="Cancel Edit">
+      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled={!isEditing} title="Cancel Edit" onClick={() => setIsEditing(false)}>
         <MdClose size={16} /> Cancel Edit
       </button>
     </div>

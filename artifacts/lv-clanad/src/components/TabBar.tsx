@@ -46,7 +46,7 @@ export function TabBar({
   const visibleTabs =
     planCode === "87" || planCode === "84" || planCode === "90" || planCode === "51" || planCode === "621"
       ? TABS.filter((t) => t.key !== "contacts" && t.key !== "contacts2")
-      : planCode === "83"
+      : planCode === "83" || planCode === "76"
       ? TABS.filter((t) => t.key !== "contacts2")
       : TABS;
   return (

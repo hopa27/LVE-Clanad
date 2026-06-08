@@ -420,6 +420,7 @@ export function Header({ title }: { title: string }) {
   const menuItems: MenuItem[] = MENU_ITEMS
     .filter((m) => {
       if (planCode === "51") return m.label === "Options" || m.label === "Print" || m.label === "Help";
+      if (planCode === "62a") return m.label === "Options" || m.label === "Print" || m.label === "Help";
       return true;
     })
     .map((m) => {

@@ -90,6 +90,18 @@ const PAYMENT_HISTORY_83: Row[] = [
   { date: "14/12/2016", gross: "702", cap: "", tax: "", postAdj: "", net: "", method: "B", reason: "PROC",  bacs: "13/12/2016", hash: "/-BB" },
 ];
 
+const PAYMENT_HISTORY_621: Row[] = [
+  { date: "03/06/2026", gross: "200",  cap: "0", tax: "0", postAdj: "0", net: "200",  method: "B", reason: "MANUAL", bacs: "02/06/2026", hash: "/LB4" },
+  { date: "03/06/2026", gross: "-200", cap: "0", tax: "0", postAdj: "0", net: "-200", method: "R", reason: "RETURN", bacs: "",           hash: ""     },
+  { date: "03/06/2026", gross: "200",  cap: "0", tax: "0", postAdj: "0", net: "200",  method: "T", reason: "REISS",  bacs: "",           hash: ""     },
+];
+
+const TAX_HISTORY_621: Row[] = [
+  { date: "03/06/2026", code: "1257L", n: "2", gross: "200",  cum: "200", free: "2096.52", taxable: "-1896.52", tax: "0", ytd: "0" },
+  { date: "03/06/2026", code: "1257L", n: "2", gross: "-200", cum: "0",   free: "1048.26", taxable: "-1048.26", tax: "0", ytd: "0" },
+  { date: "03/06/2026", code: "1257L", n: "2", gross: "200",  cum: "200", free: "2096.52", taxable: "-1896.52", tax: "0", ytd: "0" },
+];
+
 const TAX_HISTORY_83: Row[] = [];
 
 const TAX_HISTORY_51: Row[] = [
@@ -108,12 +120,13 @@ const TAX_HISTORY_51: Row[] = [
 
 export function PaymentsTab() {
   const { planCode } = usePlanCode();
-  const isPlan0  = planCode === "0";
-  const isPlan87 = planCode === "87";
-  const isPlan84 = planCode === "84";
-  const isPlan90 = planCode === "90";
-  const isPlan51 = planCode === "51";
-  const isPlan83 = planCode === "83";
+  const isPlan0   = planCode === "0";
+  const isPlan87  = planCode === "87";
+  const isPlan84  = planCode === "84";
+  const isPlan90  = planCode === "90";
+  const isPlan51  = planCode === "51";
+  const isPlan83  = planCode === "83";
+  const isPlan621 = planCode === "621";
 
   const paymentHistory = isPlan84
     ? PAYMENT_HISTORY_84
@@ -123,6 +136,8 @@ export function PaymentsTab() {
     ? PAYMENT_HISTORY_51
     : isPlan83
     ? PAYMENT_HISTORY_83
+    : isPlan621
+    ? PAYMENT_HISTORY_621
     : isPlan0 || isPlan87
     ? []
     : PAYMENT_HISTORY_DEFAULT;
@@ -134,6 +149,8 @@ export function PaymentsTab() {
     ? TAX_HISTORY_51
     : isPlan83
     ? TAX_HISTORY_83
+    : isPlan621
+    ? TAX_HISTORY_621
     : isPlan0 || isPlan87
     ? []
     : TAX_HISTORY_DEFAULT;
@@ -274,6 +291,40 @@ export function PaymentsTab() {
               </Field>
               <Field label="Inst Remaining:"><TextInput value="0" disabled /></Field>
               <Field label="Nth Inst:"><TextInput value="4" disabled /></Field>
+            </div>
+          </div>
+        ) : isPlan621 ? (
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-8">
+            <div>
+              <Field label="Premium:"><TextInput value="39911.31" disabled /></Field>
+              <Field label="Tax Free Cash:"><TextInput value="13303.76" disabled /></Field>
+              <Field label={<span className="text-[#d72714]">Total:</span>}>
+                <TextInput value="53215.07" disabled className="!text-[#d72714] underline" />
+              </Field>
+              <Field label="1st Annuitants Gross:"><TextInput value="0" disabled /></Field>
+              <Field label="2nd Annuitants Gross:"><TextInput value="772.5" disabled /></Field>
+            </div>
+            <div>
+              <Field label=" "><div className="h-[44px]" /></Field>
+              <Field label=" "><div className="h-[44px]" /></Field>
+              <Field label="Taxable pay:"><TextInput value="-1896.52" disabled /></Field>
+              <Field label="Cumulative Free Pay:"><TextInput value="2096.52" disabled /></Field>
+            </div>
+            <div>
+              <Field label="Cumulative Instal:"><TextInput value="200" disabled /></Field>
+              <Field label="BAL Gross Annuity:"><TextInput value="0" disabled /></Field>
+              <Field label="PAYE Tax Due To Date:"><TextInput value="0" disabled /></Field>
+              <Field label="PAYE Tax Deduction:"><TextInput value="0" disabled /></Field>
+            </div>
+            <div>
+              <Field label="Next Anniversary:">
+                <DatePicker value="" placeholder="" disabled />
+              </Field>
+              <Field label="Next Payment Due:">
+                <DatePicker value="" placeholder="" disabled />
+              </Field>
+              <Field label="Inst Remaining:"><TextInput value="0" disabled /></Field>
+              <Field label="Nth Inst:"><TextInput value="2" disabled /></Field>
             </div>
           </div>
         ) : (

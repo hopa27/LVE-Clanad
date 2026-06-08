@@ -108,6 +108,31 @@ const PLAN_83_DIARY: DiaryRow[] = [
 
 const AUDIT_83 = Array.from({ length: 10 }, () => "Test Note");
 
+const PLAN_621_DIARY: DiaryRow[] = [
+  { ref: 1, type: "Beneficiary (Name & Add)", notes: "Beneficiary name & address",       created: "20/11/2023", by: "SYSANN", due: "20/12/2023", completed: "", byCompleted: "" },
+  { ref: 2, type: "Beneficiary (NINO)",       notes: "Beneficiary NI Number",             created: "20/11/2023", by: "SYSANN", due: "20/12/2023", completed: "", byCompleted: "" },
+  { ref: 3, type: "Beneficiary (Bank Dets)",  notes: "Beneficiary bank account details",  created: "20/11/2023", by: "SYSANN", due: "20/12/2023", completed: "", byCompleted: "" },
+  { ref: 8, type: "Overpayment",              notes: "Return of overpayment",             created: "20/11/2023", by: "SYSANN", due: "20/12/2023", completed: "", byCompleted: "" },
+  { ref: 5, type: "Benefits Beneficiary Form",notes: "Benefits Beneficiary Form",         created: "20/11/2023", by: "SYSANN", due: "20/12/2023", completed: "", byCompleted: "" },
+  { ref: 6, type: "Death Cert Client",        notes: "Annuitant Death Certificate",       created: "20/11/2023", by: "SYSANN", due: "20/12/2023", completed: "", byCompleted: "" },
+  { ref: 7, type: "Marriage Certificate",     notes: "Marriage Certificate",              created: "20/11/2023", by: "SYSANN", due: "20/12/2023", completed: "", byCompleted: "" },
+  { ref: 4, type: "Beneficiary (DOB)",        notes: "Beneficiary date of birth",         created: "20/11/2023", by: "SYSANN", due: "20/12/2023", completed: "", byCompleted: "" },
+];
+
+const AUDIT_621: string[] = [];
+
+const DATA_CHANGES_621: { changeDate: string; description: string; userId: string }[] = [
+  { changeDate: "03/06/2026 07:36:30", description: "Field PAYE-Cum Free Pay for Ref line 3 was inserted with value: 2096.52.",   userId: "UAT5" },
+  { changeDate: "03/06/2026 07:36:30", description: "Field PAYE-Cum Instalments for Ref line 3 was inserted with value: 200.",    userId: "UAT5" },
+  { changeDate: "03/06/2026 07:36:30", description: "Field PAYE-Gross for Ref line 3 was inserted with value: 200.",              userId: "UAT5" },
+  { changeDate: "03/06/2026 07:36:30", description: "Field PAYE-Installment # for Ref line 3 was inserted with value: 2.",        userId: "UAT5" },
+  { changeDate: "03/06/2026 07:36:30", description: "Field PAYE-Pay Date for Ref line 3 was inserted with value: 03/06/2026.",    userId: "UAT5" },
+  { changeDate: "03/06/2026 07:36:30", description: "Field PAYE-Paye Code for Ref line 3 was inserted with value: 1257L.",        userId: "UAT5" },
+  { changeDate: "03/06/2026 07:36:30", description: "Field PAYE-Ref for Ref line 3 was inserted with value: 3.",                  userId: "UAT5" },
+  { changeDate: "03/06/2026 07:36:30", description: "Field PAYE-Tax Deduction for Ref line 3 was inserted with value: 0.",        userId: "UAT5" },
+  { changeDate: "03/06/2026 07:36:30", description: "Field PAYE-Tax Liability for Ref line 3 was inserted with value: 0.",        userId: "UAT5" },
+];
+
 const DATA_CHANGES_83: { changeDate: string; description: string; userId: string }[] = [
   { changeDate: "08/09/2017 11:29:16", description: "Field Installments-Cumulative was changed from 4212 to 3510.",                          userId: "LOPVB" },
   { changeDate: "08/09/2017 11:29:16", description: "Field PAYE-Cum Free Pay for Ref line 28 was inserted with value: 4795.45.",             userId: "LOPVB" },
@@ -151,18 +176,19 @@ const DIARY_COLS = ["Ref", "Type", "Notes", "Created", "By", "Due", "Completed",
 
 export function DiaryAuditTab() {
   const { planCode } = usePlanCode();
-  const isPlan0 = planCode === "0";
-  const isPlan87 = planCode === "87";
-  const isPlan84 = planCode === "84";
-  const isPlan90 = planCode === "90";
-  const isPlan51 = planCode === "51";
-  const isPlan83 = planCode === "83";
+  const isPlan0   = planCode === "0";
+  const isPlan87  = planCode === "87";
+  const isPlan84  = planCode === "84";
+  const isPlan90  = planCode === "90";
+  const isPlan51  = planCode === "51";
+  const isPlan83  = planCode === "83";
+  const isPlan621 = planCode === "621";
   const [trail, setTrail] = useState<"notes" | "data">("notes");
   const [diaryOpen, setDiaryOpen] = useState(false);
   const [needsOpen, setNeedsOpen] = useState(false);
   const [cedingOpen, setCedingOpen] = useState(false);
   const [diary, setDiary] = useState<DiaryRow[]>(
-    isPlan87 ? PLAN_87_DIARY : isPlan84 ? PLAN_84_DIARY : isPlan90 ? PLAN_90_DIARY : isPlan51 ? PLAN_51_DIARY : isPlan83 ? PLAN_83_DIARY : INITIAL_DIARY,
+    isPlan87 ? PLAN_87_DIARY : isPlan84 ? PLAN_84_DIARY : isPlan90 ? PLAN_90_DIARY : isPlan51 ? PLAN_51_DIARY : isPlan83 ? PLAN_83_DIARY : isPlan621 ? PLAN_621_DIARY : INITIAL_DIARY,
   );
   const [selectedRef, setSelectedRef] = useState<number | null>(null);
   const [editConfirmOpen, setEditConfirmOpen] = useState(false);
@@ -360,7 +386,7 @@ export function DiaryAuditTab() {
                   </tr>
                 </thead>
                 <tbody>
-                  {(isPlan0 || isPlan87 ? [] : isPlan84 ? AUDIT_84 : isPlan90 ? AUDIT_90 : isPlan51 ? AUDIT_51 : isPlan83 ? AUDIT_83 : AUDIT).map((line, i) => {
+                  {(isPlan0 || isPlan87 ? [] : isPlan84 ? AUDIT_84 : isPlan90 ? AUDIT_90 : isPlan51 ? AUDIT_51 : isPlan83 ? AUDIT_83 : isPlan621 ? AUDIT_621 : AUDIT).map((line, i) => {
                     const m = line.match(
                       /^(.*?)\s+by\s+(\S+)\s+on\s+(\S+)\s+at\s+(\S+)\s*$/,
                     );
@@ -412,6 +438,14 @@ export function DiaryAuditTab() {
                     ))
                   : isPlan83
                   ? DATA_CHANGES_83.map((r, i) => (
+                      <tr key={i}>
+                        <td className="!px-4 whitespace-nowrap">{r.changeDate}</td>
+                        <td className="!px-4">{r.description}</td>
+                        <td className="!px-4 whitespace-nowrap">{r.userId}</td>
+                      </tr>
+                    ))
+                  : isPlan621
+                  ? DATA_CHANGES_621.map((r, i) => (
                       <tr key={i}>
                         <td className="!px-4 whitespace-nowrap">{r.changeDate}</td>
                         <td className="!px-4">{r.description}</td>

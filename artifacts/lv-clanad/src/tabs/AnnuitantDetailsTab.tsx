@@ -316,7 +316,7 @@ export function AnnuitantDetailsTab() {
         />
       </Section>
 
-      <Section title="Dependant / Second Annuitant / Beneficiary">
+      {!isPlan76 && <Section title="Dependant / Second Annuitant / Beneficiary">
         <AnnuitantBlock
           showShortName={false}
           showUwBlock={false}
@@ -341,7 +341,7 @@ export function AnnuitantDetailsTab() {
           icd2=""
           icd3=""
         />
-      </Section>
+      </Section>}
 
       <div className="rounded-[8px] border border-[#BBBBBB] bg-white overflow-hidden">
         <div className="relative h-7 w-full bg-white">

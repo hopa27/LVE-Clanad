@@ -95,6 +95,30 @@ const AUDIT_90 = [
   "System Advises: P45 details amended by UAT4 on 25/05/2026 at 13:48:46",
 ];
 
+const PLAN_83_DIARY: DiaryRow[] = [
+  { ref: 12, type: "Claim Form Details",   notes: "Claim Form Details",   created: "14/08/2025", by: "SYSANN", due: "21/08/2026", completed: "", byCompleted: "" },
+  { ref: 11, type: "Nature Of Payment",    notes: "Nature Of Payment",    created: "14/08/2025", by: "SYSANN", due: "21/08/2026", completed: "", byCompleted: "" },
+  { ref: 10, type: "Payment Method",       notes: "Payment Method",       created: "14/08/2025", by: "SYSANN", due: "21/08/2026", completed: "", byCompleted: "" },
+  { ref: 9,  type: "Correspondence Details", notes: "Correspondence Details", created: "14/08/2025", by: "SYSANN", due: "21/08/2026", completed: "", byCompleted: "" },
+  { ref: 13, type: "Payee Details",        notes: "Payee Details",        created: "14/08/2025", by: "SYSANN", due: "21/08/2026", completed: "", byCompleted: "" },
+  { ref: 8,  type: "BCE5A",               notes: "BCE 5A check at age 75", created: "08/11/2016", by: "SYSANN", due: "06/07/2025", completed: "", byCompleted: "" },
+  { ref: 7,  type: "Misc",               notes: "is var 3 ok?",          created: "18/08/2015", by: "LOPCH",  due: "25/08/2015", completed: "21/08/2015", byCompleted: "LOPCH" },
+  { ref: 6,  type: "Misc",               notes: "RA",                    created: "27/07/2015", by: "LOPBP",  due: "03/08/2015", completed: "18/08/2015", byCompleted: "LOPCH" },
+];
+
+const AUDIT_83 = Array.from({ length: 10 }, () => "Test Note");
+
+const DATA_CHANGES_83: { changeDate: string; description: string; userId: string }[] = [
+  { changeDate: "08/09/2017 11:29:16", description: "Field Installments-Cumulative was changed from 4212 to 3510.",                          userId: "LOPVB" },
+  { changeDate: "08/09/2017 11:29:16", description: "Field PAYE-Cum Free Pay for Ref line 28 was inserted with value: 4795.45.",             userId: "LOPVB" },
+  { changeDate: "08/09/2017 11:29:16", description: "Field PAYE-Cum Instalments for Ref line 28 was inserted with value: 3510.",             userId: "LOPVB" },
+  { changeDate: "08/09/2017 11:29:16", description: "Field PAYE-Gross for Ref line 28 was inserted with value: -702.",                      userId: "LOPVB" },
+  { changeDate: "08/09/2017 11:29:16", description: "Field PAYE-Installment # for Ref line 28 was inserted with value: 3.",                  userId: "LOPVB" },
+  { changeDate: "08/09/2017 11:29:16", description: "Field PAYE-Pay Date for Ref line 28 was inserted with value: 08/09/2017.",              userId: "LOPVB" },
+  { changeDate: "08/09/2017 11:29:16", description: "Field PAYE-Paye Code for Ref line 28 was inserted with value: 1150L.",                  userId: "LOPVB" },
+  { changeDate: "08/09/2017 11:29:16", description: "Field PAYE-Ref for Ref line 28 was inserted with value: 28.",                           userId: "LOPVB" },
+];
+
 const DATA_CHANGES_84: { changeDate: string; description: string; userId: string }[] = [
   { changeDate: "24/04/2018 08:48:47", description: "Field Annuities-Gross Balance was changed from 1294 to 1186.17.",                userId: "LOPJSH" },
   { changeDate: "24/04/2018 08:48:47", description: "Field Installments-Remaining was changed from 12 to 11.",                       userId: "LOPJSH" },
@@ -132,12 +156,13 @@ export function DiaryAuditTab() {
   const isPlan84 = planCode === "84";
   const isPlan90 = planCode === "90";
   const isPlan51 = planCode === "51";
+  const isPlan83 = planCode === "83";
   const [trail, setTrail] = useState<"notes" | "data">("notes");
   const [diaryOpen, setDiaryOpen] = useState(false);
   const [needsOpen, setNeedsOpen] = useState(false);
   const [cedingOpen, setCedingOpen] = useState(false);
   const [diary, setDiary] = useState<DiaryRow[]>(
-    isPlan87 ? PLAN_87_DIARY : isPlan84 ? PLAN_84_DIARY : isPlan90 ? PLAN_90_DIARY : isPlan51 ? PLAN_51_DIARY : INITIAL_DIARY,
+    isPlan87 ? PLAN_87_DIARY : isPlan84 ? PLAN_84_DIARY : isPlan90 ? PLAN_90_DIARY : isPlan51 ? PLAN_51_DIARY : isPlan83 ? PLAN_83_DIARY : INITIAL_DIARY,
   );
   const [selectedRef, setSelectedRef] = useState<number | null>(null);
   const [editConfirmOpen, setEditConfirmOpen] = useState(false);
@@ -335,7 +360,7 @@ export function DiaryAuditTab() {
                   </tr>
                 </thead>
                 <tbody>
-                  {(isPlan0 || isPlan87 ? [] : isPlan84 ? AUDIT_84 : isPlan90 ? AUDIT_90 : isPlan51 ? AUDIT_51 : AUDIT).map((line, i) => {
+                  {(isPlan0 || isPlan87 ? [] : isPlan84 ? AUDIT_84 : isPlan90 ? AUDIT_90 : isPlan51 ? AUDIT_51 : isPlan83 ? AUDIT_83 : AUDIT).map((line, i) => {
                     const m = line.match(
                       /^(.*?)\s+by\s+(\S+)\s+on\s+(\S+)\s+at\s+(\S+)\s*$/,
                     );
@@ -379,6 +404,14 @@ export function DiaryAuditTab() {
                     ))
                   : isPlan51
                   ? DATA_CHANGES_51.map((r, i) => (
+                      <tr key={i}>
+                        <td className="!px-4 whitespace-nowrap">{r.changeDate}</td>
+                        <td className="!px-4">{r.description}</td>
+                        <td className="!px-4 whitespace-nowrap">{r.userId}</td>
+                      </tr>
+                    ))
+                  : isPlan83
+                  ? DATA_CHANGES_83.map((r, i) => (
                       <tr key={i}>
                         <td className="!px-4 whitespace-nowrap">{r.changeDate}</td>
                         <td className="!px-4">{r.description}</td>

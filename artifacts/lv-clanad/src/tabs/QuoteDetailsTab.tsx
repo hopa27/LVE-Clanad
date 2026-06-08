@@ -53,6 +53,16 @@ const QUOTE_ROWS_51 = [
   },
 ];
 
+const QUOTE_ROWS_83 = [
+  {
+    type: "Std Post 97", premium: "£75,459.46", tfc: "", original: "£8,424.00",
+    escType: "Fixed", escRate: "0", currentInc: "£8,424.00", spousePct: "0",
+    spouseInc: "£0.00", guarantee: "", lastPay: "", overlap: "No",
+    valProt: "100", taxFree: "0", maxFree: "F",
+    valProtFlag: "T", lsConvert: "", planProt: "", dependant: "None",
+  },
+];
+
 const QUOTE_COLUMNS = [
   "Type","Premium","Tax Free Cash Amount","Original Income","Esc Type","Esc Rate %",
   "Current Income","Spouse %","Spouse Income","Guarantee","Last Pay Under Guarantee",
@@ -68,6 +78,7 @@ export function QuoteDetailsTab() {
   const isPlan84 = planCode === "84";
   const isPlan90 = planCode === "90";
   const isPlan51 = planCode === "51";
+  const isPlan83 = planCode === "83";
   const showGad = false;
   const quoteRows = isPlan0
     ? []
@@ -79,6 +90,8 @@ export function QuoteDetailsTab() {
     ? QUOTE_ROWS_90
     : isPlan51
     ? QUOTE_ROWS_51
+    : isPlan83
+    ? QUOTE_ROWS_83
     : QUOTE_ROWS;
 
   return (
@@ -181,7 +194,7 @@ export function QuoteDetailsTab() {
           <>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-8">
               <div>
-                <Field label="Life Type:"><TextInput value={isPlan87 || isPlan51 ? "M" : isPlan90 ? "" : "F"} disabled /></Field>
+                <Field label="Life Type:"><TextInput value={isPlan87 || isPlan51 || isPlan83 ? "M" : isPlan90 ? "" : "F"} disabled /></Field>
                 <Field label="Plan Type:">
                   {isPlan84 ? (
                     <div className="grid grid-cols-2 gap-2">
@@ -189,25 +202,25 @@ export function QuoteDetailsTab() {
                       <TextInput value="(PRP)" disabled />
                     </div>
                   ) : (
-                    <TextInput value={isPlan90 ? "MCP" : isPlan51 ? "CPA" : "FTA"} disabled />
+                    <TextInput value={isPlan90 ? "MCP" : isPlan51 ? "CPA" : isPlan83 ? "PRP" : "FTA"} disabled />
                   )}
                 </Field>
-                <Field label="Payments:"><TextInput value="AR" disabled /></Field>
-                <Field label="Frequency:"><TextInput value={isPlan87 ? "1" : isPlan84 || isPlan90 ? "12" : isPlan51 ? "4" : "2"} disabled /></Field>
+                <Field label="Payments:"><TextInput value={isPlan83 ? "AD" : "AR"} disabled /></Field>
+                <Field label="Frequency:"><TextInput value={isPlan87 ? "1" : isPlan84 || isPlan90 || isPlan83 ? "12" : isPlan51 ? "4" : "2"} disabled /></Field>
                 <Field label="ELE:"><TextInput value="" disabled={!isPlan51} /></Field>
                 {!isPlan84 && !isPlan90 && (
                   <Field label="Capital Protection?:"><TextInput value="" disabled={!isPlan51} /></Field>
                 )}
                 <Field label="Original Amnt Vested:"><TextInput value="" disabled={!isPlan51} /></Field>
-                {!isPlan84 && !isPlan90 && !isPlan51 && (
+                {!isPlan84 && !isPlan90 && !isPlan51 && !isPlan83 && (
                   <Field label="Withheld Minimal Income:"><Checkbox checked={isPlan87} disabled /></Field>
                 )}
               </div>
               <div>
-                <Field label="Series:"><TextInput value={isPlan87 ? "912" : isPlan84 ? "700" : isPlan90 ? "" : isPlan51 ? "325" : "893"} disabled /></Field>
+                <Field label="Series:"><TextInput value={isPlan87 ? "912" : isPlan84 ? "700" : isPlan90 ? "" : isPlan51 ? "325" : isPlan83 ? "792" : "893"} disabled /></Field>
                 <Field label="Policy Type:">
                   <SelectInput
-                    value={isPlan84 || isPlan90 || isPlan51 ? "non profit" : "with profit"}
+                    value={isPlan84 || isPlan90 || isPlan51 || isPlan83 ? "non profit" : "with profit"}
                     options={["with profit", "without profit", "non profit"]}
                     disabled
                   />
@@ -237,8 +250,15 @@ export function QuoteDetailsTab() {
                     <Field label="Maturity Date:"><TextInput value="31/10/2032" disabled /></Field>
                   </>
                 )}
+                {isPlan83 && (
+                  <>
+                    <Field label="Policy Term (months):"><TextInput value="120" disabled /></Field>
+                    <Field label="Guaranteed Maturity:"><TextInput value="501" disabled /></Field>
+                    <Field label="Maturity Date:"><TextInput value="14/08/2025" disabled /></Field>
+                  </>
+                )}
               </div>
-              {!isPlan87 && !isPlan90 && !isPlan51 && (
+              {!isPlan87 && !isPlan90 && !isPlan51 && !isPlan83 && (
                 <div>
                   <Field label="Notional Value:"><TextInput value={isPlan84 ? "8189.23" : "14,828"} disabled /></Field>
                   <Field label="Value Date:"><TextInput value={isPlan84 ? "30/04/2026" : "25/03/2026"} disabled /></Field>
@@ -259,7 +279,7 @@ export function QuoteDetailsTab() {
               )}
             </div>
 
-            {!isPlan90 && (
+            {!isPlan90 && !isPlan83 && (
             <Section title="LTA Details">
               {isPlan51 ? (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8">

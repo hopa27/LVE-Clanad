@@ -95,6 +95,31 @@ export function NotesTab() {
   const isPlan84 = planCode === "84";
   const isPlan90 = planCode === "90";
   const isPlan51 = planCode === "51";
+  const isPlan83 = planCode === "83";
+  if (isPlan83) {
+    const count = 6;
+    return (
+      <Section
+        title={`Notes (${count})`}
+        headerAction={<NoteButtons />}
+      >
+        <div className="space-y-3 max-h-[620px] overflow-auto pr-1">
+          {Array.from({ length: count }).map((_, i) => (
+            <article
+              key={i}
+              className="relative bg-white rounded-[8px] border border-[#e0e0e0] overflow-hidden"
+            >
+              <div className="p-4">
+                <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#3d3d3d] leading-[1.6] m-0">
+                  Test Note
+                </pre>
+              </div>
+            </article>
+          ))}
+        </div>
+      </Section>
+    );
+  }
   if (isPlan84 || isPlan90 || isPlan51) {
     const count = 7;
     return (

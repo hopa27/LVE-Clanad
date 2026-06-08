@@ -98,7 +98,7 @@ export function IncreaseHistoryTab() {
                   <th
                     key={c}
                     className={`!px-4 max-w-[120px]${i === 0 ? " sticky left-0 z-10" : ""}`}
-                    style={i === 0 ? { backgroundColor: "#002f5c" } : undefined}
+                    style={i === 0 ? { backgroundColor: "#ffffff" } : undefined}
                   >
                     {c}
                   </th>

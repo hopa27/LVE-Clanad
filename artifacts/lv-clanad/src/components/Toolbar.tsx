@@ -80,7 +80,8 @@ export function Toolbar() {
     { label: "Reports", icon: MdBarChart, enabled: !editing, action: "reports" },
     { label: "Company", icon: MdBusiness, enabled: !editing, action: "company" },
   ];
-  const TOOLS = isPlan51
+  const isPlan62a = planCode === "62a";
+  const TOOLS = (isPlan51 || isPlan62a)
     ? ALL_TOOLS.filter((t) => t.action !== "edit-toggle" && t.action !== "log")
     : ALL_TOOLS;
 

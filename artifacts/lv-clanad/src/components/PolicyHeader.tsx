@@ -66,7 +66,7 @@ export function PolicyHeader() {
         {surname}
       </div>
 
-      {planCode === "84" || planCode === "51" || planCode === "83" ? (
+      {planCode === "84" || planCode === "51" || planCode === "83" || planCode === "62a" ? (
         <div className="px-3 h-9 inline-flex items-center rounded-[8px] bg-[#eaf5f8] text-[#0d2c41] font-['Mulish'] text-sm">
           Simultaneous Policies
         </div>

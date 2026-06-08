@@ -119,6 +119,153 @@ function ContactPanel({
   );
 }
 
+function ClearBtn() {
+  return (
+    <button
+      type="button"
+      className="lve-btn lve-btn-secondary shrink-0 inline-flex items-center gap-1"
+      title="Clear address"
+    >
+      <MdClear size={16} />
+      Clear
+    </button>
+  );
+}
+
+function Plan76ContactsLayout() {
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      {/* Annuitant */}
+      <Section title="Annuitant">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3">
+          <Field label="Corres Name:"><TextInput value="Testmlbaabia" /></Field>
+          <Field label="Salutation:"><TextInput value="Testmlbaabia" /></Field>
+        </div>
+        <Field label="Address:">
+          <div className="flex items-start gap-2">
+            <div className="flex-1 min-w-0">
+              <ConnectedAddress
+                lines={[
+                  { placeholder: "Line 1" },
+                  { placeholder: "Line 2" },
+                  { placeholder: "Line 3" },
+                  { placeholder: "Line 4" },
+                  { placeholder: "Line 5" },
+                ]}
+                initial={["Northampton", "10 Western Avenue", "", "Eastleigh", ""]}
+              />
+            </div>
+            <ClearBtn />
+          </div>
+        </Field>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3">
+          <Field label="Postcode:"><TextInput value="VE99 9AB" /></Field>
+          <Field label="Tel.:"><TextInput value="01632 532709" /></Field>
+        </div>
+      </Section>
+
+      {/* Power of Attorney */}
+      <Section title="Power of Attorney">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3">
+          <Field label="Corres Name:"><TextInput value="Testmnbaabia" /></Field>
+          <Field label="Salutation:"><TextInput value="Testmnbaabia" /></Field>
+        </div>
+        <Field label="Co. Name:"><TextInput value="" /></Field>
+        <Field label="Address:">
+          <div className="flex items-start gap-2">
+            <div className="flex-1 min-w-0">
+              <ConnectedAddress
+                lines={[
+                  { placeholder: "Line 1" },
+                  { placeholder: "Line 2" },
+                  { placeholder: "Line 3" },
+                  { placeholder: "Line 4" },
+                  { placeholder: "Line 5" },
+                ]}
+                initial={["10 Western Avenue", "Zennor", "Dawlish", "", "Eastleigh"]}
+              />
+            </div>
+            <ClearBtn />
+          </div>
+        </Field>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3">
+          <Field label="Postcode:"><TextInput value="VE99 9AB" /></Field>
+          <Field label="Tel.:"><TextInput value="01632890188" /></Field>
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3">
+          <Field label="Relationship:"><TextInput value="" /></Field>
+          <Field label="POA Received?:"><TextInput value="Y" disabled /></Field>
+        </div>
+      </Section>
+
+      {/* Care Provider */}
+      <Section title="Care Provider">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3">
+          <Field label="Corres Name:"><TextInput value="Testmebaabia" /></Field>
+          <Field label="Salutation:"><TextInput value="Testmebaabia" /></Field>
+        </div>
+        <Field label="Prov. Name:"><TextInput value="Abbeyfield UK Pratt Hou" /></Field>
+        <Field label="Address:">
+          <div className="flex items-start gap-2">
+            <div className="flex-1 min-w-0">
+              <ConnectedAddress
+                lines={[
+                  { placeholder: "Line 1" },
+                  { placeholder: "Line 2" },
+                  { placeholder: "Line 3" },
+                  { placeholder: "Line 4" },
+                  { placeholder: "Line 5" },
+                ]}
+                initial={["Northampton", "Kinson", "Eastleigh", "", ""]}
+              />
+            </div>
+            <ClearBtn />
+          </div>
+        </Field>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3">
+          <Field label="Postcode:"><TextInput value="VE99 9AB" /></Field>
+          <Field label="Tel.:"><TextInput value="01632 722940" /></Field>
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3">
+          <Field label="Provider ID:"><TextInput value="0000023008" /></Field>
+          <Field label="ContractReceived?:"><TextInput value="Y" disabled /></Field>
+        </div>
+      </Section>
+
+      {/* Applicant */}
+      <Section title="Applicant">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3">
+          <Field label="Corres Name:"><TextInput value="Testbaabia" /></Field>
+          <Field label="Salutation:"><TextInput value="Testbaabia" /></Field>
+        </div>
+        <Field label="Co. Name:"><TextInput value="" /></Field>
+        <Field label="Address:">
+          <div className="flex items-start gap-2">
+            <div className="flex-1 min-w-0">
+              <ConnectedAddress
+                lines={[
+                  { placeholder: "Line 1" },
+                  { placeholder: "Line 2" },
+                  { placeholder: "Line 3" },
+                  { placeholder: "Line 4" },
+                  { placeholder: "Line 5" },
+                ]}
+                initial={["", "", "", "", ""]}
+              />
+            </div>
+            <ClearBtn />
+          </div>
+        </Field>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3">
+          <Field label="Postcode:"><TextInput value="" /></Field>
+          <Field label="Tel.:"><TextInput value="" /></Field>
+        </div>
+        <Field label="Relationship:"><TextInput value="" /></Field>
+      </Section>
+    </div>
+  );
+}
+
 function Plan83ContactsLayout() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -236,9 +383,14 @@ function Plan83ContactsLayout() {
 export function ContactsTab() {
   const { planCode } = usePlanCode();
   const isPlan83 = planCode === "83";
+  const isPlan76 = planCode === "76";
 
   if (isPlan83) {
     return <Plan83ContactsLayout />;
+  }
+
+  if (isPlan76) {
+    return <Plan76ContactsLayout />;
   }
 
   return (

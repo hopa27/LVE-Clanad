@@ -94,8 +94,14 @@ export function IncreaseHistoryTab() {
           <table className="lve-grid">
             <thead>
               <tr>
-                {COLUMNS.map((c) => (
-                  <th key={c} className="!px-4 max-w-[120px]">{c}</th>
+                {COLUMNS.map((c, i) => (
+                  <th
+                    key={c}
+                    className={`!px-4 max-w-[120px]${i === 0 ? " sticky left-0 z-10" : ""}`}
+                    style={i === 0 ? { backgroundColor: "#002f5c" } : undefined}
+                  >
+                    {c}
+                  </th>
                 ))}
               </tr>
             </thead>
@@ -103,7 +109,13 @@ export function IncreaseHistoryTab() {
               {rows.map((row, ri) => (
                 <tr key={ri}>
                   {row.map((v, i) => (
-                    <td key={i} className="!px-4 whitespace-nowrap">{v}</td>
+                    <td
+                      key={i}
+                      className={`!px-4 whitespace-nowrap${i === 0 ? " sticky left-0 z-10" : ""}`}
+                      style={i === 0 ? { backgroundColor: ri % 2 === 0 ? "#ffffff" : "#eaf5f8" } : undefined}
+                    >
+                      {v}
+                    </td>
                   ))}
                 </tr>
               ))}

@@ -29,7 +29,6 @@ const POLICIES: PolicyRow[] = [
   { policyRef: "166092",   planType: "PRP",    planCode: "83",  surname: "TESTENBGGAJC",  natInsNo: "EA-06-07-50-A", originalQuote: "10578050", status: "W", phPostCode: "VE99 9AB", ifaRef: "TAYLO-062", dob1: "06/07/1950", policyNo: "166092",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Enbggajc",    fullName2: "" },
   { policyRef: "100004.1", planType: "PPA",    planCode: "621", surname: "TESTFRBAAAAE.B", natInsNo: "EX-07-01-43-A", originalQuote: "919598",   status: "I", phPostCode: "QU99 9AB", ifaRef: "FORUM-00",  dob1: "07/01/1943", policyNo: "100004.1", cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Frbaaaae.b",  fullName2: "" },
   { policyRef: "100180",   planType: "ICFP",   planCode: "76",  surname: "TESTSLBAABIA",   natInsNo: "SB-04-02-15-A", originalQuote: "938688",   status: "D", phPostCode: "",         ifaRef: "SBTYL-004", dob1: "04/02/1915", policyNo: "100180",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Slbaabia",    fullName2: "" },
-  { policyRef: "162715",   planType: "CPA",    planCode: "51",  surname: "TESTNOBGCHBF",   natInsNo: "",              originalQuote: "931709",   status: "C", phPostCode: "CO99 9AB", ifaRef: "QUOTE-001", dob1: "10/01/1949", policyNo: "162715",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Nobgchbf",    fullName2: "" },
 ];
 
 const STATUSES = ["Pending", "Completed", "Shelved", "ALL"] as const;

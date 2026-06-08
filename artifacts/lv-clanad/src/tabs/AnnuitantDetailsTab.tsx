@@ -343,7 +343,7 @@ export function AnnuitantDetailsTab() {
         />
       </Section>}
 
-      <div className="rounded-[8px] border border-[#BBBBBB] bg-white overflow-hidden">
+      {!isPlan76 && <div className="rounded-[8px] border border-[#BBBBBB] bg-white overflow-hidden">
         <div className="relative h-7 w-full bg-white">
           <div
             className="absolute inset-y-0 left-0 bg-[#178830] transition-[width]"
@@ -353,7 +353,7 @@ export function AnnuitantDetailsTab() {
             0%
           </div>
         </div>
-      </div>
+      </div>}
     </div>
   );
 }

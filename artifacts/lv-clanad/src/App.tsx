@@ -37,6 +37,7 @@ const PLAN_CODE_ACCENT: Record<PlanCodeVersion, string> = {
   "83":  "#BEE4BE",
   "621": "#000080",
   "76":  "#000080",
+  "62a": "#000080",
 };
 
 const PLAN_CODE_ACCENT_FG: Record<PlanCodeVersion, string> = {
@@ -48,6 +49,7 @@ const PLAN_CODE_ACCENT_FG: Record<PlanCodeVersion, string> = {
   "83":  "#023E02",
   "621": "#ffffff",
   "76":  "#ffffff",
+  "62a": "#ffffff",
 };
 
 const TAB_COMPONENTS: Record<TabKey, () => JSX.Element> = {

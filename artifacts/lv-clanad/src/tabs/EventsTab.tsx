@@ -57,7 +57,7 @@ export function EventsTab() {
   const { planCode } = usePlanCode();
   const isPlan51 = planCode === "51";
   const [rows, setRows] = useState<EventRow[]>(
-    planCode === "0" || planCode === "87" || planCode === "84" || planCode === "90" || isPlan51 ? [] : SAMPLE_ROWS,
+    planCode === "0" || planCode === "87" || planCode === "84" || planCode === "90" || isPlan51 || planCode === "83" ? [] : SAMPLE_ROWS,
   );
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
   const [newEventOpen, setNewEventOpen] = useState(false);

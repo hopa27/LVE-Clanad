@@ -73,13 +73,14 @@ const ROWS_83: string[][] = PLAN_83_ROWS.map(([status, stmtDate, annivDate]) => 
 
 export function IncreaseHistoryTab() {
   const { planCode } = usePlanCode();
-  const isPlan0 = planCode === "0";
-  const isPlan87 = planCode === "87";
-  const isPlan84 = planCode === "84";
-  const isPlan90 = planCode === "90";
-  const isPlan51 = planCode === "51";
-  const isPlan83 = planCode === "83";
-  const rows: string[][] = isPlan0 || isPlan87 || isPlan90 || isPlan51
+  const isPlan0   = planCode === "0";
+  const isPlan87  = planCode === "87";
+  const isPlan84  = planCode === "84";
+  const isPlan90  = planCode === "90";
+  const isPlan51  = planCode === "51";
+  const isPlan83  = planCode === "83";
+  const isPlan621 = planCode === "621";
+  const rows: string[][] = isPlan0 || isPlan87 || isPlan90 || isPlan51 || isPlan621
     ? []
     : isPlan84
       ? ROWS_84

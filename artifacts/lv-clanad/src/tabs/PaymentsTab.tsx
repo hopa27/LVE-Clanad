@@ -70,6 +70,28 @@ const PAYMENT_HISTORY_51: Row[] = [
   { date: "28/07/2009", gross: "131.5",  cap: "0", tax: "-26.4", postAdj: "0", net: "105.1",  method: "B", reason: "PROC", bacs: "27/07/2009",  hash: "" },
 ];
 
+const PAYMENT_HISTORY_83: Row[] = [
+  { date: "26/08/2015", gross: "702", cap: "", tax: "", postAdj: "", net: "", method: "B", reason: "FIRST", bacs: "25/08/2015", hash: "/E7Z" },
+  { date: "14/09/2015", gross: "702", cap: "", tax: "", postAdj: "", net: "", method: "B", reason: "FIRST", bacs: "11/09/2015", hash: "/TXY" },
+  { date: "14/10/2015", gross: "702", cap: "", tax: "", postAdj: "", net: "", method: "B", reason: "PROC",  bacs: "13/10/2015", hash: "/S/-" },
+  { date: "14/11/2015", gross: "702", cap: "", tax: "", postAdj: "", net: "", method: "B", reason: "PROC",  bacs: "12/11/2015", hash: "/FLY" },
+  { date: "14/12/2015", gross: "702", cap: "", tax: "", postAdj: "", net: "", method: "B", reason: "PROC",  bacs: "11/12/2015", hash: "/XFA" },
+  { date: "14/01/2016", gross: "702", cap: "", tax: "", postAdj: "", net: "", method: "B", reason: "PROC",  bacs: "13/01/2016", hash: "/4C1" },
+  { date: "14/02/2016", gross: "702", cap: "", tax: "", postAdj: "", net: "", method: "B", reason: "PROC",  bacs: "11/02/2016", hash: "/3Y0" },
+  { date: "14/03/2016", gross: "702", cap: "", tax: "", postAdj: "", net: "", method: "B", reason: "PROC",  bacs: "11/03/2016", hash: "/70Y" },
+  { date: "14/04/2016", gross: "702", cap: "", tax: "", postAdj: "", net: "", method: "B", reason: "PROC",  bacs: "13/04/2016", hash: "//70" },
+  { date: "14/05/2016", gross: "702", cap: "", tax: "", postAdj: "", net: "", method: "B", reason: "PROC",  bacs: "12/05/2016", hash: "/VL8" },
+  { date: "14/06/2016", gross: "702", cap: "", tax: "", postAdj: "", net: "", method: "B", reason: "PROC",  bacs: "13/06/2016", hash: "/87"  },
+  { date: "14/07/2016", gross: "702", cap: "", tax: "", postAdj: "", net: "", method: "B", reason: "PROC",  bacs: "13/07/2016", hash: "/L48" },
+  { date: "14/08/2016", gross: "702", cap: "", tax: "", postAdj: "", net: "", method: "B", reason: "PROC",  bacs: "11/08/2016", hash: "/T90" },
+  { date: "14/09/2016", gross: "702", cap: "", tax: "", postAdj: "", net: "", method: "B", reason: "PROC",  bacs: "13/09/2016", hash: "/LDE" },
+  { date: "14/10/2016", gross: "702", cap: "", tax: "", postAdj: "", net: "", method: "B", reason: "PROC",  bacs: "13/10/2016", hash: "/FIT" },
+  { date: "14/11/2016", gross: "702", cap: "", tax: "", postAdj: "", net: "", method: "B", reason: "PROC",  bacs: "11/11/2016", hash: "/LB." },
+  { date: "14/12/2016", gross: "702", cap: "", tax: "", postAdj: "", net: "", method: "B", reason: "PROC",  bacs: "13/12/2016", hash: "/-BB" },
+];
+
+const TAX_HISTORY_83: Row[] = [];
+
 const TAX_HISTORY_51: Row[] = [
   { date: "28/04/2008", code: "BR", n: "3",  gross: "131.5",  cum: "131.5", free: "0", taxable: "131.5", tax: "-26.2", ytd: "-26.2"  },
   { date: "30/04/2008", code: "BR", n: "3",  gross: "-131.5", cum: "0",     free: "0", taxable: "0",      tax: "26.2",  ytd: "0"      },
@@ -91,6 +113,7 @@ export function PaymentsTab() {
   const isPlan84 = planCode === "84";
   const isPlan90 = planCode === "90";
   const isPlan51 = planCode === "51";
+  const isPlan83 = planCode === "83";
 
   const paymentHistory = isPlan84
     ? PAYMENT_HISTORY_84
@@ -98,6 +121,8 @@ export function PaymentsTab() {
     ? PAYMENT_HISTORY_90
     : isPlan51
     ? PAYMENT_HISTORY_51
+    : isPlan83
+    ? PAYMENT_HISTORY_83
     : isPlan0 || isPlan87
     ? []
     : PAYMENT_HISTORY_DEFAULT;
@@ -107,6 +132,8 @@ export function PaymentsTab() {
     ? TAX_HISTORY_90
     : isPlan51
     ? TAX_HISTORY_51
+    : isPlan83
+    ? TAX_HISTORY_83
     : isPlan0 || isPlan87
     ? []
     : TAX_HISTORY_DEFAULT;
@@ -215,6 +242,40 @@ export function PaymentsTab() {
               <Field label="PAYE Tax Deduction:"><TextInput value="-26.2" disabled /></Field>
             </div>
           </div>
+        ) : isPlan83 ? (
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-8">
+            <div>
+              <Field label="Premium:"><TextInput value="75459.46" disabled /></Field>
+              <Field label="Tax Free Cash:"><TextInput value="0" disabled /></Field>
+              <Field label={<span className="text-[#d72714]">Total:</span>}>
+                <TextInput value="75459.46" disabled className="!text-[#d72714] underline" />
+              </Field>
+              <Field label="1st Annuitants Gross:"><TextInput value="8424" disabled /></Field>
+              <Field label="2nd Annuitants Gross:"><TextInput value="0" disabled /></Field>
+            </div>
+            <div>
+              <Field label=" "><div className="h-[44px]" /></Field>
+              <Field label=" "><div className="h-[44px]" /></Field>
+              <Field label="Taxable pay:"><TextInput value="-1385.04" disabled /></Field>
+              <Field label="Cumulative Free Pay:"><TextInput value="4193.04" disabled /></Field>
+            </div>
+            <div>
+              <Field label="Cumulative Instal:"><TextInput value="2808" disabled /></Field>
+              <Field label="BAL Gross Annuity:"><TextInput value="0" disabled /></Field>
+              <Field label="PAYE Tax Due To Date:"><TextInput value="0" disabled /></Field>
+              <Field label="PAYE Tax Deduction:"><TextInput value="0" disabled /></Field>
+            </div>
+            <div>
+              <Field label="Next Anniversary:">
+                <DatePicker value="14/08/2025" placeholder="" disabled />
+              </Field>
+              <Field label="Next Payment Due:">
+                <DatePicker value="14/08/2025" placeholder="" disabled />
+              </Field>
+              <Field label="Inst Remaining:"><TextInput value="0" disabled /></Field>
+              <Field label="Nth Inst:"><TextInput value="4" disabled /></Field>
+            </div>
+          </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-8">
             <div>
@@ -267,10 +328,7 @@ export function PaymentsTab() {
               <tr>
                 <th>Pay Date</th>
                 <th>Gross</th>
-                <th>Cap Element</th>
-                <th>Tax</th>
-                <th>Post Adj</th>
-                <th>Net</th>
+                {!isPlan83 && <><th>Cap Element</th><th>Tax</th><th>Post Adj</th><th>Net</th></>}
                 <th>Method</th>
                 <th>Reason</th>
                 <th>BACS Date</th>
@@ -282,10 +340,7 @@ export function PaymentsTab() {
                 <tr key={i}>
                   <td>{row.date}</td>
                   <td>{row.gross}</td>
-                  <td>{row.cap}</td>
-                  <td>{row.tax}</td>
-                  <td>{row.postAdj}</td>
-                  <td>{row.net}</td>
+                  {!isPlan83 && <><td>{row.cap}</td><td>{row.tax}</td><td>{row.postAdj}</td><td>{row.net}</td></>}
                   <td>{row.method}</td>
                   <td>{row.reason}</td>
                   <td>{row.bacs}</td>

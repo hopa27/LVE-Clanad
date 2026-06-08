@@ -13,12 +13,13 @@ const SEED_CHEQUE_NOS = new Set(["232693", "232694", "232695"]);
 export function BankAccDetailsTab() {
   const [editBankOpen, setEditBankOpen] = useState(false);
   const { planCode } = usePlanCode();
-  const isPlan87 = planCode === "87";
-  const isPlan84 = planCode === "84";
-  const isPlan90 = planCode === "90";
-  const isPlan51 = planCode === "51";
-  const isPlan83 = planCode === "83";
-  const isPreset = isPlan87 || isPlan84 || isPlan90;
+  const isPlan87  = planCode === "87";
+  const isPlan84  = planCode === "84";
+  const isPlan90  = planCode === "90";
+  const isPlan51  = planCode === "51";
+  const isPlan83  = planCode === "83";
+  const isPlan621 = planCode === "621";
+  const isPreset  = isPlan87 || isPlan84 || isPlan90;
   const { cheques } = useCheques();
   const plan84Rows = isPlan84
     ? [
@@ -35,7 +36,29 @@ export function BankAccDetailsTab() {
   const plan83Rows = isPlan83
     ? [{ company: "NM PENSION TRUST", ref: "", date: "21/08/2015", amount: "75459.46" }]
     : [];
-  const postedRows = isPreset || isPlan51 || isPlan83
+  const plan621Rows = isPlan621
+    ? [
+        { company: "SCOTTISH WIDOWS",  ref: "", date: "03/01/2008", amount: "5970.55"  },
+        { company: "clerical medical", ref: "", date: "17/01/2008", amount: "47244.52" },
+        { company: "clerical medical", ref: "", date: "09/01/2008", amount: "47244.52" },
+        { company: "clerical medical", ref: "", date: "09/01/2008", amount: "47244.52" },
+        { company: "clerical medical", ref: "", date: "09/01/2008", amount: "47244.52" },
+        { company: "clerical medical", ref: "", date: "09/01/2008", amount: "47244.52" },
+        { company: "clerical medical", ref: "", date: "09/01/2008", amount: "47244.52" },
+        { company: "clerical medical", ref: "", date: "31/12/2010", amount: "47244.52" },
+        { company: "clerical medical", ref: "", date: "09/01/2008", amount: "47244.52" },
+        { company: "clerical medical", ref: "", date: "09/01/2008", amount: "47244.52" },
+        { company: "clerical medical", ref: "", date: "09/01/2008", amount: "47244.52" },
+        { company: "clerical medical", ref: "", date: "09/01/2008", amount: "47244.52" },
+        { company: "clerical medical", ref: "", date: "09/01/2008", amount: "47244.52" },
+        { company: "clerical medical", ref: "", date: "09/01/2008", amount: "44"       },
+        { company: "clerical medical", ref: "", date: "09/01/2008", amount: "44"       },
+        { company: "clerical medical", ref: "", date: "03/06/2008", amount: "44"       },
+        { company: "clerical medical", ref: "", date: "09/01/2008", amount: "44"       },
+        { company: "clerical medical", ref: "", date: "09/01/2008", amount: "44"       },
+      ]
+    : [];
+  const postedRows = isPreset || isPlan51 || isPlan83 || isPlan621
     ? []
     : cheques
         .filter((c) => !SEED_CHEQUE_NOS.has(c.chequeNo))
@@ -45,7 +68,7 @@ export function BankAccDetailsTab() {
           date: c.date,
           amount: c.amount,
         }));
-  const rows = [...TRANSFERS, ...plan84Rows, ...plan90Rows, ...plan51Rows, ...plan83Rows, ...postedRows];
+  const rows = [...TRANSFERS, ...plan84Rows, ...plan90Rows, ...plan51Rows, ...plan83Rows, ...plan621Rows, ...postedRows];
   return (
     <div className="space-y-4">
       <Section
@@ -60,19 +83,19 @@ export function BankAccDetailsTab() {
           <div>
             <Field inline label="Bank sort code:">
               <TextInput
-                value={isPlan87 ? "20-00-00" : isPlan84 || isPlan90 || isPlan51 || isPlan83 ? "77-48-14" : "DBEdit41"}
+                value={isPlan87 ? "20-00-00" : isPlan84 || isPlan90 || isPlan51 || isPlan83 || isPlan621 ? "77-48-14" : "DBEdit41"}
                 disabled={isPlan84 || isPlan90}
               />
             </Field>
             <Field inline label="Bank account no:">
               <TextInput
-                value={isPlan87 ? "83608808" : isPlan84 || isPlan90 || isPlan51 || isPlan83 ? "24782346" : "DBEdit77"}
+                value={isPlan87 ? "83608808" : isPlan84 || isPlan90 || isPlan51 || isPlan83 || isPlan621 ? "24782346" : "DBEdit77"}
                 disabled={isPlan84 || isPlan90}
               />
             </Field>
             <Field inline label="Bank account name:">
               <TextInput
-                value={isPlan87 ? "Test" : isPlan84 ? "Testktbbbide" : isPlan90 ? "Testmtcchibd" : isPlan51 ? "Testmubaabii" : isPlan83 ? "Testnybggajc" : "DBEdit79"}
+                value={isPlan87 ? "Test" : isPlan84 ? "Testktbbbide" : isPlan90 ? "Testmtcchibd" : isPlan51 ? "Testmubaabii" : isPlan83 ? "Testnybggajc" : isPlan621 ? "Testmrbaaaae.b" : "DBEdit79"}
                 disabled={isPlan84 || isPlan90}
               />
             </Field>
@@ -81,7 +104,7 @@ export function BankAccDetailsTab() {
                 value={
                   isPlan87
                     ? "BARCLAY'S BANK PLC, 1 CHURCHILL  PLACE"
-                    : isPlan84 || isPlan90 || isPlan51 || isPlan83
+                    : isPlan84 || isPlan90 || isPlan51 || isPlan83 || isPlan621
                     ? "TSB, WINSFORD"
                     : ""
                 }
@@ -92,14 +115,14 @@ export function BankAccDetailsTab() {
           <div>
             <Field inline label="Payment Ref:">
               <TextInput
-                value={isPlan87 ? "233451" : isPlan84 ? "111834" : isPlan90 ? "227813" : isPlan51 ? "100188" : isPlan83 ? "INVENC123588" : "DBEdit6"}
+                value={isPlan87 ? "233451" : isPlan84 ? "111834" : isPlan90 ? "227813" : isPlan51 ? "100188" : isPlan83 ? "INVENC123588" : isPlan621 ? "100004" : "DBEdit6"}
                 disabled={isPlan84 || isPlan90}
               />
             </Field>
             <Field inline label="Payment Method:">
-              <TextInput value={isPreset || isPlan51 || isPlan83 ? "B" : "DB"} disabled />
+              <TextInput value={isPreset || isPlan51 || isPlan83 || isPlan621 ? "B" : "DB"} disabled />
             </Field>
-            {(!isPreset && !isPlan51 && !isPlan83) || isPlan90 ? (
+            {((!isPreset && !isPlan51 && !isPlan83 && !isPlan621) || isPlan90) ? (
               <Field inline label="Change Effective Date:">
                 <DatePicker
                   value={isPlan90 ? "" : "dbedChangeEffect"}

@@ -20,7 +20,7 @@ export function StatusBar() {
     { label: "User",         value: isPlan51 || isPlan83 ? "UAT1" : "UAT3" },
   ];
   return (
-    <div className="lve-panel mt-6 p-4 flex flex-wrap items-center gap-6">
+    <div className="lve-panel mt-6 p-4 flex flex-wrap items-center gap-6 sticky bottom-0 z-20 shadow-[0_-2px_6px_rgba(0,0,0,0.08)]">
       {items.map((item) => (
         <div key={item.label} className="flex items-center gap-2">
           <span className="font-['Livvic'] text-xs uppercase tracking-wider text-[#0d2c41]/60">

@@ -29,21 +29,23 @@ import { MaturitiesSurrenderTab } from "./tabs/MaturitiesSurrenderTab";
 import { LoaPoaTab } from "./tabs/LoaPoaTab";
 
 const PLAN_CODE_ACCENT: Record<PlanCodeVersion, string> = {
-  "0":  "#848285",
-  "87": "#F28C28",
-  "84": "#BEE4BE",
-  "90": "#F4D9E8",
-  "51": "#000080",
-  "83": "#BEE4BE",
+  "0":   "#848285",
+  "87":  "#F28C28",
+  "84":  "#BEE4BE",
+  "90":  "#F4D9E8",
+  "51":  "#000080",
+  "83":  "#BEE4BE",
+  "621": "#000080",
 };
 
 const PLAN_CODE_ACCENT_FG: Record<PlanCodeVersion, string> = {
-  "0":  "#ffffff",
-  "87": "#ffffff",
-  "84": "#023E02",
-  "90": "#710340",
-  "51": "#ffffff",
-  "83": "#023E02",
+  "0":   "#ffffff",
+  "87":  "#ffffff",
+  "84":  "#023E02",
+  "90":  "#710340",
+  "51":  "#ffffff",
+  "83":  "#023E02",
+  "621": "#ffffff",
 };
 
 const TAB_COMPONENTS: Record<TabKey, () => JSX.Element> = {

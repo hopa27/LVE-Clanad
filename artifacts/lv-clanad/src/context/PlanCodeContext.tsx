@@ -1,18 +1,19 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 
-export type PlanCodeVersion = "0" | "87" | "84" | "90" | "51" | "83";
+export type PlanCodeVersion = "0" | "87" | "84" | "90" | "51" | "83" | "621";
 
 export const PLAN_CODE_VERSIONS: {
   code: PlanCodeVersion;
   planType: string;
   description: string;
 }[] = [
-  { code: "0",  planType: "master", description: "Master — Default version" },
-  { code: "87", planType: "FTA",    description: "Version 87 — Standard controls" },
-  { code: "84", planType: "FTA",    description: "Version 84 — Full controls (incl. GAD & IR)" },
-  { code: "90", planType: "MCP",    description: "Version 90 — MCP" },
-  { code: "51", planType: "CPA",    description: "Version 51 — CPA (Status Q)" },
-  { code: "83", planType: "PRP",    description: "Version 83 — PRP (Status W)" },
+  { code: "0",   planType: "master", description: "Master — Default version" },
+  { code: "87",  planType: "FTA",    description: "Version 87 — Standard controls" },
+  { code: "84",  planType: "FTA",    description: "Version 84 — Full controls (incl. GAD & IR)" },
+  { code: "90",  planType: "MCP",    description: "Version 90 — MCP" },
+  { code: "51",  planType: "CPA",    description: "Version 51 — CPA (Status Q)" },
+  { code: "83",  planType: "PRP",    description: "Version 83 — PRP (Status W)" },
+  { code: "621", planType: "PPA",    description: "Version 621 — PPA (Status I)" },
 ];
 
 type PlanCodeValue = {

@@ -60,10 +60,10 @@ export function PolicyHeader() {
       </div>
 
       <div
-        className="px-4 h-9 inline-flex items-center rounded-[8px] font-['Livvic'] font-semibold text-sm"
+        className="px-4 h-9 w-[220px] inline-flex items-center rounded-[8px] font-['Livvic'] font-semibold text-sm overflow-hidden"
         style={{ background: "var(--lve-accent)", color: "var(--lve-accent-fg, #ffffff)" }}
       >
-        {surname}
+        <span className="truncate">{surname}</span>
       </div>
 
       {planCode === "84" || planCode === "51" || planCode === "83" || planCode === "62a" || planCode === "611" ? (

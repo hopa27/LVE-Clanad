@@ -31,6 +31,7 @@ const POLICIES: PolicyRow[] = [
   { policyRef: "100180",   planType: "ICFP",   planCode: "76",  surname: "TESTSLBAABIA",   natInsNo: "SB-04-02-15-A", originalQuote: "938688",   status: "D", phPostCode: "",         ifaRef: "SBTYL-004", dob1: "04/02/1915", policyNo: "100180",   cocode: "STALW-00", premium: "£10,000.00", fullName1: "Test  Slbaabia",    fullName2: "" },
   { policyRef: "118106",   planType: "PPA",    planCode: "62a", surname: "TESTCSBBIBAG",   natInsNo: "CH-30-11-51-A", originalQuote: "2684095",  status: "C", phPostCode: "LE99 9AB", ifaRef: "HARGR-001", dob1: "30/11/1951", policyNo: "118106",   cocode: "STALW-00",  premium: "£10,000.00", fullName1: "Test  Csbbibag",  fullName2: "" },
   { policyRef: "100303",   planType: "CPA",    planCode: "611", surname: "TESTSSBAADAD",   natInsNo: "SB-25-11-44-A", originalQuote: "948258",   status: "N", phPostCode: "RE99 9AB", ifaRef: "INDEP-088", dob1: "25/11/1944", policyNo: "100303",   cocode: "STALW-001", premium: "£10,000.00", fullName1: "Test  Ssbaadad", fullName2: "" },
+  { policyRef: "100118",   planType: "PPA",    planCode: "52",  surname: "",               natInsNo: "",              originalQuote: "922450",   status: "X", phPostCode: "",         ifaRef: "KNOWL-00",  dob1: "07/04/1953", policyNo: "100118",   cocode: "STALW-001", premium: "£10,000.00", fullName1: "", fullName2: "" },
 ];
 
 const STATUSES = ["Pending", "Completed", "Shelved", "ALL"] as const;

@@ -206,7 +206,7 @@ export function FindPolicyModal({
           <div className="border border-[#BBBBBB] rounded-[8px] overflow-hidden flex-1 min-h-[200px] flex flex-col">
             <div className="overflow-auto flex-1">
               <table className="w-full font-['Mulish'] text-[13px] text-[#3d3d3d] min-w-[1160px]">
-                <thead>
+                <thead className="sticky top-0 z-10">
                   <tr className="bg-white border-y-[3px] border-[#04589b] font-['Livvic'] font-semibold text-[13px] uppercase text-[#002f5c]">
                     {COLUMNS.map((c) => {
                       const active = c.key === searchColumn;

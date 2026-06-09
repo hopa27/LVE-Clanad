@@ -169,6 +169,40 @@ const PLAN_61a_DIARY: DiaryRow[] = [
 
 const AUDIT_61a = Array.from({ length: 8 }, () => "Test Note");
 
+const DATA_CHANGES_61a: { changeDate: string; description: string; userId: string }[] = [
+  { changeDate: "27/01/2012 10:00:51", description: "Field Tax Details-Suspended was changed from Y to N.",                                     userId: "LOPNB" },
+  { changeDate: "27/01/2012 10:00:43", description: "Field Annuities-Gross Balance was changed from 451.33 to 394.91.",                         userId: "LOPNB" },
+  { changeDate: "27/01/2012 10:00:43", description: "Field Installments-Cumulative was changed from 0 to 112.82.",                              userId: "LOPNB" },
+  { changeDate: "27/01/2012 10:00:43", description: "Field Installments-Number was changed from 0 to 1.",                                       userId: "LOPNB" },
+  { changeDate: "27/01/2012 10:00:43", description: "Field Tax Details-Cumulative Free Pay was changed from 0 to 623.25.",                      userId: "LOPNB" },
+  { changeDate: "27/01/2012 10:00:43", description: "Field Tax Details-Tax Liability was changed from 0 to -11.2.",                             userId: "LOPNB" },
+  { changeDate: "27/01/2012 10:00:43", description: "Field Tax Details-Taxable Pay was changed from 0 to -566.84.",                             userId: "LOPNB" },
+  { changeDate: "27/01/2012 09:58:11", description: "Field Payment-Capital Element for Ref line 2 was inserted with value: 0.",                 userId: "LOPNB" },
+  { changeDate: "27/01/2012 09:58:11", description: "Field Payment-Gross for Ref line 2 was inserted with value: 56.41.",                       userId: "LOPNB" },
+  { changeDate: "27/01/2012 09:58:11", description: "Field Payment-Net for Ref line 2 was inserted with value: 56.41.",                         userId: "LOPNB" },
+  { changeDate: "27/01/2012 09:58:11", description: "Field Payment-Pay Date for Ref line 2 was inserted with value: 27/01/2012.",               userId: "LOPNB" },
+  { changeDate: "27/01/2012 09:58:11", description: "Field Payment-Pay Method for Ref line 2 was inserted with value: B.",                      userId: "LOPNB" },
+  { changeDate: "27/01/2012 09:58:11", description: "Field Payment-Post Adj for Ref line 2 was inserted with value: 0.",                        userId: "LOPNB" },
+  { changeDate: "27/01/2012 09:58:11", description: "Field Payment-Pre Adj for Ref line 2 was inserted with value: 0.",                         userId: "LOPNB" },
+  { changeDate: "27/01/2012 09:58:11", description: "Field Payment-Ref for Ref line 2 was inserted with value: 2.",                             userId: "LOPNB" },
+  { changeDate: "27/01/2012 09:58:11", description: "Field Payment-Tax for Ref line 2 was inserted with value: 0.",                             userId: "LOPNB" },
+  { changeDate: "27/01/2012 09:57:35", description: "Field PAYE-Cum Free Pay for Ref line 2 was inserted with value: 623.25.",                  userId: "LOPNB" },
+  { changeDate: "27/01/2012 09:57:35", description: "Field PAYE-Cum Instalments for Ref line 2 was inserted with value: 112.82.",               userId: "LOPNB" },
+  { changeDate: "27/01/2012 09:57:35", description: "Field PAYE-Gross for Ref line 2 was inserted with value: 56.41.",                          userId: "LOPNB" },
+  { changeDate: "27/01/2012 09:57:35", description: "Field PAYE-Installment # for Ref line 2 was inserted with value: 1.",                      userId: "LOPNB" },
+  { changeDate: "27/01/2012 09:57:35", description: "Field PAYE-Pay Date for Ref line 2 was inserted with value: 27/01/2012.",                  userId: "LOPNB" },
+  { changeDate: "27/01/2012 09:57:35", description: "Field PAYE-Paye Code for Ref line 2 was inserted with value: 747L*.",                      userId: "LOPNB" },
+  { changeDate: "27/01/2012 09:57:35", description: "Field PAYE-Ref for Ref line 2 was inserted with value: 2.",                                userId: "LOPNB" },
+  { changeDate: "27/01/2012 09:57:35", description: "Field PAYE-Tax Deduction for Ref line 2 was inserted with value: 0.",                      userId: "LOPNB" },
+  { changeDate: "27/01/2012 09:57:35", description: "Field PAYE-Tax Liability for Ref line 2 was inserted with value: -11.2.",                  userId: "LOPNB" },
+  { changeDate: "27/01/2012 09:57:35", description: "Field PAYE-Taxable Pay for Ref line 2 was inserted with value: -566.84.",                  userId: "LOPNB" },
+  { changeDate: "27/01/2012 09:55:56", description: "Field PAYE-Cum Instalments for Ref line 1 was changed from 507.77 to 56.41.",              userId: "LOPNB" },
+  { changeDate: "27/01/2012 09:55:56", description: "Field PAYE-Tax Liability for Ref line 1 was changed from -101.4 to -11.2.",                userId: "LOPNB" },
+  { changeDate: "27/01/2012 09:55:56", description: "Field PAYE-Taxable Pay for Ref line 1 was changed from 507.77 to 56.41.",                  userId: "LOPNB" },
+  { changeDate: "27/01/2012 09:55:35", description: "Field PAYE-Ref for Ref line 1 was changed from 40 to 1.",                                  userId: "LOPNB" },
+  { changeDate: "27/01/2012 09:55:33", description: "Field Payment-Ref for Ref line 1 was changed from 40 to 1.",                               userId: "LOPNB" },
+];
+
 const DATA_CHANGES_621: { changeDate: string; description: string; userId: string }[] = [
   { changeDate: "03/06/2026 07:36:30", description: "Field PAYE-Cum Free Pay for Ref line 3 was inserted with value: 2096.52.",   userId: "UAT5" },
   { changeDate: "03/06/2026 07:36:30", description: "Field PAYE-Cum Instalments for Ref line 3 was inserted with value: 200.",    userId: "UAT5" },
@@ -514,7 +548,13 @@ export function DiaryAuditTab() {
                   : isPlan52
                   ? []
                   : isPlan61a
-                  ? []
+                  ? DATA_CHANGES_61a.map((r, i) => (
+                      <tr key={i}>
+                        <td className="!px-4 whitespace-nowrap">{r.changeDate}</td>
+                        <td className="!px-4">{r.description}</td>
+                        <td className="!px-4 whitespace-nowrap">{r.userId}</td>
+                      </tr>
+                    ))
                   : (isPlan0 || isPlan87 || isPlan90 ? [] : AUDIT).map((line, i) => {
                       const m = line.match(
                         /^(.*?)\s+by\s+(\S+)\s+on\s+(\S+)\s+at\s+(\S+)\s*$/,

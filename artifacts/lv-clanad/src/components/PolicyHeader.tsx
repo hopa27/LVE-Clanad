@@ -10,14 +10,20 @@ import { usePlanCode } from "../context/PlanCodeContext";
 
 type SimRow = { policyNo: string; status: string; productType: string };
 
-const SIM_ROWS: SimRow[] = [
+const SIM_ROWS_DEFAULT: SimRow[] = [
   { policyNo: "233424", status: "P", productType: "FTA" },
+];
+
+const SIM_ROWS_82: SimRow[] = [
+  { policyNo: "116444", status: "S", productType: "PRP" },
 ];
 
 export function PolicyHeader() {
   const [simOpen, setSimOpen] = useState(false);
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
   const { planCode, surname, policyRef } = usePlanCode();
+
+  const SIM_ROWS = planCode === "82" ? SIM_ROWS_82 : SIM_ROWS_DEFAULT;
 
   return (
     <div className="lve-panel mb-6 p-4 flex flex-wrap items-center gap-3">

@@ -72,7 +72,7 @@ export function PolicyHeader() {
         <span className="truncate">{surname}</span>
       </div>
 
-      {planCode === "84" || planCode === "51" || planCode === "83" || planCode === "62a" || planCode === "611" || planCode === "61a" ? (
+      {planCode === "84" || planCode === "51" || planCode === "80" || planCode === "83" || planCode === "62a" || planCode === "611" || planCode === "61a" ? (
         <div className="px-3 h-9 inline-flex items-center rounded-[8px] bg-[#eaf5f8] text-[#0d2c41] font-['Mulish'] text-sm">
           Simultaneous Policies
         </div>

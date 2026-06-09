@@ -83,7 +83,8 @@ export function IncreaseHistoryTab() {
   const isPlan76  = planCode === "76";
   const isPlan62a = planCode === "62a";
   const isPlan611 = planCode === "611";
-  const rows: string[][] = isPlan0 || isPlan87 || isPlan90 || isPlan51 || isPlan621 || isPlan76 || isPlan62a || isPlan611
+  const isPlan52  = planCode === "52";
+  const rows: string[][] = isPlan0 || isPlan87 || isPlan90 || isPlan51 || isPlan621 || isPlan76 || isPlan62a || isPlan611 || isPlan52
     ? []
     : isPlan84
       ? ROWS_84

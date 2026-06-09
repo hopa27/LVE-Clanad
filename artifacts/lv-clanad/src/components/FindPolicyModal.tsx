@@ -2,6 +2,8 @@ import { useState } from "react";
 import { MdClose, MdRadioButtonChecked, MdRadioButtonUnchecked } from "react-icons/md";
 import { usePlanCode, PLAN_CODE_VERSIONS, type PlanCodeVersion } from "../context/PlanCodeContext";
 
+type ChequeRow = { company: string; date: string; amount: string };
+
 type PolicyRow = {
   policyRef: string;
   planType: string;
@@ -18,6 +20,7 @@ type PolicyRow = {
   premium: string;
   fullName1: string;
   fullName2: string;
+  cheques?: ChequeRow[];
 };
 
 const POLICIES: PolicyRow[] = [
@@ -35,7 +38,7 @@ const POLICIES: PolicyRow[] = [
   { policyRef: "100303",   planType: "CPA",    planCode: "611", surname: "TESTSSBAADAD",   natInsNo: "SB-25-11-44-A", originalQuote: "948258",   status: "N", phPostCode: "RE99 9AB", ifaRef: "INDEP-088", dob1: "25/11/1944", policyNo: "100303",   cocode: "STALW-001", premium: "£10,000.00", fullName1: "Test  Ssbaadad", fullName2: "" },
   { policyRef: "100118",   planType: "PPA",    planCode: "52",  surname: "",               natInsNo: "",              originalQuote: "922450",   status: "X", phPostCode: "",         ifaRef: "KNOWL-00",  dob1: "07/04/1953", policyNo: "100118",   cocode: "STALW-001", premium: "£10,000.00", fullName1: "", fullName2: "" },
   { policyRef: "102929.1", planType: "CPA",    planCode: "61a", surname: "TESTMHBACJCJ.B", natInsNo: "MW-25-08-43-A", originalQuote: "1135311",  status: "E", phPostCode: "VE99 9AB", ifaRef: "POSIT-053", dob1: "25/08/1943", policyNo: "102929.1", cocode: "STALW-001", premium: "£10,000.00", fullName1: "Test  Mhbacjcj.b", fullName2: "" },
-  { policyRef: "101873",   planType: "ICFP",   planCode: "76z", surname: "TESTKYBABIAHD",   natInsNo: "KB-02-02-20-A", originalQuote: "1030695",  status: "Z", phPostCode: "",         ifaRef: "QUOTE-00",  dob1: "02/02/1920", policyNo: "101873",   cocode: "STALW-00",  premium: "£10,000.00", fullName1: "Test  Kybabiahd",   fullName2: "" },
+  { policyRef: "101873",   planType: "ICFP",   planCode: "76z", surname: "TESTKYBABIAHD",   natInsNo: "KB-02-02-20-A", originalQuote: "1030695",  status: "Z", phPostCode: "",         ifaRef: "QUOTE-00",  dob1: "02/02/1920", policyNo: "101873",   cocode: "STALW-00",  premium: "£63,697.99", fullName1: "Michael Testkybabihd", fullName2: "", cheques: [{ company: "Stuart L Kinsey", date: "26/06/2008", amount: "£21,232.66" }, { company: "Martin L Kinsey", date: "26/06/2008", amount: "£21,232.67" }, { company: "MT & Mrs Blakekey", date: "26/06/2008", amount: "£21,232.66" }] },
 ];
 
 const STATUSES = ["Pending", "Completed", "Shelved", "ALL"] as const;
@@ -318,10 +321,20 @@ export function FindPolicyModal({
                     </tr>
                   </thead>
                   <tbody>
-                    {Array.from({ length: 2 }).map((_, i) => (
+                    {(rec?.cheques ?? []).map((c, i) => (
                       <tr
                         key={i}
                         className={i % 2 === 0 ? "bg-white" : "bg-[#e7ebec34]"}
+                      >
+                        <td className="px-2 py-1">{c.company}</td>
+                        <td className="px-2 py-1">{c.date}</td>
+                        <td className="px-2 py-1 text-right">{c.amount}</td>
+                      </tr>
+                    ))}
+                    {Array.from({ length: Math.max(0, 2 - (rec?.cheques?.length ?? 0)) }).map((_, i) => (
+                      <tr
+                        key={`pad-${i}`}
+                        className={(( (rec?.cheques?.length ?? 0) + i) % 2 === 0 ? "bg-white" : "bg-[#e7ebec34]")}
                       >
                         <td className="px-2 py-1">&nbsp;</td>
                         <td className="px-2 py-1"></td>

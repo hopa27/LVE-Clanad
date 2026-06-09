@@ -129,6 +129,82 @@ const PROCESS_83: MenuOption[] = [
   { label: "Cancel LTC", disabled: true },
 ];
 
+const PROCESS_82: MenuOption[] = [
+  {
+    label: "Set Dead",
+    hasSubmenu: true,
+    submenu: [
+      { label: "Life One", accel: "L", action: "set-dead-life-one" },
+      { label: "Life Two/Current Beneficiary", accel: "L", action: "set-dead-life-two" },
+    ],
+  },
+  {
+    label: "Payments",
+    hasSubmenu: true,
+    submenu: [{ label: "Suspend", action: "suspend" }],
+  },
+  { label: "PLA Cancellation", action: "pla-cancellation" },
+  { kind: "separator" },
+  { label: "Ceding Scheme Details", action: "ceding-scheme" },
+  { label: "LIC Benefit", disabled: true },
+  { label: "Cancel LTC", disabled: true },
+];
+
+const PRINT_82: MenuOption[] = [
+  { label: "Tax Certificate", action: "tax-certificate" },
+  { label: "Copy P60", action: "copy-p60" },
+  {
+    label: "Reprint Mar's",
+    hasSubmenu: true,
+    submenu: [
+      { label: "1st Life MAR" },
+      { label: "2nd Life MAR" },
+    ],
+  },
+  { label: "Diary Report" },
+];
+
+const SUPERVISOR_82: MenuOption[] = [
+  { label: "Supervisory Edit", action: "supervisory-edit" },
+  { label: "Revert to Live" },
+  {
+    label: "Status Change",
+    hasSubmenu: true,
+    submenu: [
+      { label: "NTU", accel: "N" },
+      { label: "Backdate", accel: "B" },
+      { label: "Cancel", accel: "C" },
+      { label: "XDuplicate", accel: "X" },
+      { label: "Surrender", accel: "S" },
+      { label: "Maturity", accel: "M" },
+    ],
+  },
+  { label: "Amend Cheques", action: "amend-cheques" },
+  { label: "Amend IFA", action: "amend-ifa" },
+  { label: "C(ancel) Application" },
+  {
+    label: "Bank Detail Changes",
+    hasSubmenu: true,
+    submenu: [
+      { label: "Approve Bank Changes" },
+      { label: "Approve Maturity Bank Detail Changes" },
+    ],
+  },
+  { label: "Convert to Flexi-Access", disabled: true },
+  { kind: "separator" },
+  {
+    label: "LTC",
+    hasSubmenu: true,
+    disabled: true,
+    submenu: [{ label: "LTC Benefit" }],
+  },
+  { label: "Pull Quote", disabled: true },
+  { kind: "separator" },
+  { label: "Reprint Annual Statements", action: "reprint-annual-statements" },
+  { label: "Annual Statement Recalculation", action: "annual-statement-recalc" },
+  { label: "Reprint Maturity Letters", action: "reprint-maturity-letters" },
+];
+
 const PROCESS_76: MenuOption[] = [
   { label: "ICFP Death Letters" },
   { label: "Set Dead", action: "set-dead" },
@@ -432,7 +508,13 @@ export function Header({ title }: { title: string }) {
       }
       if (planCode === "87" && m.label === "Supervisor")
         return { ...m, options: SUPERVISOR_87 };
-      if (planCode === "83" || planCode === "82") {
+      if (planCode === "82") {
+        if (m.label === "Options")    return { ...m, options: OPTIONS_84 };
+        if (m.label === "Process")    return { ...m, options: PROCESS_82 };
+        if (m.label === "Print")      return { ...m, options: PRINT_82 };
+        if (m.label === "Supervisor") return { ...m, options: SUPERVISOR_82 };
+      }
+      if (planCode === "83") {
         if (m.label === "Options")    return { ...m, options: OPTIONS_84 };
         if (m.label === "Process")    return { ...m, options: PROCESS_83 };
         if (m.label === "Print")      return { ...m, options: PRINT_83 };

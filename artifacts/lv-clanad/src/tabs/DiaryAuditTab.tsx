@@ -144,6 +144,15 @@ const PLAN_76_DIARY: DiaryRow[] = [
   { ref: 1, type: "App Form",  notes: "Care Provider Contract signed by care home",created: "21/01/2008", by: "LOPKXB", due: "04/02/2008", completed: "25/01/2008", byCompleted: "LOPHK" },
 ];
 
+const PLAN_76z_DIARY: DiaryRow[] = [
+  { ref: 3, type: "Prov Overpay", notes: "Chase Care Provider for Overpayment",                        created: "27/03/2015", by: "LOPAL",  due: "27/04/2015", completed: "27/04/2015", byCompleted: "CLMRK"  },
+  { ref: 4, type: "Misc",         notes: "death cert",                                                  created: "27/03/2015", by: "LOPAL",  due: "27/06/2015", completed: "31/03/2015", byCompleted: "LOPJW"  },
+  { ref: 2, type: "Misc",         notes: "Is var 8 ok?",                                                created: "07/07/2008", by: "LOPCXW", due: "08/07/2008", completed: "08/07/2008", byCompleted: "LOPKXB" },
+  { ref: 1, type: "Misc",         notes: "EPOA Doc - certified by IFA (already certified by solicitor)", created: "02/07/2008", by: "LOPKXB", due: "16/07/2008", completed: "02/07/2008", byCompleted: "LOPJT1" },
+];
+
+const AUDIT_76z = Array.from({ length: 10 }, () => "Test Note");
+
 const AUDIT_76 = Array.from({ length: 10 }, () => "Test Note");
 
 const PLAN_62a_DIARY: DiaryRow[] = [
@@ -314,7 +323,7 @@ export function DiaryAuditTab() {
   const [needsOpen, setNeedsOpen] = useState(false);
   const [cedingOpen, setCedingOpen] = useState(false);
   const [diary, setDiary] = useState<DiaryRow[]>(
-    isPlan87 ? PLAN_87_DIARY : isPlan84 ? PLAN_84_DIARY : isPlan90 ? PLAN_90_DIARY : isPlan51 ? PLAN_51_DIARY : isPlan82 ? PLAN_82_DIARY : isPlan80 ? PLAN_80_DIARY : isPlan83 ? PLAN_83_DIARY : isPlan621 ? PLAN_621_DIARY : isPlan76 ? PLAN_76_DIARY : isPlan76z ? [] : isPlan62a ? PLAN_62a_DIARY : isPlan611 ? PLAN_611_DIARY : isPlan52 ? [] : isPlan61a ? PLAN_61a_DIARY : INITIAL_DIARY,
+    isPlan87 ? PLAN_87_DIARY : isPlan84 ? PLAN_84_DIARY : isPlan90 ? PLAN_90_DIARY : isPlan51 ? PLAN_51_DIARY : isPlan82 ? PLAN_82_DIARY : isPlan80 ? PLAN_80_DIARY : isPlan83 ? PLAN_83_DIARY : isPlan621 ? PLAN_621_DIARY : isPlan76 ? PLAN_76_DIARY : isPlan76z ? PLAN_76z_DIARY : isPlan62a ? PLAN_62a_DIARY : isPlan611 ? PLAN_611_DIARY : isPlan52 ? [] : isPlan61a ? PLAN_61a_DIARY : INITIAL_DIARY,
   );
   const [selectedRef, setSelectedRef] = useState<number | null>(null);
   const [editConfirmOpen, setEditConfirmOpen] = useState(false);
@@ -512,7 +521,7 @@ export function DiaryAuditTab() {
                   </tr>
                 </thead>
                 <tbody>
-                  {(isPlan0 || isPlan87 ? [] : isPlan84 ? AUDIT_84 : isPlan90 ? AUDIT_90 : isPlan51 ? AUDIT_51 : isPlan82 ? AUDIT_82 : isPlan80 ? AUDIT_80 : isPlan83 ? AUDIT_83 : isPlan621 ? AUDIT_621 : isPlan76 ? AUDIT_76 : isPlan76z ? [] : isPlan62a ? AUDIT_62a : isPlan611 ? AUDIT_611 : isPlan52 ? AUDIT_52 : isPlan61a ? AUDIT_61a : AUDIT).map((line, i) => {
+                  {(isPlan0 || isPlan87 ? [] : isPlan84 ? AUDIT_84 : isPlan90 ? AUDIT_90 : isPlan51 ? AUDIT_51 : isPlan82 ? AUDIT_82 : isPlan80 ? AUDIT_80 : isPlan83 ? AUDIT_83 : isPlan621 ? AUDIT_621 : isPlan76 ? AUDIT_76 : isPlan76z ? AUDIT_76z : isPlan62a ? AUDIT_62a : isPlan611 ? AUDIT_611 : isPlan52 ? AUDIT_52 : isPlan61a ? AUDIT_61a : AUDIT).map((line, i) => {
                     const m = line.match(
                       /^(.*?)\s+by\s+(\S+)\s+on\s+(\S+)\s+at\s+(\S+)\s*$/,
                     );

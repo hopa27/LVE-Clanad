@@ -269,35 +269,6 @@ function Plan76ContactsLayout() {
 function Plan76zContactsLayout() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-      {/* Annuitant */}
-      <Section title="Annuitant">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3">
-          <Field label="Corres Name:"><TextInput value="Testmybabihd" /></Field>
-          <Field label="Salutation:"><TextInput value="Testmybabihd" /></Field>
-        </div>
-        <Field label="Address:">
-          <div className="flex items-start gap-2">
-            <div className="flex-1 min-w-0">
-              <ConnectedAddress
-                lines={[
-                  { placeholder: "Line 1" },
-                  { placeholder: "Line 2" },
-                  { placeholder: "Line 3" },
-                  { placeholder: "Line 4" },
-                  { placeholder: "Line 5" },
-                ]}
-                initial={["Reading", "", "Reading", "Avonmouth", "Leicester"]}
-              />
-            </div>
-            <ClearBtn />
-          </div>
-        </Field>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3">
-          <Field label="Postcode:"><TextInput value="QU99 9AB" /></Field>
-          <Field label="Tel.:"><TextInput value="01632 650888" /></Field>
-        </div>
-      </Section>
-
       {/* Power of Attorney */}
       <Section title="Power of Attorney">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3">

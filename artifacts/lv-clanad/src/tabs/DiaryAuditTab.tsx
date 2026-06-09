@@ -95,6 +95,19 @@ const AUDIT_90 = [
   "System Advises: P45 details amended by UAT4 on 25/05/2026 at 13:48:46",
 ];
 
+const PLAN_82_DIARY: DiaryRow[] = [
+  { ref: 11, type: "Misc",                notes: "FQ - IS VAR 02 OK?",                         created: "05/01/2011", by: "LOPPY",  due: "12/01/2011", completed: "05/01/2011", byCompleted: "LOPPY" },
+  { ref: 10, type: "Misc",                notes: "IFA email address - customerservices@retirementdirect.co.uk", created: "06/10/2010", by: "LONLM", due: "13/10/2010", completed: "05/01/2011", byCompleted: "LOPPY" },
+  { ref: 9,  type: "Misc",                notes: "NO TFC BEING PAID",                           created: "21/09/2010", by: "LONLM",  due: "28/09/2010", completed: "05/01/2011", byCompleted: "LOPPY" },
+  { ref: 8,  type: "Fund Correspondence", notes: "Aegon",                                        created: "21/09/2010", by: "LONLM",  due: "28/09/2010", completed: "05/01/2011", byCompleted: "LOPPY" },
+  { ref: 7,  type: "Funds",               notes: "Aegon",                                        created: "21/09/2010", by: "LONLM",  due: "28/09/2010", completed: "22/11/2010", byCompleted: "LOPPY" },
+  { ref: 6,  type: "LTA Form",            notes: "LTA Form missing, incomplete or invalid",      created: "21/09/2010", by: "SYSANN", due: "28/09/2010", completed: "06/10/2010", byCompleted: "LONLM" },
+  { ref: 5,  type: "Death Ben Nom Form",  notes: "DBNF missing, incomplete or invalid",          created: "21/09/2010", by: "SYSANN", due: "28/09/2010", completed: "06/10/2010", byCompleted: "LONLM" },
+  { ref: 4,  type: "CVI",                 notes: "Confirmation of Verification of Identity",     created: "21/09/2010", by: "SYSANN", due: "28/09/2010", completed: "06/10/2010", byCompleted: "LONLM" },
+];
+
+const AUDIT_82 = Array.from({ length: 10 }, () => "Test Note");
+
 const PLAN_83_DIARY: DiaryRow[] = [
   { ref: 12, type: "Claim Form Details",   notes: "Claim Form Details",   created: "14/08/2025", by: "SYSANN", due: "21/08/2026", completed: "", byCompleted: "" },
   { ref: 11, type: "Nature Of Payment",    notes: "Nature Of Payment",    created: "14/08/2025", by: "SYSANN", due: "21/08/2026", completed: "", byCompleted: "" },
@@ -276,7 +289,7 @@ export function DiaryAuditTab() {
   const [needsOpen, setNeedsOpen] = useState(false);
   const [cedingOpen, setCedingOpen] = useState(false);
   const [diary, setDiary] = useState<DiaryRow[]>(
-    isPlan87 ? PLAN_87_DIARY : isPlan84 ? PLAN_84_DIARY : isPlan90 ? PLAN_90_DIARY : isPlan51 ? PLAN_51_DIARY : (isPlan82 || isPlan83) ? PLAN_83_DIARY : isPlan621 ? PLAN_621_DIARY : isPlan76 ? PLAN_76_DIARY : isPlan62a ? PLAN_62a_DIARY : isPlan611 ? PLAN_611_DIARY : isPlan52 ? [] : isPlan61a ? PLAN_61a_DIARY : INITIAL_DIARY,
+    isPlan87 ? PLAN_87_DIARY : isPlan84 ? PLAN_84_DIARY : isPlan90 ? PLAN_90_DIARY : isPlan51 ? PLAN_51_DIARY : isPlan82 ? PLAN_82_DIARY : isPlan83 ? PLAN_83_DIARY : isPlan621 ? PLAN_621_DIARY : isPlan76 ? PLAN_76_DIARY : isPlan62a ? PLAN_62a_DIARY : isPlan611 ? PLAN_611_DIARY : isPlan52 ? [] : isPlan61a ? PLAN_61a_DIARY : INITIAL_DIARY,
   );
   const [selectedRef, setSelectedRef] = useState<number | null>(null);
   const [editConfirmOpen, setEditConfirmOpen] = useState(false);
@@ -474,7 +487,7 @@ export function DiaryAuditTab() {
                   </tr>
                 </thead>
                 <tbody>
-                  {(isPlan0 || isPlan87 ? [] : isPlan84 ? AUDIT_84 : isPlan90 ? AUDIT_90 : isPlan51 ? AUDIT_51 : (isPlan82 || isPlan83) ? AUDIT_83 : isPlan621 ? AUDIT_621 : isPlan76 ? AUDIT_76 : isPlan62a ? AUDIT_62a : isPlan611 ? AUDIT_611 : isPlan52 ? AUDIT_52 : isPlan61a ? AUDIT_61a : AUDIT).map((line, i) => {
+                  {(isPlan0 || isPlan87 ? [] : isPlan84 ? AUDIT_84 : isPlan90 ? AUDIT_90 : isPlan51 ? AUDIT_51 : isPlan82 ? AUDIT_82 : isPlan83 ? AUDIT_83 : isPlan621 ? AUDIT_621 : isPlan76 ? AUDIT_76 : isPlan62a ? AUDIT_62a : isPlan611 ? AUDIT_611 : isPlan52 ? AUDIT_52 : isPlan61a ? AUDIT_61a : AUDIT).map((line, i) => {
                     const m = line.match(
                       /^(.*?)\s+by\s+(\S+)\s+on\s+(\S+)\s+at\s+(\S+)\s*$/,
                     );
@@ -524,7 +537,9 @@ export function DiaryAuditTab() {
                         <td className="!px-4 whitespace-nowrap">{r.userId}</td>
                       </tr>
                     ))
-                  : (isPlan82 || isPlan83)
+                  : isPlan82
+                  ? []
+                  : isPlan83
                   ? DATA_CHANGES_83.map((r, i) => (
                       <tr key={i}>
                         <td className="!px-4 whitespace-nowrap">{r.changeDate}</td>

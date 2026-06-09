@@ -409,22 +409,27 @@ export function PaymentsTab() {
             </div>
           </div>
         ) : isPlan611 ? (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-8">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-8">
             <div>
-              <Field label="Premium:"><TextInput value="9483.25" disabled /></Field>
+              <Field label="Premium:"><TextInput value="3670.56" disabled /></Field>
               <Field label="Tax Free Cash:"><TextInput value="0" disabled /></Field>
               <Field label={<span className="text-[#d72714]">Total:</span>}>
-                <TextInput value="9483.25" disabled className="!text-[#d72714] underline" />
+                <TextInput value="3670.56" disabled className="!text-[#d72714] underline" />
               </Field>
-              <Field label="1st Annuitants Gross:"><TextInput value="526" disabled /></Field>
+              <Field label="1st Annuitants Gross:"><TextInput value="169" disabled /></Field>
               <Field label="2nd Annuitants Gross:"><TextInput value="0" disabled /></Field>
+            </div>
+            <div>
+              <Field label=" "><div className="h-[44px]" /></Field>
+              <Field label=" "><div className="h-[44px]" /></Field>
+              <Field label="Taxable pay:"><TextInput value="" disabled /></Field>
+              <Field label="Cumulative Free Pay:"><TextInput value="" disabled /></Field>
             </div>
             <div>
               <Field label="Cumulative Instal:"><TextInput value="" disabled /></Field>
               <Field label="BAL Gross Annuity:"><TextInput value="" disabled /></Field>
-              <Field label="Taxable pay:"><TextInput value="" disabled /></Field>
-              <Field label="Cumulative Free Pay:"><TextInput value="" disabled /></Field>
               <Field label="PAYE Tax Due To Date:"><TextInput value="" disabled /></Field>
+              <Field label="PAYE Tax Deduction:"><TextInput value="" disabled /></Field>
             </div>
             <div>
               <Field label="Next Anniversary:">
@@ -489,7 +494,7 @@ export function PaymentsTab() {
               <tr>
                 <th>Pay Date</th>
                 <th>Gross</th>
-                {!isPlan83 && !isPlan76 && !isPlan611 && <><th>Cap Element</th><th>Tax</th><th>Post Adj</th><th>Net</th></>}
+                {!isPlan83 && !isPlan76 && <><th>Cap Element</th><th>Tax</th><th>Post Adj</th><th>Net</th></>}
                 <th>Method</th>
                 <th>Reason</th>
                 <th>BACS Date</th>
@@ -501,7 +506,7 @@ export function PaymentsTab() {
                 <tr key={i}>
                   <td>{row.date}</td>
                   <td>{row.gross}</td>
-                  {!isPlan83 && !isPlan76 && !isPlan611 && <><td>{row.cap}</td><td>{row.tax}</td><td>{row.postAdj}</td><td>{row.net}</td></>}
+                  {!isPlan83 && !isPlan76 && <><td>{row.cap}</td><td>{row.tax}</td><td>{row.postAdj}</td><td>{row.net}</td></>}
                   <td>{row.method}</td>
                   <td>{row.reason}</td>
                   <td>{row.bacs}</td>

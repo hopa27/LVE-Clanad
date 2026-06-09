@@ -146,6 +146,7 @@ export function QuoteDetailsTab() {
   const isPlan62a = planCode === "62a";
   const isPlan611 = planCode === "611";
   const isPlan52  = planCode === "52";
+  const isPlan61a = planCode === "61a";
   const showGad = false;
   const quoteRows = isPlan0
     ? []
@@ -169,6 +170,8 @@ export function QuoteDetailsTab() {
     ? QUOTE_ROWS_611
     : isPlan52
     ? QUOTE_ROWS_52
+    : isPlan61a
+    ? QUOTE_ROWS_611
     : QUOTE_ROWS;
 
   return (
@@ -271,7 +274,7 @@ export function QuoteDetailsTab() {
           <>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-8">
               <div>
-                <Field label="Life Type:"><TextInput value={isPlan611 ? "FM" : isPlan87 || isPlan51 || isPlan83 || isPlan621 || isPlan62a ? "M" : isPlan90 ? "" : "F"} disabled /></Field>
+                <Field label="Life Type:"><TextInput value={isPlan611 || isPlan61a ? "FM" : isPlan87 || isPlan51 || isPlan83 || isPlan621 || isPlan62a ? "M" : isPlan90 ? "" : "F"} disabled /></Field>
                 <Field label="Plan Type:">
                   {isPlan84 ? (
                     <div className="grid grid-cols-2 gap-2">
@@ -279,11 +282,11 @@ export function QuoteDetailsTab() {
                       <TextInput value="(PRP)" disabled />
                     </div>
                   ) : (
-                    <TextInput value={isPlan90 ? "MCP" : isPlan51 || isPlan611 ? "CPA" : isPlan83 ? "PRP" : isPlan621 || isPlan62a || isPlan52 ? "PPA" : isPlan76 ? "ICFP" : "FTA"} disabled />
+                    <TextInput value={isPlan90 ? "MCP" : isPlan51 || isPlan611 || isPlan61a ? "CPA" : isPlan83 ? "PRP" : isPlan621 || isPlan62a || isPlan52 ? "PPA" : isPlan76 ? "ICFP" : "FTA"} disabled />
                   )}
                 </Field>
-                <Field label="Payments:"><TextInput value={isPlan83 || isPlan76 || isPlan611 || isPlan52 ? "AD" : "AR"} disabled /></Field>
-                <Field label="Frequency:"><TextInput value={isPlan87 || isPlan62a ? "1" : isPlan84 || isPlan90 || isPlan83 || isPlan621 || isPlan76 || isPlan611 || isPlan52 ? "12" : isPlan51 ? "4" : "2"} disabled /></Field>
+                <Field label="Payments:"><TextInput value={isPlan83 || isPlan76 || isPlan611 || isPlan52 || isPlan61a ? "AD" : "AR"} disabled /></Field>
+                <Field label="Frequency:"><TextInput value={isPlan87 || isPlan62a ? "1" : isPlan84 || isPlan90 || isPlan83 || isPlan621 || isPlan76 || isPlan611 || isPlan52 || isPlan61a ? "12" : isPlan51 ? "4" : "2"} disabled /></Field>
                 {isPlan76 && (
                   <Field label="DMT:"><TextInput value="0" disabled /></Field>
                 )}
@@ -292,15 +295,15 @@ export function QuoteDetailsTab() {
                   <Field label="Capital Protection?:"><TextInput value="" disabled={!isPlan51} /></Field>
                 )}
                 <Field label="Original Amnt Vested:"><TextInput value="" disabled={!isPlan51} /></Field>
-                {!isPlan84 && !isPlan90 && !isPlan51 && !isPlan83 && !isPlan621 && !isPlan76 && !isPlan62a && !isPlan611 && !isPlan52 && (
+                {!isPlan84 && !isPlan90 && !isPlan51 && !isPlan83 && !isPlan621 && !isPlan76 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
                   <Field label="Withheld Minimal Income:"><Checkbox checked={isPlan87} disabled /></Field>
                 )}
               </div>
               <div>
-                <Field label="Series:"><TextInput value={isPlan87 ? "912" : isPlan84 ? "700" : isPlan90 ? "" : isPlan51 ? "325" : isPlan83 ? "792" : isPlan621 ? "322" : isPlan76 ? "325" : isPlan62a ? "378" : isPlan611 ? "325" : isPlan52 ? "325" : "893"} disabled /></Field>
+                <Field label="Series:"><TextInput value={isPlan87 ? "912" : isPlan84 ? "700" : isPlan90 ? "" : isPlan51 ? "325" : isPlan83 ? "792" : isPlan621 ? "322" : isPlan76 ? "325" : isPlan62a ? "378" : isPlan611 ? "325" : isPlan52 ? "325" : isPlan61a ? "325" : "893"} disabled /></Field>
                 <Field label="Policy Type:">
                   <SelectInput
-                    value={isPlan84 || isPlan90 || isPlan51 || isPlan83 || isPlan621 || isPlan76 || isPlan62a || isPlan611 || isPlan52 ? "non profit" : "with profit"}
+                    value={isPlan84 || isPlan90 || isPlan51 || isPlan83 || isPlan621 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "non profit" : "with profit"}
                     options={["with profit", "without profit", "non profit"]}
                     disabled
                   />
@@ -338,7 +341,7 @@ export function QuoteDetailsTab() {
                   </>
                 )}
               </div>
-              {!isPlan87 && !isPlan90 && !isPlan51 && !isPlan83 && !isPlan621 && !isPlan76 && !isPlan62a && !isPlan611 && !isPlan52 && (
+              {!isPlan87 && !isPlan90 && !isPlan51 && !isPlan83 && !isPlan621 && !isPlan76 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
                 <div>
                   <Field label="Notional Value:"><TextInput value={isPlan84 ? "8189.23" : "14,828"} disabled /></Field>
                   <Field label="Value Date:"><TextInput value={isPlan84 ? "30/04/2026" : "25/03/2026"} disabled /></Field>
@@ -361,11 +364,11 @@ export function QuoteDetailsTab() {
 
             {!isPlan90 && !isPlan83 && !isPlan76 && (
             <Section title="LTA Details">
-              {isPlan51 || isPlan611 ? (
+              {isPlan51 || isPlan611 || isPlan61a ? (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
                   <div>
-                    <Field inline labelWidth={200} label="LTA% Crystallised:"><TextInput value={isPlan611 ? "0" : "7.4"} disabled /></Field>
-                    <Field inline labelWidth={200} label="Scheme Name:"><TextInput value={isPlan611 ? "" : "Zurich"} /></Field>
+                    <Field inline labelWidth={200} label="LTA% Crystallised:"><TextInput value={isPlan611 || isPlan61a ? "0" : "7.4"} disabled /></Field>
+                    <Field inline labelWidth={200} label="Scheme Name:"><TextInput value={isPlan611 || isPlan61a ? "" : "Zurich"} /></Field>
                     <Field inline labelWidth={200} label="HMRC Scheme Number:"><TextInput value="" /></Field>
                   </div>
                   <div>

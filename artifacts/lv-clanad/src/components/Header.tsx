@@ -421,12 +421,12 @@ export function Header({ title }: { title: string }) {
     .filter((m) => {
       if (planCode === "51") return m.label === "Options" || m.label === "Print" || m.label === "Help";
       if (planCode === "62a") return m.label === "Options" || m.label === "Print" || m.label === "Help";
-      if (planCode === "611") return m.label === "Options" || m.label === "Print" || m.label === "Help";
+      if (planCode === "611" || planCode === "61a") return m.label === "Options" || m.label === "Print" || m.label === "Help";
       if (planCode === "52") return m.label === "Options" || m.label === "Print" || m.label === "Help";
       return true;
     })
     .map((m) => {
-      if (planCode === "51" || planCode === "62a" || planCode === "611" || planCode === "52") {
+      if (planCode === "51" || planCode === "62a" || planCode === "611" || planCode === "52" || planCode === "61a") {
         if (m.label === "Options") return { ...m, options: OPTIONS_51 };
         if (m.label === "Print")   return { ...m, options: PRINT_51 };
       }

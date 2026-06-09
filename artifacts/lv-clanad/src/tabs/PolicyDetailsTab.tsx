@@ -11,6 +11,7 @@ export function PolicyDetailsTab() {
   const isPlan51 = planCode === "51";
   const isPlan83 = planCode === "83";
   const isPlan82 = planCode === "82";
+  const isPlan80 = planCode === "80";
   const isPlan76 = planCode === "76";
   const isPlan62a = planCode === "62a";
   const isPlan611 = planCode === "611";
@@ -28,13 +29,13 @@ export function PolicyDetailsTab() {
         <Field label="Tax Code:">
           <div className="flex items-center gap-3">
             <div className="w-32">
-              <TextInput value={isPlan87 ? "1257L*" : isPlan84 ? "52N" : isPlan90 ? "NT" : isPlan51 ? "1257L" : isPlan82 ? "1257L" : isPlan83 ? "125L" : isPlan76 ? "" : isPlan62a ? "960L" : isPlan611 ? "939L" : isPlan52 ? "939L" : isPlan61a ? "BR" : "DBTAXC"} />
+              <TextInput value={isPlan87 ? "1257L*" : isPlan84 ? "52N" : isPlan90 ? "NT" : isPlan51 ? "1257L" : isPlan82 ? "1257L" : isPlan80 ? "1123L" : isPlan83 ? "125L" : isPlan76 ? "" : isPlan62a ? "960L" : isPlan611 ? "939L" : isPlan52 ? "939L" : isPlan61a ? "BR" : "DBTAXC"} />
             </div>
             <Checkbox label="Tax Free" />
           </div>
         </Field>
         <Field label="Initial payment method:">
-          {isPlan82 ? (
+          {isPlan82 || isPlan80 ? (
             <SelectInput value="B" options={["B", "C", "T"]} />
           ) : isPlan83 ? (
             <SelectInput value="8" options={["8", "B", "C", "T"]} />
@@ -47,7 +48,7 @@ export function PolicyDetailsTab() {
         </Field>
         {!isPlan76 && (
           <Field label="Pay Tax Free Cash by:">
-            {isPlan82 ? (
+            {isPlan82 || isPlan80 ? (
               <SelectInput value="B" options={["B", "C", "T"]} />
             ) : isPlan83 ? (
               <SelectInput value="8" options={["8", "B", "C", "T"]} />
@@ -59,7 +60,7 @@ export function PolicyDetailsTab() {
             )}
           </Field>
         )}
-        {(!isPreset || isPlan90) && !isPlan51 && !isPlan83 && !isPlan82 && !isPlan76 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
+        {(!isPreset || isPlan90) && !isPlan51 && !isPlan80 && !isPlan83 && !isPlan82 && !isPlan76 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
           <>
             <Field label="IR Max Pension:">
               <TextInput value={isPlan90 ? "" : "dbirmax"} />
@@ -71,22 +72,22 @@ export function PolicyDetailsTab() {
         )}
         <Field label="ReAssurance Premium:">
           <TextInput
-            value={isPlan87 ? "60000" : isPlan84 ? "12209.38" : isPlan90 ? "" : isPlan51 ? "5364.39" : isPlan82 ? "12834.92" : isPlan83 ? "45275.68" : isPlan76 ? "26377.2" : isPlan62a ? "65142" : isPlan611 ? "0" : isPlan52 ? "0" : isPlan61a ? "4082.21" : "dbreassprem"}
+            value={isPlan87 ? "60000" : isPlan84 ? "12209.38" : isPlan90 ? "" : isPlan51 ? "5364.39" : isPlan82 ? "12834.92" : isPlan80 ? "18544.54" : isPlan83 ? "45275.68" : isPlan76 ? "26377.2" : isPlan62a ? "65142" : isPlan611 ? "0" : isPlan52 ? "0" : isPlan61a ? "4082.21" : "dbreassprem"}
           />
         </Field>
         <Field label="ReAssurer:">
-          <TextInput value={isPreset || isPlan51 || isPlan83 || isPlan82 || isPlan76 || isPlan62a || isPlan61a ? "RGA 1" : isPlan611 || isPlan52 ? "None" : "dbReassurer"} />
+          <TextInput value={isPreset || isPlan51 || isPlan80 || isPlan83 || isPlan82 || isPlan76 || isPlan62a || isPlan61a ? "RGA 1" : isPlan611 || isPlan52 ? "None" : "dbReassurer"} />
         </Field>
         <Field label="Evidence of Age:">
-          <TextInput value={isPlan87 || isPlan52 ? "N" : isPlan84 || isPlan90 || isPlan51 || isPlan83 || isPlan82 || isPlan76 || isPlan62a || isPlan611 || isPlan61a ? "Y" : "DB"} />
+          <TextInput value={isPlan87 || isPlan52 ? "N" : isPlan84 || isPlan90 || isPlan51 || isPlan80 || isPlan83 || isPlan82 || isPlan76 || isPlan62a || isPlan611 || isPlan61a ? "Y" : "DB"} />
         </Field>
         <Field label="Advice Type:">
           <div className="flex items-center gap-2">
             <div className="flex-1 min-w-0">
               <SelectInput
-                value={isPreset || isPlan51 || isPlan83 || isPlan82 || isPlan76 || isPlan611 || isPlan52 || isPlan61a ? "Independent" : isPlan62a ? "Non advised" : ""}
+                value={isPreset || isPlan51 || isPlan80 || isPlan83 || isPlan82 || isPlan76 || isPlan611 || isPlan52 || isPlan61a ? "Independent" : isPlan62a ? "Non advised" : ""}
                 options={
-                  isPreset || isPlan51 || isPlan83 || isPlan82 || isPlan76 || isPlan611 || isPlan52 || isPlan61a
+                  isPreset || isPlan51 || isPlan80 || isPlan83 || isPlan82 || isPlan76 || isPlan611 || isPlan52 || isPlan61a
                     ? ["Independent", "Non advised", "Advised"]
                     : isPlan62a
                     ? ["Non advised", "Independent", "Advised"]
@@ -94,7 +95,7 @@ export function PolicyDetailsTab() {
                 }
               />
             </div>
-            {!isPreset && !isPlan51 && !isPlan83 && !isPlan82 && !isPlan76 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
+            {!isPreset && !isPlan51 && !isPlan80 && !isPlan83 && !isPlan82 && !isPlan76 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
               <span className="text-[12px] font-['Mulish'] text-[#3d3d3d] whitespace-nowrap">
                 er (invisible)
               </span>
@@ -107,12 +108,12 @@ export function PolicyDetailsTab() {
             options={["", "Whole of market", "Restricted"]}
           />
         </Field>
-        {!isPreset && !isPlan51 && !isPlan83 && !isPlan82 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
+        {!isPreset && !isPlan51 && !isPlan80 && !isPlan83 && !isPlan82 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
           <Field label="Money Laundering Form:">
             <TextInput value={isPlan76 ? "Y" : "DB"} />
           </Field>
         )}
-        {!isPreset && !isPlan51 && !isPlan83 && !isPlan82 && !isPlan76 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
+        {!isPreset && !isPlan51 && !isPlan80 && !isPlan83 && !isPlan82 && !isPlan76 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
           <Field label="Advised Sale Info:">
             <SelectInput value="" options={["", "Yes", "No"]} />
           </Field>
@@ -120,18 +121,18 @@ export function PolicyDetailsTab() {
         <Field label="Internal Maturity Transfer:"><Checkbox /></Field>
         <Field label="Scheme Pension:">
           <SelectInput
-            value={isPreset || isPlan83 || isPlan82 || isPlan76 || isPlan62a || isPlan52 ? "No" : isPlan51 || isPlan611 || isPlan61a ? "Unknown" : "DBLookupComl"}
-            options={isPreset || isPlan83 || isPlan82 || isPlan76 || isPlan62a || isPlan52 ? ["No", "Yes"] : isPlan51 || isPlan611 || isPlan61a ? ["Unknown", "No", "Yes"] : ["DBLookupComl", "No", "Yes"]}
+            value={isPreset || isPlan80 || isPlan83 || isPlan82 || isPlan76 || isPlan62a || isPlan52 ? "No" : isPlan51 || isPlan611 || isPlan61a ? "Unknown" : "DBLookupComl"}
+            options={isPreset || isPlan80 || isPlan83 || isPlan82 || isPlan76 || isPlan62a || isPlan52 ? ["No", "Yes"] : isPlan51 || isPlan611 || isPlan61a ? ["Unknown", "No", "Yes"] : ["DBLookupComl", "No", "Yes"]}
           />
         </Field>
         <Field label="Purchaser:">
           <TextInput
-            value={isPlan87 || isPlan52 ? "" : isPlan84 ? "Testmtbbbide" : isPlan90 ? "Testbtcchibd" : isPlan51 ? "Testzhbaabii" : isPlan82 ? "Testmrbbgeee" : isPlan83 ? "Testindbggajc" : isPlan76 ? "Testmlbaabia" : isPlan62a ? "Testmsbbibag" : isPlan611 ? "Testnnbaadad" : isPlan61a ? "Testsebacjcj.b" : "DBEdit5"}
+            value={isPlan87 || isPlan52 ? "" : isPlan84 ? "Testmtbbbide" : isPlan90 ? "Testbtcchibd" : isPlan51 ? "Testzhbaabii" : isPlan82 ? "Testmrbbgeee" : isPlan80 ? "Testmrbbbaib" : isPlan83 ? "Testindbggajc" : isPlan76 ? "Testmlbaabia" : isPlan62a ? "Testmsbbibag" : isPlan611 ? "Testnnbaadad" : isPlan61a ? "Testsebacjcj.b" : "DBEdit5"}
           />
         </Field>
         <Field label="Policy Owner:">
           <SelectInput
-            value={isPlan84 ? "Testmtbbbide" : isPlan90 ? "Belinda Testctcchibd" : isPlan51 ? "Simon Simon Testsubaabii" : isPlan82 ? "Testmrbbgeee" : isPlan83 ? "Testindbggajc" : isPlan76 ? "Colin Testslbaabia" : isPlan62a ? "Testmsbbibag" : ""}
+            value={isPlan84 ? "Testmtbbbide" : isPlan90 ? "Belinda Testctcchibd" : isPlan51 ? "Simon Simon Testsubaabii" : isPlan82 ? "Testmrbbgeee" : isPlan80 ? "Testmrbbbaib" : isPlan83 ? "Testindbggajc" : isPlan76 ? "Colin Testslbaabia" : isPlan62a ? "Testmsbbibag" : ""}
             options={
               isPlan84
                 ? ["Testmtbbbide"]
@@ -141,6 +142,8 @@ export function PolicyDetailsTab() {
                 ? ["Simon Simon Testsubaabii"]
                 : isPlan82
                 ? ["Testmrbbgeee"]
+                : isPlan80
+                ? ["Testmrbbbaib"]
                 : isPlan83
                 ? ["Testindbggajc"]
                 : isPlan76
@@ -190,6 +193,7 @@ export function PolicyDetailsTab() {
               : isPlan90 ? "Lyndhurst Financial Management Ltd"
               : isPlan51 ? "Firth & Scott Financial Services Ltd"
               : isPlan82 ? "BSGFA Ltd - Ex Retirement Direct Limited"
+              : isPlan80 ? "True Potential Wealth Management Llp"
               : isPlan83 ? "Premium Fin Plnr Serv (Ex Taylored FS)"
               : isPlan76 ? "HSBC Bank PLC - NHFA Division"
               : isPlan62a ? "Hargreaves Lansdown"
@@ -209,6 +213,7 @@ export function PolicyDetailsTab() {
               : isPlan90 ? "28 Bridge Street"
               : isPlan51 ? "579 Mansfield Road"
               : isPlan82 ? "DO NOT USE NOT AUTH"
+              : isPlan80 ? "Newburn House"
               : isPlan83 ? "37 Cromwell Road"
               : isPlan76 ? "Floor 2"
               : isPlan62a ? "One College Square South"
@@ -228,6 +233,7 @@ export function PolicyDetailsTab() {
               : isPlan90 ? ""
               : isPlan51 ? "Sherwood"
               : isPlan82 ? ""
+              : isPlan80 ? "Gateway West"
               : isPlan83 ? "Load Sail Farm"
               : isPlan76 ? "Midland House"
               : isPlan62a ? "Anchor Road"
@@ -247,6 +253,7 @@ export function PolicyDetailsTab() {
               : isPlan90 ? "Hitchin"
               : isPlan51 ? "Nottingham"
               : isPlan82 ? ""
+              : isPlan80 ? "Newcastle upon Tyne"
               : isPlan83 ? "Hull"
               : isPlan76 ? "Botley"
               : isPlan62a ? "Bristol"
@@ -259,7 +266,7 @@ export function PolicyDetailsTab() {
           />
         </Field>
         <Field label="District:">
-          <TextInput value={isPreset || isPlan51 || isPlan83 || isPlan62a || isPlan52 || isPlan61a ? "" : isPlan611 ? "Heather" : isPlan76 ? "West Way" : "DBEdDistrict"} disabled />
+          <TextInput value={isPreset || isPlan51 || isPlan83 || isPlan62a || isPlan52 || isPlan61a ? "" : isPlan80 ? "Newburn Riverside" : isPlan611 ? "Heather" : isPlan76 ? "West Way" : "DBEdDistrict"} disabled />
         </Field>
         <Field label="County:">
           <TextInput
@@ -268,6 +275,7 @@ export function PolicyDetailsTab() {
               : isPlan84 ? "Essex"
               : isPlan90 ? "Hertfordshire"
               : isPlan51 ? "Nottinghamshire"
+              : isPlan80 ? ""
               : isPlan83 ? ""
               : isPlan76 ? "Oxford"
               : isPlan62a ? ""
@@ -287,6 +295,7 @@ export function PolicyDetailsTab() {
               : isPlan90 ? "SG5 2DF"
               : isPlan51 ? "NG5 2JN"
               : isPlan82 ? "EX1 3LH"
+              : isPlan80 ? "NE15 8NX"
               : isPlan83 ? "HU12 8GF"
               : isPlan76 ? "OX2 0PL"
               : isPlan62a ? "BS1 5HL"
@@ -306,6 +315,7 @@ export function PolicyDetailsTab() {
               : isPlan90 ? ""
               : isPlan51 ? "Kate Nicol"
               : isPlan82 ? "Gemma Law"
+              : isPlan80 ? "Harry Kaur"
               : isPlan83 ? ""
               : isPlan76 ? "Andrew Pike"
               : isPlan62a ? ""
@@ -347,32 +357,32 @@ export function PolicyDetailsTab() {
         <Section title="Statements & Letters">
           <Field label="Issue Statements:">
             <SelectInput
-              value={isPlan87 || isPlan84 || isPlan83 ? "Yes" : isPlan82 ? "No" : ""}
-              options={isPlan87 || isPlan84 || isPlan83 ? ["Yes", "No"] : isPlan82 ? ["No", "Yes"] : [""]}
+              value={isPlan87 || isPlan84 || isPlan80 || isPlan83 ? "Yes" : isPlan82 ? "No" : ""}
+              options={isPlan87 || isPlan84 || isPlan80 || isPlan83 ? ["Yes", "No"] : isPlan82 ? ["No", "Yes"] : [""]}
             />
           </Field>
           <Field label="Copy Annual Statement to IFA:">
             <SelectInput
-              value={isPlan87 || isPlan84 || isPlan83 ? "Yes" : isPlan82 ? "No" : ""}
-              options={isPlan87 || isPlan84 || isPlan83 ? ["Yes", "No"] : isPlan82 ? ["No", "Yes"] : [""]}
+              value={isPlan87 || isPlan84 || isPlan80 || isPlan83 ? "Yes" : isPlan82 ? "No" : ""}
+              options={isPlan87 || isPlan84 || isPlan80 || isPlan83 ? ["Yes", "No"] : isPlan82 ? ["No", "Yes"] : [""]}
             />
           </Field>
           <Field label="Copy Annual Statement to Policyholder:">
             <SelectInput
-              value={isPlan87 || isPlan84 || isPlan83 ? "Yes" : isPlan82 ? "No" : ""}
-              options={isPlan87 || isPlan84 || isPlan83 ? ["Yes", "No"] : isPlan82 ? ["No", "Yes"] : [""]}
+              value={isPlan87 || isPlan84 || isPlan80 || isPlan83 ? "Yes" : isPlan82 ? "No" : ""}
+              options={isPlan87 || isPlan84 || isPlan80 || isPlan83 ? ["Yes", "No"] : isPlan82 ? ["No", "Yes"] : [""]}
             />
           </Field>
           <Field label="Issue wake up letters/maturity chasers:">
             <SelectInput
-              value={isPlan87 || isPlan84 || isPlan83 || isPlan82 ? "Yes" : "dblcMat"}
-              options={isPlan87 || isPlan84 || isPlan83 || isPlan82 ? ["Yes", "No"] : ["dblcMat"]}
+              value={isPlan87 || isPlan84 || isPlan80 || isPlan83 || isPlan82 ? "Yes" : "dblcMat"}
+              options={isPlan87 || isPlan84 || isPlan80 || isPlan83 || isPlan82 ? ["Yes", "No"] : ["dblcMat"]}
             />
           </Field>
         </Section>
       )}
 
-      {!isPreset && !isPlan51 && !isPlan82 && !isPlan83 && !isPlan76 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
+      {!isPreset && !isPlan51 && !isPlan80 && !isPlan82 && !isPlan83 && !isPlan76 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
         <Section title="Certificate of Existence Details">
           <Field label="CoE No:"><TextInput value="" /></Field>
           <Field label="CoE Received Date:">
@@ -399,7 +409,7 @@ export function PolicyDetailsTab() {
         </Section>
       )}
 
-      {!isPreset && !isPlan51 && !isPlan82 && !isPlan83 && !isPlan76 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
+      {!isPreset && !isPlan51 && !isPlan80 && !isPlan82 && !isPlan83 && !isPlan76 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
         <Section title="P45 Details">
           <Field label="P45 date rec'd:">
             <TextInput value="bdp45recd" disabled />
@@ -413,7 +423,7 @@ export function PolicyDetailsTab() {
         </Section>
       )}
 
-      {(isPreset || isPlan51 || isPlan82 || isPlan83 || isPlan62a || isPlan611 || isPlan52 || isPlan61a) && (
+      {(isPreset || isPlan51 || isPlan80 || isPlan82 || isPlan83 || isPlan62a || isPlan611 || isPlan52 || isPlan61a) && (
         <Section title="P45 Details">
           <Field label="P45 date rec'd:">
             <TextInput value="" disabled />
@@ -433,8 +443,8 @@ export function PolicyDetailsTab() {
         </Field>
         <Field label="Serious ill health:">
           <DatePicker
-            value={isPreset || isPlan51 || isPlan82 || isPlan83 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "" : "DbEdSeriou"}
-            placeholder={isPreset || isPlan51 || isPlan82 || isPlan83 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "" : "DbEdSeriou"}
+            value={isPreset || isPlan51 || isPlan80 || isPlan82 || isPlan83 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "" : "DbEdSeriou"}
+            placeholder={isPreset || isPlan51 || isPlan80 || isPlan82 || isPlan83 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "" : "DbEdSeriou"}
           />
         </Field>
       </div>
@@ -448,6 +458,7 @@ export function PolicyDetailsTab() {
               : isPlan90 ? "ROTHM-002"
               : isPlan51 ? "FRTH-001"
               : isPlan82 ? "READL-001"
+              : isPlan80 ? "TRUEP-001"
               : isPlan83 ? "TAYLO-062"
               : isPlan76 ? "SBTYL-004"
               : isPlan62a ? "HARGR-005"
@@ -459,15 +470,15 @@ export function PolicyDetailsTab() {
             disabled
           />
         </Field>
-        <Field label={isPlan84 || isPlan90 || isPlan51 || isPlan82 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "Comm. %:" : "Adviser Charge %:"}>
+        <Field label={isPlan84 || isPlan90 || isPlan51 || isPlan80 || isPlan82 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "Comm. %:" : "Adviser Charge %:"}>
           <TextInput
-            value={isPlan87 ? "" : isPlan84 ? "2" : isPlan90 ? "0" : isPlan51 ? "2" : isPlan82 ? "3" : isPlan83 ? "" : isPlan76 ? "4" : isPlan62a ? "3" : isPlan611 ? "1.3" : isPlan52 ? "1" : isPlan61a ? "1.3" : "edtAdviserChar"}
+            value={isPlan87 ? "" : isPlan84 ? "2" : isPlan90 ? "0" : isPlan51 ? "2" : isPlan82 ? "3" : isPlan80 ? "3" : isPlan83 ? "" : isPlan76 ? "4" : isPlan62a ? "3" : isPlan611 ? "1.3" : isPlan52 ? "1" : isPlan61a ? "1.3" : "edtAdviserChar"}
             disabled
           />
         </Field>
-        <Field label={isPlan84 || isPlan90 || isPlan51 || isPlan82 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "Commission:" : "Adviser Charge:"}>
+        <Field label={isPlan84 || isPlan90 || isPlan51 || isPlan80 || isPlan82 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "Commission:" : "Adviser Charge:"}>
           <TextInput
-            value={isPlan87 ? "0" : isPlan84 ? "406.98" : isPlan90 ? "" : isPlan51 ? "176.81" : isPlan82 ? "641.75" : isPlan83 ? "0" : isPlan76 ? "1758.48" : isPlan62a ? "3257.1" : isPlan611 ? "47.72" : isPlan52 ? "324.03" : isPlan61a ? "88.45" : "edtAdviserChar"}
+            value={isPlan87 ? "0" : isPlan84 ? "406.98" : isPlan90 ? "" : isPlan51 ? "176.81" : isPlan82 ? "641.75" : isPlan80 ? "927.23" : isPlan83 ? "0" : isPlan76 ? "1758.48" : isPlan62a ? "3257.1" : isPlan611 ? "47.72" : isPlan52 ? "324.03" : isPlan61a ? "88.45" : "edtAdviserChar"}
             disabled
           />
         </Field>
@@ -475,13 +486,13 @@ export function PolicyDetailsTab() {
           <>
             <Field label="Key Account:">
               <TextInput
-                value={isPlan87 ? "" : isPlan84 ? "Q" : isPlan82 ? "S" : isPlan83 ? "P" : "DBEdit4"}
+                value={isPlan87 ? "" : isPlan84 ? "Q" : isPlan82 ? "S" : isPlan80 ? "Y" : isPlan83 ? "P" : "DBEdit4"}
                 disabled
               />
             </Field>
             <Field label="Region:">
               <TextInput
-                value={isPlan87 ? "" : isPlan84 ? "LON" : isPlan82 ? "HIT" : isPlan83 ? "MAN" : "DBEdit12"}
+                value={isPlan87 ? "" : isPlan84 ? "LON" : isPlan82 ? "HIT" : isPlan80 ? "MAN" : isPlan83 ? "MAN" : "DBEdit12"}
                 disabled
               />
             </Field>
@@ -509,10 +520,10 @@ export function PolicyDetailsTab() {
           />
         </Field>
         <Field label="Agency Ref:">
-          <TextInput value={isPreset || isPlan51 || isPlan83 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "" : "edtAgencyDecea"} disabled />
+          <TextInput value={isPreset || isPlan51 || isPlan80 || isPlan83 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "" : "edtAgencyDecea"} disabled />
         </Field>
         <Field label="Agency Unique Ref:">
-          <TextInput value={isPreset || isPlan51 || isPlan83 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "" : "edtAgencyDecNo"} disabled />
+          <TextInput value={isPreset || isPlan51 || isPlan80 || isPlan83 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "" : "edtAgencyDecNo"} disabled />
         </Field>
         <Field label="Notification Date:">
           <DatePicker

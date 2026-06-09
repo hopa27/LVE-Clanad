@@ -222,11 +222,11 @@ export function NotesTab() {
       </Section>
     );
   }
-  if (isPlan87) {
+  if (isPlan87 || planCode === "52") {
     return (
       <Section
         title="Notes (0)"
-        headerAction={<NoteButtons disableEditDelete />}
+        headerAction={<NoteButtons disableEditDelete={planCode === "52"} />}
       >
         <div className="space-y-3 max-h-[620px] overflow-auto pr-1" />
       </Section>

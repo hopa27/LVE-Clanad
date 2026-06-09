@@ -33,7 +33,8 @@ type ToolAction =
   | "reports"
   | "crs"
   | "log"
-  | "search";
+  | "search"
+  | "exit";
 
 type Tool = {
   label: string;
@@ -47,6 +48,7 @@ export function Toolbar() {
   const { planCode } = usePlanCode();
   const isPlan51 = planCode === "51";
   const isPlan621 = planCode === "621";
+  const isPlan611 = planCode === "611";
   const [newAppConfirm, setNewAppConfirm] = useState(false);
   const [simAppConfirm, setSimAppConfirm] = useState(false);
   const [quoteLookupOpen, setQuoteLookupOpen] = useState(false);
@@ -66,14 +68,14 @@ export function Toolbar() {
   const ALL_TOOLS: Tool[] = [
     { label: "New App", icon: MdAdd, enabled: !editing, action: "new-app" },
     { label: "New Quote", icon: MdNoteAdd, enabled: false, action: "new-quote" },
-    { label: "Sim App", icon: MdContentCopy, enabled: !editing && !isPlan51, action: "sim-app" },
+    { label: "Sim App", icon: MdContentCopy, enabled: !editing && !isPlan51 && !isPlan611, action: "sim-app" },
     {
       label: editing ? "Save" : "Edit",
       icon: editing ? MdSave : MdEdit,
       enabled: !isPlan621,
       action: "edit-toggle",
     },
-    { label: "Cancel", icon: MdBlock, enabled: editing && !isPlan51 && !isPlan621, action: "edit-cancel" },
+    { label: "Cancel", icon: MdBlock, enabled: editing && !isPlan51 && !isPlan621 && !isPlan611, action: "edit-cancel" },
     { label: "Search", icon: MdSearch, enabled: !editing, action: "search" },
     { label: "Log", icon: MdHistory, enabled: !editing, action: "log" },
     { label: "CRS", icon: MdStorage, enabled: !editing, action: "crs" },
@@ -81,9 +83,12 @@ export function Toolbar() {
     { label: "Company", icon: MdBusiness, enabled: !editing, action: "company" },
   ];
   const isPlan62a = planCode === "62a";
-  const TOOLS = (isPlan51 || isPlan62a)
+  const baseTools = (isPlan51 || isPlan62a || isPlan611)
     ? ALL_TOOLS.filter((t) => t.action !== "edit-toggle" && t.action !== "log")
     : ALL_TOOLS;
+  const TOOLS = isPlan611
+    ? [...baseTools, { label: "Exit", icon: MdBlock, enabled: true, action: "exit" as ToolAction }]
+    : baseTools;
 
   const handleClick = (action?: ToolAction) => {
     if (action === "new-app") setNewAppConfirm(true);

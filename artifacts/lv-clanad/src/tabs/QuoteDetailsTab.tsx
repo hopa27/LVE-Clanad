@@ -63,6 +63,16 @@ const QUOTE_ROWS_83 = [
   },
 ];
 
+const QUOTE_ROWS_82 = [
+  {
+    type: "Prot Pre 97", premium: "£21,391.53", tfc: "", original: "£0.00",
+    escType: "Fixed", escRate: "0", currentInc: "£0.00", spousePct: "0",
+    spouseInc: "£0.00", guarantee: "", lastPay: "", overlap: "No",
+    valProt: "100", taxFree: "", maxFree: "F",
+    valProtFlag: "T", lsConvert: "", planProt: "", dependant: "None",
+  },
+];
+
 const QUOTE_ROWS_76 = [
   {
     type: "Std Pre 97", premium: "£43,962.00", tfc: "", original: "£13,800.00",
@@ -158,7 +168,7 @@ export function QuoteDetailsTab() {
   const isPlan611 = planCode === "611";
   const isPlan52  = planCode === "52";
   const isPlan61a = planCode === "61a";
-  const showGad = false;
+  const showGad = isPlan82;
   const quoteRows = isPlan0
     ? []
     : isPlan87
@@ -169,7 +179,9 @@ export function QuoteDetailsTab() {
     ? QUOTE_ROWS_90
     : isPlan51
     ? QUOTE_ROWS_51
-    : (isPlan82 || isPlan83)
+    : isPlan82
+    ? QUOTE_ROWS_82
+    : isPlan83
     ? QUOTE_ROWS_83
     : isPlan621
     ? QUOTE_ROWS_621
@@ -296,7 +308,7 @@ export function QuoteDetailsTab() {
                     <TextInput value={isPlan90 ? "MCP" : isPlan51 || isPlan611 || isPlan61a ? "CPA" : (isPlan82 || isPlan83) ? "PRP" : isPlan621 || isPlan62a || isPlan52 ? "PPA" : isPlan76 ? "ICFP" : "FTA"} disabled />
                   )}
                 </Field>
-                <Field label="Payments:"><TextInput value={(isPlan82 || isPlan83) || isPlan76 || isPlan611 || isPlan52 || isPlan61a ? "AD" : "AR"} disabled /></Field>
+                <Field label="Payments:"><TextInput value={isPlan83 || isPlan76 || isPlan611 || isPlan52 || isPlan61a ? "AD" : "AR"} disabled /></Field>
                 <Field label="Frequency:"><TextInput value={isPlan87 || isPlan62a ? "1" : isPlan84 || isPlan90 || isPlan82 || isPlan83 || isPlan621 || isPlan76 || isPlan611 || isPlan52 || isPlan61a ? "12" : isPlan51 ? "4" : "2"} disabled /></Field>
                 {isPlan76 && (
                   <Field label="DMT:"><TextInput value="0" disabled /></Field>
@@ -311,7 +323,7 @@ export function QuoteDetailsTab() {
                 )}
               </div>
               <div>
-                <Field label="Series:"><TextInput value={isPlan87 ? "912" : isPlan84 ? "700" : isPlan90 ? "" : isPlan51 ? "325" : (isPlan82 || isPlan83) ? "792" : isPlan621 ? "322" : isPlan76 ? "325" : isPlan62a ? "378" : isPlan611 ? "325" : isPlan52 ? "325" : isPlan61a ? "351" : "893"} disabled /></Field>
+                <Field label="Series:"><TextInput value={isPlan87 ? "912" : isPlan84 ? "700" : isPlan90 ? "" : isPlan51 ? "325" : isPlan82 ? "716" : isPlan83 ? "792" : isPlan621 ? "322" : isPlan76 ? "325" : isPlan62a ? "378" : isPlan611 ? "325" : isPlan52 ? "325" : isPlan61a ? "351" : "893"} disabled /></Field>
                 <Field label="Policy Type:">
                   <SelectInput
                     value={isPlan84 || isPlan90 || isPlan51 || isPlan82 || isPlan83 || isPlan621 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "non profit" : "with profit"}
@@ -324,11 +336,11 @@ export function QuoteDetailsTab() {
                 )}
                 {showGad && (
                   <>
-                    <Field label="Original GAD Limit Upper:"><TextInput value="" disabled /></Field>
-                    <Field label="Original GAD Limit:"><TextInput value="" disabled /></Field>
-                    <Field label="Original GAD Review Date:"><TextInput value="" disabled /></Field>
-                    <Field label="GAD Review Maximum:"><TextInput value="" disabled /></Field>
-                    <Field label="GAD Review Date:"><TextInput value="" disabled /></Field>
+                    <Field label="Original GAD Limit Upper:"><TextInput value="1394.32" disabled /></Field>
+                    <Field label="Original GAD Limit:"><TextInput value="0" disabled /></Field>
+                    <Field label="Original GAD Review Date:"><TextInput value="28/09/2015" disabled /></Field>
+                    <Field label="GAD Review Maximum:"><TextInput value="1394.32" disabled /></Field>
+                    <Field label="GAD Review Date:"><TextInput value="28/09/2015" disabled /></Field>
                   </>
                 )}
                 {isPlan87 && (
@@ -344,7 +356,14 @@ export function QuoteDetailsTab() {
                     <Field label="Maturity Date:"><TextInput value="31/10/2032" disabled /></Field>
                   </>
                 )}
-                {(isPlan82 || isPlan83) && (
+                {isPlan82 && (
+                  <>
+                    <Field label="Policy Term (months):"><TextInput value="60" disabled /></Field>
+                    <Field label="Guaranteed Maturity:"><TextInput value="22651" disabled /></Field>
+                    <Field label="Maturity Date:"><TextInput value="26/10/2015" disabled /></Field>
+                  </>
+                )}
+                {isPlan83 && (
                   <>
                     <Field label="Policy Term (months):"><TextInput value="120" disabled /></Field>
                     <Field label="Guaranteed Maturity:"><TextInput value="501" disabled /></Field>
@@ -373,13 +392,13 @@ export function QuoteDetailsTab() {
               )}
             </div>
 
-            {!isPlan90 && !isPlan82 && !isPlan83 && !isPlan76 && (
+            {!isPlan90 && !isPlan83 && !isPlan76 && (
             <Section title="LTA Details">
-              {isPlan51 || isPlan611 || isPlan61a ? (
+              {isPlan51 || isPlan611 || isPlan61a || isPlan82 ? (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
                   <div>
-                    <Field inline labelWidth={200} label="LTA% Crystallised:"><TextInput value={isPlan611 ? "0" : isPlan61a ? "0.54" : "7.4"} disabled /></Field>
-                    <Field inline labelWidth={200} label="Scheme Name:"><TextInput value={isPlan611 || isPlan61a ? "" : "Zurich"} /></Field>
+                    <Field inline labelWidth={200} label="LTA% Crystallised:"><TextInput value={isPlan611 ? "0" : isPlan61a ? "0.54" : isPlan82 ? "1.83" : "7.4"} disabled /></Field>
+                    <Field inline labelWidth={200} label="Scheme Name:"><TextInput value={isPlan611 || isPlan61a || isPlan82 ? "" : "Zurich"} /></Field>
                     <Field inline labelWidth={200} label="HMRC Scheme Number:"><TextInput value="" /></Field>
                   </div>
                   <div>

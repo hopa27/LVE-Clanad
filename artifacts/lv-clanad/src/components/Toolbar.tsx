@@ -83,7 +83,8 @@ export function Toolbar() {
     { label: "Company", icon: MdBusiness, enabled: !editing, action: "company" },
   ];
   const isPlan62a = planCode === "62a";
-  const baseTools = (isPlan51 || isPlan62a || isPlan611)
+  const isPlan52  = planCode === "52";
+  const baseTools = (isPlan51 || isPlan62a || isPlan611 || isPlan52)
     ? ALL_TOOLS.filter((t) => t.action !== "edit-toggle" && t.action !== "log")
     : ALL_TOOLS;
   const TOOLS = baseTools;

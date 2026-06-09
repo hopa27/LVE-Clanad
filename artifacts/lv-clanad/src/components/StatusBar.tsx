@@ -13,12 +13,12 @@ export function StatusBar() {
   const items = [
     {
       label: "Status",
-      value: isPlan51 ? "MIGRATED" : isPlan83 ? "Maturity Pending" : isPlan621 ? "Death Pending" : isPlan76 ? "DEAD" : isPlan62a ? "CANCELLED" : isPlan611 ? "SHELVED - Ntu" : isPlan52 ? "LIVE" : "LIVE",
-      highlight: !isPlan51 && !isPlan83 && !isPlan621 && !isPlan76 && !isPlan62a && !isPlan611,
-      error: isPlan51 || isPlan83 || isPlan621 || isPlan76 || isPlan62a || isPlan611,
+      value: isPlan51 ? "MIGRATED" : isPlan83 ? "Maturity Pending" : isPlan621 ? "Death Pending" : isPlan76 ? "DEAD" : isPlan62a ? "CANCELLED" : isPlan611 ? "SHELVED - Ntu" : isPlan52 ? "SHELVED - Duplicate" : "LIVE",
+      highlight: !isPlan51 && !isPlan83 && !isPlan621 && !isPlan76 && !isPlan62a && !isPlan611 && !isPlan52,
+      error: isPlan51 || isPlan83 || isPlan621 || isPlan76 || isPlan62a || isPlan611 || isPlan52,
     },
     { label: "Illustration", value: isPlan0 ? "" : isPlan51 ? "927657" : isPlan83 ? "10578050" : isPlan621 ? "919598" : isPlan76 ? "938688" : isPlan62a ? "2684095" : isPlan611 ? "948258" : isPlan52 ? "922450" : "20911002" },
-    { label: "Variant",      value: isPlan0 ? "" : isPlan51 ? "8"      : isPlan83 ? "3"        : isPlan621 ? "4"      : isPlan76 ? "4"      : isPlan62a ? "1"        : isPlan611 ? "5"      : isPlan52 ? "7" : "7"       },
+    { label: "Variant",      value: isPlan0 ? "" : isPlan51 ? "8"      : isPlan83 ? "3"        : isPlan621 ? "4"      : isPlan76 ? "4"      : isPlan62a ? "1"        : isPlan611 ? "5"      : isPlan52 ? "4" : "7"       },
     { label: "RAQ ID",       value: isPlan51 || isPlan83 || isPlan621 || isPlan76 || isPlan62a || isPlan611 || isPlan52 ? "" : "—" },
     { label: "User",         value: isPlan51 || isPlan83 || isPlan62a ? "UAT1" : "UAT3" },
   ];

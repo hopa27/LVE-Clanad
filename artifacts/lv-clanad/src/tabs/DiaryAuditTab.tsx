@@ -155,6 +155,19 @@ const PLAN_611_DIARY: DiaryRow[] = [
 const AUDIT_611 = Array.from({ length: 4 }, () => "Test Note");
 const AUDIT_52  = ["Test Note"];
 
+const PLAN_61a_DIARY: DiaryRow[] = [
+  { ref: 9, type: "Misc",                    notes: "Guaranteed period ends in one month",  created: "22/12/2011", by: "LOPNB",  due: "19/07/2018", completed: "",           byCompleted: "" },
+  { ref: 3, type: "Beneficiary (Bank Dets)", notes: "Beneficiary bank account details",     created: "22/12/2011", by: "SYSANN", due: "20/02/2012", completed: "27/01/2012", byCompleted: "LOPNB" },
+  { ref: 5, type: "Benefits Beneficiary Form", notes: "Benefits Beneficiary Form",          created: "22/12/2011", by: "SYSANN", due: "21/01/2012", completed: "10/01/2012", byCompleted: "LOPNB" },
+  { ref: 6, type: "Death Cert Client",       notes: "Annuitant Death Certificate",          created: "22/12/2011", by: "SYSANN", due: "21/01/2012", completed: "05/01/2012", byCompleted: "LOPNB" },
+  { ref: 4, type: "Beneficiary (DOB)",       notes: "Beneficiary date of birth",            created: "22/12/2011", by: "SYSANN", due: "21/01/2012", completed: "22/12/2011", byCompleted: "LOPNB" },
+  { ref: 7, type: "Marriage Certificate",    notes: "Marriage Certificate",                 created: "22/12/2011", by: "SYSANN", due: "21/01/2012", completed: "22/12/2011", byCompleted: "LOPNB" },
+  { ref: 8, type: "Overpayment",             notes: "Return of overpayment",                created: "22/12/2011", by: "SYSANN", due: "21/01/2012", completed: "22/12/2011", byCompleted: "LOPNB" },
+  { ref: 2, type: "Beneficiary (NINO)",      notes: "Beneficiary NI Number",                created: "22/12/2011", by: "SYSANN", due: "21/01/2012", completed: "22/12/2011", byCompleted: "LOPNB" },
+];
+
+const AUDIT_61a = Array.from({ length: 8 }, () => "Test Note");
+
 const DATA_CHANGES_621: { changeDate: string; description: string; userId: string }[] = [
   { changeDate: "03/06/2026 07:36:30", description: "Field PAYE-Cum Free Pay for Ref line 3 was inserted with value: 2096.52.",   userId: "UAT5" },
   { changeDate: "03/06/2026 07:36:30", description: "Field PAYE-Cum Instalments for Ref line 3 was inserted with value: 200.",    userId: "UAT5" },
@@ -227,7 +240,7 @@ export function DiaryAuditTab() {
   const [needsOpen, setNeedsOpen] = useState(false);
   const [cedingOpen, setCedingOpen] = useState(false);
   const [diary, setDiary] = useState<DiaryRow[]>(
-    isPlan87 ? PLAN_87_DIARY : isPlan84 ? PLAN_84_DIARY : isPlan90 ? PLAN_90_DIARY : isPlan51 ? PLAN_51_DIARY : isPlan83 ? PLAN_83_DIARY : isPlan621 ? PLAN_621_DIARY : isPlan76 ? PLAN_76_DIARY : isPlan62a ? PLAN_62a_DIARY : isPlan611 ? PLAN_611_DIARY : isPlan52 ? [] : isPlan61a ? [] : INITIAL_DIARY,
+    isPlan87 ? PLAN_87_DIARY : isPlan84 ? PLAN_84_DIARY : isPlan90 ? PLAN_90_DIARY : isPlan51 ? PLAN_51_DIARY : isPlan83 ? PLAN_83_DIARY : isPlan621 ? PLAN_621_DIARY : isPlan76 ? PLAN_76_DIARY : isPlan62a ? PLAN_62a_DIARY : isPlan611 ? PLAN_611_DIARY : isPlan52 ? [] : isPlan61a ? PLAN_61a_DIARY : INITIAL_DIARY,
   );
   const [selectedRef, setSelectedRef] = useState<number | null>(null);
   const [editConfirmOpen, setEditConfirmOpen] = useState(false);
@@ -425,7 +438,7 @@ export function DiaryAuditTab() {
                   </tr>
                 </thead>
                 <tbody>
-                  {(isPlan0 || isPlan87 ? [] : isPlan84 ? AUDIT_84 : isPlan90 ? AUDIT_90 : isPlan51 ? AUDIT_51 : isPlan83 ? AUDIT_83 : isPlan621 ? AUDIT_621 : isPlan76 ? AUDIT_76 : isPlan62a ? AUDIT_62a : isPlan611 ? AUDIT_611 : isPlan52 ? AUDIT_52 : AUDIT).map((line, i) => {
+                  {(isPlan0 || isPlan87 ? [] : isPlan84 ? AUDIT_84 : isPlan90 ? AUDIT_90 : isPlan51 ? AUDIT_51 : isPlan83 ? AUDIT_83 : isPlan621 ? AUDIT_621 : isPlan76 ? AUDIT_76 : isPlan62a ? AUDIT_62a : isPlan611 ? AUDIT_611 : isPlan52 ? AUDIT_52 : isPlan61a ? AUDIT_61a : AUDIT).map((line, i) => {
                     const m = line.match(
                       /^(.*?)\s+by\s+(\S+)\s+on\s+(\S+)\s+at\s+(\S+)\s*$/,
                     );

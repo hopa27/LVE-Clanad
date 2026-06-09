@@ -242,6 +242,26 @@ const DATA_CHANGES_83: { changeDate: string; description: string; userId: string
   { changeDate: "08/09/2017 11:29:16", description: "Field PAYE-Ref for Ref line 28 was inserted with value: 28.",                           userId: "LOPVB" },
 ];
 
+const PLAN_80_DIARY: DiaryRow[] = [
+  { ref: 10, type: "Quote",   notes: "is var 13 ok?",                                         created: "09/03/2010", by: "LOPHK",  due: "23/03/2010", completed: "22/09/2015", byCompleted: "CPUBW" },
+  { ref: 7,  type: "Misc",    notes: "IFA email address - sbhundia@hotmail.com",               created: "18/02/2010", by: "LONLM",  due: "25/02/2010", completed: "10/03/2010", byCompleted: "LOPJT1" },
+  { ref: 5,  type: "Misc",    notes: "***OPTIONS - L&G***",                                    created: "18/02/2010", by: "LONLM",  due: "25/02/2010", completed: "03/03/2010", byCompleted: "LOPVL" },
+  { ref: 3,  type: "Misc",    notes: "Confirmation of transfer - Legal & General",             created: "18/02/2010", by: "LONLM",  due: "25/02/2010", completed: "03/03/2010", byCompleted: "LOPVL" },
+  { ref: 1,  type: "Cheques", notes: "Chase for application cheques of Legal & General",       created: "18/02/2010", by: "LONLM",  due: "11/03/2010", completed: "03/03/2010", byCompleted: "LOPVL" },
+  { ref: 6,  type: "Misc",    notes: "***OPTIONS - GUARDIAN FINANCIAL SERVICES***",            created: "18/02/2010", by: "LONLM",  due: "25/02/2010", completed: "03/03/2010", byCompleted: "LOPRXS" },
+  { ref: 9,  type: "Misc",    notes: "ignore",                                                 created: "01/03/2010", by: "LOPRXS", due: "08/03/2010", completed: "03/03/2010", byCompleted: "LOPRXS" },
+  { ref: 8,  type: "Cheques", notes: "ignore",                                                 created: "01/03/2010", by: "LOPRXS", due: "08/03/2010", completed: "03/03/2010", byCompleted: "LOPRXS" },
+  { ref: 4,  type: "Misc",    notes: "CQR - Guardian",                                        created: "18/02/2010", by: "LONLM",  due: "08/03/2010", completed: "01/03/2010", byCompleted: "LOPRXS" },
+  { ref: 2,  type: "Cheques", notes: "Chase for app chq Guardian",                            created: "18/02/2010", by: "LONLM",  due: "11/03/2010", completed: "01/03/2010", byCompleted: "LOPRXS" },
+];
+
+const AUDIT_80 = Array.from({ length: 7 }, () => "Test Note");
+
+const DATA_CHANGES_80: { changeDate: string; description: string; userId: string }[] = [
+  { changeDate: "21/02/2013 11:43:04", description: "Field Installments-Remaining was changed from 1 to .",          userId: "CPUBW" },
+  { changeDate: "11/02/2013 11:36:11", description: "Field Next Payment Due was changed from 26/02/2013 to .",       userId: "CPUBW" },
+];
+
 const DATA_CHANGES_84: { changeDate: string; description: string; userId: string }[] = [
   { changeDate: "24/04/2018 08:48:47", description: "Field Annuities-Gross Balance was changed from 1294 to 1186.17.",                userId: "LOPJSH" },
   { changeDate: "24/04/2018 08:48:47", description: "Field Installments-Remaining was changed from 12 to 11.",                       userId: "LOPJSH" },
@@ -281,6 +301,7 @@ export function DiaryAuditTab() {
   const isPlan51  = planCode === "51";
   const isPlan83  = planCode === "83";
   const isPlan82  = planCode === "82";
+  const isPlan80  = planCode === "80";
   const isPlan621 = planCode === "621";
   const isPlan76  = planCode === "76";
   const isPlan62a = planCode === "62a";
@@ -292,7 +313,7 @@ export function DiaryAuditTab() {
   const [needsOpen, setNeedsOpen] = useState(false);
   const [cedingOpen, setCedingOpen] = useState(false);
   const [diary, setDiary] = useState<DiaryRow[]>(
-    isPlan87 ? PLAN_87_DIARY : isPlan84 ? PLAN_84_DIARY : isPlan90 ? PLAN_90_DIARY : isPlan51 ? PLAN_51_DIARY : isPlan82 ? PLAN_82_DIARY : isPlan83 ? PLAN_83_DIARY : isPlan621 ? PLAN_621_DIARY : isPlan76 ? PLAN_76_DIARY : isPlan62a ? PLAN_62a_DIARY : isPlan611 ? PLAN_611_DIARY : isPlan52 ? [] : isPlan61a ? PLAN_61a_DIARY : INITIAL_DIARY,
+    isPlan87 ? PLAN_87_DIARY : isPlan84 ? PLAN_84_DIARY : isPlan90 ? PLAN_90_DIARY : isPlan51 ? PLAN_51_DIARY : isPlan82 ? PLAN_82_DIARY : isPlan80 ? PLAN_80_DIARY : isPlan83 ? PLAN_83_DIARY : isPlan621 ? PLAN_621_DIARY : isPlan76 ? PLAN_76_DIARY : isPlan62a ? PLAN_62a_DIARY : isPlan611 ? PLAN_611_DIARY : isPlan52 ? [] : isPlan61a ? PLAN_61a_DIARY : INITIAL_DIARY,
   );
   const [selectedRef, setSelectedRef] = useState<number | null>(null);
   const [editConfirmOpen, setEditConfirmOpen] = useState(false);
@@ -490,7 +511,7 @@ export function DiaryAuditTab() {
                   </tr>
                 </thead>
                 <tbody>
-                  {(isPlan0 || isPlan87 ? [] : isPlan84 ? AUDIT_84 : isPlan90 ? AUDIT_90 : isPlan51 ? AUDIT_51 : isPlan82 ? AUDIT_82 : isPlan83 ? AUDIT_83 : isPlan621 ? AUDIT_621 : isPlan76 ? AUDIT_76 : isPlan62a ? AUDIT_62a : isPlan611 ? AUDIT_611 : isPlan52 ? AUDIT_52 : isPlan61a ? AUDIT_61a : AUDIT).map((line, i) => {
+                  {(isPlan0 || isPlan87 ? [] : isPlan84 ? AUDIT_84 : isPlan90 ? AUDIT_90 : isPlan51 ? AUDIT_51 : isPlan82 ? AUDIT_82 : isPlan80 ? AUDIT_80 : isPlan83 ? AUDIT_83 : isPlan621 ? AUDIT_621 : isPlan76 ? AUDIT_76 : isPlan62a ? AUDIT_62a : isPlan611 ? AUDIT_611 : isPlan52 ? AUDIT_52 : isPlan61a ? AUDIT_61a : AUDIT).map((line, i) => {
                     const m = line.match(
                       /^(.*?)\s+by\s+(\S+)\s+on\s+(\S+)\s+at\s+(\S+)\s*$/,
                     );
@@ -542,6 +563,14 @@ export function DiaryAuditTab() {
                     ))
                   : isPlan82
                   ? []
+                  : isPlan80
+                  ? DATA_CHANGES_80.map((r, i) => (
+                      <tr key={i}>
+                        <td className="!px-4 whitespace-nowrap">{r.changeDate}</td>
+                        <td className="!px-4">{r.description}</td>
+                        <td className="!px-4 whitespace-nowrap">{r.userId}</td>
+                      </tr>
+                    ))
                   : isPlan83
                   ? DATA_CHANGES_83.map((r, i) => (
                       <tr key={i}>

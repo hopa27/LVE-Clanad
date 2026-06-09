@@ -144,6 +144,16 @@ const PLAN_62a_DIARY: DiaryRow[] = [
 
 const AUDIT_62a = Array.from({ length: 10 }, () => "Test Note");
 
+const PLAN_611_DIARY: DiaryRow[] = [
+  { ref: 5, type: "Misc",     notes: "Policy Owner",                              created: "31/01/2008", by: "LOPKXB", due: "14/02/2008", completed: "", byCompleted: "" },
+  { ref: 4, type: "Misc",     notes: "LTA %",                                     created: "31/01/2008", by: "LOPKXB", due: "14/02/2008", completed: "", byCompleted: "" },
+  { ref: 3, type: "App Form", notes: "Dec D4.2 signed by NU/dec not signed",      created: "31/01/2008", by: "LOPKXB", due: "14/02/2008", completed: "", byCompleted: "" },
+  { ref: 2, type: "Cheques",  notes: "CHQ Correspondence - NU",                   created: "31/01/2008", by: "LOPKXB", due: "14/02/2008", completed: "", byCompleted: "" },
+  { ref: 1, type: "Cheques",  notes: "Chase for application cheques of Norwich Union", created: "31/01/2008", by: "LOPKXB", due: "20/03/2008", completed: "", byCompleted: "" },
+];
+
+const AUDIT_611 = Array.from({ length: 4 }, () => "Test Note");
+
 const DATA_CHANGES_621: { changeDate: string; description: string; userId: string }[] = [
   { changeDate: "03/06/2026 07:36:30", description: "Field PAYE-Cum Free Pay for Ref line 3 was inserted with value: 2096.52.",   userId: "UAT5" },
   { changeDate: "03/06/2026 07:36:30", description: "Field PAYE-Cum Instalments for Ref line 3 was inserted with value: 200.",    userId: "UAT5" },
@@ -214,7 +224,7 @@ export function DiaryAuditTab() {
   const [needsOpen, setNeedsOpen] = useState(false);
   const [cedingOpen, setCedingOpen] = useState(false);
   const [diary, setDiary] = useState<DiaryRow[]>(
-    isPlan87 ? PLAN_87_DIARY : isPlan84 ? PLAN_84_DIARY : isPlan90 ? PLAN_90_DIARY : isPlan51 ? PLAN_51_DIARY : isPlan83 ? PLAN_83_DIARY : isPlan621 ? PLAN_621_DIARY : isPlan76 ? PLAN_76_DIARY : isPlan62a ? PLAN_62a_DIARY : isPlan611 ? PLAN_51_DIARY : INITIAL_DIARY,
+    isPlan87 ? PLAN_87_DIARY : isPlan84 ? PLAN_84_DIARY : isPlan90 ? PLAN_90_DIARY : isPlan51 ? PLAN_51_DIARY : isPlan83 ? PLAN_83_DIARY : isPlan621 ? PLAN_621_DIARY : isPlan76 ? PLAN_76_DIARY : isPlan62a ? PLAN_62a_DIARY : isPlan611 ? PLAN_611_DIARY : INITIAL_DIARY,
   );
   const [selectedRef, setSelectedRef] = useState<number | null>(null);
   const [editConfirmOpen, setEditConfirmOpen] = useState(false);
@@ -412,7 +422,7 @@ export function DiaryAuditTab() {
                   </tr>
                 </thead>
                 <tbody>
-                  {(isPlan0 || isPlan87 ? [] : isPlan84 ? AUDIT_84 : isPlan90 ? AUDIT_90 : isPlan51 ? AUDIT_51 : isPlan83 ? AUDIT_83 : isPlan621 ? AUDIT_621 : isPlan76 ? AUDIT_76 : isPlan62a ? AUDIT_62a : isPlan611 ? AUDIT_51 : AUDIT).map((line, i) => {
+                  {(isPlan0 || isPlan87 ? [] : isPlan84 ? AUDIT_84 : isPlan90 ? AUDIT_90 : isPlan51 ? AUDIT_51 : isPlan83 ? AUDIT_83 : isPlan621 ? AUDIT_621 : isPlan76 ? AUDIT_76 : isPlan62a ? AUDIT_62a : isPlan611 ? AUDIT_611 : AUDIT).map((line, i) => {
                     const m = line.match(
                       /^(.*?)\s+by\s+(\S+)\s+on\s+(\S+)\s+at\s+(\S+)\s*$/,
                     );
@@ -481,6 +491,8 @@ export function DiaryAuditTab() {
                   : isPlan76
                   ? []
                   : isPlan62a
+                  ? []
+                  : isPlan611
                   ? []
                   : (isPlan0 || isPlan87 || isPlan90 ? [] : AUDIT).map((line, i) => {
                       const m = line.match(

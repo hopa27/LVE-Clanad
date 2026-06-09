@@ -266,6 +266,138 @@ function Plan76ContactsLayout() {
   );
 }
 
+function Plan76zContactsLayout() {
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      {/* Annuitant */}
+      <Section title="Annuitant">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3">
+          <Field label="Corres Name:"><TextInput value="Testmybabihd" /></Field>
+          <Field label="Salutation:"><TextInput value="Testmybabihd" /></Field>
+        </div>
+        <Field label="Address:">
+          <div className="flex items-start gap-2">
+            <div className="flex-1 min-w-0">
+              <ConnectedAddress
+                lines={[
+                  { placeholder: "Line 1" },
+                  { placeholder: "Line 2" },
+                  { placeholder: "Line 3" },
+                  { placeholder: "Line 4" },
+                  { placeholder: "Line 5" },
+                ]}
+                initial={["Reading", "", "Reading", "Avonmouth", "Leicester"]}
+              />
+            </div>
+            <ClearBtn />
+          </div>
+        </Field>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3">
+          <Field label="Postcode:"><TextInput value="QU99 9AB" /></Field>
+          <Field label="Tel.:"><TextInput value="01632 650888" /></Field>
+        </div>
+      </Section>
+
+      {/* Power of Attorney */}
+      <Section title="Power of Attorney">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3">
+          <Field label="Corres Name:"><TextInput value="Testmybabihd" /></Field>
+          <Field label="Salutation:"><TextInput value="Testmybabihd" /></Field>
+        </div>
+        <Field label="Co. Name:"><TextInput value="Mr S L Kinsey" /></Field>
+        <Field label="Address:">
+          <div className="flex items-start gap-2">
+            <div className="flex-1 min-w-0">
+              <ConnectedAddress
+                lines={[
+                  { placeholder: "Line 1" },
+                  { placeholder: "Line 2" },
+                  { placeholder: "Line 3" },
+                  { placeholder: "Line 4" },
+                  { placeholder: "Line 5" },
+                ]}
+                initial={["Queensferry", "Verwood", "Queensferry", "", "Leicester"]}
+              />
+            </div>
+            <ClearBtn />
+          </div>
+        </Field>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3">
+          <Field label="Postcode:"><TextInput value="EX99 9AB" /></Field>
+          <Field label="Tel.:"><TextInput value="01632529739" /></Field>
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3">
+          <Field label="Relationship:"><TextInput value="Son" /></Field>
+          <Field label="POA Received?:"><TextInput value="Y" disabled /></Field>
+        </div>
+      </Section>
+
+      {/* Care Provider */}
+      <Section title="Care Provider">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3">
+          <Field label="Corres Name:"><TextInput value="Testmsbabihd" /></Field>
+          <Field label="Salutation:"><TextInput value="Testmsbabihd" /></Field>
+        </div>
+        <Field label="Prov. Name:"><TextInput value="Tabley House Nursing" /></Field>
+        <Field label="Address:">
+          <div className="flex items-start gap-2">
+            <div className="flex-1 min-w-0">
+              <ConnectedAddress
+                lines={[
+                  { placeholder: "Line 1" },
+                  { placeholder: "Line 2" },
+                  { placeholder: "Line 3" },
+                  { placeholder: "Line 4" },
+                  { placeholder: "Line 5" },
+                ]}
+                initial={["Reading", "Avonmouth", "", "", "Leicester"]}
+              />
+            </div>
+            <ClearBtn />
+          </div>
+        </Field>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3">
+          <Field label="Postcode:"><TextInput value="QU99 9AB" /></Field>
+          <Field label="Tel.:"><TextInput value="01632650888" /></Field>
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3">
+          <Field label="Provider ID:"><TextInput value="000018823" /></Field>
+          <Field label="ContractReceived?:"><TextInput value="Y" disabled /></Field>
+        </div>
+      </Section>
+
+      {/* Applicant */}
+      <Section title="Applicant">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3">
+          <Field label="Corres Name:"><TextInput value="Testbabihd" /></Field>
+          <Field label="Salutation:"><TextInput value="Testbabihd" /></Field>
+        </div>
+        <Field label="Address:">
+          <div className="flex items-start gap-2">
+            <div className="flex-1 min-w-0">
+              <ConnectedAddress
+                lines={[
+                  { placeholder: "Line 1" },
+                  { placeholder: "Line 2" },
+                  { placeholder: "Line 3" },
+                  { placeholder: "Line 4" },
+                  { placeholder: "Line 5" },
+                ]}
+                initial={["", "", "", "", ""]}
+              />
+            </div>
+            <ClearBtn />
+          </div>
+        </Field>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3">
+          <Field label="Postcode:"><TextInput value="" /></Field>
+          <Field label="Tel.:"><TextInput value="" /></Field>
+        </div>
+      </Section>
+    </div>
+  );
+}
+
 function Plan83ContactsLayout() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
@@ -385,6 +517,7 @@ export function ContactsTab() {
   const isPlan83 = planCode === "83";
   const isPlan82 = planCode === "82";
   const isPlan76 = planCode === "76";
+  const isPlan76z = planCode === "76z";
 
   if (isPlan83 || isPlan82) {
     return <Plan83ContactsLayout />;
@@ -392,6 +525,10 @@ export function ContactsTab() {
 
   if (isPlan76) {
     return <Plan76ContactsLayout />;
+  }
+
+  if (isPlan76z) {
+    return <Plan76zContactsLayout />;
   }
 
   return (

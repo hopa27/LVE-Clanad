@@ -163,7 +163,8 @@ const PLAN_61a_DIARY: DiaryRow[] = [
   { ref: 4, type: "Beneficiary (DOB)",       notes: "Beneficiary date of birth",            created: "22/12/2011", by: "SYSANN", due: "21/01/2012", completed: "22/12/2011", byCompleted: "LOPNB" },
   { ref: 7, type: "Marriage Certificate",    notes: "Marriage Certificate",                 created: "22/12/2011", by: "SYSANN", due: "21/01/2012", completed: "22/12/2011", byCompleted: "LOPNB" },
   { ref: 8, type: "Overpayment",             notes: "Return of overpayment",                created: "22/12/2011", by: "SYSANN", due: "21/01/2012", completed: "22/12/2011", byCompleted: "LOPNB" },
-  { ref: 2, type: "Beneficiary (NINO)",      notes: "Beneficiary NI Number",                created: "22/12/2011", by: "SYSANN", due: "21/01/2012", completed: "22/12/2011", byCompleted: "LOPNB" },
+  { ref: 2, type: "Beneficiary (NINO)",       notes: "Beneficiary NI Number",              created: "22/12/2011", by: "SYSANN", due: "21/01/2012", completed: "22/12/2011", byCompleted: "LOPNB" },
+  { ref: 1, type: "Beneficiary (Name & Add)", notes: "Beneficiary name & address",         created: "22/12/2011", by: "SYSANN", due: "21/01/2012", completed: "22/12/2011", byCompleted: "LOPNB" },
 ];
 
 const AUDIT_61a = Array.from({ length: 8 }, () => "Test Note");

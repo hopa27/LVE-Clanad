@@ -71,6 +71,23 @@ const ROWS_83: string[][] = PLAN_83_ROWS.map(([status, stmtDate, annivDate]) => 
   "No", "0", "0", "0", "0",
 ]);
 
+const PLAN_82_ROWS: [string, string, string][] = [
+  ["A", "31/08/2011", "28/09/2011"],
+  ["A", "02/09/2012", "28/09/2012"],
+  ["A", "01/09/2013", "28/09/2013"],
+  ["A", "31/08/2014", "28/09/2014"],
+];
+
+const ROWS_82: string[][] = PLAN_82_ROWS.map(([status, stmtDate, annivDate]) => [
+  "Prot Pre 97", status, stmtDate, annivDate,
+  "£0.00", "£0.00", "Fixed",
+  "0", "n/a", "n/a",
+  "n/a", "n/a", "n/a",
+  "n/a", "n/a", "n/a",
+  "28/09/2015", "1394.32", "0",
+  "No", "0", "0", "0", "0",
+]);
+
 export function IncreaseHistoryTab() {
   const { planCode } = usePlanCode();
   const isPlan0   = planCode === "0";
@@ -90,9 +107,11 @@ export function IncreaseHistoryTab() {
     ? []
     : isPlan84
       ? ROWS_84
-      : (isPlan82 || isPlan83)
+      : isPlan83
         ? ROWS_83
-        : [ROW_DEFAULT];
+        : isPlan82
+          ? ROWS_82
+          : [ROW_DEFAULT];
 
   return (
     <div className="space-y-4">

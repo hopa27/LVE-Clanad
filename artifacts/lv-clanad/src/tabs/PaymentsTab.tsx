@@ -90,6 +90,27 @@ const PAYMENT_HISTORY_83: Row[] = [
   { date: "14/12/2016", gross: "702", cap: "", tax: "", postAdj: "", net: "", method: "B", reason: "PROC",  bacs: "13/12/2016", hash: "/-BB" },
 ];
 
+const PAYMENT_HISTORY_61a: Row[] = [
+  { date: "19/12/2011", gross: "56.41", cap: "0", tax: "-11.2", postAdj: "0", net: "45.21", method: "B", reason: "PROC", bacs: "16/12/2011", hash: "" },
+  { date: "27/01/2012", gross: "56.41", cap: "0", tax: "0",     postAdj: "0", net: "56.41", method: "B", reason: "",     bacs: "",           hash: "" },
+  { date: "19/02/2012", gross: "56.41", cap: "0", tax: "0",     postAdj: "0", net: "56.41", method: "B", reason: "PROC", bacs: "16/02/2012", hash: "" },
+  { date: "19/03/2012", gross: "56.41", cap: "0", tax: "0",     postAdj: "0", net: "56.41", method: "B", reason: "PROC", bacs: "16/03/2012", hash: "" },
+  { date: "19/04/2012", gross: "56.41", cap: "0", tax: "-11.2", postAdj: "0", net: "45.21", method: "B", reason: "PROC", bacs: "18/04/2012", hash: "" },
+  { date: "19/05/2012", gross: "56.41", cap: "0", tax: "-11.2", postAdj: "0", net: "45.21", method: "B", reason: "PROC", bacs: "17/05/2012", hash: "" },
+  { date: "19/06/2012", gross: "56.41", cap: "0", tax: "-11.4", postAdj: "0", net: "45.01", method: "B", reason: "PROC", bacs: "18/06/2012", hash: "" },
+  { date: "19/07/2012", gross: "56.41", cap: "0", tax: "-11.2", postAdj: "0", net: "45.21", method: "B", reason: "PROC", bacs: "18/07/2012", hash: "" },
+  { date: "19/08/2012", gross: "56.45", cap: "0", tax: "-11.4", postAdj: "0", net: "45.05", method: "B", reason: "PROC", bacs: "16/08/2012", hash: "" },
+];
+
+const TAX_HISTORY_61a: Row[] = [
+  { date: "19/12/2011", code: "BR",    n: "9", gross: "56.41", cum: "56.41",  free: "0",      taxable: "56.41",   tax: "-11.2", ytd: "-11.2" },
+  { date: "27/01/2012", code: "747L*", n: "1", gross: "56.41", cum: "112.82", free: "623.25", taxable: "-566.84", tax: "0",     ytd: "-11.2" },
+  { date: "19/02/2012", code: "747L*", n: "1", gross: "56.41", cum: "169.23", free: "623.26", taxable: "-566.85", tax: "0",     ytd: "-11.2" },
+  { date: "19/03/2012", code: "747L*", n: "1", gross: "56.41", cum: "225.64", free: "623.26", taxable: "-566.85", tax: "0",     ytd: "-11.2" },
+  { date: "19/04/2012", code: "BR",    n: "1", gross: "56.41", cum: "56.41",  free: "0",      taxable: "56.41",   tax: "-11.2", ytd: "-11.2" },
+  { date: "19/05/2012", code: "BR",    n: "2", gross: "56.41", cum: "112.82", free: "0",      taxable: "112.82",  tax: "-11.2", ytd: "-22.4" },
+];
+
 const PAYMENT_HISTORY_621: Row[] = [
   { date: "03/06/2026", gross: "200",  cap: "0", tax: "0", postAdj: "0", net: "200",  method: "B", reason: "MANUAL", bacs: "02/06/2026", hash: "/LB4" },
   { date: "03/06/2026", gross: "-200", cap: "0", tax: "0", postAdj: "0", net: "-200", method: "R", reason: "RETURN", bacs: "",           hash: ""     },
@@ -159,7 +180,9 @@ export function PaymentsTab() {
     ? PAYMENT_HISTORY_621
     : isPlan76
     ? PAYMENT_HISTORY_76
-    : isPlan62a || isPlan611 || isPlan52 || isPlan61a
+    : isPlan61a
+    ? PAYMENT_HISTORY_61a
+    : isPlan62a || isPlan611 || isPlan52
     ? []
     : isPlan0 || isPlan87
     ? []
@@ -176,7 +199,9 @@ export function PaymentsTab() {
     ? TAX_HISTORY_621
     : isPlan76
     ? TAX_HISTORY_76
-    : isPlan62a || isPlan611 || isPlan52 || isPlan61a
+    : isPlan61a
+    ? TAX_HISTORY_61a
+    : isPlan62a || isPlan611 || isPlan52
     ? []
     : isPlan0 || isPlan87
     ? []
@@ -410,7 +435,41 @@ export function PaymentsTab() {
               <Field label="Nth Inst:"><TextInput value="" disabled /></Field>
             </div>
           </div>
-        ) : isPlan611 || isPlan61a ? (
+        ) : isPlan61a ? (
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-8">
+            <div>
+              <Field label="Premium:"><TextInput value="6803.69" disabled /></Field>
+              <Field label="Tax Free Cash:"><TextInput value="0" disabled /></Field>
+              <Field label={<span className="text-[#d72714]">Total:</span>}>
+                <TextInput value="6803.69" disabled className="!text-[#d72714] underline" />
+              </Field>
+              <Field label="1st Annuitants Gross:"><TextInput value="677" disabled /></Field>
+              <Field label="2nd Annuitants Gross:"><TextInput value="0" disabled /></Field>
+            </div>
+            <div>
+              <Field label=" "><div className="h-[44px]" /></Field>
+              <Field label=" "><div className="h-[44px]" /></Field>
+              <Field label="Taxable pay:"><TextInput value="282.13" disabled /></Field>
+              <Field label="Cumulative Free Pay:"><TextInput value="0" disabled /></Field>
+            </div>
+            <div>
+              <Field label="Cumulative Instal:"><TextInput value="282.13" disabled /></Field>
+              <Field label="BAL Gross Annuity:"><TextInput value="0" disabled /></Field>
+              <Field label="PAYE Tax Due To Date:"><TextInput value="-56.4" disabled /></Field>
+              <Field label="PAYE Tax Deduction:"><TextInput value="-11.4" disabled /></Field>
+            </div>
+            <div>
+              <Field label="Next Anniversary:">
+                <DatePicker value="19/09/2018" placeholder="" disabled />
+              </Field>
+              <Field label="Next Payment Due:">
+                <DatePicker value="" placeholder="" disabled />
+              </Field>
+              <Field label="Inst Remaining:"><TextInput value="0" disabled /></Field>
+              <Field label="Nth Inst:"><TextInput value="5" disabled /></Field>
+            </div>
+          </div>
+        ) : isPlan611 ? (
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-8">
             <div>
               <Field label="Premium:"><TextInput value="3670.56" disabled /></Field>

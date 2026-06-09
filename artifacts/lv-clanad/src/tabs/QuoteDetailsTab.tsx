@@ -73,6 +73,16 @@ const QUOTE_ROWS_76 = [
   },
 ];
 
+const QUOTE_ROWS_611 = [
+  {
+    type: "Std Pre 97", premium: "£3,670.56", tfc: "", original: "£169.00",
+    escType: "Fixed", escRate: "0", currentInc: "", spousePct: "100",
+    spouseInc: "£169.00", guarantee: "None", lastPay: "", overlap: "No",
+    valProt: "", taxFree: "", maxFree: "F",
+    valProtFlag: "F", lsConvert: "", planProt: "", dependant: "Named",
+  },
+];
+
 const QUOTE_ROWS_62a = [
   {
     type: "Std Pre 97", premium: "£144,760.00", tfc: "£36,190.00", original: "£7,499.00",
@@ -138,7 +148,7 @@ export function QuoteDetailsTab() {
     : isPlan62a
     ? QUOTE_ROWS_62a
     : isPlan611
-    ? QUOTE_ROWS_51
+    ? QUOTE_ROWS_611
     : QUOTE_ROWS;
 
   return (
@@ -241,7 +251,7 @@ export function QuoteDetailsTab() {
           <>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-8">
               <div>
-                <Field label="Life Type:"><TextInput value={isPlan87 || isPlan51 || isPlan83 || isPlan621 || isPlan62a || isPlan611 ? "M" : isPlan90 ? "" : "F"} disabled /></Field>
+                <Field label="Life Type:"><TextInput value={isPlan611 ? "FM" : isPlan87 || isPlan51 || isPlan83 || isPlan621 || isPlan62a ? "M" : isPlan90 ? "" : "F"} disabled /></Field>
                 <Field label="Plan Type:">
                   {isPlan84 ? (
                     <div className="grid grid-cols-2 gap-2">
@@ -252,8 +262,8 @@ export function QuoteDetailsTab() {
                     <TextInput value={isPlan90 ? "MCP" : isPlan51 || isPlan611 ? "CPA" : isPlan83 ? "PRP" : isPlan621 || isPlan62a ? "PPA" : isPlan76 ? "ICFP" : "FTA"} disabled />
                   )}
                 </Field>
-                <Field label="Payments:"><TextInput value={isPlan83 || isPlan76 ? "AD" : "AR"} disabled /></Field>
-                <Field label="Frequency:"><TextInput value={isPlan87 || isPlan62a ? "1" : isPlan84 || isPlan90 || isPlan83 || isPlan621 || isPlan76 ? "12" : isPlan51 || isPlan611 ? "4" : "2"} disabled /></Field>
+                <Field label="Payments:"><TextInput value={isPlan83 || isPlan76 || isPlan611 ? "AD" : "AR"} disabled /></Field>
+                <Field label="Frequency:"><TextInput value={isPlan87 || isPlan62a ? "1" : isPlan84 || isPlan90 || isPlan83 || isPlan621 || isPlan76 || isPlan611 ? "12" : isPlan51 ? "4" : "2"} disabled /></Field>
                 {isPlan76 && (
                   <Field label="DMT:"><TextInput value="0" disabled /></Field>
                 )}
@@ -329,13 +339,13 @@ export function QuoteDetailsTab() {
               )}
             </div>
 
-            {!isPlan90 && !isPlan83 && !isPlan76 && !isPlan611 && (
+            {!isPlan90 && !isPlan83 && !isPlan76 && (
             <Section title="LTA Details">
-              {isPlan51 ? (
+              {isPlan51 || isPlan611 ? (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
                   <div>
-                    <Field inline labelWidth={200} label="LTA% Crystallised:"><TextInput value="7.4" disabled /></Field>
-                    <Field inline labelWidth={200} label="Scheme Name:"><TextInput value="Zurich" /></Field>
+                    <Field inline labelWidth={200} label="LTA% Crystallised:"><TextInput value={isPlan611 ? "0" : "7.4"} disabled /></Field>
+                    <Field inline labelWidth={200} label="Scheme Name:"><TextInput value={isPlan611 ? "" : "Zurich"} /></Field>
                     <Field inline labelWidth={200} label="HMRC Scheme Number:"><TextInput value="" /></Field>
                   </div>
                   <div>

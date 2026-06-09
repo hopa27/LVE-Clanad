@@ -25,20 +25,20 @@ export function ApplicationDetailsTab() {
         <div>
           <Field label="Set Up Date:">
             <DatePicker
-              value={isPlan87 ? "15/05/2026" : isPlan84 ? "17/03/2010" : isPlan90 ? "25/06/2025" : isPlan51 ? "22/01/2008" : isPlan83 ? "27/07/2015" : isPlan621 ? "03/01/2008" : isPlan76 ? "21/01/2008" : isPlan62a ? "15/12/2010" : isPlan611 ? "01/09/2016" : ""}
+              value={isPlan87 ? "15/05/2026" : isPlan84 ? "17/03/2010" : isPlan90 ? "25/06/2025" : isPlan51 ? "22/01/2008" : isPlan83 ? "27/07/2015" : isPlan621 ? "03/01/2008" : isPlan76 ? "21/01/2008" : isPlan62a ? "15/12/2010" : isPlan611 ? "31/01/2008" : ""}
               placeholder={isCompact ? "" : "DBEditAPPLI"}
               disabled
             />
           </Field>
           <Field label={isPlan90 ? "MCP Start Date:" : "Received Date:"}>
             <DatePicker
-              value={isPlan84 ? "17/03/2010" : isPlan90 ? "25/06/2025" : isPlan51 ? "21/01/2008" : isPlan83 ? "24/07/2015" : isPlan621 ? "27/12/2007" : isPlan76 ? "18/01/2008" : isPlan62a ? "15/12/2010" : isPlan611 ? "28/08/2016" : ""}
+              value={isPlan84 ? "17/03/2010" : isPlan90 ? "25/06/2025" : isPlan51 ? "21/01/2008" : isPlan83 ? "24/07/2015" : isPlan621 ? "27/12/2007" : isPlan76 ? "18/01/2008" : isPlan62a ? "15/12/2010" : isPlan611 ? "30/01/2008" : ""}
               placeholder={isCompact ? "" : "DBEditAPPLIC"}
             />
           </Field>
           <Field label={isPlan90 ? "Payment Date:" : "Start Date:"}>
             <DatePicker
-              value={isPlan87 ? "15/05/2026" : isPlan84 ? "31/03/2010" : isPlan90 ? "28/05/2025" : isPlan51 ? "28/01/2008" : isPlan83 ? "14/08/2015" : isPlan621 ? "07/01/2008" : isPlan76 ? "01/01/2008" : isPlan62a ? "15/12/2010" : isPlan611 ? "01/11/2016" : ""}
+              value={isPlan87 ? "15/05/2026" : isPlan84 ? "31/03/2010" : isPlan90 ? "28/05/2025" : isPlan51 ? "28/01/2008" : isPlan83 ? "14/08/2015" : isPlan621 ? "07/01/2008" : isPlan76 ? "01/01/2008" : isPlan62a ? "15/12/2010" : isPlan611 ? "31/01/2008" : ""}
               placeholder={isCompact ? "" : "edtStartdate"}
               disabled={isPlan84 || isPlan90 || isPlan51 || isPlan83 || isPlan621 || isPlan76 || isPlan62a || isPlan611}
             />
@@ -63,7 +63,7 @@ export function ApplicationDetailsTab() {
           )}
           <Field label="IFA Payment Date:">
             <DatePicker
-              value={isPlan84 ? "13/04/2010 10" : isPlan90 ? "07/07/2025 07" : isPlan51 ? "05/02/2008 09" : isPlan83 ? "24/08/2015 10" : isPlan621 ? "22/01/2008 14" : isPlan76 ? "05/02/2008 09" : isPlan62a ? "" : isPlan611 ? "18/10/2016 11" : ""}
+              value={isPlan84 ? "13/04/2010 10" : isPlan90 ? "07/07/2025 07" : isPlan51 ? "05/02/2008 09" : isPlan83 ? "24/08/2015 10" : isPlan621 ? "22/01/2008 14" : isPlan76 ? "05/02/2008 09" : isPlan62a ? "" : isPlan611 ? "" : ""}
               placeholder={isCompact ? "" : "DBEdit13"}
               disabled={isPlan84 || isPlan90 || isPlan51 || isPlan83 || isPlan621 || isPlan76 || isPlan62a || isPlan611}
             />
@@ -108,7 +108,7 @@ export function ApplicationDetailsTab() {
           )}
           <Field label="Days Since Application:">
             <TextInput
-              value={isPlan87 ? "" : isPlan84 ? "5912" : isPlan90 ? "334" : isPlan51 ? "6707" : isPlan83 ? "3966" : isPlan621 ? "6738" : isPlan76 ? "6712" : isPlan62a ? "5654" : isPlan611 ? "3509" : "dbday"}
+              value={isPlan87 ? "" : isPlan84 ? "5912" : isPlan90 ? "334" : isPlan51 ? "6707" : isPlan83 ? "3966" : isPlan621 ? "6738" : isPlan76 ? "6712" : isPlan62a ? "5654" : isPlan611 ? "6705" : "dbday"}
               disabled
             />
           </Field>
@@ -205,7 +205,7 @@ export function ApplicationDetailsTab() {
           )}
           <Field label="Last amended by:">
             <TextInput
-              value={isPlan87 ? "SAIMEENAKSHINA" : isPlan84 ? "LOPVH" : isPlan90 ? "LV66664" : isPlan51 ? "LOPSL2" : isPlan83 ? "LV66656" : isPlan621 ? "LV67320" : isPlan76 ? "LOPNXP" : isPlan62a ? "LOPRM" : isPlan611 ? "LV66789" : "DBEdit18"}
+              value={isPlan87 ? "SAIMEENAKSHINA" : isPlan84 ? "LOPVH" : isPlan90 ? "LV66664" : isPlan51 ? "LOPSL2" : isPlan83 ? "LV66656" : isPlan621 ? "LV67320" : isPlan76 ? "LOPNXP" : isPlan62a ? "LOPRM" : isPlan611 ? "LOPKXB" : "DBEdit18"}
               disabled
             />
           </Field>
@@ -224,7 +224,7 @@ export function ApplicationDetailsTab() {
           </Field>
           <Field label="Paykey:">
             <TextInput
-              value={isPlan87 ? "1023693" : isPlan84 ? "899032" : isPlan90 ? "1018055" : isPlan51 ? "887324" : isPlan83 ? "956314" : isPlan621 ? "100004.1" : isPlan76 ? "887316" : isPlan62a ? "905319" : isPlan611 ? "912345" : "DBEdit20"}
+              value={isPlan87 ? "1023693" : isPlan84 ? "899032" : isPlan90 ? "1018055" : isPlan51 ? "887324" : isPlan83 ? "956314" : isPlan621 ? "100004.1" : isPlan76 ? "887316" : isPlan62a ? "905319" : isPlan611 ? "887439" : "DBEdit20"}
               disabled
             />
           </Field>
@@ -257,7 +257,7 @@ export function ApplicationDetailsTab() {
               />
             </Field>
             <Field label="Telephone:">
-              <TextInput value={isPlan87 ? "" : isPlan84 ? "01632 391651" : isPlan90 ? "" : isPlan51 ? "016324162140" : isPlan621 ? "01632 329 783" : isPlan76 ? "01632 532709" : isPlan62a ? "01632 830 033" : isPlan611 ? "01632 694 002" : "anntele"} />
+              <TextInput value={isPlan87 ? "" : isPlan84 ? "01632 391651" : isPlan90 ? "" : isPlan51 ? "016324162140" : isPlan621 ? "01632 329 783" : isPlan76 ? "01632 532709" : isPlan62a ? "01632 830 033" : isPlan611 ? "01632 741501" : "anntele"} />
             </Field>
             <Field label="E-mail:">
               <TextInput
@@ -292,7 +292,7 @@ export function ApplicationDetailsTab() {
                     : isPlan62a
                     ? ["26 Eastern Close", "Exeter", "Reading", "Jarrow", "Marshwood"]
                     : isPlan611
-                    ? ["5 Northern Road", "Reigate", "", "", ""]
+                    ? ["Kinson", "Verwood", "Marshwood", "Eastleigh", "Exeter"]
                     : ["phad1", "phad2", "phad3", "phad4", "phad5"]
                 }
               />

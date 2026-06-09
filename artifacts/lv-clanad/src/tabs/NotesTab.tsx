@@ -181,7 +181,25 @@ export function NotesTab() {
   }
   const isPlan611 = planCode === "611";
   const isPlan61a = planCode === "61a";
-  if (isPlan611 || isPlan61a) {
+  if (isPlan61a) {
+    const count = 7;
+    return (
+      <Section title={`Notes (${count})`} headerAction={<NoteButtons />}>
+        <div className="space-y-3 max-h-[620px] overflow-auto pr-1">
+          {Array.from({ length: count }).map((_, i) => (
+            <article key={i} className="relative bg-white rounded-[8px] border border-[#e0e0e0] overflow-hidden">
+              <div className="p-4">
+                <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#3d3d3d] leading-[1.6] m-0">
+                  Test Note
+                </pre>
+              </div>
+            </article>
+          ))}
+        </div>
+      </Section>
+    );
+  }
+  if (isPlan611) {
     const count = 4;
     return (
       <Section title={`Notes (${count})`} headerAction={<NoteButtons />}>

@@ -10,6 +10,7 @@ export function MaturitiesSurrenderTab() {
   const { planCode } = usePlanCode();
   const isPlan0 = planCode === "0";
   const isPlan83 = planCode === "83";
+  const isPlan82 = planCode === "82";
 
   if (isPlan0) {
     return (
@@ -197,21 +198,21 @@ export function MaturitiesSurrenderTab() {
         <Section title="Bank Details">
           <Field label="Type:">
             <SelectInput
-              value={isPlan83 ? "Maturity" : ""}
-              options={isPlan83 ? ["Maturity", "Surrender"] : ["", "Maturity", "Surrender"]}
-              disabled={isPlan83}
+              value={(isPlan82 || isPlan83) ? "Maturity" : ""}
+              options={(isPlan82 || isPlan83) ? ["Maturity", "Surrender"] : ["", "Maturity", "Surrender"]}
+              disabled={isPlan82 || isPlan83}
             />
           </Field>
-          <Field label="Bank sort code:"><TextInput value={isPlan83 ? "77-48-14" : "-  -"} /></Field>
-          <Field label="Bank account no:"><TextInput value={isPlan83 ? "24782346" : ""} /></Field>
-          <Field label="Bank account name:"><TextInput value={isPlan83 ? "Testnybggajc" : ""} /></Field>
-          <Field label="Bank name:"><TextInput value={isPlan83 ? "TSB, WINSFORD" : ""} disabled /></Field>
-          <Field label="Payment Ref:"><TextInput value={isPlan83 ? "INVENC123588" : ""} /></Field>
+          <Field label="Bank sort code:"><TextInput value={(isPlan82 || isPlan83) ? "77-48-14" : "-  -"} /></Field>
+          <Field label="Bank account no:"><TextInput value={(isPlan82 || isPlan83) ? "24782346" : ""} /></Field>
+          <Field label="Bank account name:"><TextInput value={isPlan82 ? "Testtrbbgeee" : isPlan83 ? "Testnybggajc" : ""} /></Field>
+          <Field label="Bank name:"><TextInput value={(isPlan82 || isPlan83) ? "TSB, WINSFORD" : ""} disabled /></Field>
+          <Field label="Payment Ref:"><TextInput value={isPlan82 ? "INVENC116444" : isPlan83 ? "INVENC123588" : ""} /></Field>
           <button
             type="button"
             className="lve-btn lve-btn-secondary lve-btn-sm mt-2"
             onClick={() => setBankModalOpen(true)}
-            disabled={!isPlan83}
+            disabled={!isPlan82 && !isPlan83}
           >
             <MdEdit size={14} /> Edit Bank Details
           </button>
@@ -219,23 +220,23 @@ export function MaturitiesSurrenderTab() {
 
         <Section title="Payment">
           <Field label="Claim Form Received:">
-            <DatePicker value={isPlan83 ? "19/08/2025" : ""} placeholder="" />
+            <DatePicker value={(isPlan82 || isPlan83) ? "19/08/2025" : ""} placeholder="" />
           </Field>
           <Field label="Nature of Payment:">
             <SelectInput
-              value={isPlan83 ? "Transfer" : ""}
-              options={isPlan83 ? ["Transfer", "Lump Sum", "Annuity"] : ["", "Lump Sum", "Annuity"]}
-              disabled={isPlan83}
+              value={(isPlan82 || isPlan83) ? "Transfer" : ""}
+              options={(isPlan82 || isPlan83) ? ["Transfer", "Lump Sum", "Annuity"] : ["", "Lump Sum", "Annuity"]}
+              disabled={isPlan82 || isPlan83}
             />
           </Field>
           <Field label="Payment Method:">
             <SelectInput
-              value={isPlan83 ? "T" : ""}
+              value={(isPlan82 || isPlan83) ? "T" : ""}
               options={["", "B", "C", "T"]}
             />
           </Field>
           <Field label="Payment Date:"><DatePicker value="" placeholder="" /></Field>
-          <Field label="Gross:"><TextInput value={isPlan83 ? "501.00" : ""} /></Field>
+          <Field label="Gross:"><TextInput value={(isPlan82 || isPlan83) ? "501.00" : ""} /></Field>
           <button
             type="button"
             className="lve-btn lve-btn-sm mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -249,12 +250,12 @@ export function MaturitiesSurrenderTab() {
       <div className="mb-1">
         <Field label="Maturity Destination:">
           <SelectInput
-            value={isPlan83 ? "Trustee" : ""}
+            value={(isPlan82 || isPlan83) ? "Trustee" : ""}
             options={["", "Client", "IFA", "Trustee", "Other"]}
           />
         </Field>
-        <Field label="Correspondance Name:"><TextInput value={isPlan83 ? "Testmnbggajc" : ""} /></Field>
-        <Field label="Salutation:"><TextInput value={isPlan83 ? "Testmnbggajc" : ""} /></Field>
+        <Field label="Correspondance Name:"><TextInput value={isPlan82 ? "Testmtrbbgeee" : isPlan83 ? "Testmnbggajc" : ""} /></Field>
+        <Field label="Salutation:"><TextInput value={isPlan82 ? "Testmtrbbgeee" : isPlan83 ? "Testmnbggajc" : ""} /></Field>
         <Field label="Telephone:"><TextInput value="" /></Field>
       </div>
 
@@ -268,15 +269,15 @@ export function MaturitiesSurrenderTab() {
               { placeholder: "Line 4" },
               { placeholder: "Line 5 (County)" },
             ]}
-            initial={isPlan83 ? ["Congleton", "Avonmouth", "Reading", "Verwood", ""] : ["", "", "", "", ""]}
+            initial={(isPlan82 || isPlan83) ? ["Congleton", "Avonmouth", "Reading", "Verwood", ""] : ["", "", "", "", ""]}
           />
         </Field>
-        <Field label="Postcode:"><TextInput value={isPlan83 ? "EX99 9AB" : ""} /></Field>
+        <Field label="Postcode:"><TextInput value={isPlan82 ? "QU99 9AB" : isPlan83 ? "EX99 9AB" : ""} /></Field>
         <Field label="Country:">
           <SelectInput
-            value={isPlan83 ? "United Kingdom" : ""}
+            value={(isPlan82 || isPlan83) ? "United Kingdom" : ""}
             options={["", "United Kingdom", "Ireland", "Other"]}
-            disabled={isPlan83}
+            disabled={isPlan82 || isPlan83}
           />
         </Field>
       </Section>

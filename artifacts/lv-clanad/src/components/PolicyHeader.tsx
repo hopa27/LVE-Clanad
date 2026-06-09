@@ -36,7 +36,7 @@ export function PolicyHeader() {
         <MdOpenInNew size={16} />
       </button>
 
-      {planCode === "87" || planCode === "84" || planCode === "90" || planCode === "51" || planCode === "83" || planCode === "621" || planCode === "76" || planCode === "62a" || planCode === "611" || planCode === "52" || planCode === "61a" ? (
+      {planCode === "87" || planCode === "84" || planCode === "90" || planCode === "51" || planCode === "83" || planCode === "82" || planCode === "621" || planCode === "76" || planCode === "62a" || planCode === "611" || planCode === "52" || planCode === "61a" ? (
         <div className="px-4 h-9 inline-flex items-center rounded-[8px] bg-[#006cf4] text-white font-['Livvic'] font-semibold text-sm">
           Liverpool Victoria Friendly Society Limited
         </div>
@@ -66,7 +66,7 @@ export function PolicyHeader() {
         <span className="truncate">{surname}</span>
       </div>
 
-      {planCode === "84" || planCode === "51" || planCode === "83" || planCode === "62a" || planCode === "611" || planCode === "61a" ? (
+      {planCode === "84" || planCode === "51" || planCode === "83" || planCode === "82" || planCode === "62a" || planCode === "611" || planCode === "61a" ? (
         <div className="px-3 h-9 inline-flex items-center rounded-[8px] bg-[#eaf5f8] text-[#0d2c41] font-['Mulish'] text-sm">
           Simultaneous Policies
         </div>
@@ -90,7 +90,7 @@ export function PolicyHeader() {
         <div className="px-4 h-9 inline-flex items-center rounded-[8px] bg-[#F4D9E8] text-[#710340] font-['Livvic'] font-semibold text-sm">
           MONTHLY CASH POLICY
         </div>
-      ) : planCode === "83" ? (
+      ) : planCode === "83" || planCode === "82" ? (
         <div className="px-4 h-9 inline-flex items-center rounded-[8px] bg-[#00B4C8] text-black font-['Livvic'] font-semibold text-sm">
           RETIREMENT ACCOUNT
         </div>

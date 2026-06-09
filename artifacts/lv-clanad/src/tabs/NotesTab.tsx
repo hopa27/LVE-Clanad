@@ -98,6 +98,7 @@ export function NotesTab() {
   const isPlan90 = planCode === "90";
   const isPlan51 = planCode === "51";
   const isPlan83  = planCode === "83";
+  const isPlan82  = planCode === "82";
   const isPlan621 = planCode === "621";
   const isPlan76  = planCode === "76";
   const isPlan62a = planCode === "62a";
@@ -155,7 +156,7 @@ export function NotesTab() {
       </Section>
     );
   }
-  if (isPlan83) {
+  if (isPlan83 || isPlan82) {
     const count = 6;
     return (
       <Section

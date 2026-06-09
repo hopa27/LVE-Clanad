@@ -432,7 +432,7 @@ export function Header({ title }: { title: string }) {
       }
       if (planCode === "87" && m.label === "Supervisor")
         return { ...m, options: SUPERVISOR_87 };
-      if (planCode === "83") {
+      if (planCode === "83" || planCode === "82") {
         if (m.label === "Options")    return { ...m, options: OPTIONS_84 };
         if (m.label === "Process")    return { ...m, options: PROCESS_83 };
         if (m.label === "Print")      return { ...m, options: PRINT_83 };

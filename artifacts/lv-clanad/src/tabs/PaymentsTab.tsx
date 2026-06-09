@@ -161,6 +161,7 @@ export function PaymentsTab() {
   const isPlan90  = planCode === "90";
   const isPlan51  = planCode === "51";
   const isPlan83  = planCode === "83";
+  const isPlan82  = planCode === "82";
   const isPlan621 = planCode === "621";
   const isPlan76  = planCode === "76";
   const isPlan62a = planCode === "62a";
@@ -174,7 +175,7 @@ export function PaymentsTab() {
     ? PAYMENT_HISTORY_90
     : isPlan51
     ? PAYMENT_HISTORY_51
-    : isPlan83
+    : (isPlan82 || isPlan83)
     ? PAYMENT_HISTORY_83
     : isPlan621
     ? PAYMENT_HISTORY_621
@@ -193,7 +194,7 @@ export function PaymentsTab() {
     ? TAX_HISTORY_90
     : isPlan51
     ? TAX_HISTORY_51
-    : isPlan83
+    : (isPlan82 || isPlan83)
     ? TAX_HISTORY_83
     : isPlan621
     ? TAX_HISTORY_621
@@ -311,7 +312,7 @@ export function PaymentsTab() {
               <Field label="PAYE Tax Deduction:"><TextInput value="-26.2" disabled /></Field>
             </div>
           </div>
-        ) : isPlan83 ? (
+        ) : (isPlan82 || isPlan83) ? (
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-8">
             <div>
               <Field label="Premium:"><TextInput value="75459.46" disabled /></Field>
@@ -589,7 +590,7 @@ export function PaymentsTab() {
               <tr>
                 <th>Pay Date</th>
                 <th>Gross</th>
-                {!isPlan83 && !isPlan76 && <><th>Cap Element</th><th>Tax</th><th>Post Adj</th><th>Net</th></>}
+                {!isPlan82 && !isPlan83 && !isPlan76 && <><th>Cap Element</th><th>Tax</th><th>Post Adj</th><th>Net</th></>}
                 <th>Method</th>
                 <th>Reason</th>
                 <th>BACS Date</th>
@@ -601,7 +602,7 @@ export function PaymentsTab() {
                 <tr key={i}>
                   <td>{row.date}</td>
                   <td>{row.gross}</td>
-                  {!isPlan83 && !isPlan76 && <><td>{row.cap}</td><td>{row.tax}</td><td>{row.postAdj}</td><td>{row.net}</td></>}
+                  {!isPlan82 && !isPlan83 && !isPlan76 && <><td>{row.cap}</td><td>{row.tax}</td><td>{row.postAdj}</td><td>{row.net}</td></>}
                   <td>{row.method}</td>
                   <td>{row.reason}</td>
                   <td>{row.bacs}</td>

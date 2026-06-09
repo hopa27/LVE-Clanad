@@ -11,6 +11,7 @@ export function ApplicationDetailsTab() {
   const isPlan90  = planCode === "90";
   const isPlan51  = planCode === "51";
   const isPlan83  = planCode === "83";
+  const isPlan82  = planCode === "82";
   const isPlan621 = planCode === "621";
   const isPlan76  = planCode === "76";
   const isPlan62a = planCode === "62a";
@@ -27,25 +28,25 @@ export function ApplicationDetailsTab() {
         <div>
           <Field label="Set Up Date:">
             <DatePicker
-              value={isPlan87 ? "15/05/2026" : isPlan84 ? "17/03/2010" : isPlan90 ? "25/06/2025" : isPlan51 ? "22/01/2008" : isPlan83 ? "27/07/2015" : isPlan621 ? "03/01/2008" : isPlan76 ? "21/01/2008" : isPlan62a ? "15/12/2010" : isPlan611 ? "31/01/2008" : isPlan52 ? "16/01/2008" : isPlan61a ? "06/09/2008" : ""}
+              value={isPlan87 ? "15/05/2026" : isPlan84 ? "17/03/2010" : isPlan90 ? "25/06/2025" : isPlan51 ? "22/01/2008" : (isPlan82 || isPlan83) ? "27/07/2015" : isPlan621 ? "03/01/2008" : isPlan76 ? "21/01/2008" : isPlan62a ? "15/12/2010" : isPlan611 ? "31/01/2008" : isPlan52 ? "16/01/2008" : isPlan61a ? "06/09/2008" : ""}
               placeholder={isCompact ? "" : "DBEditAPPLI"}
               disabled
             />
           </Field>
           <Field label={isPlan90 ? "MCP Start Date:" : "Received Date:"}>
             <DatePicker
-              value={isPlan84 ? "17/03/2010" : isPlan90 ? "25/06/2025" : isPlan51 ? "21/01/2008" : isPlan83 ? "24/07/2015" : isPlan621 ? "27/12/2007" : isPlan76 ? "18/01/2008" : isPlan62a ? "15/12/2010" : isPlan611 ? "30/01/2008" : isPlan61a ? "26/08/2008" : ""}
+              value={isPlan84 ? "17/03/2010" : isPlan90 ? "25/06/2025" : isPlan51 ? "21/01/2008" : (isPlan82 || isPlan83) ? "24/07/2015" : isPlan621 ? "27/12/2007" : isPlan76 ? "18/01/2008" : isPlan62a ? "15/12/2010" : isPlan611 ? "30/01/2008" : isPlan61a ? "26/08/2008" : ""}
               placeholder={isCompact ? "" : "DBEditAPPLIC"}
             />
           </Field>
           <Field label={isPlan90 ? "Payment Date:" : "Start Date:"}>
             <DatePicker
-              value={isPlan87 ? "15/05/2026" : isPlan84 ? "31/03/2010" : isPlan90 ? "28/05/2025" : isPlan51 ? "28/01/2008" : isPlan83 ? "14/08/2015" : isPlan621 ? "07/01/2008" : isPlan76 ? "01/01/2008" : isPlan62a ? "15/12/2010" : isPlan611 ? "31/01/2008" : isPlan52 ? "16/01/2008" : isPlan61a ? "19/09/2008" : ""}
+              value={isPlan87 ? "15/05/2026" : isPlan84 ? "31/03/2010" : isPlan90 ? "28/05/2025" : isPlan51 ? "28/01/2008" : (isPlan82 || isPlan83) ? "14/08/2015" : isPlan621 ? "07/01/2008" : isPlan76 ? "01/01/2008" : isPlan62a ? "15/12/2010" : isPlan611 ? "31/01/2008" : isPlan52 ? "16/01/2008" : isPlan61a ? "19/09/2008" : ""}
               placeholder={isCompact ? "" : "edtStartdate"}
-              disabled={isPlan84 || isPlan90 || isPlan51 || isPlan83 || isPlan621 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a}
+              disabled={isPlan84 || isPlan90 || isPlan51 || isPlan83 || isPlan82 || isPlan621 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a}
             />
           </Field>
-          {!isCompact && !isPlan51 && !isPlan83 && !isPlan621 && !isPlan76 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
+          {!isCompact && !isPlan51 && !isPlan83 && !isPlan82 && !isPlan621 && !isPlan76 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
             <>
               <div className="mb-2 mt-1 font-['Livvic'] text-[13px] font-semibold text-[#0d2c41]">
                 WPPA amendment notification date
@@ -57,20 +58,20 @@ export function ApplicationDetailsTab() {
           {!isPlan84 && !isPlan90 && !isPlan51 && !isPlan621 && !isPlan76 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
             <Field label="Accept Date:">
               <DatePicker
-                value={isPlan87 ? "" : isPlan83 ? "02/09/2015" : ""}
-                placeholder={isPlan87 || isPlan83 ? "" : "DBEdit21"}
+                value={isPlan87 ? "" : (isPlan82 || isPlan83) ? "02/09/2015" : ""}
+                placeholder={isPlan87 || isPlan83 || isPlan82 ? "" : "DBEdit21"}
                 disabled
               />
             </Field>
           )}
           <Field label="IFA Payment Date:">
             <DatePicker
-              value={isPlan84 ? "13/04/2010 10" : isPlan90 ? "07/07/2025 07" : isPlan51 ? "05/02/2008 09" : isPlan83 ? "24/08/2015 10" : isPlan621 ? "22/01/2008 14" : isPlan76 ? "05/02/2008 09" : isPlan62a ? "" : isPlan611 ? "" : isPlan61a ? "30/09/2008 08" : ""}
+              value={isPlan84 ? "13/04/2010 10" : isPlan90 ? "07/07/2025 07" : isPlan51 ? "05/02/2008 09" : (isPlan82 || isPlan83) ? "24/08/2015 10" : isPlan621 ? "22/01/2008 14" : isPlan76 ? "05/02/2008 09" : isPlan62a ? "" : isPlan611 ? "" : isPlan61a ? "30/09/2008 08" : ""}
               placeholder={isCompact ? "" : "DBEdit13"}
-              disabled={isPlan84 || isPlan90 || isPlan51 || isPlan83 || isPlan621 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a}
+              disabled={isPlan84 || isPlan90 || isPlan51 || isPlan83 || isPlan82 || isPlan621 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a}
             />
           </Field>
-          <Field label="PostADay:"><Checkbox checked={isPlan87 || isPlan84 || isPlan51 || isPlan83 || isPlan621 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a} /></Field>
+          <Field label="PostADay:"><Checkbox checked={isPlan87 || isPlan84 || isPlan51 || isPlan83 || isPlan82 || isPlan621 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a} /></Field>
           <Field label="Transfer from Beneficiary Drawdown?:">
             <div className="relative">
               <select defaultValue="Unknown" className="lve-input pr-12 appearance-none">
@@ -92,25 +93,25 @@ export function ApplicationDetailsTab() {
         <div>
           {!isPlan87 && (
             <Field label="Special Status:">
-              <TextInput value={isPlan84 || isPlan90 || isPlan51 || isPlan83 || isPlan76 || isPlan62a || isPlan611 || isPlan52 ? "" : isPlan621 || isPlan61a ? "G" : "DBSp"} disabled />
+              <TextInput value={isPlan84 || isPlan90 || isPlan51 || isPlan83 || isPlan82 || isPlan76 || isPlan62a || isPlan611 || isPlan52 ? "" : isPlan621 || isPlan61a ? "G" : "DBSp"} disabled />
             </Field>
           )}
           {!isPlan84 && !isPlan90 && !isPlan51 && !isPlan621 && !isPlan76 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
             <Field label="Final Quote Issued Date:">
-              <DatePicker value="" placeholder={isPlan87 || isPlan83 ? "" : "DBEdit16"} disabled />
+              <DatePicker value="" placeholder={isPlan87 || isPlan83 || isPlan82 ? "" : "DBEdit16"} disabled />
             </Field>
           )}
           <Field label="Status:">
-            <TextInput value={isPlan87 ? "P" : isPlan84 || isPlan90 ? "L" : isPlan51 ? "Q" : isPlan83 ? "W" : isPlan621 ? "I" : isPlan76 ? "D" : isPlan62a ? "C" : isPlan611 ? "N" : isPlan52 ? "X" : isPlan61a ? "E" : "status"} disabled />
+            <TextInput value={isPlan87 ? "P" : isPlan84 || isPlan90 ? "L" : isPlan51 ? "Q" : isPlan82 ? "S" : isPlan83 ? "W" : isPlan621 ? "I" : isPlan76 ? "D" : isPlan62a ? "C" : isPlan611 ? "N" : isPlan52 ? "X" : isPlan61a ? "E" : "status"} disabled />
           </Field>
           {!isPlan87 && (
             <Field label="Suspended:">
-              <TextInput value={isPlan84 || isPlan90 || isPlan83 || isPlan621 || isPlan62a || isPlan611 || isPlan52 ? "N" : isPlan51 || isPlan76 || isPlan61a ? "Y" : "DBSu"} disabled />
+              <TextInput value={isPlan82 ? "Y" : isPlan84 || isPlan90 || isPlan83 || isPlan621 || isPlan62a || isPlan611 || isPlan52 ? "N" : isPlan51 || isPlan76 || isPlan61a ? "Y" : "DBSu"} disabled />
             </Field>
           )}
           <Field label="Days Since Application:">
             <TextInput
-              value={isPlan87 ? "" : isPlan84 ? "5912" : isPlan90 ? "334" : isPlan51 ? "6707" : isPlan83 ? "3966" : isPlan621 ? "6738" : isPlan76 ? "6712" : isPlan62a ? "5654" : isPlan611 ? "6705" : isPlan52 ? "6720" : isPlan61a ? "6496" : "dbday"}
+              value={isPlan87 ? "" : isPlan84 ? "5912" : isPlan90 ? "334" : isPlan51 ? "6707" : (isPlan82 || isPlan83) ? "3966" : isPlan621 ? "6738" : isPlan76 ? "6712" : isPlan62a ? "5654" : isPlan611 ? "6705" : isPlan52 ? "6720" : isPlan61a ? "6496" : "dbday"}
               disabled
             />
           </Field>
@@ -120,7 +121,7 @@ export function ApplicationDetailsTab() {
               <Field label="LTA Details:"><Checkbox checked /></Field>
             </>
           )}
-          {!isCompact && !isPlan51 && !isPlan83 && !isPlan621 && !isPlan76 && !isPlan611 && !isPlan61a && (
+          {!isCompact && !isPlan51 && !isPlan83 && !isPlan82 && !isPlan621 && !isPlan76 && !isPlan611 && !isPlan61a && (
             <>
               {!isPlan62a && !isPlan52 && (
                 <Field label="Hosp'd Date:">
@@ -135,7 +136,7 @@ export function ApplicationDetailsTab() {
         {/* Column 3 — entirely hidden for plan 87 */}
         {!isPlan87 && (
           <div>
-            {!isPlan84 && !isPlan90 && !isPlan51 && !isPlan83 && !isPlan76 && !isPlan621 && !isPlan62a && !isPlan52 && !isPlan61a && (
+            {!isPlan84 && !isPlan90 && !isPlan51 && !isPlan83 && !isPlan82 && !isPlan76 && !isPlan621 && !isPlan62a && !isPlan52 && !isPlan61a && (
               <Field label="GAD Anniversary:">
                 <div className="flex gap-2">
                   <TextInput value="10" className="!w-16" disabled />
@@ -147,21 +148,21 @@ export function ApplicationDetailsTab() {
               </Field>
             )}
             <Field label="Life One Dead:">
-              <TextInput value={isPlan84 || isPlan90 || isPlan83 || isPlan611 || isPlan52 ? "" : isPlan51 || isPlan621 || isPlan76 || isPlan62a || isPlan61a ? "Y" : "DBLifeOneDe"} disabled />
+              <TextInput value={isPlan84 || isPlan90 || isPlan83 || isPlan82 || isPlan611 || isPlan52 ? "" : isPlan51 || isPlan621 || isPlan76 || isPlan62a || isPlan61a ? "Y" : "DBLifeOneDe"} disabled />
             </Field>
             <Field label="Life Two Dead:">
-              <TextInput value={isPlan84 || isPlan90 || isPlan83 || isPlan621 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "" : "DBLifeTwoDe"} disabled />
+              <TextInput value={isPlan84 || isPlan90 || isPlan83 || isPlan82 || isPlan621 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "" : "DBLifeTwoDe"} disabled />
             </Field>
             <Field label="Completed:">
               <TextInput
-                value={isPlan84 ? "13/04/2010" : isPlan90 ? "02/07/2025" : isPlan51 ? "05/02/2008" : isPlan83 ? "24/08/2015" : isPlan621 ? "22/01/2008" : isPlan76 ? "05/02/2008" : isPlan62a ? "" : isPlan611 ? "" : isPlan52 ? "" : isPlan61a ? "30/09/2008" : "DBCompeted"}
+                value={isPlan84 ? "13/04/2010" : isPlan90 ? "02/07/2025" : isPlan51 ? "05/02/2008" : (isPlan82 || isPlan83) ? "24/08/2015" : isPlan621 ? "22/01/2008" : isPlan76 ? "05/02/2008" : isPlan62a ? "" : isPlan611 ? "" : isPlan52 ? "" : isPlan61a ? "30/09/2008" : "DBCompeted"}
                 disabled
               />
             </Field>
             <Field label="Closed:">
-              <TextInput value={isPlan84 || isPlan90 || isPlan51 || isPlan83 || isPlan621 || isPlan62a || isPlan611 || isPlan61a ? "" : isPlan76 ? "10/09/2009 1" : isPlan52 ? "29/01/2008 1" : "DBClosed"} disabled />
+              <TextInput value={isPlan84 || isPlan90 || isPlan51 || isPlan83 || isPlan82 || isPlan621 || isPlan62a || isPlan611 || isPlan61a ? "" : isPlan76 ? "10/09/2009 1" : isPlan52 ? "29/01/2008 1" : "DBClosed"} disabled />
             </Field>
-            {!isPlan84 && !isPlan90 && !isPlan83 && (
+            {!isPlan84 && !isPlan90 && !isPlan83 && !isPlan82 && (
               <>
                 <Field label="Age at death:">
                   <TextInput value={isPlan51 || isPlan621 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "" : isPlan76 ? "94" : "edAge"} disabled />
@@ -196,7 +197,7 @@ export function ApplicationDetailsTab() {
               <DatePicker value="10/12/2013" placeholder="" disabled={isPlan87} />
             </Field>
           )}
-          {!isPlan84 && !isPlan90 && !isPlan51 && !isPlan83 && !isPlan76 && !isPlan621 && !isPlan62a && !isPlan52 && !isPlan61a && !isPlan611 && (
+          {!isPlan84 && !isPlan90 && !isPlan51 && !isPlan83 && !isPlan82 && !isPlan76 && !isPlan621 && !isPlan62a && !isPlan52 && !isPlan61a && !isPlan611 && (
             <Field label="Quote Expiry Date:">
               <DatePicker
                 value={isPlan87 ? "14/06/2026" : ""}
@@ -207,45 +208,45 @@ export function ApplicationDetailsTab() {
           )}
           <Field label="Last amended by:">
             <TextInput
-              value={isPlan87 ? "SAIMEENAKSHINA" : isPlan84 ? "LOPVH" : isPlan90 ? "LV66664" : isPlan51 ? "LOPSL2" : isPlan83 ? "LV66656" : isPlan621 ? "LV67320" : isPlan76 ? "LOPNXP" : isPlan62a ? "LOPRM" : isPlan611 ? "LOPKXB" : isPlan52 ? "LOPAW" : isPlan61a ? "LOPSH" : "DBEdit18"}
+              value={isPlan87 ? "SAIMEENAKSHINA" : isPlan84 ? "LOPVH" : isPlan90 ? "LV66664" : isPlan51 ? "LOPSL2" : (isPlan82 || isPlan83) ? "LV66656" : isPlan621 ? "LV67320" : isPlan76 ? "LOPNXP" : isPlan62a ? "LOPRM" : isPlan611 ? "LOPKXB" : isPlan52 ? "LOPAW" : isPlan61a ? "LOPSH" : "DBEdit18"}
               disabled
             />
           </Field>
           {!isPlan84 && !isPlan90 && !isPlan51 && !isPlan621 && !isPlan76 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
             <>
               <Field label="App Created by:">
-                <TextInput value={isPlan87 ? "saimeenakshinathan" : isPlan83 ? "LOPEO" : "DBEdit14"} disabled />
+                <TextInput value={isPlan87 ? "saimeenakshinathan" : (isPlan82 || isPlan83) ? "LOPEO" : "DBEdit14"} disabled />
               </Field>
               <Field label="Final Quote Issued by:">
-                <TextInput value={isPlan87 || isPlan83 ? "" : "DBEdit19"} disabled />
+                <TextInput value={isPlan87 || isPlan83 || isPlan82 ? "" : "DBEdit19"} disabled />
               </Field>
             </>
           )}
           <Field label="Rates Ok'd by:">
-            <TextInput value={isCompact || isPlan51 || isPlan83 || isPlan621 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "" : "DBEdit7"} disabled />
+            <TextInput value={isCompact || isPlan51 || isPlan83 || isPlan82 || isPlan621 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "" : "DBEdit7"} disabled />
           </Field>
           <Field label="Paykey:">
             <TextInput
-              value={isPlan87 ? "1023693" : isPlan84 ? "899032" : isPlan90 ? "1018055" : isPlan51 ? "887324" : isPlan83 ? "956314" : isPlan621 ? "100004.1" : isPlan76 ? "887316" : isPlan62a ? "905319" : isPlan611 ? "887439" : isPlan52 ? "887254" : isPlan61a ? "102929.1" : "DBEdit20"}
+              value={isPlan87 ? "1023693" : isPlan84 ? "899032" : isPlan90 ? "1018055" : isPlan51 ? "887324" : isPlan82 ? "116444" : isPlan83 ? "956314" : isPlan621 ? "100004.1" : isPlan76 ? "887316" : isPlan62a ? "905319" : isPlan611 ? "887439" : isPlan52 ? "887254" : isPlan61a ? "102929.1" : "DBEdit20"}
               disabled
             />
           </Field>
           <Field label="Policy No:">
             <TextInput
-              value={isPlan87 ? "233451" : isPlan84 ? "111834" : isPlan90 ? "227813" : isPlan51 ? "100188" : isPlan83 ? "166092" : isPlan621 ? "100004.1" : isPlan76 ? "100180" : isPlan62a ? "118106" : isPlan611 ? "100303" : isPlan52 ? "100118" : isPlan61a ? "102929.1" : "DBEdit24"}
+              value={isPlan87 ? "233451" : isPlan84 ? "111834" : isPlan90 ? "227813" : isPlan51 ? "100188" : isPlan82 ? "116444" : isPlan83 ? "166092" : isPlan621 ? "100004.1" : isPlan76 ? "100180" : isPlan62a ? "118106" : isPlan611 ? "100303" : isPlan52 ? "100118" : isPlan61a ? "102929.1" : "DBEdit24"}
               disabled
             />
           </Field>
           {!isPlan90 && !isPlan51 && !isPlan621 && !isPlan76 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
             <Field label="Dependant Eligible to Receive Benefits:">
-              <TextInput value={isPlan87 || isPlan84 || isPlan83 ? "" : "edtEli"} disabled />
+              <TextInput value={isPlan87 || isPlan84 || isPlan83 || isPlan82 ? "" : "edtEli"} disabled />
             </Field>
           )}
         </div>
       </div>
 
       {/* Correspondence Details */}
-      {!isPlan83 && !isPlan76 && (
+      {!isPlan83 && !isPlan82 && !isPlan76 && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <Section title="Correspondence Details">
             <Field label="Correspond Name:">

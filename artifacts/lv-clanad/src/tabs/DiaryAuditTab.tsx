@@ -264,6 +264,7 @@ export function DiaryAuditTab() {
   const isPlan90  = planCode === "90";
   const isPlan51  = planCode === "51";
   const isPlan83  = planCode === "83";
+  const isPlan82  = planCode === "82";
   const isPlan621 = planCode === "621";
   const isPlan76  = planCode === "76";
   const isPlan62a = planCode === "62a";
@@ -275,7 +276,7 @@ export function DiaryAuditTab() {
   const [needsOpen, setNeedsOpen] = useState(false);
   const [cedingOpen, setCedingOpen] = useState(false);
   const [diary, setDiary] = useState<DiaryRow[]>(
-    isPlan87 ? PLAN_87_DIARY : isPlan84 ? PLAN_84_DIARY : isPlan90 ? PLAN_90_DIARY : isPlan51 ? PLAN_51_DIARY : isPlan83 ? PLAN_83_DIARY : isPlan621 ? PLAN_621_DIARY : isPlan76 ? PLAN_76_DIARY : isPlan62a ? PLAN_62a_DIARY : isPlan611 ? PLAN_611_DIARY : isPlan52 ? [] : isPlan61a ? PLAN_61a_DIARY : INITIAL_DIARY,
+    isPlan87 ? PLAN_87_DIARY : isPlan84 ? PLAN_84_DIARY : isPlan90 ? PLAN_90_DIARY : isPlan51 ? PLAN_51_DIARY : (isPlan82 || isPlan83) ? PLAN_83_DIARY : isPlan621 ? PLAN_621_DIARY : isPlan76 ? PLAN_76_DIARY : isPlan62a ? PLAN_62a_DIARY : isPlan611 ? PLAN_611_DIARY : isPlan52 ? [] : isPlan61a ? PLAN_61a_DIARY : INITIAL_DIARY,
   );
   const [selectedRef, setSelectedRef] = useState<number | null>(null);
   const [editConfirmOpen, setEditConfirmOpen] = useState(false);
@@ -473,7 +474,7 @@ export function DiaryAuditTab() {
                   </tr>
                 </thead>
                 <tbody>
-                  {(isPlan0 || isPlan87 ? [] : isPlan84 ? AUDIT_84 : isPlan90 ? AUDIT_90 : isPlan51 ? AUDIT_51 : isPlan83 ? AUDIT_83 : isPlan621 ? AUDIT_621 : isPlan76 ? AUDIT_76 : isPlan62a ? AUDIT_62a : isPlan611 ? AUDIT_611 : isPlan52 ? AUDIT_52 : isPlan61a ? AUDIT_61a : AUDIT).map((line, i) => {
+                  {(isPlan0 || isPlan87 ? [] : isPlan84 ? AUDIT_84 : isPlan90 ? AUDIT_90 : isPlan51 ? AUDIT_51 : (isPlan82 || isPlan83) ? AUDIT_83 : isPlan621 ? AUDIT_621 : isPlan76 ? AUDIT_76 : isPlan62a ? AUDIT_62a : isPlan611 ? AUDIT_611 : isPlan52 ? AUDIT_52 : isPlan61a ? AUDIT_61a : AUDIT).map((line, i) => {
                     const m = line.match(
                       /^(.*?)\s+by\s+(\S+)\s+on\s+(\S+)\s+at\s+(\S+)\s*$/,
                     );
@@ -523,7 +524,7 @@ export function DiaryAuditTab() {
                         <td className="!px-4 whitespace-nowrap">{r.userId}</td>
                       </tr>
                     ))
-                  : isPlan83
+                  : (isPlan82 || isPlan83)
                   ? DATA_CHANGES_83.map((r, i) => (
                       <tr key={i}>
                         <td className="!px-4 whitespace-nowrap">{r.changeDate}</td>

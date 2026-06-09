@@ -383,9 +383,10 @@ function Plan83ContactsLayout() {
 export function ContactsTab() {
   const { planCode } = usePlanCode();
   const isPlan83 = planCode === "83";
+  const isPlan82 = planCode === "82";
   const isPlan76 = planCode === "76";
 
-  if (isPlan83) {
+  if (isPlan83 || isPlan82) {
     return <Plan83ContactsLayout />;
   }
 

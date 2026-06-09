@@ -156,7 +156,8 @@ export function NotesTab() {
       </Section>
     );
   }
-  if (isPlan82) {
+  const isPlan80 = planCode === "80";
+  if (isPlan82 || isPlan80) {
     const count = 7;
     return (
       <Section title={`Notes (${count})`} headerAction={<NoteButtons />}>

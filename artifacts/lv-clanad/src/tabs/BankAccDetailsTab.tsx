@@ -101,7 +101,7 @@ export function BankAccDetailsTab() {
             </Field>
             <Field inline label="Bank account name:">
               <TextInput
-                value={isPlan87 ? "Test" : isPlan84 ? "Testktbbbide" : isPlan90 ? "Testmtcchibd" : isPlan51 ? "Testmubaabii" : isPlan83 ? "Testnybggajc" : isPlan621 ? "Testmrbaaaae.b" : isPlan76 ? "Testakbaabia" : isPlan62a ? "Testmsbbibag" : isPlan611 ? "Testssbaadad S" : "DBEdit79"}
+                value={isPlan87 ? "Test" : isPlan84 ? "Testktbbbide" : isPlan90 ? "Testmtcchibd" : isPlan51 ? "Testmubaabii" : isPlan83 ? "Testnybggajc" : isPlan621 ? "Testmrbaaaae.b" : isPlan76 ? "Testakbaabia" : isPlan62a ? "Testmsbbibag" : isPlan611 ? "Testjsbaadad" : "DBEdit79"}
                 disabled={isPlan84 || isPlan90}
               />
             </Field>

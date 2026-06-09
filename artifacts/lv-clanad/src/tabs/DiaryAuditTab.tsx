@@ -104,6 +104,9 @@ const PLAN_82_DIARY: DiaryRow[] = [
   { ref: 6,  type: "LTA Form",            notes: "LTA Form missing, incomplete or invalid",      created: "21/09/2010", by: "SYSANN", due: "28/09/2010", completed: "06/10/2010", byCompleted: "LONLM" },
   { ref: 5,  type: "Death Ben Nom Form",  notes: "DBNF missing, incomplete or invalid",          created: "21/09/2010", by: "SYSANN", due: "28/09/2010", completed: "06/10/2010", byCompleted: "LONLM" },
   { ref: 4,  type: "CVI",                 notes: "Confirmation of Verification of Identity",     created: "21/09/2010", by: "SYSANN", due: "28/09/2010", completed: "06/10/2010", byCompleted: "LONLM" },
+  { ref: 3,  type: "App Form (E/F)",      notes: "Client declaration not signed",                 created: "21/09/2010", by: "SYSANN", due: "28/09/2010", completed: "06/10/2010", byCompleted: "LONLM" },
+  { ref: 2,  type: "EOA Client",          notes: "Annuitant EOA missing, incomplete or invalid",  created: "21/09/2010", by: "SYSANN", due: "28/09/2010", completed: "06/10/2010", byCompleted: "LONLM" },
+  { ref: 1,  type: "App Form (B)",        notes: "Client bank account details missing/incomplete", created: "21/09/2010", by: "SYSANN", due: "28/09/2010", completed: "06/10/2010", byCompleted: "LONLM" },
 ];
 
 const AUDIT_82 = Array.from({ length: 10 }, () => "Test Note");

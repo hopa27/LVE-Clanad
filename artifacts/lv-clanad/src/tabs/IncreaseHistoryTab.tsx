@@ -88,6 +88,15 @@ const ROWS_82: string[][] = PLAN_82_ROWS.map(([status, stmtDate, annivDate]) => 
   "No", "0", "0", "0", "0",
 ]);
 
+const ROWS_76z: string[][] = [
+  ["Std Pre 97", "A", "18/05/2009", "26/06/2009", "£18,600.00", "£18,901.32", "RPI + 2", "1.62", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "0", "0", "n/a", "0", "0", "0", "0"],
+  ["Std Pre 97", "A", "18/05/2010", "26/06/2010", "£18,901.32", "£20,120.46", "RPI + 2", "6.45", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "0", "0", "n/a", "0", "0", "0", "0"],
+  ["Std Pre 97", "A", "18/05/2011", "26/06/2011", "£20,120.46", "£21,599.31", "RPI + 2", "7.35", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "0", "0", "n/a", "0", "0", "0", "0"],
+  ["Std Pre 97", "A", "20/05/2012", "26/06/2012", "£21,599.31", "£22,802.39", "RPI + 2", "5.57", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "0", "0", "n/a", "0", "0", "0", "0"],
+  ["Std Pre 97", "A", "19/05/2013", "26/06/2013", "£22,802.39", "£24,006.36", "RPI + 2", "5.28", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "0", "0", "n/a", "0", "0", "0", "0"],
+  ["Std Pre 97", "A", "18/05/2014", "26/06/2014", "£24,006.36", "£25,074.64", "RPI + 2", "4.45", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "0", "0", "n/a", "0", "0", "0", "0"],
+];
+
 const ROWS_80: string[][] = [
   ["Std Pre 97", "A", "30/01/2011", "26/02/2011", "£0.00", "£0.00", "Fixed", "0", "", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "26/02/2015", "2262.43", "0", "No", "0", "0", "0", "0"],
   ["Std Pre 97", "A", "29/01/2012", "26/02/2012", "£0.00", "£0.00", "Fixed", "0", "", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "26/02/2015", "2262.43", "0", "No", "0", "0", "0", "0"],
@@ -105,6 +114,7 @@ export function IncreaseHistoryTab() {
   const isPlan80  = planCode === "80";
   const isPlan621 = planCode === "621";
   const isPlan76  = planCode === "76";
+  const isPlan76z = planCode === "76z";
   const isPlan62a = planCode === "62a";
   const isPlan611 = planCode === "611";
   const isPlan52  = planCode === "52";
@@ -118,8 +128,10 @@ export function IncreaseHistoryTab() {
         : isPlan80
           ? ROWS_80
           : isPlan82
-            ? ROWS_82
-            : [ROW_DEFAULT];
+          ? ROWS_82
+          : isPlan76z
+          ? ROWS_76z
+          : [ROW_DEFAULT];
 
   return (
     <div className="space-y-4">

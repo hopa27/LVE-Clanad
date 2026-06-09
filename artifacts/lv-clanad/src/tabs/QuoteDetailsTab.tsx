@@ -108,6 +108,16 @@ const QUOTE_ROWS_621 = [
   },
 ];
 
+const QUOTE_ROWS_61a = [
+  {
+    type: "Std Pre 97", premium: "£6,803.69", tfc: "", original: "£677.00",
+    escType: "Fixed", escRate: "0", currentInc: "£677.00", spousePct: "0",
+    spouseInc: "£0.00", guarantee: "10 year", lastPay: "19/08/2018", overlap: "No",
+    valProt: "", taxFree: "", maxFree: "F",
+    valProtFlag: "F", lsConvert: "", planProt: "", dependant: "None",
+  },
+];
+
 const QUOTE_ROWS_52 = [
   {
     type: "Std Pre 97", premium: "£11,218.88", tfc: "£2,804.72", original: "£540.00",
@@ -171,7 +181,7 @@ export function QuoteDetailsTab() {
     : isPlan52
     ? QUOTE_ROWS_52
     : isPlan61a
-    ? QUOTE_ROWS_611
+    ? QUOTE_ROWS_61a
     : QUOTE_ROWS;
 
   return (
@@ -274,7 +284,7 @@ export function QuoteDetailsTab() {
           <>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-8">
               <div>
-                <Field label="Life Type:"><TextInput value={isPlan611 || isPlan61a ? "FM" : isPlan87 || isPlan51 || isPlan83 || isPlan621 || isPlan62a ? "M" : isPlan90 ? "" : "F"} disabled /></Field>
+                <Field label="Life Type:"><TextInput value={isPlan611 ? "FM" : isPlan87 || isPlan51 || isPlan83 || isPlan621 || isPlan62a || isPlan61a ? "M" : isPlan90 ? "" : "F"} disabled /></Field>
                 <Field label="Plan Type:">
                   {isPlan84 ? (
                     <div className="grid grid-cols-2 gap-2">
@@ -300,7 +310,7 @@ export function QuoteDetailsTab() {
                 )}
               </div>
               <div>
-                <Field label="Series:"><TextInput value={isPlan87 ? "912" : isPlan84 ? "700" : isPlan90 ? "" : isPlan51 ? "325" : isPlan83 ? "792" : isPlan621 ? "322" : isPlan76 ? "325" : isPlan62a ? "378" : isPlan611 ? "325" : isPlan52 ? "325" : isPlan61a ? "325" : "893"} disabled /></Field>
+                <Field label="Series:"><TextInput value={isPlan87 ? "912" : isPlan84 ? "700" : isPlan90 ? "" : isPlan51 ? "325" : isPlan83 ? "792" : isPlan621 ? "322" : isPlan76 ? "325" : isPlan62a ? "378" : isPlan611 ? "325" : isPlan52 ? "325" : isPlan61a ? "351" : "893"} disabled /></Field>
                 <Field label="Policy Type:">
                   <SelectInput
                     value={isPlan84 || isPlan90 || isPlan51 || isPlan83 || isPlan621 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "non profit" : "with profit"}
@@ -367,7 +377,7 @@ export function QuoteDetailsTab() {
               {isPlan51 || isPlan611 || isPlan61a ? (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
                   <div>
-                    <Field inline labelWidth={200} label="LTA% Crystallised:"><TextInput value={isPlan611 || isPlan61a ? "0" : "7.4"} disabled /></Field>
+                    <Field inline labelWidth={200} label="LTA% Crystallised:"><TextInput value={isPlan611 ? "0" : isPlan61a ? "0.54" : "7.4"} disabled /></Field>
                     <Field inline labelWidth={200} label="Scheme Name:"><TextInput value={isPlan611 || isPlan61a ? "" : "Zurich"} /></Field>
                     <Field inline labelWidth={200} label="HMRC Scheme Number:"><TextInput value="" /></Field>
                   </div>

@@ -198,16 +198,16 @@ export function MaturitiesSurrenderTab() {
         <Section title="Bank Details">
           <Field label="Type:">
             <SelectInput
-              value={(isPlan82 || isPlan83) ? "Maturity" : ""}
+              value={isPlan82 ? "Surrender" : isPlan83 ? "Maturity" : ""}
               options={(isPlan82 || isPlan83) ? ["Maturity", "Surrender"] : ["", "Maturity", "Surrender"]}
               disabled={isPlan82 || isPlan83}
             />
           </Field>
           <Field label="Bank sort code:"><TextInput value={(isPlan82 || isPlan83) ? "77-48-14" : "-  -"} /></Field>
           <Field label="Bank account no:"><TextInput value={(isPlan82 || isPlan83) ? "24782346" : ""} /></Field>
-          <Field label="Bank account name:"><TextInput value={isPlan82 ? "Testtrbbgeee" : isPlan83 ? "Testnybggajc" : ""} /></Field>
+          <Field label="Bank account name:"><TextInput value={isPlan82 ? "Testmrbbgeee" : isPlan83 ? "Testnybggajc" : ""} /></Field>
           <Field label="Bank name:"><TextInput value={(isPlan82 || isPlan83) ? "TSB, WINSFORD" : ""} disabled /></Field>
-          <Field label="Payment Ref:"><TextInput value={isPlan82 ? "INVENC116444" : isPlan83 ? "INVENC123588" : ""} /></Field>
+          <Field label="Payment Ref:"><TextInput value={isPlan82 ? "D/1494543610" : isPlan83 ? "INVENC123588" : ""} /></Field>
           <button
             type="button"
             className="lve-btn lve-btn-secondary lve-btn-sm mt-2"
@@ -216,27 +216,33 @@ export function MaturitiesSurrenderTab() {
           >
             <MdEdit size={14} /> Edit Bank Details
           </button>
+          {isPlan82 && (
+            <p className="font-['Mulish'] text-[12px] text-[#3d3d3d] mt-3 bg-[#fffff0] border border-[#ccc] rounded p-2">
+              BCE4 crystallisation event will occur on Surrender/Maturity for policies
+              where the money is being used to purchase an OMO Annuity.
+            </p>
+          )}
         </Section>
 
         <Section title="Payment">
           <Field label="Claim Form Received:">
-            <DatePicker value={(isPlan82 || isPlan83) ? "19/08/2025" : ""} placeholder="" />
+            <DatePicker value={isPlan82 ? "03/08/2015" : isPlan83 ? "19/08/2025" : ""} placeholder="" />
           </Field>
           <Field label="Nature of Payment:">
             <SelectInput
-              value={(isPlan82 || isPlan83) ? "Transfer" : ""}
-              options={(isPlan82 || isPlan83) ? ["Transfer", "Lump Sum", "Annuity"] : ["", "Lump Sum", "Annuity"]}
-              disabled={isPlan82 || isPlan83}
+              value={isPlan82 ? "" : isPlan83 ? "Transfer" : ""}
+              options={["", "Transfer", "Lump Sum", "Annuity"]}
+              disabled={isPlan83}
             />
           </Field>
           <Field label="Payment Method:">
             <SelectInput
-              value={(isPlan82 || isPlan83) ? "T" : ""}
+              value={isPlan82 ? "B" : isPlan83 ? "T" : ""}
               options={["", "B", "C", "T"]}
             />
           </Field>
-          <Field label="Payment Date:"><DatePicker value="" placeholder="" /></Field>
-          <Field label="Gross:"><TextInput value={(isPlan82 || isPlan83) ? "501.00" : ""} /></Field>
+          <Field label="Payment Date:"><DatePicker value={isPlan82 ? "06/08/2015" : ""} placeholder="" disabled={isPlan82} /></Field>
+          <Field label="Gross:"><TextInput value={isPlan82 ? "22575.80" : isPlan83 ? "501.00" : ""} /></Field>
           <button
             type="button"
             className="lve-btn lve-btn-sm mt-2 disabled:opacity-50 disabled:cursor-not-allowed"
@@ -250,13 +256,13 @@ export function MaturitiesSurrenderTab() {
       <div className="mb-1">
         <Field label="Maturity Destination:">
           <SelectInput
-            value={(isPlan82 || isPlan83) ? "Trustee" : ""}
-            options={["", "Client", "IFA", "Trustee", "Other"]}
+            value={isPlan82 ? "Policy Holder" : isPlan83 ? "Trustee" : ""}
+            options={["", "Client", "IFA", "Policy Holder", "Trustee", "Other"]}
           />
         </Field>
-        <Field label="Correspondance Name:"><TextInput value={isPlan82 ? "Testmtrbbgeee" : isPlan83 ? "Testmnbggajc" : ""} /></Field>
-        <Field label="Salutation:"><TextInput value={isPlan82 ? "Testmtrbbgeee" : isPlan83 ? "Testmnbggajc" : ""} /></Field>
-        <Field label="Telephone:"><TextInput value="" /></Field>
+        <Field label="Correspondance Name:"><TextInput value={isPlan82 ? "Testmrbbgeee" : isPlan83 ? "Testmnbggajc" : ""} /></Field>
+        <Field label="Salutation:"><TextInput value={isPlan82 ? "Testmrbbgeee" : isPlan83 ? "Testmnbggajc" : ""} /></Field>
+        <Field label="Telephone:"><TextInput value={isPlan82 ? "01632555660" : ""} /></Field>
       </div>
 
       <Section title="Maturity / Surrender Address">
@@ -269,7 +275,11 @@ export function MaturitiesSurrenderTab() {
               { placeholder: "Line 4" },
               { placeholder: "Line 5 (County)" },
             ]}
-            initial={(isPlan82 || isPlan83) ? ["Congleton", "Avonmouth", "Reading", "Verwood", ""] : ["", "", "", "", ""]}
+            initial={
+              isPlan82 ? ["10 Rightway Close", "Exeter", "", "", "Oldham"]
+              : isPlan83 ? ["Congleton", "Avonmouth", "Reading", "Verwood", ""]
+              : ["", "", "", "", ""]
+            }
           />
         </Field>
         <Field label="Postcode:"><TextInput value={isPlan82 ? "QU99 9AB" : isPlan83 ? "EX99 9AB" : ""} /></Field>

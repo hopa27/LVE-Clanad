@@ -73,6 +73,16 @@ const QUOTE_ROWS_82 = [
   },
 ];
 
+const QUOTE_ROWS_76z = [
+  {
+    type: "Std Pre 97", premium: "£63,697.99", tfc: "", original: "£18,600.00",
+    escType: "RPI + 2", escRate: "0", currentInc: "£25,074.64", spousePct: "0",
+    spouseInc: "£0.00", guarantee: "None", lastPay: "", overlap: "No",
+    valProt: "", taxFree: "", maxFree: "F",
+    valProtFlag: "F", lsConvert: "", planProt: "", dependant: "None",
+  },
+];
+
 const QUOTE_ROWS_76 = [
   {
     type: "Std Pre 97", premium: "£43,962.00", tfc: "", original: "£13,800.00",
@@ -175,6 +185,7 @@ export function QuoteDetailsTab() {
   const isPlan80  = planCode === "80";
   const isPlan621 = planCode === "621";
   const isPlan76  = planCode === "76";
+  const isPlan76z = planCode === "76z";
   const isPlan62a = planCode === "62a";
   const isPlan611 = planCode === "611";
   const isPlan52  = planCode === "52";
@@ -200,6 +211,8 @@ export function QuoteDetailsTab() {
     ? QUOTE_ROWS_621
     : isPlan76
     ? QUOTE_ROWS_76
+    : isPlan76z
+    ? QUOTE_ROWS_76z
     : isPlan62a
     ? QUOTE_ROWS_62a
     : isPlan611
@@ -318,28 +331,28 @@ export function QuoteDetailsTab() {
                       <TextInput value="(PRP)" disabled />
                     </div>
                   ) : (
-                    <TextInput value={isPlan90 ? "MCP" : isPlan51 || isPlan611 || isPlan61a ? "CPA" : (isPlan80 || isPlan82 || isPlan83) ? "PRP" : isPlan621 || isPlan62a || isPlan52 ? "PPA" : isPlan76 ? "ICFP" : "FTA"} disabled />
+                    <TextInput value={isPlan90 ? "MCP" : isPlan51 || isPlan611 || isPlan61a ? "CPA" : (isPlan80 || isPlan82 || isPlan83) ? "PRP" : isPlan621 || isPlan62a || isPlan52 ? "PPA" : isPlan76 || isPlan76z ? "ICFP" : "FTA"} disabled />
                   )}
                 </Field>
-                <Field label="Payments:"><TextInput value={isPlan83 || isPlan76 || isPlan611 || isPlan52 || isPlan61a ? "AD" : "AR"} disabled /></Field>
-                <Field label="Frequency:"><TextInput value={isPlan87 || isPlan62a ? "1" : isPlan80 || isPlan84 || isPlan90 || isPlan82 || isPlan83 || isPlan621 || isPlan76 || isPlan611 || isPlan52 || isPlan61a ? "12" : isPlan51 ? "4" : "2"} disabled /></Field>
-                {isPlan76 && (
+                <Field label="Payments:"><TextInput value={isPlan83 || isPlan76 || isPlan76z || isPlan611 || isPlan52 || isPlan61a ? "AD" : "AR"} disabled /></Field>
+                <Field label="Frequency:"><TextInput value={isPlan87 || isPlan62a ? "1" : isPlan80 || isPlan84 || isPlan90 || isPlan82 || isPlan83 || isPlan621 || isPlan76 || isPlan76z || isPlan611 || isPlan52 || isPlan61a ? "12" : isPlan51 ? "4" : "2"} disabled /></Field>
+                {(isPlan76 || isPlan76z) && (
                   <Field label="DMT:"><TextInput value="0" disabled /></Field>
                 )}
                 <Field label="ELE:"><TextInput value="" disabled={!isPlan51} /></Field>
-                {!isPlan84 && !isPlan90 && !isPlan76 && (
+                {!isPlan84 && !isPlan90 && !isPlan76 && !isPlan76z && (
                   <Field label="Capital Protection?:"><TextInput value="" disabled={!isPlan51} /></Field>
                 )}
                 <Field label="Original Amnt Vested:"><TextInput value="" disabled={!isPlan51} /></Field>
-                {!isPlan80 && !isPlan84 && !isPlan90 && !isPlan51 && !isPlan82 && !isPlan83 && !isPlan621 && !isPlan76 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
+                {!isPlan80 && !isPlan84 && !isPlan90 && !isPlan51 && !isPlan82 && !isPlan83 && !isPlan621 && !isPlan76 && !isPlan76z && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
                   <Field label="Withheld Minimal Income:"><Checkbox checked={isPlan87} disabled /></Field>
                 )}
               </div>
               <div>
-                <Field label="Series:"><TextInput value={isPlan87 ? "912" : isPlan84 || isPlan80 ? "700" : isPlan90 ? "" : isPlan51 ? "325" : isPlan82 ? "716" : isPlan83 ? "792" : isPlan621 ? "322" : isPlan76 ? "325" : isPlan62a ? "378" : isPlan611 ? "325" : isPlan52 ? "325" : isPlan61a ? "351" : "893"} disabled /></Field>
+                <Field label="Series:"><TextInput value={isPlan87 ? "912" : isPlan84 || isPlan80 ? "700" : isPlan90 ? "" : isPlan51 ? "325" : isPlan82 ? "716" : isPlan83 ? "792" : isPlan621 ? "322" : isPlan76 ? "325" : isPlan76z ? "335" : isPlan62a ? "378" : isPlan611 ? "325" : isPlan52 ? "325" : isPlan61a ? "351" : "893"} disabled /></Field>
                 <Field label="Policy Type:">
                   <SelectInput
-                    value={isPlan80 || isPlan84 || isPlan90 || isPlan51 || isPlan82 || isPlan83 || isPlan621 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "non profit" : "with profit"}
+                    value={isPlan80 || isPlan84 || isPlan90 || isPlan51 || isPlan82 || isPlan83 || isPlan621 || isPlan76 || isPlan76z || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "non profit" : "with profit"}
                     options={["with profit", "without profit", "non profit"]}
                     disabled
                   />
@@ -391,7 +404,7 @@ export function QuoteDetailsTab() {
                   </>
                 )}
               </div>
-              {!isPlan80 && !isPlan87 && !isPlan90 && !isPlan51 && !isPlan82 && !isPlan83 && !isPlan621 && !isPlan76 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
+              {!isPlan80 && !isPlan87 && !isPlan90 && !isPlan51 && !isPlan82 && !isPlan83 && !isPlan621 && !isPlan76 && !isPlan76z && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
                 <div>
                   <Field label="Notional Value:"><TextInput value={isPlan84 ? "8189.23" : "14,828"} disabled /></Field>
                   <Field label="Value Date:"><TextInput value={isPlan84 ? "30/04/2026" : "25/03/2026"} disabled /></Field>
@@ -412,7 +425,7 @@ export function QuoteDetailsTab() {
               )}
             </div>
 
-            {!isPlan90 && !isPlan83 && !isPlan76 && (
+            {!isPlan90 && !isPlan83 && !isPlan76 && !isPlan76z && (
             <Section title="LTA Details">
               {isPlan51 || isPlan611 || isPlan61a || isPlan82 ? (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8">

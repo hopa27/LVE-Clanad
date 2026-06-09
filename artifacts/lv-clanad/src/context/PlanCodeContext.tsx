@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, type ReactNode } from "react";
 
-export type PlanCodeVersion = "0" | "87" | "84" | "90" | "51" | "83" | "621" | "76" | "62a" | "611" | "52";
+export type PlanCodeVersion = "0" | "87" | "84" | "90" | "51" | "83" | "621" | "76" | "62a" | "611" | "52" | "61a";
 
 export const PLAN_CODE_VERSIONS: {
   code: PlanCodeVersion;
@@ -18,6 +18,7 @@ export const PLAN_CODE_VERSIONS: {
   { code: "62a", planType: "PPA",    description: "Version 62a — PPA (Status C)" },
   { code: "611", planType: "CPA",    description: "Version 611 — CPA (Status N)" },
   { code: "52",  planType: "PPA",    description: "Version 52 — PPA (Status X)" },
+  { code: "61a", planType: "CPA",    description: "Version 61a — CPA (Status E)" },
 ];
 
 type PlanCodeValue = {

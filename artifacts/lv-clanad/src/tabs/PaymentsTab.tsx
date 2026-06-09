@@ -145,6 +145,7 @@ export function PaymentsTab() {
   const isPlan62a = planCode === "62a";
   const isPlan611 = planCode === "611";
   const isPlan52  = planCode === "52";
+  const isPlan61a = planCode === "61a";
 
   const paymentHistory = isPlan84
     ? PAYMENT_HISTORY_84
@@ -158,7 +159,7 @@ export function PaymentsTab() {
     ? PAYMENT_HISTORY_621
     : isPlan76
     ? PAYMENT_HISTORY_76
-    : isPlan62a || isPlan611 || isPlan52
+    : isPlan62a || isPlan611 || isPlan52 || isPlan61a
     ? []
     : isPlan0 || isPlan87
     ? []
@@ -175,7 +176,7 @@ export function PaymentsTab() {
     ? TAX_HISTORY_621
     : isPlan76
     ? TAX_HISTORY_76
-    : isPlan62a || isPlan611 || isPlan52
+    : isPlan62a || isPlan611 || isPlan52 || isPlan61a
     ? []
     : isPlan0 || isPlan87
     ? []
@@ -409,7 +410,7 @@ export function PaymentsTab() {
               <Field label="Nth Inst:"><TextInput value="" disabled /></Field>
             </div>
           </div>
-        ) : isPlan611 ? (
+        ) : isPlan611 || isPlan61a ? (
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-8">
             <div>
               <Field label="Premium:"><TextInput value="3670.56" disabled /></Field>

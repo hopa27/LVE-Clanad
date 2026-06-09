@@ -180,7 +180,8 @@ export function NotesTab() {
     );
   }
   const isPlan611 = planCode === "611";
-  if (isPlan611) {
+  const isPlan61a = planCode === "61a";
+  if (isPlan611 || isPlan61a) {
     const count = 4;
     return (
       <Section title={`Notes (${count})`} headerAction={<NoteButtons />}>

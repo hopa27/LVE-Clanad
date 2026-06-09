@@ -108,6 +108,23 @@ const QUOTE_ROWS_621 = [
   },
 ];
 
+const QUOTE_ROWS_52 = [
+  {
+    type: "Std Pre 97", premium: "£11,218.88", tfc: "£2,804.72", original: "£540.00",
+    escType: "Fixed", escRate: "0", currentInc: "", spousePct: "0",
+    spouseInc: "£0.00", guarantee: "10 year", lastPay: "", overlap: "No",
+    valProt: "", taxFree: "25", maxFree: "T",
+    valProtFlag: "F", lsConvert: "", planProt: "", dependant: "None",
+  },
+  {
+    type: "Prot Pre 97", premium: "£31,985.09", tfc: "£7,996.27", original: "£1,552.00",
+    escType: "Fixed", escRate: "0", currentInc: "", spousePct: "0",
+    spouseInc: "£0.00", guarantee: "5 year", lastPay: "", overlap: "No",
+    valProt: "", taxFree: "25", maxFree: "T",
+    valProtFlag: "F", lsConvert: "", planProt: "", dependant: "None",
+  },
+];
+
 const QUOTE_COLUMNS = [
   "Type","Premium","Tax Free Cash Amount","Original Income","Esc Type","Esc Rate %",
   "Current Income","Spouse %","Spouse Income","Guarantee","Last Pay Under Guarantee",
@@ -128,6 +145,7 @@ export function QuoteDetailsTab() {
   const isPlan76  = planCode === "76";
   const isPlan62a = planCode === "62a";
   const isPlan611 = planCode === "611";
+  const isPlan52  = planCode === "52";
   const showGad = false;
   const quoteRows = isPlan0
     ? []
@@ -149,6 +167,8 @@ export function QuoteDetailsTab() {
     ? QUOTE_ROWS_62a
     : isPlan611
     ? QUOTE_ROWS_611
+    : isPlan52
+    ? QUOTE_ROWS_52
     : QUOTE_ROWS;
 
   return (
@@ -259,11 +279,11 @@ export function QuoteDetailsTab() {
                       <TextInput value="(PRP)" disabled />
                     </div>
                   ) : (
-                    <TextInput value={isPlan90 ? "MCP" : isPlan51 || isPlan611 ? "CPA" : isPlan83 ? "PRP" : isPlan621 || isPlan62a ? "PPA" : isPlan76 ? "ICFP" : "FTA"} disabled />
+                    <TextInput value={isPlan90 ? "MCP" : isPlan51 || isPlan611 ? "CPA" : isPlan83 ? "PRP" : isPlan621 || isPlan62a || isPlan52 ? "PPA" : isPlan76 ? "ICFP" : "FTA"} disabled />
                   )}
                 </Field>
-                <Field label="Payments:"><TextInput value={isPlan83 || isPlan76 || isPlan611 ? "AD" : "AR"} disabled /></Field>
-                <Field label="Frequency:"><TextInput value={isPlan87 || isPlan62a ? "1" : isPlan84 || isPlan90 || isPlan83 || isPlan621 || isPlan76 || isPlan611 ? "12" : isPlan51 ? "4" : "2"} disabled /></Field>
+                <Field label="Payments:"><TextInput value={isPlan83 || isPlan76 || isPlan611 || isPlan52 ? "AD" : "AR"} disabled /></Field>
+                <Field label="Frequency:"><TextInput value={isPlan87 || isPlan62a ? "1" : isPlan84 || isPlan90 || isPlan83 || isPlan621 || isPlan76 || isPlan611 || isPlan52 ? "12" : isPlan51 ? "4" : "2"} disabled /></Field>
                 {isPlan76 && (
                   <Field label="DMT:"><TextInput value="0" disabled /></Field>
                 )}
@@ -272,15 +292,15 @@ export function QuoteDetailsTab() {
                   <Field label="Capital Protection?:"><TextInput value="" disabled={!isPlan51} /></Field>
                 )}
                 <Field label="Original Amnt Vested:"><TextInput value="" disabled={!isPlan51} /></Field>
-                {!isPlan84 && !isPlan90 && !isPlan51 && !isPlan83 && !isPlan621 && !isPlan76 && !isPlan62a && !isPlan611 && (
+                {!isPlan84 && !isPlan90 && !isPlan51 && !isPlan83 && !isPlan621 && !isPlan76 && !isPlan62a && !isPlan611 && !isPlan52 && (
                   <Field label="Withheld Minimal Income:"><Checkbox checked={isPlan87} disabled /></Field>
                 )}
               </div>
               <div>
-                <Field label="Series:"><TextInput value={isPlan87 ? "912" : isPlan84 ? "700" : isPlan90 ? "" : isPlan51 ? "325" : isPlan83 ? "792" : isPlan621 ? "322" : isPlan76 ? "325" : isPlan62a ? "378" : isPlan611 ? "325" : "893"} disabled /></Field>
+                <Field label="Series:"><TextInput value={isPlan87 ? "912" : isPlan84 ? "700" : isPlan90 ? "" : isPlan51 ? "325" : isPlan83 ? "792" : isPlan621 ? "322" : isPlan76 ? "325" : isPlan62a ? "378" : isPlan611 ? "325" : isPlan52 ? "325" : "893"} disabled /></Field>
                 <Field label="Policy Type:">
                   <SelectInput
-                    value={isPlan84 || isPlan90 || isPlan51 || isPlan83 || isPlan621 || isPlan76 || isPlan62a || isPlan611 ? "non profit" : "with profit"}
+                    value={isPlan84 || isPlan90 || isPlan51 || isPlan83 || isPlan621 || isPlan76 || isPlan62a || isPlan611 || isPlan52 ? "non profit" : "with profit"}
                     options={["with profit", "without profit", "non profit"]}
                     disabled
                   />
@@ -318,7 +338,7 @@ export function QuoteDetailsTab() {
                   </>
                 )}
               </div>
-              {!isPlan87 && !isPlan90 && !isPlan51 && !isPlan83 && !isPlan621 && !isPlan76 && !isPlan62a && !isPlan611 && (
+              {!isPlan87 && !isPlan90 && !isPlan51 && !isPlan83 && !isPlan621 && !isPlan76 && !isPlan62a && !isPlan611 && !isPlan52 && (
                 <div>
                   <Field label="Notional Value:"><TextInput value={isPlan84 ? "8189.23" : "14,828"} disabled /></Field>
                   <Field label="Value Date:"><TextInput value={isPlan84 ? "30/04/2026" : "25/03/2026"} disabled /></Field>
@@ -355,24 +375,24 @@ export function QuoteDetailsTab() {
               ) : (
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
                 <div>
-                  <Field inline labelWidth={260} label="LTA% Crystallised:"><TextInput value={isPlan84 ? "1.55" : isPlan621 ? "3.33" : isPlan62a ? "8.04" : "0"} disabled /></Field>
-                  <Field inline labelWidth={260} label="Pension Fund within LTA:"><TextInput value={isPlan87 ? "" : isPlan84 ? "20348.97" : isPlan621 ? "39911.31" : isPlan62a ? "108570" : "15,000"} disabled /></Field>
+                  <Field inline labelWidth={260} label="LTA% Crystallised:"><TextInput value={isPlan84 ? "1.55" : isPlan621 ? "3.33" : isPlan62a ? "8.04" : isPlan52 ? "2.7" : "0"} disabled /></Field>
+                  <Field inline labelWidth={260} label="Pension Fund within LTA:"><TextInput value={isPlan87 ? "" : isPlan84 ? "20348.97" : isPlan621 ? "39911.31" : isPlan62a ? "108570" : isPlan52 ? "32402.98" : "15,000"} disabled /></Field>
                   <Field inline labelWidth={260} label="Net LTA Excess Pension Fund Retained:"><TextInput value={isPlan87 ? "" : "0"} disabled /></Field>
-                  <Field inline labelWidth={260} label="Standard Lifetime Allowance:"><TextInput value={isPlan87 ? "" : isPlan84 ? "1750000" : isPlan621 ? "1600000" : isPlan62a ? "1800000" : "1,073,100"} disabled /></Field>
+                  <Field inline labelWidth={260} label="Standard Lifetime Allowance:"><TextInput value={isPlan87 ? "" : isPlan84 ? "1750000" : isPlan621 ? "1600000" : isPlan62a ? "1800000" : isPlan52 ? "1600000" : "1,073,100"} disabled /></Field>
                   <Field inline labelWidth={260} label="First BCE:"><Checkbox checked={!isPlan621} disabled /></Field>
                   <Field inline labelWidth={260} label="LTA Protection type:"><TextInput value={isPlan87 ? "" : "N"} disabled /></Field>
                   <Field inline labelWidth={260} label="Enhancement:"><TextInput value={isPlan87 || isPlan84 ? "" : "0"} disabled /></Field>
                   <Field inline labelWidth={260} label="HMRC Certificate Number:"><TextInput value="" /></Field>
                 </div>
                 <div>
-                  <Field inline labelWidth={260} label="Cumulative LTA%:"><TextInput value={isPlan87 ? "" : isPlan84 ? "1.55" : isPlan621 ? "4.28" : isPlan62a ? "8.04" : "0"} disabled /></Field>
+                  <Field inline labelWidth={260} label="Cumulative LTA%:"><TextInput value={isPlan87 ? "" : isPlan84 ? "1.55" : isPlan621 ? "4.28" : isPlan62a ? "8.04" : isPlan52 ? "2.7" : "0"} disabled /></Field>
                   <Field inline labelWidth={260} label="LTA Excess Tax:"><TextInput value={isPlan87 ? "" : "0"} disabled /></Field>
                   <Field inline labelWidth={260} label="Net LTA Excess Lumpsum:"><TextInput value={isPlan87 ? "" : "0"} disabled /></Field>
                   <Field inline labelWidth={260} label="Pensions In Payment LTA%:"><TextInput value={isPlan87 ? "" : "0"} disabled /></Field>
-                  <Field inline labelWidth={260} label="LSA Amount:"><TextInput value={isPlan87 ? "" : isPlan84 ? "4158" : isPlan621 || isPlan62a ? "" : "8,190"} /></Field>
+                  <Field inline labelWidth={260} label="LSA Amount:"><TextInput value={isPlan87 ? "" : isPlan84 ? "4158" : isPlan621 || isPlan62a || isPlan52 ? "" : "8,190"} /></Field>
                   <Field inline labelWidth={260} label="PCLS Protection:"><TextInput value={isPlan87 ? "" : "N"} disabled /></Field>
                   <Field inline labelWidth={260} label="Enhancement:"><TextInput value={isPlan87 ? "" : "0.25"} disabled /></Field>
-                  <Field inline labelWidth={260} label="% Crystallised Post 5th Apr 2024:"><TextInput value={isPlan87 ? "0" : isPlan84 || isPlan621 || isPlan62a ? "" : "100"} /></Field>
+                  <Field inline labelWidth={260} label="% Crystallised Post 5th Apr 2024:"><TextInput value={isPlan87 ? "0" : isPlan84 || isPlan621 || isPlan62a || isPlan52 ? "" : "100"} /></Field>
                 </div>
               </div>
               )}

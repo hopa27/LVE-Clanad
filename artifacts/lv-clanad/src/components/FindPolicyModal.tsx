@@ -205,8 +205,8 @@ export function FindPolicyModal({
           {/* Results grid */}
           <div className="border border-[#BBBBBB] rounded-[8px] overflow-hidden flex-1 min-h-[200px] flex flex-col">
             <div className="overflow-auto flex-1">
-              <table className="w-full font-['Mulish'] text-[13px] text-[#3d3d3d] min-w-[1160px]">
-                <thead className="sticky top-0 z-10 [box-shadow:inset_0_3px_0_#04589b,0_3px_0_#04589b]">
+              <table className="w-full font-['Mulish'] text-[13px] text-[#3d3d3d] min-w-[1160px] border-separate border-spacing-0">
+                <thead className="sticky top-0 z-10">
                   <tr className="bg-white font-['Livvic'] font-semibold text-[13px] uppercase text-[#002f5c]">
                     {COLUMNS.map((c) => {
                       const active = c.key === searchColumn;
@@ -218,7 +218,7 @@ export function FindPolicyModal({
                             setSearch("");
                             setSelected(0);
                           }}
-                          className={`px-3 py-3 cursor-pointer select-none ${
+                          className={`px-3 py-3 cursor-pointer select-none border-t-[3px] border-b-[3px] border-[#04589b] ${
                             c.align === "right" ? "text-right" : "text-left"
                           } ${
                             active

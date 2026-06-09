@@ -175,7 +175,9 @@ export function PaymentsTab() {
     ? PAYMENT_HISTORY_90
     : isPlan51
     ? PAYMENT_HISTORY_51
-    : (isPlan82 || isPlan83)
+    : isPlan82
+    ? []
+    : isPlan83
     ? PAYMENT_HISTORY_83
     : isPlan621
     ? PAYMENT_HISTORY_621
@@ -194,7 +196,9 @@ export function PaymentsTab() {
     ? TAX_HISTORY_90
     : isPlan51
     ? TAX_HISTORY_51
-    : (isPlan82 || isPlan83)
+    : isPlan82
+    ? []
+    : isPlan83
     ? TAX_HISTORY_83
     : isPlan621
     ? TAX_HISTORY_621
@@ -312,7 +316,41 @@ export function PaymentsTab() {
               <Field label="PAYE Tax Deduction:"><TextInput value="-26.2" disabled /></Field>
             </div>
           </div>
-        ) : (isPlan82 || isPlan83) ? (
+        ) : isPlan82 ? (
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-8">
+            <div>
+              <Field label="Premium:"><TextInput value="21391.53" disabled /></Field>
+              <Field label="Tax Free Cash:"><TextInput value="0" disabled /></Field>
+              <Field label={<span className="text-[#d72714]">Total:</span>}>
+                <TextInput value="21391.53" disabled className="!text-[#d72714] underline" />
+              </Field>
+              <Field label="1st Annuitants Gross:"><TextInput value="0" disabled /></Field>
+              <Field label="2nd Annuitants Gross:"><TextInput value="0" disabled /></Field>
+            </div>
+            <div>
+              <Field label="Gross Annuity Year 1:"><TextInput value="0" disabled /></Field>
+              <Field label="Instalments Year 1:"><TextInput value="11" disabled /></Field>
+              <Field label=" "><div className="h-[44px]" /></Field>
+              <Field label="Taxable pay:"><TextInput value="-9174.99" disabled /></Field>
+              <Field label="Cumulative Free Pay:"><TextInput value="9174.99" disabled /></Field>
+            </div>
+            <div>
+              <Field label="BAL Gross Annuity:"><TextInput value="0" disabled /></Field>
+              <Field label="PAYE Tax Due To Date:"><TextInput value="0" disabled /></Field>
+              <Field label="PAYE Tax Deduction:"><TextInput value="0" disabled /></Field>
+            </div>
+            <div>
+              <Field label="Next Anniversary:">
+                <DatePicker value="28/09/2015" placeholder="" disabled />
+              </Field>
+              <Field label="Next Payment Due:">
+                <DatePicker value="26/03/2015" placeholder="" disabled />
+              </Field>
+              <Field label="Inst Remaining:"><TextInput value="7" disabled /></Field>
+              <Field label="Nth Inst:"><TextInput value="11" disabled /></Field>
+            </div>
+          </div>
+        ) : isPlan83 ? (
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-8">
             <div>
               <Field label="Premium:"><TextInput value="75459.46" disabled /></Field>

@@ -28,20 +28,20 @@ export function ApplicationDetailsTab() {
         <div>
           <Field label="Set Up Date:">
             <DatePicker
-              value={isPlan87 ? "15/05/2026" : isPlan84 ? "17/03/2010" : isPlan90 ? "25/06/2025" : isPlan51 ? "22/01/2008" : (isPlan82 || isPlan83) ? "27/07/2015" : isPlan621 ? "03/01/2008" : isPlan76 ? "21/01/2008" : isPlan62a ? "15/12/2010" : isPlan611 ? "31/01/2008" : isPlan52 ? "16/01/2008" : isPlan61a ? "06/09/2008" : ""}
+              value={isPlan87 ? "15/05/2026" : isPlan84 ? "17/03/2010" : isPlan90 ? "25/06/2025" : isPlan51 ? "22/01/2008" : isPlan82 ? "21/09/2010" : isPlan83 ? "27/07/2015" : isPlan621 ? "03/01/2008" : isPlan76 ? "21/01/2008" : isPlan62a ? "15/12/2010" : isPlan611 ? "31/01/2008" : isPlan52 ? "16/01/2008" : isPlan61a ? "06/09/2008" : ""}
               placeholder={isCompact ? "" : "DBEditAPPLI"}
               disabled
             />
           </Field>
           <Field label={isPlan90 ? "MCP Start Date:" : "Received Date:"}>
             <DatePicker
-              value={isPlan84 ? "17/03/2010" : isPlan90 ? "25/06/2025" : isPlan51 ? "21/01/2008" : (isPlan82 || isPlan83) ? "24/07/2015" : isPlan621 ? "27/12/2007" : isPlan76 ? "18/01/2008" : isPlan62a ? "15/12/2010" : isPlan611 ? "30/01/2008" : isPlan61a ? "26/08/2008" : ""}
+              value={isPlan84 ? "17/03/2010" : isPlan90 ? "25/06/2025" : isPlan51 ? "21/01/2008" : isPlan82 ? "17/09/2010" : isPlan83 ? "24/07/2015" : isPlan621 ? "27/12/2007" : isPlan76 ? "18/01/2008" : isPlan62a ? "15/12/2010" : isPlan611 ? "30/01/2008" : isPlan61a ? "26/08/2008" : ""}
               placeholder={isCompact ? "" : "DBEditAPPLIC"}
             />
           </Field>
           <Field label={isPlan90 ? "Payment Date:" : "Start Date:"}>
             <DatePicker
-              value={isPlan87 ? "15/05/2026" : isPlan84 ? "31/03/2010" : isPlan90 ? "28/05/2025" : isPlan51 ? "28/01/2008" : (isPlan82 || isPlan83) ? "14/08/2015" : isPlan621 ? "07/01/2008" : isPlan76 ? "01/01/2008" : isPlan62a ? "15/12/2010" : isPlan611 ? "31/01/2008" : isPlan52 ? "16/01/2008" : isPlan61a ? "19/09/2008" : ""}
+              value={isPlan87 ? "15/05/2026" : isPlan84 ? "31/03/2010" : isPlan90 ? "28/05/2025" : isPlan51 ? "28/01/2008" : isPlan82 ? "26/10/2010" : isPlan83 ? "14/08/2015" : isPlan621 ? "07/01/2008" : isPlan76 ? "01/01/2008" : isPlan62a ? "15/12/2010" : isPlan611 ? "31/01/2008" : isPlan52 ? "16/01/2008" : isPlan61a ? "19/09/2008" : ""}
               placeholder={isCompact ? "" : "edtStartdate"}
               disabled={isPlan84 || isPlan90 || isPlan51 || isPlan83 || isPlan82 || isPlan621 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a}
             />
@@ -58,7 +58,7 @@ export function ApplicationDetailsTab() {
           {!isPlan84 && !isPlan90 && !isPlan51 && !isPlan621 && !isPlan76 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
             <Field label="Accept Date:">
               <DatePicker
-                value={isPlan87 ? "" : (isPlan82 || isPlan83) ? "02/09/2015" : ""}
+                value={isPlan87 ? "" : isPlan82 ? "05/01/2011" : isPlan83 ? "02/09/2015" : ""}
                 placeholder={isPlan87 || isPlan83 || isPlan82 ? "" : "DBEdit21"}
                 disabled
               />
@@ -66,7 +66,7 @@ export function ApplicationDetailsTab() {
           )}
           <Field label="IFA Payment Date:">
             <DatePicker
-              value={isPlan84 ? "13/04/2010 10" : isPlan90 ? "07/07/2025 07" : isPlan51 ? "05/02/2008 09" : (isPlan82 || isPlan83) ? "24/08/2015 10" : isPlan621 ? "22/01/2008 14" : isPlan76 ? "05/02/2008 09" : isPlan62a ? "" : isPlan611 ? "" : isPlan61a ? "30/09/2008 08" : ""}
+              value={isPlan84 ? "13/04/2010 10" : isPlan90 ? "07/07/2025 07" : isPlan51 ? "05/02/2008 09" : isPlan82 ? "06/01/2011 09" : isPlan83 ? "24/08/2015 10" : isPlan621 ? "22/01/2008 14" : isPlan76 ? "05/02/2008 09" : isPlan62a ? "" : isPlan611 ? "" : isPlan61a ? "30/09/2008 08" : ""}
               placeholder={isCompact ? "" : "DBEdit13"}
               disabled={isPlan84 || isPlan90 || isPlan51 || isPlan83 || isPlan82 || isPlan621 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a}
             />
@@ -111,7 +111,7 @@ export function ApplicationDetailsTab() {
           )}
           <Field label="Days Since Application:">
             <TextInput
-              value={isPlan87 ? "" : isPlan84 ? "5912" : isPlan90 ? "334" : isPlan51 ? "6707" : (isPlan82 || isPlan83) ? "3966" : isPlan621 ? "6738" : isPlan76 ? "6712" : isPlan62a ? "5654" : isPlan611 ? "6705" : isPlan52 ? "6720" : isPlan61a ? "6496" : "dbday"}
+              value={isPlan87 ? "" : isPlan84 ? "5912" : isPlan90 ? "334" : isPlan51 ? "6707" : isPlan82 ? "5744" : isPlan83 ? "3966" : isPlan621 ? "6738" : isPlan76 ? "6712" : isPlan62a ? "5654" : isPlan611 ? "6705" : isPlan52 ? "6720" : isPlan61a ? "6496" : "dbday"}
               disabled
             />
           </Field>
@@ -155,7 +155,7 @@ export function ApplicationDetailsTab() {
             </Field>
             <Field label="Completed:">
               <TextInput
-                value={isPlan84 ? "13/04/2010" : isPlan90 ? "02/07/2025" : isPlan51 ? "05/02/2008" : (isPlan82 || isPlan83) ? "24/08/2015" : isPlan621 ? "22/01/2008" : isPlan76 ? "05/02/2008" : isPlan62a ? "" : isPlan611 ? "" : isPlan52 ? "" : isPlan61a ? "30/09/2008" : "DBCompeted"}
+                value={isPlan84 ? "13/04/2010" : isPlan90 ? "02/07/2025" : isPlan51 ? "05/02/2008" : isPlan82 ? "06/01/2011" : isPlan83 ? "24/08/2015" : isPlan621 ? "22/01/2008" : isPlan76 ? "05/02/2008" : isPlan62a ? "" : isPlan611 ? "" : isPlan52 ? "" : isPlan61a ? "30/09/2008" : "DBCompeted"}
                 disabled
               />
             </Field>
@@ -192,9 +192,9 @@ export function ApplicationDetailsTab() {
 
         {/* Column 4 */}
         <div>
-          {(isPlan87 || isPlan84) && (
+          {(isPlan87 || isPlan84 || isPlan82) && (
             <Field label="">
-              <DatePicker value="10/12/2013" placeholder="" disabled={isPlan87} />
+              <DatePicker value={isPlan82 ? "28/09/2015" : "10/12/2013"} placeholder="" disabled={isPlan87 || isPlan82} />
             </Field>
           )}
           {!isPlan84 && !isPlan90 && !isPlan51 && !isPlan83 && !isPlan82 && !isPlan76 && !isPlan621 && !isPlan62a && !isPlan52 && !isPlan61a && !isPlan611 && (
@@ -208,14 +208,14 @@ export function ApplicationDetailsTab() {
           )}
           <Field label="Last amended by:">
             <TextInput
-              value={isPlan87 ? "SAIMEENAKSHINA" : isPlan84 ? "LOPVH" : isPlan90 ? "LV66664" : isPlan51 ? "LOPSL2" : (isPlan82 || isPlan83) ? "LV66656" : isPlan621 ? "LV67320" : isPlan76 ? "LOPNXP" : isPlan62a ? "LOPRM" : isPlan611 ? "LOPKXB" : isPlan52 ? "LOPAW" : isPlan61a ? "LOPSH" : "DBEdit18"}
+              value={isPlan87 ? "SAIMEENAKSHINA" : isPlan84 ? "LOPVH" : isPlan90 ? "LV66664" : isPlan51 ? "LOPSL2" : isPlan82 ? "LOPSL2" : isPlan83 ? "LV66656" : isPlan621 ? "LV67320" : isPlan76 ? "LOPNXP" : isPlan62a ? "LOPRM" : isPlan611 ? "LOPKXB" : isPlan52 ? "LOPAW" : isPlan61a ? "LOPSH" : "DBEdit18"}
               disabled
             />
           </Field>
           {!isPlan84 && !isPlan90 && !isPlan51 && !isPlan621 && !isPlan76 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
             <>
               <Field label="App Created by:">
-                <TextInput value={isPlan87 ? "saimeenakshinathan" : (isPlan82 || isPlan83) ? "LOPEO" : "DBEdit14"} disabled />
+                <TextInput value={isPlan87 ? "saimeenakshinathan" : isPlan82 ? "LONLM" : isPlan83 ? "LOPEO" : "DBEdit14"} disabled />
               </Field>
               <Field label="Final Quote Issued by:">
                 <TextInput value={isPlan87 || isPlan83 || isPlan82 ? "" : "DBEdit19"} disabled />
@@ -227,7 +227,7 @@ export function ApplicationDetailsTab() {
           </Field>
           <Field label="Paykey:">
             <TextInput
-              value={isPlan87 ? "1023693" : isPlan84 ? "899032" : isPlan90 ? "1018055" : isPlan51 ? "887324" : isPlan82 ? "116444" : isPlan83 ? "956314" : isPlan621 ? "100004.1" : isPlan76 ? "887316" : isPlan62a ? "905319" : isPlan611 ? "887439" : isPlan52 ? "887254" : isPlan61a ? "102929.1" : "DBEdit20"}
+              value={isPlan87 ? "1023693" : isPlan84 ? "899032" : isPlan90 ? "1018055" : isPlan51 ? "887324" : isPlan82 ? "903655" : isPlan83 ? "956314" : isPlan621 ? "100004.1" : isPlan76 ? "887316" : isPlan62a ? "905319" : isPlan611 ? "887439" : isPlan52 ? "887254" : isPlan61a ? "102929.1" : "DBEdit20"}
               disabled
             />
           </Field>
@@ -246,21 +246,21 @@ export function ApplicationDetailsTab() {
       </div>
 
       {/* Correspondence Details */}
-      {!isPlan83 && !isPlan82 && !isPlan76 && (
+      {!isPlan83 && !isPlan76 && (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <Section title="Correspondence Details">
             <Field label="Correspond Name:">
               <TextInput
-                value={isPlan87 ? "Dr T Uggiu" : isPlan84 ? "Testmtbbbide" : isPlan90 ? "Testmtcchibd" : isPlan51 ? "Testmdbaabii" : isPlan621 ? "Testfrbaaaae.b" : isPlan76 ? "Testmlbaabia" : isPlan62a ? "Testmsbbibag" : isPlan611 ? "Testmssbaadad" : isPlan52 ? "" : isPlan61a ? "Testmhbacjcj b" : "correspname"}
+                value={isPlan87 ? "Dr T Uggiu" : isPlan84 ? "Testmtbbbide" : isPlan90 ? "Testmtcchibd" : isPlan51 ? "Testmdbaabii" : isPlan82 ? "Testmrbbgeee" : isPlan621 ? "Testfrbaaaae.b" : isPlan76 ? "Testmlbaabia" : isPlan62a ? "Testmsbbibag" : isPlan611 ? "Testmssbaadad" : isPlan52 ? "" : isPlan61a ? "Testmhbacjcj b" : "correspname"}
               />
             </Field>
             <Field label="Salutation Name:">
               <TextInput
-                value={isPlan87 ? "Dr Uggiu" : isPlan84 ? "Testmtbbbide" : isPlan90 ? "Testmtcchibd" : isPlan51 ? "Testmdbaabii" : isPlan621 ? "Testfrbaaaae.b" : isPlan76 ? "Testmlbaabia" : isPlan62a ? "Testmsbbibag" : isPlan611 ? "Testmssbaadad" : isPlan52 ? "" : isPlan61a ? "Testmhbacjcj b" : "salname"}
+                value={isPlan87 ? "Dr Uggiu" : isPlan84 ? "Testmtbbbide" : isPlan90 ? "Testmtcchibd" : isPlan51 ? "Testmdbaabii" : isPlan82 ? "Testmrbbgeee" : isPlan621 ? "Testfrbaaaae.b" : isPlan76 ? "Testmlbaabia" : isPlan62a ? "Testmsbbibag" : isPlan611 ? "Testmssbaadad" : isPlan52 ? "" : isPlan61a ? "Testmhbacjcj b" : "salname"}
               />
             </Field>
             <Field label="Telephone:">
-              <TextInput value={isPlan87 ? "" : isPlan84 ? "01632 391651" : isPlan90 ? "" : isPlan51 ? "016324162140" : isPlan621 ? "01632 329 783" : isPlan76 ? "01632 532709" : isPlan62a ? "01632 830 033" : isPlan611 ? "01632 741501" : isPlan52 ? "" : isPlan61a ? "01632653076" : "anntele"} />
+              <TextInput value={isPlan87 ? "" : isPlan84 ? "01632 391651" : isPlan90 ? "" : isPlan51 ? "016324162140" : isPlan82 ? "01632555660" : isPlan621 ? "01632 329 783" : isPlan76 ? "01632 532709" : isPlan62a ? "01632 830 033" : isPlan611 ? "01632 741501" : isPlan52 ? "" : isPlan61a ? "01632653076" : "anntele"} />
             </Field>
             <Field label="E-mail:">
               <TextInput
@@ -288,6 +288,8 @@ export function ApplicationDetailsTab() {
                     ? ["26 Eastern Close", "Queensferry", "Verwood", "", ""]
                     : isPlan51
                     ? ["10 Western Avenue", "Leicester", "", "", ""]
+                    : isPlan82
+                    ? ["10 Rightway Close", "Exeter", "", "", "Oldham"]
                     : isPlan621
                     ? ["5 South Drive", "Zennor", "Queensferry", "", ""]
                     : isPlan76
@@ -306,12 +308,12 @@ export function ApplicationDetailsTab() {
             </Field>
             <Field label="Postcode:">
               <TextInput
-                value={isPlan87 ? "OP9 0OP" : isPlan84 ? "ZE99 9AB" : isPlan90 ? "KI99 9AB" : isPlan51 ? "LE99 9AB" : isPlan621 ? "QU99 9AB" : isPlan76 ? "VE99 9AB" : isPlan62a ? "LE99 9AB" : isPlan611 ? "RE99 9AB" : isPlan52 ? "" : isPlan61a ? "VE99 9AB" : "phpc"}
+                value={isPlan87 ? "OP9 0OP" : isPlan84 ? "ZE99 9AB" : isPlan90 ? "KI99 9AB" : isPlan51 ? "LE99 9AB" : isPlan82 ? "QU99 9AB" : isPlan621 ? "QU99 9AB" : isPlan76 ? "VE99 9AB" : isPlan62a ? "LE99 9AB" : isPlan611 ? "RE99 9AB" : isPlan52 ? "" : isPlan61a ? "VE99 9AB" : "phpc"}
               />
             </Field>
             <Field label="Country:">
               <SelectInput
-                value={isPlan90 || isPlan51 || isPlan621 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "United Kingdom" : "cmbCountry"}
+                value={isPlan90 || isPlan51 || isPlan82 || isPlan621 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "United Kingdom" : "cmbCountry"}
                 options={["United Kingdom", "Ireland", "Other"]}
               />
             </Field>

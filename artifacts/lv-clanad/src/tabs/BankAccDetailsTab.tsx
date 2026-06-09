@@ -43,7 +43,7 @@ export function BankAccDetailsTab() {
     ? [{ company: "NM PENSION TRUST", ref: "", date: "21/08/2015", amount: "75459.46" }]
     : [];
   const plan82Rows = isPlan82
-    ? [{ company: "NM PENSION TRUST", ref: "", date: "21/08/2015", amount: "45275.68" }]
+    ? [{ company: "Scottish Equitable", ref: "", date: "26/10/2010", amount: "21391.53" }]
     : [];
   const plan621Rows = isPlan621
     ? [
@@ -107,7 +107,7 @@ export function BankAccDetailsTab() {
             </Field>
             <Field inline label="Bank account name:">
               <TextInput
-                value={isPlan87 ? "Test" : isPlan84 ? "Testktbbbide" : isPlan90 ? "Testmtcchibd" : isPlan51 ? "Testmubaabii" : isPlan82 ? "Testtrbbgeee" : isPlan83 ? "Testnybggajc" : isPlan621 ? "Testmrbaaaae.b" : isPlan76 ? "Testakbaabia" : isPlan62a ? "Testmsbbibag" : isPlan611 ? "Testjsbaadad" : isPlan52 ? "" : isPlan61a ? "" : "DBEdit79"}
+                value={isPlan87 ? "Test" : isPlan84 ? "Testktbbbide" : isPlan90 ? "Testmtcchibd" : isPlan51 ? "Testmubaabii" : isPlan82 ? "Testmrbbgeee" : isPlan83 ? "Testnybggajc" : isPlan621 ? "Testmrbaaaae.b" : isPlan76 ? "Testakbaabia" : isPlan62a ? "Testmsbbibag" : isPlan611 ? "Testjsbaadad" : isPlan52 ? "" : isPlan61a ? "" : "DBEdit79"}
                 disabled={isPlan84 || isPlan90}
               />
             </Field>
@@ -129,7 +129,7 @@ export function BankAccDetailsTab() {
           <div>
             <Field inline label="Payment Ref:">
               <TextInput
-                value={isPlan87 ? "233451" : isPlan84 ? "111834" : isPlan90 ? "227813" : isPlan51 ? "100188" : isPlan82 ? "116444" : isPlan83 ? "INVENC123588" : isPlan621 ? "100004" : isPlan76 ? "100180" : isPlan62a ? "118106" : isPlan611 ? "100303" : isPlan52 ? "100118" : isPlan61a ? "102929.1" : "DBEdit6"}
+                value={isPlan87 ? "233451" : isPlan84 ? "111834" : isPlan90 ? "227813" : isPlan51 ? "100188" : isPlan82 ? "D/1494543610" : isPlan83 ? "INVENC123588" : isPlan621 ? "100004" : isPlan76 ? "100180" : isPlan62a ? "118106" : isPlan611 ? "100303" : isPlan52 ? "100118" : isPlan61a ? "102929.1" : "DBEdit6"}
                 disabled={isPlan84 || isPlan90}
               />
             </Field>
@@ -147,7 +147,7 @@ export function BankAccDetailsTab() {
             ) : null}
             <Field inline label="TOTAL:">
               <TextInput
-                value={isPlan84 ? "27131.96" : isPlan90 ? "3021.57" : isPlan51 ? "8940.65" : isPlan82 ? "45275.68" : isPlan83 ? "75459.46" : isPlan76 ? "43962" : isPlan621 ? "" : ""}
+                value={isPlan84 ? "27131.96" : isPlan90 ? "3021.57" : isPlan51 ? "8940.65" : isPlan82 ? "21391.53" : isPlan83 ? "75459.46" : isPlan76 ? "43962" : isPlan621 ? "" : ""}
                 disabled
               />
             </Field>

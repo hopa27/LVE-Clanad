@@ -731,6 +731,7 @@ export function PaymentsTab() {
         </div>
       </Section>
 
+      {!isPlan76z && (
       <Section title="Tax History">
         <div className="overflow-auto max-h-[315px]">
           <table className="lve-grid">
@@ -765,6 +766,7 @@ export function PaymentsTab() {
           </table>
         </div>
       </Section>
+      )}
     </div>
   );
 }

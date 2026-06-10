@@ -169,12 +169,12 @@ export function Toolbar() {
             return (
               <Tooltip key={tool.label}>
                 <TooltipTrigger asChild>{button}</TooltipTrigger>
-                <TooltipContent className="bg-[#00263e] text-white border-0">
-                  <span>{tool.label} </span>
+                <TooltipContent>
+                  <span className="font-semibold">{tool.label}</span>
                   {shortcutKeys.map((k, i) => (
                     <kbd
                       key={i}
-                      className="ml-1 inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 rounded border border-white/30 bg-white/15 font-['Mulish'] text-[11px] font-semibold"
+                      className="ml-2 inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1.5 rounded-[4px] border border-[#006cf4] bg-[#eaf5f8] font-['Mulish'] text-[11px] font-semibold text-[#006cf4]"
                     >
                       {k}
                     </kbd>

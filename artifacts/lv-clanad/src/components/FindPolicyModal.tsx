@@ -331,7 +331,7 @@ export function FindPolicyModal({
                         <td className="px-2 py-1 text-right">{c.amount}</td>
                       </tr>
                     ))}
-                    {Array.from({ length: Math.max(0, 2 - (rec?.cheques?.length ?? 0)) }).map((_, i) => (
+                    {rec?.planCode !== "0" && Array.from({ length: Math.max(0, 2 - (rec?.cheques?.length ?? 0)) }).map((_, i) => (
                       <tr
                         key={`pad-${i}`}
                         className={(( (rec?.cheques?.length ?? 0) + i) % 2 === 0 ? "bg-white" : "bg-[#e7ebec34]")}

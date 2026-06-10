@@ -297,15 +297,15 @@ export function FindPolicyModal({
             <div className="grid grid-cols-[90px_160px_90px_1fr_90px_1fr] items-center gap-x-3 gap-y-2">
               <div className="font-bold text-[#4a4a49]">Premium</div>
               <div className="flex h-[28px] items-center justify-end rounded-[6px] border border-[#ACACAC] bg-[#CCCCCC] px-2 cursor-not-allowed">
-                {rec?.premium}
+                {rec?.planCode !== "0" ? rec?.premium : ""}
               </div>
               <div className="font-bold text-[#4a4a49]">Full Name 1</div>
               <div className="flex h-[28px] items-center rounded-[6px] border border-[#ACACAC] bg-[#CCCCCC] px-2 cursor-not-allowed">
-                {rec?.fullName1}
+                {rec?.planCode !== "0" ? rec?.fullName1 : ""}
               </div>
               <div className="font-bold text-[#4a4a49]">Full Name 2</div>
               <div className="flex h-[28px] items-center rounded-[6px] border border-[#ACACAC] bg-[#CCCCCC] px-2 cursor-not-allowed">
-                {rec?.fullName2}
+                {rec?.planCode !== "0" ? rec?.fullName2 : ""}
               </div>
             </div>
 

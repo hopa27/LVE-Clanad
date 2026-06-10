@@ -43,6 +43,15 @@
   }
 }
 
+/* ─── Focus-visible baseline ──────────────────────────────────────────────
+   Provides a visible 3px green ring on keyboard focus for every interactive
+   element that doesn't get a more specific treatment below.
+   Uses :focus-visible so mouse/touch clicks do NOT show the ring.          */
+*:focus-visible {
+  outline: 3px solid var(--color-lve-green);
+  outline-offset: 2px;
+}
+
 /* Custom scrollbar (per spec: 6px, #62bda8 thumb) */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
@@ -72,7 +81,8 @@
   }
   .lve-input::placeholder { color: var(--color-lve-border); font-family: 'Mulish', sans-serif; }
   .lve-input:hover:not(:disabled):not([readonly]) { border-color: var(--color-lve-green); }
-  .lve-input:focus:not(:disabled) {
+  .lve-input:focus-visible:not(:disabled) {
+    outline: none;
     border: 3px solid var(--color-lve-green);
     padding: 6px 10px;
   }
@@ -117,6 +127,10 @@
   }
   .lve-btn:hover:not(:disabled) { background: var(--color-lve-primary-hover); }
   .lve-btn:disabled { background: var(--color-lve-disabled); color: #fff; opacity: 1; cursor: not-allowed; }
+  .lve-btn:focus-visible {
+    outline: 3px solid var(--color-lve-green);
+    outline-offset: 3px;
+  }
 
   .lve-btn-secondary {
     background: #ffffff;
@@ -158,6 +172,10 @@
     background: #ffffff;
     color: var(--color-lve-tab-active-text);
     box-shadow: 0 -2px 6px rgba(0,0,0,0.04);
+  }
+  .lve-tab:focus-visible {
+    outline: 3px solid var(--color-lve-green);
+    outline-offset: -3px;
   }
 
   /* PANEL / SECTION */
@@ -210,6 +228,11 @@
   .lve-grid tbody tr:hover td.lve-sticky-col { background-color: var(--color-lve-highlight) !important; color: #ffffff; }
   .lve-grid tbody tr:hover a { color: #ffffff !important; }
   .lve-grid a { color: var(--color-lve-link); text-decoration: underline; }
+  .lve-grid a:focus-visible {
+    outline: 3px solid var(--color-lve-green);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
 
   /* Field label */
   .lve-label {

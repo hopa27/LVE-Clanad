@@ -3,6 +3,7 @@ import lvLogo from "../assets/lv-logo.png";
 import { MdLogout, MdClose, MdCheck } from "react-icons/md";
 import { TaxCertificateModal } from "./TaxCertificateModal";
 import { AboutModal } from "./AboutModal";
+import { KeyboardShortcutsModal } from "./KeyboardShortcutsModal";
 import { AmendChequesModal } from "./AmendChequesModal";
 import { CompletionCheckerModal } from "./CompletionCheckerModal";
 import { ScreenPrintModal } from "./ScreenPrintModal";
@@ -550,7 +551,10 @@ const MENU_ITEMS: MenuItem[] = [
   },
   {
     label: "Help",
-    options: [{ label: "About", action: "about" }],
+    options: [
+      { label: "About", action: "about" },
+      { label: "Keyboard Shortcuts", action: "keyboard-shortcuts" },
+    ],
   },
 ];
 
@@ -558,6 +562,7 @@ export function Header({ title }: { title: string }) {
   const [openIdx, setOpenIdx] = useState<number | null>(null);
   const [taxCertOpen, setTaxCertOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
+  const [shortcutsOpen, setShortcutsOpen] = useState(false);
   const [amendChequesOpen, setAmendChequesOpen] = useState(false);
   const [completionOpen, setCompletionOpen] = useState(false);
   const [screenPrintOpen, setScreenPrintOpen] = useState(false);
@@ -642,6 +647,12 @@ export function Header({ title }: { title: string }) {
     });
 
   useEffect(() => {
+    const handler = () => setShortcutsOpen(true);
+    window.addEventListener("clanad:open-shortcuts", handler);
+    return () => window.removeEventListener("clanad:open-shortcuts", handler);
+  }, []);
+
+  useEffect(() => {
     function onDocClick(e: MouseEvent) {
       if (navRef.current && !navRef.current.contains(e.target as Node)) {
         setOpenIdx(null);
@@ -672,6 +683,7 @@ export function Header({ title }: { title: string }) {
     else if (action === "annual-statement-recalc") setRecalcAnnStatOpen(true);
     else if (action === "reprint-annual-statements") setReprintAnnStmtOpen(true);
     else if (action === "pull-quote") setPullQuoteOpen(true);
+    else if (action === "keyboard-shortcuts") setShortcutsOpen(true);
     else if (action === "supervisory-edit") {
       window.dispatchEvent(new CustomEvent("clanad:switch-tab", { detail: "payments" }));
       setSupervisoryEditOpen(true);
@@ -853,6 +865,7 @@ export function Header({ title }: { title: string }) {
         onClose={() => setTaxCertOpen(false)}
       />
       <AboutModal open={aboutOpen} onClose={() => setAboutOpen(false)} />
+      <KeyboardShortcutsModal open={shortcutsOpen} onClose={() => setShortcutsOpen(false)} />
       <AmendChequesModal
         open={amendChequesOpen}
         onClose={() => setAmendChequesOpen(false)}

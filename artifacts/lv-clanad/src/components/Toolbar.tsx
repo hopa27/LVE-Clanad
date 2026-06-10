@@ -11,7 +11,6 @@ import {
   MdBarChart,
   MdBusiness,
   MdHistory,
-  MdKeyboard,
 } from "react-icons/md";
 import { ConfirmDialog } from "./ConfirmDialog";
 import { QuoteLookupModal } from "./QuoteLookupModal";
@@ -21,7 +20,6 @@ import { ReportsModal } from "./ReportsModal";
 import { CrsModal } from "./CrsModal";
 import { ChequeLoggerModal } from "./ChequeLoggerModal";
 import { FindPolicyModal } from "./FindPolicyModal";
-import { KeyboardShortcutsModal } from "./KeyboardShortcutsModal";
 import { useEditMode } from "../context/EditModeContext";
 import { usePlanCode } from "../context/PlanCodeContext";
 import { getShortcutKeys } from "../shortcuts";
@@ -69,18 +67,11 @@ export function Toolbar() {
   const [crsOpen, setCrsOpen] = useState(false);
   const [logOpen, setLogOpen] = useState(false);
   const [findPolicyOpen, setFindPolicyOpen] = useState(false);
-  const [shortcutsOpen, setShortcutsOpen] = useState(false);
 
   useEffect(() => {
     const handler = () => setFindPolicyOpen(true);
     window.addEventListener("clanad:open-find-policy", handler);
     return () => window.removeEventListener("clanad:open-find-policy", handler);
-  }, []);
-
-  useEffect(() => {
-    const handler = () => setShortcutsOpen(true);
-    window.addEventListener("clanad:open-shortcuts", handler);
-    return () => window.removeEventListener("clanad:open-shortcuts", handler);
   }, []);
 
   const ALL_TOOLS: Tool[] = [
@@ -149,26 +140,6 @@ export function Toolbar() {
   return (
     <TooltipProvider delayDuration={400}>
       <div className="flex flex-wrap items-center gap-2 mb-6">
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <button
-              type="button"
-              onClick={() => setShortcutsOpen(true)}
-              className="lve-btn lve-btn-secondary lve-btn-sm ml-auto"
-              aria-label="Open keyboard shortcuts"
-            >
-              <MdKeyboard size={18} />
-              <span>Shortcuts</span>
-            </button>
-          </TooltipTrigger>
-          <TooltipContent className="bg-[#00263e] text-white border-0">
-            <span>Open keyboard shortcuts </span>
-            <kbd className="ml-1 inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 rounded border border-white/30 bg-white/15 font-['Mulish'] text-[11px] font-semibold">
-              ?
-            </kbd>
-          </TooltipContent>
-        </Tooltip>
-
         <div className="w-full order-first flex flex-wrap items-center gap-2">
           {TOOLS.map((tool) => {
             const Icon = tool.icon;
@@ -263,10 +234,6 @@ export function Toolbar() {
           onClose={() => setFindPolicyOpen(false)}
         />
 
-        <KeyboardShortcutsModal
-          open={shortcutsOpen}
-          onClose={() => setShortcutsOpen(false)}
-        />
       </div>
     </TooltipProvider>
   );

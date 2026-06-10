@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback, type JSX } from "react";
+import { useState, useEffect, useRef, type JSX } from "react";
 import { EditModeProvider, useEditMode } from "./context/EditModeContext";
 import { ChequesProvider } from "./context/ChequesContext";
 import {
@@ -11,6 +11,7 @@ import { Footer } from "./components/Footer";
 import { Toolbar } from "./components/Toolbar";
 import { PolicyHeader } from "./components/PolicyHeader";
 import { TabBar, type TabKey } from "./components/TabBar";
+import { useRegisteredShortcuts } from "./hooks/useRegisteredShortcuts";
 import { StatusBar } from "./components/StatusBar";
 import { ApplicationDetailsTab } from "./tabs/ApplicationDetailsTab";
 import { AnnuitantDetailsTab } from "./tabs/AnnuitantDetailsTab";
@@ -115,23 +116,8 @@ function AppShell() {
     return () => window.removeEventListener("clanad:switch-tab", handler);
   }, []);
 
-  // Global "?" shortcut — open keyboard shortcuts modal (skip when typing in an input)
-  const openShortcuts = useCallback(() => {
-    window.dispatchEvent(new Event("clanad:open-shortcuts"));
-  }, []);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key !== "?") return;
-      const tag = (e.target as HTMLElement).tagName;
-      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
-      if ((e.target as HTMLElement).isContentEditable) return;
-      e.preventDefault();
-      openShortcuts();
-    };
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [openShortcuts]);
+  // Install all global key handlers declared in the shortcuts registry
+  useRegisteredShortcuts();
 
   return (
     <div

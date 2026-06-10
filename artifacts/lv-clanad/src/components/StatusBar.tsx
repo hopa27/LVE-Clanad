@@ -15,6 +15,8 @@ export function StatusBar() {
   const isPlan52  = planCode === "52";
   const isPlan61a = planCode === "61a";
   const isPlan90  = planCode === "90";
+  const isPlan84  = planCode === "84";
+  const isSippPol = isPlan90 || isPlan84;
   const nonLive = isPlan51 || isPlan83 || isPlan82 || isPlan80 || isPlan621 || isPlan76 || isPlan76z || isPlan62a || isPlan611 || isPlan52 || isPlan61a;
   const items = [
     {
@@ -23,10 +25,10 @@ export function StatusBar() {
       highlight: !nonLive,
       error: nonLive,
     },
-    { label: isPlan90 ? "SIPP Pol" : "Illustration", value: isPlan0 ? "" : isPlan51 ? "927657" : isPlan83 ? "10578050" : isPlan82 ? "2479583" : isPlan80 ? "2079105" : isPlan621 ? "919598" : isPlan76z ? "1030695" : isPlan76 ? "938688" : isPlan62a ? "2684095" : isPlan611 ? "948258" : isPlan52 ? "922450" : isPlan61a ? "1135311" : isPlan90 ? "608513" : "20911002" },
-    { label: "Variant",      value: isPlan0 ? "" : isPlan51 ? "8"      : isPlan83 ? "3"        : isPlan82 ? "2"       : isPlan80 ? "13"      : isPlan621 ? "4"      : isPlan76z ? "8"      : isPlan76 ? "4"      : isPlan62a ? "1"        : isPlan611 ? "5"      : isPlan52 ? "4" : isPlan61a ? "9" : isPlan90 ? "" : "7" },
-    { label: "RAQ ID",       value: nonLive || isPlan90 ? "" : "—" },
-    { label: "User",         value: isPlan51 || isPlan83 || isPlan62a || isPlan90 ? "UAT1" : "UAT3" },
+    { label: isSippPol ? "SIPP Pol" : "Illustration", value: isPlan0 ? "" : isPlan51 ? "927657" : isPlan83 ? "10578050" : isPlan82 ? "2479583" : isPlan80 ? "2079105" : isPlan621 ? "919598" : isPlan76z ? "1030695" : isPlan76 ? "938688" : isPlan62a ? "2684095" : isPlan611 ? "948258" : isPlan52 ? "922450" : isPlan61a ? "1135311" : isPlan90 ? "608513" : isPlan84 ? "" : "20911002" },
+    { label: "Variant",      value: isPlan0 ? "" : isPlan51 ? "8"      : isPlan83 ? "3"        : isPlan82 ? "2"       : isPlan80 ? "13"      : isPlan621 ? "4"      : isPlan76z ? "8"      : isPlan76 ? "4"      : isPlan62a ? "1"        : isPlan611 ? "5"      : isPlan52 ? "4" : isPlan61a ? "9" : isSippPol ? "" : "7" },
+    { label: "RAQ ID",       value: nonLive || isSippPol ? "" : "—" },
+    { label: "User",         value: isPlan51 || isPlan83 || isPlan62a || isSippPol ? "UAT1" : "UAT3" },
   ];
   return (
     <div className="lve-panel mt-6 p-4 flex flex-wrap items-center gap-6 sticky bottom-0 z-20 shadow-[0_-2px_6px_rgba(0,0,0,0.08)]">

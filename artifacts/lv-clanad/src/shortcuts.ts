@@ -4,6 +4,11 @@ export interface ShortcutEntry {
   /** Human-readable description shown in the help panel. */
   description: string;
   /**
+   * Stable identifier for programmatic lookup (e.g. by toolbar buttons).
+   * Components can call `getShortcutKeys(id)` to retrieve the display keys.
+   */
+  id?: string;
+  /**
    * The `KeyboardEvent.key` value that triggers this shortcut globally.
    * Omit for shortcuts that are handled at the component level (e.g. arrow
    * keys inside the tab-bar) — they will still appear in the modal but will
@@ -42,6 +47,19 @@ export const SHORTCUT_SECTIONS: ShortcutSection[] = [
     ],
   },
   {
+    heading: "Toolbar actions",
+    shortcuts: [
+      { id: "toolbar:new-app",  keys: ["N"], description: "New Application" },
+      { id: "toolbar:edit",     keys: ["E"], description: "Edit / Save" },
+      { id: "toolbar:cancel",   keys: ["X"], description: "Cancel edit" },
+      { id: "toolbar:search",   keys: ["F"], description: "Find policy" },
+      { id: "toolbar:log",      keys: ["L"], description: "Cheque log" },
+      { id: "toolbar:crs",      keys: ["R"], description: "CRS" },
+      { id: "toolbar:reports",  keys: ["T"], description: "Reports" },
+      { id: "toolbar:company",  keys: ["O"], description: "Company selection" },
+    ],
+  },
+  {
     heading: "General",
     shortcuts: [
       {
@@ -54,3 +72,19 @@ export const SHORTCUT_SECTIONS: ShortcutSection[] = [
     ],
   },
 ];
+
+/**
+ * Returns the display key labels for the shortcut with the given `id`, or
+ * `undefined` if no entry with that id exists.
+ *
+ * Usage in toolbar tooltips:
+ *   const keys = getShortcutKeys("toolbar:edit"); // ["E"]
+ */
+export function getShortcutKeys(id: string): string[] | undefined {
+  for (const section of SHORTCUT_SECTIONS) {
+    for (const entry of section.shortcuts) {
+      if (entry.id === id) return entry.keys;
+    }
+  }
+  return undefined;
+}

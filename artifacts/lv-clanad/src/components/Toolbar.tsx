@@ -24,6 +24,7 @@ import { FindPolicyModal } from "./FindPolicyModal";
 import { KeyboardShortcutsModal } from "./KeyboardShortcutsModal";
 import { useEditMode } from "../context/EditModeContext";
 import { usePlanCode } from "../context/PlanCodeContext";
+import { getShortcutKeys } from "../shortcuts";
 import {
   Tooltip,
   TooltipContent,
@@ -49,7 +50,8 @@ type Tool = {
   icon: typeof MdAdd;
   enabled: boolean;
   action?: ToolAction;
-  shortcut?: string;
+  /** ID of the matching entry in the shortcut registry (`shortcuts.ts`). */
+  shortcutId?: string;
 };
 
 export function Toolbar() {
@@ -82,22 +84,22 @@ export function Toolbar() {
   }, []);
 
   const ALL_TOOLS: Tool[] = [
-    { label: "New App", icon: MdAdd, enabled: !editing, action: "new-app", shortcut: "N" },
-    { label: "New Quote", icon: MdNoteAdd, enabled: false, action: "new-quote" },
-    { label: "Sim App", icon: MdContentCopy, enabled: !editing && !isPlan51, action: "sim-app" },
+    { label: "New App",   icon: MdAdd,         enabled: !editing,                          action: "new-app",     shortcutId: "toolbar:new-app" },
+    { label: "New Quote", icon: MdNoteAdd,      enabled: false,                             action: "new-quote" },
+    { label: "Sim App",   icon: MdContentCopy,  enabled: !editing && !isPlan51,             action: "sim-app" },
     {
       label: editing ? "Save" : "Edit",
       icon: editing ? MdSave : MdEdit,
       enabled: !isPlan621,
       action: "edit-toggle",
-      shortcut: "E",
+      shortcutId: "toolbar:edit",
     },
-    { label: "Cancel", icon: MdBlock, enabled: editing && !isPlan51 && !isPlan621, action: "edit-cancel", shortcut: "X" },
-    { label: "Search", icon: MdSearch, enabled: !editing, action: "search", shortcut: "F" },
-    { label: "Log", icon: MdHistory, enabled: !editing, action: "log", shortcut: "L" },
-    { label: "CRS", icon: MdStorage, enabled: !editing, action: "crs", shortcut: "R" },
-    { label: "Reports", icon: MdBarChart, enabled: !editing, action: "reports", shortcut: "T" },
-    { label: "Company", icon: MdBusiness, enabled: !editing, action: "company", shortcut: "O" },
+    { label: "Cancel",  icon: MdBlock,   enabled: editing && !isPlan51 && !isPlan621, action: "edit-cancel", shortcutId: "toolbar:cancel" },
+    { label: "Search",  icon: MdSearch,  enabled: !editing,                           action: "search",      shortcutId: "toolbar:search" },
+    { label: "Log",     icon: MdHistory, enabled: !editing,                           action: "log",         shortcutId: "toolbar:log" },
+    { label: "CRS",     icon: MdStorage, enabled: !editing,                           action: "crs",         shortcutId: "toolbar:crs" },
+    { label: "Reports", icon: MdBarChart,enabled: !editing,                           action: "reports",     shortcutId: "toolbar:reports" },
+    { label: "Company", icon: MdBusiness,enabled: !editing,                           action: "company",     shortcutId: "toolbar:company" },
   ];
   const isPlan62a = planCode === "62a";
   const isPlan52  = planCode === "52";
@@ -129,9 +131,11 @@ export function Toolbar() {
       if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
       if ((e.target as HTMLElement).isContentEditable) return;
       const key = e.key.toLowerCase();
-      const tool = toolsRef.current.find(
-        (t) => t.shortcut && t.shortcut.toLowerCase() === key
-      );
+      const tool = toolsRef.current.find((t) => {
+        if (!t.shortcutId) return false;
+        const keys = getShortcutKeys(t.shortcutId);
+        return keys?.[0]?.toLowerCase() === key;
+      });
       if (tool && tool.enabled && tool.action) {
         e.preventDefault();
         handleClick(tool.action);
@@ -169,6 +173,7 @@ export function Toolbar() {
           {TOOLS.map((tool) => {
             const Icon = tool.icon;
             const isPrimary = tool.action === "edit-toggle" && editing;
+            const shortcutKeys = tool.shortcutId ? getShortcutKeys(tool.shortcutId) : undefined;
             const button = (
               <button
                 key={tool.label}
@@ -176,6 +181,9 @@ export function Toolbar() {
                 disabled={!tool.enabled}
                 tabIndex={!tool.enabled ? -1 : undefined}
                 onClick={() => handleClick(tool.action)}
+                aria-description={
+                  shortcutKeys ? `Shortcut: ${shortcutKeys.join("+")}` : undefined
+                }
                 className={`${
                   isPrimary ? "lve-btn" : "lve-btn lve-btn-secondary"
                 } lve-btn-sm`}
@@ -185,16 +193,21 @@ export function Toolbar() {
               </button>
             );
 
-            if (!tool.shortcut) return button;
+            if (!shortcutKeys) return button;
 
             return (
               <Tooltip key={tool.label}>
                 <TooltipTrigger asChild>{button}</TooltipTrigger>
                 <TooltipContent className="bg-[#00263e] text-white border-0">
                   <span>{tool.label} </span>
-                  <kbd className="ml-1 inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 rounded border border-white/30 bg-white/15 font-['Mulish'] text-[11px] font-semibold">
-                    {tool.shortcut}
-                  </kbd>
+                  {shortcutKeys.map((k, i) => (
+                    <kbd
+                      key={i}
+                      className="ml-1 inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 rounded border border-white/30 bg-white/15 font-['Mulish'] text-[11px] font-semibold"
+                    >
+                      {k}
+                    </kbd>
+                  ))}
                 </TooltipContent>
               </Tooltip>
             );

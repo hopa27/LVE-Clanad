@@ -273,7 +273,7 @@ export function FindPolicyModal({
                       ))}
                     </tr>
                   ))}
-                  {Array.from({ length: Math.max(0, 4 - filtered.length) }).map(
+                  {Array.from({ length: Math.max(0, 5 - filtered.length) }).map(
                     (_, i) => (
                       <tr
                         key={`empty-${i}`}

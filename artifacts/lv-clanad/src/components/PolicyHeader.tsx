@@ -26,7 +26,7 @@ export function PolicyHeader() {
   const SIM_ROWS = planCode === "82" ? SIM_ROWS_82 : SIM_ROWS_DEFAULT;
 
   return (
-    <div className="lve-panel mb-6 p-4 flex flex-wrap items-center gap-3">
+    <div className="lve-panel mb-6 p-4 flex flex-nowrap items-center gap-3 overflow-x-auto">
       <button
         type="button"
         title="Policy No"
@@ -45,41 +45,41 @@ export function PolicyHeader() {
       </button>
 
       {planCode === "87" || planCode === "84" || planCode === "90" || planCode === "51" || planCode === "80" || planCode === "83" || planCode === "82" || planCode === "621" || planCode === "76" || planCode === "76z" || planCode === "62a" || planCode === "611" || planCode === "52" || planCode === "61a" ? (
-        <div className="px-4 h-9 inline-flex items-center rounded-[8px] bg-[#006cf4] text-white font-['Livvic'] font-semibold text-sm">
+        <div className="px-4 h-9 shrink-0 inline-flex items-center rounded-[8px] bg-[#006cf4] text-white font-['Livvic'] font-semibold text-sm whitespace-nowrap">
           Liverpool Victoria Friendly Society Limited
         </div>
       ) : (
-        <div className="w-[260px] h-9 rounded-[8px] bg-[#006cf4]" />
+        <div className="w-[260px] h-9 shrink-0 rounded-[8px] bg-[#006cf4]" />
       )}
 
       <div
         title="CLANAD Number"
-        className="px-3 h-9 inline-flex items-center rounded-[8px] bg-[#eaf5f8] text-[#0d2c41] font-['Mulish'] text-sm cursor-help"
+        className="px-3 h-9 shrink-0 inline-flex items-center rounded-[8px] bg-[#eaf5f8] text-[#0d2c41] font-['Mulish'] text-sm cursor-help whitespace-nowrap"
       >
         {policyRef}
       </div>
 
       <div
         title="Plan Code"
-        className="px-3 h-9 inline-flex items-center rounded-[8px] font-['Livvic'] font-semibold text-sm"
+        className="px-3 h-9 shrink-0 inline-flex items-center rounded-[8px] font-['Livvic'] font-semibold text-sm whitespace-nowrap"
         style={{ background: "var(--lve-accent)", color: "var(--lve-accent-fg, #ffffff)" }}
       >
         {planCode === "76z" ? "76" : planCode}
       </div>
 
       <div
-        className="px-4 h-9 w-[220px] inline-flex items-center rounded-[8px] font-['Livvic'] font-semibold text-sm overflow-hidden"
+        className="px-4 h-9 w-[220px] shrink-0 inline-flex items-center rounded-[8px] font-['Livvic'] font-semibold text-sm overflow-hidden"
         style={{ background: "var(--lve-accent)", color: "var(--lve-accent-fg, #ffffff)" }}
       >
         <span className="truncate">{surname}</span>
       </div>
 
       {planCode === "84" || planCode === "51" || planCode === "80" || planCode === "83" || planCode === "62a" || planCode === "611" || planCode === "61a" ? (
-        <div className="px-3 h-9 inline-flex items-center rounded-[8px] bg-[#eaf5f8] text-[#0d2c41] font-['Mulish'] text-sm">
+        <div className="px-3 h-9 shrink-0 inline-flex items-center rounded-[8px] bg-[#eaf5f8] text-[#0d2c41] font-['Mulish'] text-sm whitespace-nowrap">
           Simultaneous Policies
         </div>
       ) : (
-        <div className="w-[220px] h-9 rounded-[8px] bg-[#eaf5f8]" />
+        <div className="w-[220px] h-9 shrink-0 rounded-[8px] bg-[#eaf5f8]" />
       )}
 
       <button
@@ -96,15 +96,15 @@ export function PolicyHeader() {
       </button>
 
       {planCode === "90" ? (
-        <div role="status" aria-label="Policy type: Monthly Cash Policy" className="px-4 h-9 inline-flex items-center rounded-[8px] bg-[#F4D9E8] text-[#710340] font-['Livvic'] font-semibold text-sm">
+        <div role="status" aria-label="Policy type: Monthly Cash Policy" className="px-4 h-9 shrink-0 inline-flex items-center rounded-[8px] bg-[#F4D9E8] text-[#710340] font-['Livvic'] font-semibold text-sm whitespace-nowrap">
           MONTHLY CASH POLICY
         </div>
       ) : planCode === "83" ? (
-        <div role="status" aria-label="Policy type: Retirement Account" className="px-4 h-9 inline-flex items-center rounded-[8px] bg-[#00B4C8] text-black font-['Livvic'] font-semibold text-sm">
+        <div role="status" aria-label="Policy type: Retirement Account" className="px-4 h-9 shrink-0 inline-flex items-center rounded-[8px] bg-[#00B4C8] text-black font-['Livvic'] font-semibold text-sm whitespace-nowrap">
           RETIREMENT ACCOUNT
         </div>
       ) : (
-        <div className="w-[180px] h-9 rounded-[8px] bg-[#eaf5f8]" />
+        <div className="w-[180px] h-9 shrink-0 rounded-[8px] bg-[#eaf5f8]" />
       )}
 
       {simOpen && (

@@ -18,7 +18,13 @@ export function TaxCertificateModal({
   const [dateErrorOpen, setDateErrorOpen] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const dateErrorRef = useRef<HTMLDivElement>(null);
+  const infoRef = useRef<HTMLDivElement>(null);
+  const confirmRef = useRef<HTMLDivElement>(null);
   useFocusTrap(containerRef, open);
+  useFocusTrap(dateErrorRef, dateErrorOpen);
+  useFocusTrap(infoRef, infoOpen);
+  useFocusTrap(confirmRef, confirmOpen);
   useEscapeKey(open ? onClose : null);
   
 
@@ -120,7 +126,7 @@ export function TaxCertificateModal({
 
       {dateErrorOpen && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/30">
-          <div className="lve-panel w-[380px] bg-white">
+          <div ref={dateErrorRef} className="lve-panel w-[380px] bg-white">
             <header className="lve-panel-header flex items-center justify-between">
               <span>Client Annuity Administration System</span>
               <button
@@ -155,7 +161,7 @@ export function TaxCertificateModal({
 
       {infoOpen && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/30">
-          <div className="lve-panel w-[340px] bg-white">
+          <div ref={infoRef} className="lve-panel w-[340px] bg-white">
             <header className="lve-panel-header">Information</header>
             <div className="lve-panel-body">
               <div className="flex items-start gap-3">
@@ -179,7 +185,7 @@ export function TaxCertificateModal({
 
       {confirmOpen && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/30">
-          <div className="lve-panel w-[360px] bg-white">
+          <div ref={confirmRef} className="lve-panel w-[360px] bg-white">
             <header className="lve-panel-header">Confirm</header>
             <div className="lve-panel-body">
               <div className="flex items-start gap-3">

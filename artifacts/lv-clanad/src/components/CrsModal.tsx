@@ -121,7 +121,9 @@ export function CrsModal({
   );
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const infoDialogRef = useRef<HTMLDivElement>(null);
   useFocusTrap(containerRef, open);
+  useFocusTrap(infoDialogRef, info !== null);
   useEscapeKey(open ? onClose : null);
   
 
@@ -461,7 +463,7 @@ export function CrsModal({
 
       {info && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40 p-6">
-          <div className="lve-panel bg-white w-[480px] max-w-full">
+          <div ref={infoDialogRef} className="lve-panel bg-white w-[480px] max-w-full">
             <header className="lve-panel-header flex items-center justify-between">
               <span>{info.title}</span>
               <button

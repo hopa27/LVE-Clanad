@@ -15,21 +15,33 @@ function getFocusable(container: HTMLElement): HTMLElement[] {
   );
 }
 
+const activeTrapStack: symbol[] = [];
+
 export function useFocusTrap(containerRef: RefObject<HTMLElement | null>, active: boolean) {
   const prevFocus = useRef<HTMLElement | null>(null);
+  const trapId = useRef<symbol>(Symbol("focus-trap"));
 
   useEffect(() => {
     if (!active) return;
 
+    const id = trapId.current;
     prevFocus.current = document.activeElement as HTMLElement | null;
+    activeTrapStack.push(id);
 
     const container = containerRef.current;
-    if (!container) return;
+    if (!container) {
+      return () => {
+        const idx = activeTrapStack.lastIndexOf(id);
+        if (idx !== -1) activeTrapStack.splice(idx, 1);
+        prevFocus.current?.focus();
+      };
+    }
 
     const focusable = getFocusable(container);
     focusable[0]?.focus();
 
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (activeTrapStack[activeTrapStack.length - 1] !== id) return;
       if (e.key !== "Tab") return;
       const els = getFocusable(container);
       if (!els.length) return;
@@ -51,6 +63,8 @@ export function useFocusTrap(containerRef: RefObject<HTMLElement | null>, active
     document.addEventListener("keydown", handleKeyDown);
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
+      const idx = activeTrapStack.lastIndexOf(id);
+      if (idx !== -1) activeTrapStack.splice(idx, 1);
       prevFocus.current?.focus();
     };
   }, [active, containerRef]);

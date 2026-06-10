@@ -17,7 +17,11 @@ export function AboutModal({
   const [emailError, setEmailError] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const emailDialogRef = useRef<HTMLDivElement>(null);
+  const emailErrorDialogRef = useRef<HTMLDivElement>(null);
   useFocusTrap(containerRef, open);
+  useFocusTrap(emailDialogRef, emailOpen);
+  useFocusTrap(emailErrorDialogRef, emailError);
   useEscapeKey(open ? onClose : null);
 
   const handleCopy = () => {
@@ -177,7 +181,7 @@ export function AboutModal({
 
       {emailOpen && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40 p-6">
-          <div className="lve-panel bg-white w-[440px] max-w-full">
+          <div ref={emailDialogRef} className="lve-panel bg-white w-[440px] max-w-full">
             <header className="lve-panel-header flex items-center justify-between">
               <span>Email About Box contents to IT</span>
               <button
@@ -234,7 +238,7 @@ export function AboutModal({
 
       {emailError && (
         <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/40 p-6">
-          <div className="lve-panel bg-white w-[460px] max-w-full">
+          <div ref={emailErrorDialogRef} className="lve-panel bg-white w-[460px] max-w-full">
             <header className="lve-panel-header flex items-center justify-between">
               <span>Information</span>
               <button

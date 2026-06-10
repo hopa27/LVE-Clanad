@@ -251,7 +251,11 @@ export function ReportsModal({
   };
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const printErrorRef = useRef<HTMLDivElement>(null);
+  const warningRef = useRef<HTMLDivElement>(null);
   useFocusTrap(containerRef, open);
+  useFocusTrap(printErrorRef, printError);
+  useFocusTrap(warningRef, warningMessage !== null);
   useEscapeKey(open ? onClose : null);
   
 
@@ -389,7 +393,7 @@ export function ReportsModal({
 
       {printError && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40 p-6">
-          <div className="lve-panel bg-white w-[460px] max-w-full">
+          <div ref={printErrorRef} className="lve-panel bg-white w-[460px] max-w-full">
             <header className="lve-panel-header flex items-center justify-between">
               <span>{systemName} Reporting System</span>
               <button
@@ -428,7 +432,7 @@ export function ReportsModal({
 
       {warningMessage && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40 p-6">
-          <div className="lve-panel bg-white w-[460px] max-w-full">
+          <div ref={warningRef} className="lve-panel bg-white w-[460px] max-w-full">
             <header className="lve-panel-header flex items-center justify-between">
               <span>Warning</span>
               <button

@@ -95,6 +95,7 @@ export function MiscDiaryModal({
   const [warnOpen, setWarnOpen] = useState(false);
   const typeRef = useRef<HTMLDivElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const warnDialogRef = useRef<HTMLDivElement>(null);
 
   const reset = () => {
     setType("");
@@ -110,6 +111,7 @@ export function MiscDiaryModal({
   };
 
   useFocusTrap(containerRef, open);
+  useFocusTrap(warnDialogRef, warnOpen);
   useEscapeKey(open ? handleClose : null);
 
   useEffect(() => {
@@ -230,7 +232,7 @@ export function MiscDiaryModal({
 
       {warnOpen && (
         <div className="fixed inset-0 z-[80] flex items-center justify-center bg-black/40">
-          <div className="lve-panel w-[420px] bg-white">
+          <div ref={warnDialogRef} className="lve-panel w-[420px] bg-white">
             <header className="lve-panel-header">
               Client Annuity Administration System
             </header>

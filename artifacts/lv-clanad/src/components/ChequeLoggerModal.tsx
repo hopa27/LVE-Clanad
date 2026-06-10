@@ -54,7 +54,11 @@ export function ChequeLoggerModal({
   });
 
   const containerRef = useRef<HTMLDivElement>(null);
+  const confirmDeleteRef = useRef<HTMLDivElement>(null);
+  const infoDialogRef = useRef<HTMLDivElement>(null);
   useFocusTrap(containerRef, open);
+  useFocusTrap(confirmDeleteRef, confirmDelete !== null);
+  useFocusTrap(infoDialogRef, info !== null);
   useEscapeKey(open ? onClose : null);
   
 
@@ -357,7 +361,7 @@ export function ChequeLoggerModal({
 
       {confirmDelete && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40 p-6">
-          <div className="lve-panel bg-white w-[420px] max-w-full">
+          <div ref={confirmDeleteRef} className="lve-panel bg-white w-[420px] max-w-full">
             <header className="lve-panel-header flex items-center justify-between">
               <span>Information</span>
               <button
@@ -400,7 +404,7 @@ export function ChequeLoggerModal({
 
       {info && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40 p-6">
-          <div className="lve-panel bg-white w-[440px] max-w-full">
+          <div ref={infoDialogRef} className="lve-panel bg-white w-[440px] max-w-full">
             <header className="lve-panel-header flex items-center justify-between">
               <span>Information</span>
               <button

@@ -127,9 +127,24 @@ export function EventsTab() {
 
   const hasSelection = selectedIdx !== null;
 
+  const handleGridKey = (e: React.KeyboardEvent) => {
+    if (!rows.length) return;
+    const last = rows.length - 1;
+    if (e.key === "ArrowDown") { e.preventDefault(); setSelectedIdx((i) => Math.min((i ?? -1) + 1, last)); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); setSelectedIdx((i) => Math.max((i ?? 1) - 1, 0)); }
+    else if (e.key === "Home") { e.preventDefault(); setSelectedIdx(0); }
+    else if (e.key === "End") { e.preventDefault(); setSelectedIdx(last); }
+  };
+
   return (
     <Section title="Event Details">
-      <div className="overflow-auto">
+      <div
+        className="overflow-auto"
+        role="grid"
+        tabIndex={0}
+        onKeyDown={handleGridKey}
+        aria-label="Event Details grid"
+      >
         <table className="lve-grid">
           <thead>
             <tr>
@@ -161,6 +176,8 @@ export function EventsTab() {
                     key={i}
                     onClick={() => setSelectedIdx(i)}
                     className="cursor-pointer"
+                    aria-selected={isSel}
+                    role="row"
                   >
                     <td className="!px-4" style={tdStyle}>{r.date}</td>
                     <td className="!px-4" style={tdStyle}>{r.no}</td>

@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { MdClose } from "react-icons/md";
 import lvLogo from "../assets/lv-logo.png";
 import coinsBg from "@assets/image_1778782056161.png";
+import { useFocusTrap } from "../hooks/useFocusTrap";
+import { useEscapeKey } from "../hooks/useEscapeKey";
 
 export function AboutModal({
   open,
@@ -14,6 +16,9 @@ export function AboutModal({
   const [subject, setSubject] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [toast, setToast] = useState<string | null>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(containerRef, open);
+  useEscapeKey(open ? onClose : null);
 
   const handleCopy = () => {
     const text = [
@@ -53,7 +58,7 @@ export function AboutModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
-      <div className="lve-panel bg-white w-[760px] max-w-full">
+      <div ref={containerRef} className="lve-panel bg-white w-[760px] max-w-full">
         <header className="lve-panel-header flex items-center justify-between">
           <span>About</span>
           <button

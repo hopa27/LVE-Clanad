@@ -406,7 +406,25 @@ export function DiaryAuditTab() {
   return (
     <div className="space-y-4">
       <Section title="Diary Details">
-        <div className="overflow-auto max-h-[320px]">
+        {(() => {
+          const visibleDiary = isPlan0 ? [] : diary;
+          const handleDiaryKey = (e: React.KeyboardEvent) => {
+            if (!visibleDiary.length) return;
+            const curIdx = selectedRef === null ? -1 : visibleDiary.findIndex((d) => d.ref === selectedRef);
+            const last = visibleDiary.length - 1;
+            if (e.key === "ArrowDown") { e.preventDefault(); setSelectedRef(visibleDiary[Math.min(curIdx + 1, last)].ref); }
+            else if (e.key === "ArrowUp") { e.preventDefault(); setSelectedRef(visibleDiary[Math.max(curIdx - 1, 0)].ref); }
+            else if (e.key === "Home") { e.preventDefault(); setSelectedRef(visibleDiary[0].ref); }
+            else if (e.key === "End") { e.preventDefault(); setSelectedRef(visibleDiary[last].ref); }
+          };
+          return (
+        <div
+          className="overflow-auto max-h-[320px]"
+          role="grid"
+          tabIndex={0}
+          onKeyDown={handleDiaryKey}
+          aria-label="Diary Details grid"
+        >
           <table className="lve-grid">
             <thead>
               <tr>
@@ -418,7 +436,7 @@ export function DiaryAuditTab() {
               </tr>
             </thead>
             <tbody>
-              {(isPlan0 ? [] : diary).map((d) => {
+              {visibleDiary.map((d) => {
                 const isSel = selectedRef === d.ref;
                 const tdStyle = isSel
                   ? { backgroundColor: "#05579B", color: "#ffffff" }
@@ -428,6 +446,8 @@ export function DiaryAuditTab() {
                     key={d.ref}
                     onClick={() => setSelectedRef(d.ref)}
                     className="cursor-pointer"
+                    aria-selected={isSel}
+                    role="row"
                   >
                     <td className="!px-4 whitespace-nowrap" style={tdStyle}>{d.ref}</td>
                     <td className="!px-4 whitespace-nowrap" style={tdStyle}>{d.type}</td>
@@ -443,6 +463,8 @@ export function DiaryAuditTab() {
             </tbody>
           </table>
         </div>
+          );
+        })()}
 
         <div className="flex flex-wrap gap-2 mt-4">
           <button

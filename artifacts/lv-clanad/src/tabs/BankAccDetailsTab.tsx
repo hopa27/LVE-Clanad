@@ -12,6 +12,7 @@ const SEED_CHEQUE_NOS = new Set(["232693", "232694", "232695"]);
 
 export function BankAccDetailsTab() {
   const [editBankOpen, setEditBankOpen] = useState(false);
+  const [selectedTransferIdx, setSelectedTransferIdx] = useState<number | null>(null);
   const { planCode } = usePlanCode();
   const isPlan87  = planCode === "87";
   const isPlan84  = planCode === "84";
@@ -173,7 +174,23 @@ export function BankAccDetailsTab() {
       </Section>
 
       <Section>
-        <div className="overflow-auto max-h-[320px]">
+        {(() => {
+          const handleTransferKey = (e: React.KeyboardEvent) => {
+            if (!rows.length) return;
+            const last = rows.length - 1;
+            if (e.key === "ArrowDown") { e.preventDefault(); setSelectedTransferIdx((i) => Math.min((i ?? -1) + 1, last)); }
+            else if (e.key === "ArrowUp") { e.preventDefault(); setSelectedTransferIdx((i) => Math.max((i ?? 1) - 1, 0)); }
+            else if (e.key === "Home") { e.preventDefault(); setSelectedTransferIdx(0); }
+            else if (e.key === "End") { e.preventDefault(); setSelectedTransferIdx(last); }
+          };
+          return (
+        <div
+          className="overflow-auto max-h-[320px]"
+          role="grid"
+          tabIndex={0}
+          onKeyDown={handleTransferKey}
+          aria-label="Transfer history grid"
+        >
           <table className="lve-grid">
             <thead className="sticky top-0 bg-white z-10">
               <tr>
@@ -184,17 +201,29 @@ export function BankAccDetailsTab() {
               </tr>
             </thead>
             <tbody>
-              {rows.map((t, i) => (
-                <tr key={i}>
-                  <td>{t.company}</td>
-                  <td>{t.ref}</td>
-                  <td>{t.date}</td>
-                  <td style={{ textAlign: "right" }}>{t.amount}</td>
-                </tr>
-              ))}
+              {rows.map((t, i) => {
+                const isSel = selectedTransferIdx === i;
+                const tdStyle = isSel ? { backgroundColor: "#05579B", color: "#ffffff" } : undefined;
+                return (
+                  <tr
+                    key={i}
+                    onClick={() => setSelectedTransferIdx(i)}
+                    className="cursor-pointer"
+                    aria-selected={isSel}
+                    role="row"
+                  >
+                    <td style={tdStyle}>{t.company}</td>
+                    <td style={tdStyle}>{t.ref}</td>
+                    <td style={tdStyle}>{t.date}</td>
+                    <td style={{ textAlign: "right", ...(isSel ? { backgroundColor: "#05579B", color: "#ffffff" } : {}) }}>{t.amount}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
+          );
+        })()}
       </Section>
 
       <EditBankDetailsModal

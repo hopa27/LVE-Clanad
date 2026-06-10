@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Field, TextInput, Section } from "../components/Field";
 import { DatePicker } from "../components/DatePicker";
 import { MdFileUpload } from "react-icons/md";
@@ -184,6 +185,7 @@ export function PaymentsTab() {
   const isPlan611 = planCode === "611";
   const isPlan52  = planCode === "52";
   const isPlan61a = planCode === "61a";
+  const [selectedPayIdx, setSelectedPayIdx] = useState<number | null>(null);
 
   const paymentHistory = isPlan84
     ? PAYMENT_HISTORY_84
@@ -701,7 +703,23 @@ export function PaymentsTab() {
       </Section>
 
       <Section title="Payment History">
-        <div className="overflow-auto max-h-[315px]">
+        {(() => {
+          const handlePayKey = (e: React.KeyboardEvent) => {
+            if (!paymentHistory.length) return;
+            const last = paymentHistory.length - 1;
+            if (e.key === "ArrowDown") { e.preventDefault(); setSelectedPayIdx((i) => Math.min((i ?? -1) + 1, last)); }
+            else if (e.key === "ArrowUp") { e.preventDefault(); setSelectedPayIdx((i) => Math.max((i ?? 1) - 1, 0)); }
+            else if (e.key === "Home") { e.preventDefault(); setSelectedPayIdx(0); }
+            else if (e.key === "End") { e.preventDefault(); setSelectedPayIdx(last); }
+          };
+          return (
+        <div
+          className="overflow-auto max-h-[315px]"
+          role="grid"
+          tabIndex={0}
+          onKeyDown={handlePayKey}
+          aria-label="Payment History grid"
+        >
           <table className="lve-grid">
             <thead className="sticky top-0 bg-white z-10">
               <tr>
@@ -715,20 +733,32 @@ export function PaymentsTab() {
               </tr>
             </thead>
             <tbody>
-              {paymentHistory.map((row, i) => (
-                <tr key={i}>
-                  <td>{row.date}</td>
-                  <td>{row.gross}</td>
-                  {!isPlan82 && !isPlan83 && !isPlan76 && !isPlan76z && <><td>{row.cap}</td><td>{row.tax}</td><td>{row.postAdj}</td><td>{row.net}</td></>}
-                  <td>{row.method}</td>
-                  <td>{row.reason}</td>
-                  <td>{row.bacs}</td>
-                  <td>{row.hash}</td>
-                </tr>
-              ))}
+              {paymentHistory.map((row, i) => {
+                const isSel = selectedPayIdx === i;
+                const tdStyle = isSel ? { backgroundColor: "#05579B", color: "#ffffff" } : undefined;
+                return (
+                  <tr
+                    key={i}
+                    onClick={() => setSelectedPayIdx(i)}
+                    className="cursor-pointer"
+                    aria-selected={isSel}
+                    role="row"
+                  >
+                    <td style={tdStyle}>{row.date}</td>
+                    <td style={tdStyle}>{row.gross}</td>
+                    {!isPlan82 && !isPlan83 && !isPlan76 && !isPlan76z && <><td style={tdStyle}>{row.cap}</td><td style={tdStyle}>{row.tax}</td><td style={tdStyle}>{row.postAdj}</td><td style={tdStyle}>{row.net}</td></>}
+                    <td style={tdStyle}>{row.method}</td>
+                    <td style={tdStyle}>{row.reason}</td>
+                    <td style={tdStyle}>{row.bacs}</td>
+                    <td style={tdStyle}>{row.hash}</td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
+          );
+        })()}
       </Section>
 
       {!isPlan76z && (

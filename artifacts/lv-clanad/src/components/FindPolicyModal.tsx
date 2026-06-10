@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { MdClose, MdRadioButtonChecked, MdRadioButtonUnchecked } from "react-icons/md";
 import { usePlanCode, PLAN_CODE_VERSIONS, type PlanCodeVersion } from "../context/PlanCodeContext";
+import { useFocusTrap } from "../hooks/useFocusTrap";
+import { useEscapeKey } from "../hooks/useEscapeKey";
 
 type ChequeRow = { company: string; date: string; amount: string };
 
@@ -124,6 +126,12 @@ export function FindPolicyModal({
   const [searchColumn, setSearchColumn] = useState<ColumnKey>("policyRef");
   const { setPlanCode, setSurname, setPolicyRef } = usePlanCode();
 
+  const containerRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  useFocusTrap(containerRef, open);
+  useEscapeKey(open ? onClose : null);
+
   if (!open) return null;
 
   const placeholder = POLICIES[0]?.[searchColumn] ?? "";
@@ -150,9 +158,32 @@ export function FindPolicyModal({
     onClose();
   };
 
+  const loadRow = (p: PolicyRow) => {
+    if (versionCodes.includes(p.planCode)) {
+      setPlanCode(p.planCode as PlanCodeVersion);
+    }
+    setSurname(p.surname);
+    setPolicyRef(p.policyRef);
+    onClose();
+  };
+
+  const handleGridKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      setSelected((prev) => Math.min(prev + 1, filtered.length - 1));
+    } else if (e.key === "ArrowUp") {
+      e.preventDefault();
+      setSelected((prev) => Math.max(prev - 1, 0));
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      const p = filtered[selected];
+      if (p) loadRow(p);
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
-      <div className="lve-panel bg-white w-[1200px] max-w-full h-[96vh] flex flex-col">
+      <div ref={containerRef} className="lve-panel bg-white w-[1200px] max-w-full h-[96vh] flex flex-col">
         <header className="lve-panel-header flex items-center justify-between">
           <span>Find Policy</span>
           <button
@@ -218,7 +249,14 @@ export function FindPolicyModal({
           </div>
 
           {/* Results grid */}
-          <div className="border border-[#BBBBBB] rounded-[8px] overflow-hidden flex-1 min-h-[200px] flex flex-col">
+          <div
+            ref={gridRef}
+            className="border border-[#BBBBBB] rounded-[8px] overflow-hidden flex-1 min-h-[200px] flex flex-col focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#178830]"
+            tabIndex={0}
+            role="grid"
+            aria-label="Policy results"
+            onKeyDown={handleGridKeyDown}
+          >
             <div className="overflow-auto flex-1">
               <table className="w-full font-['Mulish'] text-[13px] text-[#3d3d3d] min-w-[1160px] border-separate border-spacing-0">
                 <thead className="sticky top-0 z-10">
@@ -252,15 +290,7 @@ export function FindPolicyModal({
                     <tr
                       key={p.policyRef}
                       onClick={() => setSelected(i)}
-                      onDoubleClick={() => {
-                        setSelected(i);
-                        if (versionCodes.includes(p.planCode)) {
-                          setPlanCode(p.planCode as PlanCodeVersion);
-                        }
-                        setSurname(p.surname);
-                        setPolicyRef(p.policyRef);
-                        onClose();
-                      }}
+                      onDoubleClick={() => loadRow(p)}
                       className={`cursor-pointer ${
                         i === selected
                           ? "bg-[#003578] text-white"
@@ -304,15 +334,15 @@ export function FindPolicyModal({
           <div className="border border-[#BBBBBB] rounded-[8px] p-3 space-y-2 font-['Mulish'] text-[13px] text-[#3d3d3d] shrink-0">
             <div className="grid grid-cols-[90px_160px_90px_1fr_90px_1fr] items-center gap-x-3 gap-y-2">
               <div className="font-bold text-[#4a4a49]">Premium</div>
-              <div className="flex h-[28px] items-center justify-end rounded-[6px] border border-[#ACACAC] bg-[#CCCCCC] px-2 cursor-not-allowed">
+              <div tabIndex={-1} className="flex h-[28px] items-center justify-end rounded-[6px] border border-[#ACACAC] bg-[#CCCCCC] px-2 cursor-not-allowed">
                 {rec?.planCode !== "0" ? rec?.premium : ""}
               </div>
               <div className="font-bold text-[#4a4a49]">Full Name 1</div>
-              <div className="flex h-[28px] items-center rounded-[6px] border border-[#ACACAC] bg-[#CCCCCC] px-2 cursor-not-allowed">
+              <div tabIndex={-1} className="flex h-[28px] items-center rounded-[6px] border border-[#ACACAC] bg-[#CCCCCC] px-2 cursor-not-allowed">
                 {rec?.planCode !== "0" ? rec?.fullName1 : ""}
               </div>
               <div className="font-bold text-[#4a4a49]">Full Name 2</div>
-              <div className="flex h-[28px] items-center rounded-[6px] border border-[#ACACAC] bg-[#CCCCCC] px-2 cursor-not-allowed">
+              <div tabIndex={-1} className="flex h-[28px] items-center rounded-[6px] border border-[#ACACAC] bg-[#CCCCCC] px-2 cursor-not-allowed">
                 {rec?.planCode !== "0" ? rec?.fullName2 : ""}
               </div>
             </div>

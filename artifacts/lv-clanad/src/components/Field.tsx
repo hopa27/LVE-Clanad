@@ -58,6 +58,7 @@ export function TextInput({
   const { editing } = useEditMode();
   const isControlled = onChange !== undefined;
   const lockedReadOnly = readOnly || (!editing && !isControlled);
+  const notInteractive = lockedReadOnly || disabled;
   return (
     <input
       type={type}
@@ -66,6 +67,7 @@ export function TextInput({
       disabled={disabled}
       placeholder={placeholder}
       data-error={error || undefined}
+      tabIndex={notInteractive ? -1 : undefined}
       onChange={isControlled ? (e) => onChange(e.target.value) : undefined}
       className={`lve-input ${
         lockedReadOnly && !disabled ? "bg-[#fafafa] cursor-default" : ""
@@ -100,6 +102,7 @@ export function SelectInput({
         {...(isControlled ? { value } : { defaultValue: value })}
         onChange={(e) => onChange?.(e.target.value)}
         disabled={isDisabled}
+        tabIndex={isDisabled ? -1 : undefined}
         data-error={error || undefined}
         className={`lve-input pr-12 appearance-none ${
           lockedReadOnly && !disabled ? "bg-[#fafafa] cursor-default" : ""
@@ -150,6 +153,7 @@ export function Checkbox({
           type="checkbox"
           checked={isChecked}
           disabled={isLocked}
+          tabIndex={isLocked ? -1 : undefined}
           onChange={(e) => {
             setIsChecked(e.target.checked);
             onChange?.(e.target.checked);

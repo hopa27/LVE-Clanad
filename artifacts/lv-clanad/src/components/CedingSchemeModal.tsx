@@ -1,4 +1,6 @@
 import { useMemo, useRef, useState } from "react";
+import { useFocusTrap } from "../hooks/useFocusTrap";
+import { useEscapeKey } from "../hooks/useEscapeKey";
 import {
   MdClose,
   MdInsertDriveFile,
@@ -382,6 +384,9 @@ export function CedingSchemeModal({
   const [confirmNewOpen, setConfirmNewOpen] = useState(false);
   const [confirmEditOpen, setConfirmEditOpen] = useState(false);
   const [confirmCancelOpen, setConfirmCancelOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(containerRef, open);
+  useEscapeKey(open ? onClose : null);
 
   if (!open) return null;
 
@@ -449,7 +454,7 @@ export function CedingSchemeModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
-      <div className="lve-panel w-[1024px] max-w-[95vw] bg-white">
+      <div ref={containerRef} className="lve-panel w-[1024px] max-w-[95vw] bg-white">
         <header className="lve-panel-header flex items-center justify-between">
           <span>Ceding Company Details</span>
           <button

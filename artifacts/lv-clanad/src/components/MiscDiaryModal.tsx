@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { MdCheck, MdClose, MdArrowDropDown, MdInfoOutline } from "react-icons/md";
 import { DatePicker } from "./DatePicker";
+import { useFocusTrap } from "../hooks/useFocusTrap";
+import { useEscapeKey } from "../hooks/useEscapeKey";
 
 const TYPE_OPTIONS = [
   "",
@@ -92,6 +94,7 @@ export function MiscDiaryModal({
   const [typeOpen, setTypeOpen] = useState(false);
   const [warnOpen, setWarnOpen] = useState(false);
   const typeRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const reset = () => {
     setType("");
@@ -105,6 +108,9 @@ export function MiscDiaryModal({
     reset();
     onClose();
   };
+
+  useFocusTrap(containerRef, open);
+  useEscapeKey(open ? handleClose : null);
 
   useEffect(() => {
     if (!typeOpen) return;
@@ -141,7 +147,7 @@ export function MiscDiaryModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
-      <div className="lve-panel w-[460px] bg-white">
+      <div ref={containerRef} className="lve-panel w-[460px] bg-white">
         <header className="lve-panel-header">{title}</header>
         <div className="lve-panel-body space-y-4">
           <div className="flex items-center gap-3">

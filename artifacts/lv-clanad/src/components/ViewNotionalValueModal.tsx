@@ -1,4 +1,7 @@
+import { useRef } from "react";
 import { MdClose } from "react-icons/md";
+import { useFocusTrap } from "../hooks/useFocusTrap";
+import { useEscapeKey } from "../hooks/useEscapeKey";
 
 type Row = {
   valueDate: string;
@@ -22,11 +25,15 @@ export function ViewNotionalValueModal({
   open: boolean;
   onClose: () => void;
 }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(containerRef, open);
+  useEscapeKey(open ? onClose : null);
+
   if (!open) return null;
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
-      <div className="lve-panel bg-white w-[760px] max-w-full max-h-[92vh] flex flex-col">
+      <div ref={containerRef} className="lve-panel bg-white w-[760px] max-w-full max-h-[92vh] flex flex-col">
         <header className="lve-panel-header flex items-center justify-between">
           <span>ViewNotionalValue</span>
           <button

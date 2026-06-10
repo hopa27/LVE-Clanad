@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { MdCheck, MdClose, MdArrowDropDown, MdDelete, MdHelpOutline } from "react-icons/md";
 import { DatePicker } from "./DatePicker";
+import { useFocusTrap } from "../hooks/useFocusTrap";
+import { useEscapeKey } from "../hooks/useEscapeKey";
 
 const NEEDS_OPTIONS = [
   "BI | Break In Call",
@@ -74,6 +76,9 @@ export function CustomerNeedsModal({
   const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
   const [deletedOpen, setDeletedOpen] = useState(false);
   const needRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(containerRef, open);
+  useEscapeKey(open ? onClose : null);
 
   useEffect(() => {
     if (!needOpen) return;
@@ -133,7 +138,7 @@ export function CustomerNeedsModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
-      <div className="lve-panel w-[760px] bg-white">
+      <div ref={containerRef} className="lve-panel w-[760px] bg-white">
         <header className="lve-panel-header flex items-center justify-between">
           <span>CustomerNeeds</span>
           <button

@@ -174,6 +174,7 @@ const QUOTE_COLUMNS = [
 
 export function QuoteDetailsTab() {
   const [notionalOpen, setNotionalOpen] = useState(false);
+  const [selectedQuoteIdx, setSelectedQuoteIdx] = useState<number | null>(null);
   const { planCode } = usePlanCode();
   const isPlan0   = planCode === "0";
   const isPlan87  = planCode === "87";
@@ -469,7 +470,23 @@ export function QuoteDetailsTab() {
       </Section>
 
       <Section title="Quote Lines">
-        <div className="overflow-auto">
+        {(() => {
+          const handleQuoteKey = (e: React.KeyboardEvent) => {
+            if (!quoteRows.length) return;
+            const last = quoteRows.length - 1;
+            if (e.key === "ArrowDown") { e.preventDefault(); setSelectedQuoteIdx((i) => Math.min((i ?? -1) + 1, last)); }
+            else if (e.key === "ArrowUp") { e.preventDefault(); setSelectedQuoteIdx((i) => Math.max((i ?? 1) - 1, 0)); }
+            else if (e.key === "Home") { e.preventDefault(); setSelectedQuoteIdx(0); }
+            else if (e.key === "End") { e.preventDefault(); setSelectedQuoteIdx(last); }
+          };
+          return (
+        <div
+          className="overflow-auto"
+          role="grid"
+          tabIndex={0}
+          onKeyDown={handleQuoteKey}
+          aria-label="Quote Lines grid"
+        >
           <table className="lve-grid">
             <thead>
               <tr>
@@ -479,21 +496,33 @@ export function QuoteDetailsTab() {
               </tr>
             </thead>
             <tbody>
-              {quoteRows.map((r, i) => (
-                <tr key={i}>
-                  {[
-                    r.type, r.premium, r.tfc, r.original, r.escType, r.escRate,
-                    r.currentInc, r.spousePct, r.spouseInc, r.guarantee, r.lastPay,
-                    r.overlap, r.valProt, r.taxFree, r.maxFree,
-                    r.valProtFlag, r.lsConvert, r.planProt, r.dependant,
-                  ].map((v, j) => (
-                    <td key={j} className="!px-4 whitespace-nowrap">{v}</td>
-                  ))}
-                </tr>
-              ))}
+              {quoteRows.map((r, i) => {
+                const isSel = selectedQuoteIdx === i;
+                const tdStyle = isSel ? { backgroundColor: "#05579B", color: "#ffffff" } : undefined;
+                return (
+                  <tr
+                    key={i}
+                    onClick={() => setSelectedQuoteIdx(i)}
+                    className="cursor-pointer"
+                    aria-selected={isSel}
+                    role="row"
+                  >
+                    {[
+                      r.type, r.premium, r.tfc, r.original, r.escType, r.escRate,
+                      r.currentInc, r.spousePct, r.spouseInc, r.guarantee, r.lastPay,
+                      r.overlap, r.valProt, r.taxFree, r.maxFree,
+                      r.valProtFlag, r.lsConvert, r.planProt, r.dependant,
+                    ].map((v, j) => (
+                      <td key={j} className="!px-4 whitespace-nowrap" style={tdStyle}>{v}</td>
+                    ))}
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
+          );
+        })()}
       </Section>
 
       {isPlan0 && (

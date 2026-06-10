@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   MdClose,
   MdFirstPage,
@@ -11,6 +11,8 @@ import {
   MdAssignmentInd,
 } from "react-icons/md";
 import { useCheques } from "../context/ChequesContext";
+import { useFocusTrap } from "../hooks/useFocusTrap";
+import { useEscapeKey } from "../hooks/useEscapeKey";
 
 const SEED_CHEQUE_NOS = new Set(["232693", "232694", "232695"]);
 
@@ -23,6 +25,9 @@ export function AmendChequesModal({
 }) {
   const { cheques, setCheques } = useCheques();
   const amendable = cheques.filter((c) => !SEED_CHEQUE_NOS.has(c.chequeNo));
+  const containerRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(containerRef, open);
+  useEscapeKey(open ? onClose : null);
 
   const [idx, setIdx] = useState(0);
   const [date, setDate] = useState("");
@@ -89,7 +94,7 @@ export function AmendChequesModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
-      <div className="lve-panel bg-white w-[420px] max-w-full">
+      <div ref={containerRef} className="lve-panel bg-white w-[420px] max-w-full">
         <header className="lve-panel-header flex items-center justify-between">
           <span>Amend the cheques</span>
           <button

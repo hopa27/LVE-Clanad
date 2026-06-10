@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, type JSX } from "react";
+import { useState, useEffect, useRef, useCallback, type JSX } from "react";
 import { EditModeProvider, useEditMode } from "./context/EditModeContext";
 import { ChequesProvider } from "./context/ChequesContext";
 import {
@@ -114,6 +114,24 @@ function AppShell() {
     window.addEventListener("clanad:switch-tab", handler);
     return () => window.removeEventListener("clanad:switch-tab", handler);
   }, []);
+
+  // Global "?" shortcut — open keyboard shortcuts modal (skip when typing in an input)
+  const openShortcuts = useCallback(() => {
+    window.dispatchEvent(new Event("clanad:open-shortcuts"));
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== "?") return;
+      const tag = (e.target as HTMLElement).tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+      if ((e.target as HTMLElement).isContentEditable) return;
+      e.preventDefault();
+      openShortcuts();
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [openShortcuts]);
 
   return (
     <div

@@ -11,6 +11,7 @@ import {
   MdBarChart,
   MdBusiness,
   MdHistory,
+  MdKeyboard,
 } from "react-icons/md";
 import { ConfirmDialog } from "./ConfirmDialog";
 import { QuoteLookupModal } from "./QuoteLookupModal";
@@ -20,6 +21,7 @@ import { ReportsModal } from "./ReportsModal";
 import { CrsModal } from "./CrsModal";
 import { ChequeLoggerModal } from "./ChequeLoggerModal";
 import { FindPolicyModal } from "./FindPolicyModal";
+import { KeyboardShortcutsModal } from "./KeyboardShortcutsModal";
 import { useEditMode } from "../context/EditModeContext";
 import { usePlanCode } from "../context/PlanCodeContext";
 
@@ -58,11 +60,18 @@ export function Toolbar() {
   const [crsOpen, setCrsOpen] = useState(false);
   const [logOpen, setLogOpen] = useState(false);
   const [findPolicyOpen, setFindPolicyOpen] = useState(false);
+  const [shortcutsOpen, setShortcutsOpen] = useState(false);
 
   useEffect(() => {
     const handler = () => setFindPolicyOpen(true);
     window.addEventListener("clanad:open-find-policy", handler);
     return () => window.removeEventListener("clanad:open-find-policy", handler);
+  }, []);
+
+  useEffect(() => {
+    const handler = () => setShortcutsOpen(true);
+    window.addEventListener("clanad:open-shortcuts", handler);
+    return () => window.removeEventListener("clanad:open-shortcuts", handler);
   }, []);
 
   const ALL_TOOLS: Tool[] = [
@@ -104,6 +113,19 @@ export function Toolbar() {
 
   return (
     <div className="flex flex-wrap items-center gap-2 mb-6">
+      {/* Keyboard shortcuts button — always visible, floated to the right */}
+      <button
+        type="button"
+        onClick={() => setShortcutsOpen(true)}
+        className="lve-btn lve-btn-secondary lve-btn-sm ml-auto"
+        title="Keyboard shortcuts (?)"
+        aria-label="Open keyboard shortcuts"
+      >
+        <MdKeyboard size={18} />
+        <span>Shortcuts</span>
+      </button>
+
+      <div className="w-full order-first flex flex-wrap items-center gap-2">
       {TOOLS.map((tool) => {
         const Icon = tool.icon;
         const isPrimary = tool.action === "edit-toggle" && editing;
@@ -124,6 +146,7 @@ export function Toolbar() {
           </button>
         );
       })}
+      </div>
 
       <ConfirmDialog
         open={newAppConfirm}
@@ -172,6 +195,11 @@ export function Toolbar() {
       <FindPolicyModal
         open={findPolicyOpen}
         onClose={() => setFindPolicyOpen(false)}
+      />
+
+      <KeyboardShortcutsModal
+        open={shortcutsOpen}
+        onClose={() => setShortcutsOpen(false)}
       />
     </div>
   );

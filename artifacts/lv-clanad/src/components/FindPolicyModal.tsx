@@ -44,6 +44,13 @@ const POLICIES: PolicyRow[] = [
 const STATUSES = ["Pending", "Completed", "Shelved", "ALL"] as const;
 type Status = (typeof STATUSES)[number];
 
+const STATUS_CODES: Record<Status, Set<string> | null> = {
+  Pending:   new Set(["P"]),
+  Completed: new Set(["L"]),
+  Shelved:   new Set(["N", "X"]),
+  ALL:       null,
+};
+
 function Radio({
   checked,
   label,
@@ -121,11 +128,12 @@ export function FindPolicyModal({
 
   const placeholder = POLICIES[0]?.[searchColumn] ?? "";
   const q = search.trim().toLowerCase();
-  const filtered = q
-    ? POLICIES.filter((p) =>
-        String(p[searchColumn] ?? "").toLowerCase().includes(q),
-      )
-    : POLICIES;
+  const allowedStatuses = STATUS_CODES[status];
+  const filtered = POLICIES.filter((p) => {
+    const textMatch = !q || String(p[searchColumn] ?? "").toLowerCase().includes(q);
+    const statusMatch = allowedStatuses === null || allowedStatuses.has(p.status);
+    return textMatch && statusMatch;
+  });
 
   const rec = filtered[selected] ?? filtered[0];
 
@@ -185,7 +193,7 @@ export function FindPolicyModal({
                     key={s}
                     label={s}
                     checked={status === s}
-                    onChange={() => setStatus(s)}
+                    onChange={() => { setStatus(s); setSelected(0); }}
                   />
                 ))}
               </div>

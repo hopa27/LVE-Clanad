@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   MdAdd,
   MdNoteAdd,
@@ -24,6 +24,12 @@ import { FindPolicyModal } from "./FindPolicyModal";
 import { KeyboardShortcutsModal } from "./KeyboardShortcutsModal";
 import { useEditMode } from "../context/EditModeContext";
 import { usePlanCode } from "../context/PlanCodeContext";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
 
 type ToolAction =
   | "new-app"
@@ -43,6 +49,7 @@ type Tool = {
   icon: typeof MdAdd;
   enabled: boolean;
   action?: ToolAction;
+  shortcut?: string;
 };
 
 export function Toolbar() {
@@ -75,7 +82,7 @@ export function Toolbar() {
   }, []);
 
   const ALL_TOOLS: Tool[] = [
-    { label: "New App", icon: MdAdd, enabled: !editing, action: "new-app" },
+    { label: "New App", icon: MdAdd, enabled: !editing, action: "new-app", shortcut: "N" },
     { label: "New Quote", icon: MdNoteAdd, enabled: false, action: "new-quote" },
     { label: "Sim App", icon: MdContentCopy, enabled: !editing && !isPlan51, action: "sim-app" },
     {
@@ -83,13 +90,14 @@ export function Toolbar() {
       icon: editing ? MdSave : MdEdit,
       enabled: !isPlan621,
       action: "edit-toggle",
+      shortcut: "E",
     },
-    { label: "Cancel", icon: MdBlock, enabled: editing && !isPlan51 && !isPlan621, action: "edit-cancel" },
-    { label: "Search", icon: MdSearch, enabled: !editing, action: "search" },
-    { label: "Log", icon: MdHistory, enabled: !editing, action: "log" },
-    { label: "CRS", icon: MdStorage, enabled: !editing, action: "crs" },
-    { label: "Reports", icon: MdBarChart, enabled: !editing, action: "reports" },
-    { label: "Company", icon: MdBusiness, enabled: !editing, action: "company" },
+    { label: "Cancel", icon: MdBlock, enabled: editing && !isPlan51 && !isPlan621, action: "edit-cancel", shortcut: "X" },
+    { label: "Search", icon: MdSearch, enabled: !editing, action: "search", shortcut: "F" },
+    { label: "Log", icon: MdHistory, enabled: !editing, action: "log", shortcut: "L" },
+    { label: "CRS", icon: MdStorage, enabled: !editing, action: "crs", shortcut: "R" },
+    { label: "Reports", icon: MdBarChart, enabled: !editing, action: "reports", shortcut: "T" },
+    { label: "Company", icon: MdBusiness, enabled: !editing, action: "company", shortcut: "O" },
   ];
   const isPlan62a = planCode === "62a";
   const isPlan52  = planCode === "52";
@@ -98,7 +106,7 @@ export function Toolbar() {
     : ALL_TOOLS;
   const TOOLS = baseTools;
 
-  const handleClick = (action?: ToolAction) => {
+  const handleClick = useCallback((action?: ToolAction) => {
     if (action === "new-app") setNewAppConfirm(true);
     else if (action === "new-quote") { /* always disabled */ }
     else if (action === "sim-app") setSimAppConfirm(true);
@@ -109,98 +117,144 @@ export function Toolbar() {
     else if (action === "crs") setCrsOpen(true);
     else if (action === "log") setLogOpen(true);
     else if (action === "search") setFindPolicyOpen(true);
-  };
+  }, [editing, setEditing, cancel]);
+
+  const toolsRef = useRef(TOOLS);
+  toolsRef.current = TOOLS;
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.altKey || e.ctrlKey || e.metaKey) return;
+      const tag = (e.target as HTMLElement).tagName;
+      if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+      if ((e.target as HTMLElement).isContentEditable) return;
+      const key = e.key.toLowerCase();
+      const tool = toolsRef.current.find(
+        (t) => t.shortcut && t.shortcut.toLowerCase() === key
+      );
+      if (tool && tool.enabled && tool.action) {
+        e.preventDefault();
+        handleClick(tool.action);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    return () => document.removeEventListener("keydown", handleKeyDown);
+  }, [handleClick]);
 
   return (
-    <div className="flex flex-wrap items-center gap-2 mb-6">
-      {/* Keyboard shortcuts button — always visible, floated to the right */}
-      <button
-        type="button"
-        onClick={() => setShortcutsOpen(true)}
-        className="lve-btn lve-btn-secondary lve-btn-sm ml-auto"
-        title="Keyboard shortcuts (?)"
-        aria-label="Open keyboard shortcuts"
-      >
-        <MdKeyboard size={18} />
-        <span>Shortcuts</span>
-      </button>
+    <TooltipProvider delayDuration={400}>
+      <div className="flex flex-wrap items-center gap-2 mb-6">
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <button
+              type="button"
+              onClick={() => setShortcutsOpen(true)}
+              className="lve-btn lve-btn-secondary lve-btn-sm ml-auto"
+              aria-label="Open keyboard shortcuts"
+            >
+              <MdKeyboard size={18} />
+              <span>Shortcuts</span>
+            </button>
+          </TooltipTrigger>
+          <TooltipContent className="bg-[#00263e] text-white border-0">
+            <span>Open keyboard shortcuts </span>
+            <kbd className="ml-1 inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 rounded border border-white/30 bg-white/15 font-['Mulish'] text-[11px] font-semibold">
+              ?
+            </kbd>
+          </TooltipContent>
+        </Tooltip>
 
-      <div className="w-full order-first flex flex-wrap items-center gap-2">
-      {TOOLS.map((tool) => {
-        const Icon = tool.icon;
-        const isPrimary = tool.action === "edit-toggle" && editing;
-        return (
-          <button
-            key={tool.label}
-            type="button"
-            disabled={!tool.enabled}
-            tabIndex={!tool.enabled ? -1 : undefined}
-            onClick={() => handleClick(tool.action)}
-            className={`${
-              isPrimary ? "lve-btn" : "lve-btn lve-btn-secondary"
-            } lve-btn-sm`}
-            title={tool.label}
-          >
-            <Icon size={18} />
-            <span>{tool.label}</span>
-          </button>
-        );
-      })}
+        <div className="w-full order-first flex flex-wrap items-center gap-2">
+          {TOOLS.map((tool) => {
+            const Icon = tool.icon;
+            const isPrimary = tool.action === "edit-toggle" && editing;
+            const button = (
+              <button
+                key={tool.label}
+                type="button"
+                disabled={!tool.enabled}
+                tabIndex={!tool.enabled ? -1 : undefined}
+                onClick={() => handleClick(tool.action)}
+                className={`${
+                  isPrimary ? "lve-btn" : "lve-btn lve-btn-secondary"
+                } lve-btn-sm`}
+              >
+                <Icon size={18} />
+                <span>{tool.label}</span>
+              </button>
+            );
+
+            if (!tool.shortcut) return button;
+
+            return (
+              <Tooltip key={tool.label}>
+                <TooltipTrigger asChild>{button}</TooltipTrigger>
+                <TooltipContent className="bg-[#00263e] text-white border-0">
+                  <span>{tool.label} </span>
+                  <kbd className="ml-1 inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1 rounded border border-white/30 bg-white/15 font-['Mulish'] text-[11px] font-semibold">
+                    {tool.shortcut}
+                  </kbd>
+                </TooltipContent>
+              </Tooltip>
+            );
+          })}
+        </div>
+
+        <ConfirmDialog
+          open={newAppConfirm}
+          message="Create a new Application?"
+          onYes={() => {
+            setNewAppConfirm(false);
+            setQuoteLookupOpen(true);
+          }}
+          onNo={() => setNewAppConfirm(false)}
+        />
+
+        <ConfirmDialog
+          open={simAppConfirm}
+          message="Are you sure you wish to generate simultaneous policy?"
+          onYes={() => {
+            setSimAppConfirm(false);
+            setQuoteLookupOpen(true);
+          }}
+          onNo={() => setSimAppConfirm(false)}
+        />
+
+        <QuoteLookupModal
+          open={quoteLookupOpen}
+          onClose={() => setQuoteLookupOpen(false)}
+        />
+
+        <PullQuoteModal
+          open={newQuoteOpen}
+          onClose={() => setNewQuoteOpen(false)}
+        />
+
+        <CompanySelectionModal
+          open={companyOpen}
+          onClose={() => setCompanyOpen(false)}
+        />
+
+        <ReportsModal
+          open={reportsOpen}
+          onClose={() => setReportsOpen(false)}
+        />
+
+        <CrsModal open={crsOpen} onClose={() => setCrsOpen(false)} />
+
+        <ChequeLoggerModal open={logOpen} onClose={() => setLogOpen(false)} />
+
+        <FindPolicyModal
+          open={findPolicyOpen}
+          onClose={() => setFindPolicyOpen(false)}
+        />
+
+        <KeyboardShortcutsModal
+          open={shortcutsOpen}
+          onClose={() => setShortcutsOpen(false)}
+        />
       </div>
-
-      <ConfirmDialog
-        open={newAppConfirm}
-        message="Create a new Application?"
-        onYes={() => {
-          setNewAppConfirm(false);
-          setQuoteLookupOpen(true);
-        }}
-        onNo={() => setNewAppConfirm(false)}
-      />
-
-      <ConfirmDialog
-        open={simAppConfirm}
-        message="Are you sure you wish to generate simultaneous policy?"
-        onYes={() => {
-          setSimAppConfirm(false);
-          setQuoteLookupOpen(true);
-        }}
-        onNo={() => setSimAppConfirm(false)}
-      />
-
-      <QuoteLookupModal
-        open={quoteLookupOpen}
-        onClose={() => setQuoteLookupOpen(false)}
-      />
-
-      <PullQuoteModal
-        open={newQuoteOpen}
-        onClose={() => setNewQuoteOpen(false)}
-      />
-
-      <CompanySelectionModal
-        open={companyOpen}
-        onClose={() => setCompanyOpen(false)}
-      />
-
-      <ReportsModal
-        open={reportsOpen}
-        onClose={() => setReportsOpen(false)}
-      />
-
-      <CrsModal open={crsOpen} onClose={() => setCrsOpen(false)} />
-
-      <ChequeLoggerModal open={logOpen} onClose={() => setLogOpen(false)} />
-
-      <FindPolicyModal
-        open={findPolicyOpen}
-        onClose={() => setFindPolicyOpen(false)}
-      />
-
-      <KeyboardShortcutsModal
-        open={shortcutsOpen}
-        onClose={() => setShortcutsOpen(false)}
-      />
-    </div>
+    </TooltipProvider>
   );
 }

@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { MdClose, MdKeyboard } from "react-icons/md";
 import { useFocusTrap } from "../hooks/useFocusTrap";
 import { useEscapeKey } from "../hooks/useEscapeKey";
-import { SHORTCUT_SECTIONS } from "../shortcuts";
+import { useShortcutRegistry } from "../context/ShortcutRegistryContext";
 
 function Key({ children }: { children: string }) {
   return (
@@ -22,6 +22,8 @@ export function KeyboardShortcutsModal({
   const containerRef = useRef<HTMLDivElement>(null);
   useFocusTrap(containerRef, open);
   useEscapeKey(open ? onClose : null);
+
+  const { sections } = useShortcutRegistry();
 
   if (!open) return null;
 
@@ -52,7 +54,7 @@ export function KeyboardShortcutsModal({
         </header>
 
         <div className="lve-panel-body overflow-y-auto flex-1">
-          {SHORTCUT_SECTIONS.map((section) => (
+          {sections.map((section) => (
             <section key={section.heading} className="mb-6 last:mb-0">
               <h3 className="font-['Livvic'] text-[11px] font-semibold uppercase tracking-wider text-[#005a9c] mb-3 pb-1 border-b border-[#e0eaf0]">
                 {section.heading}

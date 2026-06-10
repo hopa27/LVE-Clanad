@@ -1,18 +1,19 @@
 import { useEffect } from "react";
-import { SHORTCUT_SECTIONS } from "../shortcuts";
+import { useShortcutRegistry } from "../context/ShortcutRegistryContext";
 
 /**
- * Installs global `keydown` listeners for every entry in `SHORTCUT_SECTIONS`
- * that has both a `triggerKey` and a `handler`.  Skips events originating
- * from text inputs, textareas, selects, and contentEditable elements.
+ * Installs global `keydown` listeners for every entry in the shortcut registry
+ * that has both a `triggerKey` and a `handler`.  Skips events originating from
+ * text inputs, textareas, selects, and contentEditable elements.
  *
- * Because the registry is the single source of truth, adding a new entry
- * with `triggerKey` + `handler` automatically wires the runtime behaviour
- * as well as updating the KeyboardShortcutsModal.
+ * Reads from `ShortcutRegistryContext` so dynamically registered shortcuts
+ * (via `useRegisterShortcut`) are picked up automatically.
  */
 export function useRegisteredShortcuts(): void {
+  const { entries } = useShortcutRegistry();
+
   useEffect(() => {
-    const entries = SHORTCUT_SECTIONS.flatMap((s) => s.shortcuts).filter(
+    const active = entries.filter(
       (s) => s.triggerKey !== undefined && s.handler !== undefined
     );
 
@@ -28,7 +29,7 @@ export function useRegisteredShortcuts(): void {
         return;
       }
 
-      for (const entry of entries) {
+      for (const entry of active) {
         if (e.key === entry.triggerKey) {
           e.preventDefault();
           entry.handler!(e);
@@ -39,5 +40,5 @@ export function useRegisteredShortcuts(): void {
 
     document.addEventListener("keydown", listener);
     return () => document.removeEventListener("keydown", listener);
-  }, []);
+  }, [entries]);
 }

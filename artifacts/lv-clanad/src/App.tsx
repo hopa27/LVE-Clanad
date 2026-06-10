@@ -6,6 +6,7 @@ import {
   usePlanCode,
   type PlanCodeVersion,
 } from "./context/PlanCodeContext";
+import { ShortcutRegistryProvider } from "./context/ShortcutRegistryContext";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { Toolbar } from "./components/Toolbar";
@@ -144,12 +145,14 @@ function AppShell() {
 
 export default function App() {
   return (
-    <EditModeProvider>
-      <ChequesProvider>
-        <PlanCodeProvider>
-          <AppShell />
-        </PlanCodeProvider>
-      </ChequesProvider>
-    </EditModeProvider>
+    <ShortcutRegistryProvider>
+      <EditModeProvider>
+        <ChequesProvider>
+          <PlanCodeProvider>
+            <AppShell />
+          </PlanCodeProvider>
+        </ChequesProvider>
+      </EditModeProvider>
+    </ShortcutRegistryProvider>
   );
 }

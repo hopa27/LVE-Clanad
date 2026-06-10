@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef, type RefObject } from "react";
 import { usePlanCode } from "../context/PlanCodeContext";
 
 export type TabKey =
@@ -36,12 +36,17 @@ export const TABS: { key: TabKey; label: string }[] = [
   { key: "loa", label: "LOA/POA" },
 ];
 
+const FOCUSABLE_SELECTOR =
+  'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
 export function TabBar({
   activeTab,
   onChange,
+  panelRef,
 }: {
   activeTab: TabKey;
   onChange: (key: TabKey) => void;
+  panelRef?: RefObject<HTMLElement | null>;
 }) {
   const { planCode } = usePlanCode();
   const listRef = useRef<HTMLDivElement>(null);
@@ -62,6 +67,18 @@ export function TabBar({
       ? Array.from(listRef.current.querySelectorAll<HTMLButtonElement>("button[role='tab']"))
       : [];
     if (!buttons.length) return;
+
+    if (e.key === "Tab" && !e.shiftKey) {
+      if (panelRef?.current) {
+        const firstFocusable = panelRef.current.querySelector<HTMLElement>(FOCUSABLE_SELECTOR);
+        if (firstFocusable) {
+          e.preventDefault();
+          firstFocusable.focus();
+          return;
+        }
+      }
+      return;
+    }
 
     let nextIdx = activeIdx;
     if (e.key === "ArrowRight") {

@@ -1,4 +1,4 @@
-import { useState, useEffect, type JSX } from "react";
+import { useState, useEffect, useRef, type JSX } from "react";
 import { EditModeProvider, useEditMode } from "./context/EditModeContext";
 import { ChequesProvider } from "./context/ChequesContext";
 import {
@@ -87,6 +87,7 @@ function AppShell() {
   const ActiveComponent = TAB_COMPONENTS[activeTab];
   const { cancelKey } = useEditMode();
   const { planCode } = usePlanCode();
+  const panelRef = useRef<HTMLDivElement>(null);
 
   // Allow Header menus to switch the active tab via a custom event
   useEffect(() => {
@@ -110,8 +111,8 @@ function AppShell() {
       <main className="flex-1 px-[142px] py-8">
         <Toolbar />
         <PolicyHeader />
-        <TabBar activeTab={activeTab} onChange={setActiveTab} />
-        <div className="bg-white rounded-b-lg rounded-tr-lg shadow-sm p-6 -mt-px">
+        <TabBar activeTab={activeTab} onChange={setActiveTab} panelRef={panelRef} />
+        <div ref={panelRef} className="bg-white rounded-b-lg rounded-tr-lg shadow-sm p-6 -mt-px">
           <ActiveComponent key={`${activeTab}:${cancelKey}:${planCode}`} />
         </div>
         <StatusBar />

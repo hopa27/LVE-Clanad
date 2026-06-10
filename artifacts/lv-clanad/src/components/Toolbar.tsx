@@ -112,6 +112,7 @@ export function Toolbar() {
             key={tool.label}
             type="button"
             disabled={!tool.enabled}
+            tabIndex={!tool.enabled ? -1 : undefined}
             onClick={() => handleClick(tool.action)}
             className={`${
               isPrimary ? "lve-btn" : "lve-btn lve-btn-secondary"

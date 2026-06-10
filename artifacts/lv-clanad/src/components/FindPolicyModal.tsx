@@ -144,7 +144,7 @@ export function FindPolicyModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
-      <div className="lve-panel bg-white w-[1200px] max-w-full h-[96vh] flex flex-col">
+      <div className="lve-panel bg-white w-[1800px] max-w-full h-[96vh] flex flex-col">
         <header className="lve-panel-header flex items-center justify-between">
           <span>Find Policy</span>
           <button
@@ -210,9 +210,9 @@ export function FindPolicyModal({
           </div>
 
           {/* Results grid */}
-          <div className="border border-[#BBBBBB] rounded-[8px] overflow-hidden flex-1 min-h-[200px] flex flex-col">
+          <div className="border border-[#BBBBBB] rounded-[8px] overflow-hidden h-[305px] flex flex-col shrink-0">
             <div className="overflow-auto flex-1">
-              <table className="w-full font-['Mulish'] text-[13px] text-[#3d3d3d] min-w-[1160px] border-separate border-spacing-0">
+              <table className="w-full font-['Mulish'] text-[13px] text-[#3d3d3d] border-separate border-spacing-0">
                 <thead className="sticky top-0 z-10">
                   <tr className="bg-white font-['Livvic'] font-semibold text-[13px] uppercase text-[#002f5c]">
                     {COLUMNS.map((c) => {

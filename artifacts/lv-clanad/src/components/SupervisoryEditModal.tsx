@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { MdClose, MdCheck, MdCancel } from "react-icons/md";
+import { useFocusTrap } from "../hooks/useFocusTrap";
+import { useEscapeKey } from "../hooks/useEscapeKey";
 
 function ROField({
   label,
@@ -34,6 +36,11 @@ export function SupervisoryEditModal({
   onClose: () => void;
   planCode?: string;
 }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(containerRef, open);
+  useEscapeKey(open ? onClose : null);
+  
+
   if (!open) return null;
 
   const is90 = planCode === "90";
@@ -56,7 +63,7 @@ export function SupervisoryEditModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
-      <div className="lve-panel bg-white w-[880px] max-w-[96vw]">
+      <div ref={containerRef} className="lve-panel bg-white w-[880px] max-w-[96vw]">
         <header className="lve-panel-header flex items-center justify-between">
           <span>Supervisory Edit</span>
           <button

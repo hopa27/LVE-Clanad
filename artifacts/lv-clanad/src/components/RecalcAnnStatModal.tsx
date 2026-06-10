@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { MdClose, MdCheck, MdCancel } from "react-icons/md";
 import { DatePicker } from "./DatePicker";
 import { EditModeContext } from "../context/EditModeContext";
+import { useFocusTrap } from "../hooks/useFocusTrap";
+import { useEscapeKey } from "../hooks/useEscapeKey";
 
 const PRODUCTS = ["With Profits", "Non Profits", "ICFP", "PRP", "PIPA"];
 
@@ -23,11 +25,16 @@ export function RecalcAnnStatModal({
   const [_fromDate, setFromDate] = useState<Date | undefined>();
   const [_toDate, setToDate] = useState<Date | undefined>();
 
+  const containerRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(containerRef, open);
+  useEscapeKey(open ? onClose : null);
+  
+
   if (!open) return null;
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
-      <div className="lve-panel bg-white w-[420px] max-w-[96vw]">
+      <div ref={containerRef} className="lve-panel bg-white w-[420px] max-w-[96vw]">
         <header className="lve-panel-header flex items-center justify-between">
           <span>Recalculate Ann. Stat.</span>
           <button

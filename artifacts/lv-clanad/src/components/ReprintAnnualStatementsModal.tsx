@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { MdClose, MdPrint, MdCancel } from "react-icons/md";
 import { DatePicker } from "./DatePicker";
 import { EditModeContext } from "../context/EditModeContext";
+import { useFocusTrap } from "../hooks/useFocusTrap";
+import { useEscapeKey } from "../hooks/useEscapeKey";
 
 const ALWAYS_EDITING = {
   editing: true,
@@ -21,11 +23,16 @@ export function ReprintAnnualStatementsModal({
     new Date(2026, 4, 25)
   );
 
+  const containerRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(containerRef, open);
+  useEscapeKey(open ? onClose : null);
+  
+
   if (!open) return null;
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
-      <div className="lve-panel bg-white w-[420px] max-w-[96vw]">
+      <div ref={containerRef} className="lve-panel bg-white w-[420px] max-w-[96vw]">
         <header className="lve-panel-header flex items-center justify-between">
           <span>Reprint Annual Statements</span>
           <button

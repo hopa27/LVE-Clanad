@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { MdClose, MdCheck } from "react-icons/md";
+import { useFocusTrap } from "../hooks/useFocusTrap";
+import { useEscapeKey } from "../hooks/useEscapeKey";
 
 type Company = {
   names: string[];
@@ -58,6 +60,11 @@ export function CompanySelectionModal({
 }) {
   const [selected, setSelected] = useState(0);
 
+  const containerRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(containerRef, open);
+  useEscapeKey(open ? onClose : null);
+  
+
   if (!open) return null;
 
   const c = COMPANIES[selected];
@@ -65,7 +72,7 @@ export function CompanySelectionModal({
 
   return (
     <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40 p-6">
-      <div className="lve-panel bg-white w-[820px] max-w-full max-h-[90vh] flex flex-col">
+      <div ref={containerRef} className="lve-panel bg-white w-[820px] max-w-full max-h-[90vh] flex flex-col">
         <header className="lve-panel-header flex items-center justify-between">
           <span>Company Selection</span>
           <button

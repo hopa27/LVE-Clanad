@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   MdClose,
   MdFirstPage,
@@ -8,6 +8,8 @@ import {
   MdPrint,
   MdSearch,
 } from "react-icons/md";
+import { useFocusTrap } from "../hooks/useFocusTrap";
+import { useEscapeKey } from "../hooks/useEscapeKey";
 
 type Row = { policy: string; surname: string; username: string; date: string };
 
@@ -78,6 +80,11 @@ export function BankChangesReportModal({
   onClose: () => void;
 }) {
   const [page, setPage] = useState(1);
+  const containerRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(containerRef, open);
+  useEscapeKey(open ? onClose : null);
+  
+
   if (!open) return null;
 
   const rows = page === 28 ? PAGE_28 : PAGE_1;
@@ -86,7 +93,7 @@ export function BankChangesReportModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
-      <div className="lve-panel bg-white w-[820px] max-w-full max-h-[90vh] flex flex-col">
+      <div ref={containerRef} className="lve-panel bg-white w-[820px] max-w-full max-h-[90vh] flex flex-col">
 
         {/* LVE header */}
         <header className="lve-panel-header flex items-center justify-between">

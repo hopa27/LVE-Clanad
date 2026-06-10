@@ -192,6 +192,7 @@ export function FindPolicyModal({
             onClick={onClose}
             title="Close"
             aria-label="Close"
+            tabIndex={-1}
           >
             <MdClose size={18} />
           </button>
@@ -211,6 +212,7 @@ export function FindPolicyModal({
                 }}
                 placeholder={String(placeholder)}
                 className="lve-input"
+                autoFocus
               />
             </div>
 

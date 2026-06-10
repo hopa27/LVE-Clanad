@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   MdCheck,
   MdClose,
@@ -10,6 +10,8 @@ import {
   MdSearch,
   MdManageSearch,
 } from "react-icons/md";
+import { useFocusTrap } from "../hooks/useFocusTrap";
+import { useEscapeKey } from "../hooks/useEscapeKey";
 
 const ILLUSTRATIONS = [
   ["925149", "0", "SANDF-001", "18 Dec 2007", "Mr M Stanislas",        "PPA", "JOINT",  "64.75", "111000346", "No", "Printed", "STALW-001"],
@@ -79,6 +81,11 @@ export function QuoteLookupModal({
   const hasRecords = total > 0;
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const containerRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(containerRef, open);
+  useEscapeKey(open ? onClose : null);
+  
+
   if (!open) return null;
 
   const navBtn =
@@ -94,7 +101,7 @@ export function QuoteLookupModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
-      <div className="lve-panel bg-white w-[1100px] max-w-full max-h-[90vh] flex flex-col">
+      <div ref={containerRef} className="lve-panel bg-white w-[1100px] max-w-full max-h-[90vh] flex flex-col">
         <header className="lve-panel-header flex items-center justify-between">
           <span>Quote Lookup</span>
           <button

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   MdClose,
   MdAddCircle,
@@ -12,6 +12,8 @@ import {
 } from "react-icons/md";
 import { useCheques, type Cheque } from "../context/ChequesContext";
 import { CompanySelectionModal } from "./CompanySelectionModal";
+import { useFocusTrap } from "../hooks/useFocusTrap";
+import { useEscapeKey } from "../hooks/useEscapeKey";
 
 const CHEQUE_DB: Record<string, { date: string; amount: string; transferCompany: string }> = {
   "232693": { date: "12/05/2026", amount: "12,450.00", transferCompany: "Liverpool Victoria Friendly Society Limited" },
@@ -50,6 +52,11 @@ export function ChequeLoggerModal({
     amount: "",
     transferCompany: "",
   });
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(containerRef, open);
+  useEscapeKey(open ? onClose : null);
+  
 
   if (!open) return null;
 
@@ -153,7 +160,7 @@ export function ChequeLoggerModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
-      <div className="lve-panel bg-white w-[1200px] max-w-full max-h-[90vh] flex flex-col">
+      <div ref={containerRef} className="lve-panel bg-white w-[1200px] max-w-full max-h-[90vh] flex flex-col">
         <header className="lve-panel-header flex items-center justify-between">
           <span>Cheque Logger</span>
           <button

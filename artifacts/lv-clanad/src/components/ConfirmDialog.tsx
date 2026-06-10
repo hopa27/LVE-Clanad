@@ -1,4 +1,7 @@
+import { useRef } from "react";
 import { MdHelpOutline } from "react-icons/md";
+import { useFocusTrap } from "../hooks/useFocusTrap";
+import { useEscapeKey } from "../hooks/useEscapeKey";
 
 export function ConfirmDialog({
   open,
@@ -13,10 +16,14 @@ export function ConfirmDialog({
   onYes: () => void;
   onNo: () => void;
 }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(containerRef, open);
+  useEscapeKey(open ? onNo : null);
+
   if (!open) return null;
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/30">
-      <div className="lve-panel w-[360px] bg-white">
+      <div ref={containerRef} className="lve-panel w-[360px] bg-white">
         <header className="lve-panel-header">{title}</header>
         <div className="lve-panel-body">
           <div className="flex items-start gap-3">

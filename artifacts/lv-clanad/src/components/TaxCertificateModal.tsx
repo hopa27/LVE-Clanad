@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { MdPrint, MdClose, MdHelpOutline, MdInfoOutline, MdCancel } from "react-icons/md";
 import { DatePicker } from "./DatePicker";
+import { useFocusTrap } from "../hooks/useFocusTrap";
+import { useEscapeKey } from "../hooks/useEscapeKey";
 
 export function TaxCertificateModal({
   open,
@@ -14,6 +16,11 @@ export function TaxCertificateModal({
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
   const [dateErrorOpen, setDateErrorOpen] = useState(false);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(containerRef, open);
+  useEscapeKey(open ? onClose : null);
+  
 
   if (!open) return null;
 
@@ -29,7 +36,7 @@ export function TaxCertificateModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div className="lve-panel w-[420px] bg-white">
+      <div ref={containerRef} className="lve-panel w-[420px] bg-white">
         <header className="lve-panel-header">Tax Certificate</header>
         <div className="lve-panel-body">
           <p className="font-['Mulish'] text-[13px] text-[#3d3d3d] mb-4">

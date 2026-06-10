@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { MdClose, MdCheck, MdCancel } from "react-icons/md";
+import { useFocusTrap } from "../hooks/useFocusTrap";
+import { useEscapeKey } from "../hooks/useEscapeKey";
 
 export function P45DetailsModal({
   open,
@@ -11,11 +13,16 @@ export function P45DetailsModal({
   const [grossPay, setGrossPay] = useState("");
   const [taxPaid, setTaxPaid] = useState("");
 
+  const containerRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(containerRef, open);
+  useEscapeKey(open ? onClose : null);
+  
+
   if (!open) return null;
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
-      <div className="lve-panel bg-white w-[380px] max-w-full">
+      <div ref={containerRef} className="lve-panel bg-white w-[380px] max-w-full">
         <header className="lve-panel-header flex items-center justify-between">
           <span>P45 Details...</span>
           <button

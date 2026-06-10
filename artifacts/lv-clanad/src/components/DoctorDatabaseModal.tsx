@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import {
   MdClose,
   MdFirstPage,
@@ -12,6 +12,8 @@ import {
   MdCheck,
   MdCancel,
 } from "react-icons/md";
+import { useFocusTrap } from "../hooks/useFocusTrap";
+import { useEscapeKey } from "../hooks/useEscapeKey";
 
 type Doctor = {
   id: number;
@@ -132,6 +134,11 @@ export function DoctorDatabaseModal({
   const [search, setSearch] = useState("");
   const [info, setInfo] = useState<{ title: string; message: string } | null>(null);
 
+  const containerRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(containerRef, open);
+  useEscapeKey(open ? onClose : null);
+  
+
   if (!open) return null;
 
   const total = DOCTORS.length;
@@ -159,7 +166,7 @@ export function DoctorDatabaseModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
-      <div className="lve-panel bg-white w-[640px] max-w-full max-h-[92vh] flex flex-col">
+      <div ref={containerRef} className="lve-panel bg-white w-[640px] max-w-full max-h-[92vh] flex flex-col">
         <header className="lve-panel-header flex items-center justify-between">
           <span>Doctor Database</span>
           <button

@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { MdClose, MdCheck, MdNoteAdd } from "react-icons/md";
+import { useFocusTrap } from "../hooks/useFocusTrap";
+import { useEscapeKey } from "../hooks/useEscapeKey";
 
 type Ifa = {
   ref: string;
@@ -42,6 +44,11 @@ export function AmendIfaModal({
     revoked: false,
   });
   const [selected, setSelected] = useState(0);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  useFocusTrap(containerRef, open);
+  useEscapeKey(open ? onClose : null);
+  
 
   if (!open) return null;
 
@@ -121,7 +128,7 @@ export function AmendIfaModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
-      <div className="lve-panel bg-white w-[1000px] max-w-full max-h-[90vh] flex flex-col">
+      <div ref={containerRef} className="lve-panel bg-white w-[1000px] max-w-full max-h-[90vh] flex flex-col">
         <header className="lve-panel-header flex items-center justify-between">
           <span>IFA Lookup</span>
           <button

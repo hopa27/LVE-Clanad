@@ -311,9 +311,9 @@ export function FindPolicyModal({
 
             <div className="grid grid-cols-[90px_1fr] gap-3 items-start">
               <div className="font-bold text-[#4a4a49] pt-1">Cheques Rec</div>
-              <div className="border border-[#BBBBBB] rounded-[6px] overflow-hidden">
+              <div className="border border-[#BBBBBB] rounded-[6px] overflow-y-auto h-[96px]">
                 <table className="w-full text-[12px]">
-                  <thead>
+                  <thead className="sticky top-0 z-10">
                     <tr className="bg-white border-y-[2px] border-[#04589b] font-['Livvic'] font-semibold text-[12px] text-[#002f5c]">
                       <th className="px-2 py-1 text-left">Transfer Company</th>
                       <th className="px-2 py-1 text-left w-[140px]">Date</th>
@@ -331,7 +331,7 @@ export function FindPolicyModal({
                         <td className="px-2 py-1 text-right">{c.amount}</td>
                       </tr>
                     ))}
-                    {rec?.planCode !== "0" && Array.from({ length: Math.max(0, 2 - (rec?.cheques?.length ?? 0)) }).map((_, i) => (
+                    {rec?.planCode !== "0" && Array.from({ length: Math.max(0, 3 - (rec?.cheques?.length ?? 0)) }).map((_, i) => (
                       <tr
                         key={`pad-${i}`}
                         className={(( (rec?.cheques?.length ?? 0) + i) % 2 === 0 ? "bg-white" : "bg-[#e7ebec34]")}

@@ -454,9 +454,9 @@ export function CedingSchemeModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
-      <div ref={containerRef} className="lve-panel w-[1024px] max-w-[95vw] bg-white">
+      <div ref={containerRef} role="dialog" aria-modal="true" aria-labelledby="ceding-scheme-title" className="lve-panel w-[1024px] max-w-[95vw] bg-white">
         <header className="lve-panel-header flex items-center justify-between">
-          <span>Ceding Company Details</span>
+          <span id="ceding-scheme-title">Ceding Company Details</span>
           <button
             type="button"
             onClick={handleClose}

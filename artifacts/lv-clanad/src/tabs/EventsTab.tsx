@@ -144,6 +144,7 @@ export function EventsTab() {
         tabIndex={0}
         onKeyDown={handleGridKey}
         aria-label="Event Details grid"
+        aria-rowcount={rows.length}
       >
         <table className="lve-grid">
           <thead>
@@ -178,6 +179,7 @@ export function EventsTab() {
                     className="cursor-pointer"
                     aria-selected={isSel}
                     role="row"
+                    aria-rowindex={i + 1}
                   >
                     <td className="!px-4" style={tdStyle}>{r.date}</td>
                     <td className="!px-4" style={tdStyle}>{r.no}</td>
@@ -221,9 +223,9 @@ export function EventsTab() {
 
       {newEventOpen && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
-          <div className="lve-panel bg-white w-[520px] max-w-full">
+          <div role="dialog" aria-modal="true" aria-labelledby="new-event-title" className="lve-panel bg-white w-[520px] max-w-full">
             <header className="lve-panel-header flex items-center justify-between">
-              <span>{editingIdx !== null ? "Edit Event" : "New Event"}</span>
+              <span id="new-event-title">{editingIdx !== null ? "Edit Event" : "New Event"}</span>
               <button
                 type="button"
                 className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-white hover:bg-[#d72714] hover:text-white transition-colors"
@@ -309,8 +311,8 @@ export function EventsTab() {
 
       {editConfirm && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40 p-6">
-          <div className="lve-panel bg-white w-[400px] max-w-full">
-            <header className="lve-panel-header">Confirm</header>
+          <div role="dialog" aria-modal="true" aria-labelledby="edit-confirm-title" className="lve-panel bg-white w-[400px] max-w-full">
+            <header id="edit-confirm-title" className="lve-panel-header">Confirm</header>
             <div className="lve-panel-body">
               <div className="flex items-start gap-3">
                 <span className="text-[#006cf4] mt-0.5"><MdHelpOutline size={28} /></span>
@@ -341,8 +343,8 @@ export function EventsTab() {
 
       {deleteConfirm && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40 p-6">
-          <div className="lve-panel bg-white w-[440px] max-w-full">
-            <header className="lve-panel-header">Confirm</header>
+          <div role="dialog" aria-modal="true" aria-labelledby="delete-confirm-title" className="lve-panel bg-white w-[440px] max-w-full">
+            <header id="delete-confirm-title" className="lve-panel-header">Confirm</header>
             <div className="lve-panel-body">
               <div className="flex items-start gap-3">
                 <span className="text-[#006cf4] mt-0.5"><MdHelpOutline size={28} /></span>
@@ -373,8 +375,8 @@ export function EventsTab() {
 
       {toast && (
         <div className="fixed inset-0 z-[90] flex items-center justify-center bg-black/40 p-6">
-          <div className="lve-panel bg-white w-[400px] max-w-full">
-            <header className="lve-panel-header">Client Annuity Administration System</header>
+          <div role="alertdialog" aria-modal="true" aria-labelledby="events-toast-title" className="lve-panel bg-white w-[400px] max-w-full">
+            <header id="events-toast-title" className="lve-panel-header">Client Annuity Administration System</header>
             <div className="lve-panel-body">
               <p className="text-center font-['Mulish'] text-[14px] text-[#3d3d3d] py-2">
                 {toast}

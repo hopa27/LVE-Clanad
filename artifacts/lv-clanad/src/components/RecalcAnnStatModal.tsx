@@ -34,9 +34,9 @@ export function RecalcAnnStatModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
-      <div ref={containerRef} className="lve-panel bg-white w-[420px] max-w-[96vw]">
+      <div ref={containerRef} role="dialog" aria-modal="true" aria-labelledby="recalc-ann-stat-title" className="lve-panel bg-white w-[420px] max-w-[96vw]">
         <header className="lve-panel-header flex items-center justify-between">
-          <span>Recalculate Ann. Stat.</span>
+          <span id="recalc-ann-stat-title">Recalculate Ann. Stat.</span>
           <button
             type="button"
             onClick={onClose}

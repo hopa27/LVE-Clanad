@@ -63,9 +63,9 @@ export function SupervisoryEditModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
-      <div ref={containerRef} className="lve-panel bg-white w-[880px] max-w-[96vw]">
+      <div ref={containerRef} role="dialog" aria-modal="true" aria-labelledby="supervisory-edit-title" className="lve-panel bg-white w-[880px] max-w-[96vw]">
         <header className="lve-panel-header flex items-center justify-between">
-          <span>Supervisory Edit</span>
+          <span id="supervisory-edit-title">Supervisory Edit</span>
           <button
             type="button"
             onClick={onClose}

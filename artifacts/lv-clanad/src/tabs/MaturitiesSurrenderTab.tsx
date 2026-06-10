@@ -294,9 +294,9 @@ export function MaturitiesSurrenderTab() {
 
       {bankModalOpen && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
-          <div className="lve-panel bg-white w-[720px] max-w-full">
+          <div role="dialog" aria-modal="true" aria-labelledby="maturity-bank-title" className="lve-panel bg-white w-[720px] max-w-full">
             <header className="lve-panel-header flex items-center justify-between">
-              <span>New Maturity / Surrender Bank Details</span>
+              <span id="maturity-bank-title">New Maturity / Surrender Bank Details</span>
               <button
                 type="button"
                 className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-white hover:bg-[#d72714] hover:text-white transition-colors"

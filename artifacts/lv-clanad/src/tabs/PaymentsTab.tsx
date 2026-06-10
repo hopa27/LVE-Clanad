@@ -719,6 +719,7 @@ export function PaymentsTab() {
           tabIndex={0}
           onKeyDown={handlePayKey}
           aria-label="Payment History grid"
+          aria-rowcount={paymentHistory.length}
         >
           <table className="lve-grid">
             <thead className="sticky top-0 bg-white z-10">
@@ -743,6 +744,7 @@ export function PaymentsTab() {
                     className="cursor-pointer"
                     aria-selected={isSel}
                     role="row"
+                    aria-rowindex={i + 1}
                   >
                     <td style={tdStyle}>{row.date}</td>
                     <td style={tdStyle}>{row.gross}</td>
@@ -763,7 +765,7 @@ export function PaymentsTab() {
 
       {!isPlan76z && (
       <Section title="Tax History">
-        <div className="overflow-auto max-h-[315px]">
+        <div className="overflow-auto max-h-[315px]" role="grid" aria-label="Tax History grid" aria-rowcount={taxHistory.length}>
           <table className="lve-grid">
             <thead className="sticky top-0 bg-white z-10">
               <tr>
@@ -780,7 +782,7 @@ export function PaymentsTab() {
             </thead>
             <tbody>
               {taxHistory.map((row, i) => (
-                <tr key={i}>
+                <tr key={i} role="row" aria-rowindex={i + 1}>
                   <td>{row.date}</td>
                   <td>{row.code}</td>
                   <td>{row.n}</td>

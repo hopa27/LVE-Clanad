@@ -318,6 +318,8 @@ export function DiaryAuditTab() {
   const isPlan611 = planCode === "611";
   const isPlan52  = planCode === "52";
   const isPlan61a = planCode === "61a";
+  const auditNotesRows = (isPlan0 || isPlan87 ? [] : isPlan84 ? AUDIT_84 : isPlan90 ? AUDIT_90 : isPlan51 ? AUDIT_51 : isPlan82 ? AUDIT_82 : isPlan80 ? AUDIT_80 : isPlan83 ? AUDIT_83 : isPlan621 ? AUDIT_621 : isPlan76 ? AUDIT_76 : isPlan76z ? AUDIT_76z : isPlan62a ? AUDIT_62a : isPlan611 ? AUDIT_611 : isPlan52 ? AUDIT_52 : isPlan61a ? AUDIT_61a : AUDIT).length;
+  const dataChangesRows = (isPlan84 ? DATA_CHANGES_84 : isPlan51 ? DATA_CHANGES_51 : isPlan82 ? [] : isPlan80 ? DATA_CHANGES_80 : isPlan83 ? DATA_CHANGES_83 : isPlan621 ? DATA_CHANGES_621 : isPlan76 ? [] : isPlan76z ? [] : isPlan62a ? [] : isPlan611 ? [] : isPlan52 ? [] : isPlan61a ? DATA_CHANGES_61a : (isPlan0 || isPlan87 || isPlan90 ? [] : AUDIT)).length;
   const [trail, setTrail] = useState<"notes" | "data">("notes");
   const [diaryOpen, setDiaryOpen] = useState(false);
   const [needsOpen, setNeedsOpen] = useState(false);
@@ -424,6 +426,7 @@ export function DiaryAuditTab() {
           tabIndex={0}
           onKeyDown={handleDiaryKey}
           aria-label="Diary Details grid"
+          aria-rowcount={visibleDiary.length}
         >
           <table className="lve-grid">
             <thead>
@@ -436,7 +439,7 @@ export function DiaryAuditTab() {
               </tr>
             </thead>
             <tbody>
-              {visibleDiary.map((d) => {
+              {visibleDiary.map((d, i) => {
                 const isSel = selectedRef === d.ref;
                 const tdStyle = isSel
                   ? { backgroundColor: "#05579B", color: "#ffffff" }
@@ -448,6 +451,7 @@ export function DiaryAuditTab() {
                     className="cursor-pointer"
                     aria-selected={isSel}
                     role="row"
+                    aria-rowindex={i + 1}
                   >
                     <td className="!px-4 whitespace-nowrap" style={tdStyle}>{d.ref}</td>
                     <td className="!px-4 whitespace-nowrap" style={tdStyle}>{d.type}</td>
@@ -532,7 +536,7 @@ export function DiaryAuditTab() {
             <p className="font-['Mulish'] text-[12px] italic text-[#777] mb-2">
               Audit trail — you cannot amend or delete these notes!
             </p>
-            <div className="overflow-auto max-h-[320px]">
+            <div className="overflow-auto max-h-[320px]" role="grid" aria-label="Audit notes grid" aria-rowcount={auditNotesRows}>
               <table className="lve-grid">
                 <thead>
                   <tr>
@@ -552,7 +556,7 @@ export function DiaryAuditTab() {
                     const date = m ? m[3] : "";
                     const time = m ? m[4] : "";
                     return (
-                      <tr key={i}>
+                      <tr key={i} role="row" aria-rowindex={i + 1}>
                         <td className="!px-4">{desc}</td>
                         <td className="!px-4 whitespace-nowrap">{by}</td>
                         <td className="!px-4 whitespace-nowrap">{date}</td>
@@ -565,7 +569,7 @@ export function DiaryAuditTab() {
             </div>
           </div>
         ) : (
-          <div className="overflow-auto max-h-[320px]">
+          <div className="overflow-auto max-h-[320px]" role="grid" aria-label="Data changes grid" aria-rowcount={dataChangesRows}>
             <table className="lve-grid">
               <thead>
                 <tr>
@@ -579,7 +583,7 @@ export function DiaryAuditTab() {
               <tbody>
                 {isPlan84
                   ? DATA_CHANGES_84.map((r, i) => (
-                      <tr key={i}>
+                      <tr key={i} role="row" aria-rowindex={i + 1}>
                         <td className="!px-4 whitespace-nowrap">{r.changeDate}</td>
                         <td className="!px-4">{r.description}</td>
                         <td className="!px-4 whitespace-nowrap">{r.userId}</td>
@@ -587,7 +591,7 @@ export function DiaryAuditTab() {
                     ))
                   : isPlan51
                   ? DATA_CHANGES_51.map((r, i) => (
-                      <tr key={i}>
+                      <tr key={i} role="row" aria-rowindex={i + 1}>
                         <td className="!px-4 whitespace-nowrap">{r.changeDate}</td>
                         <td className="!px-4">{r.description}</td>
                         <td className="!px-4 whitespace-nowrap">{r.userId}</td>
@@ -597,7 +601,7 @@ export function DiaryAuditTab() {
                   ? []
                   : isPlan80
                   ? DATA_CHANGES_80.map((r, i) => (
-                      <tr key={i}>
+                      <tr key={i} role="row" aria-rowindex={i + 1}>
                         <td className="!px-4 whitespace-nowrap">{r.changeDate}</td>
                         <td className="!px-4">{r.description}</td>
                         <td className="!px-4 whitespace-nowrap">{r.userId}</td>
@@ -605,7 +609,7 @@ export function DiaryAuditTab() {
                     ))
                   : isPlan83
                   ? DATA_CHANGES_83.map((r, i) => (
-                      <tr key={i}>
+                      <tr key={i} role="row" aria-rowindex={i + 1}>
                         <td className="!px-4 whitespace-nowrap">{r.changeDate}</td>
                         <td className="!px-4">{r.description}</td>
                         <td className="!px-4 whitespace-nowrap">{r.userId}</td>
@@ -613,7 +617,7 @@ export function DiaryAuditTab() {
                     ))
                   : isPlan621
                   ? DATA_CHANGES_621.map((r, i) => (
-                      <tr key={i}>
+                      <tr key={i} role="row" aria-rowindex={i + 1}>
                         <td className="!px-4 whitespace-nowrap">{r.changeDate}</td>
                         <td className="!px-4">{r.description}</td>
                         <td className="!px-4 whitespace-nowrap">{r.userId}</td>
@@ -631,7 +635,7 @@ export function DiaryAuditTab() {
                   ? []
                   : isPlan61a
                   ? DATA_CHANGES_61a.map((r, i) => (
-                      <tr key={i}>
+                      <tr key={i} role="row" aria-rowindex={i + 1}>
                         <td className="!px-4 whitespace-nowrap">{r.changeDate}</td>
                         <td className="!px-4">{r.description}</td>
                         <td className="!px-4 whitespace-nowrap">{r.userId}</td>
@@ -645,7 +649,7 @@ export function DiaryAuditTab() {
                       const userId = m ? m[2] : "";
                       const changeDate = m ? `${m[3]} ${m[4]}` : "";
                       return (
-                        <tr key={i}>
+                        <tr key={i} role="row" aria-rowindex={i + 1}>
                           <td className="!px-4 whitespace-nowrap">{changeDate}</td>
                           <td className="!px-4">{desc}</td>
                           <td className="!px-4 whitespace-nowrap">{userId}</td>
@@ -771,8 +775,8 @@ export function DiaryAuditTab() {
 
       {simPoliciesOpen && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40">
-          <div className="w-[520px] bg-white rounded-[8px] shadow-xl overflow-hidden border border-[#bcd]">
-            <header className="bg-[#00263e] text-white font-['Livvic'] text-[13px] font-semibold px-3 py-2">
+          <div role="dialog" aria-modal="true" aria-labelledby="diary-sim-policies-title" className="w-[520px] bg-white rounded-[8px] shadow-xl overflow-hidden border border-[#bcd]">
+            <header id="diary-sim-policies-title" className="bg-[#00263e] text-white font-['Livvic'] text-[13px] font-semibold px-3 py-2">
               Simultaneous Policies
             </header>
             <div className="p-5">
@@ -780,7 +784,7 @@ export function DiaryAuditTab() {
                 Select simultaneous policies to update
               </p>
               <div className="border border-[#bcd] rounded-[8px] overflow-hidden">
-                <table className="w-full border-collapse font-['Mulish'] text-[12px]">
+                <table className="w-full border-collapse font-['Mulish'] text-[12px]" aria-label="Simultaneous policies to update">
                   <thead>
                     <tr className="bg-[#d4d4d4] text-[#3d3d3d]">
                       <th className="text-left px-3 py-1.5 border-r border-[#a0a0a0] w-[110px]">

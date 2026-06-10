@@ -35,9 +35,9 @@ export function ReprintMaturityModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
-      <div ref={containerRef} className="lve-panel bg-white w-[420px] max-w-[96vw]">
+      <div ref={containerRef} role="dialog" aria-modal="true" aria-labelledby="reprint-maturity-title" className="lve-panel bg-white w-[420px] max-w-[96vw]">
         <header className="lve-panel-header flex items-center justify-between">
-          <span>Reprint Maturity Letters</span>
+          <span id="reprint-maturity-title">Reprint Maturity Letters</span>
           <button
             type="button"
             onClick={onClose}

@@ -22,9 +22,9 @@ export function P45DetailsModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
-      <div ref={containerRef} className="lve-panel bg-white w-[380px] max-w-full">
+      <div ref={containerRef} role="dialog" aria-modal="true" aria-labelledby="p45-details-title" className="lve-panel bg-white w-[380px] max-w-full">
         <header className="lve-panel-header flex items-center justify-between">
-          <span>P45 Details...</span>
+          <span id="p45-details-title">P45 Details...</span>
           <button
             type="button"
             className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-white hover:bg-[#d72714] transition-colors"

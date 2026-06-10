@@ -30,6 +30,7 @@ export function PolicyHeader() {
       <button
         type="button"
         title="Policy No"
+        aria-label="Select policy number"
         className="inline-flex items-center justify-end gap-1 w-[140px] h-9 px-3 rounded-[8px] border border-[#BBBBBB] bg-white font-['Mulish'] text-[#3d3d3d] hover:border-[#178830]"
       >
         <MdKeyboardArrowDown />
@@ -37,7 +38,8 @@ export function PolicyHeader() {
       <button
         type="button"
         className="h-9 w-9 inline-flex items-center justify-center rounded-[8px] border border-[#BBBBBB] bg-white text-[#006cf4] hover:border-[#178830]"
-        title="find aplication"
+        title="Find application"
+        aria-label="Find application"
       >
         <MdOpenInNew size={16} />
       </button>
@@ -88,16 +90,17 @@ export function PolicyHeader() {
         }}
         className="h-9 w-9 inline-flex items-center justify-center rounded-[8px] border border-[#BBBBBB] bg-white text-[#3d3d3d] hover:border-[#178830]"
         title="More"
+        aria-label="More options"
       >
         <MdMoreHoriz size={18} />
       </button>
 
       {planCode === "90" ? (
-        <div className="px-4 h-9 inline-flex items-center rounded-[8px] bg-[#F4D9E8] text-[#710340] font-['Livvic'] font-semibold text-sm">
+        <div role="status" aria-label="Policy type: Monthly Cash Policy" className="px-4 h-9 inline-flex items-center rounded-[8px] bg-[#F4D9E8] text-[#710340] font-['Livvic'] font-semibold text-sm">
           MONTHLY CASH POLICY
         </div>
       ) : planCode === "83" ? (
-        <div className="px-4 h-9 inline-flex items-center rounded-[8px] bg-[#00B4C8] text-black font-['Livvic'] font-semibold text-sm">
+        <div role="status" aria-label="Policy type: Retirement Account" className="px-4 h-9 inline-flex items-center rounded-[8px] bg-[#00B4C8] text-black font-['Livvic'] font-semibold text-sm">
           RETIREMENT ACCOUNT
         </div>
       ) : (
@@ -106,8 +109,8 @@ export function PolicyHeader() {
 
       {simOpen && (
         <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
-          <div className="w-[460px] bg-white rounded-[8px] shadow-xl overflow-hidden border border-[#bcd]">
-            <header className="bg-[#00263e] text-white font-['Livvic'] text-[13px] font-semibold px-3 py-2">
+          <div role="dialog" aria-modal="true" aria-labelledby="sim-policies-title" className="w-[460px] bg-white rounded-[8px] shadow-xl overflow-hidden border border-[#bcd]">
+            <header id="sim-policies-title" className="bg-[#00263e] text-white font-['Livvic'] text-[13px] font-semibold px-3 py-2">
               Simultaneous Policies
             </header>
             <div className="p-5">

@@ -183,9 +183,9 @@ export function FindPolicyModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
-      <div ref={containerRef} className="lve-panel bg-white w-[1200px] max-w-full h-[96vh] flex flex-col">
+      <div ref={containerRef} role="dialog" aria-modal="true" aria-labelledby="find-policy-title" className="lve-panel bg-white w-[1200px] max-w-full h-[96vh] flex flex-col">
         <header className="lve-panel-header flex items-center justify-between">
-          <span>Find Policy</span>
+          <span id="find-policy-title">Find Policy</span>
           <button
             type="button"
             className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-white hover:bg-[#d72714] hover:text-white transition-colors"
@@ -263,6 +263,7 @@ export function FindPolicyModal({
             tabIndex={-1}
             role="grid"
             aria-label="Policy results"
+            aria-rowcount={filtered.length}
             onKeyDown={handleGridKeyDown}
           >
             <div className="overflow-auto flex-1">
@@ -299,6 +300,8 @@ export function FindPolicyModal({
                       key={p.policyRef}
                       onClick={() => setSelected(i)}
                       onDoubleClick={() => loadRow(p)}
+                      role="row"
+                      aria-rowindex={i + 1}
                       className={`cursor-pointer ${
                         i === selected
                           ? "bg-[#003578] text-white"

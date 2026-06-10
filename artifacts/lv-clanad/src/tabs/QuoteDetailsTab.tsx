@@ -486,6 +486,7 @@ export function QuoteDetailsTab() {
           tabIndex={0}
           onKeyDown={handleQuoteKey}
           aria-label="Quote Lines grid"
+          aria-rowcount={quoteRows.length}
         >
           <table className="lve-grid">
             <thead>
@@ -506,6 +507,7 @@ export function QuoteDetailsTab() {
                     className="cursor-pointer"
                     aria-selected={isSel}
                     role="row"
+                    aria-rowindex={i + 1}
                   >
                     {[
                       r.type, r.premium, r.tfc, r.original, r.escType, r.escRate,

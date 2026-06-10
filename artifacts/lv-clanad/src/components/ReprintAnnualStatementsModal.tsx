@@ -32,9 +32,9 @@ export function ReprintAnnualStatementsModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
-      <div ref={containerRef} className="lve-panel bg-white w-[420px] max-w-[96vw]">
+      <div ref={containerRef} role="dialog" aria-modal="true" aria-labelledby="reprint-ann-stmt-title" className="lve-panel bg-white w-[420px] max-w-[96vw]">
         <header className="lve-panel-header flex items-center justify-between">
-          <span>Reprint Annual Statements</span>
+          <span id="reprint-ann-stmt-title">Reprint Annual Statements</span>
           <button
             type="button"
             onClick={onClose}

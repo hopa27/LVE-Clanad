@@ -23,9 +23,9 @@ export function CopyP60Modal({
   if (done) {
     return (
       <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
-        <div ref={containerRef} className="lve-panel bg-white w-[320px] max-w-full">
+        <div ref={containerRef} role="dialog" aria-modal="true" aria-labelledby="copy-p60-done-title" className="lve-panel bg-white w-[320px] max-w-full">
           <header className="lve-panel-header flex items-center justify-between">
-            <span>Information</span>
+            <span id="copy-p60-done-title">Information</span>
             <button
               type="button"
               className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-white hover:bg-[#d72714] transition-colors"
@@ -58,9 +58,9 @@ export function CopyP60Modal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
-      <div className="lve-panel bg-white w-[360px] max-w-full">
+      <div role="dialog" aria-modal="true" aria-labelledby="copy-p60-title" className="lve-panel bg-white w-[360px] max-w-full">
         <header className="lve-panel-header flex items-center justify-between">
-          <span>Copy P60</span>
+          <span id="copy-p60-title">Copy P60</span>
           <button
             type="button"
             className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-white hover:bg-[#d72714] transition-colors"

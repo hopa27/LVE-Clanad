@@ -36,8 +36,8 @@ export function TaxCertificateModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-      <div ref={containerRef} className="lve-panel w-[420px] bg-white">
-        <header className="lve-panel-header">Tax Certificate</header>
+      <div ref={containerRef} role="dialog" aria-modal="true" aria-labelledby="tax-cert-title" className="lve-panel w-[420px] bg-white">
+        <header id="tax-cert-title" className="lve-panel-header">Tax Certificate</header>
         <div className="lve-panel-body">
           <p className="font-['Mulish'] text-[13px] text-[#3d3d3d] mb-4">
             Please enter the dates of the first and last payments you want to see

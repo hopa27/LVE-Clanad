@@ -101,9 +101,9 @@ export function QuoteLookupModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
-      <div ref={containerRef} className="lve-panel bg-white w-[1100px] max-w-full max-h-[90vh] flex flex-col">
+      <div ref={containerRef} role="dialog" aria-modal="true" aria-labelledby="quote-lookup-title" className="lve-panel bg-white w-[1100px] max-w-full max-h-[90vh] flex flex-col">
         <header className="lve-panel-header flex items-center justify-between">
-          <span>Quote Lookup</span>
+          <span id="quote-lookup-title">Quote Lookup</span>
           <button
             type="button"
             className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-white hover:bg-[#d72714] hover:text-white transition-colors"
@@ -143,6 +143,7 @@ export function QuoteLookupModal({
                 <button
                   type="button"
                   title="Lookup"
+                  aria-label="Lookup"
                   className="w-7 h-7 inline-flex items-center justify-center rounded-[6px] border border-[#BBBBBB] bg-white text-[#04589b] hover:border-[#178830]"
                 >
                   <MdManageSearch size={16} />
@@ -162,6 +163,7 @@ export function QuoteLookupModal({
                 onClick={goFirst}
                 disabled={atStart}
                 title="First Record"
+                aria-label="First Record"
                 className={navBtn}
               >
                 <MdFirstPage size={20} />
@@ -171,6 +173,7 @@ export function QuoteLookupModal({
                 onClick={goPrev}
                 disabled={atStart}
                 title="Previous Record"
+                aria-label="Previous Record"
                 className={navBtn}
               >
                 <MdChevronLeft size={20} />
@@ -183,6 +186,7 @@ export function QuoteLookupModal({
                 onClick={goNext}
                 disabled={atEnd}
                 title="Next Record"
+                aria-label="Next Record"
                 className={navBtn}
               >
                 <MdChevronRight size={20} />
@@ -192,6 +196,7 @@ export function QuoteLookupModal({
                 onClick={goLast}
                 disabled={atEnd}
                 title="Last Record"
+                aria-label="Last Record"
                 className={navBtn}
               >
                 <MdLastPage size={20} />
@@ -230,7 +235,7 @@ export function QuoteLookupModal({
           <h4 className="font-['Livvic'] text-[13px] font-semibold text-[#3d3d3d] mb-1">
             Illustrations (Variant 0 only)
           </h4>
-          <div className="overflow-auto border border-[#BBBBBB] rounded-[8px] mb-4">
+          <div className="overflow-auto border border-[#BBBBBB] rounded-[8px] mb-4" role="grid" aria-label="Illustrations grid" aria-rowcount={illustrations.length}>
             <table className="lve-grid">
               <thead>
                 <tr>
@@ -256,6 +261,8 @@ export function QuoteLookupModal({
                   <tr
                     key={i}
                     onClick={() => setCurrentIndex(i)}
+                    role="row"
+                    aria-rowindex={i + 1}
                     className={`cursor-pointer ${
                       i === currentIndex ? "bg-[#eaf5f8]" : ""
                     }`}
@@ -275,7 +282,7 @@ export function QuoteLookupModal({
           <h4 className="font-['Livvic'] text-[13px] font-semibold text-[#3d3d3d] mb-1">
             Variants
           </h4>
-          <div className="overflow-auto border border-[#BBBBBB] rounded-[8px]">
+          <div className="overflow-auto border border-[#BBBBBB] rounded-[8px]" role="grid" aria-label="Variants grid" aria-rowcount={variants.length}>
             <table className="lve-grid">
               <thead>
                 <tr>
@@ -298,7 +305,7 @@ export function QuoteLookupModal({
                   </tr>
                 )}
                 {variants.map((row, i) => (
-                  <tr key={i}>
+                  <tr key={i} role="row" aria-rowindex={i + 1}>
                     {row.map((v, j) => (
                       <td key={j} className="!px-3 whitespace-nowrap">
                         {v}

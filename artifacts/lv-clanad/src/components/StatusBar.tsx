@@ -42,6 +42,8 @@ export function StatusBar() {
             className={`font-['Mulish'] text-sm font-semibold ${
               item.highlight ? "text-[#178830]" : (item as any).error ? "text-[#d72714]" : "text-[#3d3d3d]"
             }`}
+            role={item.label === "Status" ? "status" : undefined}
+            aria-label={item.label === "Status" ? `Policy status: ${item.value}` : undefined}
           >
             {item.value}
           </span>

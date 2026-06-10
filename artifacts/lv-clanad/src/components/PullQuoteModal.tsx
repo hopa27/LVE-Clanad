@@ -63,10 +63,10 @@ export function PullQuoteModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
-      <div ref={containerRef} className="lve-panel bg-white w-[1100px] max-w-full max-h-[90vh] flex flex-col">
+      <div ref={containerRef} role="dialog" aria-modal="true" aria-labelledby="pull-quote-title" className="lve-panel bg-white w-[1100px] max-w-full max-h-[90vh] flex flex-col">
 
         <header className="lve-panel-header flex items-center justify-between">
-          <span>Quote Lookup</span>
+          <span id="pull-quote-title">Quote Lookup</span>
           <button
             type="button"
             className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-white hover:bg-[#d72714] hover:text-white transition-colors"
@@ -98,6 +98,7 @@ export function PullQuoteModal({
                 </div>
                 <button
                   type="button"
+                  aria-label="Lookup"
                   className="w-7 h-7 inline-flex items-center justify-center rounded-[6px] border border-[#BBBBBB] bg-white text-[#04589b] hover:border-[#178830]"
                 >
                   <MdManageSearch size={16} />
@@ -110,19 +111,19 @@ export function PullQuoteModal({
 
             {/* Nav buttons */}
             <div className="flex items-center gap-2">
-              <button type="button" onClick={() => setCurrentIndex(0)} disabled={atStart} title="First" className={navBtn}>
+              <button type="button" onClick={() => setCurrentIndex(0)} disabled={atStart} title="First" aria-label="First Record" className={navBtn}>
                 <MdFirstPage size={20} />
               </button>
-              <button type="button" onClick={() => setCurrentIndex((i) => Math.max(0, i - 1))} disabled={atStart} title="Previous" className={navBtn}>
+              <button type="button" onClick={() => setCurrentIndex((i) => Math.max(0, i - 1))} disabled={atStart} title="Previous" aria-label="Previous Record" className={navBtn}>
                 <MdChevronLeft size={20} />
               </button>
               <span className="px-2 min-w-[80px] text-center text-sm font-bold text-[#4a4a49] select-none font-['Mulish']">
                 {currentIndex + 1} of {total}
               </span>
-              <button type="button" onClick={() => setCurrentIndex((i) => Math.min(total - 1, i + 1))} disabled={atEnd} title="Next" className={navBtn}>
+              <button type="button" onClick={() => setCurrentIndex((i) => Math.min(total - 1, i + 1))} disabled={atEnd} title="Next" aria-label="Next Record" className={navBtn}>
                 <MdChevronRight size={20} />
               </button>
-              <button type="button" onClick={() => setCurrentIndex(total - 1)} disabled={atEnd} title="Last" className={navBtn}>
+              <button type="button" onClick={() => setCurrentIndex(total - 1)} disabled={atEnd} title="Last" aria-label="Last Record" className={navBtn}>
                 <MdLastPage size={20} />
               </button>
             </div>
@@ -164,7 +165,7 @@ export function PullQuoteModal({
           <h4 className="font-['Livvic'] text-[13px] font-semibold text-[#3d3d3d] mb-1">
             Illustrations (Variant 0 only)
           </h4>
-          <div className="overflow-auto border border-[#BBBBBB] rounded-[8px] mb-4">
+          <div className="overflow-auto border border-[#BBBBBB] rounded-[8px] mb-4" role="grid" aria-label="Illustrations grid" aria-rowcount={ILLUSTRATIONS.length}>
             <table className="lve-grid">
               <thead>
                 <tr>
@@ -178,6 +179,8 @@ export function PullQuoteModal({
                   <tr
                     key={i}
                     onClick={() => setCurrentIndex(i)}
+                    role="row"
+                    aria-rowindex={i + 1}
                     className={`cursor-pointer ${i === currentIndex ? "bg-[#eaf5f8]" : ""}`}
                   >
                     {row.map((v, j) => (
@@ -193,7 +196,7 @@ export function PullQuoteModal({
           <h4 className="font-['Livvic'] text-[13px] font-semibold text-[#3d3d3d] mb-1">
             Variants
           </h4>
-          <div className="overflow-auto border border-[#BBBBBB] rounded-[8px]">
+          <div className="overflow-auto border border-[#BBBBBB] rounded-[8px]" role="grid" aria-label="Variants grid" aria-rowcount={0}>
             <table className="lve-grid">
               <thead>
                 <tr>

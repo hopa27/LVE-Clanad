@@ -138,9 +138,9 @@ export function CustomerNeedsModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
-      <div ref={containerRef} className="lve-panel w-[760px] bg-white">
+      <div ref={containerRef} role="dialog" aria-modal="true" aria-labelledby="customer-needs-title" className="lve-panel w-[760px] bg-white">
         <header className="lve-panel-header flex items-center justify-between">
-          <span>CustomerNeeds</span>
+          <span id="customer-needs-title">CustomerNeeds</span>
           <button
             type="button"
             onClick={handleClose}

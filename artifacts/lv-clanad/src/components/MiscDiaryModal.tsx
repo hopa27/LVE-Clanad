@@ -147,8 +147,8 @@ export function MiscDiaryModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
-      <div ref={containerRef} className="lve-panel w-[460px] bg-white">
-        <header className="lve-panel-header">{title}</header>
+      <div ref={containerRef} role="dialog" aria-modal="true" aria-labelledby="misc-diary-title" className="lve-panel w-[460px] bg-white">
+        <header id="misc-diary-title" className="lve-panel-header">{title}</header>
         <div className="lve-panel-body space-y-4">
           <div className="flex items-center gap-3">
             <label className="lve-label w-[80px] shrink-0 text-right">

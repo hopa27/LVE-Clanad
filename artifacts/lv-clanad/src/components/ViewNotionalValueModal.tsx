@@ -33,9 +33,9 @@ export function ViewNotionalValueModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
-      <div ref={containerRef} className="lve-panel bg-white w-[760px] max-w-full max-h-[92vh] flex flex-col">
+      <div ref={containerRef} role="dialog" aria-modal="true" aria-labelledby="view-notional-title" className="lve-panel bg-white w-[760px] max-w-full max-h-[92vh] flex flex-col">
         <header className="lve-panel-header flex items-center justify-between">
-          <span>ViewNotionalValue</span>
+          <span id="view-notional-title">ViewNotionalValue</span>
           <button
             type="button"
             className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-white hover:bg-[#d72714] hover:text-white transition-colors"
@@ -50,7 +50,7 @@ export function ViewNotionalValueModal({
         <div className="lve-panel-body overflow-auto flex flex-col gap-5">
           <div className="border border-[#BBBBBB] rounded-[8px] overflow-hidden">
             <div className="overflow-auto max-h-[320px]">
-              <table className="w-full font-['Mulish'] text-[13px] text-[#3d3d3d] min-w-[680px]">
+              <table className="w-full font-['Mulish'] text-[13px] text-[#3d3d3d] min-w-[680px]" aria-label="Notional value history">
                 <thead>
                   <tr className="bg-white border-y-[3px] border-[#04589b] font-['Livvic'] font-semibold text-[13px] uppercase text-[#002f5c]">
                     <th className="px-3 py-3 text-left">VALUE_DATE</th>

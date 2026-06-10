@@ -128,9 +128,9 @@ export function AmendIfaModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
-      <div ref={containerRef} className="lve-panel bg-white w-[1000px] max-w-full max-h-[90vh] flex flex-col">
+      <div ref={containerRef} role="dialog" aria-modal="true" aria-labelledby="amend-ifa-title" className="lve-panel bg-white w-[1000px] max-w-full max-h-[90vh] flex flex-col">
         <header className="lve-panel-header flex items-center justify-between">
-          <span>IFA Lookup</span>
+          <span id="amend-ifa-title">IFA Lookup</span>
           <button
             type="button"
             className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-white hover:bg-[#d72714] hover:text-white transition-colors"
@@ -209,7 +209,7 @@ export function AmendIfaModal({
           </div>
 
           {/* Data grid */}
-          <div className="overflow-auto" style={{ maxHeight: 240 }}>
+          <div className="overflow-auto" role="grid" aria-label="IFA results grid" aria-rowcount={rows.length} style={{ maxHeight: 240 }}>
             <table className="lve-grid">
               <thead>
                 <tr>
@@ -223,6 +223,8 @@ export function AmendIfaModal({
                   <tr
                     key={r.ref}
                     onClick={() => setSelected(i)}
+                    role="row"
+                    aria-rowindex={i + 1}
                     style={{
                       cursor: "pointer",
                       ...(i === selected

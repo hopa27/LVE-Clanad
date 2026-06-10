@@ -190,6 +190,7 @@ export function BankAccDetailsTab() {
           tabIndex={0}
           onKeyDown={handleTransferKey}
           aria-label="Transfer history grid"
+          aria-rowcount={rows.length}
         >
           <table className="lve-grid">
             <thead className="sticky top-0 bg-white z-10">
@@ -211,6 +212,7 @@ export function BankAccDetailsTab() {
                     className="cursor-pointer"
                     aria-selected={isSel}
                     role="row"
+                    aria-rowindex={i + 1}
                   >
                     <td style={tdStyle}>{t.company}</td>
                     <td style={tdStyle}>{t.ref}</td>

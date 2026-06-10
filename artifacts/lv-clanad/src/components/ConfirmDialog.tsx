@@ -23,8 +23,8 @@ export function ConfirmDialog({
   if (!open) return null;
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/30">
-      <div ref={containerRef} className="lve-panel w-[360px] bg-white">
-        <header className="lve-panel-header">{title}</header>
+      <div ref={containerRef} role="dialog" aria-modal="true" aria-labelledby="confirm-dialog-title" className="lve-panel w-[360px] bg-white">
+        <header id="confirm-dialog-title" className="lve-panel-header">{title}</header>
         <div className="lve-panel-body">
           <div className="flex items-start gap-3">
             <MdHelpOutline

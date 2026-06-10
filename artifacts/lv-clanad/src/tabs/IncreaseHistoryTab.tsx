@@ -136,7 +136,7 @@ export function IncreaseHistoryTab() {
   return (
     <div className="space-y-4">
       <Section title="Increase History">
-        <div className="overflow-auto">
+        <div className="overflow-auto" role="grid" aria-label="Increase History grid" aria-rowcount={rows.length}>
           <table className="lve-grid">
             <thead>
               <tr>
@@ -153,7 +153,7 @@ export function IncreaseHistoryTab() {
             </thead>
             <tbody>
               {rows.map((row, ri) => (
-                <tr key={ri}>
+                <tr key={ri} role="row" aria-rowindex={ri + 1}>
                   {row.map((v, i) => (
                     <td
                       key={i}

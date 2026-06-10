@@ -86,9 +86,9 @@ export function EditBankDetailsModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-4">
-      <div ref={containerRef} className="bg-white rounded-[8px] shadow-xl border border-[#bcd] w-[520px] max-w-full overflow-hidden">
+      <div ref={containerRef} role="dialog" aria-modal="true" aria-labelledby="edit-bank-title" className="bg-white rounded-[8px] shadow-xl border border-[#bcd] w-[520px] max-w-full overflow-hidden">
         <header className="bg-[#00263e] text-white font-['Livvic'] text-[14px] font-semibold px-4 py-2 flex items-center justify-between">
-          <span>New bank details</span>
+          <span id="edit-bank-title">New bank details</span>
           <button
             type="button"
             className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-white hover:bg-[#d72714] transition-colors"

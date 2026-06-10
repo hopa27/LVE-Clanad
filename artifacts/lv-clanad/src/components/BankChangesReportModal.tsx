@@ -93,11 +93,11 @@ export function BankChangesReportModal({
 
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
-      <div ref={containerRef} className="lve-panel bg-white w-[820px] max-w-full max-h-[90vh] flex flex-col">
+      <div ref={containerRef} role="dialog" aria-modal="true" aria-labelledby="bank-changes-report-title" className="lve-panel bg-white w-[820px] max-w-full max-h-[90vh] flex flex-col">
 
         {/* LVE header */}
         <header className="lve-panel-header flex items-center justify-between">
-          <span>Bank Detail Amendments Report</span>
+          <span id="bank-changes-report-title">Bank Detail Amendments Report</span>
           <button
             type="button"
             onClick={onClose}

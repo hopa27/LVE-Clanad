@@ -210,6 +210,12 @@ export function FindPolicyModal({
                   setSearch(e.target.value);
                   setSelected(0);
                 }}
+                onKeyDown={(e) => {
+                  if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    gridRef.current?.focus();
+                  }
+                }}
                 placeholder={String(placeholder)}
                 className="lve-input"
                 autoFocus

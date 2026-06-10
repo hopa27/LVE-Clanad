@@ -43,10 +43,12 @@ export function TabBar({
   activeTab,
   onChange,
   panelRef,
+  activeTabRef,
 }: {
   activeTab: TabKey;
   onChange: (key: TabKey) => void;
   panelRef?: RefObject<HTMLElement | null>;
+  activeTabRef?: RefObject<HTMLButtonElement | null>;
 }) {
   const { planCode } = usePlanCode();
   const listRef = useRef<HTMLDivElement>(null);
@@ -115,6 +117,7 @@ export function TabBar({
           return (
             <button
               key={tab.key}
+              ref={isActive ? activeTabRef : undefined}
               role="tab"
               aria-selected={isActive}
               tabIndex={isActive ? 0 : -1}

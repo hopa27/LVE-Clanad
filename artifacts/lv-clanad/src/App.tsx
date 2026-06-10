@@ -88,6 +88,22 @@ function AppShell() {
   const { cancelKey } = useEditMode();
   const { planCode } = usePlanCode();
   const panelRef = useRef<HTMLDivElement>(null);
+  const activeTabRef = useRef<HTMLButtonElement>(null);
+
+  const FOCUSABLE_SELECTOR =
+    'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
+
+  const handlePanelKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Tab" && e.shiftKey && panelRef.current) {
+      const focusables = Array.from(
+        panelRef.current.querySelectorAll<HTMLElement>(FOCUSABLE_SELECTOR)
+      );
+      if (focusables.length > 0 && document.activeElement === focusables[0]) {
+        e.preventDefault();
+        activeTabRef.current?.focus();
+      }
+    }
+  };
 
   // Allow Header menus to switch the active tab via a custom event
   useEffect(() => {
@@ -111,8 +127,8 @@ function AppShell() {
       <main className="flex-1 px-[142px] py-8">
         <Toolbar />
         <PolicyHeader />
-        <TabBar activeTab={activeTab} onChange={setActiveTab} panelRef={panelRef} />
-        <div ref={panelRef} className="bg-white rounded-b-lg rounded-tr-lg shadow-sm p-6 -mt-px">
+        <TabBar activeTab={activeTab} onChange={setActiveTab} panelRef={panelRef} activeTabRef={activeTabRef} />
+        <div ref={panelRef} onKeyDown={handlePanelKeyDown} className="bg-white rounded-b-lg rounded-tr-lg shadow-sm p-6 -mt-px">
           <ActiveComponent key={`${activeTab}:${cancelKey}:${planCode}`} />
         </div>
         <StatusBar />

@@ -254,7 +254,7 @@ export function FindPolicyModal({
           <div
             ref={gridRef}
             className="border border-[#BBBBBB] rounded-[8px] overflow-hidden flex-1 min-h-[200px] flex flex-col focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#178830]"
-            tabIndex={0}
+            tabIndex={-1}
             role="grid"
             aria-label="Policy results"
             onKeyDown={handleGridKeyDown}

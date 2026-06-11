@@ -145,31 +145,40 @@ export function Toolbar() {
             const Icon = tool.icon;
             const isPrimary = tool.action === "edit-toggle" && editing;
             const shortcutKeys = tool.shortcutId ? getShortcutKeys(tool.shortcutId) : undefined;
-            const button = (
-              <button
-                key={tool.label}
-                type="button"
-                disabled={!tool.enabled}
-                tabIndex={!tool.enabled ? -1 : undefined}
-                onClick={() => handleClick(tool.action)}
-                aria-description={
-                  shortcutKeys ? `Shortcut: ${shortcutKeys.join("+")}` : undefined
-                }
-                className={`${
-                  isPrimary ? "lve-btn" : "lve-btn lve-btn-secondary"
-                } lve-btn-sm`}
-              >
-                <Icon size={18} />
-                <span>{tool.label}</span>
-              </button>
-            );
+            const btnClass = `${isPrimary ? "lve-btn" : "lve-btn lve-btn-secondary"} lve-btn-sm`;
 
-            if (!shortcutKeys) return button;
+            if (!shortcutKeys) {
+              return (
+                <button
+                  key={tool.label}
+                  type="button"
+                  disabled={!tool.enabled}
+                  tabIndex={!tool.enabled ? -1 : undefined}
+                  onClick={() => handleClick(tool.action)}
+                  className={btnClass}
+                >
+                  <Icon size={18} />
+                  <span>{tool.label}</span>
+                </button>
+              );
+            }
 
             return (
               <Tooltip key={tool.label}>
-                <TooltipTrigger asChild>{button}</TooltipTrigger>
-                <TooltipContent side="bottom" sideOffset={6}>
+                <TooltipTrigger asChild>
+                  <button
+                    type="button"
+                    disabled={!tool.enabled}
+                    tabIndex={!tool.enabled ? -1 : undefined}
+                    onClick={() => handleClick(tool.action)}
+                    aria-description={`Shortcut: ${shortcutKeys.join("+")}`}
+                    className={btnClass}
+                  >
+                    <Icon size={18} />
+                    <span>{tool.label}</span>
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent side="top" sideOffset={6} avoidCollisions={false}>
                   <span className="font-semibold">{tool.label}</span>
                   {shortcutKeys.map((k, i) => (
                     <kbd

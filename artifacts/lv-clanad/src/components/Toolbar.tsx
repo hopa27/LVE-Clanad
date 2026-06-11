@@ -174,7 +174,7 @@ export function Toolbar() {
                   {shortcutKeys.map((k, i) => (
                     <kbd
                       key={i}
-                      className="ml-2 inline-flex items-center justify-center min-w-[1.25rem] h-5 px-1.5 rounded-[4px] border border-[#006cf4] bg-[#eaf5f8] font-['Mulish'] text-[11px] font-semibold text-[#006cf4]"
+                      className="ml-2 inline-flex items-center justify-center min-w-[1.25rem] h-[18px] px-1 rounded-[3px] border border-white/40 bg-white/15 font-['Mulish'] text-[10px] font-semibold text-white/90"
                     >
                       {k}
                     </kbd>

@@ -169,7 +169,7 @@ export function Toolbar() {
             return (
               <Tooltip key={tool.label}>
                 <TooltipTrigger asChild>{button}</TooltipTrigger>
-                <TooltipContent>
+                <TooltipContent side="bottom" sideOffset={6}>
                   <span className="font-semibold">{tool.label}</span>
                   {shortcutKeys.map((k, i) => (
                     <kbd

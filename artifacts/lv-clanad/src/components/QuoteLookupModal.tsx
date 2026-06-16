@@ -123,20 +123,22 @@ export function QuoteLookupModal({
               </legend>
               <div className="flex items-center gap-2">
                 <div className="flex flex-col gap-0.5">
-                  <label className="inline-flex items-center cursor-pointer">
+                  <label className="inline-flex items-center gap-1 cursor-pointer font-['Mulish'] text-[13px] text-[#3d3d3d]">
                     <input
                       type="radio"
                       name="get-records-mode"
                       defaultChecked
                       className="w-3 h-3 accent-[#006cf4] cursor-pointer"
                     />
+                    &gt;=
                   </label>
-                  <label className="inline-flex items-center cursor-pointer">
+                  <label className="inline-flex items-center gap-1 cursor-pointer font-['Mulish'] text-[13px] text-[#3d3d3d]">
                     <input
                       type="radio"
                       name="get-records-mode"
                       className="w-3 h-3 accent-[#006cf4] cursor-pointer"
                     />
+                    =
                   </label>
                 </div>
                 <input

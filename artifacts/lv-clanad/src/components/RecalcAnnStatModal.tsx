@@ -22,8 +22,9 @@ export function RecalcAnnStatModal({
   onClose: () => void;
 }) {
   const [product, setProduct] = useState("With Profits");
-  const [_fromDate, setFromDate] = useState<Date | undefined>();
-  const [_toDate, setToDate] = useState<Date | undefined>();
+  const [fromDate, setFromDate] = useState<Date | undefined>();
+  const [toDate, setToDate] = useState<Date | undefined>();
+  const canSubmit = !!product && !!fromDate && !!toDate;
 
   const containerRef = useRef<HTMLDivElement>(null);
   useFocusTrap(containerRef, open);
@@ -89,7 +90,8 @@ export function RecalcAnnStatModal({
             <button
               type="button"
               onClick={onClose}
-              className="lve-btn min-w-[90px] justify-center"
+              disabled={!canSubmit}
+              className="lve-btn min-w-[90px] justify-center disabled:opacity-40 disabled:cursor-not-allowed"
             >
               <MdCheck size={16} />
               OK

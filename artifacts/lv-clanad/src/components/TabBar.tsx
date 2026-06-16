@@ -58,9 +58,12 @@ export function TabBar({
     const el = scrollRef.current;
     if (!el) return;
     const onWheel = (e: WheelEvent) => {
-      if (e.deltaY === 0) return;
+      // absorb both vertical and horizontal wheel delta into horizontal scroll
+      const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+      if (delta === 0) return;
       e.preventDefault();
-      el.scrollLeft += e.deltaY;
+      e.stopPropagation();
+      el.scrollLeft += delta;
     };
     el.addEventListener("wheel", onWheel, { passive: false });
     return () => el.removeEventListener("wheel", onWheel);
@@ -117,7 +120,7 @@ export function TabBar({
   };
 
   return (
-    <div ref={scrollRef} className="overflow-x-auto">
+    <div ref={scrollRef} className="overflow-x-auto overflow-y-hidden">
       <div
         ref={listRef}
         role="tablist"

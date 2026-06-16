@@ -11,6 +11,7 @@ import {
 } from "react-icons/md";
 import { useFocusTrap } from "../hooks/useFocusTrap";
 import { useEscapeKey } from "../hooks/useEscapeKey";
+import { LocateFieldValueModal } from "./LocateFieldValueModal";
 
 const ILLUSTRATIONS = [
   ["925149", "0", "SANDF-001", "18 Dec 2007", "Mr M Stanislas",        "PPA", "JOINT",  "64.75", "111000346", "No", "Printed", "STALW-001"],
@@ -79,6 +80,7 @@ export function QuoteLookupModal({
   const total = illustrations.length;
   const hasRecords = total > 0;
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [locateOpen, setLocateOpen] = useState(false);
 
   const containerRef = useRef<HTMLDivElement>(null);
   useFocusTrap(containerRef, open);
@@ -198,7 +200,7 @@ export function QuoteLookupModal({
               <MdSkipPrevious size={16} />
               Last 60
             </button>
-            <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm">
+            <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" onClick={() => setLocateOpen(true)}>
               <MdSearch size={16} />
               Locate (F3 Next)
             </button>
@@ -309,6 +311,7 @@ export function QuoteLookupModal({
           </div>
         </div>
       </div>
+      <LocateFieldValueModal open={locateOpen} onClose={() => setLocateOpen(false)} />
     </div>
   );
 }

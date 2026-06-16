@@ -19,9 +19,8 @@ export function ReprintAnnualStatementsModal({
   open: boolean;
   onClose: () => void;
 }) {
-  const [_reprintDate, setReprintDate] = useState<Date | undefined>(
-    new Date(2026, 4, 25)
-  );
+  const today = new Date();
+  const [_reprintDate, setReprintDate] = useState<Date | undefined>(today);
 
   const containerRef = useRef<HTMLDivElement>(null);
   useFocusTrap(containerRef, open);
@@ -55,7 +54,7 @@ export function ReprintAnnualStatementsModal({
             <div className="flex-1">
               <EditModeContext.Provider value={ALWAYS_EDITING}>
                 <DatePicker
-                  value="25/05/2026"
+                  value={`${String(today.getDate()).padStart(2, "0")}/${String(today.getMonth() + 1).padStart(2, "0")}/${today.getFullYear()}`}
                   placeholder="DD/MM/YYYY"
                   onChange={setReprintDate}
                 />

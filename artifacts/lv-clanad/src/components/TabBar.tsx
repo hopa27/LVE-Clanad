@@ -1,4 +1,4 @@
-import { useRef, type RefObject } from "react";
+import { useEffect, useRef, type RefObject } from "react";
 import { usePlanCode } from "../context/PlanCodeContext";
 
 export type TabKey =
@@ -52,6 +52,19 @@ export function TabBar({
 }) {
   const { planCode } = usePlanCode();
   const listRef = useRef<HTMLDivElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const onWheel = (e: WheelEvent) => {
+      if (e.deltaY === 0) return;
+      e.preventDefault();
+      el.scrollLeft += e.deltaY;
+    };
+    el.addEventListener("wheel", onWheel, { passive: false });
+    return () => el.removeEventListener("wheel", onWheel);
+  }, []);
 
   const visibleTabs =
     planCode === "611" || planCode === "61a"
@@ -104,7 +117,7 @@ export function TabBar({
   };
 
   return (
-    <div className="overflow-x-auto">
+    <div ref={scrollRef} className="overflow-x-auto">
       <div
         ref={listRef}
         role="tablist"

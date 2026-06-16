@@ -141,6 +141,10 @@ export function QuoteLookupModal({
                     =
                   </label>
                 </div>
+                <input
+                  type="text"
+                  className="lve-input h-8 w-[160px]"
+                />
               </div>
             </fieldset>
             <span className={divider} />

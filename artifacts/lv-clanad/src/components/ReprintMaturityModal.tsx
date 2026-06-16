@@ -5,7 +5,7 @@ import { EditModeContext } from "../context/EditModeContext";
 import { useFocusTrap } from "../hooks/useFocusTrap";
 import { useEscapeKey } from "../hooks/useEscapeKey";
 
-const LETTER_TYPES = ["", "4 Month", "6 Week", "3 Week", "10 Day"];
+const LETTER_TYPES = ["", "4 Month", "6 Week", "3 Week", "10 Day", "0 Day"];
 
 const ALWAYS_EDITING = {
   editing: true,

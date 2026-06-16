@@ -3,7 +3,23 @@ import { MdClose, MdFirstPage, MdChevronRight, MdCancel } from "react-icons/md";
 import { useFocusTrap } from "../hooks/useFocusTrap";
 import { useEscapeKey } from "../hooks/useEscapeKey";
 
-const FIELDS = ["Quote", "Policy No", "Surname", "Nat Ins No", "DOB"];
+const FIELDS = [
+  "Age 1",
+  "COCODE",
+  "Created",
+  "ENHANCED1",
+  "IFA",
+  "ILLUSTRATION",
+  "LifeType",
+  "Master",
+  "Name",
+  "Quote",
+  "Status",
+  "Type",
+  "User",
+  "VARIANT",
+  "Variant[T1]",
+];
 
 export function LocateFieldValueModal({
   open,

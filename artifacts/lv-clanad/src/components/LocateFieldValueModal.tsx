@@ -130,6 +130,7 @@ export function LocateFieldValueModal({
             </legend>
             <select
               className="lve-input w-full cursor-pointer"
+              size={6}
               value={field}
               onChange={(e) => setField(e.target.value)}
             >

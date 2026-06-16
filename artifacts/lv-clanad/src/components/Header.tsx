@@ -775,7 +775,7 @@ export function Header({ title }: { title: string }) {
                             <span className="text-[#04589b]">▶</span>
                           )}
                         </button>
-                        {opt.hasSubmenu && opt.submenu && (
+                        {opt.hasSubmenu && opt.submenu && !opt.disabled && (
                           <div className="hidden group-hover:block absolute left-full top-0 -mt-1 ml-0 z-40 min-w-[180px] bg-white border border-[#e3e6ea] rounded-[8px] shadow-lg py-1 font-['Mulish'] text-[14px] text-[#3d3d3d] overflow-hidden">
                             {opt.submenu.map((sub) => {
                               const accelIdx = sub.accel

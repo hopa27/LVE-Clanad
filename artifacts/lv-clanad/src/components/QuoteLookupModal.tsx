@@ -141,12 +141,6 @@ export function QuoteLookupModal({
                     =
                   </label>
                 </div>
-                <input
-                  key={initialQuery}
-                  type="text"
-                  defaultValue={initialQuery}
-                  className="lve-input h-8 w-[160px]"
-                />
               </div>
             </fieldset>
             <span className={divider} />

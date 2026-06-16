@@ -1,4 +1,5 @@
-import { useEffect, useRef, type RefObject } from "react";
+import { useEffect, useRef, useState, type RefObject } from "react";
+import { MdChevronLeft, MdChevronRight } from "react-icons/md";
 import { usePlanCode } from "../context/PlanCodeContext";
 
 export type TabKey =
@@ -39,6 +40,8 @@ export const TABS: { key: TabKey; label: string }[] = [
 const FOCUSABLE_SELECTOR =
   'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])';
 
+const SCROLL_STEP = 220;
+
 export function TabBar({
   activeTab,
   onChange,
@@ -53,21 +56,48 @@ export function TabBar({
   const { planCode } = usePlanCode();
   const listRef = useRef<HTMLDivElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(false);
+
+  const updateArrows = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    setCanScrollLeft(el.scrollLeft > 1);
+    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1);
+  };
 
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
+
+    updateArrows();
+
+    const onScroll = () => updateArrows();
+    const onResize = () => updateArrows();
+
     const onWheel = (e: WheelEvent) => {
-      // absorb both vertical and horizontal wheel delta into horizontal scroll
       const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
       if (delta === 0) return;
       e.preventDefault();
       e.stopPropagation();
       el.scrollLeft += delta;
     };
+
+    el.addEventListener("scroll", onScroll, { passive: true });
     el.addEventListener("wheel", onWheel, { passive: false });
-    return () => el.removeEventListener("wheel", onWheel);
+    window.addEventListener("resize", onResize);
+    return () => {
+      el.removeEventListener("scroll", onScroll);
+      el.removeEventListener("wheel", onWheel);
+      window.removeEventListener("resize", onResize);
+    };
   }, []);
+
+  const scrollBy = (dir: "left" | "right") => {
+    const el = scrollRef.current;
+    if (!el) return;
+    el.scrollBy({ left: dir === "left" ? -SCROLL_STEP : SCROLL_STEP, behavior: "smooth" });
+  };
 
   const visibleTabs =
     planCode === "611" || planCode === "61a"
@@ -120,32 +150,54 @@ export function TabBar({
   };
 
   return (
-    <div ref={scrollRef} className="overflow-x-auto overflow-y-hidden">
-      <div
-        ref={listRef}
-        role="tablist"
-        aria-label="Policy tabs"
-        className="flex flex-row gap-4 min-w-max"
-        onKeyDown={handleKeyDown}
+    <div className="flex items-end gap-1">
+      <button
+        type="button"
+        aria-label="Scroll tabs left"
+        onClick={() => scrollBy("left")}
+        disabled={!canScrollLeft}
+        className="flex-shrink-0 self-center mb-0.5 inline-flex items-center justify-center w-7 h-7 rounded-full border border-[#04589b] text-[#04589b] bg-white hover:bg-[#eaf5f8] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
       >
-        {visibleTabs.map((tab, idx) => {
-          const isActive = activeTab === tab.key;
-          return (
-            <button
-              key={tab.key}
-              ref={isActive ? activeTabRef : undefined}
-              role="tab"
-              aria-selected={isActive}
-              tabIndex={isActive ? 0 : -1}
-              type="button"
-              className={`lve-tab ${isActive ? "active" : ""}`}
-              onClick={() => onChange(tab.key)}
-            >
-              {tab.label}
-            </button>
-          );
-        })}
+        <MdChevronLeft size={20} />
+      </button>
+
+      <div ref={scrollRef} className="flex-1 overflow-x-auto overflow-y-hidden">
+        <div
+          ref={listRef}
+          role="tablist"
+          aria-label="Policy tabs"
+          className="flex flex-row gap-4 min-w-max"
+          onKeyDown={handleKeyDown}
+        >
+          {visibleTabs.map((tab) => {
+            const isActive = activeTab === tab.key;
+            return (
+              <button
+                key={tab.key}
+                ref={isActive ? activeTabRef : undefined}
+                role="tab"
+                aria-selected={isActive}
+                tabIndex={isActive ? 0 : -1}
+                type="button"
+                className={`lve-tab ${isActive ? "active" : ""}`}
+                onClick={() => onChange(tab.key)}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
+        </div>
       </div>
+
+      <button
+        type="button"
+        aria-label="Scroll tabs right"
+        onClick={() => scrollBy("right")}
+        disabled={!canScrollRight}
+        className="flex-shrink-0 self-center mb-0.5 inline-flex items-center justify-center w-7 h-7 rounded-full border border-[#04589b] text-[#04589b] bg-white hover:bg-[#eaf5f8] disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+      >
+        <MdChevronRight size={20} />
+      </button>
     </div>
   );
 }

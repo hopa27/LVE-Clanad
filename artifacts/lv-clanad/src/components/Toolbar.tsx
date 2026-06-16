@@ -55,9 +55,12 @@ type Tool = {
 export function Toolbar() {
   const { editing, setEditing, cancel } = useEditMode();
   const { planCode } = usePlanCode();
-  const isPlan51 = planCode === "51";
+  const isPlan51  = planCode === "51";
   const isPlan621 = planCode === "621";
   const isPlan611 = planCode === "611";
+  const isPlan84  = planCode === "84";
+  const isPlan90  = planCode === "90";
+  const isStatusL = isPlan84 || isPlan90;
   const [newAppConfirm, setNewAppConfirm] = useState(false);
   const [simAppConfirm, setSimAppConfirm] = useState(false);
   const [quoteLookupOpen, setQuoteLookupOpen] = useState(false);
@@ -96,6 +99,8 @@ export function Toolbar() {
   const isPlan52  = planCode === "52";
   const baseTools = (isPlan51 || isPlan62a || isPlan611 || isPlan52)
     ? ALL_TOOLS.filter((t) => t.action !== "edit-toggle" && t.action !== "log")
+    : isStatusL
+    ? ALL_TOOLS.filter((t) => t.action !== "log")
     : ALL_TOOLS;
   const TOOLS = baseTools;
 

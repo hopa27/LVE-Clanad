@@ -3,17 +3,20 @@ import { MdEdit, MdCheck, MdClose } from "react-icons/md";
 import { Field, TextInput, SelectInput, Section } from "../components/Field";
 import { DatePicker } from "../components/DatePicker";
 import { ConnectedAddress } from "../components/ConnectedAddress";
+import { EditModeContext, useEditMode } from "../context/EditModeContext";
 import { usePlanCode } from "../context/PlanCodeContext";
 
 export function MaturitiesSurrenderTab() {
   const [bankModalOpen, setBankModalOpen] = useState(false);
   const { planCode } = usePlanCode();
+  const editModeCtx = useEditMode();
   const isPlan0 = planCode === "0";
   const isPlan83 = planCode === "83";
   const isPlan82 = planCode === "82";
 
   if (isPlan0) {
     return (
+      <EditModeContext.Provider value={{ ...editModeCtx, editing: false }}>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <div className="space-y-4">
           <Section title="Bank Details">
@@ -134,7 +137,7 @@ export function MaturitiesSurrenderTab() {
 
         {bankModalOpen && (
           <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
-            <div className="lve-panel bg-white w-[720px] max-w-full">
+            <div className="lve-panel bg-white w-[720px] max-w-full" role="dialog" aria-modal="true">
               <header className="lve-panel-header flex items-center justify-between">
                 <span>New Maturity / Surrender Bank Details</span>
                 <button
@@ -189,10 +192,12 @@ export function MaturitiesSurrenderTab() {
           </div>
         )}
       </div>
+      </EditModeContext.Provider>
     );
   }
 
   return (
+    <EditModeContext.Provider value={{ ...editModeCtx, editing: false }}>
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
       <div className="space-y-4">
         <Section title="Bank Details">
@@ -351,5 +356,6 @@ export function MaturitiesSurrenderTab() {
         </div>
       )}
     </div>
+    </EditModeContext.Provider>
   );
 }

@@ -88,11 +88,11 @@ function AnnuitantBlock({
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-6">
       {/* Column 1 — Names + Cause of Death */}
       <div>
-        <Field label="Surname:"><TextInput value={surname} /></Field>
-        <Field label="Forename:"><TextInput value={forename} /></Field>
-        <Field label="2nd Name:"><TextInput value={second} /></Field>
+        <Field inline labelWidth={120} label="Surname:"><TextInput value={surname} /></Field>
+        <Field inline labelWidth={120} label="Forename:"><TextInput value={forename} /></Field>
+        <Field inline labelWidth={120} label="2nd Name:"><TextInput value={second} /></Field>
         {showShortName && (
-          <Field label="Short Name:"><TextInput value={shortName} /></Field>
+          <Field inline labelWidth={120} label="Short Name:"><TextInput value={shortName} /></Field>
         )}
 
         {showCauseOfDeath && (
@@ -111,9 +111,9 @@ function AnnuitantBlock({
 
       {/* Column 2 — DOB / DOD / Nat ins / Enhanced / Doctor / Gender */}
       <div>
-        <Field label="DOB:"><DatePicker value={dob} placeholder="DOB" /></Field>
+        <Field inline labelWidth={120} label="DOB:"><DatePicker value={dob} placeholder="DOB" /></Field>
         {showDod && (
-          <Field label="DOD:">
+          <Field inline labelWidth={120} label="DOD:">
             <div className="flex items-center gap-3">
               <div className="flex-1 min-w-0">
                 <DatePicker value={dod} placeholder="DOD" />
@@ -124,7 +124,7 @@ function AnnuitantBlock({
             </div>
           </Field>
         )}
-        <Field label="Nat ins no:">
+        <Field inline labelWidth={120} label="Nat ins no:">
           <div className="flex items-center gap-2">
             <div className="flex-1 min-w-0">
               <TextInput value={natIns} />
@@ -139,8 +139,8 @@ function AnnuitantBlock({
             </button>
           </div>
         </Field>
-        <Field label="Enhanced?:"><TextInput value={enhanced} disabled /></Field>
-        <Field label="Doctor:">
+        <Field inline labelWidth={120} label="Enhanced?:"><TextInput value={enhanced} disabled /></Field>
+        <Field inline labelWidth={120} label="Doctor:">
           <div className="flex items-center gap-2">
             <div className="w-32 shrink-0">
               <TextInput value={doctor} />
@@ -159,7 +159,7 @@ function AnnuitantBlock({
             </div>
           </div>
         </Field>
-        <Field label="Gender:">
+        <Field inline labelWidth={120} label="Gender:">
           <SelectInput value={gender} options={["", "Male", "Female"]} />
         </Field>
       </div>
@@ -167,24 +167,24 @@ function AnnuitantBlock({
       {/* Column 3 — ELE/MRSD + MAR + U/W */}
       <div>
         {ele !== undefined && (
-          <Field label="ELE:"><TextInput value={ele} disabled /></Field>
+          <Field inline labelWidth={120} label="ELE:"><TextInput value={ele} disabled /></Field>
         )}
         {mrsd !== undefined && (
-          <Field label="MRSD:"><TextInput value={mrsd} disabled /></Field>
+          <Field inline labelWidth={120} label="MRSD:"><TextInput value={mrsd} disabled /></Field>
         )}
-        <Field label="MAR required?:">
+        <Field inline labelWidth={120} label="MAR required?:">
           <TextInput value={marRequired} disabled={marRequiredDisabled} />
         </Field>
-        <Field label={marCopyLabel}><TextInput value={marCopyToPH} /></Field>
-        <Field label="Date MAR Sent:"><TextInput value={dateMarSent} disabled /></Field>
-        <Field label="Date MAR Received:"><TextInput value={dateMarRec} /></Field>
+        <Field inline labelWidth={120} label={marCopyLabel}><TextInput value={marCopyToPH} /></Field>
+        <Field inline labelWidth={120} label="Date MAR Sent:"><TextInput value={dateMarSent} disabled /></Field>
+        <Field inline labelWidth={120} label="Date MAR Received:"><TextInput value={dateMarRec} /></Field>
         {showUwBlock && (
           <>
-            <Field label="U/W Ref:"><TextInput value={uwRef} disabled /></Field>
+            <Field inline labelWidth={120} label="U/W Ref:"><TextInput value={uwRef} disabled /></Field>
             {showUwDateBlock && (
               <>
-                <Field label="U/W Date:"><TextInput value={uwDate} disabled /></Field>
-                <Field label="Days Since U/W:"><TextInput value={daysSinceUW} disabled /></Field>
+                <Field inline labelWidth={120} label="U/W Date:"><TextInput value={uwDate} disabled /></Field>
+                <Field inline labelWidth={120} label="Days Since U/W:"><TextInput value={daysSinceUW} disabled /></Field>
               </>
             )}
           </>

@@ -21,9 +21,8 @@ export function ReprintMaturityModal({
   open: boolean;
   onClose: () => void;
 }) {
-  const [reprintDate, setReprintDate] = useState<Date | undefined>(
-    new Date(2026, 4, 25)
-  );
+  const today = new Date();
+  const [reprintDate, setReprintDate] = useState<Date | undefined>(today);
   const [letterType, setLetterType] = useState("");
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -59,7 +58,7 @@ export function ReprintMaturityModal({
               <div className="flex-1">
                 <EditModeContext.Provider value={ALWAYS_EDITING}>
                   <DatePicker
-                    value="25/05/2026"
+                    value={`${String(today.getDate()).padStart(2, "0")}/${String(today.getMonth() + 1).padStart(2, "0")}/${today.getFullYear()}`}
                     placeholder="DD/MM/YYYY"
                     onChange={setReprintDate}
                   />

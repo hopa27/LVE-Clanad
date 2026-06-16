@@ -24,6 +24,7 @@ export function ReprintMaturityModal({
   const today = new Date();
   const [reprintDate, setReprintDate] = useState<Date | undefined>(today);
   const [letterType, setLetterType] = useState("");
+  const canPrint = !!reprintDate && letterType !== "";
 
   const containerRef = useRef<HTMLDivElement>(null);
   useFocusTrap(containerRef, open);
@@ -84,7 +85,8 @@ export function ReprintMaturityModal({
             <button
               type="button"
               onClick={onClose}
-              className="lve-btn min-w-[100px] justify-center"
+              disabled={!canPrint}
+              className="lve-btn min-w-[100px] justify-center disabled:opacity-40 disabled:cursor-not-allowed"
             >
               <MdPrint size={16} />
               Print

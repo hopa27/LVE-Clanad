@@ -8,7 +8,6 @@ import {
   MdFirstPage,
   MdLastPage,
   MdSearch,
-  MdManageSearch,
 } from "react-icons/md";
 import { useFocusTrap } from "../hooks/useFocusTrap";
 import { useEscapeKey } from "../hooks/useEscapeKey";
@@ -140,14 +139,6 @@ export function QuoteLookupModal({
                     />
                   </label>
                 </div>
-                <button
-                  type="button"
-                  title="Lookup"
-                  aria-label="Lookup"
-                  className="w-7 h-7 inline-flex items-center justify-center rounded-[6px] border border-[#BBBBBB] bg-white text-[#04589b] hover:border-[#178830]"
-                >
-                  <MdManageSearch size={16} />
-                </button>
                 <input
                   key={initialQuery}
                   type="text"

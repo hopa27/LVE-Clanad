@@ -37,7 +37,7 @@ export function PolicyHeader() {
       </button>
       <button
         type="button"
-        className="h-9 w-9 inline-flex items-center justify-center rounded-[8px] border border-[#BBBBBB] bg-white text-[#006cf4] hover:border-[#178830]"
+        className="h-9 w-9 shrink-0 inline-flex items-center justify-center rounded-[8px] border border-[#BBBBBB] bg-white text-[#006cf4] hover:border-[#178830]"
         title="Find application"
         aria-label="Find application"
       >
@@ -88,7 +88,7 @@ export function PolicyHeader() {
           setSelectedIdx(null);
           setSimOpen(true);
         }}
-        className="h-9 w-9 inline-flex items-center justify-center rounded-[8px] border border-[#BBBBBB] bg-white text-[#3d3d3d] hover:border-[#178830]"
+        className="h-9 w-9 shrink-0 inline-flex items-center justify-center rounded-[8px] border border-[#BBBBBB] bg-white text-[#3d3d3d] hover:border-[#178830]"
         title="More"
         aria-label="More options"
       >

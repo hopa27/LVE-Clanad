@@ -75,7 +75,9 @@ function LettersTabInner() {
 
   // Distribution method state — reset via key when letter changes
   const [printChecked, setPrintChecked] = useState(false);
+  const [faxChecked,   setFaxChecked]   = useState(false);
   const [faxValue,     setFaxValue]     = useState("");
+  const [emailChecked, setEmailChecked] = useState(false);
   const [emailValue,   setEmailValue]   = useState("");
   const [sendToClient,  setSendToClient]  = useState(false);
   const [sendToIFA,     setSendToIFA]     = useState(false);
@@ -86,8 +88,8 @@ function LettersTabInner() {
 
   const hasDistribution =
     (cfg.print  && printChecked)        ||
-    (cfg.fax    && faxValue.trim() !== "") ||
-    (cfg.email  && emailValue.trim() !== "") ||
+    (cfg.fax    && faxChecked)          ||
+    (cfg.email  && emailChecked)        ||
     (cfg.sendTo.client  && sendToClient)  ||
     (cfg.sendTo.ifa     && sendToIFA)     ||
     (cfg.sendTo.ceding  && sendToCeding)  ||
@@ -110,7 +112,9 @@ function LettersTabInner() {
     if (v) setLetterError(false);
     // Reset distribution state when letter changes
     setPrintChecked(false);
+    setFaxChecked(false);
     setFaxValue("");
+    setEmailChecked(false);
     setEmailValue(isPlan0 && v ? "dbedEmail" : "");
     setSendToClient(false);
     setSendToIFA(false);
@@ -186,22 +190,24 @@ function LettersTabInner() {
             </div>
             <div className="flex items-center gap-3">
               <label className="lve-label !mb-0 text-right shrink-0 w-[70px]">Fax:</label>
+              <Checkbox disabled={!cfg.fax} checked={faxChecked} onChange={(v) => { setFaxChecked(v); if (!v) setFaxValue(""); }} />
               <div className="flex-1 min-w-0">
                 <TextInput
                   value={faxValue}
                   placeholder="Fax number"
-                  disabled={!cfg.fax}
+                  disabled={!cfg.fax || !faxChecked}
                   onChange={setFaxValue}
                 />
               </div>
             </div>
             <div className="flex items-center gap-3">
               <label className="lve-label !mb-0 text-right shrink-0 w-[70px]">Email:</label>
+              <Checkbox disabled={!cfg.email} checked={emailChecked} onChange={(v) => { setEmailChecked(v); if (!v) setEmailValue(""); }} />
               <div className="flex-1 min-w-0">
                 <TextInput
                   value={emailValue}
                   placeholder="recipient@example.com"
-                  disabled={!cfg.email}
+                  disabled={!cfg.email || !emailChecked}
                   onChange={setEmailValue}
                 />
               </div>

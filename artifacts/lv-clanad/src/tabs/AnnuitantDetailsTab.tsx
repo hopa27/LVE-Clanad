@@ -374,7 +374,7 @@ export function AnnuitantDetailsTab() {
           }
           daysSinceUW={isPlan76z ? "6581" : isPlan76 ? "6726" : ""}
           showCauseOfDeath={!isPreset && !isPlan80 && !isPlan83 && !isPlan82 && !isPlan52}
-          showDod={!isPlan87 && !isPlan90 && !isPlan611}
+          showDod={!isPlan87 && !isPlan611}
           showUwDateBlock={!isPreset && !isPlan51 && !isPlan80 && !isPlan83 && !isPlan82 && !isPlan621 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a}
           icd1={isPlan76z ? "F01" : isPlan76 ? "447" : isPlan61a ? "155" : ""}
           icd2={isPlan61a ? "428" : ""}

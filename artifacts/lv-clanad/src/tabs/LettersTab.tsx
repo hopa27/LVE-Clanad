@@ -182,15 +182,9 @@ function LettersTabInner() {
       <div className="space-y-4" key={selectedLetter}>
         <Section title="Distribution Info">
           <div className="space-y-3">
+            <Checkbox label="Print" disabled={!cfg.print} onChange={setPrintChecked} />
             <div className="flex items-center gap-3">
-              <label className="lve-label !mb-0 text-right shrink-0 w-[70px]">Print:</label>
-              <div className="flex-1 min-w-0">
-                <Checkbox disabled={!cfg.print} onChange={setPrintChecked} />
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <label className="lve-label !mb-0 text-right shrink-0 w-[70px]">Fax:</label>
-              <Checkbox disabled={!cfg.fax} checked={faxChecked} onChange={(v) => { setFaxChecked(v); if (!v) setFaxValue(""); }} />
+              <Checkbox label="Fax" disabled={!cfg.fax} checked={faxChecked} onChange={(v) => { setFaxChecked(v); if (!v) setFaxValue(""); }} />
               <div className="flex-1 min-w-0">
                 <TextInput
                   value={faxValue}
@@ -201,8 +195,7 @@ function LettersTabInner() {
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <label className="lve-label !mb-0 text-right shrink-0 w-[70px]">Email:</label>
-              <Checkbox disabled={!cfg.email} checked={emailChecked} onChange={(v) => { setEmailChecked(v); if (!v) setEmailValue(""); }} />
+              <Checkbox label="Email" disabled={!cfg.email} checked={emailChecked} onChange={(v) => { setEmailChecked(v); if (!v) setEmailValue(""); }} />
               <div className="flex-1 min-w-0">
                 <TextInput
                   value={emailValue}

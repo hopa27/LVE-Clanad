@@ -196,7 +196,7 @@ export function BankAccDetailsTab() {
             <thead className="sticky top-0 bg-white z-10">
               <tr>
                 <th>Transfer Company</th>
-                <th>Ref</th>
+                {!isPlan90 && <th>Ref</th>}
                 <th>Date</th>
                 <th style={{ textAlign: "right" }}>Amount (£)</th>
               </tr>
@@ -215,7 +215,7 @@ export function BankAccDetailsTab() {
                     aria-rowindex={i + 1}
                   >
                     <td style={tdStyle}>{t.company}</td>
-                    <td style={tdStyle}>{t.ref}</td>
+                    {!isPlan90 && <td style={tdStyle}>{t.ref}</td>}
                     <td style={tdStyle}>{t.date}</td>
                     <td style={{ textAlign: "right", ...(isSel ? { backgroundColor: "#05579B", color: "#ffffff" } : {}) }}>{t.amount}</td>
                   </tr>

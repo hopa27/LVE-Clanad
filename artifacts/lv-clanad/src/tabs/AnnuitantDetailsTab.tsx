@@ -410,6 +410,8 @@ export function AnnuitantDetailsTab() {
           gender={isPlan611 ? "Male" : isPlan61a ? "Female" : ""}
           showCauseOfDeath={!isPreset && !isPlan51 && !isPlan80 && !isPlan83 && !isPlan82 && !isPlan621 && !isPlan76 && !isPlan76z && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a}
           showDod={!isPlan87 && !isPlan611}
+          doctorDisabled={isPlan621}
+          natInsDisabled={isPlan621}
           icd1=""
           icd2=""
           icd3=""

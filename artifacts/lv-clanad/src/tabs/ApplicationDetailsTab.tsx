@@ -151,7 +151,7 @@ export function ApplicationDetailsTab() {
           )}
           {isPlan76z && (
             <Field label="Hosp'd Date:">
-              <DatePicker value="" placeholder="dbedHospdDat" />
+              <DatePicker value="" placeholder="" />
             </Field>
           )}
           {!isCompact && !isPlan51 && !isPlan83 && !isPlan82 && !isPlan621 && !isPlan76 && !isPlan76z && !isPlan611 && !isPlan61a && (

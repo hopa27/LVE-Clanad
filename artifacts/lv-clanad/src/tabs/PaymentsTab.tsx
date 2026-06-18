@@ -725,12 +725,12 @@ export function PaymentsTab() {
             <thead className="sticky top-0 bg-white z-10">
               <tr>
                 <th>Pay Date</th>
-                <th>Gross</th>
-                {!isPlan82 && !isPlan83 && !isPlan76 && !isPlan76z && <><th>Cap Element</th><th>Tax</th><th>Post Adj</th><th>Net</th></>}
+                <th>GROSS</th>
+                {!isPlan82 && !isPlan83 && !isPlan76 && !isPlan76z && <><th>Cap Element</th><th>TAX</th><th>Post Adj</th><th>NET</th></>}
                 <th>Method</th>
-                <th>Reason</th>
-                <th>BACS Date</th>
-                <th>Hash Code</th>
+                <th>REASON</th>
+                <th>BACS_DATE</th>
+                <th>HASH_CODE</th>
               </tr>
             </thead>
             <tbody>

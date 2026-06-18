@@ -600,6 +600,15 @@ export function Header({ title }: { title: string }) {
       }
       if (planCode === "87" && m.label === "Supervisor")
         return { ...m, options: SUPERVISOR_87 };
+      if (planCode === "87" && m.label === "Process")
+        return {
+          ...m,
+          options: m.options.map((opt) =>
+            opt.label === "P45 details"
+              ? { label: "P45 details", action: "p45-details" }
+              : opt
+          ),
+        };
       if (planCode === "80") {
         if (m.label === "Options")    return { ...m, options: OPTIONS_84 };
         if (m.label === "Process")    return { ...m, options: PROCESS_80 };

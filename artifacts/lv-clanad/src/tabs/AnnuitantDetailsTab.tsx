@@ -156,8 +156,8 @@ function AnnuitantBlock({
               type="button"
               disabled={natInsDisabled}
               className="lve-btn lve-btn-secondary !rounded-full !p-0 !w-10 !h-10 shrink-0 inline-flex items-center justify-center"
-              title="Cancel"
-              aria-label="Cancel"
+              title="Click here to delete NI Number"
+              aria-label="Click here to delete NI Number"
             >
               <MdCancel size={18} />
             </button>

@@ -142,6 +142,42 @@ export function IncreaseHistoryTab() {
   const [dragOverIdx, setDragOverIdx] = useState<number | null>(null);
   const [draggingIdx, setDraggingIdx] = useState<number | null>(null);
 
+  const DEFAULT_COL_WIDTH = 140;
+  const [colWidths, setColWidths] = useState<number[]>(() =>
+    COLUMNS.map(() => DEFAULT_COL_WIDTH)
+  );
+  const resizeRef = useRef<{ colIdx: number; startX: number; startW: number } | null>(null);
+
+  function handleResizeMouseDown(e: React.MouseEvent, colIdx: number) {
+    e.preventDefault();
+    e.stopPropagation();
+    resizeRef.current = { colIdx, startX: e.clientX, startW: colWidths[colIdx] };
+
+    const onMouseMove = (ev: MouseEvent) => {
+      if (!resizeRef.current) return;
+      const { colIdx: ci, startX, startW } = resizeRef.current;
+      const newW = Math.max(60, startW + ev.clientX - startX);
+      setColWidths(prev => {
+        const next = [...prev];
+        next[ci] = newW;
+        return next;
+      });
+    };
+
+    const onMouseUp = () => {
+      resizeRef.current = null;
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseup", onMouseUp);
+      document.body.style.cursor = "";
+      document.body.style.userSelect = "";
+    };
+
+    document.body.style.cursor = "col-resize";
+    document.body.style.userSelect = "none";
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseup", onMouseUp);
+  }
+
   function handleDragStart(orderIdx: number) {
     dragColRef.current = orderIdx;
     setDraggingIdx(orderIdx);
@@ -181,7 +217,7 @@ export function IncreaseHistoryTab() {
     <div className="space-y-4">
       <Section title="Increase History">
         <div className="overflow-auto" role="grid" aria-label="Increase History grid" aria-rowcount={rows.length}>
-          <table className="lve-grid">
+          <table className="lve-grid" style={{ tableLayout: "fixed" }}>
             <thead>
               <tr>
                 {colOrder.map((colIdx, orderIdx) => {
@@ -196,11 +232,21 @@ export function IncreaseHistoryTab() {
                       onDragOver={isFixed ? undefined : (e) => handleDragOver(e, orderIdx)}
                       onDrop={isFixed ? undefined : () => handleDrop(orderIdx)}
                       onDragEnd={handleDragEnd}
-                      className={`!px-4 max-w-[120px] select-none transition-colors${isFixed ? " sticky left-0 z-10" : " cursor-grab active:cursor-grabbing"}${isDragging ? " opacity-40" : ""}${isDropTarget ? " border-l-4 border-l-[#006cf4]" : ""}`}
-                      style={isFixed ? { backgroundColor: "#ffffff" } : undefined}
+                      className={`!px-4 select-none transition-colors relative${isFixed ? " sticky left-0 z-10" : " cursor-grab active:cursor-grabbing"}${isDragging ? " opacity-40" : ""}${isDropTarget ? " border-l-4 border-l-[#006cf4]" : ""}`}
+                      style={{ width: colWidths[colIdx], minWidth: colWidths[colIdx], maxWidth: colWidths[colIdx], ...(isFixed ? { backgroundColor: "#ffffff" } : {}) }}
                       title={isFixed ? undefined : "Drag to reorder"}
                     >
-                      {COLUMNS[colIdx]}
+                      <span className="block truncate">{COLUMNS[colIdx]}</span>
+                      <div
+                        className="absolute top-0 right-0 h-full w-2 cursor-col-resize z-20 flex items-center justify-center group"
+                        onMouseDown={(e) => handleResizeMouseDown(e, colIdx)}
+                        onClick={(e) => e.stopPropagation()}
+                        draggable={false}
+                        onDragStart={(e) => e.preventDefault()}
+                        title="Drag to resize column"
+                      >
+                        <div className="w-0.5 h-4 bg-[#BBBBBB] group-hover:bg-[#006cf4] rounded-full transition-colors" />
+                      </div>
                     </th>
                   );
                 })}
@@ -214,8 +260,13 @@ export function IncreaseHistoryTab() {
                     return (
                       <td
                         key={colIdx}
-                        className={`!px-4 whitespace-nowrap${isFixed ? " sticky left-0 z-10 lve-sticky-col" : ""}`}
-                        style={isFixed ? { backgroundColor: ri % 2 === 0 ? "#ffffff" : "#eaf5f8" } : undefined}
+                        className={`!px-4 whitespace-nowrap overflow-hidden${isFixed ? " sticky left-0 z-10 lve-sticky-col" : ""}`}
+                        style={{
+                          width: colWidths[colIdx],
+                          minWidth: colWidths[colIdx],
+                          maxWidth: colWidths[colIdx],
+                          ...(isFixed ? { backgroundColor: ri % 2 === 0 ? "#ffffff" : "#eaf5f8" } : {}),
+                        }}
                       >
                         {row[colIdx]}
                       </td>

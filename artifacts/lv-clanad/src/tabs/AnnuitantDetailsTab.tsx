@@ -416,17 +416,6 @@ export function AnnuitantDetailsTab() {
         />
       </Section>}
 
-      {!isPlan76 && !isPlan76z && <div className="rounded-[8px] border border-[#BBBBBB] bg-white overflow-hidden">
-        <div className="relative h-7 w-full bg-white">
-          <div
-            className="absolute inset-y-0 left-0 bg-[#178830] transition-[width]"
-            style={{ width: "0%" }}
-          />
-          <div className="absolute inset-0 flex items-center justify-center font-['Mulish'] text-[13px] font-semibold text-[#3d3d3d]">
-            0%
-          </div>
-        </div>
-      </div>}
     </div>
   );
 }

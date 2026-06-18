@@ -142,10 +142,10 @@ function AnnuitantBlock({
             >
               <MdMedicalServices size={18} />
             </button>
-            <div className="flex-1 min-w-0">
-              <TextInput value={doctorName} disabled />
-            </div>
           </div>
+        </Field>
+        <Field inline labelWidth={120} label="">
+          <TextInput value={doctorName} disabled />
         </Field>
         <Field inline labelWidth={120} label="Nat ins no:">
           <div className="flex items-center gap-2">

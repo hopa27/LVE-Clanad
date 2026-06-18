@@ -113,16 +113,14 @@ function AnnuitantBlock({
       <div>
         <Field inline labelWidth={120} label="DOB:"><DatePicker value={dob} placeholder="DOB" /></Field>
         {showDod && (
-          <Field inline labelWidth={120} label="DOD:">
-            <div className="flex items-center gap-3">
-              <div className="flex-1 min-w-0">
-                <DatePicker value={dod} placeholder="DOD" />
-              </div>
-              <div className="shrink-0">
-                <Checkbox label="Death Cert Received?" checked={deathCertReceived} />
-              </div>
-            </div>
-          </Field>
+          <>
+            <Field inline labelWidth={120} label="DOD:">
+              <DatePicker value={dod} placeholder="DOD" />
+            </Field>
+            <Field inline labelWidth={120} label="">
+              <Checkbox label="Death Cert Received?" checked={deathCertReceived} />
+            </Field>
+          </>
         )}
         <Field inline labelWidth={120} label="Nat ins no:">
           <div className="flex items-center gap-2">

@@ -380,7 +380,6 @@ export function AnnuitantDetailsTab() {
           showCauseOfDeath={!isPreset && !isPlan80 && !isPlan83 && !isPlan82 && !isPlan52}
           showDod={!isPlan87 && !isPlan611}
           doctorDisabled={isPlan621}
-          natInsDisabled={isPlan621}
           showUwDateBlock={!isPreset && !isPlan51 && !isPlan80 && !isPlan83 && !isPlan82 && !isPlan621 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a}
           icd1={isPlan76z ? "F01" : isPlan76 ? "447" : isPlan61a ? "155" : ""}
           icd2={isPlan61a ? "428" : ""}
@@ -411,7 +410,6 @@ export function AnnuitantDetailsTab() {
           showCauseOfDeath={!isPreset && !isPlan51 && !isPlan80 && !isPlan83 && !isPlan82 && !isPlan621 && !isPlan76 && !isPlan76z && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a}
           showDod={!isPlan87 && !isPlan611}
           doctorDisabled={isPlan621}
-          natInsDisabled={isPlan621}
           icd1=""
           icd2=""
           icd3=""

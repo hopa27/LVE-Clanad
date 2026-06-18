@@ -143,6 +143,13 @@
     color: #ffffff;
     border-color: var(--color-lve-primary-hover);
   }
+  .lve-btn-secondary:disabled {
+    background: var(--color-lve-disabled);
+    color: #fff;
+    border-color: var(--color-lve-disabled);
+    opacity: 1;
+    cursor: not-allowed;
+  }
 
   .lve-btn-ghost {
     background: transparent;

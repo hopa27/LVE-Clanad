@@ -204,7 +204,7 @@ export function ApplicationDetailsTab() {
                 <Field label="Payee:"><TextInput value="" /></Field>
                 <Field label="Trustee:"><Checkbox /></Field>
                 <div className="mt-2">
-                  <button type="button" className="lve-btn lve-btn-sm" disabled={isPlan51 || isPlan76 || isPlan76z || isPlan62a || isPlan611 || isPlan52 || isPlan61a}>
+                  <button type="button" className="lve-btn lve-btn-sm" disabled={isPlan51 || isPlan621 || isPlan76 || isPlan76z || isPlan62a || isPlan611 || isPlan52 || isPlan61a}>
                     Create payment...
                   </button>
                 </div>

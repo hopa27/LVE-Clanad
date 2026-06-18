@@ -43,6 +43,7 @@ type BlockProps = {
   showCauseOfDeath?: boolean;
   showDod?: boolean;
   doctorDisabled?: boolean;
+  natInsDisabled?: boolean;
 };
 
 function AnnuitantBlock({
@@ -83,6 +84,7 @@ function AnnuitantBlock({
   showCauseOfDeath = true,
   showDod = true,
   doctorDisabled = false,
+  natInsDisabled = false,
 }: BlockProps) {
   const [doctorOpen, setDoctorOpen] = useState(false);
 
@@ -152,6 +154,7 @@ function AnnuitantBlock({
             </div>
             <button
               type="button"
+              disabled={natInsDisabled}
               className="lve-btn lve-btn-secondary !rounded-full !p-0 !w-10 !h-10 shrink-0 inline-flex items-center justify-center"
               title="Edit Nat ins"
               aria-label="Edit Nat ins"
@@ -377,6 +380,7 @@ export function AnnuitantDetailsTab() {
           showCauseOfDeath={!isPreset && !isPlan80 && !isPlan83 && !isPlan82 && !isPlan52}
           showDod={!isPlan87 && !isPlan611}
           doctorDisabled={isPlan621}
+          natInsDisabled={isPlan621}
           showUwDateBlock={!isPreset && !isPlan51 && !isPlan80 && !isPlan83 && !isPlan82 && !isPlan621 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a}
           icd1={isPlan76z ? "F01" : isPlan76 ? "447" : isPlan61a ? "155" : ""}
           icd2={isPlan61a ? "428" : ""}

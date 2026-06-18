@@ -702,7 +702,7 @@ export function PaymentsTab() {
         )}
       </Section>
 
-      <Section title="Payment History">
+      <Section>
         {(() => {
           const handlePayKey = (e: React.KeyboardEvent) => {
             if (!paymentHistory.length) return;
@@ -764,7 +764,7 @@ export function PaymentsTab() {
       </Section>
 
       {!isPlan76z && (
-      <Section title="Tax History">
+      <Section>
         <div className="overflow-auto max-h-[315px]" role="grid" aria-label="Tax History grid" aria-rowcount={taxHistory.length}>
           <table className="lve-grid">
             <thead className="sticky top-0 bg-white z-10">

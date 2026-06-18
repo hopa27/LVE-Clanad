@@ -124,21 +124,6 @@ function AnnuitantBlock({
             </Field>
           </>
         )}
-        <Field inline labelWidth={120} label="Nat ins no:">
-          <div className="flex items-center gap-2">
-            <div className="flex-1 min-w-0">
-              <TextInput value={natIns} />
-            </div>
-            <button
-              type="button"
-              className="lve-btn lve-btn-secondary !rounded-full !p-0 !w-10 !h-10 shrink-0 inline-flex items-center justify-center"
-              title="Edit Nat ins"
-              aria-label="Edit Nat ins"
-            >
-              <MdEdit size={18} />
-            </button>
-          </div>
-        </Field>
         <Field inline labelWidth={120} label="Enhanced?:"><TextInput value={enhanced} disabled /></Field>
         <Field inline labelWidth={120} label="Doctor:">
           <div className="flex items-center gap-2">
@@ -158,6 +143,21 @@ function AnnuitantBlock({
             <div className="flex-1 min-w-0">
               <TextInput value={doctorName} disabled />
             </div>
+          </div>
+        </Field>
+        <Field inline labelWidth={120} label="Nat ins no:">
+          <div className="flex items-center gap-2">
+            <div className="flex-1 min-w-0">
+              <TextInput value={natIns} />
+            </div>
+            <button
+              type="button"
+              className="lve-btn lve-btn-secondary !rounded-full !p-0 !w-10 !h-10 shrink-0 inline-flex items-center justify-center"
+              title="Edit Nat ins"
+              aria-label="Edit Nat ins"
+            >
+              <MdEdit size={18} />
+            </button>
           </div>
         </Field>
         <Field inline labelWidth={120} label="Gender:">

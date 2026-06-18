@@ -1,3 +1,4 @@
+import { useState, useRef } from "react";
 import { Field, Section, TextInput, SelectInput } from "../components/Field";
 import { usePlanCode } from "../context/PlanCodeContext";
 
@@ -133,6 +134,49 @@ export function IncreaseHistoryTab() {
           ? ROWS_76z
           : [ROW_DEFAULT];
 
+  const [colOrder, setColOrder] = useState<number[]>(() =>
+    COLUMNS.map((_, i) => i)
+  );
+  const dragColRef = useRef<number | null>(null);
+  const dragOverColRef = useRef<number | null>(null);
+  const [dragOverIdx, setDragOverIdx] = useState<number | null>(null);
+  const [draggingIdx, setDraggingIdx] = useState<number | null>(null);
+
+  function handleDragStart(orderIdx: number) {
+    dragColRef.current = orderIdx;
+    setDraggingIdx(orderIdx);
+  }
+
+  function handleDragOver(e: React.DragEvent, orderIdx: number) {
+    e.preventDefault();
+    if (orderIdx === 0) return;
+    dragOverColRef.current = orderIdx;
+    setDragOverIdx(orderIdx);
+  }
+
+  function handleDrop(orderIdx: number) {
+    const from = dragColRef.current;
+    const to = orderIdx;
+    if (from === null || from === to || from === 0 || to === 0) return;
+    setColOrder(prev => {
+      const next = [...prev];
+      const [moved] = next.splice(from, 1);
+      next.splice(to, 0, moved);
+      return next;
+    });
+    dragColRef.current = null;
+    dragOverColRef.current = null;
+    setDragOverIdx(null);
+    setDraggingIdx(null);
+  }
+
+  function handleDragEnd() {
+    dragColRef.current = null;
+    dragOverColRef.current = null;
+    setDragOverIdx(null);
+    setDraggingIdx(null);
+  }
+
   return (
     <div className="space-y-4">
       <Section title="Increase History">
@@ -140,29 +184,43 @@ export function IncreaseHistoryTab() {
           <table className="lve-grid">
             <thead>
               <tr>
-                {COLUMNS.map((c, i) => (
-                  <th
-                    key={c}
-                    className={`!px-4 max-w-[120px]${i === 0 ? " sticky left-0 z-10" : ""}`}
-                    style={i === 0 ? { backgroundColor: "#ffffff" } : undefined}
-                  >
-                    {c}
-                  </th>
-                ))}
+                {colOrder.map((colIdx, orderIdx) => {
+                  const isFixed = orderIdx === 0;
+                  const isDragging = draggingIdx === orderIdx;
+                  const isDropTarget = dragOverIdx === orderIdx && !isFixed;
+                  return (
+                    <th
+                      key={colIdx}
+                      draggable={!isFixed}
+                      onDragStart={isFixed ? undefined : () => handleDragStart(orderIdx)}
+                      onDragOver={isFixed ? undefined : (e) => handleDragOver(e, orderIdx)}
+                      onDrop={isFixed ? undefined : () => handleDrop(orderIdx)}
+                      onDragEnd={handleDragEnd}
+                      className={`!px-4 max-w-[120px] select-none transition-colors${isFixed ? " sticky left-0 z-10" : " cursor-grab active:cursor-grabbing"}${isDragging ? " opacity-40" : ""}${isDropTarget ? " border-l-4 border-l-[#006cf4]" : ""}`}
+                      style={isFixed ? { backgroundColor: "#ffffff" } : undefined}
+                      title={isFixed ? undefined : "Drag to reorder"}
+                    >
+                      {COLUMNS[colIdx]}
+                    </th>
+                  );
+                })}
               </tr>
             </thead>
             <tbody>
               {rows.map((row, ri) => (
                 <tr key={ri} role="row" aria-rowindex={ri + 1}>
-                  {row.map((v, i) => (
-                    <td
-                      key={i}
-                      className={`!px-4 whitespace-nowrap${i === 0 ? " sticky left-0 z-10 lve-sticky-col" : ""}`}
-                      style={i === 0 ? { backgroundColor: ri % 2 === 0 ? "#ffffff" : "#eaf5f8" } : undefined}
-                    >
-                      {v}
-                    </td>
-                  ))}
+                  {colOrder.map((colIdx, orderIdx) => {
+                    const isFixed = orderIdx === 0;
+                    return (
+                      <td
+                        key={colIdx}
+                        className={`!px-4 whitespace-nowrap${isFixed ? " sticky left-0 z-10 lve-sticky-col" : ""}`}
+                        style={isFixed ? { backgroundColor: ri % 2 === 0 ? "#ffffff" : "#eaf5f8" } : undefined}
+                      >
+                        {row[colIdx]}
+                      </td>
+                    );
+                  })}
                 </tr>
               ))}
             </tbody>

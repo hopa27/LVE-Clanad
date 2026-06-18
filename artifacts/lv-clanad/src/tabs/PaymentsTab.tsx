@@ -772,10 +772,10 @@ export function PaymentsTab() {
                 <th>Pay Date</th>
                 <th>Tax Code</th>
                 <th>N</th>
-                <th>Gross</th>
+                <th>GROSS</th>
                 <th>Cum Instal</th>
                 <th>Free Pay</th>
-                <th>Taxable Pay</th>
+                <th>TAXABLE_PAY</th>
                 <th>Tax</th>
                 <th>Tax YTD</th>
               </tr>

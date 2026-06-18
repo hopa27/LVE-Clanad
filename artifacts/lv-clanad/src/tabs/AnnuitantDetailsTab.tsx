@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { MdMedicalServices, MdEdit } from "react-icons/md";
+import { MdMedicalServices, MdCancel } from "react-icons/md";
 import { Field, TextInput, SelectInput, Checkbox, Section } from "../components/Field";
 import { DatePicker } from "../components/DatePicker";
 import { DoctorDatabaseModal } from "../components/DoctorDatabaseModal";
@@ -156,10 +156,10 @@ function AnnuitantBlock({
               type="button"
               disabled={natInsDisabled}
               className="lve-btn lve-btn-secondary !rounded-full !p-0 !w-10 !h-10 shrink-0 inline-flex items-center justify-center"
-              title="Edit Nat ins"
-              aria-label="Edit Nat ins"
+              title="Cancel"
+              aria-label="Cancel"
             >
-              <MdEdit size={18} />
+              <MdCancel size={18} />
             </button>
           </div>
         </Field>

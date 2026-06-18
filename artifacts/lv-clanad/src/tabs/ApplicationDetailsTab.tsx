@@ -28,7 +28,7 @@ export function ApplicationDetailsTab() {
     const start = new Date(y, m - 1, d);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    const diff = Math.floor((today.getTime() - start.getTime()) / 86400000) + 1;
+    const diff = Math.floor((today.getTime() - start.getTime()) / 86400000);
     return diff > 0 ? String(diff) : "";
   }
 

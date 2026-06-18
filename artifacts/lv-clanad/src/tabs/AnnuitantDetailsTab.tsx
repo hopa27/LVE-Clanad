@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { createPortal } from "react-dom";
-import { MdMedicalServices, MdCancel, MdHelp, MdClose } from "react-icons/md";
+import { MdMedicalServices, MdCancel } from "react-icons/md";
 import { Field, TextInput, SelectInput, Checkbox, Section } from "../components/Field";
 import { DatePicker } from "../components/DatePicker";
 import { DoctorDatabaseModal } from "../components/DoctorDatabaseModal";
+import { ConfirmDialog } from "../components/ConfirmDialog";
 import { usePlanCode } from "../context/PlanCodeContext";
 
 type BlockProps = {
@@ -200,43 +200,12 @@ function AnnuitantBlock({
 
       <DoctorDatabaseModal open={doctorOpen} onClose={() => setDoctorOpen(false)} />
 
-      {niConfirmOpen && createPortal(
-        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/30">
-          <div className="bg-[#d4d0c8] border-2 border-[#ffffff] shadow-[2px_2px_0_#808080] w-[260px]">
-            <div className="flex items-center justify-between bg-gradient-to-r from-[#003578] to-[#006cf4] px-2 py-1">
-              <span className="font-['Livvic'] font-bold text-white text-[13px]">Confirm</span>
-              <button
-                type="button"
-                onClick={() => setNiConfirmOpen(false)}
-                className="w-5 h-5 flex items-center justify-center bg-[#d4d0c8] border border-[#808080] text-[#3d3d3d] hover:bg-[#c0bbb4]"
-              >
-                <MdClose size={12} />
-              </button>
-            </div>
-            <div className="flex items-center gap-3 px-4 py-5">
-              <MdHelp size={36} className="text-[#006cf4] shrink-0" />
-              <span className="font-['Mulish'] text-[14px] text-[#3d3d3d]">Are you sure?</span>
-            </div>
-            <div className="flex justify-center gap-2 pb-4">
-              <button
-                type="button"
-                onClick={() => setNiConfirmOpen(false)}
-                className="font-['Mulish'] text-[13px] bg-[#d4d0c8] border border-[#808080] shadow-[1px_1px_0_#ffffff_inset] px-6 py-1 hover:bg-[#c0bbb4] min-w-[64px]"
-              >
-                Yes
-              </button>
-              <button
-                type="button"
-                onClick={() => setNiConfirmOpen(false)}
-                className="font-['Mulish'] text-[13px] bg-[#d4d0c8] border border-[#808080] shadow-[1px_1px_0_#ffffff_inset] px-6 py-1 hover:bg-[#c0bbb4] min-w-[64px]"
-              >
-                No
-              </button>
-            </div>
-          </div>
-        </div>,
-        document.body
-      )}
+      <ConfirmDialog
+        open={niConfirmOpen}
+        message="Are you sure?"
+        onYes={() => setNiConfirmOpen(false)}
+        onNo={() => setNiConfirmOpen(false)}
+      />
     </div>
   );
 }

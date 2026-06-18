@@ -190,6 +190,7 @@
     background: #ffffff;
     border-radius: 8px;
     border: 1px solid #e3e6ea;
+    overflow: hidden;
   }
   .lve-panel-header {
     padding: 16px 24px;

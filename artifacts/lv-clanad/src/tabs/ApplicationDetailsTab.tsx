@@ -138,14 +138,21 @@ export function ApplicationDetailsTab() {
               <TextInput value={isPlan82 ? "Y" : isPlan84 || isPlan90 || isPlan80 || isPlan83 || isPlan621 || isPlan62a || isPlan611 || isPlan52 ? "N" : isPlan51 || isPlan76 || isPlan76z || isPlan61a ? "Y" : "DBSu"} disabled />
             </Field>
           )}
-          <Field label="Days Since Application:">
-            <TextInput value={daysSinceApplication} disabled />
-          </Field>
+          {!isPlan76z && (
+            <Field label="Days Since Application:">
+              <TextInput value={daysSinceApplication} disabled />
+            </Field>
+          )}
           {isPlan621 && (
             <>
               <Field label="Commuted Value:"><TextInput value="" disabled /></Field>
               <Field label="LTA Details:"><Checkbox checked /></Field>
             </>
+          )}
+          {isPlan76z && (
+            <Field label="Hosp'd Date:">
+              <DatePicker value="" placeholder="dbedHospdDat" />
+            </Field>
           )}
           {!isCompact && !isPlan51 && !isPlan83 && !isPlan82 && !isPlan621 && !isPlan76 && !isPlan76z && !isPlan611 && !isPlan61a && (
             <>
@@ -188,7 +195,7 @@ export function ApplicationDetailsTab() {
             <Field label="Closed:">
               <TextInput value={isPlan84 || isPlan90 || isPlan51 || isPlan80 || isPlan83 || isPlan82 || isPlan621 || isPlan76z || isPlan62a || isPlan611 || isPlan61a ? "" : isPlan76 ? "10/09/2009 1" : isPlan52 ? "29/01/2008 1" : "DBClosed"} disabled />
             </Field>
-            {!isPlan84 && !isPlan90 && !isPlan80 && !isPlan83 && !isPlan82 && (
+            {!isPlan84 && !isPlan90 && !isPlan80 && !isPlan83 && !isPlan82 && !isPlan76z && (
               <>
                 <Field label="Age at death:">
                   <TextInput value={isPlan51 || isPlan621 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "" : isPlan76 ? "94" : isPlan76z ? "95" : "edAge"} disabled />
@@ -248,9 +255,11 @@ export function ApplicationDetailsTab() {
               </Field>
             </>
           )}
-          <Field label="Rates Ok'd by:">
-            <TextInput value={isCompact || isPlan51 || isPlan80 || isPlan83 || isPlan82 || isPlan621 || isPlan76 || isPlan76z || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "" : "DBEdit7"} disabled />
-          </Field>
+          {!isPlan76z && (
+            <Field label="Rates Ok'd by:">
+              <TextInput value={isCompact || isPlan51 || isPlan80 || isPlan83 || isPlan82 || isPlan621 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "" : "DBEdit7"} disabled />
+            </Field>
+          )}
           <Field label="Paykey:">
             <TextInput
               value={isPlan87 ? "1023693" : isPlan84 ? "899032" : isPlan90 ? "1018055" : isPlan51 ? "887324" : isPlan82 ? "903655" : isPlan80 ? "898243" : isPlan83 ? "956314" : isPlan621 ? "100004.1" : isPlan76 ? "887316" : isPlan76z ? "889009" : isPlan62a ? "905319" : isPlan611 ? "887439" : isPlan52 ? "887254" : isPlan61a ? "102929.1" : "DBEdit20"}

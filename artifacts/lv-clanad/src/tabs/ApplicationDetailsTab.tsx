@@ -22,6 +22,33 @@ export function ApplicationDetailsTab() {
   const isPlan61a = planCode === "61a";
   const isCompact = isPlan87 || isPlan84 || isPlan90;
 
+  function daysSince(ddmmyyyy: string): string {
+    if (!ddmmyyyy) return "";
+    const [d, m, y] = ddmmyyyy.split("/").map(Number);
+    const start = new Date(y, m - 1, d);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const diff = Math.floor((today.getTime() - start.getTime()) / 86400000) + 1;
+    return diff > 0 ? String(diff) : "";
+  }
+
+  const daysSinceApplication =
+    isPlan87  ? ""
+    : isPlan84  ? daysSince("17/03/2010")
+    : isPlan90  ? daysSince("25/06/2025")
+    : isPlan51  ? daysSince("21/01/2008")
+    : isPlan82  ? daysSince("17/09/2010")
+    : isPlan80  ? daysSince("17/02/2010")
+    : isPlan83  ? daysSince("24/07/2015")
+    : isPlan621 ? daysSince("27/12/2007")
+    : isPlan76  ? daysSince("18/01/2008")
+    : isPlan76z ? daysSince("26/06/2008")
+    : isPlan62a ? daysSince("15/12/2010")
+    : isPlan611 ? daysSince("30/01/2008")
+    : isPlan52  ? daysSince("16/01/2008")
+    : isPlan61a ? daysSince("26/08/2008")
+    : "dbday";
+
   return (
     <div className="space-y-4">
       <div className="panel panel-body grid grid-cols-1 lg:grid-cols-4 gap-x-6">
@@ -112,10 +139,7 @@ export function ApplicationDetailsTab() {
             </Field>
           )}
           <Field label="Days Since Application:">
-            <TextInput
-              value={isPlan87 ? "" : isPlan84 ? "5912" : isPlan90 ? "334" : isPlan51 ? "6707" : isPlan82 ? "5744" : isPlan80 ? "5956" : isPlan83 ? "3966" : isPlan621 ? "6738" : isPlan76 ? "6712" : isPlan76z ? "6557" : isPlan62a ? "5654" : isPlan611 ? "6705" : isPlan52 ? "6720" : isPlan61a ? "6496" : "dbday"}
-              disabled
-            />
+            <TextInput value={daysSinceApplication} disabled />
           </Field>
           {isPlan621 && (
             <>

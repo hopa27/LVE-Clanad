@@ -209,7 +209,7 @@ export function CrsModal({
                 type="button"
                 disabled={index <= 0 || editing}
                 onClick={() => go(0)}
-                className="lve-btn lve-btn-secondary lve-btn-sm"
+                className="lve-btn lve-btn-secondary !rounded-full !p-0 !w-8 !h-8 inline-flex items-center justify-center shrink-0"
                 title="First"
               >
                 <MdFirstPage size={18} />
@@ -218,7 +218,7 @@ export function CrsModal({
                 type="button"
                 disabled={index <= 0 || editing}
                 onClick={() => go(index - 1)}
-                className="lve-btn lve-btn-secondary lve-btn-sm"
+                className="lve-btn lve-btn-secondary !rounded-full !p-0 !w-8 !h-8 inline-flex items-center justify-center shrink-0"
                 title="Previous"
               >
                 <MdNavigateBefore size={18} />
@@ -230,7 +230,7 @@ export function CrsModal({
                 type="button"
                 disabled={index >= REQS.length - 1 || editing}
                 onClick={() => go(index + 1)}
-                className="lve-btn lve-btn-secondary lve-btn-sm"
+                className="lve-btn lve-btn-secondary !rounded-full !p-0 !w-8 !h-8 inline-flex items-center justify-center shrink-0"
                 title="Next"
               >
                 <MdNavigateNext size={18} />
@@ -239,7 +239,7 @@ export function CrsModal({
                 type="button"
                 disabled={index >= REQS.length - 1 || editing}
                 onClick={() => go(REQS.length - 1)}
-                className="lve-btn lve-btn-secondary lve-btn-sm"
+                className="lve-btn lve-btn-secondary !rounded-full !p-0 !w-8 !h-8 inline-flex items-center justify-center shrink-0"
                 title="Last"
               >
                 <MdLastPage size={18} />

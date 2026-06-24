@@ -3,24 +3,29 @@ import { MdKeyboardArrowDown } from "react-icons/md";
 import { DatePicker } from "../components/DatePicker";
 import { ConnectedAddress } from "../components/ConnectedAddress";
 import { usePlanCode } from "../context/PlanCodeContext";
+import { useEditMode } from "../context/EditModeContext";
 
 export function LoaPoaTab() {
   const { planCode } = usePlanCode();
   const isPlan0 = planCode === "0";
+  const { editing } = useEditMode();
 
   return (
     <Section title="LOA / POA Details">
       <div className="max-w-xl">
         <Field inline labelWidth={140} label="LOA/POA:">
           <div className="relative">
-            <select className="lve-input pr-12 appearance-none">
+            <select
+              disabled={!editing}
+              className={`lve-input pr-12 appearance-none ${!editing ? "bg-[#fafafa] cursor-default" : ""}`}
+            >
               <option value="">—</option>
               <option value="Letter of Authority">Letter of Authority</option>
               <option value="Power of Attorney">Power of Attorney</option>
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none">
               <span className="h-6 w-px bg-[#BBBBBB]" />
-              <span className="px-3 text-[#006cf4]">
+              <span className={`px-3 ${!editing ? "text-[#3d3d3d]" : "text-[#006cf4]"}`}>
                 <MdKeyboardArrowDown size={22} />
               </span>
             </div>

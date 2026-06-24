@@ -1,0 +1,74 @@
+Prompt: Build a hybrid masked date-picker component (DD/MM/YYYY)
+
+Build a reusable DatePicker component — a single control that combines a typeable masked text input with a calendar popover. It must follow every rule below exactly.
+
+Tech / dependencies
+
+React + TypeScript, Tailwind CSS, date-fns (format, parse, isValid), and react-icons/md (MdOutlineCalendarToday).
+Use a Radix-style Popover (Popover / PopoverTrigger / PopoverContent).
+Render a separate 3-view Calendar component (days / months / years) inside the popover.
+Date display format is always dd/MM/yyyy.
+Props (API)
+
+date?: Date — the currently selected value.
+onSelect?: (date: Date | undefined) => void — fires on a valid commit or when cleared (passes undefined).
+placeholder?: string — default "DD/MM/YYYY".
+error?: boolean — externally forced error state.
+disabled?: boolean.
+highlightMondays?: boolean — passed through to the calendar.
+isDateDisabled?: (date: Date) => boolean — predicate that marks days as not selectable.
+Internal state
+
+isOpen (popover), isFocused (input focus), inputValue (the masked text string), typedInvalid (boolean).
+Initialize inputValue from date (formatted) or "".
+active = isOpen || isFocused. showError = error || typedInvalid.
+Typing / masking rules (applied on every keystroke)
+
+Strip all non-digit characters; keep at most 8 digits.
+Split into day (digits 1–2), month (digits 3–4), year (digits 5–8).
+Insert / separators automatically: show / before month once more than 2 digits are entered, and before year once more than 4 digits are entered. The user never types slashes.
+inputMode="numeric".
+Day clamping: if day is a single digit > 3, auto-pad to 0X (e.g. 4 → 04). If day is 2 digits: 00 → 01, anything > 31 → 31.
+Month clamping: if month is a single digit > 1, auto-pad to 0X (e.g. 5 → 05). If month is 2 digits: 00 → 01, anything > 12 → 12.
+Full calendar validity (e.g. rejecting 31/02/2026) is not enforced while typing — only on commit.
+When the user edits after an invalid commit, clear the typedInvalid flag immediately.
+Commit rules (on blur, and on Enter)
+
+On Enter: prevent default, commit, then blur the input.
+Trim the value. If empty → clear typedInvalid and call onSelect(undefined).
+Otherwise parse with parse(trimmed, "dd/MM/yyyy", new Date()). Accept the value only if all three are true:
+isValid(parsed) is true,
+re-formatting the parsed date equals the typed string exactly (guards against rollover like 31/02), and
+isDateDisabled(parsed) is not true.
+If accepted → clear typedInvalid, call onSelect(parsed). If rejected → set typedInvalid = true (do not change the selected date).
+External sync
+
+A useEffect on date must re-sync inputValue (formatted or "") and reset typedInvalid whenever date changes from outside (e.g. the calendar picks a day, or a parent auto-fills it).
+Calendar popover behavior
+
+Opening the calendar is done via the calendar-icon button (the PopoverTrigger).
+Pass selected={date}, error={showError}, highlightMondays, and isDateDisabled to the Calendar.
+When the calendar's onSelect(d) fires, call onSelect(d) and close the popover (isOpen = false).
+Layout & styling (exact)
+
+Outer container: relative flex items-center h-[44px] w-full rounded-[8px] border bg-white, font Mulish, text-[16px] leading-[26px] text-[#3d3d3d], transition-colors.
+Text input fills available space (flex-1 min-w-0 bg-transparent outline-none), placeholder color #BBBBBB.
+Trailing button: a 1px × 24px divider (#BBBBBB) followed by the MdOutlineCalendarToday icon at 20px, color #006cf4. aria-label="Open calendar".
+Popover content: w-auto p-0 rounded-[12px] border-[2px] border-[#178830] overflow-hidden bg-white, align="start".
+Visual states (border + colors)
+
+Default: border #BBBBBB (1px), padding pl-[12px] py-[8px].
+Hover (not error, not active, not disabled): border #178830.
+Active (focused or popover open, not error): border #178830 at 2px.
+Error (error prop or typedInvalid): border #d72714 at 2px, input text turns #d72714, calendar icon turns #d72714, and the popover border turns #d72714.
+Disabled: cursor-not-allowed, background #CCCCCC, border #ACACAC at 2px, calendar icon #979797; input and button non-interactive.
+To prevent layout shift when the border grows to 2px, reduce padding to pl-[11px] py-[7px] whenever active || showError.
+3-view Calendar (companion component, summary of required behavior)
+
+Three views: days, months, years; 300px wide, Mulish.
+Header has prev/next arrows (MdKeyboardArrowLeft / MdKeyboardArrowRight); step is ±1 month (days), ±1 year (months), ±25 years (years page).
+Captions are clickable: in days view, clicking the month → months view, clicking the year → years view; in months view, clicking the year → years view.
+Days view: weekday header row (bg #eef4f8), a 6×7 (42-cell) grid. Selected day = filled #006cf4 circle with white text; today = bold #006cf4; optional Monday highlight (bold #006cf4 ring + #eef4f8 bg); outside-month days faded with a diagonal hatch (#e7ebec); disabled days (per isDateDisabled) struck through, #CCCCCC, non-clickable.
+Months view: 3 columns, each cell shows the 2-digit number + 3-letter month; picking a month → days view.
+Years view: 5 columns × 25 years (hatched cells); picking a year → months view.
+Picking a day calls onSelect(day).

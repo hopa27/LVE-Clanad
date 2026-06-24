@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Field, SelectInput, TextInput, Checkbox, Section } from "../components/Field";
+import { DatePicker } from "../components/DatePicker";
 import { MdSend, MdCheck, MdInfoOutline } from "react-icons/md";
 import { EditModeContext } from "../context/EditModeContext";
 import { usePlanCode } from "../context/PlanCodeContext";
@@ -147,7 +148,7 @@ function LettersTabInner() {
               <TextInput value="" />
             </Field>
             <Field inline label="Next Income Date" labelWidth={200}>
-              <TextInput value="" type="date" />
+              <DatePicker placeholder="DD/MM/YYYY" />
             </Field>
             <Field inline label="Next Regular Income Amount" labelWidth={200}>
               <TextInput value="" />

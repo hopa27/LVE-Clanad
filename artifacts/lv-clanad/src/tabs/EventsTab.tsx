@@ -64,7 +64,9 @@ export function EventsTab() {
     planCode === "76" ? PLAN_76_ROWS :
     planCode === "0" || planCode === "87" || planCode === "84" || planCode === "90" || isPlan51 || planCode === "80" || planCode === "82" || planCode === "83" || planCode === "621" || planCode === "76z" || planCode === "62a" || planCode === "611" || planCode === "52" || planCode === "61a" ? [] : SAMPLE_ROWS,
   );
-  const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
+  const [selectedIdx, setSelectedIdx] = useState<number | null>(
+    planCode === "76" ? 0 : null
+  );
   const [newEventOpen, setNewEventOpen] = useState(false);
   const [editingIdx, setEditingIdx] = useState<number | null>(null);
   const [form, setForm] = useState<FormState>(emptyForm);

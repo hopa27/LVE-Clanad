@@ -229,7 +229,7 @@ function LettersTabInner() {
           </div>
         </Section>
 
-        <button type="button" className="lve-btn w-full justify-center" onClick={handleGenerate}>
+        <button type="button" className="lve-btn lve-btn-secondary w-full justify-center" onClick={handleGenerate}>
           <MdSend size={16} /> Generate
         </button>
       </div>

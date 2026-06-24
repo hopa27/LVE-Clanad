@@ -45,7 +45,7 @@ const LETTER_DIST: Record<string, DistConfig> = {
   "IFA Acceptance Pack":                  { print: true,  fax: true,  email: true,  sendTo: { client: false, ifa: true,  ceding: false, other: false } },
   "IRF Acceptance Pack inc Client Ltr":   { print: true,  fax: true,  email: true,  sendTo: { client: true,  ifa: false, ceding: true,  other: false } },
   "IRF Letter":                           { print: true,  fax: true,  email: false, sendTo: { client: false, ifa: false, ceding: true,  other: false } },
-  "MPAA Letter":                          { print: true,  fax: false, email: true,  sendTo: { client: true,  ifa: false, ceding: false, other: true  } },
+  "MPAA Letter":                          { print: true,  fax: false, email: false, sendTo: { client: false, ifa: false, ceding: false, other: false } },
   "Plan Schedule":                        { print: true,  fax: false, email: true,  sendTo: { client: true,  ifa: true,  ceding: false, other: false } },
   "Return Original Certificates":         { print: true,  fax: false, email: false, sendTo: { client: true,  ifa: false, ceding: false, other: false } },
   "Rewrite Completion Pack":              { print: true,  fax: false, email: true,  sendTo: { client: true,  ifa: true,  ceding: false, other: true  } },
@@ -186,30 +186,26 @@ function LettersTabInner() {
         <Section title="Distribution Info">
           <div className="space-y-3">
             <Checkbox label="Print" disabled={!cfg.print} onChange={setPrintChecked} />
-            {selectedLetter !== "MPAA Letter" && (
-              <>
-                <div className="flex items-center gap-3">
-                  <Checkbox label="Fax" disabled={!cfg.fax} checked={faxChecked} onChange={(v) => { setFaxChecked(v); if (!v) setFaxValue(""); }} />
-                  <div className="flex-1 min-w-0">
-                    <TextInput
-                      value={faxValue}
-                      disabled={!cfg.fax || !faxChecked}
-                      onChange={setFaxValue}
-                    />
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Checkbox label="Email" disabled={!cfg.email} checked={emailChecked} onChange={(v) => { setEmailChecked(v); if (!v) setEmailValue(""); }} />
-                  <div className="flex-1 min-w-0">
-                    <TextInput
-                      value={emailValue}
-                      disabled={!cfg.email || !emailChecked}
-                      onChange={setEmailValue}
-                    />
-                  </div>
-                </div>
-              </>
-            )}
+            <div className="flex items-center gap-3">
+              <Checkbox label="Fax" disabled={!cfg.fax} checked={faxChecked} onChange={(v) => { setFaxChecked(v); if (!v) setFaxValue(""); }} />
+              <div className="flex-1 min-w-0">
+                <TextInput
+                  value={faxValue}
+                  disabled={!cfg.fax || !faxChecked}
+                  onChange={setFaxValue}
+                />
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <Checkbox label="Email" disabled={!cfg.email} checked={emailChecked} onChange={(v) => { setEmailChecked(v); if (!v) setEmailValue(""); }} />
+              <div className="flex-1 min-w-0">
+                <TextInput
+                  value={emailValue}
+                  disabled={!cfg.email || !emailChecked}
+                  onChange={setEmailValue}
+                />
+              </div>
+            </div>
             {isPlan0 && (
               <div className="flex items-center gap-3">
                 <label className="lve-label !mb-0 text-right shrink-0 w-[70px]">Archive:</label>
@@ -220,19 +216,17 @@ function LettersTabInner() {
             )}
           </div>
 
-          {selectedLetter !== "MPAA Letter" && (
-            <div className="mt-4 pt-3 border-t border-[#d8d8d8]">
-              <div className="font-['Livvic'] text-[13px] font-semibold text-[#00263e] mb-2">
-                Send To
-              </div>
-              <div className="grid grid-cols-2 gap-y-2">
-                <Checkbox label="Client"        disabled={!cfg.sendTo.client}  onChange={setSendToClient}  />
-                <Checkbox label="IFA"           disabled={!cfg.sendTo.ifa}     onChange={setSendToIFA}     />
-                <Checkbox label="Ceding Scheme" disabled={!cfg.sendTo.ceding}  onChange={setSendToCeding}  />
-                <Checkbox label="Other"         disabled={!cfg.sendTo.other}   onChange={setSendToOther}   />
-              </div>
+          <div className="mt-4 pt-3 border-t border-[#d8d8d8]">
+            <div className="font-['Livvic'] text-[13px] font-semibold text-[#00263e] mb-2">
+              Send To
             </div>
-          )}
+            <div className="grid grid-cols-2 gap-y-2">
+              <Checkbox label="Client"        disabled={!cfg.sendTo.client}  onChange={setSendToClient}  />
+              <Checkbox label="IFA"           disabled={!cfg.sendTo.ifa}     onChange={setSendToIFA}     />
+              <Checkbox label="Ceding Scheme" disabled={!cfg.sendTo.ceding}  onChange={setSendToCeding}  />
+              <Checkbox label="Other"         disabled={!cfg.sendTo.other}   onChange={setSendToOther}   />
+            </div>
+          </div>
         </Section>
 
         <button type="button" className="lve-btn lve-btn-secondary w-full justify-center" onClick={handleGenerate}>

@@ -191,7 +191,6 @@ function LettersTabInner() {
               <div className="flex-1 min-w-0">
                 <TextInput
                   value={faxValue}
-                  placeholder="Fax number"
                   disabled={!cfg.fax || !faxChecked}
                   onChange={setFaxValue}
                 />
@@ -202,7 +201,6 @@ function LettersTabInner() {
               <div className="flex-1 min-w-0">
                 <TextInput
                   value={emailValue}
-                  placeholder="recipient@example.com"
                   disabled={!cfg.email || !emailChecked}
                   onChange={setEmailValue}
                 />

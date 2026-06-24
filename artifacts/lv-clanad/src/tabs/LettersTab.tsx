@@ -69,6 +69,8 @@ function LettersTabInner() {
   const { planCode } = usePlanCode();
   const isPlan0 = planCode === "0";
 
+  const availableLetters = planCode === "76" ? ["MPAA Letter"] : LETTERS;
+
   const [selectedLetter, setSelectedLetter] = useState("");
   const [letterError, setLetterError] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
@@ -130,7 +132,7 @@ function LettersTabInner() {
         <div className={letterError ? "rounded-[8px] ring-2 ring-[#d72714]" : ""}>
           <SelectInput
             value={selectedLetter}
-            options={["", ...LETTERS]}
+            options={["", ...availableLetters]}
             onChange={handleLetterChange}
           />
         </div>

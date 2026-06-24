@@ -53,11 +53,16 @@ const SAMPLE_ROWS: EventRow[] = [
   { date: "14/07/2024", no: "1005", gross: "10,000.00", tax: "2,000.00", type: "Reportable" },
 ];
 
+const PLAN_76_ROWS: EventRow[] = [
+  { date: "12/03/2009", no: "2", gross: "3300", tax: "44", type: "Taxable" },
+];
+
 export function EventsTab() {
   const { planCode } = usePlanCode();
   const isPlan51 = planCode === "51";
   const [rows, setRows] = useState<EventRow[]>(
-    planCode === "0" || planCode === "87" || planCode === "84" || planCode === "90" || isPlan51 || planCode === "80" || planCode === "82" || planCode === "83" || planCode === "621" || planCode === "76" || planCode === "76z" || planCode === "62a" || planCode === "611" || planCode === "52" || planCode === "61a" ? [] : SAMPLE_ROWS,
+    planCode === "76" ? PLAN_76_ROWS :
+    planCode === "0" || planCode === "87" || planCode === "84" || planCode === "90" || isPlan51 || planCode === "80" || planCode === "82" || planCode === "83" || planCode === "621" || planCode === "76z" || planCode === "62a" || planCode === "611" || planCode === "52" || planCode === "61a" ? [] : SAMPLE_ROWS,
   );
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
   const [newEventOpen, setNewEventOpen] = useState(false);

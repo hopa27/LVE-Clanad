@@ -94,18 +94,18 @@ export function SelectInput({
   const { editing } = useEditMode();
   const all = value && !options.includes(value) ? [value, ...options] : options;
   const lockedReadOnly = !editing;
-  const isDisabled = disabled || lockedReadOnly;
+  const isDisabled = disabled;
   const isControlled = onChange !== undefined;
   return (
     <div className="relative">
       <select
         {...(isControlled ? { value } : { defaultValue: value })}
-        onChange={(e) => onChange?.(e.target.value)}
+        onChange={(e) => { if (editing && !disabled) onChange?.(e.target.value); }}
         disabled={isDisabled}
-        tabIndex={isDisabled ? -1 : undefined}
+        tabIndex={isDisabled || lockedReadOnly ? -1 : undefined}
         data-error={error || undefined}
         className={`lve-input pr-12 appearance-none ${
-          lockedReadOnly && !disabled ? "bg-[#fafafa] cursor-default" : ""
+          lockedReadOnly && !disabled ? "bg-[#fafafa]" : ""
         } ${className}`}
       >
         {all.map((opt) => (

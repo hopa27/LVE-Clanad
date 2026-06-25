@@ -248,7 +248,7 @@ export function ApplicationDetailsTab() {
           {!isPlan84 && !isPlan90 && !isPlan51 && !isPlan621 && !isPlan76 && !isPlan76z && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
             <>
               <Field label="App Created by:">
-                <TextInput value={isPlan87 ? "saimeenakshinathan" : isPlan82 ? "LONLM" : isPlan80 ? "LONLM" : isPlan83 ? "LOPEO" : "DBEdit14"} disabled />
+                <TextInput value={isPlan87 ? "saimaanakshinathan.s@lv.com" : isPlan82 ? "LONLM" : isPlan80 ? "LONLM" : isPlan83 ? "LOPEO" : "DBEdit14"} disabled />
               </Field>
               <Field label="Final Quote Issued by:">
                 <TextInput value={isPlan87 || isPlan83 || isPlan80 || isPlan82 ? "" : "DBEdit19"} disabled />

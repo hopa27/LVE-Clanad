@@ -11,6 +11,9 @@ import {
 import { Section, Field } from "../components/Field";
 import { DatePicker } from "../components/DatePicker";
 import { usePlanCode } from "../context/PlanCodeContext";
+import { EditModeContext } from "../context/EditModeContext";
+
+const ALWAYS_EDITING = { editing: true, setEditing: () => {}, cancel: () => {}, cancelKey: 0 };
 
 const EVENT_COLS = ["Date of Event", "Event No", "Gross Amount", "Tax Amount", "Event Type"];
 
@@ -144,6 +147,7 @@ export function EventsTab() {
   };
 
   return (
+    <EditModeContext.Provider value={ALWAYS_EDITING}>
     <Section title="Event Details">
       <div
         className="overflow-auto"
@@ -402,5 +406,6 @@ export function EventsTab() {
         </div>
       )}
     </Section>
+    </EditModeContext.Provider>
   );
 }

@@ -241,7 +241,7 @@ export function ApplicationDetailsTab() {
           )}
           <Field label="Last amended by:">
             <TextInput
-              value={isPlan87 ? "SAIMEENAKSHINA" : isPlan84 ? "LOPVH" : isPlan90 ? "LV66664" : isPlan51 ? "LOPSL2" : isPlan82 ? "LOPSL2" : isPlan80 ? "LOPRXP" : isPlan83 ? "LV66656" : isPlan621 ? "LV67320" : isPlan76 ? "LOPNXP" : isPlan76z ? "LOPSH" : isPlan62a ? "LOPRM" : isPlan611 ? "LOPKXB" : isPlan52 ? "LOPAW" : isPlan61a ? "LOPSH" : "DBEdit18"}
+              value={isPlan87 ? "SAIMEENAKSHINATHAN.S@LV.com" : isPlan84 ? "LOPVH" : isPlan90 ? "LV66664" : isPlan51 ? "LOPSL2" : isPlan82 ? "LOPSL2" : isPlan80 ? "LOPRXP" : isPlan83 ? "LV66656" : isPlan621 ? "LV67320" : isPlan76 ? "LOPNXP" : isPlan76z ? "LOPSH" : isPlan62a ? "LOPRM" : isPlan611 ? "LOPKXB" : isPlan52 ? "LOPAW" : isPlan61a ? "LOPSH" : "DBEdit18"}
               disabled
             />
           </Field>

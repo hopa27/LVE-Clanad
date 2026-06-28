@@ -514,7 +514,7 @@ export function QuoteDetailsTab() {
         )}
       </Section>
 
-      <Section title="Quote Lines">
+      <Section>
         {(() => {
           const handleQuoteKey = (e: React.KeyboardEvent) => {
             if (!quoteRows.length) return;

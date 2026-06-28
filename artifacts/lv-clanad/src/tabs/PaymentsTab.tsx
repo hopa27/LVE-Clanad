@@ -727,7 +727,7 @@ export function PaymentsTab() {
                 <th>Pay Date</th>
                 <th>GROSS</th>
                 {!isPlan82 && !isPlan83 && !isPlan76 && !isPlan76z && <><th>Cap Element</th><th>TAX</th><th>Post Adj</th><th>NET</th></>}
-                <th>Method</th>
+                <th>Pay Method</th>
                 <th>REASON</th>
                 <th>BACS_DATE</th>
                 <th>HASH_CODE</th>

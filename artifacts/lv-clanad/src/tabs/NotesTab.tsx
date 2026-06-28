@@ -304,9 +304,12 @@ function NotesSection({
                         )}
                       </header>
                       {note.prefix && (
-                        <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#777] leading-[1.6] m-0 mb-1 select-none">
-                          {note.prefix}
-                        </pre>
+                        <>
+                          <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#777] leading-[1.6] m-0 select-none">
+                            {note.prefix}
+                          </pre>
+                          <hr className="border-t border-[#e0e0e0] my-2" />
+                        </>
                       )}
                       {isEditingThis ? (
                         <textarea
@@ -325,9 +328,12 @@ function NotesSection({
                   ) : (
                     <>
                       {note.prefix && (
-                        <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#777] leading-[1.6] m-0 mb-1 select-none">
-                          {note.prefix}
-                        </pre>
+                        <>
+                          <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#777] leading-[1.6] m-0 select-none">
+                            {note.prefix}
+                          </pre>
+                          <hr className="border-t border-[#e0e0e0] my-2" />
+                        </>
                       )}
                       {isEditingThis ? (
                         <textarea

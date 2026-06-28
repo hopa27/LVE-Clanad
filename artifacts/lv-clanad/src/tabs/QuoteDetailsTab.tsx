@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Field, TextInput, SelectInput, Checkbox, Section } from "../components/Field";
 import { ViewNotionalValueModal } from "../components/ViewNotionalValueModal";
 import { usePlanCode } from "../context/PlanCodeContext";
@@ -175,6 +175,50 @@ const QUOTE_COLUMNS = [
 export function QuoteDetailsTab() {
   const [notionalOpen, setNotionalOpen] = useState(false);
   const [selectedQuoteIdx, setSelectedQuoteIdx] = useState<number | null>(null);
+  const [colOrder, setColOrder] = useState<number[]>(() => QUOTE_COLUMNS.map((_, i) => i));
+  const [colWidths, setColWidths] = useState<number[]>(() => QUOTE_COLUMNS.map(() => 140));
+  const [dragOverIdx, setDragOverIdx] = useState<number | null>(null);
+  const [draggingIdx, setDraggingIdx] = useState<number | null>(null);
+  const dragColRef = useRef<number | null>(null);
+  const dragOverColRef = useRef<number | null>(null);
+  const resizeRef = useRef<{ colIdx: number; startX: number; startW: number } | null>(null);
+
+  function handleResizeMouseDown(e: React.MouseEvent, colIdx: number) {
+    e.preventDefault();
+    e.stopPropagation();
+    resizeRef.current = { colIdx, startX: e.clientX, startW: colWidths[colIdx] };
+    const onMouseMove = (ev: MouseEvent) => {
+      if (!resizeRef.current) return;
+      const { colIdx: ci, startX, startW } = resizeRef.current;
+      setColWidths(prev => { const next = [...prev]; next[ci] = Math.max(60, startW + ev.clientX - startX); return next; });
+    };
+    const onMouseUp = () => {
+      resizeRef.current = null;
+      document.removeEventListener("mousemove", onMouseMove);
+      document.removeEventListener("mouseup", onMouseUp);
+      document.body.style.cursor = "";
+      document.body.style.userSelect = "";
+    };
+    document.body.style.cursor = "col-resize";
+    document.body.style.userSelect = "none";
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseup", onMouseUp);
+  }
+
+  function handleDragStart(orderIdx: number) { dragColRef.current = orderIdx; setDraggingIdx(orderIdx); }
+  function handleDragOver(e: React.DragEvent, orderIdx: number) {
+    e.preventDefault();
+    dragOverColRef.current = orderIdx;
+    setDragOverIdx(orderIdx);
+  }
+  function handleDrop(orderIdx: number) {
+    const from = dragColRef.current;
+    const to = orderIdx;
+    if (from === null || from === to) return;
+    setColOrder(prev => { const next = [...prev]; const [moved] = next.splice(from, 1); next.splice(to, 0, moved); return next; });
+    dragColRef.current = null; dragOverColRef.current = null; setDragOverIdx(null); setDraggingIdx(null);
+  }
+  function handleDragEnd() { dragColRef.current = null; dragOverColRef.current = null; setDragOverIdx(null); setDraggingIdx(null); }
   const { planCode } = usePlanCode();
   const isPlan0   = planCode === "0";
   const isPlan87  = planCode === "87";
@@ -488,18 +532,50 @@ export function QuoteDetailsTab() {
           aria-label="Quote Lines grid"
           aria-rowcount={quoteRows.length}
         >
-          <table className="lve-grid">
+          <table className="lve-grid" style={{ tableLayout: "fixed" }}>
             <thead>
               <tr>
-                {QUOTE_COLUMNS.map((c) => (
-                  <th key={c} className="whitespace-nowrap !px-4">{c}</th>
-                ))}
+                {colOrder.map((colIdx, orderIdx) => {
+                  const isDragging = draggingIdx === orderIdx;
+                  const isDropTarget = dragOverIdx === orderIdx;
+                  return (
+                    <th
+                      key={colIdx}
+                      draggable
+                      onDragStart={() => handleDragStart(orderIdx)}
+                      onDragOver={(e) => handleDragOver(e, orderIdx)}
+                      onDrop={() => handleDrop(orderIdx)}
+                      onDragEnd={handleDragEnd}
+                      className={`!px-4 select-none whitespace-nowrap transition-colors relative cursor-grab active:cursor-grabbing${isDragging ? " opacity-40" : ""}${isDropTarget ? " border-l-4 border-l-[#006cf4]" : ""}`}
+                      style={{ width: colWidths[colIdx], minWidth: colWidths[colIdx], maxWidth: colWidths[colIdx] }}
+                      title="Drag to reorder"
+                    >
+                      <span className="block truncate">{QUOTE_COLUMNS[colIdx]}</span>
+                      <div
+                        className="absolute top-0 right-0 h-full w-2 cursor-col-resize z-20 flex items-center justify-center group"
+                        onMouseDown={(e) => handleResizeMouseDown(e, colIdx)}
+                        onClick={(e) => e.stopPropagation()}
+                        draggable={false}
+                        onDragStart={(e) => e.preventDefault()}
+                        title="Drag to resize column"
+                      >
+                        <div className="w-0.5 h-4 bg-[#BBBBBB] group-hover:bg-[#006cf4] rounded-full transition-colors" />
+                      </div>
+                    </th>
+                  );
+                })}
               </tr>
             </thead>
             <tbody>
               {quoteRows.map((r, i) => {
                 const isSel = selectedQuoteIdx === i;
                 const tdStyle = isSel ? { backgroundColor: "#05579B", color: "#ffffff" } : undefined;
+                const vals = [
+                  r.type, r.premium, r.tfc, r.original, r.escType, r.escRate,
+                  r.currentInc, r.spousePct, r.spouseInc, r.guarantee, r.lastPay,
+                  r.overlap, r.valProt, r.taxFree, r.maxFree,
+                  r.valProtFlag, r.lsConvert, r.planProt, r.dependant,
+                ];
                 return (
                   <tr
                     key={i}
@@ -509,13 +585,14 @@ export function QuoteDetailsTab() {
                     role="row"
                     aria-rowindex={i + 1}
                   >
-                    {[
-                      r.type, r.premium, r.tfc, r.original, r.escType, r.escRate,
-                      r.currentInc, r.spousePct, r.spouseInc, r.guarantee, r.lastPay,
-                      r.overlap, r.valProt, r.taxFree, r.maxFree,
-                      r.valProtFlag, r.lsConvert, r.planProt, r.dependant,
-                    ].map((v, j) => (
-                      <td key={j} className="!px-4 whitespace-nowrap" style={tdStyle}>{v}</td>
+                    {colOrder.map((colIdx) => (
+                      <td
+                        key={colIdx}
+                        className="!px-4 whitespace-nowrap overflow-hidden"
+                        style={{ width: colWidths[colIdx], minWidth: colWidths[colIdx], maxWidth: colWidths[colIdx], ...tdStyle }}
+                      >
+                        {vals[colIdx]}
+                      </td>
                     ))}
                   </tr>
                 );

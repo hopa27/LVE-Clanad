@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Field, TextInput, Section } from "../components/Field";
 import { DatePicker } from "../components/DatePicker";
-import { MdEdit, MdDelete } from "react-icons/md";
+import { MdEdit, MdCancel } from "react-icons/md";
 import { useCheques } from "../context/ChequesContext";
 import { usePlanCode } from "../context/PlanCodeContext";
 import { EditBankDetailsModal } from "../components/EditBankDetailsModal";
@@ -128,7 +128,7 @@ export function BankAccDetailsTab() {
                   title="Delete sort code"
                   aria-label="Delete sort code"
                 >
-                  <MdDelete size={18} />
+                  <MdCancel size={18} />
                 </button>
               </div>
             </Field>
@@ -251,7 +251,7 @@ export function BankAccDetailsTab() {
 
       <ConfirmDialog
         open={deleteSortCodeOpen}
-        message="Are you sure you want to delete the bank sort code?"
+        message="Are you sure?"
         onYes={() => setDeleteSortCodeOpen(false)}
         onNo={() => setDeleteSortCodeOpen(false)}
       />

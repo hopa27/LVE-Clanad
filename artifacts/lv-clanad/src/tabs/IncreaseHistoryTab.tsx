@@ -103,10 +103,9 @@ const ROWS_80: string[][] = [
   ["Std Pre 97", "A", "29/01/2012", "26/02/2012", "£0.00", "£0.00", "Fixed", "0", "", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "n/a", "26/02/2015", "2262.43", "0", "No", "0", "0", "0", "0"],
 ];
 
-const ROWS_621: string[][] = [
-  //  0   1   2   3   4   5   6   7   8   9  10  11  12  13  14  15          16    17  18         19   20  21  22  23
-  [ "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "n/a", "", "", "n/a", "", "", "", "" ],
-];
+const EMPTY_ROW: string[] = ["", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "n/a", "", "", "n/a", "", "", "", ""];
+
+const ROWS_621: string[][] = [EMPTY_ROW];
 
 export function IncreaseHistoryTab() {
   const { planCode } = usePlanCode();
@@ -125,8 +124,8 @@ export function IncreaseHistoryTab() {
   const isPlan611 = planCode === "611";
   const isPlan52  = planCode === "52";
   const isPlan61a = planCode === "61a";
-  const rows: string[][] = isPlan0 || isPlan87 || isPlan90 || isPlan51 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a
-    ? []
+  const rows: string[][] = isPlan87 || isPlan90 || isPlan51 || isPlan76 || isPlan62a || isPlan611 || isPlan52 || isPlan61a || isPlan0
+    ? [EMPTY_ROW]
     : isPlan621
       ? ROWS_621
       : isPlan84

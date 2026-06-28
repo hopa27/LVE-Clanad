@@ -102,19 +102,7 @@ export function ApplicationDetailsTab() {
           </Field>
           <Field label="PostADay:"><Checkbox checked={isPlan87 || isPlan84 || isPlan51 || isPlan80 || isPlan83 || isPlan82 || isPlan621 || isPlan76 || isPlan76z || isPlan62a || isPlan611 || isPlan52 || isPlan61a} /></Field>
           <Field label="Transfer from Beneficiary Drawdown?:">
-            <div className="relative">
-              <select defaultValue="Unknown" className="lve-input pr-12 appearance-none">
-                <option value="Yes">Yes</option>
-                <option value="No">No</option>
-                <option value="Unknown">Unknown</option>
-              </select>
-              <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none">
-                <span className="h-6 w-px bg-[#BBBBBB]" />
-                <span className="px-3 text-[#006cf4]">
-                  <MdKeyboardArrowDown size={22} />
-                </span>
-              </div>
-            </div>
+            <SelectInput value="Unknown" options={["Yes", "No", "Unknown"]} />
           </Field>
         </div>
 

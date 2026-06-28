@@ -168,7 +168,9 @@ function NotesSection({
       setInserting(false);
       setInsertText("");
     } else if (editingId) {
-      setNotes((prev) => prev.map((n) => n.id === editingId ? { ...n, body: editText } : n));
+      const hdr  = `Modified by UAT1 USER, ${fmtDateTime(new Date())}`;
+      const body = hdr + "\n" + editText;
+      setNotes((prev) => prev.map((n) => n.id === editingId ? { ...n, body } : n));
       setEditingId(null);
       setEditText("");
     }

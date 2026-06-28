@@ -16,7 +16,6 @@ import {
   MdKeyboardArrowLeft,
   MdKeyboardArrowRight,
 } from "react-icons/md";
-import { useEditMode } from "../context/EditModeContext";
 
 type View = "days" | "months" | "years";
 
@@ -366,10 +365,9 @@ export function DatePicker({
   highlightMondays?: boolean;
   isDateDisabled?: (date: Date) => boolean;
 }) {
-  const { editing } = useEditMode();
   const explicitlyDisabled = disabled === true;
-  const isDisabled = explicitlyDisabled || !editing;
-  const isLockedReadOnly = isDisabled && !explicitlyDisabled;
+  const isDisabled = explicitlyDisabled;
+  const isLockedReadOnly = false;
 
   const initDate = dateProp ?? parseInitial(value);
 

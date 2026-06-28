@@ -1,5 +1,5 @@
-import { Field, TextInput, Section } from "../components/Field";
-import { MdEdit, MdCheck, MdClose, MdKeyboardArrowDown } from "react-icons/md";
+import { Field, TextInput, SelectInput, Section } from "../components/Field";
+import { MdEdit, MdCheck, MdClose } from "react-icons/md";
 import { DatePicker } from "../components/DatePicker";
 import { ConnectedAddress } from "../components/ConnectedAddress";
 import { usePlanCode } from "../context/PlanCodeContext";
@@ -44,26 +44,15 @@ function LoaPoaButtons() {
 
 function LoaPoaForm() {
   const { planCode } = usePlanCode();
-  const { editing } = useEditMode();
   const isPlan0 = planCode === "0";
 
   return (
     <Section title="LOA / POA Details" headerAction={<LoaPoaButtons />}>
       <div className="max-w-xl">
         <Field inline labelWidth={140} label="LOA/POA:">
-          <div className="relative">
-            <select className="lve-input pr-12 appearance-none" disabled={!editing}>
-              <option value="">—</option>
-              <option value="Letter of Authority">Letter of Authority</option>
-              <option value="Power of Attorney">Power of Attorney</option>
-            </select>
-            <div className="absolute inset-y-0 right-0 flex items-center pointer-events-none">
-              <span className="h-6 w-px bg-[#BBBBBB]" />
-              <span className="px-3 text-[#006cf4]">
-                <MdKeyboardArrowDown size={22} />
-              </span>
-            </div>
-          </div>
+          <SelectInput
+            options={["Letter of Authority", "Power of Attorney"]}
+          />
         </Field>
         <Field inline labelWidth={140} label="Name:">
           <TextInput value={isPlan0 ? "LoaPoaName" : ""} />

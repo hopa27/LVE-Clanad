@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useEditMode } from "../context/EditModeContext";
 import * as Popover from "@radix-ui/react-popover";
 import {
   format,
@@ -365,9 +366,10 @@ export function DatePicker({
   highlightMondays?: boolean;
   isDateDisabled?: (date: Date) => boolean;
 }) {
+  const { editing } = useEditMode();
   const explicitlyDisabled = disabled === true;
   const isDisabled = explicitlyDisabled;
-  const isLockedReadOnly = false;
+  const isLockedReadOnly = !editing && !explicitlyDisabled;
 
   const initDate = dateProp ?? parseInitial(value);
 

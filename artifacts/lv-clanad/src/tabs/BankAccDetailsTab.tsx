@@ -4,6 +4,7 @@ import { DatePicker } from "../components/DatePicker";
 import { MdEdit, MdCancel } from "react-icons/md";
 import { useCheques } from "../context/ChequesContext";
 import { usePlanCode } from "../context/PlanCodeContext";
+import { useEditMode } from "../context/EditModeContext";
 import { EditBankDetailsModal } from "../components/EditBankDetailsModal";
 import { ConfirmDialog } from "../components/ConfirmDialog";
 
@@ -16,6 +17,7 @@ export function BankAccDetailsTab() {
   const [selectedTransferIdx, setSelectedTransferIdx] = useState<number | null>(null);
   const [deleteSortCodeOpen, setDeleteSortCodeOpen] = useState(false);
   const { planCode } = usePlanCode();
+  const { editing } = useEditMode();
   const isPlan87  = planCode === "87";
   const isPlan84  = planCode === "84";
   const isPlan90  = planCode === "90";
@@ -123,6 +125,7 @@ export function BankAccDetailsTab() {
                 </div>
                 <button
                   type="button"
+                  disabled={editing}
                   onClick={() => setDeleteSortCodeOpen(true)}
                   className="lve-btn lve-btn-secondary !rounded-full !p-0 !w-10 !h-10 shrink-0 inline-flex items-center justify-center"
                   title="Delete sort code"

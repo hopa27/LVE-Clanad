@@ -217,7 +217,7 @@ export function BankAccDetailsTab() {
               <tr>
                 <th>Transfer Company</th>
                 <th>Date</th>
-                <th style={{ textAlign: "right" }}>Amount (£)</th>
+                <th style={{ textAlign: "right" }}>Amount</th>
               </tr>
             </thead>
             <tbody>

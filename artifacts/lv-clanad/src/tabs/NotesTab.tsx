@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
 import { Section } from "../components/Field";
 import {
   MdAdd,
@@ -10,29 +10,6 @@ import {
   MdPerson,
 } from "react-icons/md";
 import { usePlanCode } from "../context/PlanCodeContext";
-
-function NoteButtons({ disableEditDelete = false, disableAll = false }: { disableEditDelete?: boolean; disableAll?: boolean }) {
-  const [isEditing, setIsEditing] = useState(false);
-  return (
-    <div className="flex items-center gap-2">
-      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled={disableAll || isEditing} title="Insert Record (Ctrl+Insert)">
-        <MdAdd size={16} /> Insert Record
-      </button>
-      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled={disableEditDelete || disableAll || isEditing} title="Delete Record (Ctrl+Delete)">
-        <MdRemove size={16} /> Delete Record
-      </button>
-      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled={disableEditDelete || disableAll || isEditing} title="Edit Record" onClick={() => setIsEditing(true)}>
-        <MdEdit size={16} /> Edit Record
-      </button>
-      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled={!isEditing} title="Post Edit" onClick={() => setIsEditing(false)}>
-        <MdCheck size={16} /> Post Edit
-      </button>
-      <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" disabled={!isEditing} title="Cancel Edit" onClick={() => setIsEditing(false)}>
-        <MdClose size={16} /> Cancel Edit
-      </button>
-    </div>
-  );
-}
 
 const NOTES = [
   {
@@ -90,260 +67,229 @@ function colorFor(name: string) {
   return AVATAR_COLORS[Math.abs(hash) % AVATAR_COLORS.length];
 }
 
-export function NotesTab() {
-  const { planCode } = usePlanCode();
-  const isPlan0 = planCode === "0";
-  const isPlan87 = planCode === "87";
-  const isPlan84 = planCode === "84";
-  const isPlan90 = planCode === "90";
-  const isPlan51 = planCode === "51";
-  const isPlan83  = planCode === "83";
-  const isPlan82  = planCode === "82";
-  const isPlan621 = planCode === "621";
-  const isPlan76  = planCode === "76";
-  const isPlan62a = planCode === "62a";
-  if (isPlan62a) {
-    const count = 6;
-    return (
-      <Section title={`Notes (${count})`} headerAction={<NoteButtons />}>
-        <div className="space-y-3 max-h-[620px] overflow-auto pr-1">
-          {Array.from({ length: count }).map((_, i) => (
-            <article key={i} className="relative bg-white rounded-[8px] border border-[#e0e0e0] overflow-hidden">
-              <div className="p-4">
-                <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#3d3d3d] leading-[1.6] m-0">
-                  Test Note
-                </pre>
-              </div>
-            </article>
-          ))}
-        </div>
-      </Section>
-    );
+function fmtDateTime(d: Date) {
+  const dd = String(d.getDate()).padStart(2, "0");
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const hh = String(d.getHours()).padStart(2, "0");
+  const min = String(d.getMinutes()).padStart(2, "0");
+  return `${dd}/${mm}/${d.getFullYear()} ${hh}:${min}`;
+}
+
+function NotesSection({
+  baseCount,
+  disableEditDelete = false,
+  disableAll = false,
+  children,
+}: {
+  baseCount: number;
+  disableEditDelete?: boolean;
+  disableAll?: boolean;
+  children: ReactNode;
+}) {
+  const [inserting, setInserting] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [noteText, setNoteText] = useState("");
+  const [added, setAdded] = useState<string[]>([]);
+
+  const active = inserting || isEditing;
+  const totalCount = baseCount + added.length;
+
+  function handleInsert() { setInserting(true); setNoteText(""); }
+
+  function handlePost() {
+    if (inserting) {
+      const header = `Added by UAT1 USER, ${fmtDateTime(new Date())}`;
+      setAdded((prev) => [header + (noteText ? "\n" + noteText : ""), ...prev]);
+      setInserting(false);
+      setNoteText("");
+    } else {
+      setIsEditing(false);
+    }
   }
-  if (isPlan76) {
-    const count = 6;
-    return (
-      <Section title={`Notes (${count})`} headerAction={<NoteButtons />}>
-        <div className="space-y-3 max-h-[620px] overflow-auto pr-1">
-          {Array.from({ length: count }).map((_, i) => (
-            <article key={i} className="relative bg-white rounded-[8px] border border-[#e0e0e0] overflow-hidden">
-              <div className="p-4">
-                <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#3d3d3d] leading-[1.6] m-0">
-                  Test Note
-                </pre>
-              </div>
-            </article>
-          ))}
-        </div>
-      </Section>
-    );
+
+  function handleCancel() {
+    setInserting(false);
+    setIsEditing(false);
+    setNoteText("");
   }
-  if (planCode === "76z") {
-    const count = 7;
-    return (
-      <Section title={`Notes (${count})`} headerAction={<NoteButtons />}>
-        <div className="space-y-3 max-h-[620px] overflow-auto pr-1">
-          {Array.from({ length: count }).map((_, i) => (
-            <article key={i} className="relative bg-white rounded-[8px] border border-[#e0e0e0] overflow-hidden">
-              <div className="p-4">
-                <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#3d3d3d] leading-[1.6] m-0">
-                  Test Note
-                </pre>
-              </div>
-            </article>
-          ))}
-        </div>
-      </Section>
-    );
-  }
-  if (isPlan621) {
-    const count = 4;
-    return (
-      <Section title={`Notes (${count})`} headerAction={<NoteButtons />}>
-        <div className="space-y-3 max-h-[620px] overflow-auto pr-1">
-          {Array.from({ length: count }).map((_, i) => (
-            <article key={i} className="relative bg-white rounded-[8px] border border-[#e0e0e0] overflow-hidden">
-              <div className="p-4">
-                <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#3d3d3d] leading-[1.6] m-0">
-                  Test Note
-                </pre>
-              </div>
-            </article>
-          ))}
-        </div>
-      </Section>
-    );
-  }
-  const isPlan80 = planCode === "80";
-  if (isPlan82 || isPlan80) {
-    const count = 7;
-    return (
-      <Section title={`Notes (${count})`} headerAction={<NoteButtons />}>
-        <div className="space-y-3 max-h-[620px] overflow-auto pr-1">
-          {Array.from({ length: count }).map((_, i) => (
-            <article key={i} className="relative bg-white rounded-[8px] border border-[#e0e0e0] overflow-hidden">
-              <div className="p-4">
-                <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#3d3d3d] leading-[1.6] m-0">
-                  Test Note
-                </pre>
-              </div>
-            </article>
-          ))}
-        </div>
-      </Section>
-    );
-  }
-  if (isPlan83) {
-    const count = 6;
-    return (
-      <Section title={`Notes (${count})`} headerAction={<NoteButtons />}>
-        <div className="space-y-3 max-h-[620px] overflow-auto pr-1">
-          {Array.from({ length: count }).map((_, i) => (
-            <article key={i} className="relative bg-white rounded-[8px] border border-[#e0e0e0] overflow-hidden">
-              <div className="p-4">
-                <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#3d3d3d] leading-[1.6] m-0">
-                  Test Note
-                </pre>
-              </div>
-            </article>
-          ))}
-        </div>
-      </Section>
-    );
-  }
-  const isPlan611 = planCode === "611";
-  const isPlan61a = planCode === "61a";
-  if (isPlan61a) {
-    const count = 7;
-    return (
-      <Section title={`Notes (${count})`} headerAction={<NoteButtons />}>
-        <div className="space-y-3 max-h-[620px] overflow-auto pr-1">
-          {Array.from({ length: count }).map((_, i) => (
-            <article key={i} className="relative bg-white rounded-[8px] border border-[#e0e0e0] overflow-hidden">
-              <div className="p-4">
-                <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#3d3d3d] leading-[1.6] m-0">
-                  Test Note
-                </pre>
-              </div>
-            </article>
-          ))}
-        </div>
-      </Section>
-    );
-  }
-  if (isPlan611) {
-    const count = 4;
-    return (
-      <Section title={`Notes (${count})`} headerAction={<NoteButtons />}>
-        <div className="space-y-3 max-h-[620px] overflow-auto pr-1">
-          {Array.from({ length: count }).map((_, i) => (
-            <article key={i} className="relative bg-white rounded-[8px] border border-[#e0e0e0] overflow-hidden">
-              <div className="p-4">
-                <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#3d3d3d] leading-[1.6] m-0">
-                  Test Note
-                </pre>
-              </div>
-            </article>
-          ))}
-        </div>
-      </Section>
-    );
-  }
-  if (isPlan84 || isPlan90 || isPlan51) {
-    const count = 7;
-    return (
-      <Section
-        title={`Notes (${count})`}
-        headerAction={<NoteButtons disableAll={isPlan51} />}
-      >
-        <div className="space-y-3 max-h-[620px] overflow-auto pr-1">
-          {Array.from({ length: count }).map((_, i) => (
-            <article
-              key={i}
-              className="relative bg-white rounded-[8px] border border-[#e0e0e0] overflow-hidden"
-            >
-              <div className="p-4">
-                <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#3d3d3d] leading-[1.6] m-0">
-                  Test Note
-                </pre>
-              </div>
-            </article>
-          ))}
-        </div>
-      </Section>
-    );
-  }
-  if (isPlan87 || planCode === "52") {
-    return (
-      <Section
-        title="Notes (0)"
-        headerAction={<NoteButtons disableEditDelete={planCode === "52"} />}
-      >
-        <div className="space-y-3 max-h-[620px] overflow-auto pr-1" />
-      </Section>
-    );
-  }
-  if (isPlan0) {
-    return (
-      <Section
-        title="Notes (0)"
-        headerAction={<NoteButtons />}
-      >
-        <div className="space-y-3 max-h-[620px] overflow-auto pr-1">
-          <article className="relative bg-white rounded-[8px] border border-[#e0e0e0] overflow-hidden">
-            <div className="p-4">
-              <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#3d3d3d] leading-[1.6] m-0">
-                ImmoNotes
-              </pre>
-            </div>
-          </article>
-        </div>
-      </Section>
-    );
-  }
+
   return (
     <Section
-      title={`Notes (${NOTES.length})`}
-      headerAction={<NoteButtons />}
+      title={`Notes (${totalCount})`}
+      headerAction={
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            className="lve-btn lve-btn-secondary lve-btn-sm"
+            disabled={disableAll || active}
+            onClick={handleInsert}
+            title="Insert Record (Ctrl+Insert)"
+          >
+            <MdAdd size={16} /> Insert Record
+          </button>
+          <button
+            type="button"
+            className="lve-btn lve-btn-secondary lve-btn-sm"
+            disabled={disableEditDelete || disableAll || active}
+            title="Delete Record (Ctrl+Delete)"
+          >
+            <MdRemove size={16} /> Delete Record
+          </button>
+          <button
+            type="button"
+            className="lve-btn lve-btn-secondary lve-btn-sm"
+            disabled={disableEditDelete || disableAll || active}
+            title="Edit Record"
+            onClick={() => setIsEditing(true)}
+          >
+            <MdEdit size={16} /> Edit Record
+          </button>
+          <button
+            type="button"
+            className="lve-btn lve-btn-secondary lve-btn-sm"
+            disabled={!active}
+            title="Post Edit"
+            onClick={handlePost}
+          >
+            <MdCheck size={16} /> Post Edit
+          </button>
+          <button
+            type="button"
+            className="lve-btn lve-btn-secondary lve-btn-sm"
+            disabled={!active}
+            title="Cancel Edit"
+            onClick={handleCancel}
+          >
+            <MdClose size={16} /> Cancel Edit
+          </button>
+        </div>
+      }
     >
       <div className="space-y-3 max-h-[620px] overflow-auto pr-1">
-        {NOTES.map((n, i) => (
-          <article
-            key={i}
-            className="relative bg-white rounded-[8px] border border-[#e0e0e0] overflow-hidden"
-          >
+        {inserting && (
+          <article className="relative bg-white rounded-[8px] border border-[#006cf4] overflow-hidden">
+            <div className="p-2">
+              <textarea
+                className="w-full h-[80px] font-['Mulish'] text-[12.5px] text-[#3d3d3d] leading-[1.6] resize-none outline-none p-1"
+                value={noteText}
+                onChange={(e) => setNoteText(e.target.value)}
+                autoFocus
+              />
+            </div>
+          </article>
+        )}
+        {added.map((body, i) => (
+          <article key={`added-${i}`} className="relative bg-white rounded-[8px] border border-[#e0e0e0] overflow-hidden">
             <div className="p-4">
-              <header className="flex items-center justify-between gap-3 mb-3 pb-3 border-b border-[#eef2f5]">
-                <div className="flex items-center gap-3 min-w-0">
-                  <span
-                    className={`inline-flex items-center justify-center w-9 h-9 rounded-full text-white font-['Livvic'] font-semibold text-[13px] shrink-0 ${colorFor(
-                      n.author,
-                    )}`}
-                  >
-                    {initials(n.author)}
-                  </span>
-                  <div className="min-w-0">
-                    <div className="flex items-center gap-1.5 font-['Livvic'] font-semibold text-[14px] text-[#00263e] truncate">
-                      <MdPerson size={14} className="text-[#777] shrink-0" />
-                      {n.author}
-                    </div>
-                    <div className="flex items-center gap-1.5 font-['Mulish'] text-[11px] text-[#777] mt-0.5">
-                      <MdAccessTime size={12} />
-                      {n.date}
-                    </div>
-                  </div>
-                </div>
-                <span className="font-['Mulish'] text-[10px] tracking-wider uppercase text-[#04589b] bg-[#eaf5f8] border border-[#d6e7ef] rounded-full px-2.5 py-0.5 shrink-0">
-                  Note #{NOTES.length - i}
-                </span>
-              </header>
               <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#3d3d3d] leading-[1.6] m-0">
-                {n.body}
+                {body}
               </pre>
             </div>
           </article>
         ))}
+        {children}
       </div>
     </Section>
+  );
+}
+
+function SimpleNotes({ count }: { count: number }) {
+  return (
+    <>
+      {Array.from({ length: count }).map((_, i) => (
+        <article key={i} className="relative bg-white rounded-[8px] border border-[#e0e0e0] overflow-hidden">
+          <div className="p-4">
+            <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#3d3d3d] leading-[1.6] m-0">
+              Test Note
+            </pre>
+          </div>
+        </article>
+      ))}
+    </>
+  );
+}
+
+export function NotesTab() {
+  const { planCode } = usePlanCode();
+  const isPlan0   = planCode === "0";
+  const isPlan87  = planCode === "87";
+  const isPlan84  = planCode === "84";
+  const isPlan90  = planCode === "90";
+  const isPlan51  = planCode === "51";
+  const isPlan83  = planCode === "83";
+  const isPlan82  = planCode === "82";
+  const isPlan80  = planCode === "80";
+  const isPlan621 = planCode === "621";
+  const isPlan76  = planCode === "76";
+  const isPlan62a = planCode === "62a";
+  const isPlan611 = planCode === "611";
+  const isPlan61a = planCode === "61a";
+  const isPlan52  = planCode === "52";
+  const isPlan76z = planCode === "76z";
+
+  if (isPlan62a)  return <NotesSection baseCount={6}><SimpleNotes count={6} /></NotesSection>;
+  if (isPlan76)   return <NotesSection baseCount={6}><SimpleNotes count={6} /></NotesSection>;
+  if (isPlan76z)  return <NotesSection baseCount={7}><SimpleNotes count={7} /></NotesSection>;
+  if (isPlan621)  return <NotesSection baseCount={4}><SimpleNotes count={4} /></NotesSection>;
+  if (isPlan82 || isPlan80) return <NotesSection baseCount={7}><SimpleNotes count={7} /></NotesSection>;
+  if (isPlan83)   return <NotesSection baseCount={6}><SimpleNotes count={6} /></NotesSection>;
+  if (isPlan61a)  return <NotesSection baseCount={7}><SimpleNotes count={7} /></NotesSection>;
+  if (isPlan611)  return <NotesSection baseCount={4}><SimpleNotes count={4} /></NotesSection>;
+  if (isPlan84 || isPlan90) return <NotesSection baseCount={7}><SimpleNotes count={7} /></NotesSection>;
+  if (isPlan51)   return <NotesSection baseCount={7} disableAll><SimpleNotes count={7} /></NotesSection>;
+  if (isPlan87)   return <NotesSection baseCount={0}>{null}</NotesSection>;
+  if (isPlan52)   return <NotesSection baseCount={0} disableEditDelete>{null}</NotesSection>;
+
+  if (isPlan0) {
+    return (
+      <NotesSection baseCount={1}>
+        <article className="relative bg-white rounded-[8px] border border-[#e0e0e0] overflow-hidden">
+          <div className="p-4">
+            <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#3d3d3d] leading-[1.6] m-0">
+              ImmoNotes
+            </pre>
+          </div>
+        </article>
+      </NotesSection>
+    );
+  }
+
+  return (
+    <NotesSection baseCount={NOTES.length}>
+      {NOTES.map((n, i) => (
+        <article
+          key={i}
+          className="relative bg-white rounded-[8px] border border-[#e0e0e0] overflow-hidden"
+        >
+          <div className="p-4">
+            <header className="flex items-center justify-between gap-3 mb-3 pb-3 border-b border-[#eef2f5]">
+              <div className="flex items-center gap-3 min-w-0">
+                <span
+                  className={`inline-flex items-center justify-center w-9 h-9 rounded-full text-white font-['Livvic'] font-semibold text-[13px] shrink-0 ${colorFor(n.author)}`}
+                >
+                  {initials(n.author)}
+                </span>
+                <div className="min-w-0">
+                  <div className="flex items-center gap-1.5 font-['Livvic'] font-semibold text-[14px] text-[#00263e] truncate">
+                    <MdPerson size={14} className="text-[#777] shrink-0" />
+                    {n.author}
+                  </div>
+                  <div className="flex items-center gap-1.5 font-['Mulish'] text-[11px] text-[#777] mt-0.5">
+                    <MdAccessTime size={12} />
+                    {n.date}
+                  </div>
+                </div>
+              </div>
+              <span className="font-['Mulish'] text-[10px] tracking-wider uppercase text-[#04589b] bg-[#eaf5f8] border border-[#d6e7ef] rounded-full px-2.5 py-0.5 shrink-0">
+                Note #{NOTES.length - i}
+              </span>
+            </header>
+            <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#3d3d3d] leading-[1.6] m-0">
+              {n.body}
+            </pre>
+          </div>
+        </article>
+      ))}
+    </NotesSection>
   );
 }

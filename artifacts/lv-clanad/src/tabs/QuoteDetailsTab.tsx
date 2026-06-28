@@ -208,13 +208,14 @@ export function QuoteDetailsTab() {
   function handleDragStart(orderIdx: number) { dragColRef.current = orderIdx; setDraggingIdx(orderIdx); }
   function handleDragOver(e: React.DragEvent, orderIdx: number) {
     e.preventDefault();
+    if (orderIdx === 0) return;
     dragOverColRef.current = orderIdx;
     setDragOverIdx(orderIdx);
   }
   function handleDrop(orderIdx: number) {
     const from = dragColRef.current;
     const to = orderIdx;
-    if (from === null || from === to) return;
+    if (from === null || from === to || from === 0 || to === 0) return;
     setColOrder(prev => { const next = [...prev]; const [moved] = next.splice(from, 1); next.splice(to, 0, moved); return next; });
     dragColRef.current = null; dragOverColRef.current = null; setDragOverIdx(null); setDraggingIdx(null);
   }
@@ -536,19 +537,20 @@ export function QuoteDetailsTab() {
             <thead>
               <tr>
                 {colOrder.map((colIdx, orderIdx) => {
+                  const isFixed = orderIdx === 0;
                   const isDragging = draggingIdx === orderIdx;
-                  const isDropTarget = dragOverIdx === orderIdx;
+                  const isDropTarget = dragOverIdx === orderIdx && !isFixed;
                   return (
                     <th
                       key={colIdx}
-                      draggable
-                      onDragStart={() => handleDragStart(orderIdx)}
-                      onDragOver={(e) => handleDragOver(e, orderIdx)}
-                      onDrop={() => handleDrop(orderIdx)}
+                      draggable={!isFixed}
+                      onDragStart={isFixed ? undefined : () => handleDragStart(orderIdx)}
+                      onDragOver={isFixed ? undefined : (e) => handleDragOver(e, orderIdx)}
+                      onDrop={isFixed ? undefined : () => handleDrop(orderIdx)}
                       onDragEnd={handleDragEnd}
-                      className={`!px-4 select-none whitespace-nowrap transition-colors relative cursor-grab active:cursor-grabbing${isDragging ? " opacity-40" : ""}${isDropTarget ? " border-l-4 border-l-[#006cf4]" : ""}`}
+                      className={`!px-4 select-none whitespace-nowrap transition-colors relative${isFixed ? "" : " cursor-grab active:cursor-grabbing"}${isDragging ? " opacity-40" : ""}${isDropTarget ? " border-l-4 border-l-[#006cf4]" : ""}`}
                       style={{ width: colWidths[colIdx], minWidth: colWidths[colIdx], maxWidth: colWidths[colIdx] }}
-                      title="Drag to reorder"
+                      title={isFixed ? undefined : "Drag to reorder"}
                     >
                       <span className="block truncate">{QUOTE_COLUMNS[colIdx]}</span>
                       <div

@@ -51,7 +51,7 @@ function LoaPoaForm() {
       <div className="max-w-xl">
         <Field inline labelWidth={140} label="LOA/POA:">
           <SelectInput
-            options={["Letter of Authority", "Power of Attorney"]}
+            options={["", "Letter of Authority", "Power of Attorney"]}
           />
         </Field>
         <Field inline labelWidth={140} label="Name:">

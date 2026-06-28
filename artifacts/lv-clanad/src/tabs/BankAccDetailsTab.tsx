@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Field, TextInput, Section } from "../components/Field";
 import { DatePicker } from "../components/DatePicker";
-import { MdEdit } from "react-icons/md";
+import { MdEdit, MdDelete } from "react-icons/md";
 import { useCheques } from "../context/ChequesContext";
 import { usePlanCode } from "../context/PlanCodeContext";
 import { EditBankDetailsModal } from "../components/EditBankDetailsModal";
+import { ConfirmDialog } from "../components/ConfirmDialog";
 
 const TRANSFERS: { company: string; ref: string; date: string; amount: string }[] = [];
 
@@ -13,6 +14,7 @@ const SEED_CHEQUE_NOS = new Set(["232693", "232694", "232695"]);
 export function BankAccDetailsTab() {
   const [editBankOpen, setEditBankOpen] = useState(false);
   const [selectedTransferIdx, setSelectedTransferIdx] = useState<number | null>(null);
+  const [deleteSortCodeOpen, setDeleteSortCodeOpen] = useState(false);
   const { planCode } = usePlanCode();
   const isPlan87  = planCode === "87";
   const isPlan84  = planCode === "84";
@@ -112,10 +114,23 @@ export function BankAccDetailsTab() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8">
           <div>
             <Field inline label="Bank sort code:">
-              <TextInput
-                value={isPlan87 ? "20-00-00" : isPlan84 || isPlan90 || isPlan51 || isPlan80 || isPlan83 || isPlan82 || isPlan621 || isPlan76 || isPlan76z || isPlan62a || isPlan611 || isPlan61a ? "77-48-14" : isPlan52 ? "" : "DBEdit41"}
-                disabled={isPlan84 || isPlan90}
-              />
+              <div className="flex items-center gap-2">
+                <div className="flex-1 min-w-0">
+                  <TextInput
+                    value={isPlan87 ? "20-00-00" : isPlan84 || isPlan90 || isPlan51 || isPlan80 || isPlan83 || isPlan82 || isPlan621 || isPlan76 || isPlan76z || isPlan62a || isPlan611 || isPlan61a ? "77-48-14" : isPlan52 ? "" : "DBEdit41"}
+                    disabled={isPlan84 || isPlan90}
+                  />
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setDeleteSortCodeOpen(true)}
+                  className="lve-btn lve-btn-secondary !rounded-full !p-0 !w-10 !h-10 shrink-0 inline-flex items-center justify-center"
+                  title="Delete sort code"
+                  aria-label="Delete sort code"
+                >
+                  <MdDelete size={18} />
+                </button>
+              </div>
             </Field>
             <Field inline label="Bank account no:">
               <TextInput
@@ -232,6 +247,13 @@ export function BankAccDetailsTab() {
         open={editBankOpen}
         onClose={() => setEditBankOpen(false)}
         planCode={planCode}
+      />
+
+      <ConfirmDialog
+        open={deleteSortCodeOpen}
+        message="Are you sure you want to delete the bank sort code?"
+        onYes={() => setDeleteSortCodeOpen(false)}
+        onNo={() => setDeleteSortCodeOpen(false)}
       />
     </div>
   );

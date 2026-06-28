@@ -84,30 +84,30 @@ function simpleItems(count: number, prefix = "s"): NoteItem[] {
 function ConfirmDeleteDialog({ onOk, onCancel }: { onOk: () => void; onCancel: () => void }) {
   return (
     <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40">
-      <div className="w-[280px] bg-[#d4d0c8] border-2 border-white shadow-[2px_2px_6px_rgba(0,0,0,0.5)] rounded-sm overflow-hidden">
-        <header className="bg-[#00263e] text-white font-['Livvic'] text-[13px] font-semibold px-3 py-1.5 flex items-center justify-between">
-          <span>Confirm</span>
-          <button type="button" className="text-white hover:text-gray-300 leading-none" onClick={onCancel}>✕</button>
+      <div className="w-[360px] bg-white rounded-[8px] shadow-xl overflow-hidden border border-[#bcd]">
+        <header className="bg-[#00263e] text-white font-['Livvic'] text-[13px] font-semibold px-3 py-2">
+          Client Annuity Administration System
         </header>
-        <div className="p-5 flex items-center gap-4">
-          <span className="text-[36px] text-[#006cf4] select-none leading-none">?</span>
-          <p className="font-['Mulish'] text-[13px] text-[#1a1a1a]">Delete record?</p>
-        </div>
-        <div className="px-5 pb-4 flex items-center gap-3">
-          <button
-            type="button"
-            className="lve-btn lve-btn-sm min-w-[64px]"
-            onClick={onOk}
-          >
-            OK
-          </button>
-          <button
-            type="button"
-            className="lve-btn lve-btn-secondary lve-btn-sm min-w-[64px]"
-            onClick={onCancel}
-          >
-            Cancel
-          </button>
+        <div className="p-5">
+          <p className="font-['Mulish'] text-[14px] text-[#3d3d3d] text-center">
+            Delete record?
+          </p>
+          <div className="mt-5 flex items-center justify-center gap-3">
+            <button
+              type="button"
+              className="lve-btn lve-btn-sm min-w-[72px]"
+              onClick={onOk}
+            >
+              OK
+            </button>
+            <button
+              type="button"
+              className="lve-btn lve-btn-secondary lve-btn-sm min-w-[72px]"
+              onClick={onCancel}
+            >
+              Cancel
+            </button>
+          </div>
         </div>
       </div>
     </div>

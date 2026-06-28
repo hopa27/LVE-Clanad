@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useState } from "react";
 import { Section } from "../components/Field";
 import {
   MdAdd,
@@ -11,33 +11,41 @@ import {
 } from "react-icons/md";
 import { usePlanCode } from "../context/PlanCodeContext";
 
-const NOTES = [
+type NoteItem = {
+  id: string;
+  body: string;
+  author?: string;
+  date?: string;
+  noteNum?: number;
+};
+
+const NOTES_DATA: NoteItem[] = [
   {
-    author: "Alice Oldacre", date: "13/03/2025 12:22",
+    id: "n0", author: "Alice Oldacre", date: "13/03/2025 12:22", noteNum: 7,
     body: `ORIGINALLY 225762\nTask – New business app\nVetting done\ntracesmart and sira passed`,
   },
   {
-    author: "Tayla Annon-Batson", date: "19/03/2025 09:19",
+    id: "n1", author: "Tayla Annon-Batson", date: "19/03/2025 09:19", noteNum: 6,
     body: `IFA CALLED\nID&V COMPLETE\nWANTED UPDATE ON TRANSFER\nCONFIRMED IT WAS PUT OOS AND THEY REQUESTED PAPER TRANSFER SO WE SENT IRF FORMS ON 14/03`,
   },
   {
-    author: "James Males", date: "22/04/2025 13:26",
+    id: "n2", author: "James Males", date: "22/04/2025 13:26", noteNum: 5,
     body: `IFA called - ID&V verified\nCalled as they wanted an update on the transfer as Pru have said they haven't rec'd a request\nI checked this has not been requested on Origo - I have requested the transfer now\nI have also requote on current rate and rate the application was rec'd with due to LV= delays and emailed to IFA with WP FTA dec`,
   },
   {
-    author: "James Males", date: "22/04/2025 13:26",
+    id: "n3", author: "James Males", date: "22/04/2025 13:26", noteNum: 4,
     body: `From: Annuity Servicing\nSent: 22 April 2025 13:24\nTo: 'WMCS@agepartnership.com' <WMCS@agepartnership.com>\nSubject: Mrs L Turner - 225810: Transfer re-requested`,
   },
   {
-    author: "James Males", date: "22/04/2025 13:27",
+    id: "n4", author: "James Males", date: "22/04/2025 13:27", noteNum: 3,
     body: `Email cont.\nI'm requesting that LV= now invest the funds within the new LV= Fixed Term Investment/Annuity product, which has replaced the LV= Protected Retirement Plan on the basis outlined in the quote attached (<quote reference>).\nI/we read the Plan Conditions, Key Features and Customer Facing Principles and Practices of Financial Management documents applicable to the new plan.\nWhere I/we/ asked for the Plan to be set up to provide a Guaranteed Maturity Value (GMV) only, I/we also instructing LV= to produce a minimal income of £1 each year payable in arrears, which will be held back within the pension scheme and added to the GMV at the end of`,
   },
   {
-    author: "Michael Hibbs", date: "24/04/2025 17:08",
+    id: "n5", author: "Michael Hibbs", date: "24/04/2025 17:08", noteNum: 2,
     body: `Funds sent, not yet received`,
   },
   {
-    author: "James Males", date: "28/04/2025 12:20",
+    id: "n6", author: "James Males", date: "28/04/2025 12:20", noteNum: 1,
     body: `Funds rec'd - TV dec in file\nReady for FQ`,
   },
 ];
@@ -52,13 +60,7 @@ const AVATAR_COLORS = [
 ];
 
 function initials(name: string) {
-  return name
-    .split(" ")
-    .map((w) => w[0])
-    .filter(Boolean)
-    .slice(0, 2)
-    .join("")
-    .toUpperCase();
+  return name.split(" ").map((w) => w[0]).filter(Boolean).slice(0, 2).join("").toUpperCase();
 }
 
 function colorFor(name: string) {
@@ -68,228 +70,290 @@ function colorFor(name: string) {
 }
 
 function fmtDateTime(d: Date) {
-  const dd = String(d.getDate()).padStart(2, "0");
-  const mm = String(d.getMonth() + 1).padStart(2, "0");
-  const hh = String(d.getHours()).padStart(2, "0");
+  const dd  = String(d.getDate()).padStart(2, "0");
+  const mm  = String(d.getMonth() + 1).padStart(2, "0");
+  const hh  = String(d.getHours()).padStart(2, "0");
   const min = String(d.getMinutes()).padStart(2, "0");
   return `${dd}/${mm}/${d.getFullYear()} ${hh}:${min}`;
 }
 
+function simpleItems(count: number, prefix = "s"): NoteItem[] {
+  return Array.from({ length: count }, (_, i) => ({ id: `${prefix}${i}`, body: "Test Note" }));
+}
+
+function ConfirmDeleteDialog({ onOk, onCancel }: { onOk: () => void; onCancel: () => void }) {
+  return (
+    <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40">
+      <div className="w-[280px] bg-[#d4d0c8] border-2 border-white shadow-[2px_2px_6px_rgba(0,0,0,0.5)] rounded-sm overflow-hidden">
+        <header className="bg-[#00263e] text-white font-['Livvic'] text-[13px] font-semibold px-3 py-1.5 flex items-center justify-between">
+          <span>Confirm</span>
+          <button type="button" className="text-white hover:text-gray-300 leading-none" onClick={onCancel}>✕</button>
+        </header>
+        <div className="p-5 flex items-center gap-4">
+          <span className="text-[36px] text-[#006cf4] select-none leading-none">?</span>
+          <p className="font-['Mulish'] text-[13px] text-[#1a1a1a]">Delete record?</p>
+        </div>
+        <div className="px-5 pb-4 flex items-center gap-3">
+          <button
+            type="button"
+            className="lve-btn lve-btn-sm min-w-[64px]"
+            onClick={onOk}
+          >
+            OK
+          </button>
+          <button
+            type="button"
+            className="lve-btn lve-btn-secondary lve-btn-sm min-w-[64px]"
+            onClick={onCancel}
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function NotesSection({
-  baseCount,
+  initialItems,
   disableEditDelete = false,
   disableAll = false,
-  children,
 }: {
-  baseCount: number;
+  initialItems: NoteItem[];
   disableEditDelete?: boolean;
   disableAll?: boolean;
-  children: ReactNode;
 }) {
-  const [inserting, setInserting] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
-  const [noteText, setNoteText] = useState("");
-  const [added, setAdded] = useState<string[]>([]);
+  const [notes, setNotes]           = useState<NoteItem[]>(initialItems);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [inserting, setInserting]   = useState(false);
+  const [insertText, setInsertText] = useState("");
+  const [editingId, setEditingId]   = useState<string | null>(null);
+  const [editText, setEditText]     = useState("");
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
-  const active = inserting || isEditing;
-  const totalCount = baseCount + added.length;
+  const active      = inserting || editingId !== null;
+  const hasSelection = selectedId !== null && !active;
 
-  function handleInsert() { setInserting(true); setNoteText(""); }
+  function handleInsert() {
+    setSelectedId(null);
+    setInserting(true);
+    setInsertText("");
+  }
+
+  function handleDelete() {
+    if (!hasSelection) return;
+    setConfirmDelete(true);
+  }
+
+  function confirmOk() {
+    setNotes((prev) => prev.filter((n) => n.id !== selectedId));
+    setSelectedId(null);
+    setConfirmDelete(false);
+  }
+
+  function handleEdit() {
+    if (!hasSelection) return;
+    const note = notes.find((n) => n.id === selectedId);
+    if (!note) return;
+    setEditText(note.body);
+    setEditingId(selectedId);
+  }
 
   function handlePost() {
     if (inserting) {
-      const header = `Added by UAT1 USER, ${fmtDateTime(new Date())}`;
-      setAdded((prev) => [header + (noteText ? "\n" + noteText : ""), ...prev]);
+      const id   = `added-${Date.now()}`;
+      const hdr  = `Added by UAT1 USER, ${fmtDateTime(new Date())}`;
+      const body = hdr + (insertText ? "\n" + insertText : "");
+      setNotes((prev) => [{ id, body }, ...prev]);
       setInserting(false);
-      setNoteText("");
-    } else {
-      setIsEditing(false);
+      setInsertText("");
+    } else if (editingId) {
+      setNotes((prev) => prev.map((n) => n.id === editingId ? { ...n, body: editText } : n));
+      setEditingId(null);
+      setEditText("");
     }
   }
 
   function handleCancel() {
     setInserting(false);
-    setIsEditing(false);
-    setNoteText("");
+    setEditingId(null);
+    setInsertText("");
+    setEditText("");
+  }
+
+  function handleNoteClick(id: string) {
+    if (active) return;
+    setSelectedId((prev) => (prev === id ? null : id));
   }
 
   return (
-    <Section
-      title={`Notes (${totalCount})`}
-      headerAction={
-        <div className="flex items-center gap-2">
-          <button
-            type="button"
-            className="lve-btn lve-btn-secondary lve-btn-sm"
-            disabled={disableAll || active}
-            onClick={handleInsert}
-            title="Insert Record (Ctrl+Insert)"
-          >
-            <MdAdd size={16} /> Insert Record
-          </button>
-          <button
-            type="button"
-            className="lve-btn lve-btn-secondary lve-btn-sm"
-            disabled={disableEditDelete || disableAll || active}
-            title="Delete Record (Ctrl+Delete)"
-          >
-            <MdRemove size={16} /> Delete Record
-          </button>
-          <button
-            type="button"
-            className="lve-btn lve-btn-secondary lve-btn-sm"
-            disabled={disableEditDelete || disableAll || active}
-            title="Edit Record"
-            onClick={() => setIsEditing(true)}
-          >
-            <MdEdit size={16} /> Edit Record
-          </button>
-          <button
-            type="button"
-            className="lve-btn lve-btn-secondary lve-btn-sm"
-            disabled={!active}
-            title="Post Edit"
-            onClick={handlePost}
-          >
-            <MdCheck size={16} /> Post Edit
-          </button>
-          <button
-            type="button"
-            className="lve-btn lve-btn-secondary lve-btn-sm"
-            disabled={!active}
-            title="Cancel Edit"
-            onClick={handleCancel}
-          >
-            <MdClose size={16} /> Cancel Edit
-          </button>
-        </div>
-      }
-    >
-      <div className="space-y-3 max-h-[620px] overflow-auto pr-1">
-        {inserting && (
-          <article className="relative bg-white rounded-[8px] border border-[#006cf4] overflow-hidden">
-            <div className="p-2">
-              <textarea
-                className="w-full h-[80px] font-['Mulish'] text-[12.5px] text-[#3d3d3d] leading-[1.6] resize-none outline-none p-1"
-                value={noteText}
-                onChange={(e) => setNoteText(e.target.value)}
-                autoFocus
-              />
-            </div>
-          </article>
-        )}
-        {added.map((body, i) => (
-          <article key={`added-${i}`} className="relative bg-white rounded-[8px] border border-[#e0e0e0] overflow-hidden">
-            <div className="p-4">
-              <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#3d3d3d] leading-[1.6] m-0">
-                {body}
-              </pre>
-            </div>
-          </article>
-        ))}
-        {children}
-      </div>
-    </Section>
-  );
-}
-
-function SimpleNotes({ count }: { count: number }) {
-  return (
     <>
-      {Array.from({ length: count }).map((_, i) => (
-        <article key={i} className="relative bg-white rounded-[8px] border border-[#e0e0e0] overflow-hidden">
-          <div className="p-4">
-            <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#3d3d3d] leading-[1.6] m-0">
-              Test Note
-            </pre>
+      <Section
+        title={`Notes (${notes.length})`}
+        headerAction={
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              className="lve-btn lve-btn-secondary lve-btn-sm"
+              disabled={disableAll || active}
+              onClick={handleInsert}
+              title="Insert Record (Ctrl+Insert)"
+            >
+              <MdAdd size={16} /> Insert Record
+            </button>
+            <button
+              type="button"
+              className="lve-btn lve-btn-secondary lve-btn-sm"
+              disabled={disableEditDelete || disableAll || active || !hasSelection}
+              onClick={handleDelete}
+              title="Delete Record (Ctrl+Delete)"
+            >
+              <MdRemove size={16} /> Delete Record
+            </button>
+            <button
+              type="button"
+              className="lve-btn lve-btn-secondary lve-btn-sm"
+              disabled={disableEditDelete || disableAll || active || !hasSelection}
+              onClick={handleEdit}
+              title="Edit Record"
+            >
+              <MdEdit size={16} /> Edit Record
+            </button>
+            <button
+              type="button"
+              className="lve-btn lve-btn-secondary lve-btn-sm"
+              disabled={!active}
+              onClick={handlePost}
+              title="Post Edit"
+            >
+              <MdCheck size={16} /> Post Edit
+            </button>
+            <button
+              type="button"
+              className="lve-btn lve-btn-secondary lve-btn-sm"
+              disabled={!active}
+              onClick={handleCancel}
+              title="Cancel Edit"
+            >
+              <MdClose size={16} /> Cancel Edit
+            </button>
           </div>
-        </article>
-      ))}
+        }
+      >
+        <div className="space-y-3 max-h-[620px] overflow-auto pr-1">
+          {inserting && (
+            <article className="relative bg-white rounded-[8px] border border-[#006cf4] overflow-hidden">
+              <div className="p-2">
+                <textarea
+                  className="w-full h-[80px] font-['Mulish'] text-[12.5px] text-[#3d3d3d] leading-[1.6] resize-none outline-none p-1"
+                  value={insertText}
+                  onChange={(e) => setInsertText(e.target.value)}
+                  autoFocus
+                />
+              </div>
+            </article>
+          )}
+
+          {notes.map((note) => {
+            const isSelected    = !active && selectedId === note.id;
+            const isEditingThis = editingId === note.id;
+
+            const articleCls = [
+              "relative bg-white rounded-[8px] border overflow-hidden cursor-pointer select-none transition-colors",
+              isSelected    ? "border-[#006cf4] bg-[#eaf5f8]"  : "border-[#e0e0e0]",
+              isEditingThis ? "border-[#006cf4]" : "",
+            ].join(" ");
+
+            return (
+              <article
+                key={note.id}
+                className={articleCls}
+                onClick={() => handleNoteClick(note.id)}
+              >
+                <div className="p-4">
+                  {note.author ? (
+                    <>
+                      <header className="flex items-center justify-between gap-3 mb-3 pb-3 border-b border-[#eef2f5]">
+                        <div className="flex items-center gap-3 min-w-0">
+                          <span className={`inline-flex items-center justify-center w-9 h-9 rounded-full text-white font-['Livvic'] font-semibold text-[13px] shrink-0 ${colorFor(note.author)}`}>
+                            {initials(note.author)}
+                          </span>
+                          <div className="min-w-0">
+                            <div className="flex items-center gap-1.5 font-['Livvic'] font-semibold text-[14px] text-[#00263e] truncate">
+                              <MdPerson size={14} className="text-[#777] shrink-0" />
+                              {note.author}
+                            </div>
+                            <div className="flex items-center gap-1.5 font-['Mulish'] text-[11px] text-[#777] mt-0.5">
+                              <MdAccessTime size={12} />
+                              {note.date}
+                            </div>
+                          </div>
+                        </div>
+                        {note.noteNum !== undefined && (
+                          <span className="font-['Mulish'] text-[10px] tracking-wider uppercase text-[#04589b] bg-[#eaf5f8] border border-[#d6e7ef] rounded-full px-2.5 py-0.5 shrink-0">
+                            Note #{note.noteNum}
+                          </span>
+                        )}
+                      </header>
+                      {isEditingThis ? (
+                        <textarea
+                          className="w-full min-h-[80px] font-['Mulish'] text-[12.5px] text-[#3d3d3d] leading-[1.6] resize-none outline-none border border-[#006cf4] rounded p-1 cursor-text"
+                          value={editText}
+                          onChange={(e) => setEditText(e.target.value)}
+                          autoFocus
+                          onClick={(e) => e.stopPropagation()}
+                        />
+                      ) : (
+                        <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#3d3d3d] leading-[1.6] m-0">
+                          {note.body}
+                        </pre>
+                      )}
+                    </>
+                  ) : isEditingThis ? (
+                    <textarea
+                      className="w-full min-h-[80px] font-['Mulish'] text-[12.5px] text-[#3d3d3d] leading-[1.6] resize-none outline-none border border-[#006cf4] rounded p-1 cursor-text"
+                      value={editText}
+                      onChange={(e) => setEditText(e.target.value)}
+                      autoFocus
+                      onClick={(e) => e.stopPropagation()}
+                    />
+                  ) : (
+                    <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#3d3d3d] leading-[1.6] m-0">
+                      {note.body}
+                    </pre>
+                  )}
+                </div>
+              </article>
+            );
+          })}
+        </div>
+      </Section>
+
+      {confirmDelete && (
+        <ConfirmDeleteDialog onOk={confirmOk} onCancel={() => setConfirmDelete(false)} />
+      )}
     </>
   );
 }
 
 export function NotesTab() {
   const { planCode } = usePlanCode();
-  const isPlan0   = planCode === "0";
-  const isPlan87  = planCode === "87";
-  const isPlan84  = planCode === "84";
-  const isPlan90  = planCode === "90";
-  const isPlan51  = planCode === "51";
-  const isPlan83  = planCode === "83";
-  const isPlan82  = planCode === "82";
-  const isPlan80  = planCode === "80";
-  const isPlan621 = planCode === "621";
-  const isPlan76  = planCode === "76";
-  const isPlan62a = planCode === "62a";
-  const isPlan611 = planCode === "611";
-  const isPlan61a = planCode === "61a";
-  const isPlan52  = planCode === "52";
-  const isPlan76z = planCode === "76z";
 
-  if (isPlan62a)  return <NotesSection baseCount={6}><SimpleNotes count={6} /></NotesSection>;
-  if (isPlan76)   return <NotesSection baseCount={6}><SimpleNotes count={6} /></NotesSection>;
-  if (isPlan76z)  return <NotesSection baseCount={7}><SimpleNotes count={7} /></NotesSection>;
-  if (isPlan621)  return <NotesSection baseCount={4}><SimpleNotes count={4} /></NotesSection>;
-  if (isPlan82 || isPlan80) return <NotesSection baseCount={7}><SimpleNotes count={7} /></NotesSection>;
-  if (isPlan83)   return <NotesSection baseCount={6}><SimpleNotes count={6} /></NotesSection>;
-  if (isPlan61a)  return <NotesSection baseCount={7}><SimpleNotes count={7} /></NotesSection>;
-  if (isPlan611)  return <NotesSection baseCount={4}><SimpleNotes count={4} /></NotesSection>;
-  if (isPlan84 || isPlan90) return <NotesSection baseCount={7}><SimpleNotes count={7} /></NotesSection>;
-  if (isPlan51)   return <NotesSection baseCount={7} disableAll><SimpleNotes count={7} /></NotesSection>;
-  if (isPlan87)   return <NotesSection baseCount={0}>{null}</NotesSection>;
-  if (isPlan52)   return <NotesSection baseCount={0} disableEditDelete>{null}</NotesSection>;
+  const simple = (n: number, pfx: string) => simpleItems(n, pfx);
 
-  if (isPlan0) {
-    return (
-      <NotesSection baseCount={1}>
-        <article className="relative bg-white rounded-[8px] border border-[#e0e0e0] overflow-hidden">
-          <div className="p-4">
-            <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#3d3d3d] leading-[1.6] m-0">
-              ImmoNotes
-            </pre>
-          </div>
-        </article>
-      </NotesSection>
-    );
-  }
+  if (planCode === "62a")  return <NotesSection initialItems={simple(6,  "62a")} />;
+  if (planCode === "76")   return <NotesSection initialItems={simple(6,  "76")}  />;
+  if (planCode === "76z")  return <NotesSection initialItems={simple(7,  "76z")} />;
+  if (planCode === "621")  return <NotesSection initialItems={simple(4,  "621")} />;
+  if (planCode === "82" || planCode === "80") return <NotesSection initialItems={simple(7, planCode)} />;
+  if (planCode === "83")   return <NotesSection initialItems={simple(6,  "83")}  />;
+  if (planCode === "61a")  return <NotesSection initialItems={simple(7,  "61a")} />;
+  if (planCode === "611")  return <NotesSection initialItems={simple(4,  "611")} />;
+  if (planCode === "84" || planCode === "90") return <NotesSection initialItems={simple(7, planCode)} />;
+  if (planCode === "51")   return <NotesSection initialItems={simple(7,  "51")}  disableAll />;
+  if (planCode === "87")   return <NotesSection initialItems={[]} />;
+  if (planCode === "52")   return <NotesSection initialItems={[]} disableEditDelete />;
+  if (planCode === "0")    return <NotesSection initialItems={[{ id: "immo", body: "ImmoNotes" }]} />;
 
-  return (
-    <NotesSection baseCount={NOTES.length}>
-      {NOTES.map((n, i) => (
-        <article
-          key={i}
-          className="relative bg-white rounded-[8px] border border-[#e0e0e0] overflow-hidden"
-        >
-          <div className="p-4">
-            <header className="flex items-center justify-between gap-3 mb-3 pb-3 border-b border-[#eef2f5]">
-              <div className="flex items-center gap-3 min-w-0">
-                <span
-                  className={`inline-flex items-center justify-center w-9 h-9 rounded-full text-white font-['Livvic'] font-semibold text-[13px] shrink-0 ${colorFor(n.author)}`}
-                >
-                  {initials(n.author)}
-                </span>
-                <div className="min-w-0">
-                  <div className="flex items-center gap-1.5 font-['Livvic'] font-semibold text-[14px] text-[#00263e] truncate">
-                    <MdPerson size={14} className="text-[#777] shrink-0" />
-                    {n.author}
-                  </div>
-                  <div className="flex items-center gap-1.5 font-['Mulish'] text-[11px] text-[#777] mt-0.5">
-                    <MdAccessTime size={12} />
-                    {n.date}
-                  </div>
-                </div>
-              </div>
-              <span className="font-['Mulish'] text-[10px] tracking-wider uppercase text-[#04589b] bg-[#eaf5f8] border border-[#d6e7ef] rounded-full px-2.5 py-0.5 shrink-0">
-                Note #{NOTES.length - i}
-              </span>
-            </header>
-            <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#3d3d3d] leading-[1.6] m-0">
-              {n.body}
-            </pre>
-          </div>
-        </article>
-      ))}
-    </NotesSection>
-  );
+  return <NotesSection initialItems={NOTES_DATA} />;
 }

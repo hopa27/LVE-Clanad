@@ -59,6 +59,7 @@ export function Toolbar() {
   const isPlan621 = planCode === "621";
   const isPlan611 = planCode === "611";
   const isPlan84  = planCode === "84";
+  const isPlan87  = planCode === "87";
   const isPlan90  = planCode === "90";
   const isStatusL = isPlan84 || isPlan90;
   const [newAppConfirm, setNewAppConfirm] = useState(false);
@@ -79,7 +80,7 @@ export function Toolbar() {
 
   const ALL_TOOLS: Tool[] = [
     { label: "New App",   icon: MdAdd,         enabled: !editing,                          action: "new-app",     shortcutId: "toolbar:new-app" },
-    { label: "New Quote", icon: MdNoteAdd,      enabled: false,                             action: "new-quote" },
+    { label: "New Quote", icon: MdNoteAdd,      enabled: isPlan87,                          action: "new-quote" },
     { label: "Sim App",   icon: MdContentCopy,  enabled: !editing && !isPlan51,             action: "sim-app" },
     {
       label: editing ? "Save" : "Edit",

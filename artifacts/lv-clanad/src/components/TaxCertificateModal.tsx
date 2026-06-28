@@ -3,6 +3,7 @@ import { MdPrint, MdClose, MdHelpOutline, MdInfoOutline, MdCancel } from "react-
 import { DatePicker } from "./DatePicker";
 import { useFocusTrap } from "../hooks/useFocusTrap";
 import { useEscapeKey } from "../hooks/useEscapeKey";
+import { AlwaysEditingProvider } from "../context/EditModeContext";
 
 export function TaxCertificateModal({
   open,
@@ -41,6 +42,7 @@ export function TaxCertificateModal({
   };
 
   return (
+    <AlwaysEditingProvider>
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
       <div ref={containerRef} role="dialog" aria-modal="true" aria-labelledby="tax-cert-title" className="lve-panel w-[420px] bg-white">
         <header id="tax-cert-title" className="lve-panel-header">Tax Certificate</header>
@@ -218,5 +220,6 @@ export function TaxCertificateModal({
         </div>
       )}
     </div>
+    </AlwaysEditingProvider>
   );
 }

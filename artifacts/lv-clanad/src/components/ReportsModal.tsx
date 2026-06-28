@@ -12,6 +12,7 @@ import { format } from "date-fns";
 import { DatePicker } from "./DatePicker";
 import { useFocusTrap } from "../hooks/useFocusTrap";
 import { useEscapeKey } from "../hooks/useEscapeKey";
+import { AlwaysEditingProvider } from "../context/EditModeContext";
 
 type Report = { name: string; dateRequired: string; path?: string };
 
@@ -265,6 +266,7 @@ export function ReportsModal({
   const reportPath = selectedReport?.path ?? "";
 
   return (
+    <AlwaysEditingProvider>
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
       <div ref={containerRef} role="dialog" aria-modal="true" aria-labelledby="reports-title" className="lve-panel bg-white w-[1080px] max-w-full max-h-[90vh] flex flex-col">
         <header className="lve-panel-header flex items-center justify-between">
@@ -469,5 +471,6 @@ export function ReportsModal({
         </div>
       )}
     </div>
+    </AlwaysEditingProvider>
   );
 }

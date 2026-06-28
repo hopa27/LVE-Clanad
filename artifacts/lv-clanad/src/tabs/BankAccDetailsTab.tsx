@@ -108,9 +108,11 @@ export function BankAccDetailsTab() {
       <Section
         title="Bank Details"
         headerAction={
-          <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" onClick={() => setEditBankOpen(true)}>
-            <MdEdit size={16} /> Edit Bank Details
-          </button>
+          !isPlan87 ? (
+            <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" onClick={() => setEditBankOpen(true)}>
+              <MdEdit size={16} /> Edit Bank Details
+            </button>
+          ) : undefined
         }
       >
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-8">

@@ -18,7 +18,6 @@ type NoteItem = {
   author?: string;
   date?: string;
   noteNum?: number;
-  readOnly?: boolean;
 };
 
 const NOTES_DATA: NoteItem[] = [
@@ -156,7 +155,7 @@ function NotesSection({
   function handleEdit() {
     if (!hasSelection) return;
     const note = notes.find((n) => n.id === selectedId);
-    if (!note || note.readOnly) return;
+    if (!note) return;
     setEditText(note.body);
     setEditingId(selectedId);
   }
@@ -167,7 +166,7 @@ function NotesSection({
     if (inserting) {
       const id     = `added-${Date.now()}`;
       const prefix = `Added by UAT1 USER, ${fmtDateTime(new Date())}`;
-      setNotes((prev) => [{ id, body: insertText, prefix, readOnly: true }, ...prev]);
+      setNotes((prev) => [{ id, body: insertText, prefix }, ...prev]);
       setInserting(false);
       setInsertText("");
     } else if (editingId) {
@@ -221,7 +220,7 @@ function NotesSection({
             <button
               type="button"
               className="lve-btn lve-btn-secondary lve-btn-sm"
-              disabled={disableEditDelete || disableAll || active || !hasSelection || !!selectedNote?.readOnly}
+              disabled={disableEditDelete || disableAll || active || !hasSelection}
               onClick={handleEdit}
               title="Edit Record"
             >

@@ -436,6 +436,7 @@ export function DatePicker({
   };
 
   const handleCalendarSelect = (d: Date) => {
+    if (isLockedReadOnly) { setIsOpen(false); return; }
     setDate(d);
     setInputValue(format(d, "dd/MM/yyyy"));
     setTypedInvalid(false);
@@ -477,9 +478,9 @@ export function DatePicker({
 
   return (
     <Popover.Root
-      open={isOpen && !isDisabled && !isLockedReadOnly}
+      open={isOpen && !isDisabled}
       onOpenChange={(o) => {
-        if (isDisabled || isLockedReadOnly) return;
+        if (isDisabled) return;
         setIsOpen(o);
       }}
     >
@@ -510,10 +511,10 @@ export function DatePicker({
         <Popover.Trigger asChild>
           <button
             type="button"
-            disabled={isDisabled || isLockedReadOnly}
+            disabled={isDisabled}
             aria-label="Open calendar"
             className={`px-2 shrink-0 transition-opacity ${
-              isDisabled || isLockedReadOnly ? "cursor-default opacity-60" : "hover:opacity-70"
+              isDisabled ? "cursor-default opacity-60" : "hover:opacity-70"
             }`}
             style={{ color: iconColor }}
           >

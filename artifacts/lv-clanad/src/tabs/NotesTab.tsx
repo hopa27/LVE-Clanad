@@ -13,7 +13,8 @@ import { usePlanCode } from "../context/PlanCodeContext";
 
 type NoteItem = {
   id: string;
-  body: string;
+  body: string;       // user-typed text only
+  prefix?: string;    // "Added by…" / "Modified by…" lines — never editable
   author?: string;
   date?: string;
   noteNum?: number;
@@ -164,16 +165,18 @@ function NotesSection({
 
   function handlePost() {
     if (inserting) {
-      const id   = `added-${Date.now()}`;
-      const hdr  = `Added by UAT1 USER, ${fmtDateTime(new Date())}`;
-      const body = hdr + (insertText ? "\n" + insertText : "");
-      setNotes((prev) => [{ id, body, readOnly: true }, ...prev]);
+      const id     = `added-${Date.now()}`;
+      const prefix = `Added by UAT1 USER, ${fmtDateTime(new Date())}`;
+      setNotes((prev) => [{ id, body: insertText, prefix, readOnly: true }, ...prev]);
       setInserting(false);
       setInsertText("");
     } else if (editingId) {
-      const hdr  = `Modified by UAT1 USER, ${fmtDateTime(new Date())}`;
-      const body = hdr + "\n" + editText;
-      setNotes((prev) => prev.map((n) => n.id === editingId ? { ...n, body } : n));
+      const newMeta = `Modified by UAT1 USER, ${fmtDateTime(new Date())}`;
+      setNotes((prev) => prev.map((n) => {
+        if (n.id !== editingId) return n;
+        const prefix = n.prefix ? `${newMeta}\n${n.prefix}` : newMeta;
+        return { ...n, body: editText, prefix };
+      }));
       setEditingId(null);
       setEditText("");
     }
@@ -300,6 +303,11 @@ function NotesSection({
                           </span>
                         )}
                       </header>
+                      {note.prefix && (
+                        <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#777] leading-[1.6] m-0 mb-1 select-none">
+                          {note.prefix}
+                        </pre>
+                      )}
                       {isEditingThis ? (
                         <textarea
                           className="w-full min-h-[80px] font-['Mulish'] text-[12.5px] text-[#3d3d3d] leading-[1.6] resize-none outline-none border border-[#006cf4] rounded p-1 cursor-text"
@@ -314,18 +322,27 @@ function NotesSection({
                         </pre>
                       )}
                     </>
-                  ) : isEditingThis ? (
-                    <textarea
-                      className="w-full min-h-[80px] font-['Mulish'] text-[12.5px] text-[#3d3d3d] leading-[1.6] resize-none outline-none border border-[#006cf4] rounded p-1 cursor-text"
-                      value={editText}
-                      onChange={(e) => setEditText(e.target.value)}
-                      autoFocus
-                      onClick={(e) => e.stopPropagation()}
-                    />
                   ) : (
-                    <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#3d3d3d] leading-[1.6] m-0">
-                      {note.body}
-                    </pre>
+                    <>
+                      {note.prefix && (
+                        <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#777] leading-[1.6] m-0 mb-1 select-none">
+                          {note.prefix}
+                        </pre>
+                      )}
+                      {isEditingThis ? (
+                        <textarea
+                          className="w-full min-h-[80px] font-['Mulish'] text-[12.5px] text-[#3d3d3d] leading-[1.6] resize-none outline-none border border-[#006cf4] rounded p-1 cursor-text"
+                          value={editText}
+                          onChange={(e) => setEditText(e.target.value)}
+                          autoFocus
+                          onClick={(e) => e.stopPropagation()}
+                        />
+                      ) : (
+                        <pre className="font-['Mulish'] text-[12.5px] whitespace-pre-wrap text-[#3d3d3d] leading-[1.6] m-0">
+                          {note.body}
+                        </pre>
+                      )}
+                    </>
                   )}
                 </div>
               </article>

@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import { MdKeyboardArrowDown, MdCheck } from "react-icons/md";
 import { useEditMode } from "../context/EditModeContext";
 
@@ -95,11 +95,22 @@ export function SelectInput({
   const all = value && !options.includes(value) ? [value, ...options] : options;
   const lockedReadOnly = !editing;
   const isDisabled = disabled;
+
+  const [{ val, resetCount }, setLocal] = useState({ val: value, resetCount: 0 });
+  useEffect(() => { setLocal(s => ({ ...s, val: value })); }, [value]);
+
   return (
     <div className="relative">
       <select
-        value={value}
-        onChange={(e) => { if (editing && !disabled) onChange?.(e.target.value); }}
+        value={val}
+        onChange={(e) => {
+          if (editing && !disabled) {
+            setLocal(s => ({ ...s, val: e.target.value }));
+            onChange?.(e.target.value);
+          } else {
+            setLocal(s => ({ ...s, resetCount: s.resetCount + 1 }));
+          }
+        }}
         disabled={isDisabled}
         tabIndex={isDisabled || lockedReadOnly ? -1 : undefined}
         data-error={error || undefined}

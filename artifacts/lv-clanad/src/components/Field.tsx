@@ -95,11 +95,10 @@ export function SelectInput({
   const all = value && !options.includes(value) ? [value, ...options] : options;
   const lockedReadOnly = !editing;
   const isDisabled = disabled;
-  const isControlled = onChange !== undefined;
   return (
     <div className="relative">
       <select
-        {...(isControlled ? { value } : { defaultValue: value })}
+        value={value}
         onChange={(e) => { if (editing && !disabled) onChange?.(e.target.value); }}
         disabled={isDisabled}
         tabIndex={isDisabled || lockedReadOnly ? -1 : undefined}

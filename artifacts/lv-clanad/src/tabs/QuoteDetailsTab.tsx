@@ -16,10 +16,10 @@ const QUOTE_ROWS = [
 const QUOTE_ROWS_87 = [
   {
     type: "Std Post 97", premium: "£100,000.00", tfc: "", original: "£1.00",
-    escType: "Fixed", escRate: "0", currentInc: "", spousePct: "0",
-    spouseInc: "£0.00", guarantee: "", lastPay: "", overlap: "",
-    valProt: "", taxFree: "", maxFree: "",
-    valProtFlag: "", lsConvert: "", planProt: "", dependant: "",
+    escType: "Fixed", escRate: "0", currentInc: "0", spousePct: "0",
+    spouseInc: "£0.00", guarantee: "", lastPay: "", overlap: "No",
+    valProt: "100", taxFree: "0", maxFree: "0",
+    valProtFlag: "F", lsConvert: "T", planProt: "", dependant: "None",
   },
 ];
 

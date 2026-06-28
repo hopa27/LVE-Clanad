@@ -158,7 +158,7 @@ function AnnuitantBlock({
             </div>
             <button
               type="button"
-              disabled={natInsDisabled}
+              disabled={natInsDisabled || editing}
               onClick={() => setNiConfirmOpen(true)}
               className="lve-btn lve-btn-secondary !rounded-full !p-0 !w-10 !h-10 shrink-0 inline-flex items-center justify-center"
               title="Click here to delete NI Number"

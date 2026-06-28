@@ -28,6 +28,21 @@ export function EditModeProvider({ children }: { children: ReactNode }) {
   );
 }
 
+const ALWAYS_EDITING: EditModeValue = {
+  editing: true,
+  setEditing: () => {},
+  cancel: () => {},
+  cancelKey: 0,
+};
+
+export function AlwaysEditingProvider({ children }: { children: ReactNode }) {
+  return (
+    <EditModeContext.Provider value={ALWAYS_EDITING}>
+      {children}
+    </EditModeContext.Provider>
+  );
+}
+
 export function useEditMode() {
   return useContext(EditModeContext);
 }

@@ -1,18 +1,12 @@
 import { useRef, useState } from "react";
 import { MdClose, MdCheck, MdCancel } from "react-icons/md";
 import { DatePicker } from "./DatePicker";
-import { EditModeContext } from "../context/EditModeContext";
+import { AlwaysEditingProvider } from "../context/EditModeContext";
 import { useFocusTrap } from "../hooks/useFocusTrap";
 import { useEscapeKey } from "../hooks/useEscapeKey";
 
 const PRODUCTS = ["With Profits", "Non Profits", "ICFP", "PRP", "PIPA"];
 
-const ALWAYS_EDITING = {
-  editing: true,
-  setEditing: () => {},
-  cancel: () => {},
-  cancelKey: 0,
-};
 
 export function RecalcAnnStatModal({
   open,
@@ -34,6 +28,7 @@ export function RecalcAnnStatModal({
   if (!open) return null;
 
   return (
+    <AlwaysEditingProvider>
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
       <div ref={containerRef} role="dialog" aria-modal="true" aria-labelledby="recalc-ann-stat-title" className="lve-panel bg-white w-[420px] max-w-[96vw]">
         <header className="lve-panel-header flex items-center justify-between">
@@ -70,18 +65,14 @@ export function RecalcAnnStatModal({
             <div className="flex items-center gap-3">
               <span className="lve-label text-right shrink-0 w-[100px]">From Date:</span>
               <div className="flex-1">
-                <EditModeContext.Provider value={ALWAYS_EDITING}>
-                  <DatePicker placeholder="DD/MM/YYYY" onChange={setFromDate} />
-                </EditModeContext.Provider>
+                <DatePicker placeholder="DD/MM/YYYY" onChange={setFromDate} />
               </div>
             </div>
 
             <div className="flex items-center gap-3">
               <span className="lve-label text-right shrink-0 w-[100px]">To Date:</span>
               <div className="flex-1">
-                <EditModeContext.Provider value={ALWAYS_EDITING}>
-                  <DatePicker placeholder="DD/MM/YYYY" onChange={setToDate} />
-                </EditModeContext.Provider>
+                <DatePicker placeholder="DD/MM/YYYY" onChange={setToDate} />
               </div>
             </div>
           </div>
@@ -108,5 +99,6 @@ export function RecalcAnnStatModal({
         </div>
       </div>
     </div>
+    </AlwaysEditingProvider>
   );
 }

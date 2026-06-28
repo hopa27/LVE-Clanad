@@ -3,6 +3,7 @@ import { MdCheck, MdClose, MdKeyboardArrowDown } from "react-icons/md";
 import { DatePicker } from "./DatePicker";
 import { useFocusTrap } from "../hooks/useFocusTrap";
 import { useEscapeKey } from "../hooks/useEscapeKey";
+import { AlwaysEditingProvider } from "../context/EditModeContext";
 
 type BankData = {
   sortCode: string;
@@ -85,6 +86,7 @@ export function EditBankDetailsModal({
     setForm((f) => ({ ...f, [k]: v }));
 
   return (
+    <AlwaysEditingProvider>
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-4">
       <div ref={containerRef} role="dialog" aria-modal="true" aria-labelledby="edit-bank-title" className="bg-white rounded-[8px] shadow-xl border border-[#bcd] w-[520px] max-w-full overflow-hidden">
         <header className="bg-[#00263e] text-white font-['Livvic'] text-[14px] font-semibold px-4 py-2 flex items-center justify-between">
@@ -230,5 +232,6 @@ export function EditBankDetailsModal({
         </div>
       </div>
     </div>
+    </AlwaysEditingProvider>
   );
 }

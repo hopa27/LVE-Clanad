@@ -3,6 +3,7 @@ import { MdCheck, MdClose, MdArrowDropDown, MdDelete, MdHelpOutline } from "reac
 import { DatePicker } from "./DatePicker";
 import { useFocusTrap } from "../hooks/useFocusTrap";
 import { useEscapeKey } from "../hooks/useEscapeKey";
+import { AlwaysEditingProvider } from "../context/EditModeContext";
 
 const NEEDS_OPTIONS = [
   "BI | Break In Call",
@@ -139,6 +140,7 @@ export function CustomerNeedsModal({
   })();
 
   return (
+    <AlwaysEditingProvider>
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
       <div ref={containerRef} role="dialog" aria-modal="true" aria-labelledby="customer-needs-title" className="lve-panel w-[760px] bg-white">
         <header className="lve-panel-header flex items-center justify-between">
@@ -403,5 +405,6 @@ export function CustomerNeedsModal({
         </div>
       )}
     </div>
+    </AlwaysEditingProvider>
   );
 }

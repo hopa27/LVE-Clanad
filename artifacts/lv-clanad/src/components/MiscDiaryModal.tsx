@@ -3,6 +3,7 @@ import { MdCheck, MdClose, MdArrowDropDown, MdInfoOutline } from "react-icons/md
 import { DatePicker } from "./DatePicker";
 import { useFocusTrap } from "../hooks/useFocusTrap";
 import { useEscapeKey } from "../hooks/useEscapeKey";
+import { AlwaysEditingProvider } from "../context/EditModeContext";
 
 const TYPE_OPTIONS = [
   "",
@@ -148,6 +149,7 @@ export function MiscDiaryModal({
   };
 
   return (
+    <AlwaysEditingProvider>
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
       <div ref={containerRef} role="dialog" aria-modal="true" aria-labelledby="misc-diary-title" className="lve-panel w-[460px] bg-white">
         <header id="misc-diary-title" className="lve-panel-header">{title}</header>
@@ -258,5 +260,6 @@ export function MiscDiaryModal({
         </div>
       )}
     </div>
+    </AlwaysEditingProvider>
   );
 }

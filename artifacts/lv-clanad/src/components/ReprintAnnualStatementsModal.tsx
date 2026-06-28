@@ -1,16 +1,10 @@
 import { useRef, useState } from "react";
 import { MdClose, MdPrint, MdCancel } from "react-icons/md";
 import { DatePicker } from "./DatePicker";
-import { EditModeContext } from "../context/EditModeContext";
+import { AlwaysEditingProvider } from "../context/EditModeContext";
 import { useFocusTrap } from "../hooks/useFocusTrap";
 import { useEscapeKey } from "../hooks/useEscapeKey";
 
-const ALWAYS_EDITING = {
-  editing: true,
-  setEditing: () => {},
-  cancel: () => {},
-  cancelKey: 0,
-};
 
 export function ReprintAnnualStatementsModal({
   open,
@@ -30,6 +24,7 @@ export function ReprintAnnualStatementsModal({
   if (!open) return null;
 
   return (
+    <AlwaysEditingProvider>
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
       <div ref={containerRef} role="dialog" aria-modal="true" aria-labelledby="reprint-ann-stmt-title" className="lve-panel bg-white w-[420px] max-w-[96vw]">
         <header className="lve-panel-header flex items-center justify-between">
@@ -52,13 +47,11 @@ export function ReprintAnnualStatementsModal({
           <div className="flex items-center gap-3">
             <span className="lve-label text-right shrink-0 w-[120px]">Reprint Date</span>
             <div className="flex-1">
-              <EditModeContext.Provider value={ALWAYS_EDITING}>
-                <DatePicker
-                  value={`${String(today.getDate()).padStart(2, "0")}/${String(today.getMonth() + 1).padStart(2, "0")}/${today.getFullYear()}`}
-                  placeholder="DD/MM/YYYY"
-                  onChange={setReprintDate}
-                />
-              </EditModeContext.Provider>
+              <DatePicker
+                value={`${String(today.getDate()).padStart(2, "0")}/${String(today.getMonth() + 1).padStart(2, "0")}/${today.getFullYear()}`}
+                placeholder="DD/MM/YYYY"
+                onChange={setReprintDate}
+              />
             </div>
           </div>
 
@@ -83,5 +76,6 @@ export function ReprintAnnualStatementsModal({
         </div>
       </div>
     </div>
+    </AlwaysEditingProvider>
   );
 }

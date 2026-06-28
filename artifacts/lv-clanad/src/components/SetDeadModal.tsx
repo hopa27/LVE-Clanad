@@ -4,6 +4,7 @@ import { DatePicker } from "./DatePicker";
 import { format } from "date-fns";
 import { useFocusTrap } from "../hooks/useFocusTrap";
 import { useEscapeKey } from "../hooks/useEscapeKey";
+import { AlwaysEditingProvider } from "../context/EditModeContext";
 
 export function SetDeadModal({
   open,
@@ -22,6 +23,7 @@ export function SetDeadModal({
   if (!open) return null;
 
   return (
+    <AlwaysEditingProvider>
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40 p-6">
       <div ref={containerRef} role="dialog" aria-modal="true" aria-labelledby="set-dead-title" className="lve-panel bg-white w-[340px] max-w-full">
         <header className="lve-panel-header flex items-center justify-between">
@@ -70,5 +72,6 @@ export function SetDeadModal({
         </div>
       </div>
     </div>
+    </AlwaysEditingProvider>
   );
 }

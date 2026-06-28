@@ -72,6 +72,7 @@ export function CustomerNeedsModal({
   const [rows, setRows] = useState<NeedRow[]>([]);
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
   const [addedOpen, setAddedOpen] = useState(false);
+  const [needMandatoryOpen, setNeedMandatoryOpen] = useState(false);
   const [selectFirstOpen, setSelectFirstOpen] = useState(false);
   const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
   const [deletedOpen, setDeletedOpen] = useState(false);
@@ -106,7 +107,8 @@ export function CustomerNeedsModal({
   };
 
   const handleAdd = () => {
-    if (!need || !dateUpdated) return;
+    if (!need) { setNeedMandatoryOpen(true); return; }
+    if (!dateUpdated) return;
     setRows((prev) => [...prev, { dateAdded: fmt(dateUpdated), description: need }]);
     setNeed("");
     setDateUpdated(undefined);
@@ -201,7 +203,7 @@ export function CustomerNeedsModal({
               type="button"
               className="lve-btn"
               onClick={handleAdd}
-              disabled={!need || !dateUpdated}
+              disabled={false}
             >
               <MdCheck size={16} />
               ADD
@@ -268,6 +270,31 @@ export function CustomerNeedsModal({
           </div>
         </div>
       </div>
+
+      {needMandatoryOpen && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40">
+          <div className="w-[380px] bg-white rounded-[8px] shadow-xl overflow-hidden border border-[#bcd]">
+            <header className="bg-[#00263e] text-white font-['Livvic'] text-[13px] font-semibold px-3 py-2">
+              Client Annuity Administration System
+            </header>
+            <div className="p-5">
+              <p className="font-['Mulish'] text-[14px] text-[#3d3d3d] text-center">
+                Customer Need mandatory
+              </p>
+              <div className="mt-5 flex items-center justify-center">
+                <button
+                  type="button"
+                  className="lve-btn"
+                  onClick={() => setNeedMandatoryOpen(false)}
+                >
+                  <MdCheck size={16} />
+                  OK
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {addedOpen && (
         <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40">

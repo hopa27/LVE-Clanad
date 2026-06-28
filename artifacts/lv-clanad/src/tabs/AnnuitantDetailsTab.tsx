@@ -5,7 +5,6 @@ import { DatePicker } from "../components/DatePicker";
 import { DoctorDatabaseModal } from "../components/DoctorDatabaseModal";
 import { ConfirmDialog } from "../components/ConfirmDialog";
 import { usePlanCode } from "../context/PlanCodeContext";
-import { useEditMode } from "../context/EditModeContext";
 
 type BlockProps = {
   surname?: string;
@@ -90,7 +89,6 @@ function AnnuitantBlock({
 }: BlockProps) {
   const [doctorOpen, setDoctorOpen] = useState(false);
   const [niConfirmOpen, setNiConfirmOpen] = useState(false);
-  const { editing } = useEditMode();
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-6">
@@ -138,8 +136,8 @@ function AnnuitantBlock({
             </div>
             <button
               type="button"
-              onClick={() => editing && setDoctorOpen(true)}
-              disabled={!editing}
+              onClick={() => setDoctorOpen(true)}
+              disabled={false}
               className="lve-btn lve-btn-secondary !rounded-full !p-0 !w-10 !h-10 shrink-0 inline-flex items-center justify-center"
               title="Doctor Database"
               aria-label="Doctor Database"
@@ -158,7 +156,7 @@ function AnnuitantBlock({
             </div>
             <button
               type="button"
-              disabled={natInsDisabled || editing}
+              disabled={natInsDisabled}
               onClick={() => setNiConfirmOpen(true)}
               className="lve-btn lve-btn-secondary !rounded-full !p-0 !w-10 !h-10 shrink-0 inline-flex items-center justify-center"
               title="Click here to delete NI Number"

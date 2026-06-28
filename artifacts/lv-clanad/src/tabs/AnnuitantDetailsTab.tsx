@@ -138,8 +138,8 @@ function AnnuitantBlock({
             </div>
             <button
               type="button"
-              onClick={() => editing && !doctorDisabled && setDoctorOpen(true)}
-              disabled={doctorDisabled || !editing}
+              onClick={() => editing && setDoctorOpen(true)}
+              disabled={!editing}
               className="lve-btn lve-btn-secondary !rounded-full !p-0 !w-10 !h-10 shrink-0 inline-flex items-center justify-center"
               title="Doctor Database"
               aria-label="Doctor Database"

@@ -390,14 +390,6 @@ function Plan83ContactsLayout() {
                 initial={["Keynes House", "Tilehouse Street", "Hitchin", "", ""]}
               />
             </div>
-            <button
-              type="button"
-              className="lve-btn lve-btn-secondary shrink-0 inline-flex items-center gap-1"
-              title="Clear address"
-            >
-              <MdClear size={16} />
-              Clear
-            </button>
           </div>
         </Field>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3">
@@ -428,14 +420,6 @@ function Plan83ContactsLayout() {
                 initial={["26 Eastern Close", "Verwood", "Marshwood", "", ""]}
               />
             </div>
-            <button
-              type="button"
-              className="lve-btn lve-btn-secondary shrink-0 inline-flex items-center gap-1"
-              title="Clear address"
-            >
-              <MdClear size={16} />
-              Clear
-            </button>
           </div>
         </Field>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3">
@@ -464,14 +448,6 @@ function Plan83ContactsLayout() {
                 initial={["Manchester", "", "", "", ""]}
               />
             </div>
-            <button
-              type="button"
-              className="lve-btn lve-btn-secondary shrink-0 inline-flex items-center gap-1"
-              title="Clear address"
-            >
-              <MdClear size={16} />
-              Clear
-            </button>
           </div>
         </Field>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-x-3">

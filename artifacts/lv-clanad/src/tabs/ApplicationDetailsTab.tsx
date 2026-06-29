@@ -41,7 +41,7 @@ export function ApplicationDetailsTab() {
     : isPlan80  ? daysSince("17/02/2010")
     : isPlan83  ? daysSince("24/07/2015")
     : isPlan621 ? daysSince("27/12/2007")
-    : isPlan76  ? daysSince("18/01/2008")
+    : isPlan76  ? ""
     : isPlan76z ? daysSince("26/06/2008")
     : isPlan62a ? daysSince("15/12/2010")
     : isPlan611 ? daysSince("30/01/2008")

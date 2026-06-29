@@ -190,7 +190,7 @@ export function ApplicationDetailsTab() {
             {!isPlan84 && !isPlan90 && !isPlan80 && !isPlan83 && !isPlan82 && !isPlan76z && (
               <>
                 <Field label="Age at death:">
-                  <TextInput value={isPlan51 || isPlan621 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "" : isPlan76 ? "94" : isPlan76z ? "95" : "edAge"} disabled />
+                  <TextInput value={isPlan621 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "" : isPlan51 ? "58" : isPlan76 ? "94" : isPlan76z ? "95" : "edAge"} disabled />
                 </Field>
                 <Field label="Gross £:"><TextInput value="" /></Field>
                 <Field label="Paid net:">

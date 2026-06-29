@@ -118,7 +118,7 @@ export function ConnectedAddress({
           }}
           type="text"
           value={values[i] ?? ""}
-          placeholder={line.placeholder ?? `Line ${i + 1}`}
+          placeholder={line.placeholder ?? ""}
           readOnly={line.readOnly || !editing}
           onChange={(e) => handleChange(i, e.target.value)}
           onKeyDown={(e) => handleKeyDown(i, e)}

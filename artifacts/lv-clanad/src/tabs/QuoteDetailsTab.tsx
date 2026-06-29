@@ -460,13 +460,15 @@ export function QuoteDetailsTab() {
                       <Field label="Total Mutual Bonus:"><TextInput value="" disabled /></Field>
                     </>
                   )}
-                  <button
-                    type="button"
-                    onClick={() => setNotionalOpen(true)}
-                    className="lve-btn lve-btn-secondary lve-btn-sm mt-2"
-                  >
-                    View Notional Value
-                  </button>
+                  {!isPlan84 && (
+                    <button
+                      type="button"
+                      onClick={() => setNotionalOpen(true)}
+                      className="lve-btn lve-btn-secondary lve-btn-sm mt-2"
+                    >
+                      View Notional Value
+                    </button>
+                  )}
                 </div>
               )}
             </div>

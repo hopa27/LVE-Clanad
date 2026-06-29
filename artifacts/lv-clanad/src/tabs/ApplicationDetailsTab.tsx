@@ -126,7 +126,7 @@ export function ApplicationDetailsTab() {
               <TextInput value={isPlan82 ? "Y" : isPlan84 || isPlan90 || isPlan80 || isPlan83 || isPlan621 || isPlan62a || isPlan611 || isPlan52 ? "N" : isPlan51 || isPlan76 || isPlan76z || isPlan61a ? "Y" : "DBSu"} disabled />
             </Field>
           )}
-          {!isPlan76z && (
+          {!isPlan76z && !isPlan76 && (
             <Field label="Days Since Application:">
               <TextInput value={daysSinceApplication} disabled />
             </Field>

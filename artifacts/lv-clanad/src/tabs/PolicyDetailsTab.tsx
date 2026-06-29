@@ -30,7 +30,7 @@ export function PolicyDetailsTab() {
         <Field label="Tax Code:">
           <div className="flex items-center gap-3">
             <div className="w-32">
-              <TextInput value={isPlan87 ? "1257L*" : isPlan84 ? "52N" : isPlan90 ? "NT" : isPlan51 ? "1257L" : isPlan82 ? "1257L" : isPlan80 ? "1123L" : isPlan83 ? "125L" : isPlan76 ? "" : isPlan76z ? "" : isPlan62a ? "960L" : isPlan611 ? "939L" : isPlan52 ? "939L" : isPlan61a ? "BR" : "DBTAXC"} />
+              <TextInput value={isPlan87 ? "1257L*" : isPlan84 ? "52N" : isPlan90 ? "NT" : isPlan51 ? "1257L" : isPlan82 ? "1257L" : isPlan80 ? "1123L" : isPlan83 ? "125L" : isPlan621 ? "1257L" : isPlan76 ? "" : isPlan76z ? "" : isPlan62a ? "960L" : isPlan611 ? "939L" : isPlan52 ? "939L" : isPlan61a ? "BR" : "DBTAXC"} />
             </div>
             <Checkbox label="Tax Free" />
           </div>

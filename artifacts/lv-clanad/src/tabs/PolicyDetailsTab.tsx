@@ -40,7 +40,7 @@ export function PolicyDetailsTab() {
           {isPlan82 || isPlan80 ? (
             <SelectInput value="B" options={["B", "C", "T"]} />
           ) : isPlan83 ? (
-            <SelectInput value="8" options={["8", "B", "C", "T"]} />
+            <SelectInput value="B" options={["B", "C", "T"]} />
           ) : (
             <SelectInput
               value={isBOrTaxLike84 || isPlan76 || isPlan76z || isPlan621 ? "B" : ""}
@@ -53,7 +53,7 @@ export function PolicyDetailsTab() {
             {isPlan82 || isPlan80 ? (
               <SelectInput value="B" options={["B", "C", "T"]} />
             ) : isPlan83 ? (
-              <SelectInput value="8" options={["8", "B", "C", "T"]} />
+              <SelectInput value="B" options={["B", "C", "T"]} />
             ) : (
               <SelectInput
                 value={isBOrTaxLike84 || isPlan621 ? "B" : ""}

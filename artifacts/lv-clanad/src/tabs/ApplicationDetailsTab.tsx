@@ -176,7 +176,7 @@ export function ApplicationDetailsTab() {
               <TextInput value={isPlan84 || isPlan90 || isPlan80 || isPlan83 || isPlan82 || isPlan76z || isPlan611 || isPlan52 ? "" : isPlan51 || isPlan621 || isPlan76 || isPlan62a || isPlan61a ? "Y" : "DBLifeOneDe"} disabled />
             </Field>
             <Field label="Life Two Dead:">
-              <TextInput value={isPlan84 || isPlan90 || isPlan80 || isPlan83 || isPlan82 || isPlan621 || isPlan76 || isPlan76z || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "" : "DBLifeTwoDe"} disabled />
+              <TextInput value={isPlan84 || isPlan90 || isPlan51 || isPlan80 || isPlan83 || isPlan82 || isPlan621 || isPlan76 || isPlan76z || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "" : "DBLifeTwoDe"} disabled />
             </Field>
             <Field label="Completed:">
               <TextInput

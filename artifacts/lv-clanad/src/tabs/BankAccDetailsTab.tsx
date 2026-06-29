@@ -108,7 +108,7 @@ export function BankAccDetailsTab() {
       <Section
         title="Bank Details"
         headerAction={
-          !isPlan87 ? (
+          !isPlan87 && !isPlan51 ? (
             <button type="button" className="lve-btn lve-btn-secondary lve-btn-sm" onClick={() => setEditBankOpen(true)}>
               <MdEdit size={16} /> Edit Bank Details
             </button>

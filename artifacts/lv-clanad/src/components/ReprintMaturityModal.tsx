@@ -51,7 +51,7 @@ export function ReprintMaturityModal({
           <div className="space-y-3">
             <div className="flex items-center gap-3">
               <span className="lve-label text-right shrink-0 w-[140px]">Reprint Date</span>
-              <div className="flex-1">
+              <div className="flex-1 min-w-0">
                 <DatePicker
                   value={`${String(today.getDate()).padStart(2, "0")}/${String(today.getMonth() + 1).padStart(2, "0")}/${today.getFullYear()}`}
                   placeholder="DD/MM/YYYY"

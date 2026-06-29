@@ -1,15 +1,18 @@
 import { useState } from "react";
-import { MdEdit, MdCheck, MdClose } from "react-icons/md";
+import { MdEdit, MdCheck, MdClose, MdCancel } from "react-icons/md";
 import { Field, TextInput, SelectInput, Section } from "../components/Field";
 import { DatePicker } from "../components/DatePicker";
 import { ConnectedAddress } from "../components/ConnectedAddress";
 import { EditModeContext, useEditMode } from "../context/EditModeContext";
 import { usePlanCode } from "../context/PlanCodeContext";
+import { ConfirmDialog } from "../components/ConfirmDialog";
 
 export function MaturitiesSurrenderTab() {
   const [bankModalOpen, setBankModalOpen] = useState(false);
+  const [deleteSortCodeOpen, setDeleteSortCodeOpen] = useState(false);
   const { planCode } = usePlanCode();
   const editModeCtx = useEditMode();
+  const { editing } = editModeCtx;
   const isPlan0 = planCode === "0";
   const isPlan83 = planCode === "83";
   const isPlan82 = planCode === "82";
@@ -23,7 +26,21 @@ export function MaturitiesSurrenderTab() {
             <Field label="Type:">
               <SelectInput value="" options={["", "Maturity", "Surrender"]} />
             </Field>
-            <Field label="Bank sort code:"><TextInput value="DBMatSortCode" /></Field>
+            <Field label="Bank sort code:">
+              <div className="flex items-center gap-2">
+                <div className="flex-1 min-w-0"><TextInput value="DBMatSortCode" /></div>
+                <button
+                  type="button"
+                  disabled={editing}
+                  onClick={() => setDeleteSortCodeOpen(true)}
+                  className="lve-btn lve-btn-secondary !rounded-full !p-0 !w-10 !h-10 shrink-0 inline-flex items-center justify-center"
+                  title="Delete sort code"
+                  aria-label="Delete sort code"
+                >
+                  <MdCancel size={18} />
+                </button>
+              </div>
+            </Field>
             <Field label="Bank account no:"><TextInput value="DBMatAccountNo" /></Field>
             <Field label="Bank account name:"><TextInput value="DBMatAccountName" /></Field>
             <Field label="Bank name:"><TextInput value="" disabled /></Field>
@@ -192,6 +209,12 @@ export function MaturitiesSurrenderTab() {
           </div>
         )}
       </div>
+      <ConfirmDialog
+        open={deleteSortCodeOpen}
+        message="Are you sure?"
+        onYes={() => setDeleteSortCodeOpen(false)}
+        onNo={() => setDeleteSortCodeOpen(false)}
+      />
       </EditModeContext.Provider>
     );
   }
@@ -208,7 +231,21 @@ export function MaturitiesSurrenderTab() {
               disabled={isPlan82 || isPlan83}
             />
           </Field>
-          <Field label="Bank sort code:"><TextInput value={(isPlan82 || isPlan83) ? "77-48-14" : "-  -"} /></Field>
+          <Field label="Bank sort code:">
+            <div className="flex items-center gap-2">
+              <div className="flex-1 min-w-0"><TextInput value={(isPlan82 || isPlan83) ? "77-48-14" : "-  -"} /></div>
+              <button
+                type="button"
+                disabled={editing}
+                onClick={() => setDeleteSortCodeOpen(true)}
+                className="lve-btn lve-btn-secondary !rounded-full !p-0 !w-10 !h-10 shrink-0 inline-flex items-center justify-center"
+                title="Delete sort code"
+                aria-label="Delete sort code"
+              >
+                <MdCancel size={18} />
+              </button>
+            </div>
+          </Field>
           <Field label="Bank account no:"><TextInput value={(isPlan82 || isPlan83) ? "24782346" : ""} /></Field>
           <Field label="Bank account name:"><TextInput value={isPlan82 ? "Testmrbbgeee" : isPlan83 ? "Testnybggajc" : ""} /></Field>
           <Field label="Bank name:"><TextInput value={(isPlan82 || isPlan83) ? "TSB, WINSFORD" : ""} disabled /></Field>
@@ -356,6 +393,12 @@ export function MaturitiesSurrenderTab() {
         </div>
       )}
     </div>
+    <ConfirmDialog
+      open={deleteSortCodeOpen}
+      message="Are you sure?"
+      onYes={() => setDeleteSortCodeOpen(false)}
+      onNo={() => setDeleteSortCodeOpen(false)}
+    />
     </EditModeContext.Provider>
   );
 }

@@ -92,7 +92,7 @@ export function Toolbar() {
     },
     { label: "Cancel",  icon: MdBlock,   enabled: editing && !isPlan51 && !isPlan621, action: "edit-cancel", shortcutId: "toolbar:cancel" },
     { label: "Search",  icon: MdSearch,  enabled: !editing,                           action: "search",      shortcutId: "toolbar:search" },
-    { label: "Log",     icon: MdHistory, enabled: !editing,                           action: "log",         shortcutId: "toolbar:log" },
+    { label: "Log",     icon: MdHistory, enabled: !editing && !isPlan621,              action: "log",         shortcutId: "toolbar:log" },
     { label: "CRS",     icon: MdStorage, enabled: !editing,                           action: "crs",         shortcutId: "toolbar:crs" },
     { label: "Reports", icon: MdBarChart,enabled: !editing,                           action: "reports",     shortcutId: "toolbar:reports" },
     { label: "Company", icon: MdBusiness,enabled: !editing,                           action: "company",     shortcutId: "toolbar:company" },

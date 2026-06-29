@@ -235,9 +235,9 @@ const SUPERVISOR_80: MenuOption[] = [
     label: "Status Change",
     hasSubmenu: true,
     submenu: [
-      { label: "Surrender", accel: "S" },
-      { label: "Maturity", accel: "M" },
-      { label: "Expired", accel: "E", action: "expired-confirm" },
+      { label: "Surrender", accel: "S", disabled: true },
+      { label: "Maturity", accel: "M", disabled: true },
+      { label: "Expired", accel: "E", disabled: true },
     ],
   },
   { label: "Amend Cheques", action: "amend-cheques" },

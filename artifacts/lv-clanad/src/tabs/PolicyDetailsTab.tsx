@@ -33,7 +33,7 @@ export function PolicyDetailsTab() {
             <div className="w-32">
               <TextInput value={isPlan87 ? "1257L*" : isPlan84 ? "1257L*" : isPlan90 ? "NT" : isPlan51 ? "1257L" : isPlan82 ? "1257L" : isPlan80 ? "1123L" : isPlan83 ? "1257L" : isPlan621 ? "1257L" : isPlan76 ? "" : isPlan76z ? "" : isPlan62a ? "960L" : isPlan611 ? "939L" : isPlan52 ? "939L" : isPlan61a ? "BR" : "DBTAXC"} />
             </div>
-            <Checkbox label="Tax Free" />
+            <Checkbox label="Tax Free" checked={isPlan90} disabled={isPlan90} />
           </div>
         </Field>
         <Field label="Initial payment method:">

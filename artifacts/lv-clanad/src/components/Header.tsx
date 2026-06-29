@@ -184,8 +184,9 @@ const SUPERVISOR_82: MenuOption[] = [
     label: "Bank Detail Changes",
     hasSubmenu: true,
     submenu: [
-      { label: "Approve Bank Changes" },
-      { label: "Approve Maturity Bank Detail Changes" },
+      { label: "Bank Changes Awaiting Approval" },
+      { label: "Approve Bank Changes", disabled: true },
+      { label: "Approve Maturity Bank Changes", disabled: true },
     ],
   },
   { label: "Convert to Flexi-Access", disabled: true },

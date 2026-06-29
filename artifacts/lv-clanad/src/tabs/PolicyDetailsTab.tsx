@@ -522,7 +522,7 @@ export function PolicyDetailsTab() {
         )}
       </Section>
 
-      {!isPlan87 && !isPlan90 && !isPlan51 && !isPlan621 && !isPlan76 && !isPlan76z && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
+      {!isPlan87 && !isPlan84 && !isPlan90 && !isPlan51 && !isPlan621 && !isPlan76 && !isPlan76z && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
         <Section title="MPAA">
           <Field label=" ">
             <Checkbox label="MPAA Rules Triggered" checked={isPlan84} />

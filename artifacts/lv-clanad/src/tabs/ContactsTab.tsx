@@ -51,11 +51,11 @@ function ContactPanel({
           <div className="flex-1 min-w-0">
             <ConnectedAddress
               lines={[
-                { placeholder: "Line 1" },
-                { placeholder: "Line 2" },
-                { placeholder: "Line 3" },
-                { placeholder: "Line 4" },
-                { placeholder: "Line 5" },
+                {},
+                {},
+                {},
+                {},
+                {},
               ]}
               initial={[
                 `${prefix}Address1`,
@@ -146,11 +146,11 @@ function Plan76ContactsLayout() {
             <div className="flex-1 min-w-0">
               <ConnectedAddress
                 lines={[
-                  { placeholder: "Line 1" },
-                  { placeholder: "Line 2" },
-                  { placeholder: "Line 3" },
-                  { placeholder: "Line 4" },
-                  { placeholder: "Line 5" },
+                  {},
+                  {},
+                  {},
+                  {},
+                  {},
                 ]}
                 initial={["Northampton", "10 Western Avenue", "", "Eastleigh", ""]}
               />
@@ -176,11 +176,11 @@ function Plan76ContactsLayout() {
             <div className="flex-1 min-w-0">
               <ConnectedAddress
                 lines={[
-                  { placeholder: "Line 1" },
-                  { placeholder: "Line 2" },
-                  { placeholder: "Line 3" },
-                  { placeholder: "Line 4" },
-                  { placeholder: "Line 5" },
+                  {},
+                  {},
+                  {},
+                  {},
+                  {},
                 ]}
                 initial={["10 Western Avenue", "Zennor", "Dawlish", "", "Eastleigh"]}
               />
@@ -210,11 +210,11 @@ function Plan76ContactsLayout() {
             <div className="flex-1 min-w-0">
               <ConnectedAddress
                 lines={[
-                  { placeholder: "Line 1" },
-                  { placeholder: "Line 2" },
-                  { placeholder: "Line 3" },
-                  { placeholder: "Line 4" },
-                  { placeholder: "Line 5" },
+                  {},
+                  {},
+                  {},
+                  {},
+                  {},
                 ]}
                 initial={["Northampton", "Kinson", "Eastleigh", "", ""]}
               />
@@ -244,11 +244,11 @@ function Plan76ContactsLayout() {
             <div className="flex-1 min-w-0">
               <ConnectedAddress
                 lines={[
-                  { placeholder: "Line 1" },
-                  { placeholder: "Line 2" },
-                  { placeholder: "Line 3" },
-                  { placeholder: "Line 4" },
-                  { placeholder: "Line 5" },
+                  {},
+                  {},
+                  {},
+                  {},
+                  {},
                 ]}
                 initial={["", "", "", "", ""]}
               />
@@ -281,11 +281,11 @@ function Plan76zContactsLayout() {
             <div className="flex-1 min-w-0">
               <ConnectedAddress
                 lines={[
-                  { placeholder: "Line 1" },
-                  { placeholder: "Line 2" },
-                  { placeholder: "Line 3" },
-                  { placeholder: "Line 4" },
-                  { placeholder: "Line 5" },
+                  {},
+                  {},
+                  {},
+                  {},
+                  {},
                 ]}
                 initial={["Queensferry", "Verwood", "Queensferry", "", "Leicester"]}
               />
@@ -315,11 +315,11 @@ function Plan76zContactsLayout() {
             <div className="flex-1 min-w-0">
               <ConnectedAddress
                 lines={[
-                  { placeholder: "Line 1" },
-                  { placeholder: "Line 2" },
-                  { placeholder: "Line 3" },
-                  { placeholder: "Line 4" },
-                  { placeholder: "Line 5" },
+                  {},
+                  {},
+                  {},
+                  {},
+                  {},
                 ]}
                 initial={["Reading", "Avonmouth", "", "", "Leicester"]}
               />
@@ -348,11 +348,11 @@ function Plan76zContactsLayout() {
             <div className="flex-1 min-w-0">
               <ConnectedAddress
                 lines={[
-                  { placeholder: "Line 1" },
-                  { placeholder: "Line 2" },
-                  { placeholder: "Line 3" },
-                  { placeholder: "Line 4" },
-                  { placeholder: "Line 5" },
+                  {},
+                  {},
+                  {},
+                  {},
+                  {},
                 ]}
                 initial={["", "", "", "", ""]}
               />
@@ -381,11 +381,11 @@ function Plan83ContactsLayout() {
             <div className="flex-1 min-w-0">
               <ConnectedAddress
                 lines={[
-                  { placeholder: "Line 1" },
-                  { placeholder: "Line 2" },
-                  { placeholder: "Line 3" },
-                  { placeholder: "Line 4" },
-                  { placeholder: "Line 5" },
+                  {},
+                  {},
+                  {},
+                  {},
+                  {},
                 ]}
                 initial={["Keynes House", "Tilehouse Street", "Hitchin", "", ""]}
               />
@@ -411,11 +411,11 @@ function Plan83ContactsLayout() {
             <div className="flex-1 min-w-0">
               <ConnectedAddress
                 lines={[
-                  { placeholder: "Line 1" },
-                  { placeholder: "Line 2" },
-                  { placeholder: "Line 3" },
-                  { placeholder: "Line 4" },
-                  { placeholder: "Line 5" },
+                  {},
+                  {},
+                  {},
+                  {},
+                  {},
                 ]}
                 initial={["26 Eastern Close", "Verwood", "Marshwood", "", ""]}
               />
@@ -439,11 +439,11 @@ function Plan83ContactsLayout() {
             <div className="flex-1 min-w-0">
               <ConnectedAddress
                 lines={[
-                  { placeholder: "Line 1" },
-                  { placeholder: "Line 2" },
-                  { placeholder: "Line 3" },
-                  { placeholder: "Line 4" },
-                  { placeholder: "Line 5" },
+                  {},
+                  {},
+                  {},
+                  {},
+                  {},
                 ]}
                 initial={["Manchester", "", "", "", ""]}
               />

@@ -300,10 +300,10 @@ export function ApplicationDetailsTab() {
             <Field label="Address:">
               <ConnectedAddress
                 lines={[
-                  { placeholder: "Line 1" },
-                  { placeholder: "Line 2" },
-                  { placeholder: "Line 3" },
-                  { placeholder: "Line 4" },
+                  {},
+                  {},
+                  {},
+                  {},
                   { placeholder: "Line 5 (County)" },
                 ]}
                 initial={

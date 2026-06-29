@@ -8,11 +8,11 @@ function AddressBlock({ prefix }: { prefix: string }) {
       <div className="flex-1 min-w-0">
         <ConnectedAddress
           lines={[
-            { placeholder: "Line 1" },
-            { placeholder: "Line 2" },
-            { placeholder: "Line 3" },
-            { placeholder: "Line 4" },
-            { placeholder: "Line 5" },
+            {},
+            {},
+            {},
+            {},
+            {},
           ]}
           initial={[
             `${prefix}Address1`,

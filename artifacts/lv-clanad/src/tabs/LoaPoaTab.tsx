@@ -63,9 +63,9 @@ function LoaPoaForm() {
         <Field inline labelWidth={140} label="Address:">
           <ConnectedAddress
             lines={[
-              { placeholder: "Line 1" },
-              { placeholder: "Line 2" },
-              { placeholder: "Line 3" },
+              {},
+              {},
+              {},
             ]}
             initial={
               isPlan0

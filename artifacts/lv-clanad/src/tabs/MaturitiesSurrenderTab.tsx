@@ -110,11 +110,11 @@ export function MaturitiesSurrenderTab() {
           <Section title="Maturity / Surrender Address">
             <ConnectedAddress
               lines={[
-                { placeholder: "Line 1" },
-                { placeholder: "Line 2" },
-                { placeholder: "Line 3" },
-                { placeholder: "Line 4" },
-                { placeholder: "Line 5" },
+                {},
+                {},
+                {},
+                {},
+                {},
               ]}
               initial={[
                 "DBMatAddress1",
@@ -135,11 +135,11 @@ export function MaturitiesSurrenderTab() {
           <Section title="Correspondence Address">
             <ConnectedAddress
               lines={[
-                { placeholder: "Line 1" },
-                { placeholder: "Line 2" },
-                { placeholder: "Line 3" },
-                { placeholder: "Line 4" },
-                { placeholder: "Line 5" },
+                {},
+                {},
+                {},
+                {},
+                {},
               ]}
               initial={["DBEdit3", "DBEdit15", "DBEdit34", "DBEdit35", "DBEdit36"]}
             />
@@ -311,10 +311,10 @@ export function MaturitiesSurrenderTab() {
         <Field label="Address:">
           <ConnectedAddress
             lines={[
-              { placeholder: "Line 1" },
-              { placeholder: "Line 2" },
-              { placeholder: "Line 3" },
-              { placeholder: "Line 4" },
+              {},
+              {},
+              {},
+              {},
               { placeholder: "Line 5 (County)" },
             ]}
             initial={

@@ -373,7 +373,7 @@ export function PolicyDetailsTab() {
         </Field>
       </Section>
 
-      {!isPlan90 && !isPlan51 && !isPlan76 && !isPlan621 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
+      {!isPlan83 && !isPlan90 && !isPlan51 && !isPlan76 && !isPlan621 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
         <Section title="Statements & Letters">
           <Field label="Issue Statements:">
             <SelectInput

@@ -51,6 +51,17 @@ function dataForPlan(planCode: string): BankData {
         paymentMethod: "B",
         effectiveDate: "25/05/2026",
       };
+    case "621":
+      return {
+        sortCode: "77-48-14",
+        bankName: "TSB, WINSFORD",
+        accountName: "Testmrbaaaae.b",
+        accountNo: "24782346",
+        paymentRef: "100004",
+        accountType: "0",
+        paymentMethod: "B",
+        effectiveDate: "29/06/2026",
+      };
     default:
       return {
         sortCode: "",

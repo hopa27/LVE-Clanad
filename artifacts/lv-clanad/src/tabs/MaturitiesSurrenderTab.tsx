@@ -236,7 +236,7 @@ export function MaturitiesSurrenderTab() {
               <div className="flex-1 min-w-0"><TextInput value={(isPlan82 || isPlan83) ? "77-48-14" : "-  -"} /></div>
               <button
                 type="button"
-                disabled={editing}
+                disabled
                 onClick={() => setDeleteSortCodeOpen(true)}
                 className="lve-btn lve-btn-secondary !rounded-full !p-0 !w-10 !h-10 shrink-0 inline-flex items-center justify-center"
                 title="Delete sort code"

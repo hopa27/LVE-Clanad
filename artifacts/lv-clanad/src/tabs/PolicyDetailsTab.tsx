@@ -16,6 +16,7 @@ export function PolicyDetailsTab() {
   const isPlan76z = planCode === "76z";
   const isPlan62a = planCode === "62a";
   const isPlan611 = planCode === "611";
+  const isPlan621 = planCode === "621";
   const isPlan52  = planCode === "52";
   const isPlan61a = planCode === "61a";
   const isPreset = isPlan87 || isPlan84 || isPlan90;

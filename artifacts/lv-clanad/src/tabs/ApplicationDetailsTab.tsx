@@ -94,11 +94,15 @@ export function ApplicationDetailsTab() {
             </Field>
           )}
           <Field label="IFA Payment Date:">
-            <DatePicker
-              value={isPlan84 ? "13/04/2010 10" : isPlan90 ? "07/07/2025 07" : isPlan51 ? "05/02/2008 09" : isPlan82 ? "06/01/2011 09" : isPlan80 ? "11/03/2010 08" : isPlan83 ? "24/08/2015 10" : isPlan621 ? "22/01/2008 14" : isPlan76 ? "05/02/2008 09" : isPlan76z ? "08/07/2008 08" : isPlan62a ? "" : isPlan611 ? "" : isPlan61a ? "30/09/2008 08" : ""}
-              placeholder={isCompact ? "" : "DBEdit13"}
-              disabled={isPlan84 || isPlan90 || isPlan51 || isPlan80 || isPlan83 || isPlan82 || isPlan621 || isPlan76 || isPlan76z || isPlan62a || isPlan611 || isPlan52 || isPlan61a}
-            />
+            {isPlan76 ? (
+              <TextInput value="05/02/2008 09:33:52" disabled />
+            ) : (
+              <DatePicker
+                value={isPlan84 ? "13/04/2010 10" : isPlan90 ? "07/07/2025 07" : isPlan51 ? "05/02/2008 09" : isPlan82 ? "06/01/2011 09" : isPlan80 ? "11/03/2010 08" : isPlan83 ? "24/08/2015 10" : isPlan621 ? "22/01/2008 14" : isPlan76z ? "08/07/2008 08" : isPlan62a ? "" : isPlan611 ? "" : isPlan61a ? "30/09/2008 08" : ""}
+                placeholder={isCompact ? "" : "DBEdit13"}
+                disabled={isPlan84 || isPlan90 || isPlan51 || isPlan80 || isPlan83 || isPlan82 || isPlan621 || isPlan76z || isPlan62a || isPlan611 || isPlan52 || isPlan61a}
+              />
+            )}
           </Field>
           <Field label="PostADay:"><Checkbox checked={isPlan87 || isPlan84 || isPlan51 || isPlan80 || isPlan83 || isPlan82 || isPlan621 || isPlan76 || isPlan76z || isPlan62a || isPlan611 || isPlan52 || isPlan61a} /></Field>
           <Field label="Transfer from Beneficiary Drawdown?:">
@@ -181,7 +185,7 @@ export function ApplicationDetailsTab() {
               />
             </Field>
             <Field label="Closed:">
-              <TextInput value={isPlan84 || isPlan90 || isPlan51 || isPlan80 || isPlan83 || isPlan82 || isPlan621 || isPlan76z || isPlan62a || isPlan611 || isPlan61a ? "" : isPlan76 ? "10/09/2009 1" : isPlan52 ? "29/01/2008 1" : "DBClosed"} disabled />
+              <TextInput value={isPlan84 || isPlan90 || isPlan51 || isPlan80 || isPlan83 || isPlan82 || isPlan621 || isPlan76z || isPlan62a || isPlan611 || isPlan61a ? "" : isPlan76 ? "10/09/2009 15:29:25" : isPlan52 ? "29/01/2008 1" : "DBClosed"} disabled />
             </Field>
             {!isPlan84 && !isPlan90 && !isPlan80 && !isPlan83 && !isPlan82 && !isPlan76z && (
               <>

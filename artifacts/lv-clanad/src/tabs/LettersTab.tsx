@@ -16,6 +16,7 @@ const CLAIM_FORM_POLICY_TYPES = ["Transfer", "Open Market Option", "Flexible Dra
 const IRF_CEDING_SCHEMES = ["Friends Provident - Z99999/9999", "AXA - ZZ9999999"];
 
 const LETTERS = [
+  "Certificate of Existence",
   "Chaser Letter OS Application Client",
   "Chaser Letter OS Application IFA",
   "Claim Form",
@@ -38,6 +39,7 @@ type DistConfig = {
 };
 
 const LETTER_DIST: Record<string, DistConfig> = {
+  "Certificate of Existence":             { print: true,  fax: false, email: true,  sendTo: { client: true,  ifa: false, ceding: false, other: false } },
   "Chaser Letter OS Application Client": { print: true,  fax: true,  email: true,  sendTo: { client: true,  ifa: false, ceding: false, other: false } },
   "Chaser Letter OS Application IFA":    { print: true,  fax: true,  email: true,  sendTo: { client: false, ifa: true,  ceding: false, other: false } },
   "Claim Form":                           { print: true,  fax: false, email: true,  sendTo: { client: true,  ifa: true,  ceding: false, other: false } },

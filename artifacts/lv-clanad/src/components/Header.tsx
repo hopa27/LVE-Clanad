@@ -595,8 +595,8 @@ export function Header({ title }: { title: string }) {
       if (planCode === "87" && m.label === "Process")
         return {
           ...m,
-          options: m.options.map((opt) =>
-            opt.label === "P45 details"
+          options: m.options?.map((opt) =>
+            opt.kind !== "separator" && opt.label === "P45 details"
               ? { label: "P45 details", action: "p45-details" }
               : opt
           ),

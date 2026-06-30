@@ -1,0 +1,27 @@
+2026-06-30T06:15:20.468013533Z ==> Downloading cache...
+2026-06-30T06:15:20.518093517Z ==> Cloning from https://github.com/hopa27/LVE-Clanad
+2026-06-30T06:15:24.032337014Z ==> Checking out commit 1b7d5af538ba626412b40de59cd21e7b66d361de in branch main
+2026-06-30T06:15:29.827926319Z ==> Downloaded 95MB in 3s. Extraction took 5s.
+2026-06-30T06:15:30.789347584Z ==> Installing dependencies with pnpm...
+2026-06-30T06:15:30.886598531Z ==> Using Node.js version 24.14.1 (default)
+2026-06-30T06:15:30.886609242Z ==> Docs on specifying a Node.js version: https://render.com/docs/node-version
+2026-06-30T06:15:32.554788506Z ==> Running build command 'pnpm install --frozen-lockfile; pnpm run build'...
+2026-06-30T06:15:34.675801283Z 
+2026-06-30T06:15:34.675833344Z > workspace@0.0.0 build /opt/render/project/src
+2026-06-30T06:15:34.675840745Z > pnpm run typecheck && pnpm -r --if-present run build
+2026-06-30T06:15:34.675843334Z 
+2026-06-30T06:15:34.98836201Z 
+2026-06-30T06:15:34.988382871Z > workspace@0.0.0 typecheck /opt/render/project/src
+2026-06-30T06:15:34.988388271Z > pnpm run typecheck:libs && pnpm -r --filter "./artifacts/**" --filter "./scripts" --if-present run typecheck
+2026-06-30T06:15:34.988395891Z 
+2026-06-30T06:15:35.293324957Z 
+2026-06-30T06:15:35.293353418Z > workspace@0.0.0 typecheck:libs /opt/render/project/src
+2026-06-30T06:15:35.293358588Z > tsc --build
+2026-06-30T06:15:35.293362518Z 
+2026-06-30T06:15:48.074774975Z /opt/render/project/src/artifacts/lv-clanad:
+2026-06-30T06:15:48.074801146Z  ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL  @workspace/lv-clanad@0.0.0 typecheck: `tsc -p tsconfig.json --noEmit`
+2026-06-30T06:15:48.074804526Z Exit status 2
+2026-06-30T06:15:48.104737413Z  ELIFECYCLE  Command failed with exit code 2.
+2026-06-30T06:15:48.134777433Z  ELIFECYCLE  Command failed with exit code 2.
+2026-06-30T06:15:48.183665634Z ==> Build failed 😞
+2026-06-30T06:15:48.183680664Z ==> Common ways to troubleshoot your deploy: https://render.com/docs/troubleshooting-deploys

@@ -96,6 +96,7 @@ function AnnuitantBlock({
   const [doctorOpen, setDoctorOpen] = useState(false);
   const [niConfirmOpen, setNiConfirmOpen] = useState(false);
   const [niMigratedOpen, setNiMigratedOpen] = useState(false);
+  const [natInsValue, setNatInsValue] = useState(natIns);
   const { editing } = useEditMode();
 
   return (
@@ -164,7 +165,7 @@ function AnnuitantBlock({
         <Field inline labelWidth={120} label="Nat ins no:">
           <div className="flex items-center gap-2">
             <div className="flex-1 min-w-0">
-              <TextInput value={natIns} />
+              <TextInput value={natInsValue} />
             </div>
             <button
               type="button"
@@ -219,7 +220,7 @@ function AnnuitantBlock({
       <ConfirmDialog
         open={niConfirmOpen}
         message="Are you sure?"
-        onYes={() => setNiConfirmOpen(false)}
+        onYes={() => { setNatInsValue(""); setNiConfirmOpen(false); }}
         onNo={() => setNiConfirmOpen(false)}
       />
       <WinErrorDialog

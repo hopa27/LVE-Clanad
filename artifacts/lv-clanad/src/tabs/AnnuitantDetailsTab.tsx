@@ -133,26 +133,30 @@ function AnnuitantBlock({
           </>
         )}
         <Field inline labelWidth={120} label="Enhanced?:"><TextInput value={enhanced} disabled /></Field>
-        <Field inline labelWidth={120} label="Doctor:">
-          <div className="flex items-center gap-2">
-            <div className="w-32 shrink-0">
-              <TextInput value={doctor} />
-            </div>
-            <button
-              type="button"
-              onClick={() => editing && setDoctorOpen(true)}
-              disabled={!editing}
-              className="lve-btn lve-btn-secondary !rounded-full !p-0 !w-10 !h-10 shrink-0 inline-flex items-center justify-center"
-              title="Doctor Database"
-              aria-label="Doctor Database"
-            >
-              <MdMedicalServices size={18} />
-            </button>
-          </div>
-        </Field>
-        <Field inline labelWidth={120} label="">
-          <TextInput value={doctorName} disabled />
-        </Field>
+        {!isPlan76z && (
+          <>
+            <Field inline labelWidth={120} label="Doctor:">
+              <div className="flex items-center gap-2">
+                <div className="w-32 shrink-0">
+                  <TextInput value={doctor} />
+                </div>
+                <button
+                  type="button"
+                  onClick={() => editing && setDoctorOpen(true)}
+                  disabled={!editing}
+                  className="lve-btn lve-btn-secondary !rounded-full !p-0 !w-10 !h-10 shrink-0 inline-flex items-center justify-center"
+                  title="Doctor Database"
+                  aria-label="Doctor Database"
+                >
+                  <MdMedicalServices size={18} />
+                </button>
+              </div>
+            </Field>
+            <Field inline labelWidth={120} label="">
+              <TextInput value={doctorName} disabled />
+            </Field>
+          </>
+        )}
         <Field inline labelWidth={120} label="Nat ins no:">
           <div className="flex items-center gap-2">
             <div className="flex-1 min-w-0">

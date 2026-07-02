@@ -181,12 +181,16 @@ function AnnuitantBlock({
         {mrsd !== undefined && (
           <Field inline labelWidth={120} label="MRSD:"><TextInput value={mrsd} disabled /></Field>
         )}
-        <Field inline labelWidth={120} label="MAR required?:">
-          <TextInput value={marRequired} disabled={marRequiredDisabled} />
-        </Field>
-        <Field inline labelWidth={120} label={marCopyLabel}><TextInput value={marCopyToPH} /></Field>
-        <Field inline labelWidth={120} label="Date MAR Sent:"><TextInput value={dateMarSent} disabled /></Field>
-        <Field inline labelWidth={120} label="Date MAR Received:"><TextInput value={dateMarRec} /></Field>
+        {!isPlan76z && (
+          <>
+            <Field inline labelWidth={120} label="MAR required?:">
+              <TextInput value={marRequired} disabled={marRequiredDisabled} />
+            </Field>
+            <Field inline labelWidth={120} label={marCopyLabel}><TextInput value={marCopyToPH} /></Field>
+            <Field inline labelWidth={120} label="Date MAR Sent:"><TextInput value={dateMarSent} disabled /></Field>
+            <Field inline labelWidth={120} label="Date MAR Received:"><TextInput value={dateMarRec} /></Field>
+          </>
+        )}
         {showUwBlock && (
           <>
             <Field inline labelWidth={120} label="U/W Ref:"><TextInput value={uwRef} disabled /></Field>

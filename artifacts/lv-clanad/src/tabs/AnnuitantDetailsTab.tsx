@@ -46,6 +46,7 @@ type BlockProps = {
   showDod?: boolean;
   doctorDisabled?: boolean;
   natInsDisabled?: boolean;
+  isPlan76z?: boolean;
 };
 
 function AnnuitantBlock({
@@ -87,6 +88,7 @@ function AnnuitantBlock({
   showDod = true,
   doctorDisabled = false,
   natInsDisabled = false,
+  isPlan76z = false,
 }: BlockProps) {
   const [doctorOpen, setDoctorOpen] = useState(false);
   const [niConfirmOpen, setNiConfirmOpen] = useState(false);
@@ -400,6 +402,7 @@ export function AnnuitantDetailsTab() {
           icd1={isPlan76z ? "F01" : isPlan76 ? "447" : isPlan61a ? "155" : ""}
           icd2={isPlan61a ? "428" : ""}
           icd3={isPlan61a ? "414" : ""}
+          isPlan76z={isPlan76z}
         />
       </Section>
 

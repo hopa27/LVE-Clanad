@@ -147,7 +147,7 @@ const PROCESS_82: MenuOption[] = [
   { label: "PLA Cancellation", action: "pla-cancellation" },
   { kind: "separator" },
   { label: "Ceding Scheme Details", action: "ceding-scheme" },
-  { label: "LIC Benefit", disabled: true },
+  { label: "LTC Benefit", disabled: true },
   { label: "Cancel LTC", disabled: true },
 ];
 
@@ -222,7 +222,7 @@ const PROCESS_80: MenuOption[] = [
   { kind: "separator" },
   { label: "Ceding Scheme Details", action: "ceding-scheme" },
   { kind: "separator" },
-  { label: "LIC Benefit", disabled: true },
+  { label: "LTC Benefit", disabled: true },
   { label: "Cancel LTC", disabled: true },
 ];
 
@@ -278,7 +278,7 @@ const PROCESS_76: MenuOption[] = [
   { kind: "separator" },
   { label: "Ceding Scheme Details", action: "ceding-scheme" },
   { kind: "separator" },
-  { label: "LIC Benefit", disabled: true },
+  { label: "LTC Benefit", disabled: true },
   { label: "Cancel LTC", disabled: true },
 ];
 
@@ -302,7 +302,7 @@ const PROCESS_76z: MenuOption[] = [
   { kind: "separator" },
   { label: "Ceding Scheme Details", action: "ceding-scheme" },
   { kind: "separator" },
-  { label: "LIC Benefit", disabled: true },
+  { label: "LTC Benefit", disabled: true },
   { label: "Cancel LTC", disabled: true },
 ];
 

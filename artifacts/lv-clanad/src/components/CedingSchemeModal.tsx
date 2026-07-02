@@ -381,6 +381,7 @@ export function CedingSchemeModal({
   const [form, setForm] = useState<FormState>(() => initialForm(planCode));
   const [transferOpen, setTransferOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState<number>(0);
+  const [postCodeSearch, setPostCodeSearch] = useState("");
   const [confirmNewOpen, setConfirmNewOpen] = useState(false);
   const [confirmEditOpen, setConfirmEditOpen] = useState(false);
   const [confirmCancelOpen, setConfirmCancelOpen] = useState(false);
@@ -391,6 +392,11 @@ export function CedingSchemeModal({
   if (!open) return null;
 
   const editable = mode !== "view";
+  const filteredCheques = postCodeSearch.trim()
+    ? CHEQUES.filter((c) =>
+        c.postcode.toLowerCase().includes(postCodeSearch.trim().toLowerCase())
+      )
+    : CHEQUES;
 
   const upd = <K extends keyof FormState>(k: K, v: FormState[K]) =>
     setForm((f) => ({ ...f, [k]: v }));
@@ -438,11 +444,13 @@ export function CedingSchemeModal({
 
   const doCancel = () => {
     setForm(initialForm(planCode));
+    setPostCodeSearch("");
     setMode("view");
     setConfirmCancelOpen(false);
   };
 
   const handleSave = () => {
+    setPostCodeSearch("");
     setMode("view");
   };
 
@@ -511,6 +519,19 @@ export function CedingSchemeModal({
             >
               <MdCheck size={16} /> Ok
             </button>
+            <div className="ml-auto flex items-center gap-2">
+              <label className="font-['Mulish'] text-[13px] text-[#3d3d3d] whitespace-nowrap">
+                Post Code Search:
+              </label>
+              <input
+                type="text"
+                value={postCodeSearch}
+                onChange={(e) => setPostCodeSearch(e.target.value)}
+                disabled={!editable}
+                placeholder="e.g. SW1A"
+                className={`lve-input w-[140px] ${!editable ? "bg-[#fafafa] cursor-not-allowed" : ""}`}
+              />
+            </div>
           </div>
 
           {/* Unified two-column form — labels and fields aligned across both columns */}
@@ -681,7 +702,7 @@ export function CedingSchemeModal({
                 </tr>
               </thead>
               <tbody>
-                {CHEQUES.map((c, i) => {
+                {filteredCheques.map((c, i) => {
                   const sel = selectedRow === i;
                   const tdStyle = sel
                     ? { background: "#05579B", color: "#ffffff" }

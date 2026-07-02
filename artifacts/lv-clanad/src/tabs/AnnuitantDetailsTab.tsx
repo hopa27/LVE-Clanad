@@ -416,7 +416,7 @@ export function AnnuitantDetailsTab() {
           icd2={isPlan61a ? "428" : ""}
           icd3={isPlan61a ? "414" : ""}
           isPlan76z={isPlan76z}
-          natInsShowMigratedError={isPlan51 || isPlan80}
+          natInsShowMigratedError={isPlan51}
         />
       </Section>
 

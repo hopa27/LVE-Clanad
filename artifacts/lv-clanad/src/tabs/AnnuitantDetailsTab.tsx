@@ -4,6 +4,7 @@ import { Field, TextInput, SelectInput, Checkbox, Section } from "../components/
 import { DatePicker } from "../components/DatePicker";
 import { DoctorDatabaseModal } from "../components/DoctorDatabaseModal";
 import { ConfirmDialog } from "../components/ConfirmDialog";
+import { WinErrorDialog } from "../components/WinErrorDialog";
 import { usePlanCode } from "../context/PlanCodeContext";
 import { useEditMode } from "../context/EditModeContext";
 
@@ -47,6 +48,7 @@ type BlockProps = {
   doctorDisabled?: boolean;
   natInsDisabled?: boolean;
   isPlan76z?: boolean;
+  natInsShowMigratedError?: boolean;
 };
 
 function AnnuitantBlock({
@@ -89,9 +91,11 @@ function AnnuitantBlock({
   doctorDisabled = false,
   natInsDisabled = false,
   isPlan76z = false,
+  natInsShowMigratedError = false,
 }: BlockProps) {
   const [doctorOpen, setDoctorOpen] = useState(false);
   const [niConfirmOpen, setNiConfirmOpen] = useState(false);
+  const [niMigratedOpen, setNiMigratedOpen] = useState(false);
   const { editing } = useEditMode();
 
   return (
@@ -164,8 +168,8 @@ function AnnuitantBlock({
             </div>
             <button
               type="button"
-              disabled={natInsDisabled || editing}
-              onClick={() => setNiConfirmOpen(true)}
+              disabled={natInsDisabled || (editing && !natInsShowMigratedError)}
+              onClick={() => natInsShowMigratedError ? setNiMigratedOpen(true) : setNiConfirmOpen(true)}
               className="lve-btn lve-btn-secondary !rounded-full !p-0 !w-10 !h-10 shrink-0 inline-flex items-center justify-center"
               title="Click here to delete NI Number"
               aria-label="Click here to delete NI Number"
@@ -217,6 +221,11 @@ function AnnuitantBlock({
         message="Are you sure?"
         onYes={() => setNiConfirmOpen(false)}
         onNo={() => setNiConfirmOpen(false)}
+      />
+      <WinErrorDialog
+        open={niMigratedOpen}
+        message="Policy has been migrated."
+        onOk={() => setNiMigratedOpen(false)}
       />
     </div>
   );
@@ -407,6 +416,7 @@ export function AnnuitantDetailsTab() {
           icd2={isPlan61a ? "428" : ""}
           icd3={isPlan61a ? "414" : ""}
           isPlan76z={isPlan76z}
+          natInsShowMigratedError={isPlan51 || isPlan80}
         />
       </Section>
 

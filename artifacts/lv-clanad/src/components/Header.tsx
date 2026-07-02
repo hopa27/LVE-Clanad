@@ -487,7 +487,7 @@ const MENU_ITEMS: MenuItem[] = [
         hasSubmenu: true,
         submenu: [{ label: "Monthly Processing" }],
       },
-      { label: "Coding Scheme Details" },
+      { label: "Ceding Scheme Details" },
       { kind: "separator" },
       { label: "Cancel LTC", disabled: true },
     ],

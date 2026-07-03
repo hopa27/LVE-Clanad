@@ -274,6 +274,7 @@ export function CedingSchemeModal({
   const [transferOpen, setTransferOpen] = useState(false);
   const [selectedRow, setSelectedRow] = useState<number>(0);
   const [postCodeSearch, setPostCodeSearch] = useState("");
+  const [postCodeSuggestOpen, setPostCodeSuggestOpen] = useState(false);
   const [confirmNewOpen, setConfirmNewOpen] = useState(false);
   const [confirmEditOpen, setConfirmEditOpen] = useState(false);
   const [confirmCancelOpen, setConfirmCancelOpen] = useState(false);
@@ -296,22 +297,40 @@ export function CedingSchemeModal({
   const upd = <K extends keyof FormState>(k: K, v: FormState[K]) =>
     setForm((f) => ({ ...f, [k]: v }));
 
+  const applyPostCodeMatch = (match: PostCodeLookupEntry) => {
+    setForm((f) => ({
+      ...f,
+      schemeName: match.scheme,
+      address1: match.address1,
+      address2: match.address2,
+      address3: match.address3,
+      postCode: match.postCode,
+      telephone: match.telephone,
+    }));
+  };
+
+  const postCodeSuggestions =
+    mode === "new" && postCodeSearch.trim()
+      ? Object.values(POSTCODE_LOOKUP).filter((entry) =>
+          normalizePostcode(entry.postCode).startsWith(normalizePostcode(postCodeSearch))
+        )
+      : [];
+
   const handlePostCodeSearchChange = (v: string) => {
     setPostCodeSearch(v);
+    setPostCodeSuggestOpen(true);
     if (mode === "new") {
       const match = POSTCODE_LOOKUP[normalizePostcode(v)];
       if (match) {
-        setForm((f) => ({
-          ...f,
-          schemeName: match.scheme,
-          address1: match.address1,
-          address2: match.address2,
-          address3: match.address3,
-          postCode: match.postCode,
-          telephone: match.telephone,
-        }));
+        applyPostCodeMatch(match);
       }
     }
+  };
+
+  const handlePostCodeSuggestionSelect = (match: PostCodeLookupEntry) => {
+    setPostCodeSearch(match.postCode);
+    applyPostCodeMatch(match);
+    setPostCodeSuggestOpen(false);
   };
 
   const handleNew = () => {
@@ -436,14 +455,35 @@ export function CedingSchemeModal({
               <label className="font-['Mulish'] text-[13px] text-[#3d3d3d] whitespace-nowrap">
                 Post Code Search:
               </label>
-              <input
-                type="text"
-                value={postCodeSearch}
-                onChange={(e) => handlePostCodeSearchChange(e.target.value)}
-                disabled={!editable}
-                placeholder="e.g. SG5 2DX"
-                className={`lve-input w-[140px] ${!editable ? "bg-[#fafafa] cursor-not-allowed" : ""}`}
-              />
+              <div className="relative">
+                <input
+                  type="text"
+                  value={postCodeSearch}
+                  onChange={(e) => handlePostCodeSearchChange(e.target.value)}
+                  onFocus={() => setPostCodeSuggestOpen(true)}
+                  onBlur={() => setTimeout(() => setPostCodeSuggestOpen(false), 150)}
+                  disabled={!editable}
+                  placeholder="e.g. SG5 2DX"
+                  className={`lve-input w-[140px] ${!editable ? "bg-[#fafafa] cursor-not-allowed" : ""}`}
+                />
+                {editable && postCodeSuggestOpen && postCodeSuggestions.length > 0 && (
+                  <ul className="absolute z-20 left-0 right-0 mt-1 w-[260px] max-h-[220px] overflow-auto bg-white border border-[#bcd] rounded-[8px] shadow-md font-['Mulish'] text-[12px]">
+                    {postCodeSuggestions.map((entry) => (
+                      <li
+                        key={entry.postCode}
+                        onMouseDown={(e) => {
+                          e.preventDefault();
+                          handlePostCodeSuggestionSelect(entry);
+                        }}
+                        className="px-3 py-1.5 cursor-pointer hover:bg-[#05579B] hover:text-white"
+                      >
+                        <div className="font-semibold">{entry.postCode}</div>
+                        <div className="text-[11px] opacity-80 truncate">{entry.scheme}</div>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             </div>
           </div>
 

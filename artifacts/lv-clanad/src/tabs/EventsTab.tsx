@@ -217,7 +217,7 @@ export function EventsTab() {
         <button
           type="button"
           className="lve-btn lve-btn-secondary lve-btn-sm disabled:opacity-50 disabled:cursor-not-allowed"
-          disabled={!hasSelection || isPlan51}
+          disabled={!hasSelection}
           onClick={askEdit}
         >
           <MdEdit size={16} /> Edit Event
@@ -225,7 +225,7 @@ export function EventsTab() {
         <button
           type="button"
           className="lve-btn lve-btn-secondary lve-btn-sm disabled:opacity-50 disabled:cursor-not-allowed"
-          disabled={!hasSelection || isPlan51}
+          disabled={!hasSelection}
           onClick={askDelete}
         >
           <MdDelete size={16} /> Delete Event

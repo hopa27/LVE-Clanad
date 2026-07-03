@@ -228,11 +228,14 @@ export function CedingSchemeModal({
   if (!open) return null;
 
   const editable = mode !== "view";
-  const filteredCheques = postCodeSearch.trim()
-    ? CHEQUES.filter((c) =>
-        c.postcode.toLowerCase().includes(postCodeSearch.trim().toLowerCase())
-      )
-    : CHEQUES;
+  const filteredCheques =
+    mode === "new"
+      ? []
+      : postCodeSearch.trim()
+        ? CHEQUES.filter((c) =>
+            c.postcode.toLowerCase().includes(postCodeSearch.trim().toLowerCase())
+          )
+        : CHEQUES;
 
   const upd = <K extends keyof FormState>(k: K, v: FormState[K]) =>
     setForm((f) => ({ ...f, [k]: v }));

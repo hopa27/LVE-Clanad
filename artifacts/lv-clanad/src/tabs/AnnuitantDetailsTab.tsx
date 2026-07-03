@@ -165,7 +165,7 @@ function AnnuitantBlock({
         <Field inline labelWidth={120} label="Nat ins no:">
           <div className="flex items-center gap-2">
             <div className="flex-1 min-w-0">
-              <TextInput value={natInsValue} />
+              <TextInput value={natInsValue} onChange={setNatInsValue} />
             </div>
             <button
               type="button"

@@ -466,57 +466,57 @@ export function CedingSchemeModal({
             >
               <MdCheck size={16} /> Ok
             </button>
-            <div className="ml-auto flex items-center gap-2">
-              <label className="font-['Mulish'] text-[13px] text-[#3d3d3d] whitespace-nowrap">
-                Post Code Search:
-              </label>
-              <div className="relative">
-                <input
-                  ref={postCodeInputRef}
-                  type="text"
-                  value={postCodeSearch}
-                  onChange={(e) => handlePostCodeSearchChange(e.target.value)}
-                  onFocus={() => {
-                    updatePostCodeDropdownRect();
-                    setPostCodeSuggestOpen(true);
-                  }}
-                  onBlur={() => setTimeout(() => setPostCodeSuggestOpen(false), 150)}
-                  disabled={!editable}
-                  placeholder="e.g. SG5 2DX"
-                  className={`lve-input w-[140px] ${!editable ? "bg-[#fafafa] cursor-not-allowed" : ""}`}
-                />
-                {editable &&
-                  postCodeSuggestOpen &&
-                  postCodeSuggestions.length > 0 &&
-                  postCodeDropdownRect &&
-                  createPortal(
-                    <ul
-                      style={{
-                        position: "fixed",
-                        top: postCodeDropdownRect.top,
-                        left: postCodeDropdownRect.left,
-                        width: postCodeDropdownRect.width,
-                      }}
-                      className="z-[80] max-h-[220px] overflow-auto bg-white border border-[#bcd] rounded-[8px] shadow-md font-['Mulish'] text-[12px]"
-                    >
-                      {postCodeSuggestions.map((entry) => (
-                        <li
-                          key={entry.postCode}
-                          onMouseDown={(e) => {
-                            e.preventDefault();
-                            handlePostCodeSuggestionSelect(entry);
-                          }}
-                          className="px-3 py-1.5 cursor-pointer hover:bg-[#05579B] hover:text-white"
-                        >
-                          <div className="font-semibold">{entry.postCode}</div>
-                          <div className="text-[11px] opacity-80 truncate">{entry.scheme}</div>
-                        </li>
-                      ))}
-                    </ul>,
-                    document.body
-                  )}
+            {editable && (
+              <div className="ml-auto flex items-center gap-2">
+                <label className="font-['Mulish'] text-[13px] text-[#3d3d3d] whitespace-nowrap">
+                  Post Code Search:
+                </label>
+                <div className="relative">
+                  <input
+                    ref={postCodeInputRef}
+                    type="text"
+                    value={postCodeSearch}
+                    onChange={(e) => handlePostCodeSearchChange(e.target.value)}
+                    onFocus={() => {
+                      updatePostCodeDropdownRect();
+                      setPostCodeSuggestOpen(true);
+                    }}
+                    onBlur={() => setTimeout(() => setPostCodeSuggestOpen(false), 150)}
+                    placeholder="e.g. SG5 2DX"
+                    className="lve-input w-[140px]"
+                  />
+                  {postCodeSuggestOpen &&
+                    postCodeSuggestions.length > 0 &&
+                    postCodeDropdownRect &&
+                    createPortal(
+                      <ul
+                        style={{
+                          position: "fixed",
+                          top: postCodeDropdownRect.top,
+                          left: postCodeDropdownRect.left,
+                          width: postCodeDropdownRect.width,
+                        }}
+                        className="z-[80] max-h-[220px] overflow-auto bg-white border border-[#bcd] rounded-[8px] shadow-md font-['Mulish'] text-[12px]"
+                      >
+                        {postCodeSuggestions.map((entry) => (
+                          <li
+                            key={entry.postCode}
+                            onMouseDown={(e) => {
+                              e.preventDefault();
+                              handlePostCodeSuggestionSelect(entry);
+                            }}
+                            className="px-3 py-1.5 cursor-pointer hover:bg-[#05579B] hover:text-white"
+                          >
+                            <div className="font-semibold">{entry.postCode}</div>
+                            <div className="text-[11px] opacity-80 truncate">{entry.scheme}</div>
+                          </li>
+                        ))}
+                      </ul>,
+                      document.body
+                    )}
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* Unified two-column form — labels and fields aligned across both columns */}

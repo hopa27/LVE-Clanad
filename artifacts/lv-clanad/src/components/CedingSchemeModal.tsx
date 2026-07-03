@@ -20,6 +20,62 @@ const TRANSFER_TYPES = [
   "Other - Please Specify",
 ];
 
+type PostCodeLookupEntry = {
+  scheme: string;
+  address1: string;
+  address2: string;
+  address3: string;
+  postCode: string;
+  telephone: string;
+};
+
+const POSTCODE_LOOKUP: Record<string, PostCodeLookupEntry> = {
+  "SG52DX": {
+    scheme: "NM Pensions Trustees Ltd",
+    address1: "Keynes House",
+    address2: "Tilehouse Street",
+    address3: "Hitchin, Herts",
+    postCode: "SG5 2DX",
+    telephone: "01462 456789",
+  },
+  "SW1A1AA": {
+    scheme: "Buckingham Pensions Trust",
+    address1: "10 Downing Street",
+    address2: "Westminster",
+    address3: "London",
+    postCode: "SW1A 1AA",
+    telephone: "020 7946 0011",
+  },
+  "M11AE": {
+    scheme: "Manchester Pension Scheme",
+    address1: "1 Piccadilly Gardens",
+    address2: "City Centre",
+    address3: "Manchester",
+    postCode: "M1 1AE",
+    telephone: "0161 496 0022",
+  },
+  "B338TH": {
+    scheme: "Birmingham Retirement Fund",
+    address1: "25 Corporation Street",
+    address2: "City Centre",
+    address3: "Birmingham",
+    postCode: "B33 8TH",
+    telephone: "0121 496 0033",
+  },
+  "LS12JG": {
+    scheme: "Leeds Pension Trustees",
+    address1: "5 Park Row",
+    address2: "City Square",
+    address3: "Leeds",
+    postCode: "LS1 2JG",
+    telephone: "0113 496 0044",
+  },
+};
+
+function normalizePostcode(v: string): string {
+  return v.replace(/\s+/g, "").toUpperCase();
+}
+
 type ChequeRow = {
   chequeNo: number;
   amount: number;
@@ -240,6 +296,24 @@ export function CedingSchemeModal({
   const upd = <K extends keyof FormState>(k: K, v: FormState[K]) =>
     setForm((f) => ({ ...f, [k]: v }));
 
+  const handlePostCodeSearchChange = (v: string) => {
+    setPostCodeSearch(v);
+    if (mode === "new") {
+      const match = POSTCODE_LOOKUP[normalizePostcode(v)];
+      if (match) {
+        setForm((f) => ({
+          ...f,
+          schemeName: match.scheme,
+          address1: match.address1,
+          address2: match.address2,
+          address3: match.address3,
+          postCode: match.postCode,
+          telephone: match.telephone,
+        }));
+      }
+    }
+  };
+
   const handleNew = () => {
     setConfirmNewOpen(true);
   };
@@ -365,9 +439,9 @@ export function CedingSchemeModal({
               <input
                 type="text"
                 value={postCodeSearch}
-                onChange={(e) => setPostCodeSearch(e.target.value)}
+                onChange={(e) => handlePostCodeSearchChange(e.target.value)}
                 disabled={!editable}
-                placeholder="e.g. SW1A"
+                placeholder="e.g. SG5 2DX"
                 className={`lve-input w-[140px] ${!editable ? "bg-[#fafafa] cursor-not-allowed" : ""}`}
               />
             </div>

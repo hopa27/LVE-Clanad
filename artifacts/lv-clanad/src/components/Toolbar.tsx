@@ -86,7 +86,7 @@ export function Toolbar() {
     {
       label: editing ? "Save" : "Edit",
       icon: editing ? MdSave : MdEdit,
-      enabled: !isPlan76 && !isPlan90,
+      enabled: !isPlan76,
       action: "edit-toggle",
       shortcutId: "toolbar:edit",
     },

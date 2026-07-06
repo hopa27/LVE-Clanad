@@ -2,36 +2,6 @@ uploads = []
 generated = []
 
 [[outputs]]
-id = "QF6JLafRacJuNOuehWHJ6"
-uri = "file://docs/CHEQUE_LOGGER_SCREEN_FLOW(Angular).md"
-type = "text"
-title = "Cheque Logger Screen Flow (Angular)"
-
-[[outputs]]
-id = "AnnM68rPxi67cIgmGaoU-"
-uri = "file://docs/CHEQUE_LOGGER_DIGEST(Angular).md"
-type = "text"
-title = "Cheque Logger Digest (Angular)"
-
-[[outputs]]
-id = "2TYdLgo1yhHV_WUCMIVw2"
-uri = "file://attached_assets/CLANAD_SCREEN_FLOW(Angular)_LVE.md"
-type = "text"
-title = "CLANAD Screen Flow (Angular) — LVE Design System"
-
-[[outputs]]
-id = "hFXjbwl394tzA5sn--d1C"
-uri = "file://attached_assets/CLANAD_DIGEST(Angular)_LVE.md"
-type = "text"
-title = "CLANAD Application Digest (Angular) — LVE Design System"
-
-[[outputs]]
-id = "MBpus5xa1ngnyWeAhS9Nh"
-uri = "file://artifacts/lv-clanad/public/CLANAD_Docs_Angular_LVE.zip"
-type = "unspecified"
-title = "CLANAD Docs — Digest + Screen Flow (ZIP)"
-
-[[outputs]]
 id = "cRiBZpuHVcDD54UeWNoPw"
 uri = "file://artifacts/lv-clanad/public/ChequeLogger_Docs_Angular_LVE.zip"
 type = "unspecified"

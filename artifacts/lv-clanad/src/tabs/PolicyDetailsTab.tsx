@@ -170,7 +170,8 @@ export function PolicyDetailsTab() {
             <div className="w-24 relative">
               <select
                 defaultValue=""
-                className="lve-input pr-10 appearance-none"
+                disabled
+                className="lve-input pr-10 appearance-none disabled:bg-[#CCCCCC] disabled:text-[#3d3d3d] disabled:cursor-not-allowed"
               >
                 <option value="">—</option>
                 <option value="Y">Y</option>
@@ -185,7 +186,7 @@ export function PolicyDetailsTab() {
             </div>
           </Field>
           <Field label="Non Standard Policy:">
-            <TextInput value={isPlan84 || isPlan90 || isPlan51 || isPlan83 || isPlan82 || isPlan76 || isPlan76z || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "" : "dbNonStdNote"} />
+            <TextInput value="" disabled />
           </Field>
         </Section>
       )}

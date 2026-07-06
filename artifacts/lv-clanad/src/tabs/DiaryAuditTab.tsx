@@ -135,7 +135,16 @@ const PLAN_621_DIARY: DiaryRow[] = [
   { ref: 4, type: "Beneficiary (DOB)",        notes: "Beneficiary date of birth",         created: "20/11/2023", by: "SYSANN", due: "20/12/2023", completed: "", byCompleted: "" },
 ];
 
-const AUDIT_621: string[] = [];
+const AUDIT_621: string[] = [
+  "BANK ACCOUNT NAME changed from Testmrbaaaae.b to Testmrbaaaae.a by UAT2 on 17/06/2026 at 13:38:22",
+  "BANK ACCOUNT NAME changed from Testmrbaaaae.b to Testmrbaaaae.a by UAT2 on 17/06/2026 at 13:39:40",
+  "BANK REF changed from 100004 to 100005 by UAT2 on 17/06/2026 at 13:40:53",
+  "BANK REF changed from 100004 to 100005 by UAT2 on 17/06/2026 at 13:41:13",
+  "BANK REF changed from 100004 to 100005 by UAT2 on 17/06/2026 at 13:41:28",
+  "PAYMENT METHOD changed from B to C by UAT2 on 17/06/2026 at 13:41:39",
+  "Annuitant Details (Nat ins no) updated from 'EX-07-01-43-A' to '- - - - -' by UAT2 on 17/06/2026 at 13:57:55",
+  "IRF Acceptance Pack inc Client Ltr is printed by UAT5 on 02/07/2026 at 13:01:44",
+];
 
 const PLAN_76_DIARY: DiaryRow[] = [
   { ref: 2, type: "ICD Codes", notes: "Chase Underwriters for ICD Codes",         created: "13/05/2009", by: "CLMJXG", due: "13/05/2009", completed: "10/09/2009", byCompleted: "CLMJXG" },
@@ -299,7 +308,7 @@ const AUDIT = [
   "BANK_ACCOUNT_NO changed from to 01841281 by LV67180 on 28/05/2025 at 08:49:07",
 ];
 
-const DIARY_COLS = ["Ref", "Type", "Notes", "Created", "By", "Due", "Completed", "By"];
+const DIARY_COLS = ["Ref", "Type", "Notes", "Created", "By", "Due", "Completed", "Completed By"];
 
 export function DiaryAuditTab() {
   const { planCode } = usePlanCode();

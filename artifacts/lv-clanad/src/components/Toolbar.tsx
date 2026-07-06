@@ -86,11 +86,11 @@ export function Toolbar() {
     {
       label: editing ? "Save" : "Edit",
       icon: editing ? MdSave : MdEdit,
-      enabled: !isPlan621 && !isPlan76 && !isPlan90,
+      enabled: !isPlan76 && !isPlan90,
       action: "edit-toggle",
       shortcutId: "toolbar:edit",
     },
-    { label: "Cancel",  icon: MdBlock,   enabled: editing && !isPlan51 && !isPlan621, action: "edit-cancel", shortcutId: "toolbar:cancel" },
+    { label: "Cancel",  icon: MdBlock,   enabled: editing && !isPlan51, action: "edit-cancel", shortcutId: "toolbar:cancel" },
     { label: "Search",  icon: MdSearch,  enabled: !editing,                           action: "search",      shortcutId: "toolbar:search" },
     { label: "Log",     icon: MdHistory, enabled: !editing,                           action: "log",         shortcutId: "toolbar:log" },
     { label: "CRS",     icon: MdStorage, enabled: !editing,                           action: "crs",         shortcutId: "toolbar:crs" },

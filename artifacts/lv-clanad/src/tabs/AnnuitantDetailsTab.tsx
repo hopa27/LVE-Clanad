@@ -7,6 +7,12 @@ import { ConfirmDialog } from "../components/ConfirmDialog";
 import { WinErrorDialog } from "../components/WinErrorDialog";
 import { usePlanCode } from "../context/PlanCodeContext";
 import { useEditMode } from "../context/EditModeContext";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../components/ui/tooltip";
 
 type BlockProps = {
   surname?: string;
@@ -115,11 +121,28 @@ function AnnuitantBlock({
             <div className="mt-2 mb-2 font-['Livvic'] text-[13px] font-semibold text-[#0d2c41]">
               Cause of Death:
             </div>
-            <div className="grid grid-cols-3 gap-2">
-              <Field label="ICD#1"><TextInput value={icd1} /></Field>
-              <Field label="ICD#2"><TextInput value={icd2} /></Field>
-              <Field label="ICD#3"><TextInput value={icd3} /></Field>
-            </div>
+            <TooltipProvider delayDuration={400}>
+              <div className="grid grid-cols-3 gap-2">
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div><Field label="ICD#1"><TextInput value={icd1} /></Field></div>
+                  </TooltipTrigger>
+                  <TooltipContent side="top">Cause of Death reference</TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div><Field label="ICD#2"><TextInput value={icd2} /></Field></div>
+                  </TooltipTrigger>
+                  <TooltipContent side="top">Cause of Death reference</TooltipContent>
+                </Tooltip>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div><Field label="ICD#3"><TextInput value={icd3} /></Field></div>
+                  </TooltipTrigger>
+                  <TooltipContent side="top">Cause of Death reference</TooltipContent>
+                </Tooltip>
+              </div>
+            </TooltipProvider>
           </>
         )}
       </div>

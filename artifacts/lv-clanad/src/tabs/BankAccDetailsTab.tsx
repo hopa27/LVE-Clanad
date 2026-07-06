@@ -125,16 +125,18 @@ export function BankAccDetailsTab() {
                     disabled={isPlan84 || isPlan90 || isPlan621}
                   />
                 </div>
-                <button
-                  type="button"
-                  disabled={editing}
-                  onClick={() => setDeleteSortCodeOpen(true)}
-                  className="lve-btn lve-btn-secondary !rounded-full !p-0 !w-10 !h-10 shrink-0 inline-flex items-center justify-center"
-                  title="Delete sort code"
-                  aria-label="Delete sort code"
-                >
-                  <MdCancel size={18} />
-                </button>
+                {!isPlan621 && (
+                  <button
+                    type="button"
+                    disabled={editing}
+                    onClick={() => setDeleteSortCodeOpen(true)}
+                    className="lve-btn lve-btn-secondary !rounded-full !p-0 !w-10 !h-10 shrink-0 inline-flex items-center justify-center"
+                    title="Delete sort code"
+                    aria-label="Delete sort code"
+                  >
+                    <MdCancel size={18} />
+                  </button>
+                )}
               </div>
             </Field>
             <Field inline label="Bank account no:">

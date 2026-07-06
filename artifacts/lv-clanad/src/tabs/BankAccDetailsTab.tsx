@@ -122,7 +122,7 @@ export function BankAccDetailsTab() {
                 <div className="flex-1 min-w-0">
                   <TextInput
                     value={isPlan87 ? "20-00-00" : isPlan84 || isPlan90 || isPlan51 || isPlan80 || isPlan83 || isPlan82 || isPlan621 || isPlan76 || isPlan76z || isPlan62a || isPlan611 || isPlan61a ? "77-48-14" : isPlan52 ? "" : "DBEdit41"}
-                    disabled={isPlan84 || isPlan90}
+                    disabled={isPlan84 || isPlan90 || isPlan621}
                   />
                 </div>
                 <button
@@ -140,13 +140,13 @@ export function BankAccDetailsTab() {
             <Field inline label="Bank account no:">
               <TextInput
                 value={isPlan87 ? "83608808" : isPlan84 || isPlan90 || isPlan51 || isPlan80 || isPlan83 || isPlan82 || isPlan621 || isPlan76 || isPlan76z || isPlan62a || isPlan611 || isPlan61a ? "24782346" : isPlan52 ? "" : "DBEdit77"}
-                disabled={isPlan84 || isPlan90}
+                disabled={isPlan84 || isPlan90 || isPlan621}
               />
             </Field>
             <Field inline label="Bank account name:">
               <TextInput
                 value={isPlan87 ? "Test" : isPlan84 ? "Testktbbbide" : isPlan90 ? "Testmtcchibd" : isPlan51 ? "Testmubaabii" : isPlan82 ? "Testmrbbgeee" : isPlan80 ? "Testmrbbbaib" : isPlan83 ? "Testnybggajc" : isPlan621 ? "Testmrbaaaae.b" : isPlan76 ? "Testakbaabia" : isPlan76z ? "Testtebabihd" : isPlan62a ? "Testmsbbibag" : isPlan611 ? "Testjsbaadad" : isPlan52 ? "" : isPlan61a ? "" : "DBEdit79"}
-                disabled={isPlan84 || isPlan90}
+                disabled={isPlan84 || isPlan90 || isPlan621}
               />
             </Field>
             <Field inline label="Bank name:">
@@ -168,17 +168,17 @@ export function BankAccDetailsTab() {
             <Field inline label="Payment Ref:">
               <TextInput
                 value={isPlan87 ? "233451" : isPlan84 ? "111834" : isPlan90 ? "227813" : isPlan51 ? "100188" : isPlan82 ? "D/1494543610" : isPlan80 ? "111081" : isPlan83 ? "INVENC123588" : isPlan621 ? "100004" : isPlan76 ? "100180" : isPlan76z ? "101873" : isPlan62a ? "118106" : isPlan611 ? "100303" : isPlan52 ? "100118" : isPlan61a ? "102929.1" : "DBEdit6"}
-                disabled={isPlan84 || isPlan90}
+                disabled={isPlan84 || isPlan90 || isPlan621}
               />
             </Field>
             <Field inline label="Payment Method:">
               <TextInput value={isPreset || isPlan51 || isPlan80 || isPlan83 || isPlan82 || isPlan621 || isPlan76 || isPlan76z || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "B" : "DB"} disabled />
             </Field>
-            {((!isPreset && !isPlan80 && !isPlan51 && !isPlan83 && !isPlan82 && !isPlan621 && !isPlan76 && !isPlan76z && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a) || isPlan90) ? (
+            {((!isPreset && !isPlan80 && !isPlan51 && !isPlan83 && !isPlan82 && !isPlan76 && !isPlan76z && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a) || isPlan90 || isPlan621) ? (
               <Field inline label="Change Effective Date:">
                 <DatePicker
-                  value={isPlan90 ? "" : "dbedChangeEffect"}
-                  placeholder={isPlan90 ? "" : "dbedChangeEffect"}
+                  value={isPlan90 ? "" : isPlan621 ? "17/06/2026" : "dbedChangeEffect"}
+                  placeholder={isPlan90 ? "" : isPlan621 ? "17/06/2026" : "dbedChangeEffect"}
                   disabled
                 />
               </Field>

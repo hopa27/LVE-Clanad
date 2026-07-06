@@ -5,4 +5,10 @@ generated = []
 id = "smPC43N-Qy67zBJ7AxRkX"
 uri = "file://docs/CLANAD_Screen_Flow.md"
 type = "text"
-title = "CLANAD Screen Flow (ASCII)"
+title = "CLANAD Screen Flow"
+
+[[outputs]]
+id = "2whLqVmFKbOwlditiqXOv"
+uri = "file://docs/CLANAD_Design_Digest.md"
+type = "text"
+title = "CLANAD Design Digest"

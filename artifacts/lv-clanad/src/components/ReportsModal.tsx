@@ -299,7 +299,7 @@ export function ReportsModal({
               <DatePicker
                 value={startDate}
                 placeholder="Start Date"
-                disabled={false}
+                disabled={isEmptySystem}
                 onChange={(d) =>
                   setStartDate(d ? format(d, "dd/MM/yyyy") : "")
                 }
@@ -311,7 +311,7 @@ export function ReportsModal({
               <DatePicker
                 value={endDate}
                 placeholder="End Date"
-                disabled={false}
+                disabled={isEmptySystem}
                 onChange={(d) =>
                   setEndDate(d ? format(d, "dd/MM/yyyy") : "")
                 }

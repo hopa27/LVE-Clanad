@@ -84,11 +84,12 @@ export function PolicyHeader() {
 
       <button
         type="button"
+        disabled={planCode === "90"}
         onClick={() => {
           setSelectedIdx(null);
           setSimOpen(true);
         }}
-        className="h-9 w-9 shrink-0 inline-flex items-center justify-center rounded-[8px] border border-[#BBBBBB] bg-white text-[#3d3d3d] hover:border-[#178830]"
+        className="h-9 w-9 shrink-0 inline-flex items-center justify-center rounded-[8px] border border-[#BBBBBB] bg-white text-[#3d3d3d] hover:border-[#178830] disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:border-[#BBBBBB]"
         title="More"
         aria-label="More options"
       >

@@ -444,7 +444,7 @@ export function PolicyDetailsTab() {
         </Section>
       )}
 
-      {(isPreset || isPlan51 || isPlan80 || isPlan82 || isPlan83 || isPlan621 || isPlan76 || isPlan76z || isPlan62a || isPlan611 || isPlan52 || isPlan61a) && (
+      {(isPreset || isPlan51 || isPlan80 || isPlan82 || isPlan83 || isPlan621 || isPlan76z || isPlan62a || isPlan611 || isPlan52 || isPlan61a) && (
         <Section title="P45 Details">
           <Field label="P45 date rec'd:">
             <TextInput value="" disabled />

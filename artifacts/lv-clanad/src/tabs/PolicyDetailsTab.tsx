@@ -45,6 +45,7 @@ export function PolicyDetailsTab() {
             <SelectInput
               value={isBOrTaxLike84 || isPlan76 || isPlan76z || isPlan621 ? "B" : ""}
               options={isBOrTaxLike84 || isPlan76 || isPlan76z || isPlan621 ? ["B", "C", "T"] : ["", "B", "C", "T"]}
+              disabled={isPlan84}
             />
           )}
         </Field>
@@ -58,6 +59,7 @@ export function PolicyDetailsTab() {
               <SelectInput
                 value={isBOrTaxLike84 || isPlan621 ? "B" : ""}
                 options={isBOrTaxLike84 || isPlan621 ? ["B", "C", "T"] : ["", "B", "C", "T"]}
+                disabled={isPlan84}
               />
             )}
           </Field>
@@ -95,6 +97,7 @@ export function PolicyDetailsTab() {
                     ? ["Non advised", "Independent", "Advised"]
                     : ["", "Non advised", "Advised"]
                 }
+                disabled={isPlan84}
               />
             </div>
             {!isPreset && !isPlan51 && !isPlan80 && !isPlan83 && !isPlan82 && !isPlan621 && !isPlan76 && !isPlan76z && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
@@ -382,24 +385,28 @@ export function PolicyDetailsTab() {
             <SelectInput
               value={isPlan87 || isPlan84 || isPlan80 || isPlan83 || isPlan76z ? "Yes" : isPlan82 ? "No" : ""}
               options={isPlan87 || isPlan84 || isPlan80 || isPlan83 || isPlan76z ? ["Yes", "No"] : isPlan82 ? ["No", "Yes"] : [""]}
+              disabled={isPlan84}
             />
           </Field>
           <Field label="Copy Annual Statement to IFA:">
             <SelectInput
               value={isPlan76z ? "No" : isPlan87 || isPlan84 || isPlan80 || isPlan83 ? "Yes" : isPlan82 ? "No" : ""}
               options={isPlan76z ? ["No", "Yes"] : isPlan87 || isPlan84 || isPlan80 || isPlan83 ? ["Yes", "No"] : isPlan82 ? ["No", "Yes"] : [""]}
+              disabled={isPlan84}
             />
           </Field>
           <Field label="Copy Annual Statement to Policyholder:">
             <SelectInput
               value={isPlan87 || isPlan84 || isPlan80 || isPlan83 || isPlan76z ? "Yes" : isPlan82 ? "No" : ""}
               options={isPlan87 || isPlan84 || isPlan80 || isPlan83 || isPlan76z ? ["Yes", "No"] : isPlan82 ? ["No", "Yes"] : [""]}
+              disabled={isPlan84}
             />
           </Field>
           <Field label="Issue wake up letters/maturity chasers:">
             <SelectInput
               value={isPlan87 || isPlan84 || isPlan80 || isPlan83 || isPlan82 || isPlan76z ? "Yes" : "dblcMat"}
               options={isPlan87 || isPlan84 || isPlan80 || isPlan83 || isPlan82 || isPlan76z ? ["Yes", "No"] : ["dblcMat"]}
+              disabled={isPlan84}
             />
           </Field>
         </Section>

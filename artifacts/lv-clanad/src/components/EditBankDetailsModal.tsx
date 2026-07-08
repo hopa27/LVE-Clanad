@@ -62,6 +62,116 @@ function dataForPlan(planCode: string): BankData {
         paymentMethod: "B",
         effectiveDate: "29/06/2026",
       };
+    case "51":
+      return {
+        sortCode: "77-48-14",
+        bankName: "TSB, WINSFORD",
+        accountName: "Testmubaabii",
+        accountNo: "24782346",
+        paymentRef: "100188",
+        accountType: "0",
+        paymentMethod: "B",
+        effectiveDate: "",
+      };
+    case "80":
+      return {
+        sortCode: "77-48-14",
+        bankName: "TSB, WINSFORD",
+        accountName: "Testmrbbbaib",
+        accountNo: "24782346",
+        paymentRef: "111081",
+        accountType: "0",
+        paymentMethod: "B",
+        effectiveDate: "",
+      };
+    case "83":
+      return {
+        sortCode: "77-48-14",
+        bankName: "TSB, WINSFORD",
+        accountName: "Testnybggajc",
+        accountNo: "24782346",
+        paymentRef: "INVENC123588",
+        accountType: "0",
+        paymentMethod: "B",
+        effectiveDate: "",
+      };
+    case "82":
+      return {
+        sortCode: "77-48-14",
+        bankName: "TSB, WINSFORD",
+        accountName: "Testmrbbgeee",
+        accountNo: "24782346",
+        paymentRef: "D/1494543610",
+        accountType: "0",
+        paymentMethod: "B",
+        effectiveDate: "",
+      };
+    case "76":
+      return {
+        sortCode: "77-48-14",
+        bankName: "TSB, WINSFORD",
+        accountName: "Testakbaabia",
+        accountNo: "24782346",
+        paymentRef: "100180",
+        accountType: "0",
+        paymentMethod: "B",
+        effectiveDate: "",
+      };
+    case "76z":
+      return {
+        sortCode: "77-48-14",
+        bankName: "TSB, WINSFORD",
+        accountName: "Testtebabihd",
+        accountNo: "24782346",
+        paymentRef: "101873",
+        accountType: "0",
+        paymentMethod: "B",
+        effectiveDate: "",
+      };
+    case "62a":
+      return {
+        sortCode: "77-48-14",
+        bankName: "TSB, WINSFORD",
+        accountName: "Testmsbbibag",
+        accountNo: "24782346",
+        paymentRef: "118106",
+        accountType: "0",
+        paymentMethod: "B",
+        effectiveDate: "",
+      };
+    case "611":
+      return {
+        sortCode: "77-48-14",
+        bankName: "TSB, WINSFORD",
+        accountName: "Testjsbaadad",
+        accountNo: "24782346",
+        paymentRef: "100303",
+        accountType: "0",
+        paymentMethod: "B",
+        effectiveDate: "",
+      };
+    case "52":
+      return {
+        sortCode: "",
+        bankName: "ROYAL BANK OF SCOT, RBS Bishopsgate (C)",
+        accountName: "",
+        accountNo: "",
+        paymentRef: "100118",
+        accountType: "0",
+        paymentMethod: "B",
+        effectiveDate: "",
+      };
+    case "61a":
+      return {
+        sortCode: "77-48-14",
+        bankName: "TSB, WINSFORD",
+        accountName: "",
+        accountNo: "24782346",
+        paymentRef: "102929.1",
+        accountType: "0",
+        paymentMethod: "B",
+        effectiveDate: "",
+      };
     default:
       return {
         sortCode: "",

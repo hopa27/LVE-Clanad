@@ -669,7 +669,7 @@ export function DiaryAuditTab() {
           open={editOpen}
           onClose={() => setEditOpen(false)}
           onSubmit={updateDiary}
-          title="Mini-Diary"
+          title="Mini Diary"
           allowPastDue
           initial={{
             type: selectedRow.type,

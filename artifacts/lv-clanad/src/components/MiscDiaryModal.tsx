@@ -76,7 +76,7 @@ export function MiscDiaryModal({
   open,
   onClose,
   onSubmit,
-  title = "Misc Diary",
+  title = "Mini Diary",
   initial,
   allowPastDue = false,
 }: {

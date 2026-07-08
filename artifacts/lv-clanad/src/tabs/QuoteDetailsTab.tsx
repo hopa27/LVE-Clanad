@@ -450,25 +450,19 @@ export function QuoteDetailsTab() {
                   </>
                 )}
               </div>
-              {!isPlan80 && !isPlan87 && !isPlan90 && !isPlan51 && !isPlan82 && !isPlan83 && !isPlan621 && !isPlan76 && !isPlan76z && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
+              {!isPlan80 && !isPlan84 && !isPlan87 && !isPlan90 && !isPlan51 && !isPlan82 && !isPlan83 && !isPlan621 && !isPlan76 && !isPlan76z && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
                 <div>
-                  <Field label="Notional Value:"><TextInput value={isPlan84 ? "8189.23" : "14,828"} disabled /></Field>
-                  <Field label="Value Date:"><TextInput value={isPlan84 ? "30/04/2026" : "25/03/2026"} disabled /></Field>
-                  {!isPlan84 && (
-                    <>
-                      <Field label="Total Withheld Minimal Income:"><TextInput value="" disabled /></Field>
-                      <Field label="Total Mutual Bonus:"><TextInput value="" disabled /></Field>
-                    </>
-                  )}
-                  {!isPlan84 && (
-                    <button
-                      type="button"
-                      onClick={() => setNotionalOpen(true)}
-                      className="lve-btn lve-btn-secondary lve-btn-sm mt-2"
-                    >
-                      View Notional Value
-                    </button>
-                  )}
+                  <Field label="Notional Value:"><TextInput value="14,828" disabled /></Field>
+                  <Field label="Value Date:"><TextInput value="25/03/2026" disabled /></Field>
+                  <Field label="Total Withheld Minimal Income:"><TextInput value="" disabled /></Field>
+                  <Field label="Total Mutual Bonus:"><TextInput value="" disabled /></Field>
+                  <button
+                    type="button"
+                    onClick={() => setNotionalOpen(true)}
+                    className="lve-btn lve-btn-secondary lve-btn-sm mt-2"
+                  >
+                    View Notional Value
+                  </button>
                 </div>
               )}
             </div>

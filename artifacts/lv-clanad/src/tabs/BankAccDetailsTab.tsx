@@ -125,7 +125,7 @@ export function BankAccDetailsTab() {
                     disabled={isPlan84 || isPlan90 || isPlan621}
                   />
                 </div>
-                {!isPlan621 && !isPlan51 && !isPlan76 && (
+                {!isPlan621 && !isPlan51 && !isPlan76 && !isPlan84 && (
                   <button
                     type="button"
                     disabled={editing}

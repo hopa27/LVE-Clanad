@@ -345,17 +345,23 @@ export function FindPolicyModal({
           <div className="border border-[#BBBBBB] rounded-[8px] p-3 space-y-2 font-['Mulish'] text-[13px] text-[#3d3d3d] shrink-0">
             <div className="grid grid-cols-[90px_160px_90px_1fr_90px_1fr] items-center gap-x-3 gap-y-2">
               <div className="font-bold text-[#4a4a49]">Premium</div>
-              <div tabIndex={-1} className="flex h-[28px] items-center justify-end rounded-[6px] border border-[#ACACAC] bg-[#CCCCCC] px-2 cursor-not-allowed">
-                {rec?.planCode !== "0" ? rec?.premium : ""}
-              </div>
+              <input
+                type="text"
+                defaultValue={rec?.planCode !== "0" ? rec?.premium : ""}
+                className="h-[28px] rounded-[6px] border border-[#BBBBBB] bg-white px-2 text-right font-['Mulish'] text-[13px] text-[#3d3d3d] focus:outline-none focus:border-[#178830] focus:border-2 hover:border-[#178830] transition-colors"
+              />
               <div className="font-bold text-[#4a4a49]">Full Name 1</div>
-              <div tabIndex={-1} className="flex h-[28px] items-center rounded-[6px] border border-[#ACACAC] bg-[#CCCCCC] px-2 cursor-not-allowed">
-                {rec?.planCode !== "0" ? rec?.fullName1 : ""}
-              </div>
+              <input
+                type="text"
+                defaultValue={rec?.planCode !== "0" ? rec?.fullName1 : ""}
+                className="h-[28px] rounded-[6px] border border-[#BBBBBB] bg-white px-2 font-['Mulish'] text-[13px] text-[#3d3d3d] focus:outline-none focus:border-[#178830] focus:border-2 hover:border-[#178830] transition-colors"
+              />
               <div className="font-bold text-[#4a4a49]">Full Name 2</div>
-              <div tabIndex={-1} className="flex h-[28px] items-center rounded-[6px] border border-[#ACACAC] bg-[#CCCCCC] px-2 cursor-not-allowed">
-                {rec?.planCode !== "0" ? rec?.fullName2 : ""}
-              </div>
+              <input
+                type="text"
+                defaultValue={rec?.planCode !== "0" ? rec?.fullName2 : ""}
+                className="h-[28px] rounded-[6px] border border-[#BBBBBB] bg-white px-2 font-['Mulish'] text-[13px] text-[#3d3d3d] focus:outline-none focus:border-[#178830] focus:border-2 hover:border-[#178830] transition-colors"
+              />
             </div>
 
             <div className="grid grid-cols-[90px_1fr] gap-3 items-start">

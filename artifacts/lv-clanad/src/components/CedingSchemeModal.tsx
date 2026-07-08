@@ -151,7 +151,7 @@ function initialForm(planCode: string): FormState {
     postCode: "",
     telephone: "",
     letterStatus: "",
-    optionCase: is90 ? "No" : "",
+    optionCase: "",
   };
 }
 

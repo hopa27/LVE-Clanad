@@ -123,11 +123,11 @@ export function ApplicationDetailsTab() {
             </Field>
           )}
           <Field label="Status:">
-            <TextInput value={isPlan87 ? "P" : isPlan84 || isPlan90 ? "L" : isPlan51 ? "Q" : isPlan82 ? "S" : isPlan80 ? "M" : isPlan83 ? "W" : isPlan621 ? "I" : isPlan76 ? "D" : isPlan76z ? "Z" : isPlan62a ? "C" : isPlan611 ? "N" : isPlan52 ? "X" : isPlan61a ? "E" : "status"} disabled />
+            <TextInput value={isPlan87 ? "P" : isPlan84 ? "D" : isPlan90 ? "L" : isPlan51 ? "Q" : isPlan82 ? "S" : isPlan80 ? "M" : isPlan83 ? "W" : isPlan621 ? "I" : isPlan76 ? "D" : isPlan76z ? "Z" : isPlan62a ? "C" : isPlan611 ? "N" : isPlan52 ? "X" : isPlan61a ? "E" : "status"} disabled />
           </Field>
           {!isPlan87 && (
             <Field label="Suspended:">
-              <TextInput value={isPlan82 ? "Y" : isPlan84 || isPlan90 || isPlan80 || isPlan83 || isPlan621 || isPlan62a || isPlan611 || isPlan52 ? "N" : isPlan51 || isPlan76 || isPlan76z || isPlan61a ? "Y" : "DBSu"} disabled />
+              <TextInput value={isPlan82 || isPlan84 ? "Y" : isPlan90 || isPlan80 || isPlan83 || isPlan621 || isPlan62a || isPlan611 || isPlan52 ? "N" : isPlan51 || isPlan76 || isPlan76z || isPlan61a ? "Y" : "DBSu"} disabled />
             </Field>
           )}
           {!isPlan76z && !isPlan76 && (
@@ -173,7 +173,7 @@ export function ApplicationDetailsTab() {
               </Field>
             )}
             <Field label="Life One Dead:">
-              <TextInput value={isPlan84 || isPlan90 || isPlan80 || isPlan83 || isPlan82 || isPlan76z || isPlan611 || isPlan52 ? "" : isPlan51 || isPlan621 || isPlan76 || isPlan62a || isPlan61a ? "Y" : "DBLifeOneDe"} disabled />
+              <TextInput value={isPlan90 || isPlan80 || isPlan83 || isPlan82 || isPlan76z || isPlan611 || isPlan52 ? "" : isPlan84 || isPlan51 || isPlan621 || isPlan76 || isPlan62a || isPlan61a ? "Y" : "DBLifeOneDe"} disabled />
             </Field>
             <Field label="Life Two Dead:">
               <TextInput value={isPlan84 || isPlan90 || isPlan51 || isPlan80 || isPlan83 || isPlan82 || isPlan621 || isPlan76 || isPlan76z || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "" : "DBLifeTwoDe"} disabled />
@@ -185,14 +185,14 @@ export function ApplicationDetailsTab() {
               />
             </Field>
             <Field label="Closed:">
-              <TextInput value={isPlan84 || isPlan90 || isPlan51 || isPlan80 || isPlan83 || isPlan82 || isPlan621 || isPlan76z || isPlan62a || isPlan611 || isPlan61a ? "" : isPlan76 ? "10/09/2009 15:29:25" : isPlan52 ? "29/01/2008 1" : "DBClosed"} disabled />
+              <TextInput value={isPlan90 || isPlan51 || isPlan80 || isPlan83 || isPlan82 || isPlan621 || isPlan76z || isPlan62a || isPlan611 || isPlan61a ? "" : isPlan84 ? "16/06/2026 1" : isPlan76 ? "10/09/2009 15:29:25" : isPlan52 ? "29/01/2008 1" : "DBClosed"} disabled />
             </Field>
-            {!isPlan84 && !isPlan90 && !isPlan80 && !isPlan83 && !isPlan82 && !isPlan76z && (
+            {!isPlan90 && !isPlan80 && !isPlan83 && !isPlan82 && !isPlan76z && (
               <>
                 <Field label="Age at death:">
-                  <TextInput value={isPlan621 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "" : isPlan51 ? "58" : isPlan76 ? "94" : isPlan76z ? "95" : "edAge"} disabled />
+                  <TextInput value={isPlan621 || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "" : isPlan84 ? "62" : isPlan51 ? "58" : isPlan76 ? "94" : isPlan76z ? "95" : "edAge"} disabled />
                 </Field>
-                <Field label="Gross £:"><TextInput value="" /></Field>
+                <Field label="Gross £:"><TextInput value={isPlan84 ? "6222.8" : ""} /></Field>
                 <Field label="Paid net:">
                   <div className="flex items-center gap-2">
                     <Checkbox />
@@ -266,7 +266,7 @@ export function ApplicationDetailsTab() {
           </Field>
           {!isPlan90 && !isPlan51 && !isPlan621 && !isPlan76 && !isPlan76z && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
             <Field label="Dependant Eligible to Receive Benefits:">
-              <TextInput value={isPlan87 || isPlan84 || isPlan80 || isPlan83 || isPlan82 ? "" : "edtEli"} disabled />
+              <TextInput value={isPlan84 ? "N" : isPlan87 || isPlan80 || isPlan83 || isPlan82 ? "" : "edtEli"} disabled />
             </Field>
           )}
         </div>

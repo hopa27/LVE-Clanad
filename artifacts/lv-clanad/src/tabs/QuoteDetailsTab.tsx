@@ -28,8 +28,8 @@ const QUOTE_ROWS_84 = [
     type: "Std Pre 97", premium: "£27,131.96", tfc: "£6,782.99", original: "£1,294.00",
     escType: "Fixed", escRate: "0", currentInc: "£1,294.00", spousePct: "0",
     spouseInc: "£0.00", guarantee: "", lastPay: "", overlap: "No",
-    valProt: "100", taxFree: "", maxFree: "",
-    valProtFlag: "", lsConvert: "", planProt: "", dependant: "",
+    valProt: "100", taxFree: "25", maxFree: "F",
+    valProtFlag: "T", lsConvert: "", planProt: "", dependant: "None",
   },
 ];
 

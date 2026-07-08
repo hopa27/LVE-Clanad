@@ -371,7 +371,7 @@ export function QuoteDetailsTab() {
               <div>
                 <Field label="Life Type:"><TextInput value={isPlan611 ? "FM" : isPlan87 || isPlan51 || isPlan82 || isPlan83 || isPlan621 || isPlan62a || isPlan61a ? "M" : isPlan90 ? "" : "F"} disabled /></Field>
                 <Field label="Plan Type:">
-                  <TextInput value={isPlan84 ? "FTA" : isPlan90 ? "MCP" : isPlan51 || isPlan611 || isPlan61a ? "CPA" : (isPlan80 || isPlan82 || isPlan83) ? "PRP" : isPlan621 || isPlan62a || isPlan52 ? "PPA" : isPlan76 || isPlan76z ? "ICFP" : "FTA"} disabled />
+                  <TextInput value={isPlan84 ? "FTA(PRP)" : isPlan90 ? "MCP" : isPlan51 || isPlan611 || isPlan61a ? "CPA" : (isPlan80 || isPlan82 || isPlan83) ? "PRP" : isPlan621 || isPlan62a || isPlan52 ? "PPA" : isPlan76 || isPlan76z ? "ICFP" : "FTA"} disabled />
                 </Field>
                 <Field label="Payments:"><TextInput value={isPlan83 || isPlan76 || isPlan76z || isPlan611 || isPlan52 || isPlan61a ? "AD" : "AR"} disabled /></Field>
                 <Field label="Frequency:"><TextInput value={isPlan87 || isPlan62a ? "1" : isPlan80 || isPlan84 || isPlan90 || isPlan82 || isPlan83 || isPlan621 || isPlan76 || isPlan76z || isPlan611 || isPlan52 || isPlan61a ? "12" : isPlan51 ? "4" : "2"} disabled /></Field>

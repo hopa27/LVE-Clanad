@@ -18,12 +18,17 @@ const SIM_ROWS_82: SimRow[] = [
   { policyNo: "116444", status: "S", productType: "PRP" },
 ];
 
+const SIM_ROWS_84: SimRow[] = [
+  { policyNo: "111834.1", status: "I", productType: "PRP" },
+  { policyNo: "198364", status: "M", productType: "PRP" },
+];
+
 export function PolicyHeader() {
   const [simOpen, setSimOpen] = useState(false);
   const [selectedIdx, setSelectedIdx] = useState<number | null>(null);
   const { planCode, surname, policyRef } = usePlanCode();
 
-  const SIM_ROWS = planCode === "82" ? SIM_ROWS_82 : SIM_ROWS_DEFAULT;
+  const SIM_ROWS = planCode === "82" ? SIM_ROWS_82 : planCode === "84" ? SIM_ROWS_84 : SIM_ROWS_DEFAULT;
 
   return (
     <div className="lve-panel mb-6 p-4 flex flex-nowrap items-center gap-3 overflow-x-auto">

@@ -682,21 +682,21 @@ export function PaymentsTab() {
             </div>
             <div>
               <Field label="Cumulative Instal:"><TextInput value={isPlan87 ? "" : isPlan84 ? "107.83" : "10,269.82"} disabled /></Field>
-              <Field label="BAL Gross Annuity:"><TextInput value={isPlan87 ? "" : isPlan84 ? "1186.17" : "699.50"} disabled /></Field>
-              <Field label="Taxable pay:"><TextInput value={isPlan87 ? "" : isPlan84 ? "63.74" : "-5,590.06"} disabled /></Field>
-              <Field label="Cumulative Free Pay:"><TextInput value={isPlan87 ? "" : isPlan84 ? "44.09" : "6,289.56"} disabled /></Field>
-              <Field label="PAYE Tax Due To Date:"><TextInput value={isPlan87 ? "" : isPlan84 ? "-12.6" : "-2,780.46"} disabled /></Field>
+              <Field label="BAL Gross Annuity:"><TextInput value={isPlan87 ? "" : isPlan84 ? "-5036.63" : "699.50"} disabled /></Field>
+              <Field label="Taxable pay:"><TextInput value={isPlan87 ? "" : isPlan84 ? "5174.54" : "-5,590.06"} disabled /></Field>
+              <Field label="Cumulative Free Pay:"><TextInput value={isPlan87 ? "" : isPlan84 ? "1048.26" : "6,289.56"} disabled /></Field>
+              <Field label="PAYE Tax Due To Date:"><TextInput value={isPlan87 ? "" : isPlan84 ? "-1453.86" : "-2,780.46"} disabled /></Field>
             </div>
             <div>
               <Field label="Next Anniversary:">
-                <DatePicker value={isPlan84 ? "31/03/2027" : ""} placeholder="Next Anniversary" disabled />
+                <DatePicker value="" placeholder="Next Anniversary" disabled />
               </Field>
               <Field label="Next Payment Due:">
-                <DatePicker value={isPlan84 ? "31/05/2026" : ""} placeholder="Next Payment Due" disabled />
+                <DatePicker value="" placeholder="Next Payment Due" disabled />
               </Field>
-              <Field label="Inst Remaining:"><TextInput value={isPlan87 ? "" : isPlan84 ? "11" : "1"} disabled /></Field>
+              <Field label="Inst Remaining:"><TextInput value={isPlan87 ? "" : isPlan84 ? "10" : "1"} disabled /></Field>
               <Field label="Nth Inst:"><TextInput value={isPlan87 ? "" : isPlan84 ? "1" : "6"} disabled /></Field>
-              <Field label="PAYE Tax Deduction:"><TextInput value={isPlan84 ? "-12.6" : "0"} disabled /></Field>
+              <Field label="PAYE Tax Deduction:"><TextInput value={isPlan84 ? "-1441.26" : "0"} disabled /></Field>
             </div>
           </div>
         )}

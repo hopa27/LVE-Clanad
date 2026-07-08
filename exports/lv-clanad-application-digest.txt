@@ -1,0 +1,197 @@
+LV= CLANAD — Application Digest
+══════════════════════════════════════════════════════════════
+
+SYSTEM OVERVIEW
+─────────────────────────────────────────────────────────────
+Name:    LV= CLANAD (Client Annuity Administration System)
+Purpose: Administration of legacy LV= annuity policies
+Type:    Static single-page application (no backend)
+Data:    All data hard-coded from reference screenshots
+Hosting: Replit static deployment  |  path: /
+
+TECHNOLOGY STACK
+─────────────────────────────────────────────────────────────
+Framework:  Angular (LVE Component Library)
+Toolchain:  pnpm workspaces · TypeScript 5.9 · Vite
+Styling:    TailwindCSS v4
+Icons:      react-icons/md  (Material Design Line Icons only)
+Fonts:      Livvic  (headers / buttons / tabs)
+            Mulish  (body / inputs / labels)
+Artifact:   lv-clanad  ->  preview path /
+
+DESIGN TOKENS (LVE Design System)
+─────────────────────────────────────────────────────────────
+Primary       #006cf4     Hover         #003578
+Navy (header) #00263e     Dark Navy     #002f5c
+Link Blue     #005a9c     Secondary     #04589b
+Highlight     #05579B     Green focus   #178830
+Error         #d72714     Tab inactive  #eaf5f8
+Page BG       #f0f0f0     Border        #BBBBBB
+Radius pill   30px        Radius panel  8px
+
+PAGE SHELL (mandatory)
+  Root:   min-h-screen flex flex-col bg-[#f0f0f0]
+  Header: navy bar, LV logo + Logout + divider + page title
+  main:   flex-1 px-[142px] py-8
+  Footer: white bar, logo + address  (mt-auto sticks bottom)
+
+PLAN CODES
+─────────────────────────────────────────────────────────────
+Code   Plan   Status              Accent bg
+─────  ─────  ──────────────────  ─────────────────
+0      –      (master/default)    #848285  grey
+87     FTA    PENDING             #F28C28  orange
+84     PRP    DEAD                #BEE4BE  green  *focus*
+90     MCP    LIVE (SIPP)         #F4D9E8  pink
+51     CPA    MIGRATED            #000080  navy
+80     PRP    Matured             #BEE4BE  green
+82     PRP    Surrendered         #BEE4BE  green
+83     PRP    Maturity Pending    #BEE4BE  green
+621    CCP    Death Pending       #000080  navy
+76     ICFP   DEAD                #000080  navy
+76z    ICFP   Death Pending       #000080  navy
+62a    PPA    CANCELLED           #000080  navy
+611    PRA    SHELVED Ntu         #000080  navy
+52     FTA    SHELVED Duplicate   #000080  navy
+61a    PRA    EXPIRED             #000080  navy
+
+STATUS BAR VALUES (selected plans)
+─────────────────────────────────────────────────────────────
+Plan  Status          Illustration  Variant  RAQ ID     User
+────  ──────────────  ────────────  ───────  ─────────  ────
+87    PENDING         20825226      1        RAQ233845  UAT1
+84    DEAD            2139419       4        –          UAT2
+90    LIVE (SIPP Pol) 608513        –        –          UAT1
+51    MIGRATED        927657        8        –          UAT1
+80    Matured         2079105       13       –          UAT3
+
+TOOLBAR — VISIBILITY & TARGETS
+─────────────────────────────────────────────────────────────
+Button      Enabled when               Opens
+──────────  ─────────────────────────  ─────────────────────
+New App     always                     QuoteLookupModal
+New Quote   plan 87 only               PullQuoteModal
+Sim App     disabled: 51, 76, 84       QuoteLookupModal
+Edit/Save   disabled: 76, 84          (toggles edit mode)
+Cancel      editing & not plan 51      (reverts changes)
+Search      not editing                FindPolicyModal
+Log         not editing                ChequeLoggerModal
+CRS         not editing                CrsModal
+Reports     not editing                ReportsModal
+Company     not editing                CompanySelectionModal
+
+TAB VISIBILITY BY PLAN
+─────────────────────────────────────────────────────────────
+All plans:
+  Application Details  Annuitant(s) Details  Policy Details
+  Bank Acc Details  Payments  Increase History  Quote Details
+  Diary & Audit Trail  Notes  Letters  Events
+  Maturities/Surrender  LOA/POA
+
+Plans 76 / 76z only:  + Contacts  + Contacts 2
+Plans 611 / 61a:      Contacts hidden
+
+STATE MANAGEMENT (React Context)
+─────────────────────────────────────────────────────────────
+PlanCodeContext       planCode · setPlanCode
+EditModeContext       editing · setEditing · cancel · cancelKey
+ChequesContext        cheque rows for Bank Acc tab
+ShortcutRegistryCtx   keyboard shortcut registration (F1/F5/...)
+
+KEYBOARD SHORTCUTS
+─────────────────────────────────────────────────────────────
+F1   Screen Print  -> ScreenPrintModal
+F5   Search        -> FindPolicyModal
+Registered via ShortcutRegistryContext + useRegisteredShortcuts
+Toolbar IDs: toolbar:edit  toolbar:cancel  toolbar:new-app
+
+KEY PLAN 84 BEHAVIOURS (DEAD policy — validated vs. code)
+─────────────────────────────────────────────────────────────
+Toolbar:
+  Edit/Save    disabled (read-only policy)
+  Sim App      disabled
+
+Tab-level:
+  Diary   Complete Diary Note  disabled
+  Bank    Delete Sort Code     disabled
+  Policy  More (SIM Policies)  disabled
+
+Application Details tab:
+  Status              = D
+  Suspended           = Y
+  Life One Dead       = Y
+  Closed              = 16/06/2026  (field 1 = "1")
+  Age at death        = 62
+  Gross £             = 6222.8
+  Dependant Eligible  = N
+
+Annuitant(s) Details tab:
+  DOD                 = 03/03/2021
+  Cause of Death section visible (ICD#1/ICD#2/ICD#3)
+
+Policy Details tab:
+  Purchaser               disabled (grey)
+  Policy Owner            disabled (grey)
+  Initial Payment Method  disabled (grey)
+  Pay Tax Free Cash by    disabled (grey)
+  Advice Type             disabled (grey)
+  Issue Statements        disabled (grey)
+  Copy Annual Statement to IFA/PH  disabled (grey)
+  Issue wake up letters   disabled (grey)
+
+Status Bar:
+  Status = DEAD · Illustration = 2139419 · Variant = 4
+  RAQ ID = –   · User = UAT2
+
+Find Policy (plan 84 row):
+  Status column = D
+
+COMPONENT ARCHITECTURE
+─────────────────────────────────────────────────────────────
+App.tsx
+  ShortcutRegistryProvider
+    EditModeProvider
+      ChequesProvider
+        PlanCodeProvider
+          AppShell
+            Header.tsx         menus + all menu-triggered modals
+            Toolbar.tsx        buttons + toolbar-triggered modals
+            PolicyHeader.tsx   plan selector · SIM Policies panel
+            TabBar.tsx         15 tabs, plan-filtered
+            [ActiveTab]        remounts on cancelKey / planCode change
+            StatusBar.tsx
+            Footer.tsx
+
+Shared UI primitives (Field.tsx):
+  TextInput  SelectInput  Checkbox  Section  Field
+
+DatePicker.tsx       custom with dd/mm/yyyy masking
+ConnectedAddress.tsx 5-line address linked to postcode
+
+MODAL CATALOGUE (29 modals)
+─────────────────────────────────────────────────────────────
+Toolbar-triggered (7):
+  QuoteLookupModal          PullQuoteModal (plan 87)
+  FindPolicyModal           ChequeLoggerModal
+  CrsModal                  ReportsModal
+  CompanySelectionModal
+
+Menu-triggered (19):
+  ScreenPrintModal          P45DetailsModal (plan 84)
+  CustomerNeedsModal        KeyboardShortcutsModal
+  SetDeadModal              CedingSchemeModal
+  TaxCertificateModal       CopyP60Modal
+  AmendChequesModal         AmendIfaModal
+  SupervisoryEditModal      BankChangesReportModal
+  ReprintAnnualStatementsModal  RecalcAnnStatModal
+  ReprintMaturityModal      AboutModal
+
+Tab-triggered (4):
+  MiscDiaryModal            EditBankDetailsModal
+  DoctorDatabaseModal       ViewNotionalValueModal
+
+Sub-modal (1):
+  LocateFieldValueModal     (inside QuoteLookupModal)
+
+System dialogs (2):
+  ConfirmDialog             WinErrorDialog

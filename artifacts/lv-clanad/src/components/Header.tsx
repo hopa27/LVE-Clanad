@@ -388,7 +388,7 @@ const SUPERVISOR_84: MenuOption[] = [
     disabled: true,
     submenu: [{ label: "LTC Benefit" }],
   },
-  { label: "Pull Quote", action: "pull-quote" },
+  { label: "Pull Quote", disabled: true },
   { kind: "separator" },
   { label: "Reprint Annual Statements", action: "reprint-annual-statements" },
   { label: "Annual Statement Recalculation", action: "annual-statement-recalc" },

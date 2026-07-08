@@ -120,6 +120,33 @@ const CHEQUES_90: ChequeRow[] = [
   },
 ];
 
+const CHEQUES_84: ChequeRow[] = [
+  {
+    chequeNo: 1,
+    amount: 23722.24,
+    scheme: "Friends Provident",
+    schemeRef: "Z99999/9999",
+    address1: "PO Box 1550",
+    address2: "Milford",
+    address3: "Salisbury, Wiltshire",
+    postcode: "SP1 2TW",
+    letterStatus: "Active",
+    telephone: "",
+  },
+  {
+    chequeNo: 2,
+    amount: 3032.91,
+    scheme: "AXA",
+    schemeRef: "ZZ99999999",
+    address1: "",
+    address2: "",
+    address3: "",
+    postcode: "",
+    letterStatus: "",
+    telephone: "",
+  },
+];
+
 type Mode = "view" | "new" | "edit";
 
 type FormState = {
@@ -138,9 +165,40 @@ type FormState = {
 };
 
 function initialForm(planCode: string): FormState {
-  const is90 = planCode === "90";
+  if (planCode === "90") {
+    return {
+      policyNumber: "227813",
+      schemeName: "",
+      amount: "",
+      transferType: "",
+      cedingRef: "",
+      address1: "",
+      address2: "",
+      address3: "",
+      postCode: "",
+      telephone: "",
+      letterStatus: "",
+      optionCase: "",
+    };
+  }
+  if (planCode === "84") {
+    return {
+      policyNumber: "111834",
+      schemeName: "Friends Provident",
+      amount: "23722.24",
+      transferType: "",
+      cedingRef: "Z99999/9999",
+      address1: "PO Box 1550",
+      address2: "Milford",
+      address3: "Salisbury, Wiltshire",
+      postCode: "SP1 2TW",
+      telephone: "",
+      letterStatus: "Active",
+      optionCase: "No",
+    };
+  }
   return {
-    policyNumber: is90 ? "227813" : planCode === "84" ? "111834" : planCode === "87" ? "233451" : "233433",
+    policyNumber: planCode === "87" ? "233451" : "233433",
     schemeName: "",
     amount: "",
     transferType: "",
@@ -156,7 +214,9 @@ function initialForm(planCode: string): FormState {
 }
 
 function chequesFor(planCode: string): ChequeRow[] {
-  return planCode === "90" ? CHEQUES_90 : CHEQUES_DEFAULT;
+  if (planCode === "90") return CHEQUES_90;
+  if (planCode === "84") return CHEQUES_84;
+  return CHEQUES_DEFAULT;
 }
 
 function Label({ children }: { children: React.ReactNode }) {

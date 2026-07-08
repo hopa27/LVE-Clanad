@@ -45,6 +45,7 @@ const TYPE_OPTIONS = [
   "Overpayment",
   "Post GPR Client",
   "Post GPR Spouse",
+  "TOBA",
 ];
 
 function startOfDay(d: Date) {

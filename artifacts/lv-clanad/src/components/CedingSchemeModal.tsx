@@ -115,7 +115,7 @@ const CHEQUES_90: ChequeRow[] = [
     address2: "Tilehouse Street",
     address3: "Hitchin, Herts",
     postcode: "SG5 2DX",
-    letterStatus: "Active",
+    letterStatus: "Y",
     telephone: "",
   },
 ];

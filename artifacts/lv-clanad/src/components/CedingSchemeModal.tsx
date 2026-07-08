@@ -184,17 +184,17 @@ function initialForm(planCode: string): FormState {
   if (planCode === "84") {
     return {
       policyNumber: "111834",
-      schemeName: "Friends Provident",
-      amount: "23722.24",
+      schemeName: "",
+      amount: "",
       transferType: "",
-      cedingRef: "Z99999/9999",
-      address1: "PO Box 1550",
-      address2: "Milford",
-      address3: "Salisbury, Wiltshire",
-      postCode: "SP1 2TW",
+      cedingRef: "",
+      address1: "",
+      address2: "",
+      address3: "",
+      postCode: "",
       telephone: "",
-      letterStatus: "Active",
-      optionCase: "No",
+      letterStatus: "",
+      optionCase: "",
     };
   }
   return {

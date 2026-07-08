@@ -130,11 +130,13 @@ export function PolicyDetailsTab() {
         <Field label="Purchaser:">
           <TextInput
             value={isPlan87 || isPlan52 ? "" : isPlan84 ? "Testmtbbbide" : isPlan90 ? "Testbtcchibd" : isPlan51 ? "Testzhbaabii" : isPlan82 ? "Testmrbbgeee" : isPlan80 ? "Testmrbbbaib" : isPlan83 ? "Testindbggajc" : isPlan621 ? "Testmrbaaaae.b" : isPlan76 ? "Testmlbaabia" : isPlan76z ? "Testmybabihd" : isPlan62a ? "Testmsbbibag" : isPlan611 ? "Testnnbaadad" : isPlan61a ? "Testsebacjcj.b" : "DBEdit5"}
+            disabled={isPlan84}
           />
         </Field>
         <Field label="Policy Owner:">
           <SelectInput
             value={isPlan84 ? "Testmtbbbide" : isPlan90 ? "Belinda Testctcchibd" : isPlan51 ? "Simon Simon Testsubaabii" : isPlan82 ? "Testmrbbgeee" : isPlan80 ? "Testmrbbbaib" : isPlan83 ? "Testindbggajc" : isPlan621 ? "Testmrbaaaae.b" : isPlan76 ? "Colin Testslbaabia" : isPlan76z ? "Testmybabihd" : isPlan62a ? "Testmsbbibag" : ""}
+            disabled={isPlan84}
             options={
               isPlan84
                 ? ["Testmtbbbide"]
@@ -539,7 +541,7 @@ export function PolicyDetailsTab() {
           <DatePicker
             value=""
             placeholder=""
-            disabled={!isPlan90 && !isPlan51 && !isPlan76 && !isPlan76z && !isPlan611 && !isPlan61a}
+            disabled={!isPlan84 && !isPlan90 && !isPlan51 && !isPlan76 && !isPlan76z && !isPlan611 && !isPlan61a}
           />
         </Field>
         <Field label="Agency Ref:">
@@ -552,7 +554,7 @@ export function PolicyDetailsTab() {
           <DatePicker
             value=""
             placeholder=""
-            disabled={!isPlan90 && !isPlan51 && !isPlan76 && !isPlan76z && !isPlan611 && !isPlan61a}
+            disabled={!isPlan84 && !isPlan90 && !isPlan51 && !isPlan76 && !isPlan76z && !isPlan611 && !isPlan61a}
           />
         </Field>
       </Section>

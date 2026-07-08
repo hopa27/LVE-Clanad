@@ -344,8 +344,9 @@ export function ApplicationDetailsTab() {
             </Field>
             <Field label="Country:">
               <SelectInput
-                value={isPlan90 || isPlan51 || isPlan80 || isPlan82 || isPlan621 || isPlan76 || isPlan76z || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "United Kingdom" : "cmbCountry"}
+                value="United Kingdom"
                 options={["United Kingdom", "Ireland", "Other"]}
+                disabled
               />
             </Field>
             <div className="mt-2"><Checkbox label="Address Unknown / Gone Away" /></div>

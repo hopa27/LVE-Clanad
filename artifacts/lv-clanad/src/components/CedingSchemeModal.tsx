@@ -143,7 +143,7 @@ function initialForm(planCode: string): FormState {
     policyNumber: is90 ? "227813" : planCode === "84" ? "111834" : planCode === "87" ? "233451" : "233433",
     schemeName: "",
     amount: "",
-    transferType: is90 ? 'Other UK Registered Pension Scheme (eg. "Personal Pension" or "SIPP")' : "",
+    transferType: "",
     cedingRef: "",
     address1: "",
     address2: "",

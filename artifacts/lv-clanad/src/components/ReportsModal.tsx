@@ -297,6 +297,7 @@ export function ReportsModal({
             <div className="flex flex-col w-[200px]">
               <label className="lve-label">Start Date</label>
               <DatePicker
+                key={`start-${systemName}`}
                 value={startDate}
                 placeholder={isEmptySystem ? "" : "Start Date"}
                 disabled={false}
@@ -309,6 +310,7 @@ export function ReportsModal({
             <div className="flex flex-col w-[200px]">
               <label className="lve-label">End Date</label>
               <DatePicker
+                key={`end-${systemName}`}
                 value={endDate}
                 placeholder={isEmptySystem ? "" : "End Date"}
                 disabled={false}

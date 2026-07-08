@@ -362,7 +362,8 @@ export function AnnuitantDetailsTab() {
             : "dob1"
           }
           dod={
-            isPreset    ? ""
+            isPlan84    ? "03/03/2021"
+            : (isPlan87 || isPlan90) ? ""
             : isPlan51  ? "26/09/2014"
             : isPlan80  ? ""
             : isPlan83  ? ""
@@ -432,7 +433,7 @@ export function AnnuitantDetailsTab() {
             : "DBEdUWDat"
           }
           daysSinceUW={isPlan76z ? "6581" : isPlan76 ? "6726" : ""}
-          showCauseOfDeath={!isPreset && !isPlan80 && !isPlan83 && !isPlan82 && !isPlan52}
+          showCauseOfDeath={!isPlan87 && !isPlan90 && !isPlan80 && !isPlan83 && !isPlan82 && !isPlan52}
           showDod={!isPlan87 && !isPlan611}
           doctorDisabled={isPlan621 || isPlan87}
           showUwDateBlock={!isPreset && !isPlan51 && !isPlan80 && !isPlan83 && !isPlan82 && !isPlan621 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a}

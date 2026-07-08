@@ -123,10 +123,10 @@ buttons:
   - New App:    { icon: MdAdd,        opens: ConfirmDialog "Create a new Application?" -> QuoteLookupModal }
   - New Quote:  { icon: MdNoteAdd,    enabled_when: "isPlan87", else: always disabled (placeholder) }
   - Sim App:    { icon: MdContentCopy, opens: ConfirmDialog "generate simultaneous policy?" -> QuoteLookupModal, hidden_for: ["51", "76"] }
-  - Edit/Save:  { icon: "MdEdit / MdCheck", toggles: EditModeService.editing$, hidden_for: ["76"] }
+  - Edit/Save:  { icon: "MdEdit / MdCheck", toggles: EditModeService.editing$, hidden_for: ["76", "84"] }  # plan 84 is deceased — no edits permitted
   - Cancel:     { icon: MdCancel,     enabled_when: "editing && planCode != '51'" }
   - Search:     { icon: MdSearch,     opens: FindPolicyModal }
-  - Log:        { icon: MdSchedule,   opens: ChequeLoggerModal, hidden_for: ["51","62a","611","52","84","90","621"] }
+  - Log:        { icon: MdSchedule,   opens: ChequeLoggerModal, hidden_for: ["51","62a","611","52","84","90","621"] }  # 84 drops both Edit and Log
   - CRS:        { icon: MdArchive,    opens: CrsModal }
   - Reports:    { icon: MdAssessment, opens: ReportsModal }
   - Company:    { icon: MdBusiness,   opens: CompanySelectionModal }
@@ -187,10 +187,10 @@ position: "bottom of main content area, above app-footer"
 layout: "wrapping row of label/value pairs"
 fields:
   - Status: "text derived from planCode -> STATUS_LABEL map (LIVE / MIGRATED / PENDING / Maturity Pending / Matured / Surrendered / Death Pending / DEAD / CANCELLED / SHELVED - Ntu / SHELVED - Duplicate / EXPIRED)"
-  - SIPP Pol: sample value
-  - Variant: sample value
-  - RAQ ID: sample value
-  - User: sample value (e.g. UAT3)
+  - label_Illustration_or_SIPP_Pol: "label = 'SIPP Pol' only for plan 90; 'Illustration' for all others; plan 84 value = 2139419"
+  - Variant: "plan 84 = 4; plan 90 has no Variant shown"
+  - RAQ ID: "plan 84 = blank; plan 87 = RAQ233845; plan 90 = blank; others = blank or —"
+  - User: "UAT1 (83, 51, 62a, 90, 87), UAT2 (84), UAT3 (all others)"
 ```
 
 ### 2.7 App shell composition
@@ -250,7 +250,7 @@ mutation: "Only PlanCodeService.select(planCode, surname, policyRef), called fro
 | --- | --- | --- | --- |
 | `0` | master | **Master — non-dynamic baseline** (see §3.3) | n/a |
 | `87` | FTA | Standard controls | PENDING |
-| `84` | FTA | Full controls (incl. GAD & IR) | LIVE |
+| `84` | PRP | Full controls (incl. GAD & IR); policy holder deceased | DEAD |
 | `90` | MCP | Monthly Cash Policy — default on load | LIVE |
 | `51` | CPA | Status Q | MIGRATED |
 | `83` | PRP | Status W | Maturity Pending |
@@ -319,6 +319,7 @@ plan_variants:
   "76,76z": "Days Since Application hidden"
   "621": "Commuted Value / LTA fields shown"
   "87,84,90": "compact mode — blank/placeholder fields dropped; col4 dropped entirely for 87"
+  "84": "death-state values: Status=D, Suspended=Y, Life One Dead=Y, Closed=16/06/2026 1, Age at death=62, Gross £=6222.8; death payment block visible; Dependant Eligible=N"
 modals: none
 ```
 
@@ -332,7 +333,8 @@ sections:
     col3: [ELE, MRSD, MAR required?, MAR Copy to PH?, Date MAR Sent, Date MAR Received, U/W Ref, U/W Date, Days Since U/W]
   - dependant_second_beneficiary: "same AnnuitantBlock minus Short Name & U/W fields"
 plan_variants:
-  "87,84,90,80,83,82,52": "Cause of Death block hidden"
+  "87,90,80,83,82,52": "Cause of Death block hidden"
+  "84": "Cause of Death block VISIBLE (deceased); DOD = 03/03/2021; DOD field enabled"
   "76z": "relabels ELE/MRSD, disables several MAR/Doctor fields"
   "51": "NI delete triggers WinErrorDialog ('migrated' error)"
 modals: [DoctorDatabaseModal, ConfirmDialog (NI delete), WinErrorDialog]
@@ -375,6 +377,8 @@ plan_variants:
   "90": "Tax Free ticked"
   "611": "Non Standard Policy section hidden"
   "84,90,51": "Initial payment method forced to B"
+  "84_disabled_fields": "Purchaser, Policy Owner, Initial payment method, Pay TFC by, Advice Type, Issue Statements, Copy Ann. Stmt to IFA, Copy Ann. Stmt to PH, Issue wake-up/maturity letters — all read-only (policy is deceased)"
+  "84_enabled_fields": "Deceased Date and Notification Date pickers enabled (to record date-of-death notification)"
 modals: none
 ```
 
@@ -518,7 +522,7 @@ menu_variance_by_plan:
   "51,62a,611,61a,52": "Options+Print+Help only (reduced item sets)"
   "87": "Process overrides P45 details / Ceding Scheme Details with real handlers; Supervisor -> SUPERVISOR_87"
   "80,82,83": "Options -> OPTIONS_84; Process adds Set Dead ▶, Payments ▶ Suspend, PLA Cancellation; Print/Supervisor plan-specific"
-  "84,90": "Supervisor -> SUPERVISOR_84 (84) or SUPERVISOR_90 (90, adds Expired + Cancel Application)"
+  "84,90": "Supervisor -> SUPERVISOR_84 (plan 84, deceased policy) or SUPERVISOR_90 (plan 90, adds Expired + Cancel Application)"
   "621": "Options->OPTIONS_84, Process->PROCESS_83, Print->PRINT_84, Supervisor->SUPERVISOR_83"
   "76": "Process->PROCESS_76, Supervisor->SUPERVISOR_84"
   "76z": "Process->PROCESS_76z, Print->PRINT_82, Supervisor->SUPERVISOR_83"
@@ -859,3 +863,18 @@ providers (App):
 - [x] Proposed Angular component map for every screen, tab, and modal.
 - [x] Design tokens — fonts (Livvic/Mulish), `--radius: 30px`, `zoom: 0.8`,
       full brand colour table, plan-code accent pairs.
+
+---
+
+## 11. Document Downloads
+
+These documents are served as static files from the application's `/public/`
+directory and are accessible directly in the browser or via `curl`:
+
+| Document | URL path |
+|---|---|
+| **Screen Flow (ASCII)** — every screen, tab, modal, and navigation path | [`/CLANAD_SCREEN_FLOW_Angular_LVE.md`](/CLANAD_SCREEN_FLOW_Angular_LVE.md) |
+| **This file** — Application Digest (compact reference) | [`/CLANAD_DIGEST_Angular_LVE.md`](/CLANAD_DIGEST_Angular_LVE.md) |
+
+To download: navigate to the URL above in any browser and use
+**File → Save As** (or right-click → Save link as) to save the `.md` file locally.

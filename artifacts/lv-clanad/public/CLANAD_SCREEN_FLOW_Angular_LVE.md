@@ -76,7 +76,7 @@ booleans from it (`isPlan87`, `isPlan84`, `isPlan90`, `isPlan51`, `isPlan83`,
 |---|---|---|---|
 | **`0`** | master | **Master — Default version** (see §0B) | n/a |
 | `87` | FTA | Version 87 — Standard controls | PENDING |
-| `84` | FTA | Version 84 — Full controls (incl. GAD & IR) | LIVE |
+| `84` | PRP | Version 84 — Full controls (incl. GAD & IR); policy holder deceased | DEAD |
 | `90` | MCP | Version 90 — MCP | LIVE |
 | `51` | CPA | Version 51 — CPA (Status Q) | MIGRATED |
 | `83` | PRP | Version 83 — PRP (Status W) | Maturity Pending |
@@ -320,8 +320,8 @@ button row — the equivalent of a shared `app-alert-dialog` /
 |---|---|---|
 | **New App** | not editing | Opens `app-confirm-dialog` "Create a new Application?" → `QuoteLookupModal` |
 | **New Quote** | `isPlan87` only | (always disabled in this build — placeholder) |
-| **Sim App** | not editing, not plan `51`/`76` | Opens `app-confirm-dialog` "Are you sure you wish to generate simultaneous policy?" → `QuoteLookupModal` |
-| **Edit / Save** | not plan `76` | Toggles the app-wide `EditModeService.editing$` signal; label + icon swap Edit↔Save |
+| **Sim App** | not editing, not plans `51`/`76`/`84` | Opens `app-confirm-dialog` "Are you sure you wish to generate simultaneous policy?" → `QuoteLookupModal` |
+| **Edit / Save** | not plans `76` or `84` | Toggles the app-wide `EditModeService.editing$` signal; label + icon swap Edit↔Save |
 | **Cancel** | editing, not plan `51` | `EditModeService.cancel()` reverts unsaved edits |
 | **Search** | not editing | Opens `FindPolicyModal` (§4) |
 | **Log** | not editing | Opens `ChequeLoggerModal` |
@@ -330,8 +330,18 @@ button row — the equivalent of a shared `app-alert-dialog` /
 | **Company** | not editing | Opens `CompanySelectionModal` |
 
 Toolbar button set is further trimmed per plan:
-- `51`/`62a`/`611`/`52` → drop **Edit** and **Log**.
-- `84`/`90`/`621` → drop **Log** only.
+- `51`/`62a`/`611`/`52` → **remove** Edit and Log from the toolbar entirely.
+- `84` → **remove** Log; Edit remains rendered but is **disabled** (grayed out); Sim App also disabled.
+- `90`/`621` → remove Log only.
+
+### 3B. New Quote
+
+**New Quote** (`isPlan87` only) is a toolbar button that is enabled only when plan `87` is
+loaded. In the current build its click handler is intentionally a no-op (`/* always disabled */`);
+the button is visually available to convey that the action exists for FTA policies but
+the full quote-creation workflow is not wired in this static recreation. In a real Angular
+implementation it would open a `PullQuoteModal` / quote-entry flow directly (without a
+prior Confirm dialog, unlike New App → QuoteLookupModal which shows a confirm first).
 
 ### 3A. Toolbar-launched modal ASCII
 
@@ -366,7 +376,7 @@ practical "search screen" of the app.
 |-------------------------------------------------------------------------------------------------- |
 |    dbePolNo|  master  |     0     |     Master      |              |               |        | ... |  <- Plan 0 row: only 4 cols populated
 |      233451|   FTA    |    87     |      UGGIU      | JK-90-90-90-C|    20825226   |   P    | ... |
-|      111834|   PRP    |    84     |  TESTPTBBBIDE   | PK-25-10-58-A|     2139419   |   L    | ... |
+|      111834|   PRP    |    84     |  TESTPTBBBIDE   | PK-25-10-58-A|     2139419   |   D    | ... |
 |      227813|   MCP    |    90     |  TESTCTCCHIBD   | CH-10-05-59-A|    25027464   |   L    | ... |
 |         ... 15 rows total (one per plan code) ...                                                  |
 |-------------------------------------------------------------------------------------------------- |
@@ -510,6 +520,10 @@ are the **current, verified** implementation.
 - Commuted Value / LTA fields shown only for plan `621`.
 - `isCompact` mode (`87`, `84`, `90`) hides blank/placeholder fields and drops
   the 4th column entirely for `87`.
+- **Plan `84` death-state values:** Status = `D`, Suspended = `Y`, Life One Dead = `Y`,
+  Closed = `16/06/2026 1`, Age at death = `62`, Gross £ = `6222.8`; the death
+  payment block (Paid net / Date Paid / Payee / Trustee / Create payment) is
+  shown; Dependant Eligible = `N`.
 - No sub-modals; date-pickers only.
 
 ### 7.2 Annuitant(s) Details — `app-tab-annuitant`
@@ -530,7 +544,8 @@ are the **current, verified** implementation.
 | Dependant / Second Annuitant / Beneficiary            (same 3-column layout, minus Short Name & U/W fields) |
 +-----------------------------------------------------------------------------------------------------------+
 ```
-- Cause of Death block **hidden** for plans `87, 84, 90, 80, 83, 82, 52`.
+- Cause of Death block **hidden** for plans `87, 90, 80, 83, 82, 52`; **visible** for plan `84` (policy holder is deceased — ICD fields and Doctor lookup shown).
+- Plan `84` DOD populated: `03/03/2021`; DOD field enabled.
 - Plan `76z`: relabels fields "ELE"/"MRSD", disables several MAR/Doctor
   fields.
 - Plan `51`: clicking the NI delete (⊘) icon surfaces a "migrated" error via
@@ -618,6 +633,11 @@ are the **current, verified** implementation.
 - Plan `87` → "Online Application" ticked; plan `90` → "Tax Free" ticked;
   plan `611` hides the "Non Standard Policy" section; plans `84/90/51` force
   initial payment method to `B`.
+- **Plan `84` disabled fields** (read-only because policy is deceased): Purchaser,
+  Policy Owner, Initial payment method, Pay Tax Free Cash by, Advice Type, Issue
+  Statements, Copy Annual Statement to IFA, Copy Annual Statement to PH, Issue
+  wake-up/maturity letters. Deceased Date and Notification Date pickers are
+  **enabled** (editable) to allow recording the date-of-death notification.
 - No sub-modals (all inline fields).
 
 ### 7.6 Bank Acc Details — `app-tab-bank`
@@ -1203,6 +1223,18 @@ and every `components/*Modal.tsx`), then re-expressed in Angular terms above:
   "Ceding Scheme Details" Process-menu item now fires a real click handler
   for plan `87` (previously a no-op, matching the plan-`0` "unwired menu
   item" pattern described in §2A).
+- **Plan `84` (deceased policy) verified changes:** Status Bar now shows
+  `DEAD` (red), `Illustration = 2139419`, `Variant = 4`, `RAQ ID = blank`,
+  `User = UAT2`; plan `84` is removed from the SIPP Pol group. Application
+  Details tab shows death-state data (Status D, Suspended Y, Life One Dead Y,
+  death payment block, Dependant Eligible N). Annuitant tab DOD populated
+  (`03/03/2021`) and Cause of Death block is now **visible** for plan `84`
+  (removed from the hidden list). Policy Details tab: Purchaser, Policy Owner,
+  Initial payment method, Pay TFC by, Advice Type, Issue Statements, Copy Ann.
+  Stmt to IFA/PH, and Issue wake-up letters are all disabled; Deceased Date and
+  Notification Date pickers remain enabled. Toolbar Edit button rendered but
+  disabled; Log button removed; Sim App also disabled. Find Policy grid: plan
+  `84` STATUS column corrected from `L` to `D`.
 
 ---
 
@@ -1251,3 +1283,18 @@ and every `components/*Modal.tsx`), then re-expressed in Angular terms above:
    between the 15 versions — there are no separate routes per version, and
    in an Angular rebuild this would remain a single-route application with
    `[ngSwitch]`-driven panels rather than router-driven navigation.
+
+---
+
+## 15. Document Downloads
+
+These documents are served as static files from the application's `/public/`
+directory and are accessible directly in the browser or via `curl`:
+
+| Document | URL path |
+|---|---|
+| **This file** — CLANAD Screen Flow (ASCII) | [`/CLANAD_SCREEN_FLOW_Angular_LVE.md`](/CLANAD_SCREEN_FLOW_Angular_LVE.md) |
+| **Application Digest** — compact component + data reference | [`/CLANAD_DIGEST_Angular_LVE.md`](/CLANAD_DIGEST_Angular_LVE.md) |
+
+To download: navigate to the URL above in any browser and use
+**File → Save As** (or right-click → Save link as) to save the `.md` file locally.

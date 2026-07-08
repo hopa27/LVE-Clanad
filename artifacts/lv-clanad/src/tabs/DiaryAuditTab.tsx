@@ -500,7 +500,7 @@ export function DiaryAuditTab() {
             type="button"
             className="lve-btn lve-btn-secondary lve-btn-sm"
             onClick={handleCompleteClick}
-            disabled={isPlan51 || isPlan76}
+            disabled={isPlan51 || isPlan76 || isPlan84}
           >
             <MdCheckCircleOutline size={16} /> Complete diary note
           </button>

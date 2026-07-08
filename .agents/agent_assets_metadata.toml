@@ -12,15 +12,3 @@ id = "2whLqVmFKbOwlditiqXOv"
 uri = "file://docs/CLANAD_Design_Digest.md"
 type = "text"
 title = "CLANAD Design Digest"
-
-[[outputs]]
-id = "feKQwfVtbV_HqHd9Uuzzd"
-uri = "file://exports/lv-clanad-screen-flow.txt"
-type = "text"
-title = "LV= CLANAD — Screen Flow (ASCII)"
-
-[[outputs]]
-id = "Y7BN4lOzvcYCYUZWeOHGw"
-uri = "file://exports/lv-clanad-application-digest.txt"
-type = "text"
-title = "LV= CLANAD — Application Digest"

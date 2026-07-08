@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import lvLogo from "../assets/lv-logo.png";
-import { MdLogout, MdClose, MdCheck } from "react-icons/md";
+import { MdLogout, MdClose, MdCheck, MdExitToApp } from "react-icons/md";
 import { TaxCertificateModal } from "./TaxCertificateModal";
 import { AboutModal } from "./AboutModal";
 import { KeyboardShortcutsModal } from "./KeyboardShortcutsModal";
@@ -713,13 +713,22 @@ export function Header({ title }: { title: string }) {
               {title}
             </h1>
           </div>
-          <button
-            type="button"
-            className="h-8 inline-flex items-center gap-2 px-4 rounded-[30px] text-white hover:bg-white/10 font-['Livvic'] text-sm transition-colors shrink-0"
-          >
-            <MdLogout size={16} />
-            Logout
-          </button>
+          <div className="flex items-center gap-2 shrink-0">
+            <button
+              type="button"
+              className="h-8 inline-flex items-center gap-2 px-4 rounded-[30px] text-white hover:bg-white/10 font-['Livvic'] text-sm transition-colors"
+            >
+              <MdExitToApp size={16} />
+              Exit
+            </button>
+            <button
+              type="button"
+              className="h-8 inline-flex items-center gap-2 px-4 rounded-[30px] text-white hover:bg-white/10 font-['Livvic'] text-sm transition-colors"
+            >
+              <MdLogout size={16} />
+              Logout
+            </button>
+          </div>
         </div>
       </div>
       <nav

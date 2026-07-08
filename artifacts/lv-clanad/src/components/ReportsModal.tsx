@@ -298,8 +298,8 @@ export function ReportsModal({
               <label className="lve-label">Start Date</label>
               <DatePicker
                 value={startDate}
-                placeholder="Start Date"
-                disabled={isEmptySystem}
+                placeholder={isEmptySystem ? "" : "Start Date"}
+                disabled={false}
                 onChange={(d) =>
                   setStartDate(d ? format(d, "dd/MM/yyyy") : "")
                 }
@@ -310,8 +310,8 @@ export function ReportsModal({
               <label className="lve-label">End Date</label>
               <DatePicker
                 value={endDate}
-                placeholder="End Date"
-                disabled={isEmptySystem}
+                placeholder={isEmptySystem ? "" : "End Date"}
+                disabled={false}
                 onChange={(d) =>
                   setEndDate(d ? format(d, "dd/MM/yyyy") : "")
                 }

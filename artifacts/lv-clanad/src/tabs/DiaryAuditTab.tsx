@@ -550,26 +550,13 @@ export function DiaryAuditTab() {
                 <thead>
                   <tr>
                     <th className="!px-4">Note</th>
-                    <th className="whitespace-nowrap !px-4 w-[110px]">By</th>
-                    <th className="whitespace-nowrap !px-4 w-[120px]">Date</th>
-                    <th className="whitespace-nowrap !px-4 w-[110px]">Time</th>
                   </tr>
                 </thead>
                 <tbody>
                   {(isPlan0 || isPlan87 ? [] : isPlan84 ? AUDIT_84 : isPlan90 ? AUDIT_90 : isPlan51 ? AUDIT_51 : isPlan82 ? AUDIT_82 : isPlan80 ? AUDIT_80 : isPlan83 ? AUDIT_83 : isPlan621 ? AUDIT_621 : isPlan76 ? AUDIT_76 : isPlan76z ? AUDIT_76z : isPlan62a ? AUDIT_62a : isPlan611 ? AUDIT_611 : isPlan52 ? AUDIT_52 : isPlan61a ? AUDIT_61a : AUDIT).map((line, i) => {
-                    const m = line.match(
-                      /^(.*?)\s+by\s+(\S+)\s+on\s+(\S+)\s+at\s+(\S+)\s*$/,
-                    );
-                    const desc = m ? m[1] : line;
-                    const by = m ? m[2] : "";
-                    const date = m ? m[3] : "";
-                    const time = m ? m[4] : "";
                     return (
                       <tr key={i} role="row" aria-rowindex={i + 1}>
-                        <td className="!px-4">{desc}</td>
-                        <td className="!px-4 whitespace-nowrap">{by}</td>
-                        <td className="!px-4 whitespace-nowrap">{date}</td>
-                        <td className="!px-4 whitespace-nowrap">{time}</td>
+                        <td className="!px-4">{line}</td>
                       </tr>
                     );
                   })}

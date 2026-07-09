@@ -30,8 +30,8 @@ type PostCodeLookupEntry = {
   telephone: string;
 };
 
-const POSTCODE_LOOKUP: Record<string, PostCodeLookupEntry> = {
-  "SG52DX": {
+const POSTCODE_LOOKUP: PostCodeLookupEntry[] = [
+  {
     scheme: "NM Pensions Trustees Ltd",
     address1: "Keynes House",
     address2: "Tilehouse Street",
@@ -39,7 +39,15 @@ const POSTCODE_LOOKUP: Record<string, PostCodeLookupEntry> = {
     postCode: "SG5 2DX",
     telephone: "01462 456789",
   },
-  "SW1A1AA": {
+  {
+    scheme: "Hitchin Town Pension Fund",
+    address1: "1 Market Place",
+    address2: "Bancroft",
+    address3: "Hitchin, Herts",
+    postCode: "SG5 2DX",
+    telephone: "01462 456000",
+  },
+  {
     scheme: "Buckingham Pensions Trust",
     address1: "10 Downing Street",
     address2: "Westminster",
@@ -47,7 +55,7 @@ const POSTCODE_LOOKUP: Record<string, PostCodeLookupEntry> = {
     postCode: "SW1A 1AA",
     telephone: "020 7946 0011",
   },
-  "S12HE": {
+  {
     scheme: "Sheffield Pension Scheme",
     address1: "1 Fitzalan Square",
     address2: "City Centre",
@@ -55,7 +63,7 @@ const POSTCODE_LOOKUP: Record<string, PostCodeLookupEntry> = {
     postCode: "S1 2HE",
     telephone: "0114 496 0022",
   },
-  "SN11AB": {
+  {
     scheme: "Swindon Retirement Fund",
     address1: "25 Regent Street",
     address2: "Old Town",
@@ -63,7 +71,7 @@ const POSTCODE_LOOKUP: Record<string, PostCodeLookupEntry> = {
     postCode: "SN1 1AB",
     telephone: "01793 496033",
   },
-  "SL12AB": {
+  {
     scheme: "Slough Pension Trustees",
     address1: "5 High Street",
     address2: "Town Centre",
@@ -71,7 +79,7 @@ const POSTCODE_LOOKUP: Record<string, PostCodeLookupEntry> = {
     postCode: "SL1 2AB",
     telephone: "01753 496044",
   },
-};
+];
 
 function normalizePostcode(v: string): string {
   return v.replace(/\s+/g, "").toUpperCase();
@@ -378,7 +386,7 @@ export function CedingSchemeModal({
 
   const postCodeSuggestions =
     mode === "new" && postCodeSearch.trim()
-      ? Object.values(POSTCODE_LOOKUP).filter((entry) =>
+      ? POSTCODE_LOOKUP.filter((entry) =>
           normalizePostcode(entry.postCode).startsWith(normalizePostcode(postCodeSearch))
         )
       : [];
@@ -395,7 +403,9 @@ export function CedingSchemeModal({
     setPostCodeSuggestOpen(true);
     updatePostCodeDropdownRect();
     if (mode === "new") {
-      const match = POSTCODE_LOOKUP[normalizePostcode(v)];
+      const match = POSTCODE_LOOKUP.find(
+        (e) => normalizePostcode(e.postCode) === normalizePostcode(v)
+      );
       if (match) {
         applyPostCodeMatch(match);
       }
@@ -560,7 +570,7 @@ export function CedingSchemeModal({
                       >
                         {postCodeSuggestions.map((entry) => (
                           <li
-                            key={entry.postCode}
+                            key={`${entry.postCode}-${entry.address1}`}
                             onMouseDown={(e) => {
                               e.preventDefault();
                               handlePostCodeSuggestionSelect(entry);

@@ -210,7 +210,7 @@ export function EventsTab() {
           type="button"
           className="lve-btn lve-btn-secondary lve-btn-sm"
           onClick={openNew}
-          disabled={isPlan51 || planCode === "611"}
+          disabled={isPlan51}
         >
           <MdAdd size={16} /> New Event
         </button>

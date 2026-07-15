@@ -51,7 +51,7 @@ const LETTER_DIST: Record<string, DistConfig> = {
   "Chaser Letter OS Application IFA":    { print: true,  fax: true,  email: true,  sendTo: { client: false, ifa: true,  ceding: false, other: false } },
   "Claim Form":                           { print: true,  fax: false, email: true,  sendTo: { client: true,  ifa: true,  ceding: false, other: false } },
   "Completion Pack":                      { print: true,  fax: false, email: true,  sendTo: { client: true,  ifa: true,  ceding: false, other: true  } },
-  "Death - Claim Completion Letter":       { print: true,  fax: false, email: true,  sendTo: { client: true,  ifa: false, ceding: false, other: false } },
+  "Death - Claim Completion Letter":       { print: true,  fax: false, email: false, sendTo: { client: false, ifa: false, ceding: false, other: false } },
   "Death - Dependant Acknowledgement Letter": { print: true, fax: false, email: true, sendTo: { client: true,  ifa: false, ceding: false, other: false } },
   "Death - Initial Response Letter":       { print: true,  fax: false, email: true,  sendTo: { client: true,  ifa: false, ceding: false, other: false } },
   "Disclosure Check":                      { print: true,  fax: false, email: false, sendTo: { client: true,  ifa: false, ceding: false, other: false } },
@@ -102,6 +102,7 @@ function LettersTabInner() {
   const [sendToIFA,     setSendToIFA]     = useState(false);
   const [sendToCeding,  setSendToCeding]  = useState(false);
   const [sendToOther,   setSendToOther]   = useState(false);
+  const [condolences,   setCondolences]   = useState(false);
 
   const cfg = selectedLetter ? (LETTER_DIST[selectedLetter] ?? NO_DIST) : NO_DIST;
 
@@ -139,6 +140,7 @@ function LettersTabInner() {
     setSendToIFA(false);
     setSendToCeding(false);
     setSendToOther(false);
+    setCondolences(false);
   }
 
   return (
@@ -155,7 +157,32 @@ function LettersTabInner() {
       </Section>
 
       <Section title="Letter Specific Info">
-        {selectedLetter === "Claim Form" ? (
+        {selectedLetter === "Death - Claim Completion Letter" ? (
+          <div className="max-h-[320px] overflow-y-auto pr-1 space-y-1">
+            <Field inline label="Overpayment Amount" labelWidth={170}><TextInput value="" /></Field>
+            <Field inline label="Backdated Amount"   labelWidth={170}><TextInput value="" /></Field>
+            <Field inline label="Proportion Amount"  labelWidth={170}><TextInput value="" /></Field>
+            <Field inline label="Proportion Date"    labelWidth={170}>
+              <DatePicker placeholder="DD/MM/YYYY" />
+            </Field>
+            <Field inline label="Refund Amount"      labelWidth={170}><TextInput value="" /></Field>
+            <div className="py-1">
+              <Checkbox
+                label="Condolences"
+                checked={condolences}
+                onChange={setCondolences}
+              />
+            </div>
+            <Field inline label="Salutation" labelWidth={170}><TextInput value="" disabled={!condolences} /></Field>
+            <Field inline label="Name"       labelWidth={170}><TextInput value="" disabled={!condolences} /></Field>
+            <Field inline label="Address 1"  labelWidth={170}><TextInput value="" disabled={!condolences} /></Field>
+            <Field inline label="Address 2"  labelWidth={170}><TextInput value="" disabled={!condolences} /></Field>
+            <Field inline label="Address 3"  labelWidth={170}><TextInput value="" disabled={!condolences} /></Field>
+            <Field inline label="Address 4"  labelWidth={170}><TextInput value="" disabled={!condolences} /></Field>
+            <Field inline label="Address 5"  labelWidth={170}><TextInput value="" disabled={!condolences} /></Field>
+            <Field inline label="Postcode"   labelWidth={170}><TextInput value="" disabled={!condolences} /></Field>
+          </div>
+        ) : selectedLetter === "Claim Form" ? (
           <div>
             <label className="lve-label">Policy Type</label>
             <SelectInput value="" options={["", ...CLAIM_FORM_POLICY_TYPES]} />

@@ -125,7 +125,7 @@ function NotesSection({
   disableAll?: boolean;
 }) {
   const [notes, setNotes]           = useState<NoteItem[]>(initialItems);
-  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [selectedId, setSelectedId] = useState<string | null>(initialItems[0]?.id ?? null);
   const [inserting, setInserting]   = useState(false);
   const [insertText, setInsertText] = useState("");
   const [editingId, setEditingId]   = useState<string | null>(null);

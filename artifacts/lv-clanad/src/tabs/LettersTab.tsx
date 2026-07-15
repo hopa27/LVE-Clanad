@@ -52,7 +52,7 @@ const LETTER_DIST: Record<string, DistConfig> = {
   "Claim Form":                           { print: true,  fax: false, email: true,  sendTo: { client: true,  ifa: true,  ceding: false, other: false } },
   "Completion Pack":                      { print: true,  fax: false, email: true,  sendTo: { client: true,  ifa: true,  ceding: false, other: true  } },
   "Death - Claim Completion Letter":       { print: true,  fax: false, email: false, sendTo: { client: false, ifa: false, ceding: false, other: false } },
-  "Death - Dependant Acknowledgement Letter": { print: true, fax: false, email: true, sendTo: { client: true,  ifa: false, ceding: false, other: false } },
+  "Death - Dependant Acknowledgement Letter": { print: true, fax: false, email: false, sendTo: { client: false, ifa: false, ceding: false, other: false } },
   "Death - Initial Response Letter":       { print: true,  fax: false, email: true,  sendTo: { client: true,  ifa: false, ceding: false, other: false } },
   "Disclosure Check":                      { print: true,  fax: false, email: false, sendTo: { client: true,  ifa: false, ceding: false, other: false } },
   "Disclosure Check Payment Letter":       { print: true,  fax: false, email: false, sendTo: { client: true,  ifa: false, ceding: false, other: false } },
@@ -181,6 +181,17 @@ function LettersTabInner() {
             <Field inline label="Address 4"  labelWidth={170}><TextInput value="" disabled={!condolences} /></Field>
             <Field inline label="Address 5"  labelWidth={170}><TextInput value="" disabled={!condolences} /></Field>
             <Field inline label="Postcode"   labelWidth={170}><TextInput value="" disabled={!condolences} /></Field>
+          </div>
+        ) : selectedLetter === "Death - Dependant Acknowledgement Letter" ? (
+          <div className="space-y-1">
+            <Field inline label="Salutation" labelWidth={110}><TextInput value="" disabled /></Field>
+            <Field inline label="Name"       labelWidth={110}><TextInput value="" disabled /></Field>
+            <Field inline label="Address 1"  labelWidth={110}><TextInput value="" disabled /></Field>
+            <Field inline label="Address 2"  labelWidth={110}><TextInput value="" disabled /></Field>
+            <Field inline label="Address 3"  labelWidth={110}><TextInput value="" disabled /></Field>
+            <Field inline label="Address 4"  labelWidth={110}><TextInput value="" disabled /></Field>
+            <Field inline label="Address 5"  labelWidth={110}><TextInput value="" disabled /></Field>
+            <Field inline label="Postcode"   labelWidth={110}><TextInput value="" disabled /></Field>
           </div>
         ) : selectedLetter === "Claim Form" ? (
           <div>

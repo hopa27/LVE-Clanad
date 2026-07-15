@@ -46,7 +46,7 @@ type DistConfig = {
 };
 
 const LETTER_DIST: Record<string, DistConfig> = {
-  "Certificate of Existence":             { print: true,  fax: false, email: true,  sendTo: { client: true,  ifa: false, ceding: false, other: false } },
+  "Certificate of Existence":             { print: true,  fax: false, email: false, sendTo: { client: false, ifa: false, ceding: false, other: false } },
   "Chaser Letter OS Application Client": { print: true,  fax: true,  email: true,  sendTo: { client: true,  ifa: false, ceding: false, other: false } },
   "Chaser Letter OS Application IFA":    { print: true,  fax: true,  email: true,  sendTo: { client: false, ifa: true,  ceding: false, other: false } },
   "Claim Form":                           { print: true,  fax: false, email: true,  sendTo: { client: true,  ifa: true,  ceding: false, other: false } },

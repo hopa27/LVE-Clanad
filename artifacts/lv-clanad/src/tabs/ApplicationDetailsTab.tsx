@@ -161,7 +161,7 @@ export function ApplicationDetailsTab() {
         {/* Column 3 — entirely hidden for plan 87 */}
         {!isPlan87 && (
           <div>
-            {!isPlan84 && !isPlan90 && !isPlan51 && !isPlan83 && !isPlan82 && !isPlan76 && !isPlan76z && !isPlan621 && !isPlan62a && !isPlan52 && !isPlan61a && (
+            {!isPlan84 && !isPlan90 && !isPlan51 && !isPlan83 && !isPlan82 && !isPlan76 && !isPlan76z && !isPlan621 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
               <Field label="GAD Anniversary:">
                 <div className="flex gap-2">
                   <TextInput value="10" className="!w-16" disabled />
@@ -278,12 +278,12 @@ export function ApplicationDetailsTab() {
           <Section title="Correspondence Details">
             <Field label="Correspond Name:">
               <TextInput
-                value={isPlan87 ? "Dr T Uggiu" : isPlan84 ? "Testmtbbbide" : isPlan90 ? "Testmtcchibd" : isPlan51 ? "Testmdbaabii" : isPlan82 ? "Testmrbbgeee" : isPlan80 ? "Testmrbbbaib" : isPlan621 ? "Testfrbaaaae.b" : isPlan76 ? "Testmlbaabia" : isPlan76z ? "Testmybabihd" : isPlan62a ? "Testmsbbibag" : isPlan611 ? "Testmssbaadad" : isPlan52 ? "" : isPlan61a ? "Testmhbacjcj b" : "correspname"}
+                value={isPlan87 ? "Dr T Uggiu" : isPlan84 ? "Testmtbbbide" : isPlan90 ? "Testmtcchibd" : isPlan51 ? "Testmdbaabii" : isPlan82 ? "Testmrbbgeee" : isPlan80 ? "Testmrbbbaib" : isPlan621 ? "Testfrbaaaae.b" : isPlan76 ? "Testmlbaabia" : isPlan76z ? "Testmybabihd" : isPlan62a ? "Testmsbbibag" : isPlan611 ? "Testmsbaadad" : isPlan52 ? "" : isPlan61a ? "Testmhbacjcj b" : "correspname"}
               />
             </Field>
             <Field label="Salutation Name:">
               <TextInput
-                value={isPlan87 ? "Dr Uggiu" : isPlan84 ? "Testmtbbbide" : isPlan90 ? "Testmtcchibd" : isPlan51 ? "Testmdbaabii" : isPlan82 ? "Testmrbbgeee" : isPlan80 ? "Testmrbbbaib" : isPlan621 ? "Testfrbaaaae.b" : isPlan76 ? "Testmlbaabia" : isPlan76z ? "Testmybabihd" : isPlan62a ? "Testmsbbibag" : isPlan611 ? "Testmssbaadad" : isPlan52 ? "" : isPlan61a ? "Testmhbacjcj b" : "salname"}
+                value={isPlan87 ? "Dr Uggiu" : isPlan84 ? "Testmtbbbide" : isPlan90 ? "Testmtcchibd" : isPlan51 ? "Testmdbaabii" : isPlan82 ? "Testmrbbgeee" : isPlan80 ? "Testmrbbbaib" : isPlan621 ? "Testfrbaaaae.b" : isPlan76 ? "Testmlbaabia" : isPlan76z ? "Testmybabihd" : isPlan62a ? "Testmsbbibag" : isPlan611 ? "Testmsbaadad" : isPlan52 ? "" : isPlan61a ? "Testmhbacjcj b" : "salname"}
               />
             </Field>
             <Field label="Telephone:">

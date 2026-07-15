@@ -409,7 +409,7 @@ export function AnnuitantDetailsTab() {
             : isPlan76  ? "Female"
             : isPlan76z ? "Female"
             : isPlan62a ? "Male"
-            : isPlan611 ? "Female"
+            : isPlan611 ? "Male"
             : isPlan52  ? "Female"
             : isPlan61a ? "Male"
             : ""
@@ -464,7 +464,7 @@ export function AnnuitantDetailsTab() {
           marCopyToPH={isPreset || isPlan51 || isPlan80 || isPlan83 || isPlan82 || isPlan621 || isPlan76 || isPlan76z || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "" : "PH2RE"}
           dateMarSent={isPreset || isPlan51 || isPlan80 || isPlan83 || isPlan82 || isPlan621 || isPlan76 || isPlan76z || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "" : "mar2sent"}
           dateMarRec={isPreset || isPlan51 || isPlan80 || isPlan83 || isPlan82 || isPlan621 || isPlan76 || isPlan76z || isPlan62a || isPlan611 || isPlan52 || isPlan61a ? "" : "mar2recd"}
-          gender={isPlan611 ? "Male" : isPlan61a ? "Female" : ""}
+          gender={isPlan611 ? "Female" : isPlan61a ? "Female" : ""}
           showCauseOfDeath={!isPreset && !isPlan51 && !isPlan80 && !isPlan83 && !isPlan82 && !isPlan621 && !isPlan76 && !isPlan76z && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a}
           showDod={!isPlan87 && !isPlan611}
           doctorDisabled={isPlan621 || isPlan87}

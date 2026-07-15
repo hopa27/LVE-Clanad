@@ -63,12 +63,12 @@ const PLAN_76_ROWS: EventRow[] = [
 export function EventsTab() {
   const { planCode } = usePlanCode();
   const isPlan51 = planCode === "51";
-  const [rows, setRows] = useState<EventRow[]>(
+  const initialRows: EventRow[] =
     planCode === "76" ? PLAN_76_ROWS :
-    planCode === "0" || planCode === "87" || planCode === "84" || planCode === "90" || isPlan51 || planCode === "80" || planCode === "82" || planCode === "83" || planCode === "621" || planCode === "76z" || planCode === "62a" || planCode === "611" || planCode === "52" || planCode === "61a" ? [] : SAMPLE_ROWS,
-  );
+    planCode === "0" || planCode === "87" || planCode === "84" || planCode === "90" || isPlan51 || planCode === "80" || planCode === "82" || planCode === "83" || planCode === "621" || planCode === "76z" || planCode === "62a" || planCode === "611" || planCode === "52" || planCode === "61a" ? [] : SAMPLE_ROWS;
+  const [rows, setRows] = useState<EventRow[]>(initialRows);
   const [selectedIdx, setSelectedIdx] = useState<number | null>(
-    planCode === "76" ? 0 : null
+    initialRows.length > 0 ? 0 : null
   );
   const [newEventOpen, setNewEventOpen] = useState(false);
   const [editingIdx, setEditingIdx] = useState<number | null>(null);

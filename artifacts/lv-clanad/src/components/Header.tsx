@@ -357,6 +357,44 @@ const SUPERVISOR_83: MenuOption[] = [
   { label: "Reprint Maturity Letters", action: "reprint-maturity-letters" },
 ];
 
+const SUPERVISOR_76z: MenuOption[] = [
+  { label: "Supervisory Edit", action: "supervisory-edit" },
+  {
+    label: "Status Change",
+    hasSubmenu: true,
+    submenu: [
+      { label: "Surrender", accel: "S", disabled: true },
+      { label: "Maturity", accel: "M", disabled: true },
+      { label: "Expired", accel: "E", disabled: true },
+    ],
+  },
+  { label: "Amend Cheques", action: "amend-cheques" },
+  { label: "Amend IFA", action: "amend-ifa" },
+  { label: "C(ancel) Application" },
+  {
+    label: "Bank Detail Changes",
+    hasSubmenu: true,
+    submenu: [
+      { label: "Bank Changes Awaiting Approval" },
+      { label: "Approve Bank Changes", disabled: true },
+      { label: "Approve Maturity Bank Changes", disabled: true },
+    ],
+  },
+  { label: "Convert to Flexi-Access", disabled: true },
+  { kind: "separator" },
+  {
+    label: "LTC",
+    hasSubmenu: true,
+    disabled: true,
+    submenu: [{ label: "LTC Benefit" }],
+  },
+  { label: "Pull Quote", disabled: true },
+  { kind: "separator" },
+  { label: "Reprint Annual Statements", action: "reprint-annual-statements" },
+  { label: "Annual Statement Recalculation", action: "annual-statement-recalc" },
+  { label: "Reprint Maturity Letters", action: "reprint-maturity-letters" },
+];
+
 const SUPERVISOR_84: MenuOption[] = [
   { label: "Supervisory Edit", action: "supervisory-edit" },
   {
@@ -644,7 +682,7 @@ export function Header({ title }: { title: string }) {
         if (m.label === "Options")    return { ...m, options: OPTIONS_84 };
         if (m.label === "Process")    return { ...m, options: PROCESS_76z };
         if (m.label === "Print")      return { ...m, options: PRINT_82 };
-        if (m.label === "Supervisor") return { ...m, options: SUPERVISOR_83 };
+        if (m.label === "Supervisor") return { ...m, options: SUPERVISOR_76z };
       }
       return m;
     });

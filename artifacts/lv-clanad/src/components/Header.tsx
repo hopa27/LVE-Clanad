@@ -289,7 +289,7 @@ const PROCESS_76z: MenuOption[] = [
     hasSubmenu: true,
     submenu: [
       { label: "Life One", accel: "L", action: "set-dead-life-one" },
-      { label: "Life Two/Current Beneficiary", accel: "L", action: "set-dead-life-two" },
+      { label: "Life Two/Current Beneficiary", accel: "L", action: "set-dead-life-two", disabled: true },
     ],
   },
   {

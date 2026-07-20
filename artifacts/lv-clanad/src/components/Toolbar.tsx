@@ -99,9 +99,10 @@ export function Toolbar() {
   ];
   const isPlan62a = planCode === "62a";
   const isPlan52  = planCode === "52";
+  const isPlan76z = planCode === "76z";
   const baseTools = (isPlan51 || isPlan62a || isPlan611 || isPlan52)
     ? ALL_TOOLS.filter((t) => t.action !== "edit-toggle" && t.action !== "log")
-    : isStatusL || isPlan621
+    : isStatusL || isPlan621 || isPlan76z
     ? ALL_TOOLS.filter((t) => t.action !== "log")
     : ALL_TOOLS;
   const TOOLS = baseTools;

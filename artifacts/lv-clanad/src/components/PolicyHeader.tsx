@@ -89,7 +89,7 @@ export function PolicyHeader() {
 
       <button
         type="button"
-        disabled={planCode === "90"}
+        disabled={planCode === "90" || planCode === "62a"}
         onClick={() => {
           setSelectedIdx(null);
           setSimOpen(true);

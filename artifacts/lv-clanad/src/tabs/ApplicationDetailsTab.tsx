@@ -112,9 +112,9 @@ export function ApplicationDetailsTab() {
 
         {/* Column 2 */}
         <div>
-          {!isPlan87 && (
+          {!isPlan87 && !isPlan62a && (
             <Field label="Special Status:">
-              <TextInput value={isPlan84 || isPlan90 || isPlan51 || isPlan80 || isPlan83 || isPlan82 || isPlan76 || isPlan76z || isPlan62a || isPlan611 || isPlan52 ? "" : isPlan621 || isPlan61a ? "G" : "DBSp"} disabled />
+              <TextInput value={isPlan84 || isPlan90 || isPlan51 || isPlan80 || isPlan83 || isPlan82 || isPlan76 || isPlan76z || isPlan611 || isPlan52 ? "" : isPlan621 || isPlan61a ? "G" : "DBSp"} disabled />
             </Field>
           )}
           {!isPlan84 && !isPlan90 && !isPlan51 && !isPlan621 && !isPlan76 && !isPlan76z && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
@@ -125,9 +125,9 @@ export function ApplicationDetailsTab() {
           <Field label="Status:">
             <TextInput value={isPlan87 ? "P" : isPlan84 ? "D" : isPlan90 ? "L" : isPlan51 ? "Q" : isPlan82 ? "S" : isPlan80 ? "M" : isPlan83 ? "W" : isPlan621 ? "I" : isPlan76 ? "D" : isPlan76z ? "Z" : isPlan62a ? "C" : isPlan611 ? "N" : isPlan52 ? "X" : isPlan61a ? "E" : "status"} disabled />
           </Field>
-          {!isPlan87 && (
+          {!isPlan87 && !isPlan62a && (
             <Field label="Suspended:">
-              <TextInput value={isPlan82 || isPlan84 ? "Y" : isPlan90 || isPlan80 || isPlan83 || isPlan621 || isPlan62a || isPlan611 || isPlan52 ? "N" : isPlan51 || isPlan76 || isPlan76z || isPlan61a ? "Y" : "DBSu"} disabled />
+              <TextInput value={isPlan82 || isPlan84 ? "Y" : isPlan90 || isPlan80 || isPlan83 || isPlan621 || isPlan611 || isPlan52 ? "N" : isPlan51 || isPlan76 || isPlan76z || isPlan61a ? "Y" : "DBSu"} disabled />
             </Field>
           )}
           {!isPlan76z && !isPlan76 && (
@@ -158,8 +158,8 @@ export function ApplicationDetailsTab() {
           )}
         </div>
 
-        {/* Column 3 — entirely hidden for plan 87 */}
-        {!isPlan87 && (
+        {/* Column 3 — entirely hidden for plan 87 and 62a */}
+        {!isPlan87 && !isPlan62a && (
           <div>
             {!isPlan84 && !isPlan90 && !isPlan51 && !isPlan83 && !isPlan82 && !isPlan76 && !isPlan76z && !isPlan621 && !isPlan62a && !isPlan611 && !isPlan52 && !isPlan61a && (
               <Field label="GAD Anniversary:">
@@ -213,7 +213,7 @@ export function ApplicationDetailsTab() {
         )}
 
         {/* Spacer when col 3 hidden */}
-        {isPlan87 && <div />}
+        {(isPlan87 || isPlan62a) && <div />}
 
         {/* Column 4 */}
         <div>

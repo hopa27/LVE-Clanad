@@ -63,6 +63,18 @@ const PRINT_51: MenuOption[] = [
   { label: "Diary Report" },
 ];
 
+const PRINT_62a: MenuOption[] = [
+  {
+    label: "Print MAR",
+    hasSubmenu: true,
+    submenu: [
+      { label: "1st Life MAR" },
+      { label: "2nd Life MAR" },
+    ],
+  },
+  { label: "Diary Report" },
+];
+
 const OPTIONS_84: MenuOption[] = [
   { label: "P45 Details", action: "p45-details" },
   { label: "Screen Print", shortcut: "F1", action: "screen-print" },
@@ -624,7 +636,11 @@ export function Header({ title }: { title: string }) {
       return true;
     })
     .map((m) => {
-      if (planCode === "51" || planCode === "62a" || planCode === "611" || planCode === "52" || planCode === "61a") {
+      if (planCode === "62a") {
+        if (m.label === "Options") return { ...m, options: OPTIONS_51 };
+        if (m.label === "Print")   return { ...m, options: PRINT_62a };
+      }
+      if (planCode === "51" || planCode === "611" || planCode === "52" || planCode === "61a") {
         if (m.label === "Options") return { ...m, options: OPTIONS_51 };
         if (m.label === "Print")   return { ...m, options: PRINT_51 };
       }

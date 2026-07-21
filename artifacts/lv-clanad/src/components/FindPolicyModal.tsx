@@ -43,7 +43,7 @@ const POLICIES: PolicyRow[] = [
   { policyRef: "101873",   planType: "ICFP",   planCode: "76z", surname: "TESTKYBABIAHD",   natInsNo: "KB-02-02-20-A", originalQuote: "1030695",  status: "Z", phPostCode: "",         ifaRef: "QUOTE-00",  dob1: "02/02/1920", policyNo: "101873",   cocode: "STALW-00",  premium: "£63,697.99", fullName1: "Michael Testkybabihd", fullName2: "", cheques: [{ company: "Stuart L Kinsey", date: "26/06/2008", amount: "£21,232.66" }, { company: "Martin L Kinsey", date: "26/06/2008", amount: "£21,232.67" }, { company: "MT & Mrs Blakekey", date: "26/06/2008", amount: "£21,232.66" }] },
 ];
 
-const STATUSES = ["Pending", "Completed", "Shelved", "ALL"] as const;
+const STATUSES = ["Pending", "Shelved", "Completed", "ALL"] as const;
 type Status = (typeof STATUSES)[number];
 
 const STATUS_CODES: Record<Status, Set<string> | null> = {

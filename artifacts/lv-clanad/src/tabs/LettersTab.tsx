@@ -53,7 +53,7 @@ const LETTER_DIST: Record<string, DistConfig> = {
   "Completion Pack":                      { print: true,  fax: false, email: true,  sendTo: { client: true,  ifa: true,  ceding: false, other: true  } },
   "Death - Claim Completion Letter":       { print: true,  fax: false, email: false, sendTo: { client: false, ifa: false, ceding: false, other: false } },
   "Death - Dependant Acknowledgement Letter": { print: true, fax: false, email: false, sendTo: { client: false, ifa: false, ceding: false, other: false } },
-  "Death - Initial Response Letter":       { print: true,  fax: false, email: true,  sendTo: { client: true,  ifa: false, ceding: false, other: false } },
+  "Death - Initial Response Letter":       { print: true,  fax: false, email: false, sendTo: { client: false, ifa: false, ceding: false, other: false } },
   "Disclosure Check":                      { print: true,  fax: false, email: false, sendTo: { client: true,  ifa: false, ceding: false, other: false } },
   "Disclosure Check Payment Letter":       { print: true,  fax: false, email: false, sendTo: { client: true,  ifa: false, ceding: false, other: false } },
   "Divorce - Initial Response Letter":     { print: true,  fax: false, email: true,  sendTo: { client: true,  ifa: false, ceding: false, other: false } },
@@ -157,7 +157,19 @@ function LettersTabInner() {
       </Section>
 
       <Section title="Letter Specific Info">
-        {selectedLetter === "Death - Claim Completion Letter" ? (
+        {selectedLetter === "Death - Initial Response Letter" ? (
+          <div className="max-h-[320px] overflow-y-auto pr-1 space-y-1">
+            <Field inline label="Overpayment Amount" labelWidth={150}><TextInput value="" /></Field>
+            <Field inline label="Salutation" labelWidth={110}><TextInput value="" /></Field>
+            <Field inline label="Name"       labelWidth={110}><TextInput value="" /></Field>
+            <Field inline label="Address 1"  labelWidth={110}><TextInput value="" /></Field>
+            <Field inline label="Address 2"  labelWidth={110}><TextInput value="" /></Field>
+            <Field inline label="Address 3"  labelWidth={110}><TextInput value="" /></Field>
+            <Field inline label="Address 4"  labelWidth={110}><TextInput value="" /></Field>
+            <Field inline label="Address 5"  labelWidth={110}><TextInput value="" /></Field>
+            <Field inline label="Postcode"   labelWidth={110}><TextInput value="" /></Field>
+          </div>
+        ) : selectedLetter === "Death - Claim Completion Letter" ? (
           <div className="max-h-[320px] overflow-y-auto pr-1 space-y-1">
             <Field inline label="Overpayment Amount" labelWidth={170}><TextInput value="" /></Field>
             <Field inline label="Backdated Amount"   labelWidth={170}><TextInput value="" /></Field>

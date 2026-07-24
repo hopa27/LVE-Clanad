@@ -268,11 +268,13 @@ function FormField({
   onChange,
   enabled,
   width,
+  hasError,
 }: {
   value: string;
   onChange: (v: string) => void;
   enabled: boolean;
   width?: string;
+  hasError?: boolean;
 }) {
   if (enabled) {
     return (
@@ -280,7 +282,9 @@ function FormField({
         type="text"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className={`flex h-[44px] items-center rounded-[8px] border-[2px] border-[#178830] bg-white px-[11px] py-[7px] font-['Mulish'] text-[15px] text-[#3d3d3d] outline-none focus:border-[#178830] ${width ?? "w-full"}`}
+        className={`flex h-[44px] items-center rounded-[8px] border-[2px] bg-white px-[11px] py-[7px] font-['Mulish'] text-[15px] text-[#3d3d3d] outline-none ${
+          hasError ? "border-[#d72714] focus:border-[#d72714]" : "border-[#178830] focus:border-[#178830]"
+        } ${width ?? "w-full"}`}
       />
     );
   }
@@ -352,6 +356,8 @@ export function CedingSchemeModal({
   const [confirmNewOpen, setConfirmNewOpen] = useState(false);
   const [confirmEditOpen, setConfirmEditOpen] = useState(false);
   const [confirmCancelOpen, setConfirmCancelOpen] = useState(false);
+  const [amountError, setAmountError] = useState(false);
+  const [amountDialogOpen, setAmountDialogOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const postCodeInputRef = useRef<HTMLInputElement>(null);
   useFocusTrap(containerRef, open);
@@ -467,6 +473,12 @@ export function CedingSchemeModal({
   };
 
   const handleSave = () => {
+    if (!form.amount.trim()) {
+      setAmountError(true);
+      setAmountDialogOpen(true);
+      return;
+    }
+    setAmountError(false);
     setPostCodeSearch("");
     setMode("view");
   };
@@ -623,8 +635,9 @@ export function CedingSchemeModal({
             <Label>Amount</Label>
             <FormField
               value={form.amount}
-              onChange={(v) => upd("amount", v)}
+              onChange={(v) => { upd("amount", v); if (v.trim()) setAmountError(false); }}
               enabled={editable}
+              hasError={amountError}
             />
             <Label>Address 2</Label>
             <FormField
@@ -841,6 +854,37 @@ export function CedingSchemeModal({
                   onClick={() => setConfirmCancelOpen(false)}
                 >
                   <MdClose size={16} /> No
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {amountDialogOpen && (
+        <div className="fixed inset-0 z-[70] flex items-center justify-center bg-black/40">
+          <div className="lve-panel w-[400px] bg-white">
+            <header className="lve-panel-header flex items-center justify-between">
+              <span>Information</span>
+              <button
+                type="button"
+                onClick={() => setAmountDialogOpen(false)}
+                className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-white/10 text-white hover:bg-[#d72714] transition-colors"
+                aria-label="Close"
+              >
+                <MdClose size={18} />
+              </button>
+            </header>
+            <div className="lve-panel-body">
+              <div className="flex items-start gap-3">
+                <MdHelpOutline size={32} className="text-[#006cf4] shrink-0" />
+                <p className="font-['Mulish'] text-[14px] text-[#3d3d3d] pt-1">
+                  The entered text is not a valid amount.
+                </p>
+              </div>
+              <div className="mt-5 flex items-center justify-center">
+                <button type="button" className="lve-btn min-w-[80px] justify-center" onClick={() => setAmountDialogOpen(false)}>
+                  <MdCheck size={16} /> OK
                 </button>
               </div>
             </div>

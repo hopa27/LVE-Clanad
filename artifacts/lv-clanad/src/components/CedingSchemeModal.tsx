@@ -608,7 +608,7 @@ export function CedingSchemeModal({
             <FormField
               value={form.policyNumber}
               onChange={(v) => upd("policyNumber", v)}
-              enabled={editable}
+              enabled={mode === "new"}
             />
             <Label>Ceding Scheme Policy Ref</Label>
             <FormField
